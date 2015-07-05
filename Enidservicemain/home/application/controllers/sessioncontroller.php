@@ -76,8 +76,8 @@ class Sessioncontroller extends CI_Controller {
 				
 				
 				$this->load->view('TemplateEnid/header_template', $data);		
-				//$this->load->view(displayviewpresentacion( $perfil ) , $data);
-				//$this->load->view('Template/footer_template', $data);	
+				$this->load->view(displayviewpresentacion( $perfil ) , $data);
+				$this->load->view('TemplateEnid/footer_template', $data);	
 
 			}else{
 			/*Terminamos la session*/

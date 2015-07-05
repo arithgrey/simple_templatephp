@@ -1,42 +1,45 @@
-
-
-      
-
-
-
-
-
-
-
-
-    <div class="container text-center">
+<div class="container text-center">
         <h3 id='titlesubscripcion'><strong> Quieres estar al día de las nuevas experiencias &amp; casos de éxito </strong></h3>
-        <h4 class='leyendaletters'>Suscríbase a nuestra lista de correo para recibir la actualización de los nuevos casos de éxito
-          registrados </h4>
-        <div id="mc_embed_signup">
-            <form role="form" action="" method="post" id="subscribenow" name="mc-embedded-subscribe-form" target="_blank" novalidate="">
-                <input type="hidden" id="section_mail" name='section_mail' value="<?=$section_mail?>" >
-                <div class="input-group input-group-lg">
-                    
-                    
-                    
-                    
-                    <input name="EMAIL" class="form-control" id="mce-EMAIL" placeholder="arithgrey@gmail.com" type="email" required>
-                    
-                    <span class="input-group-btn">
-                        <button type="submit" name="subscribe" id="mc-embedded-subscribe" class="btn btn-default">Subscribe!</button>
-                    </span>
-                </div>
-                <div id="mce-responses">
+        <span class='leyendaletters'>Suscríbase a nuestra lista de correo para recibir la actualización de los nuevos casos de éxito
+          registrados </span>
 
-                 <div class="progress progress-xs">
-                       <div class="progress-bar progress-bar-info" role="progressbar" 
-                       aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: 100%">             
-                                    <div class="response" id="mce-error-response" ></div>
-                                    <div class="response" id="mce-success-response" ></div>
-                      </div>
-                 </div>                
+
+
+        <div id="mc_embed_signup">
+
+
+
+              <form role="form" action="" method="post" id="subscribenow" name="mc-embedded-subscribe-form" target="_blank" novalidate="">
+                <input type="hidden" id="section_mail" name='section_mail' value="<?=$section_mail?>" >
+                
+
+
+
+
+                <div class="row">
+
+                    <div class="input-group input-group-lg">            
+                      
+                        <input name="EMAIL" class="form-control" id="mce-EMAIL" placeholder="arithgrey@gmail.com" type="email" required>
+                        
+                        <span class="input-group-btn">
+                            <button type="submit" name="subscribe" id="mc-embedded-subscribe" class="btn btn-default">Subscribe!</button>
+                        </span>
+                    </div>
                 </div>
+
+                <div class="row">
+                      <div id="mce-responses">
+
+                       <div class="progress progress-xs">
+                             <div class="progress-bar progress-bar-info" role="progressbar" 
+                             aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: 100%">             
+                                          <div class="response" id="mce-error-response" ></div>
+                                          <div class="response" id="mce-success-response" ></div>
+                            </div>
+                       </div>                
+                      </div>
+                </div>      
             </form>
         </div>
         <!-- End MailChimp Signup Form -->

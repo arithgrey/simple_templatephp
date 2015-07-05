@@ -12,12 +12,12 @@
 
 
   <footer class='row'>    
-<section class="" style="background-position:50% 15%;">
+<section class="" style="">
         <div class="container">
           <div class="row">
             <div class="col-md-6">
                <a href="<?=base_url()?>">
-              <br>
+              
               <div class="feature-box-2 object-non-visible right animated object-visible fadeInDownSmall" data-animation-effect="fadeInDownSmall" data-effect-delay="100">
                 
                 <div class="body">
@@ -32,7 +32,7 @@
             </a>
             </div>
             <div class="col-md-6">
-              <br>
+              
               <a href="<?=base_url('index.php/soportesocialintelligence/opensource')?>">
               <div class="feature-box-2 object-non-visible animated object-visible fadeInDownSmall" data-animation-effect="fadeInDownSmall" data-effect-delay="100">
                 <span class="icon default-bg small"><i class="fa fa-github-alt"></i></span>
@@ -156,5 +156,5 @@
 <script type="text/javascript" src="<?=base_url('application/js/main.js')?>"></script>  
 <script type="text/javascript" src="<?=base_url('application/js/home/main.js')?>"></script>
 <script type="text/javascript" src="<?=base_url('application/js/home/iniciosession/iniciosession.js')?>"></script>
-<link rel="stylesheet" type="text/css" href="<?=base_url('application/css/main.css')?>">
+
 <script src="<?=base_url('application/js/jsapi.js')?>"></script>

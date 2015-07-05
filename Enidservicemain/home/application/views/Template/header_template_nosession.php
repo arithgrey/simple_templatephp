@@ -188,25 +188,6 @@
                                 <a href="<?=base_url('index.php/sessioncontroller/iniciosessionuser')?>">
                                   <li ><i class="fa fa-sign-in"></i>
                                   Iniciar sessión</a></li>
-                              <li >
-                                <a href="<?=base_url('index.php/soportesocialintelligence/nosotros')?>">
-                                  <i class="fa fa-users"></i>
-                                  Nosotros
-                                </a>
-                            </li>
-                              <li >
-                                <a href="<?=base_url('index.php/soportesocialintelligence/testimonios/servicios')?>">
-                                  <i class="fa fa-area-chart"></i>
-                                    Casos de éxito
-                                </a>
-                              </li>
-                              <li >
-
-                                <a href="<?=base_url('index.php/soportesocialintelligence/servicios')?>">
-                                  <i class="fa fa-credit-card"></i>
-
-                                  Servicios</a>
-                              </li>
                               
                             </ul>
                         <!-- main-menu end -->

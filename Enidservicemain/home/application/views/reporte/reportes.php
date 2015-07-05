@@ -1,26 +1,29 @@
 <script type="text/javascript" src="<?=base_url('application/js/reportes/reporte.js')?>"></script>
-<section class="panel">
-	<header class="panel-heading">
-		Reporte
-	</header>
-	<br>
+
+<div class='row'>
+
+<div class='col-md-3'></div>
+<div class='col-md-6'>
+
+<div class="row state-overview">
+<section class="panel green">
 	<div class="panel-body">
 		<form id="reporteForm">
 			<div>
 				<label>Reporte</label>
 				<br>
-				<input class="form-control" placeholder="Ingrese algo" name="algoTexto" id="texto" type="text">
+				<input class="form-control" placeholder="Breve descripción del reporte" name="algoTexto" id="texto" type="text">
 			</div>
-			<br>
+			
 			<div>
 				<label>Observaciones</label>
 				<br>
-				<textarea rows="10" cols="30" class="form-control" id="cajaTX" name="cajaDeTexto" placeholder="Escriba algo"></textarea>
+				<textarea rows="10" cols="30" class="form-control" id="cajaTX" name="cajaDeTexto" placeholder="Descripción del reporte o recomendación"></textarea>
 			</div>
-			<br>
+			
 			<div>
-				<label>Tipo de Cuestion</label>
-				<br>
+				<label>Filtro</label>
+			
 				<select class="form-control m-bot15" name="seleccion" id="seleccion">
 					<option value="Error en el funcionamiento">Error en el funcionamiento</option>
 					<option value="Sugerencia">Sugerencia</option>
@@ -30,10 +33,19 @@
 				</select>
 			</div>
 			<div>
-				<br>
+			
 				<button type="submit" class="btn btn-primary" id="Enviar" >Enviar</button>
 			</div>
 		</form>
 		<div id="etiquetaA"></div>
 	</div>
 </section>
+</div>
+</div>
+<div class='col-md-3'></div>
+</div>
+
+
+
+
+

@@ -6,8 +6,18 @@
       <input type='hidden' name='recursoid' value="<?=$modulo?>">
   </form>  
 
-  <div id='tablageneral'></div>                                
 
+
+	<div class="row">
+
+			<div class='col-lg-1'></div>
+			<div class='col-lg-10'>
+				<div id='tablageneral'></div>                                
+			</div>
+			<div class='col-lg-1'></div>
+			
+	  		  	
+	</div>
                           
 
 

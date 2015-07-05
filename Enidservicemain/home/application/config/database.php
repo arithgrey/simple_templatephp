@@ -44,11 +44,6 @@
 $active_group = 'default';
 $active_record = TRUE;
 
-
-
-$active_group = 'default';
-$active_record = TRUE;
-
 $db['default']['hostname'] = 'localhost';
 $db['default']['username'] = 'root';
 $db['default']['password'] = 'puntoExeJar';

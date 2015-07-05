@@ -57,6 +57,7 @@
 }
 .avanzadoconfigperfilrecurso:hover{
 	width: 30%;
+	cursor: pointer;
 }
 .imgavanzador{
 	width: 30%;	

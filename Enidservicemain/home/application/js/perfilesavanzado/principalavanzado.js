@@ -41,15 +41,15 @@ function displayperfiles(){
 
         var msjclient =["algo falló al cargar perfiles" , "oasjd "];        
 
-        list="<div class='table-responsive'>";
+        list="<div>";
         list+="<table  class='table'>";              
-        list+="<tr class='titulo_tb' id='table_header'>";               
-        list+="<td class='titulo_tabla'>#</td>";                                 
-        list+="<td class='titulo_tabla'>Roles con acceso al modulo</td>";                                         
+        list+="<tr class='titulo_tb enid-header-table' >";               
+        list+="<td class='title-table-enid'><label> # </label></td>";                                 
+        list+="<td class='title-table-enid'><label><i class='fa fa-group'> </i> Roles con acceso al modulo </label></td>";                                         
 
 
         for(var z in data.permiso){
-                list+="<td class='titulo_tabla'>"+data.permiso[z].nombrepermiso+"</td>";                                                         
+                list+="<td class='title-table-enid'><label>"+data.permiso[z].nombrepermiso+"</label></td>";                                                         
         }
 
         list+="</tr>";
@@ -62,7 +62,7 @@ function displayperfiles(){
                         nombreperfil = data.perfil[x].nombreperfil;
                         descripcion = data.perfil[x].descripcion; 
                         list+="<tr>";               
-                        list+="<td>"+idperfil+"</td>";                                 
+                        list+="<td class='blue-col-enid'>"+idperfil+"</td>";                                 
                         list+="<td><label>"+nombreperfil+"</label><br><span> "+descripcion+"</span></td>";                                         
                         
                         

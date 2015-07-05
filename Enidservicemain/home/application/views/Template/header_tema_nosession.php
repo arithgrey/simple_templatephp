@@ -62,82 +62,64 @@
       <div class="header-container">
         
         
-        <header class="header  fixed  dark clearfix">
+        <header class="header fixed  dark clearfix">
           
-          <div class="container">
-            <div class="row">
+          
+            
+                         
+                                <div class="main-navigation  animated with-dropdown-buttons">
+
+                                <nav class="navbar navbar-default" role="navigation">
+                                  <div class="container-fluid">
+
+                                    <div class="navbar-header">
+                                      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse-1">
+                                        <span class="sr-only"></span>
+                                        <span class="icon-bar"></span>
+                                        <span class="icon-bar"></span>
+                                        <span class="icon-bar"></span>
+                                      </button>
+                                      
+                                    </div>
+
+                                    <!-- Collect the nav links, forms, and other content for toggling -->
+                                    <div class="collapse navbar-collapse" id="navbar-collapse-1">
+                                      <!-- main-menu -->
+                                      <ul class="nav navbar-nav ">
+                                        <li class="dropdown active">
+
+                                          <a class="dropdown-toggle" data-toggle="dropdown" href="<?=base_url()?>">
+                                            <img style="width:7%;" src="<?=base_url()?>application/img/Enid2.png" > 
+                                          </a>
+
+
+                                              <ul class="dropdown-menu">
+                                            
+                                                
+                                                  <li>
+                                                    <a href="<?=base_url('index.php/sessioncontroller/iniciosessionuser')?>">
+                                                    <i class="fa fa-sign-in"></i>
+                                                        Iniciar
+                                                    </a>                                                      
+                                                  </li>
+                                              
+                                                
+                                                  <li>
+                                                    <a href="<?=base_url('index.php/home/signup')?>">
+                                                    <i class="fa fa-star"></i>
+                                                        Registrar
+                                                    </a>                                                      
+                                                  </li>
+                                              </ul>
+                                        </li>
+                                      </ul>
+                                    </div>                                    
+                                  </div>
+
+                                </nav>
               
-              <div class="col-md-12">
-              
-              <div class="header-right clearfix">
-                   <div class="main-navigation  animated with-dropdown-buttons">
 
-                  <nav class="navbar navbar-default" role="navigation">
-                    <div class="container-fluid">
-
-                      <div class="navbar-header">
-                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse-1">
-                          <span class="sr-only">Toggle navigation</span>
-                          <span class="icon-bar"></span>
-                          <span class="icon-bar"></span>
-                          <span class="icon-bar"></span>
-                        </button>
-                        
-                      </div>
-
-                      <!-- Collect the nav links, forms, and other content for toggling -->
-                      <div class="collapse navbar-collapse" id="navbar-collapse-1">
-                        <!-- main-menu -->
-                        <ul class="nav navbar-nav ">
-                          <li class="dropdown active">
-
-                            <a class="dropdown-toggle" data-toggle="dropdown" href="<?=base_url()?>">
-                              <img style="width:7%;" src="<?=base_url()?>application/img/Enid2.png" > 
-                            </a>
-
-
-                                <ul class="dropdown-menu">
-                              
-                                <a href="<?=base_url('index.php/sessioncontroller/iniciosessionuser')?>">
-                                  <li ><i class="fa fa-sign-in"></i>
-                                  Iniciar sessión</a></li>
-                              <li >
-                                <a href="<?=base_url('index.php/soportesocialintelligence/nosotros')?>">
-                                  <i class="fa fa-users"></i>
-                                  Nosotros
-                                </a>
-                            </li>
-                              <li >
-                                <a href="<?=base_url('index.php/soportesocialintelligence/testimonios/servicios')?>">
-                                  <i class="fa fa-area-chart"></i>
-                                    Casos de éxito
-                                </a>
-                              </li>
-                              <li >
-
-                                <a href="<?=base_url('index.php/soportesocialintelligence/servicios')?>">
-                                  <i class="fa fa-credit-card"></i>
-
-                                  Servicios</a>
-                              </li>
-                              
-                            </ul>
-
-
-                          </li>
-                        </ul>
-                      </div>
-
-                    </div>
-                  </nav>
-                  
-
-                </div>
-                
-                </div>
-         
-              </div>
-            </div>
+          
           </div>
           
         </header>
@@ -240,7 +222,7 @@
                   data-speed="500"
                   data-easing="easeOutQuad"
                   data-start="1000"
-                  data-end="5500"><span class="icon large circle"><i class="circle icon-lightbulb"></i></span>
+                  data-end="5500"><span class="icon large circle"><i class="circle fa fa-play-circle-o"></i></span>
                 </div>
 
                 <!-- LAYER NR. 6 -->
@@ -250,7 +232,7 @@
                   data-speed="500"
                   data-easing="easeOutQuad"
                   data-start="2500"
-                  data-end="5500"><span class="icon large circle"><i class="circle icon-arrows-ccw"></i></span>
+                  data-end="5500"><span class="icon large circle"><i class="circle fa fa-line-chart"></i></span>
                 </div>
 
                 <!-- LAYER NR. 7 -->
@@ -261,7 +243,7 @@
                   data-speed="500"
                   data-easing="easeOutQuad"
                   data-start="4000"
-                  data-end="5500"><span class="icon large circle"><i class="circle icon-chart-line"></i></span>
+                  data-end="5500"><span class="icon large circle"><i class="circle fa fa-globe"></i></span>
                 </div>
 
                 <!-- LAYER NR. 8 -->
