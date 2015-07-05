@@ -137,6 +137,52 @@
 
 </style>
 
+
+        <style type="text/css">
+
+        .left-side,  .sticky-left-side , .sticky-header , .logo{
+            //background: #09AFDF !important;
+            //background: none repeat scroll 0% 0% #12ADA2 !important;
+            //background: none repeat scroll 0% 0% #03C7FC !important;
+            //background-color: rgba(29, 119, 145, 1) !important;
+            background: #043544 !important;
+        }
+        .main-content{
+            background: white;
+            color: #00090C;
+        }
+
+        .blue-col-enid{
+            background: none repeat scroll 0% 0% #12ADA2 !important;
+            
+            //background: none repeat scroll 0% 0% #12ADA2;
+            //color: #00090C;
+            color: white;
+            padding: 8px;
+        }
+        .title-table-enid{
+            font-size: 1.1em;
+            color: white;
+        }
+        .enid-header-table{
+            
+            //background: none repeat scroll 0% 0% #12ADA2 !important;
+            //background: none repeat scroll 0% 0% #09AFDF !important;
+            background: #1C84A7 !important;
+        }
+        .header-section{
+
+            background: none repeat scroll 0% 0% #09AFDF !important;
+            //background: #1C84A7;
+        }
+
+        .panel-heading .nav > li > a {
+            color: white;
+        }
+        </style>
+       
+
+
       <div class="banner clearfix">
       <div class="slideshow">
           

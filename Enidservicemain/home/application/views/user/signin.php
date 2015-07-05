@@ -1,152 +1,145 @@
 <script src="<?=base_url('application/js/sha1.js'); ?>"></script>
 <script type="text/javascript" src="<?=base_url('application/js/home/iniciosession/iniciosession.js')?>"></script>
+
+<!--**************************************************************************************-->
+
 <style type="text/css">
-#title_sigin_s{  
-  color: #358399;  
-  font-size: 1.7em;
-}
-.label_text_form{
-  color: #358399;  
-  font-size: 1.1em; 
-}
-#createnueva{
-  font-size: 1.2em; 
-  color: #008CBA;
-}
-#img_start{
-  width: 6%;
-}
-#contenedorform{
-  padding: 20px;
-}
-#forgotpw{
-  color: #358399;
-  font-size: .9em;
+#recovery-pw{
+  color: #1D7791;
 }
 
-body{
-  background: white;
-}
-  #section_pw_hiden{
-    display: none;
-  }
-#img_start{
-  width: 6%;
-}
-#repo_section{
-  color: grey;
-  font-size: 1.1em;
-}
-.jumbotron{
-  display: none;
-}
-.cta-mail{
-  display: none;
-}
-#recovery-pw{
-  font-size: 1.2em;
-}
-#recovery-pw{
-  color: #0C9EC7;
-}
 </style>
 
 
-<!--**************************************************************************************-->
+
+<br>
+<br>
+<br>
+
 <div class='row'>
-        <div id="loginbox" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">                    
-                    <div class="panel-body">
-      <!--Inicia el formulario -->                 
-                  <form id="in" method="post" action="">
-                    <fieldset>                    
-                          <legend>
-                            <label id="title_sigin_s" class="text-center" >
-                              <strong class="">
-                                <center>   
-                                
-                                    Enid Service          
-                                
-                                </center>                       
-                              </strong>                  
-                            </label>
-                          </legend>
-
-
-                        <!--Inicia input usuario -->  
-                        <label class='label_text_form'><strong>Usuario</strong></label>          
-                        <div class="input-group">
-                          <span class="input-group-addon" id="basic-addon1">@</span>
-                          <input type="mail" name='mail' id="mail"  class="form-control" placeholder="" aria-describedby="basic-addon1">
-                        </div>
-                        <!--Termina input usuario -->
-
-          
-                        
-                        <!--Inicia passwor input -->
-                            <label class='label_text_form'><strong>Password</strong></label>    
-                            <input type='hidden' name='secret' id="secret">
-
-                            <div class="input-group">
-                              <span class="input-group-addon" id="basic-addon1">******</span>
-                              <input type="password" class="form-control"  name='pw' id="pw" aria-describedby="basic-addon1" >
-                            </div>   
-
-                        <!--Termina pasword-->
-
-
-                          <label class="label">No recuerdo mi contraseña</label>
-                         
-                          <div class='row'>
-
-                            <div class='col-sm-6 col-md-4'></div>
-                            <button role="button" id="inbutton" class='btn btn-info col-sm-4 col-md-4'>Iniciar</button>
-                            <div class='col-sm-6 col-md-4'></div>
-                          </div>                        
-
-                      
-                      <label class='' id="reportesession"></label>
-                          </fieldset>
-                      </form>
+  
+    <div class='col-lg-4'></div>
+    <div class="col-lg-4">
+            
 
 
 
+                  
+                      <ul id="myTab" class="nav nav-tabs">
 
-                    <div class="">
-                        <div style="float:right; font-size: 80%; position: relative; top:-10px">
-                          <div class='col-sm-6 col-md-2'></div>
-
-                           <a data-toggle="modal" class='col-sm-6 col-md-12' href="#myModal">
-                            <strong>
-                              <span id="recovery-pw">
-                                Recuperar contraseña
-                              </span>
-                            </strong>  
-                          </a>
-                           
-                      </div>
-                    </div>  
-
-                
+                          <li class="active">
+                            <a href="#signin" data-toggle="tab">
+                              <span class="fa fa-sign-in" aria-hidden="true"></span>                   
+                              Iniciar ahora
+                            </a>
+                          </li>              
+                            
+                          
+                      </ul>
                   
 
+          
+                  <div id="myTabContent" class="tab-content">
+                            <div class="tab-pane fade" id="why">
+                                <p>Enid service, es la plataforma prototipo 
+                                para la administración de eventos musicales 
+                                de forma inteligente.               
+                                <a mailto:href="arithgrey@gmail.com"></a>
+                                para mayor información contactarse a:
+                                arithgrey@gmail.com </p>
+                            </div>
+
+                            <div class="tab-pane fade active in" id="signin">
+                              
+                            <form id="in" method="post" action="">
+                              
+                                  
+                                
+
+                                  <div class="input-group">
+                                    <span class="input-group-addon" id="basic-addon1">@ email</span>
+                                    <input type="mail" name='mail' id="mail"  class="form-control" placeholder="" aria-describedby="basic-addon1">
+                                    
+                                  </div>
+
+
+                                  <div class="input-group">
+
+                                    <span class="input-group-addon" >Contraseña</span>
+                                    <input type="password" class="form-control"  name='pw' id="pw" aria-describedby="basic-addon1" >
+                                    <input type='hidden' name='secret' id="secret">
+                                  </div>
+                                  
+
+                                 
+
+
+                                  
+                                  <div class="control-group">
+                                  
+                                    <label class='' id="reportesession"></label>
+                                    
+                                    
+                                  </div>                
+                                  <button role="button" id="inbutton" class='btn btn-info col-sm-4 col-md-4'>Iniciar</button>
+                            
 
 
 
+                              <div class="row">                                              
+
+                                       <a data-toggle="modal" class='col-sm-6 col-md-12' href="#myModal">
+                                        <strong>
+                                          <span id="recovery-pw">
+                                            Recuperar contraseña
+                                          </span>
+                                        </strong>  
+                                      </a>                                                
+                                      
+
+                              </div>  
 
 
 
-  </div>
+                            </form>
+                               
+                            </div>
+                </div>
+                
+          
+    </div>
+    <div class='col-lg-4'></div>
 
-
-</div><!--Termina row-->
 
 </div>
-</div>
-</div>
+
+    <br>
+    <br>
+    <br>        
+    <br>
 
 
 
-   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
