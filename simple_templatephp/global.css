@@ -1,0 +1,25 @@
+body{
+	background: rgba(246, 240, 240, 1);
+	font-family: arial;
+}
+.wrapper{
+	background: none repeat scroll 0% 0% rgba(229, 251, 247, 1);
+	width: 80%;
+	margin: 0 auto;
+
+}
+.titulo_pagina_h1{
+	color: white;
+}
+footer{
+	padding: 10px;
+	background: none repeat scroll 0% 0% rgba(38, 97, 110, 1);
+	color: white;
+	text-align: right;
+
+
+}
+
+header{
+	background: none repeat scroll 0% 0% rgba(38, 97, 110, 1);
+}
