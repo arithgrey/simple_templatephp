@@ -22,6 +22,14 @@
   
 <?=link_tag('application/js/js/gritter/css/jquery.gritter.css');?>   
 <?=link_tag('application/css/css/style.css');?>
+
+
+<?=link_tag('application/js/js/advanced-datatable/css/demo_page.css')?>
+<?=link_tag('application/js/js/advanced-datatable/css/demo_table.css')?>
+<?=link_tag('application/js/js/data-tables/DT_bootstrap.css')?>
+
+
+
 <?=link_tag('application/css/css/style-responsive.css');?>
      
 <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
@@ -114,14 +122,15 @@
 
 
         
-        <a class="toggle-btn"><i class="fa fa-bars"></i></a>
+        <a class="toggle-btn"><i class="fa fa-th"></i></a>
 
         
 
 
 
 
-
+        
+        
         <script src="<?=base_url('application/js/js/jquery-1.10.2.min.js')?>"></script>
         <script src="<?=base_url('application/js/js/jquery-ui-1.9.2.custom.min.js')?>"></script>
         <script src="<?=base_url('application/js/js/jquery-migrate-1.2.1.min.js')?>"></script>
@@ -142,6 +151,9 @@
 
 
     
+        <script type="text/javascript" language="javascript" src="<?=base_url('application/js/js/advanced-datatable/js/jquery.dataTables.js')?>"></script>
+        <script type="text/javascript" src="<?=base_url('application/js/js/data-tables/DT_bootstrap.js')?>"></script>
+        <script type="text/javascript" src="<?=base_url('application/js/js/dynamic_table_init.js')?>"></script>
 
         <script type="text/javascript" src="<?=base_url('application/js/main.js')?>"></script>  
         <script src="<?=base_url('application/js/jsapi.js')?>"></script> 
@@ -171,7 +183,7 @@
             //background: none repeat scroll 0% 0% #12ADA2;
             //color: #00090C;
             color: white;
-            padding: 8px;
+            
         }
         .title-table-enid{
             font-size: 1.1em;
@@ -182,16 +194,23 @@
             //background: none repeat scroll 0% 0% #12ADA2 !important;
             //background: none repeat scroll 0% 0% #09AFDF !important;
             background: #1C84A7 !important;
+            color: white;
         }
-        .header-section{
+        .header-section , .notification-menu ,  .dropdown-toggle{
 
             background: none repeat scroll 0% 0% #09AFDF !important;
+            color: white !important;
             //background: #1C84A7;
         }
 
         .panel-heading .nav > li > a {
             color: white;
         }
+
+
+
+
+
         </style>
        
         <div class="menu-right">
@@ -413,3 +432,12 @@
 
         <!--body wrapper start-->
         <div class="wrapper">
+
+
+
+
+            <h3>
+                 &raquo; <?=$titulo;?>
+            </h3>
+            
+        

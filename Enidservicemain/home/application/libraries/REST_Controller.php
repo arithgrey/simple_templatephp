@@ -194,7 +194,12 @@ abstract class REST_Controller extends CI_Controller
      */
     public function __construct()
     {
+
+        
+
         parent::__construct();
+        //date_default_timezone_set('America/Mexico_City');
+        
 
         // Start the timer for how long the request takes
         $this->_start_rtime = microtime(true);

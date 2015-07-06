@@ -4,6 +4,7 @@ class Recursocontroller extends CI_Controller {
 	function __construct(){
 		parent::__construct();
 
+		$this->load->model("cuentageneralmodel");
 		$this->load->library('sessionclass');  
 		
 		
@@ -101,13 +102,18 @@ class Recursocontroller extends CI_Controller {
 				$perfil = $this->sessionclass->getperfiles();
 
 				$data['titulo']='Usuarios';
-
-
-
 				
+				$iduser  = $this->sessionclass->getidusuario();
+		        $integrantes  = $this->cuentageneralmodel->getintegrantesinforme($iduser);
+				
+				
+		        $data["integrantes"]= $integrantes;
 				$this->load->view('TemplateEnid/header_template', $data);
 				$this->load->view(displayviewusuario( $perfil ), $data);	
 				$this->load->view('TemplateEnid/footer_template', $data);
+
+
+
 
 			}else{
 			/*Terminamos la session*/

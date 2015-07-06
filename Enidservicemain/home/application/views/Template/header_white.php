@@ -335,26 +335,10 @@
 
       <!-- section start -->
       <!-- ================ -->
-      <section class="section default-bg clearfix">
-        <div class="container">
-          <div class="row">
-            <div class="col-md-12">
-              <div class="call-to-action text-center">
-                <div class="row">
-                  <div class="col-sm-8">
-                    <h1 class="title"> &raquo; <?=$titulo;?></h1></div>
-                  <div class="col-sm-4">
-                   
-                    
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-      
-
+      <br>
+      <br>
+      <br>
+      <br>
 
 
 

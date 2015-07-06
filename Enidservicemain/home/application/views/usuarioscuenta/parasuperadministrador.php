@@ -1,39 +1,102 @@
 <script type="text/javascript" src="<?=base_url('application/js/usuarios/principal.js')?>"></script>
 
+<?php 
+//date_default_timezone_set();
+
+
+
+$listusuarios ="";    
+$now = 1;
+    foreach ($integrantes as $row) {
+        //
+        $listusuarios .="<tr>";      
+        $listusuarios .="<td class='blue-col-enid text-center'>". $now."</td>
+                        <td class=''>".$row["nombre"]."</td>
+                        <td class=''>".$row["email"]."</td>
+                        <td class='text-center'>". getTimeFormat3( $row["fecha_registro"] )  ."</td>
+                        <td class='text-center'>".$row["nombreperfil"]."</td>      
+                        <td class='text-center'><a> <i class='editar_permisos_miembro fa fa-pencil-square fa-lg' id='". $row["idusuario"] . "'></i> </a></td>";      
+
+        $listusuarios .="</tr>";      
+        $now++;
+    }
+
+
+
+    
+
+?>
+
 
 <div class='row'>
-<div class="col-sm-2 col-centered"></div>
-<div class="col-sm-8 col-centered">
+<div class="col-sm-1 col-centered"></div>
+<div class="col-sm-10 col-centered">
                 <section class="panel">
                     <header class="panel-heading">
                         Miembros de la cuenta
-                            <span class="tools pull-right">
-                                <a href="javascript:;" class="fa fa-chevron-down"></a>
-                                <a href="javascript:;" class="fa fa-times"></a>
-                             </span>
-                    </header>
-                    <div class="panel-body">
-                        <table class="table">
-                            <thead>
-                            <tr>
-                                <th>#</th>
-                                <th>Nombre</th>
-                                <th>Registro</th>
-                                <th>Perfil</th>
-                                <th>Usuario</th>
-                            </tr>
-                            </thead>
-                            <tbody id="listausuariosempresa">
-                           
-                            </tbody>
-                        </table>
-                    </div>
-                </section>
-            
+                            
+                             <div class="pull-right">
+                                <a href="#myModal" data-toggle="modal">
+                                    <i class="fa fa-user-plus fa-1x"></i>
+                                    Nuevo integrante
+                                </a>
+                            </div>
 
-<div class="text-center"><a href="#myModal" data-toggle="modal">Nuevo integrante</a></div>
-</div>
-</div>
+
+
+                    </header>
+                        <table aria-describedby="dynamic-table_info" class="display table table-bordered table-striped dataTable dynamic-table-enid" id="dynamic-table">
+
+                                    <thead class='enid-header-table'>
+
+                                        <tr role="row">
+                                            <th class="sorting">ID</th>
+                                            <th class="sorting ">Miembro</th>
+                                            <th class="sorting">Usuario</th>
+                                            <th class="sorting">Registro</th>
+                                            <th class="sorting">Perfil</th>
+                                            <th >Edición</th>
+
+                                        </tr>
+                                    </thead>
+                                    <tbody aria-relevant="all" aria-live="polite" role="alert">
+                                        <?=$listusuarios;?>
+                                    </tbody>    
+                        </table>
+</div><!--Termina 10-->
+<div class="col-sm-1 col-centered"></div>
+</div><!--Termina row-->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <!--********************************************************************************************+***** -->
  <!-- Modal -->
         <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" 
@@ -81,3 +144,9 @@
             </div>
         </div>
         <!-- modal -->
+
+
+
+<script type="text/javascript">
+
+</script>

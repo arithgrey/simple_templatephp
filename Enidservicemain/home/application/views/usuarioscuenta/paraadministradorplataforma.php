@@ -1,1 +1,1 @@
-administrador de plataforma
+

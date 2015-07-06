@@ -52,18 +52,18 @@ function displaypermisos(){
 
 	$.get(url ,  $("#form_recursos").serialize() ).done(function(data){
 
-		/*Comenzamos con iniciar el titulo de la tabla*/
-		list="<div>";
+		
+		list="";
         //list+="<table class='table table-bordered table-striped table-condensed cf'>";              
-        list+="<table class='table  table-hover general-table'>";              
+        list+="<table class='table table-bordered table-striped table-condensed'>";              
         
         list+="<tr>";                       
         list+="<td class='blue-col-enid'><strong><span class='title-table-enid'>Modulo</span></strong></td>";                                 
         for(var y in data.perfiles){
 
-        	list += "<td clas='blue-col-enid'>"+data.perfiles[y].nombreperfil+"</td>";
+        	list += "<td clas='blue-col-enid' align='center' >"+data.perfiles[y].nombreperfil+"</td>";
         }                
-        list+="<td class='title-table-enid'>Avanzado</td></tr>";
+        list+="<td clas='blue-col-enid'>Avanzado</td></tr>";
         /*Terminamos de formar titulo de la tabla*/
         
         for(var x in data.recursos){
@@ -76,8 +76,8 @@ function displaypermisos(){
         	inputdescription = "inputdescription_"+ idrecurso;
 
         	
-        	list+="<tr><td class='blue-col-enid' > <label >" + nombre  + "</label>" ;        	
-        	list+="<br><span > " +descripcionrecurso  + "</span></td>";	        	
+        	list+="<tr><td class='blue-col-enid ' > <label>" + nombre  + "</label>" ;        	
+        	list+="<span > " +descripcionrecurso  + "</span></td>";	        	
 
 	        for(var y in data.perfiles){
 
@@ -112,13 +112,13 @@ function displaypermisos(){
 
 	       	
 	       	list+= "<td> <i class='avanzadoconfigperfilrecurso fa fa-cog' id='"+idrecurso+"' ></i></td>";
-        	list+="</tr>" ;
+        	list+="</tr>";
         	
 
         }
 
 
- 		list+="</table></div>";
+ 		list+="</table>";
         llenaelementoHTML("#display_permisos" , list);
         
         /*Controladores, eliminar y editar */
@@ -129,7 +129,7 @@ function displaypermisos(){
 
 	}).fail(function(){
 
-		alert("algo falló ");
+		alert("Falla reportar");
 	});
 
 
@@ -139,23 +139,7 @@ function displaypermisos(){
 
 	
 
-}/*Termina */
-
-
-
-
-
-
-
-/*Inicia crear nuevo permiso*/
-function nuevopermiso(){
-	alert("ok");
 }
-/*termina nuevo permiso*/
-
-
-
-
 
 
 /**************************************************desplegar perfiles en permisos  *************/
@@ -263,7 +247,7 @@ function displayperfiles(){
 
 
 		list="<div>";
-        list+="<table class='table  table-hover general-table'>";              
+        list+="<table class='table table-bordered table-striped table-condensed'>";              
         list+="<tr>";               
         list+="<td class='blue-col-enid'><label>#</label></td>";                                 
         list+="<td class='blue-col-enid'><label> Perfil </label></td>";                                 
@@ -295,7 +279,7 @@ function displayperfiles(){
 
         	
 
-        	list+="<td> <i data-toggle='modal' data-target='#modaldeleteperfil'  class='fa fa-times icono_delete_perfil' id='"+idperfil+"' ></i>  </td></tr>" ;
+        	list+="<td><div align='center'> <i data-toggle='modal' data-target='#modaldeleteperfil'  class='fa fa-times icono_delete_perfil' id='"+idperfil+"' ></i> </div> </td></tr>" ;
         	
 
         }
@@ -336,7 +320,7 @@ function displayrecursos(){
 
 
 		list="<div>";
-        list+="<table>";              
+        list+="<table class='table table-bordered table-striped table-condensed'>";              
         list+="<tr>";               
         list+="<td>#</td>";                                 
         list+="<td>Recurso</td>";                                 
@@ -366,10 +350,10 @@ function displayrecursos(){
 
         	if (descripcionrecurso.length > 0) {
 
-        		list+="<td> <input type ='text' class='inputdescription col-xs-12 col-sm-12' name='"+inputdescription+"'  value='"+descripcionrecurso+"'  id='"+inputdescription+"'/> <span class='editar_recurso' id='"+idrecurso+"' >" + descripcionrecurso  + "</span></td>  <td><img  data-toggle='modal' data-target='#modaldeleterecurso' class='icono_delete_recurso' class='delete_recurso'  id='"+idrecurso+"'  src='"+imagendelete+"'></td>";	
+        		list+="<td> <input type ='text' class='inputdescription ' name='"+inputdescription+"'  value='"+descripcionrecurso+"'  id='"+inputdescription+"'/> <span class='editar_recurso' id='"+idrecurso+"' >" + descripcionrecurso  + "</span></td>  <td><img  data-toggle='modal' data-target='#modaldeleterecurso' class='icono_delete_recurso' class='delete_recurso'  id='"+idrecurso+"'  src='"+imagendelete+"'></td>";	
         	}else{
         		
-                list+="<td> <input type ='text' class='inputdescription col-xs-12 col-sm-12' name='"+inputdescription+"' value='"+descripcionrecurso+"'  id='"+inputdescription+"'/> <span class='editar_recurso' id='"+idrecurso+"' > + </span></td>  <td><img data-toggle='modal' data-target='#modaldeleterecurso'  class='icono_delete_recurso' class='delete_recurso' id='"+idrecurso+"' src='"+imagendelete+"'></td>" ;
+                list+="<td> <input type ='text' class='inputdescription' name='"+inputdescription+"' value='"+descripcionrecurso+"'  id='"+inputdescription+"'/> <span class='editar_recurso' id='"+idrecurso+"' > + </span></td>  <td><img data-toggle='modal' data-target='#modaldeleterecurso'  class='icono_delete_recurso' class='delete_recurso' id='"+idrecurso+"' src='"+imagendelete+"'></td>" ;
                 
    
         	}
