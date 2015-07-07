@@ -1,5 +1,6 @@
 <script type="text/javascript" src="<?=base_url('application/js/usuarios/principal.js')?>"></script>
 
+
 <?php 
 //date_default_timezone_set();
 
@@ -33,14 +34,14 @@ $now = 1;
 <div class="col-sm-10 col-centered">
                 <section class="panel">
                     <header class="panel-heading">
-                        Miembros de la cuenta
+                        
                             
-                             <div class="pull-right">
+
                                 <a href="#myModal" data-toggle="modal">
                                     <i class="fa fa-user-plus fa-1x"></i>
                                     Nuevo integrante
                                 </a>
-                            </div>
+                            
 
 
 
@@ -146,7 +147,3 @@ $now = 1;
         <!-- modal -->
 
 
-
-<script type="text/javascript">
-
-</script>

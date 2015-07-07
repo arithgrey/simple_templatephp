@@ -30,7 +30,9 @@
 
 
 
+<?=link_tag('application/css/css/table-responsive.css');?>
 <?=link_tag('application/css/css/style-responsive.css');?>
+
      
 <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 
@@ -159,7 +161,7 @@
         <script src="<?=base_url('application/js/jsapi.js')?>"></script> 
 
      
-
+        
 
 
 
@@ -208,11 +210,15 @@
         }
 
 
-
+        .title-page-enid{
+            margin-top: -1px;
+        }
 
 
         </style>
        
+
+
         <div class="menu-right">
             <ul class="notification-menu">
                 <li>
@@ -401,11 +407,17 @@
                 </li>
 
             </ul>
+
+
+
         </div>
         <!--notification menu end -->
 
+
+
         </div>
         <!-- header section end-->
+
 
 
 <div class="modal fade" id="basicModal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
@@ -432,11 +444,7 @@
 
         <!--body wrapper start-->
         <div class="wrapper">
-
-
-
-
-            <h3>
+            <h3 class='title-page-enid'>
                  &raquo; <?=$titulo;?>
             </h3>
             

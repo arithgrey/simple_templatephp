@@ -10,16 +10,16 @@ function __construct(){
 
 function datos($texto,$caja,$selection){
 
-	//return $texto . $caja . $selection;
 	$consulta = "INSERT INTO reportesystema (reporte, descripcionreporte, tiporeporte) VALUES ('".$texto."','".$caja."','".$selection."')";
 	$resultado = $this->db->query($consulta);
 	return $resultado;
 }
 function listarReportes(){
-		$consultaLista = "SELECT * FROM  reportesystema ";
+		$consultaLista = "SELECT * FROM  reportesystema";
 		$listado = $this->db->query($consultaLista);
 		return $listado->result_array();
 }
 
 
 }
+

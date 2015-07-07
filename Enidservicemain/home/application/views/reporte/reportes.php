@@ -5,7 +5,7 @@
 <div class='col-md-3'></div>
 <div class='col-md-6'>
 
-<div class="row state-overview">
+
 <section class="panel green">
 	<div class="panel-body">
 		<form id="reporteForm">
@@ -18,11 +18,11 @@
 			<div>
 				<label>Observaciones</label>
 				<br>
-				<textarea rows="10" cols="30" class="form-control" id="cajaTX" name="cajaDeTexto" placeholder="Descripción del reporte o recomendación"></textarea>
+				<textarea rows="5" cols="20" class="form-control" id="cajaTX" name="cajaDeTexto" placeholder="Descripción del reporte o recomendación"></textarea>
 			</div>
 			
 			<div>
-				<label>Filtro</label>
+				<label>Tipo</label>
 			
 				<select class="form-control m-bot15" name="seleccion" id="seleccion">
 					<option value="Error en el funcionamiento">Error en el funcionamiento</option>
@@ -40,7 +40,7 @@
 		<div id="etiquetaA"></div>
 	</div>
 </section>
-</div>
+
 </div>
 <div class='col-md-3'></div>
 </div>

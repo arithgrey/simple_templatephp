@@ -4,6 +4,7 @@ class Reportecontrolador extends CI_Controller {
     function __construct(){
         parent::__construct();
 
+        $this->load->model("reportemodel");            
         $this->load->model("model_pdf" , "pdf");
         $this->load->library('sessionclass');  
         
@@ -52,13 +53,12 @@ class Reportecontrolador extends CI_Controller {
                 //$data["datosperfil"] = $this->sessionclass->getuserdataperfil();          
                 $data["nombre"]= $nombre;
                 $data["perfilactual"] =  $this->sessionclass->getnameperfilactual(); 
-                $data['titulo']='Mejora continua';
+                $data['titulo']='Reportes y mejoras del sistema';
                 
-                $data["descriptionpage"] = "descriptionpage";
-        
-                $data["section_mail"]="Testimonios";
+                $list_repo_system = $this->reportemodel->listarReportes();
+                    
+                $data["list_repo_system"] = $list_repo_system;
                 $this->load->view('TemplateEnid/header_template', $data);
-
                 $this->load->view('reporte/listarReportes/listado');
                 $this->load->view('TemplateEnid/footer_template', $data);
 

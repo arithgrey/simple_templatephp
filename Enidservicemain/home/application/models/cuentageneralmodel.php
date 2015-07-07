@@ -43,10 +43,13 @@ function getperfilesdelacuenta($idempresa){
     
   
   $idplan = $this->getidplanbyidempresa($idempresa);
-  $querygetplanperfiles = "SELECT perfil.nombreperfil , perfil.idperfil  FROM  perfil, plan_perfil  WHERE 
-  plan_perfil.idperfil =perfil.idperfil AND plan_perfil.idplan = '".  $idplan."' ";  
+
+  $querygetplanperfiles = "SELECT perfil.nombreperfil , perfil.idperfil 
+    FROM  perfil, plan_perfil  WHERE 
+    plan_perfil.idperfil =perfil.idperfil AND plan_perfil.idplan = '".  $idplan."' ";  
   $result = $this->db->query($querygetplanperfiles);  
   return $result ->result_array();
+
 }
 function getidplanbyidempresa($idempresa){
   $querygetplan = "SELECT idplan FROM empresa WHERE  idempresa ='". $idempresa . "' ";

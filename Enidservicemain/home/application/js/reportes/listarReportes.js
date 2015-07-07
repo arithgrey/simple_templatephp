@@ -1,6 +1,6 @@
 $(document).on("ready", function(){
 
-    listarReporte();
+    //listarReporte();
 
 });
 
@@ -10,7 +10,11 @@ $(document).on("ready", function(){
 
     $.get( url )
         .done(function( data ) {
-            listar = "<thead><tr><th>#</th><th>Reporte</th><th>Descripcion</th><th >Fecha de Registro</th><th>Tipo</th></tr></thead><tbody>";
+
+
+
+
+        listar = "";
 
                             
         for(var i in data){
@@ -21,17 +25,19 @@ $(document).on("ready", function(){
             descripcion = data[i].descripcionreporte;
             fecha = data[i].fecha_registro;
             tipo = data[i].tiporeporte;
+            status_repo =  data[i].status_repo;
 
-            listar += "<tr><td>"+idreporte+"</td>";
-            listar += "<td>"+nombre+"</td>";
+            listar += "<tr><td class=''>"+idreporte+"</td>";
+            listar += "<td class='blue-col-enid'>"+nombre+"</td>";
             listar += "<td>"+descripcion+"</td>";
-            listar += "<td>"+fecha+"</td>";
-            listar += "<td>"+tipo+"</td></tr>";
+            listar += "<td>"+status_repo+"</td>";
+            listar += "<td>"+tipo+"</td>";
+            listar += "<td>"+fecha+"</td></tr>";
 
         };
-        listar+="</tbody>";
-        llenaelementoHTML("#tabla" , listar);
-        //alert(listar);
+        listar+="";
+        llenaelementoHTML("#data-reportes-siste" , listar);
+        
 
     })
     .fail(function() {

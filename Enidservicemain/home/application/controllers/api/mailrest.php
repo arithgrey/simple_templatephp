@@ -69,6 +69,7 @@ function reenvioContrasena($email){
 }
 /**************************************************************************************/
 
+
 public function setmailgmailnewinvitaticon_post(){
 
 	if ( $this->sessionclass->is_logged_in() == 1) {			
@@ -128,6 +129,9 @@ public function setmailgmailnewinvitaticon_post(){
 
 
 
+
+
+
 /**************************************************************************++*/
 function sendMailGmailnuevainvitacioncuenta($mail , $pw, $mensaje,  $subject)
 {
@@ -164,7 +168,7 @@ function sendMailGmail_get()
 		'protocol' => 'smtp',
 		'smtp_host' => 'ssl://smtp.gmail.com',
 		'smtp_port' => 465,
-		'smtp_user' => 'enidservice@gmail.com',
+		'smtp_user' => 'arithgrey@gmail.com',
 		'smtp_pass' => 'ubuntuJavaJava.1',
 		'mailtype' => 'html',
 		'charset' => 'utf-8', 

@@ -53,9 +53,9 @@ function displaypermisos(){
 	$.get(url ,  $("#form_recursos").serialize() ).done(function(data){
 
 		
-		list="";
-        //list+="<table class='table table-bordered table-striped table-condensed cf'>";              
-        list+="<table class='table table-bordered table-striped table-condensed'>";              
+		list="<section id='flip-scroll'>";
+        
+        list+="<table class='table table-bordered table-striped table-condensed cf'>";              
         
         list+="<tr>";                       
         list+="<td class='blue-col-enid'><strong><span class='title-table-enid'>Modulo</span></strong></td>";                                 
@@ -64,6 +64,8 @@ function displaypermisos(){
         	list += "<td clas='blue-col-enid' align='center' >"+data.perfiles[y].nombreperfil+"</td>";
         }                
         list+="<td clas='blue-col-enid'>Avanzado</td></tr>";
+        
+
         /*Terminamos de formar titulo de la tabla*/
         
         for(var x in data.recursos){
@@ -117,8 +119,8 @@ function displaypermisos(){
 
         }
 
-
- 		list+="</table>";
+        
+ 		list+="</table></section>";
         llenaelementoHTML("#display_permisos" , list);
         
         /*Controladores, eliminar y editar */

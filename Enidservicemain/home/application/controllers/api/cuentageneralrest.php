@@ -53,6 +53,7 @@ class Cuentageneralrest extends REST_Controller{
             
     }/*Termina la cuenta */
 
+
     function getintegrantesinformacion(){
          $iduser  = $this->sessionclass->getidusuario();
          $integrantes  = $this->cuentageneralmodel->getintegrantesinforme($iduser);

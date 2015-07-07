@@ -4,43 +4,53 @@ class Mailclass extends CI_Controller
 public function __construct(){
 	
 	parent::__construct();
+	$this->load->library("email");
 }
- 
 function index(){
-	echo "string";
+	echo "string.";
 } 
 
 
 
-public function sendMailGmail()
-{
-//cargamos la libreria email de ci
-	$this->load->library("email");
-	 
-	//configuracion para gmail
-	$configGmail = array(
-	'protocol' => 'smtp',
-	'smtp_host' => 'ssl://smtp.gmail.com',
-	'smtp_port' => 465,
-	'smtp_user' => 'jmedrano@ubcubo.com',
-	'smtp_pass' => 'ubuntuJavaJava.1',
-	'mailtype' => 'html',
-	'charset' => 'utf-8', 
-	'newline' => "\r\n"
-);    
-	 
-	//cargamos la configuración para enviar con gmail
-	$this->email->initialize($configGmail);
-	 
-	$this->email->from('arithgrey@gmail.com');
-	$this->email->to("arithgrey@gmail.com");
-	$this->email->subject('Invitación a formar parte del sistema Enid Service');
-	$this->email->message('<h2>Inv</h2>');
-	$this->email->send();
-	//con esto podemos ver el resultado
-	var_dump($this->email->print_debugger());
-}
+
+
+
+public function sendMailGmail(){
+		//cargamos la libreria email de ci
+		date_default_timezone_set('America/New_York');
+		$this->load->library("email");
+		$configGmail = array(
+			'protocol' => 'smtp',
+			'smtp_host' => 'ssl://smtp.gmail.com',
+			'smtp_port' => 465,
+			'smtp_user' => 'enidservice@gmail.com',
+			'smtp_pass' => 'ubuntuJavaJava.1',
+			'mailtype' => 'html',
+			'charset' => 'utf-8',
+			'newline' => "\r\n"
+		);    
  
+		//cargamos la configuración para enviar con gmail
+		$this->email->initialize($configGmail);
+ 
+		$this->email->from('enidservice@gmail.com');
+		$this->email->to("arithgrey@gmail.com");
+		$this->email->subject('Bienvenido/a a uno-de-piera.com');
+		$this->email->message('<h2>Email enviado con codeigniter haciendo uso del smtp de gmail</h2><hr><br> Bienvenido al blog');
+		$this->email->send();
+		//con esto podemos ver el resultado
+		var_dump($this->email->print_debugger());
+	}
+
+
+
+
+
+
+
+
+
+
 	public function sendMailYahoo(){
 	//cargamos la libreria email de ci
 	$this->load->library("email");

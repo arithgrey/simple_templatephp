@@ -11,6 +11,7 @@ class ListarReportesRest extends REST_Controller{
             $this->load->library('sessionclass');
             
     }        
+    
 
     function listarReportes_get(){
 
