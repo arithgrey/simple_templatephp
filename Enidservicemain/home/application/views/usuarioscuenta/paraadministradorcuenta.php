@@ -1,33 +1,69 @@
 <script type="text/javascript" src="<?=base_url('application/js/usuarios/principal.js')?>"></script>
 
 
+<div class='container-fluid'>
 <div class='row'>
-<div class="col-sm-2 col-centered"></div>
-<div class="col-sm-8 col-centered">
-                <section class="panel">
-                   
-                    <div class="panel-body">
-                        <table class="table">
-                            <thead>
-                            <tr>
-                                <th>#</th>
-                                <th>Nombre</th>
-                                <th>Registro</th>
-                                <th>Rol en tu cuenta</th>
-                                <th>Usuario</th>
-                            </tr>
-                            </thead>
-                            <tbody id="listausuariosempresa">
-                           
-                            </tbody>
-                        </table>
-                    </div>
-                </section>
-            
 
-<div class="text-center"><a href="#myModal" data-toggle="modal">Nuevo integrante</a></div>
+    <div class="col-xs-12  col-sm-12 col-md-6 col-lg-6">
+                    <section class="panel">
+                       
+                        <div class="panel-body">
+                            <table class="table">
+                                <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Nombre</th>
+                                    <th>Registro</th>
+                                    <th>Rol en tu cuenta</th>
+                                    <th>Usuario</th>
+                                </tr>
+                                </thead>
+                                <tbody id="listausuariosempresa">
+                               
+                                </tbody>
+                            </table>
+                        </div>
+                    </section>
+                
+
+        <div class="text-center"><a href="#myModal" data-toggle="modal">Nuevo integrante</a></div>
+    </div>
+</div>   
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class='container-fluid'>
+<div class='row'>
+
+    <div class="col-xs-12  col-sm-12 col-md-6 col-lg-6">
+
+<h1>sssssssssss</h1>
+<p>alsndaks dlkas d</p>
+
+
+    </div>
 </div>
 </div>
+
+
+
+
 <!--********************************************************************************************+***** -->
  <!-- Modal -->
         <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" 

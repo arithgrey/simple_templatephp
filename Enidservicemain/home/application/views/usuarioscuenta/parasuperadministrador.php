@@ -30,8 +30,8 @@ $now = 1;
 
 
 <div class='row'>
-<div class="col-sm-1 col-centered"></div>
-<div class="col-sm-10 col-centered">
+
+<div class="col-xs-12  col-sm-12 col-md-12 col-lg-12 centered">
                 <section class="panel">
                     <header class="panel-heading">
                         
@@ -64,8 +64,8 @@ $now = 1;
                                         <?=$listusuarios;?>
                                     </tbody>    
                         </table>
-</div><!--Termina 10-->
-<div class="col-sm-1 col-centered"></div>
+</div>
+
 </div><!--Termina row-->
 
 

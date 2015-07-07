@@ -13,6 +13,22 @@ class ListarReportesRest extends REST_Controller{
     }        
     
 
+
+    function listmetricsgeneral_get(){
+
+        if ( $this->sessionclass->is_logged_in() == 1) {  
+
+            $data_respose = $this->reportemodel->getMetricasgGenerales();
+
+            $this->response($data_respose);
+
+         }else{
+            $this->sessionclass->logout();
+        }
+
+    }
+
+
     function listarReportes_get(){
 
     //$this->response("test correcto");

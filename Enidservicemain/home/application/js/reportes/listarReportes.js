@@ -1,11 +1,59 @@
 $(document).on("ready", function(){
 
-    //listarReporte();
+  
+  $("footer").ready(list_metrics_general);
 
 });
 
- function listarReporte()
-{
+  
+ function list_metrics_general(){
+
+      url = now + "index.php/api/listarreportesrest/listmetricsgeneral/format/json";  
+      $.get( url ).done(function(newdata) {
+
+           var data = google.visualization.arrayToDataTable([
+
+                  ["", "", { role: "style" } ],
+                  ["", 0 , "#043544"]
+                            
+            ]);
+
+             for(var x in newdata){                      
+
+                  data.addRow([ newdata[x].Total  , parseInt(newdata[x].valor)   , "#043544"]);
+             }
+
+            var view = new google.visualization.DataView(data);
+            view.setColumns([0, 1,
+                             { calc: "stringify",
+                               sourceColumn: 1,
+                               type: "string",
+                               role: "annotation" },
+                             2]);
+
+            var options = {                               
+              legend: { position: "none" },
+            };
+            
+            var chart = new google.visualization.BarChart(document.getElementById("metricas-reporte"));
+            chart.draw(view, options);      
+      }).fail(function() {
+          
+          alert( genericresponse[2] );
+
+      });
+
+
+ } 
+
+
+
+
+
+
+
+ function listarReporte(){
+
     url = now + "index.php/api/listarreportesrest/listarReportes/format/json";
 
     $.get( url )
@@ -50,31 +98,4 @@ $(document).on("ready", function(){
 
 
 
- function drawStuff() {
-
-            var data = new google.visualization.arrayToDataTable([
-              ['Move', 'Percentage'],
-              ["King's pawn (e4)", 44],
-              ["Queen's pawn (d4)", 31],
-              ["Knight to King 3 (Nf3)", 12],
-              ["Queen's bishop pawn (c4)", 10],
-              ['Other', 3]
-            ]);
-
-            var options = {
-              title: 'Chess opening moves',
-              width: 900,
-              legend: { position: 'none' },
-              chart: { subtitle: 'popularity by percentage' },
-              axes: {
-                x: {
-                  0: { side: 'top', label: 'White to move'} // Top x-axis.
-                }
-              },
-              bar: { groupWidth: "90%" }
-            };
-
-        var chart = new google.charts.Bar(document.getElementById('top_x_div'));
-        chart.draw(data, google.charts.Bar.convertOptions(options));
-
-}
+ 
