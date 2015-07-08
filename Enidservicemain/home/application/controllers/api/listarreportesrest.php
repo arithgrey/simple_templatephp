@@ -13,6 +13,25 @@ class ListarReportesRest extends REST_Controller{
     }        
     
 
+    function updatestatusrepo_get(){
+
+
+            if ( $this->sessionclass->is_logged_in() == 1) {  
+
+                    
+
+                    $nuevo_status = $this->get("nuevo_status");
+                    $update_element_id =  $this->get("update_element_id");
+
+                    $data_respose = $this->reportemodel->updateStatusRepo($nuevo_status , $update_element_id );
+                    $this->response($data_respose);
+                    
+
+             }else{
+                $this->sessionclass->logout();
+            }
+
+    }
 
     function listmetricsgeneral_get(){
 

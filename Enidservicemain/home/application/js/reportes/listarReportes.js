@@ -2,10 +2,40 @@ $(document).on("ready", function(){
 
   
   $("footer").ready(list_metrics_general);
+  $(".update-status-repo").click(update_repo);
+  $(".select-nuevo-status").blur(tryupdatestatus);
+
 
 });
 
+
+
+
+function tryupdatestatus(){
   
+
+  
+    url = now + "index.php/api/listarreportesrest/updatestatusrepo/format/json";
+      $.get(url , $(".form-update-status").serialize() )
+      .done(function(data){      
+        redirect("");
+
+      }).fail(function(){              
+        llenaelementoHTML(".error-operation" , genericresponse[3]);        
+    });
+    
+
+
+
+}
+
+  function update_repo(e){
+      element_update = e.target.id;
+
+      llenaelementoHTML(".num_repo" , element_update);
+      $(".update_element_id").val(element_update);
+  }
+
  function list_metrics_general(){
 
       url = now + "index.php/api/listarreportesrest/listmetricsgeneral/format/json";  

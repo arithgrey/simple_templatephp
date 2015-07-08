@@ -15,7 +15,11 @@ if(!function_exists('invierte_date_time')){
 				$list .= "<tr><td class=''>". $row["idreportesystema"] ."</td>";
 	            $list .= "<td class='blue-col-enid'>". $row["reporte"] ."</td>";
 	            $list .= "<td>". $row["descripcionreporte"]."</td>";
-	            $list .= "<td>".$row["status_repo"] ."</td>";
+
+	            
+	            $update_text_status="update-text-status-". $row["idreportesystema"];                     
+	            $list .= "<td class='update-status-repo' id='". $row["idreportesystema"] . "' data-toggle='modal' data-target='#basicModalupdatestatus'  >	            
+	            <div id='".$update_text_status."'> "  .$row["status_repo"] ." </div> </td>";
 	            $list .= "<td>". $row["tiporeporte"]."</td>";
 	            $list .= "<td>". getTimeFormat3( $row["fecha_registro"])  ."</td></tr>";
 			
