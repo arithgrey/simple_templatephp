@@ -51,7 +51,7 @@ function reenvioContrasena($email){
 		Mensajes enviado por el desarrollador de la plataforma, dudas y aclaraciones
 		 comunicarse con  arithgrey@gmail.com</label><br>
 		<h2>Tu usuario es tu correo: ".trim($email )." </h2>
-		<h3>Tu contraseña es: ".$cadena."</h3><br>
+		<h3>Tu contraseña es: ". trim( $cadena) ."</h3><br>
 		Para iniciar sessión al sistema dirigete a: ". base_url('index.php/sessioncontroller/iniciosessionuser')."
 		";
 
@@ -95,19 +95,20 @@ public function setmailgmailnewinvitaticon_post(){
 
 
 						$mensaje ="<h1>Enid service</h1>
-		<label> Hola que tal, el administrador de la cuenta de Enid  ha 
-		registrado tu usuario en el sistema, la contraseña es provisional así 
-		que una ves que inicies sesión en el sistema tendrán que cambiarla por 
-		motivos de seguridad. 
-		
-		Mensajes enviado por el desarrollador de la plataforma, dudas y aclaraciones
-		 comunicarse con  arithgrey@gmail.com</label><br>
-		<h2>Tu usuario es tu correo: ".trim($mailnewcontact)." </h2>
-		<h3>Tu contraseña es: ".$contraseñaaleatoria."</h3><br>
-		Para iniciar sessión al sistema dirigete a: ". base_url('index.php/sessioncontroller/iniciosessionuser')."
-		";
+						<label>Hola que tal, el administrador de la cuenta de Enid Service ha 
+						registrado tu usuario en el sistema, la contraseña es provisional así 
+						que una ves que inicies sesión en el sistema tendrán que cambiarla por 
+						motivos de seguridad. 
 
-		$subject ='Invitación a formar parte del sistema Enid Service';
+						Mensaje generado desde la plataforma, dudas y aclaraciones
+						comunicarse con arithgrey@enidservice.com ó arithgrey@gmail.com</label><br>
+						<h2>Tu usuario es tu correo: ".trim($mailnewcontact)." </h2>
+						<h3>Tu contraseña es: ".trim( $contraseñaaleatoria )."</h3><br>
+						Para iniciar sessión al sistema dirigete a: ". base_url('index.php/sessioncontroller/iniciosessionuser')."
+						";
+
+					$subject ='Invitación a formar parte del sistema Enid Service';
+					
 					 $clientresponse = $this->sendMailGmailnuevainvitacioncuenta( trim($mailnewcontact) ,$contraseñaaleatoria, $mensaje, $subject);
 
 				}else{
@@ -135,55 +136,73 @@ public function setmailgmailnewinvitaticon_post(){
 /**************************************************************************++*/
 function sendMailGmailnuevainvitacioncuenta($mail , $pw, $mensaje,  $subject)
 {
-		$configGmail = array(
-		'protocol' => 'smtp',
-		'smtp_host' => 'ssl://smtp.gmail.com',
-		'smtp_port' => 465,
-		'smtp_user' => 'enidservice@gmail.com',
-		'smtp_pass' => 'ubuntuJavaJava.1',
-		'mailtype' => 'html',
-		'charset' => 'utf-8', 
-		'newline' => "\r\n"
-	);    
-			 
-		//cargamos la configuración para enviar con gmail
-		$this->email->initialize($configGmail);
-		 
-		$this->email->from('enidservice@gmail.com');
-		$this->email->to($mail);
-		$this->email->subject($subject);
+		
 
-	
+
+
+			$configGmail = array(
+				'protocol' => 'sendmail',								
+				'smtp_port' => 587,
+				'smtp_user' => 'arithgrey@enidservice.com',
+				'smtp_pass' => 'ubuntuJavaJava.1',
+				'mailtype' => 'html',
+				'charset' => 'utf-8',
+				'wordwrap' => TRUE, 
+				'validate' => true
+
+			);    
+
+	       	$this->email->initialize($configGmail);
+	       	$this->email->set_newline("\r\n");				
+
+			 
+		 
+		$this->email->from('arithgrey@enidservice.com');
+		$this->email->to($mail);
+		$this->email->subject($subject);	
 		$this->email->message($mensaje);
-		$this->email->send();
-		//con esto podemos ver el resultado
-		return $this->email->print_debugger();
+
+		if ($this->email->send()) {
+			return $this->email->send();	
+		}else{
+			return $this->email->print_debugger();
+		}
+
+		
+		
+
 }/*Termina la función*/
 
 
 /*******************************************************************************/
 function sendMailGmail_get()
 {
-		$configGmail = array(
-		'protocol' => 'smtp',
-		'smtp_host' => 'ssl://smtp.gmail.com',
-		'smtp_port' => 465,
-		'smtp_user' => 'arithgrey@gmail.com',
-		'smtp_pass' => 'ubuntuJavaJava.1',
-		'mailtype' => 'html',
-		'charset' => 'utf-8', 
-		'newline' => "\r\n"
-	);    
+		  
+
+		 $configGmail = array(
+				'protocol' => 'sendmail',								
+				'smtp_port' => 587,
+				'smtp_user' => 'arithgrey@enidservice.com',
+				'smtp_pass' => 'ubuntuJavaJava.1',
+				'mailtype' => 'html',
+				'charset' => 'utf-8',
+				'wordwrap' => TRUE, 
+				'validate' => true
+
+			);    
+
+	    $this->email->initialize($configGmail);
+	    $this->email->set_newline("\r\n");				
+
 			 
-		//cargamos la configuración para enviar con gmail
-		$this->email->initialize($configGmail);
-		 
-		$this->email->from('enidservice@gmail.com');
+			  
+		
+		$this->email->from('arithgrey@enidservice.com');
 		$this->email->to("arithgrey@gmail.com");
 		$this->email->subject('Invitación a formar parte del sistema Enid Service');
 		$this->email->message('<h2>by desde el rest @arithgrey</h2>');
 		$this->email->send();
-		//con esto podemos ver el resultado
+		
 		$this->response($this->email->print_debugger());
 }
  

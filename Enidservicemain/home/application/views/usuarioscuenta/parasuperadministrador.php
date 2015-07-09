@@ -1,11 +1,6 @@
 <script type="text/javascript" src="<?=base_url('application/js/usuarios/principal.js')?>"></script>
 
-
 <?php 
-//date_default_timezone_set();
-
-
-
 $listusuarios ="";    
 $now = 1;
     foreach ($integrantes as $row) {
