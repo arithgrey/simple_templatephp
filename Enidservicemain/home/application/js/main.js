@@ -6,6 +6,10 @@ $(document).on("ready" , function(){
 	genericresponse =["Ocurio un error al registrar, reporte al administrador del sistema" 
 	, "Felicidades ahora estás suscrito !!", "Error al cargar los datos de las gráficas, reportar al administrador"
 	, "Ocurio un error al intentar registrar cambio, reporte al administrador del sistema" ];
+
+
+	
+
 });
 function outsystem(){
 	urlnext = $(".now").val()+"index.php/sessioncontroller/logout/";		

@@ -128,7 +128,10 @@ $now = 1;
 
                         <div  id='listperfiles'>
                         </div>
-                        <div id="clientresponse"></div>
+
+                        <br>
+                        <div class='well' id="clientresponse"></div>
+
                     </div>
                     <div class="modal-footer">
                         <button data-dismiss="modal" class="btn btn-default" type="button">Cancelar</button>

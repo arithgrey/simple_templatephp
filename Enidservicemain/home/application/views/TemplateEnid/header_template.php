@@ -69,10 +69,14 @@
 
         <!--logo and iconic logo start-->
         <div class="logo">
-            <a href="<?=base_url()?>"><img style="width: 25%"  src="<?=base_url('application/img/Enid2.png')?>" alt="Enid Service"></a>
+            <a href="<?=base_url()?>">
+                <img style="width: 25%"  src="<?=base_url('application/img/Enid2.png')?>" alt="Enid Service">
+
+            </a>            
         </div>
         <div class="logo-icon text-center">
             <a href="<?=base_url()?>"><img style="width: 35%" src="<?=base_url('application/img/Enid2.png')?>" alt="Enid Service"></a>
+
         </div>
         <!--logo and iconic logo end-->
 
@@ -84,13 +88,16 @@
                 <div class="media logged-user">
                     <img alt="" src="images/photos/user-avatar.png" class="media-object">
                     <div class="media-body">
-                        <h4><a href="#"><?=$nombre;?></a></h4>                        
+                        <h4><a href="#"><?=$nombre;?></a></h4> 
+                        <span><?=$perfilactual;?></span>
+
+
                     </div>
                 </div>
 
                 <h5 class="left-nav-title">General</h5>
                 <ul class="nav nav-pills nav-stacked custom-nav">                    
-                    <li><a href="#"><i class="fa fa-cog"></i> <span>Configuración</span></a></li>
+                    <li><a href="<?=base_url('index.php/recursocontroller/informacioncuenta')?>"><i class="fa fa-cog"></i> <span>Configuración</span></a></li>
 
 
                     <li><a href="" data-toggle="modal"  data-target="#basicModal">
@@ -101,6 +108,8 @@
             </div>
 
             <!--sidebar nav start-->
+
+
             <ul class="nav nav-pills nav-stacked custom-nav">
                 <?php echo $menu;  ?>
             </ul>
@@ -125,6 +134,7 @@
 
         
         <a class="toggle-btn"><i class="fa fa-th"></i></a>
+
 
         
 
@@ -220,6 +230,7 @@
 
 
         <div class="menu-right">
+            
             <ul class="notification-menu">
                 <li>
                     <a href="#" class="btn btn-default dropdown-toggle info-number" data-toggle="dropdown">
@@ -392,17 +403,18 @@
                 </li>
                 <li>
                     <a href="#" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                        <img src="images/photos/user-avatar.png" alt="" />
+                        <img src="" alt="" />
                         <?=$nombre;?>
-                        <span class="caret"></span>
+                        
                     </a>
                     <ul class="dropdown-menu dropdown-menu-usermenu pull-right">
                         
-                        <li><a href="<?=base_url('index.php/recursocontroller/informacioncuenta')?>"><i class="fa fa-cog"></i>  Configuración</a></li>
-
-                          <li><a href="" data-toggle="modal"  data-target="#basicModal">
-                            <i class="fa fa-code"></i>Versión del sistema </a></li>
+                        <li><a class='config-my-data'  href="<?=base_url('index.php/recursocontroller/informacioncuenta')?>"><i class="fa fa-cog"></i>  Configuración</a></li>
+                        <li><a href="" data-toggle="modal"  data-target="#basicModal">
+                        <i class="fa fa-code"></i>Versión del sistema </a></li>
                         <li><a href="<?=base_url('index.php/sessioncontroller/logout')?>"><i class="fa fa-sign-out"></i> Salir </a></li>
+
+
                     </ul>
                 </li>
 
