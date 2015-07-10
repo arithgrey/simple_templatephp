@@ -34,7 +34,7 @@ function displayviewpresentacion( $perfil ){
 				break;	
 
 			case 5:
-				$view ="principal/bienvenidaauditor";	
+				$view ="principal/bienvenidaestratega";	
 					break;	
 			case 6:
 				$view ="principal/bienvenidaoperativo";	

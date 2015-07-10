@@ -1,11 +1,7 @@
 $(document).on("ready", function(){
 
-	
 	$("#inbutton").click(trysession);
-
 });
-
-
 function trysession(){
 
 	pw = $("#pw").val();
@@ -27,31 +23,30 @@ function trysession(){
 				url = $(".now").val()+"index.php/api/sessionrestcontroller/startsessionusergeneral/format/json";
 				$.post(url , $("#in").serialize()).done(function(data){
 
-					if (data == 1 ) {
-						next  = $(".now").val() + "index.php/sessioncontroller/presentacion/";
-						redirect(next);
-					}else{
-						/*Reporta error*/
-						llenaelementoHTML("#reportesession" , data);
-					}
+
+						if (data == 1 ) {
+							next  = now + "index.php/sessioncontroller/presentacion/";
+							redirect(next);
+
+						}else{
+							/*Reporta error*/
+							llenaelementoHTML("#reportesession" , data);
+						}
 
 
-				}).fail(function(){
-					alert("Algo fallo al iniciar session");	
+				}).fail(function(){							
+
+						llenaelementoHTML("#reportesession" , "");
+
 				});
 
-
-
-
 			}
-	}else{
 
+	}else{
 		/*Imprimimos el error*/
 		llenaelementoHTML("#reportesession" , "Contraseña muy corta");
 		/*Deslizamos el navegador al error*/
 		recorrepage("#pw");
-	}
-
-	
+	}	
 	return false;
 }

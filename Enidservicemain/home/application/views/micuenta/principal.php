@@ -1,4 +1,3 @@
-
 <script type="text/javascript" src="<?= base_url('application/js/sha1.js')?>"></script>
 <script type="text/javascript" src="<?= base_url('application/js/MiCuenta/principal.js')?>"></script>
 <script type="text/javascript" src="<?= base_url('application/js/MiCuenta/password.js')?>"></script>
@@ -33,10 +32,10 @@
     }
     #alertaExito{
         display: none;
-        color: #00FF00;
+        color: white;
     }
     .error{
-        background-color: #eaeaec;
+        background-color: white;
     } 
     .panel-title, .collapsed {
         color: white;
@@ -271,8 +270,8 @@
                                                         Actualizar contraseña
                                                     </button>
                                                                                                 
-                                                    <div class="alert alert-block alert-danger fade in" id ="alertaError"></div>
-                                                    <div class="alert alert-success alert-block fade in" id ="alertaExito"></div>                                                        
+                                                    <div class="btn btn-xs btn-info fade in" id ="alertaError"></div>
+                                                    <div class="btn btn-xs btn-info fade in" id ="alertaExito"></div>                                                        
                                             </form>
                             </div><!--Cambio de contraseña termina -->
 

@@ -8,7 +8,12 @@ $(document).on("ready", function(){
 
 
 
+
+
+
+
 function trychange(){
+
 	a = $("#anteriorP").val();
 	b = $("#nuevoP").val();
 	c = $("#verificaP").val();
@@ -17,47 +22,55 @@ function trychange(){
 	nuevo = "" +CryptoJS.SHA1(b);
 	confirma = "" +CryptoJS.SHA1(c);
 
-	if((a == null || a == "")||(b == null || b == "")||(c == null || c == ""))
-	{
-		$( "#alertaError" ).show();
-		llenaelementoHTML("#alertaError" , "<strong>¡OH NO!</strong><br>No se permite campos vacios...");
-	}
-	else
-	{
-		url = now + "index.php/api/cambiopasswordcontrolador/actualizarPassword/format/json";
-		$.post( url, { "nuevo": nuevo, "anterior": anterior, "confirma": confirma })
-	 		.done(function( data ) {
-	 			if (data == true)
-	 			{
-	 				$( "#alertaError" ).hide();
-	 				$( "#alertaExito" ).show();
-	 				llenaelementoHTML("#alertaExito" , "<strong>¡CONTRASEÑA CAMBIADA!</strong><br>Espere por favor, se reiniciara sesion en 5 segundos....<br>Ingrese con su nueva contraseña...");
-    				setTimeout ("redireccionar()", 5000);
-    			}
-	 			else
-	 			{
-	 				$( "#alertaError" ).show();
-    				llenaelementoHTML("#alertaError" , data);
-	 			}
-    			//alert(data);
-		  	})
-		 	.fail(function() {
-		 		$( "#alertaError" ).show();
-    			llenaelementoHTML("#alertaError" , "error" );
-		    	//alert( "error" );
-			});	
-	}
 
-	
+
+						if((a == null || a == "")||(b == null || b == "")||(c == null || c == "")){
+
+								$( "#alertaError" ).show();
+								llenaelementoHTML("#alertaError" , "No se permite campos vacios...");
+						}else{
 
 
 
-	//url = now + "index.php/api/cambiopasswordcontrolador/mostrarPassword/format/json";
-	
-	//llenaelementoHTML("#etiquetaNombre" , anterior + "<br>" + nuevo + "<br>" + confirma + "<br>");
+							if ( b.length >= 8) {
+
+
+										url = now + "index.php/api/cambiopasswordcontrolador/actualizarPassword/format/json";
+										$.post( url, { "nuevo": nuevo, "anterior": anterior, "confirma": confirma })
+									 		.done(function( data ) {
+									 			if (data == true)
+									 			{
+									 				$( "#alertaError" ).hide();
+									 				$( "#alertaExito" ).show();
+									 				llenaelementoHTML("#alertaExito" , "Cambios efectuados correctamente, se reiniciara sesion en 5 segundos");
+								    				setTimeout ("redireccionar()", 3000);
+								    			}
+									 			else
+									 			{
+									 				$( "#alertaError" ).show();
+								    				llenaelementoHTML("#alertaError" , data);
+									 			}
+								    			//alert(data);
+										  	})
+										 	.fail(function() {
+										 		$( "#alertaError" ).show();
+								    			llenaelementoHTML("#alertaError" , genericresponse[0] );
+										    	
+											});	
+						
+							}else{
+					llenaelementoHTML("#alertaError" , "La nueva contraseña debe tener almenos 8 caracteres");
+			}			
+						 	
+
+						}	
+			
+
 
 }
-function redireccionar() 
-{
+
+
+function redireccionar(){
+
 	location.href=now + "index.php/sessioncontroller/logout";
 } 
