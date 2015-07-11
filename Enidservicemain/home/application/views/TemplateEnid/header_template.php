@@ -151,7 +151,7 @@
         <script src="<?=base_url('application/js/js/jquery.nicescroll.js')?>"></script>
         <script type="text/javascript" src="<?=base_url('application/js/js/gritter/js/jquery.gritter.js')?>"></script>
         <script src="<?=base_url('application/js/js/gritter/js/gritter-init.js')?>"></script>
-        <script src="<?=base_url('application/js/js/scripts.js')?>"></script>
+        
         
 
         <script src="<?=base_url('application/js/js/iCheck/jquery.icheck.js')?>"></script>
@@ -167,9 +167,10 @@
         <script type="text/javascript" src="<?=base_url('application/js/js/data-tables/DT_bootstrap.js')?>"></script>
         <script type="text/javascript" src="<?=base_url('application/js/js/dynamic_table_init.js')?>"></script>
 
+        <script src="<?=base_url('application/js/js/dropzone/dropzone.js')?>"></script>
         <script type="text/javascript" src="<?=base_url('application/js/main.js')?>"></script>  
         <script src="<?=base_url('application/js/jsapi.js')?>"></script> 
-
+        
      
         
 

@@ -50,7 +50,7 @@ class Eventos extends CI_Controller {
                         
 
                         $this->load->view('TemplateEnid/header_template', $data);
-
+                        $this->load->view('eventos/publicar');
                         $this->load->view('TemplateEnid/footer_template', $data);
 
                 }else{
