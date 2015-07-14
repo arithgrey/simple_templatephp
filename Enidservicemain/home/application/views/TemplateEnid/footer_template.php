@@ -29,5 +29,6 @@
 <input type="hidden" name="now" class="now" value="<?=base_url();?>">
 </body>
 <script src="<?=base_url('application/js/js/scripts.js')?>"></script>
+
 </html>
 

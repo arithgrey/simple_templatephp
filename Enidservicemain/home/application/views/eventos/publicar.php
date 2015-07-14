@@ -1,36 +1,20 @@
 <link href="<?=base_url('application/js/js/dropzone/css/dropzone.css')?>" rel="stylesheet"/>
 <link rel="stylesheet" type="text/css" href="<?=base_url('application/js/js/jquery-tags-input/jquery.tagsinput.css')?>" />
-<link rel="stylesheet" type="text/css" href="<?=base_url('application/js/js/bootstrap-datepicker/css/datepicker-custom.css')?>" />
-<link rel="stylesheet" type="text/css" href="<?=base_url('application/js/js/bootstrap-datetimepicker/css/datetimepicker-custom.css')?>" />
-<link href="<?=base_url('application/js/js/dropzone/css/dropzone.css')?>" rel="stylesheet"/>
-
-
-
 
 <script src="<?=base_url('application/js/js/jquery-tags-input/jquery.tagsinput.js')?>"></script>
 <script src="<?=base_url('application/js/js/tagsinput-init.js')?>"></script>
-<script type="text/javascript" src="<?=base_url('application/js/js/bootstrap-datepicker/js/bootstrap-datepicker.js')?>"></script>
-<script src="<?=base_url('application/js/js/pickers-init.js')?>"></script>
-<script src="<?=base_url('application/js/js/dropzone/dropzone.js')?>"></script>       
 
-
-
-
-<script type="text/javascript" src="<?=base_url('application/js/js/bootstrap-inputmask/bootstrap-inputmask.min.js')?>"></script>
-
-
-
-<link href="<?=base_url('application/css/css/clndr.css')?>" rel="stylesheet">
-
-
-<script src="<?=base_url('application/js/')?>js/calendar/clndr.js"></script>
-<script src="<?=base_url('application/js/')?>js/calendar/evnt.calendar.init.js"></script>
-<script src="<?=base_url('application/js/')?>js/calendar/moment-2.2.1.js"></script>
-<script src="http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.5.2/underscore-min.js"></script>
-
+<script type="text/javascript" src="<?=base_url('application/js/evento/principal.js')?>"> </script>
 
 
 <style type="text/css">
+.title-page-enid{
+    display: none;
+}
+#nombre-input, #edicion-input , #evento , #descripcion-evento, #ubicacion-input{
+    display: none;
+}
+
 .tag span{
     color: white;
 }
@@ -60,6 +44,26 @@
     background:  #13979C;
     color: white;
 }
+.nombre-evento-h1:hover{
+    font-size: 1.5em;
+    cursor: pointer;
+}
+.edicion-evento:hover{
+ font-size: 1.2em;   
+ cursor: pointer;
+}
+.descripcion-p:hover{
+ font-size: 1.1em;      
+ cursor: pointer;
+}
+.dropzone{
+    margin-top: -40px !important;
+
+}
+.ubicacion-panel:hover{
+    padding: 10px;    
+    cursor: pointer;
+}
 </style>
 
 
@@ -70,8 +74,10 @@
 
 
 
-            
 
+
+                
+                    
                 <div class="col-md-9 section-enid-events-r">
                     <div class="row">
 
@@ -79,20 +85,50 @@
                             <div class="panel">
                                 <div class="panel-body">
                                     <div class="profile-desk">
-                                        <h1>Nombre de tu evento</h1>
+                                        <h1 class='nombre-evento-h1'>Nombre de tu evento</h1>
                                         
-                                        <span class="designation">Edición 3 nueva era</span>
+
+
+                                         <div class="form-group">
+                                            <input placeholder="Registra el nombre del evento" class="form-control"  type="text" id="nombre-input" name='nombre-input'>
+
+                                        </div>
+
+
+                                         <input id="evento" name='evento'  >
+                                        
+                                        <span class="designation edicion-evento">Edición 3 nueva era</span>
+                                            
+
+                                            <div class="form-group">
+                                                <input placeholder="Registra qué edición tiene el evento" class="form-control"  type="text" id="edicion-input" name='edicion-input'>
+
+                                            </div>
+
+
                                           <form action="<?=base_url('application/js/js/dropzone/upload.php')?>" class="dropzone" id="my-awesome-dropzone">
                                                 </form>
+
+                                         <div class='dropzone-previews'></div>       
             
-                                        <p class='well descripcion-evento-p'>                                             
-                                        Celebrando un éxitoso año y cumpliendo ya 15 años haciendo historia de la música electrónica en México, nos enorgullecemos en presentar nuestra tercera edición del Festival "I love this generation" el cual tendrá lugar en nuestro mítico Club Coco Dance club, presentandose en el más de 20 artistas de esta tendencia y de más de 3 naciones, vive esta única experiencia.                                                   
-                                        </p>   
-                                        <label>Cómo será tu evento</label>   
-                                        <div class="form-group">        
+                                            <div class='well descripcion-evento-p'>
+                                                <p class='descripcion-p'><strong>
+                                              Celebrando un exitoso año y cumpliendo ya 15 años haciendo historia de la música electrónica en México, nos enorgullecemos en presentar nuestra tercera edición del Festival "I love this generation" el cual tendrá lugar en nuestro mítico Club Coco Dance club, presentándose en el más de 20 artistas de esta tendencia y de más de 3 naciones, vive esta única experiencia.                                                   
+                                                </strong></p>
+                                                <div class="form-group">
+                                                    <textarea id='descripcion-evento' placeholder ='Celebrando un exitoso año y cumpliendo ya 15 años haciendo historia de la música electrónica en México, nos enorgullecemos en presentar nuestra tercera edición del Festival "I love this generation" el cual tendrá lugar en nuestro mítico Club Coco Dance club, presentándose en el más de 20 artistas de esta tendencia y de más de 3 naciones, vive esta única experiencia.' rows="6" class="form-control"></textarea>
+                                                </div>        
+                                            </div>   
+
+
+
+                                        <label>Generos</label>
+                                       <input style="display: none;" id="tags_1" class="tags" value="Trance, House, Minimal" type="text">                             
+                                        
                                             
-                                                <input style="display: none;" id="tags_1" class="tags" value="Magnífico, El evento del año, Impresionante" type="text">                                    
-                                        </div>     
+                                        
+                                        
+
                                     </div>
                                 </div>
                             </div>
@@ -128,12 +164,13 @@
                                         
                                         <li>
                                             <div class="avatar">
-                                                <img src="images/photos/user5.png" alt="">
+                                            <img src="http://localhost/adminex/adminex/html/images/photos/user5.png" alt="">
                                             </div>
                                             <div class="activity-desk">
 
-                                                <h5><a href="#">Jonathan Smith</a> <span>was absent office due to sickness</span></h5>
-                                                <p class="text-muted">4 days ago near Alaska, USA</p>
+                                                <h5><a href="#">Jonathan Smith</a> 
+                                                    <span>was absent office due to sickness</span></h5>
+                                                    <p class="text-muted">4 days ago near Alaska, USA</p>
                                             </div>
                                         </li>
 
@@ -155,19 +192,30 @@
 
                         <div class="col-md-12">
                             <br>
-                            <div class="panel">
-
-                                <div class="panel-body p-states green-box">
-
+                            <div class="panel ">
+                                <a href="#mapsaction">    
+                                <div class="panel-body p-states ubicacion-panel green-box">
+                                    
                                     <div class="summary pull-left">
                                         <h4>
                                             <i class="fa fa-map-marker"></i>
-                                            Dirección 
+                                            Ubicación
                                         </h4>
-                                        <h5>Avenida sur 16 # 129 Colonia Agricola oriental</h5>
+                                        
+                                        
+                                        
+
+                                                <span class='text-ubicacion'></span>
+                                                
+                                                <input placeholder="Dónde será el evento" 
+                                                class="form-control"  type="text" id="ubicacion-input" 
+                                                name='ubicacion-input'>                                                      
+
+
                                     </div>
                                     
                                 </div>
+                                </a>
                             </div>
                         </div>
                     
@@ -180,10 +228,8 @@
                                 <div class="panel-body p-states green-box">
 
                                     <div class="summary pull-left">
-                                        <h4>    <i class="fa fa-money"></i> Accesos <span> al evento</span></h4>
-                                        <h5>Día del evento: $ 500</h5>                                        
-                                        <h5>Preventa 3: $ 350</h5>                                        
-                                        <h5><i class="fa fa-plus"></i> Agregar preventa</h5>
+                                        <h4>    <i class="fa fa-money"></i> Accesos </h4>
+                                       
                                     </div>
                                     
                                 </div>
@@ -197,13 +243,11 @@
                             <div class="panel">
                                 <div class="panel-body p-states green-box">
                                     <div class="summary pull-left">
-                                        <h4>
-                                        
-                                            Servicios
+                                        <h4>                                        
+                                      <i class="fa fa-cutlery"></i>
+                                      Servicios
                                         </h4>                                    
-                                        <h5><i class="fa fa-cutlery"></i> Barra de alimentos</h5>
-                                        <h5><i class="fa fa-car"></i> Estacionamiento</h5>
-                                        <h5><i class="fa fa-plus"></i> Nuevo</h5>
+                                        
                                         
                                         
                                     </div>
@@ -214,54 +258,145 @@
 
 
 
+                        <div class="col-md-12">
+                            <div class="panel">
+                                <div class="panel-body p-states green-box">
+                                    <div class="summary pull-left">
+                                        <h4>                                        
+                                      <i class="fa fa-flag"></i>
+
+
+                                      Social
+                                        </h4>                                    
+                                        
+                                        
+                                        
+                                    </div>
                                     
+                                </div>
+                            </div>
+                        </div>
 
 
-                                        <div class="col-md-12">
-                                            <div class="panel">
-                                                <div class="panel-body p-states green-box">
-                                                    
-                                                        <h4>
-                                                        
-                                                        En tus redes sociales
-                                                        </h4>                            
-                                                        <br>
-
-                                                       <ul class="p-social-link pull-center">
-                                                            <li>
-                                                                <a href="#">
-                                                                    <i class="fa fa-facebook"></i>
-                                                                </a>
-                                                            </li>
-                                                            <li class="active">
-                                                                <a href="#">
-                                                                    <i class="fa fa-twitter"></i>
-                                                                </a>
-                                                            </li>
-                                                            <li>
-                                                                <a href="#">
-                                                                    <i class="fa fa-google-plus"></i>
-                                                                </a>
-                                                            </li>
-                                                        </ul>
-
-                                                        
-                                                    
-                                                    
-                                                </div>
-                                            </div>
-                                        </div>
-
-
-                    
-
-
-
-
-
+                        <div class="col-md-12">
+                            <div class="panel">
+                                <div class="panel-body p-states green-box">
+                                    <div class="summary pull-left">
+                                        <h4>                                        
+                                            <i class="fa fa-calendar"></i>
+                                            Fecha
+                                        </h4>                                    
+                                        
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                        </div>
                        
                     </div>
                 </div>
+            </div>
+
+
+
+
+
+
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true&libraries=places"></script>
+
+    <script>
+function initialize() {
+  var mapOptions = {
+    center: new google.maps.LatLng(-33.8688, 151.2195),
+    zoom: 13
+  };
+  var map = new google.maps.Map(document.getElementById('map-canvas'),
+    mapOptions);
+
+  var input = /** @type {HTMLInputElement} */(
+      document.getElementById('pac-input'));
+
+  var types = document.getElementById('type-selector');
+  map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+  map.controls[google.maps.ControlPosition.TOP_LEFT].push(types);
+
+  var autocomplete = new google.maps.places.Autocomplete(input);
+  autocomplete.bindTo('bounds', map);
+
+  var infowindow = new google.maps.InfoWindow();
+  var marker = new google.maps.Marker({
+    map: map,
+    anchorPoint: new google.maps.Point(0, -29)
+  });
+
+  google.maps.event.addListener(autocomplete, 'place_changed', function() {
+    infowindow.close();
+    marker.setVisible(false);
+    var place = autocomplete.getPlace();
+    if (!place.geometry) {
+      window.alert("Autocomplete's returned place contains no geometry");
+      return;
+    }
+
+    // If the place has a geometry, then present it on a map.
+    if (place.geometry.viewport) {
+      map.fitBounds(place.geometry.viewport);
+    } else {
+      map.setCenter(place.geometry.location);
+      map.setZoom(17);  // Why 17? Because it looks good.
+    }
+    marker.setIcon(/** @type {google.maps.Icon} */({
+      url: place.icon,
+      size: new google.maps.Size(71, 71),
+      origin: new google.maps.Point(0, 0),
+      anchor: new google.maps.Point(17, 34),
+      scaledSize: new google.maps.Size(35, 35)
+    }));
+    marker.setPosition(place.geometry.location);
+    marker.setVisible(true);
+
+    var address = '';
+    if (place.address_components) {
+      address = [
+        (place.address_components[0] && place.address_components[0].short_name || ''),
+        (place.address_components[1] && place.address_components[1].short_name || ''),
+        (place.address_components[2] && place.address_components[2].short_name || '')
+      ].join(' ');
+    }
+
+    infowindow.setContent('<div><strong>' + place.name + '</strong><br>' + address);
+    infowindow.open(map, marker);
+  });
+
+  // Sets a listener on a radio button to change the filter type on Places
+  // Autocomplete.
+  function setupClickListener(id, types) {
+    var radioButton = document.getElementById(id);
+    google.maps.event.addDomListener(radioButton, 'click', function() {
+      autocomplete.setTypes(types);
+    });
+  }
+
+  setupClickListener('changetype-all', []);
+  setupClickListener('changetype-address', ['address']);
+  setupClickListener('changetype-establishment', ['establishment']);
+  setupClickListener('changetype-geocode', ['geocode']);
+}
+
+google.maps.event.addDomListener(window, 'load', initialize);
+
+    </script>
+  
+
+<div class='row'>
+    <div id="mapsaction">
+            <div class="form-group">
+                <input id="pac-input" class="controls" type="text" placeholder="Ubicación">
+            </div>    
+            <div id="map-canvas"></div>
+    </div>
+</div>
+  
 
 
 
@@ -280,33 +415,62 @@
 
 
 
-                <!--Termina 
-                <div class='panel-enid-right col-xs-12  col-sm-12 col-md-3 col-lg-3'> 
 
-                        
-                            <div data-date-viewmode="years" data-date-format="dd-mm-yyyy" data-date="12-02-2016"
-                             class="input-append date dpYears">
 
-                                <input readonly="" value="12-02-2012" size="16"  class="form-control" type="text">
-                                <span class="input-group-btn add-on">
-                                <button class="btn btn-primary" type="button"><i class="fa fa-calendar"></i></button>
-                                </span>
-                            </div>
-                            <label class=''> Inicio</label>
-                    
+<script type="text/javascript">
 
-                            <div data-date-viewmode="years" data-date-format="dd-mm-yyyy" data-date="12-02-2016"
-                             class="input-append date dpYears ">
 
-                                <input readonly="" value="12-02-2012" size="16"  class="form-control" type="text">
-                                <span class="input-group-btn add-on">
-                                <button class="btn btn-primary" type="button"><i class="fa fa-calendar"></i></button>
-                                </span>
-                            </div>
-                            <label class=''> Termino</label>
-                        
-                                
-                </div>
+var acceptedFileTypes = ".jpeg,.jpg,.png,.JPEG,.JPG,.PNG";
+Dropzone.options.myAwesomeDropzone = {
 
-               --> 
-                        
+      paramName: "imgportada", //Pagarametro name 
+      headers: {"eventosupload" : "test data"},       
+      maxThumbnailFilesize: 3,
+      maxFilesize: 1, // MB    
+      maxFiles: 2,    
+      acceptedFiles: ".jpeg, .jpg, .png, .JPEG, .JPG, .PNG",      
+      accept: function(file, done) {
+           
+            
+            if (file.name == "a.png") {
+              done("Naha, you don't.");
+            
+            }else { 
+                done();
+            }
+
+      }, error: function (){
+
+            alert("El formato de la imagen no corresponde con el solicitado, este archivo no se subirá ");
+      }
+
+
+    };
+
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

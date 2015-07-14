@@ -426,18 +426,17 @@ require.register("dropzone/lib/dropzone.js", function(exports, require, module){
 
     Dropzone.prototype.defaultOptions = {
       url: null,
-      parallelUploads: 1,
+      parallelUploads: 2,
       maxFilesize: 256,
       paramName: "file",
       createImageThumbnails: true,
       maxThumbnailFilesize: 2,
       thumbnailWidth: 100,
       thumbnailHeight: 100,
-      maxFiles: 1,
       params: {},
       clickable: true,
       enqueueForUpload: true,
-      previewsContainer: null,      
+      previewsContainer: null,
       accept: function(file, done) {
         return done();
       },

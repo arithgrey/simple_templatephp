@@ -169,7 +169,9 @@
 
         <script src="<?=base_url('application/js/js/dropzone/dropzone.js')?>"></script>
         <script type="text/javascript" src="<?=base_url('application/js/main.js')?>"></script>  
+
         <script src="<?=base_url('application/js/jsapi.js')?>"></script> 
+        
         
      
         

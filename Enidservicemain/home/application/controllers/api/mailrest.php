@@ -97,7 +97,7 @@ public function setmailgmailnewinvitaticon_post(){
 						$mensaje ="<h1>Enid service</h1>
 						<label>Hola que tal, el administrador de la cuenta de Enid Service ha 
 						registrado tu usuario en el sistema, la contraseña es provisional así 
-						que una ves que inicies sesión en el sistema tendrán que cambiarla por 
+						que una vez que inicies sesión en el sistema tendrás que cambiarla por 
 						motivos de seguridad. 
 
 						Mensaje generado desde la plataforma, dudas y aclaraciones
