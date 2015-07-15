@@ -1,12 +1,23 @@
+
+
 <link href="<?=base_url('application/js/js/dropzone/css/dropzone.css')?>" rel="stylesheet"/>
 <link rel="stylesheet" type="text/css" href="<?=base_url('application/js/js/jquery-tags-input/jquery.tagsinput.css')?>" />
+
+
+<script type="text/javascript" src="<?=base_url('application/js/js/bootstrap-datepicker/js/bootstrap-datepicker.js')?>"></script>
+<script src="<?=base_url('application/js/js/pickers-init.js')?>"></script>
+
+
 
 <script src="<?=base_url('application/js/js/jquery-tags-input/jquery.tagsinput.js')?>"></script>
 <script src="<?=base_url('application/js/js/tagsinput-init.js')?>"></script>
 <script type="text/javascript" src="<?=base_url('application/js/evento/principal.js')?>"> </script>
+<script type="text/javascript" src="<?=base_url('application/js/evento/escenarios.js')?>"> </script>
+
 
 
 <style type="text/css">
+
 .title-page-enid{
     display: none;
 }
@@ -133,28 +144,28 @@ h4{
 
 
 
+                                        
 
 
 
-
-
-
+                                      
 <form id='form-general-ev'>        
     <input type="hidden" value="<?=$evento;?>" id="evento" name='evento'>
 </form>        
 
                     
-                <div class="col-md-9 section-enid-events-r">
+                <div class="col-md-8 section-enid-events-r">
+
                     <div class="row">
 
                         <div class="col-md-12">
 
                             <div class="panel" >
                                 <header class="panel-heading" style="background: #CD1E3B">
-                                    General
+                                    General 
                                     <span class="tools pull-right">
                                         <a class="fa fa-chevron-down" href="javascript:;"></a>
-                                        <a class="fa fa-times" href="javascript:;"></a>
+                                        
                                      </span>
                                 </header>
                             
@@ -162,9 +173,11 @@ h4{
 
 
                                 <div class="panel-body" style='background : #124048'>
+
+
                                     <div class="profile-desk">
                                         <h1 class='nombre-evento-h1'></h1>
-                                        
+                                                                                    
 
 
                                          <div class="form-group nombre" >
@@ -187,9 +200,8 @@ h4{
                                           <form action="<?=base_url('application/js/js/dropzone/upload.php')?>" class="dropzone" id="my-awesome-dropzone">
                                                 </form>
 
-                                         <div class='dropzone-previews'></div>       
-            
-                                            <div class='well descripcion-evento-p'>
+                                                
+                                              <div class='well descripcion-evento-p'>
                                                 <p class='descripcion-p'><strong>
                                               Celebrando un exitoso año y cumpliendo ya 15 años haciendo historia de la música electrónica en México, nos enorgullecemos en presentar nuestra tercera edición del Festival "I love this generation" el cual tendrá lugar en nuestro mítico Club Coco Dance club, presentándose en el más de 20 artistas de esta tendencia y de más de 3 naciones, vive esta única experiencia.                                                   
                                                 </strong></p>
@@ -197,19 +209,28 @@ h4{
                                                     <textarea id='descripcion-evento' placeholder ='Celebrando un exitoso año y cumpliendo ya 15 años haciendo historia de la música electrónica en México, nos enorgullecemos en presentar nuestra tercera edición del Festival "I love this generation" el cual tendrá lugar en nuestro mítico Club Coco Dance club, presentándose en el más de 20 artistas de esta tendencia y de más de 3 naciones, vive esta única experiencia.' rows="6" class="form-control"></textarea>
                                                 </div>        
                                             </div>   
-
-
-
-                                        <label class='white'>Generos</label>
-                                       <input style="display: none;" id="tags_1" class="tags" value="Trance, House, Minimal" type="text">                             
-                                        
+      
+                                         <div class='dropzone-previews'></div>       
+            
                                             
-                                        
-                                        
+                                             
+
+
+
+
 
                                     </div>
+
+
+
+
+
                                 </div>
+
+
+
                             </div>
+
                         </div>
 
 
@@ -232,58 +253,106 @@ h4{
 
 
                     
-                        <div class="col-md-12">
-                            <div class="panel" >
-                                <header class="panel-heading" style="background: #CD1E3B">
-                                    Artistas que se presentarán en el evento
+                    
+                    </div>
+
+
+
+
+                    <!-- inicioa Mapa-->
+
+
+
+                                    
+
+
+                                    <div class="panel">                                        
+                                            
+                                                <input id="pac-input" class="controls" type="text" placeholder="Ubicación">
+                                                  <div id="mapsection">
+                                                          <div id="map-canvas"></div>
+                                                          <div class='textnotfound-location'></div>  
+                                                  </div>                                            
+                                    </div>
+
+
+
+
+                    <!--termina Mapa -->
+
+
+
+
+
+
+                    <!--Accesoso-->
+
+
+                     <div class="panel" >
+                                <header class="panel-heading" style="background:  #032132">
+                                    <i class="fa fa-credit-card"></i> Accesos 
                                     <span class="tools pull-right">
                                         <a class="fa fa-chevron-down" href="javascript:;"></a>
-                                        <a class="fa fa-times" href="javascript:;"></a>
+                                        
                                      </span>
                                 </header>
-                                
+                            
+
+
+
                                 <div class="panel-body">
-                                    <ul class="activity-list">
-                                        
+                                        <!--Inicia panel body-->
 
-                                        
-                                        <li>
-                                            <div class="avatar">
-                                            <img src="http://localhost/adminex/adminex/html/images/photos/user5.png" alt="">
-                                            </div>
-                                            <div class="activity-desk">
+      <section id="flip-scroll">
 
-                                                <h5><a href="#">Jonathan Smith</a> 
-                                                    <span>was absent office due to sickness</span></h5>
-                                                    <p class="text-muted">4 days ago near Alaska, USA</p>
-                                            </div>
-                                        </li>
+                    <span ><?=$inicio;?> - <?=$termino;?></span>
+                    <table class="table table-bordered table-striped table-condensed cf">
+                        <thead class="cf ">
+                        <tr>
+                            <th class='blue-col-enid'>Periodo</th>
+                            <th>
+                              <i class="fa fa-ticket text-center"></i>
+                            </th>
+                            <th class="numeric text-center">
+                              <i class="fa fa-usd"></i>
 
+                            </th>                            
+                            
+                            
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td class='blue-col-enid'>
+                              
 
-                                    </ul>
-                                </div>
-                    
-                    <div class="panel">
-                        
-                        <div style="display: block;" class="panel-body">
-                            <div class="row">
-                                <div class="col-md-12">
-                                    
-                                        <div class="form-group todo-entry">
-                                            <input placeholder="Busca tu artista en soundcloud" class="form-control" style="width: 100%" type="text">
-                                        </div>
-                                        <button class="btn btn-primary pull-right" type="submit">+</button>
-                                    
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                
+                                                      <div class="input-group  custom-date-range" data-date="13/01/2015" data-date-format="mm/dd/yyyy">
+                                                            <input class="form-control dpd1" name="nuevo_inicio" type="text">
+                                                            <span class="input-group-addon"></span>
+                                                            <input class="form-control dpd2" name="nuevo_termino" type="text">
+                                                        </div>
+                                                        
 
+                            </td>
+                            <td>Venta</td>
+                            <td class="numeric">$1.38</td>
+                            
+                            
+                            
+                            
+                        </tr>
+                        </tbody>
+                    </table>
+                    <div style="position: relative;" class="external-event label label-primary ui-draggable">+ agregar </div>
 
-                            </div>
-                        </div>
-                    </div>
+                </section>
+</div>
+
+                                        <!--Termina panel body-->
+                      </div> 
+
+                    <!--Termina accesos -->
+
                 </div>
 
 
@@ -306,105 +375,87 @@ h4{
 
 
 
-                    <div class="col-md-3 section-enid-events-left">
+                    <div class="col-md-4 section-enid-events-left">
+
+
+                         
 
                         <div class="panel" >
-                                <header class="panel-heading" style="background: black">
-                                    <i class="fa fa-credit-card"></i> Accesos
+                                <header class="panel-heading" style="background: #032132">
+                                  <i class="fa fa-play"></i>
+                                Escenarios
                                     <span class="tools pull-right">
                                         <a class="fa fa-chevron-down" href="javascript:;"></a>
                                         
                                      </span>
                                 </header>
+                                
+                               
+
+
+                                <div class="panel-body" style="background: #F3F8FB">
+                                    
+
+                                    <div id="list_escenarios"></div>
+
+
+                                </div>
+                                
+
+
+
+
+
+                                <div class="panel-body">                                    
+                                        
+                                      <form id="form-escenario" method="POST">
+                                        <div class="form-group todo-entry">
+                                            <input type="hidden" name="evento_escenario" id="evento_escenario" value="<?=$evento;?>">
+
+                                            <input placeholder="Añadir escenario" class="form-control" style="width: 100%" type="text" name='nuevoescenario'>
+                                        </div>
+
+
+                                        <button style="background:black !important" class="btn btn-primary pull-right" type="submit" id="nuevo-escenario">
+                                          <i class="fa fa-plus"></i>
+                                        </button>
+                                      </form>
+                                </div>
+                                  
+                        </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                          
+
                             
-
-
-
-                                <div class="panel-body">
-                                        <!--Inicia panel body-->
-
-                                    <div class="panel">                                        
-                                               
-
-                                            <div class="form-group">                                        
-                                                    <div class="col-sm-2">
-                                                        <i class="fa fa-plus-circle"></i>
-                                                    </div>
-                                                    
-                                                    <div class="col-sm-10">
-                                                        <input placeholder="200"  class="form-control">
-                                                        <span class="help-inline">Primer preventa</span>
-                                                    </div>
-                                            </div>
-                                    </div>
-                        
-                   
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                            
-                        
-                            
-                            
-
-
-                                        <!--Termina panel body-->
-                                </div>    
-
-                            </div>            
 
 
 
 
                                 
-                              <div class="panel" >
-                                <header class="panel-heading" style="background: black">
-                                    <i class="fa fa-map-marker"></i>
-                                    Ubicación
-                                    <span class="tools pull-right">
-                                        <a class="fa fa-chevron-down" href="javascript:;"></a>
-                                        
-                                     </span>
-                                </header>
+
+
+                            
                             
 
 
 
-                                <div class="panel-body">
-                                        <!--Inicia panel body-->
 
-                                    <div class="panel">                                        
-                                               
-                                            <div class="form-group">
-                                                <input id="pac-input" class="controls" type="text" placeholder="Ubicación">
-                                            </div>    
-                                            <div id="mapsection">
-                                                    <div id="map-canvas"></div>
-                                            </div>
-
-                                            <div class='textnotfound-location'></div>  
-
-
-                                            
-                                    </div>
-                                        <!--Termina panel body-->
-                                </div>    
-
-                            </div>            
+                                       
+                           
 
 
                     
@@ -418,6 +469,7 @@ h4{
 
 
 
+  
 
 
 
@@ -432,94 +484,21 @@ h4{
 
 
 
+
+
+<!--
+<div class='row'>
+
+<label class='white'>Generos</label>
+<input style="display: none;" id="tags_1" class="tags" value="Trance, House, Minimal" type="text">                             
+</div>
+-->
 
 
     <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true&libraries=places"></script>
 
     <script>
-function initialize() {
-  var mapOptions = {
-    center: new google.maps.LatLng(-33.8688, 151.2195),
-    zoom: 13
-  };
-  var map = new google.maps.Map(document.getElementById('map-canvas'),
-    mapOptions);
-
-  var input = /** @type {HTMLInputElement} */(
-      document.getElementById('pac-input'));
-
-  var types = document.getElementById('type-selector');
-  map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
-  map.controls[google.maps.ControlPosition.TOP_LEFT].push(types);
-
-  var autocomplete = new google.maps.places.Autocomplete(input);
-  autocomplete.bindTo('bounds', map);
-
-  var infowindow = new google.maps.InfoWindow();
-  var marker = new google.maps.Marker({
-    map: map,
-    anchorPoint: new google.maps.Point(0, -29)
-  });
-
-  google.maps.event.addListener(autocomplete, 'place_changed', function() {
-    infowindow.close();
-    marker.setVisible(false);
-    var place = autocomplete.getPlace();
-    if (!place.geometry) {
-      
-      
-      llenaelementoHTML(".textnotfound-location" , "La ubicación no ha sido encontrada");
-
-      return;
-    }
-
-    // If the place has a geometry, then present it on a map.
-    if (place.geometry.viewport) {
-      map.fitBounds(place.geometry.viewport);
-    } else {
-      map.setCenter(place.geometry.location);
-      map.setZoom(17);  // Why 17? Because it looks good.
-    }
-    marker.setIcon(/** @type {google.maps.Icon} */({
-      url: place.icon,
-      size: new google.maps.Size(71, 71),
-      origin: new google.maps.Point(0, 0),
-      anchor: new google.maps.Point(17, 34),
-      scaledSize: new google.maps.Size(35, 35)
-    }));
-    marker.setPosition(place.geometry.location);
-    marker.setVisible(true);
-
-    var address = '';
-    if (place.address_components) {
-      address = [
-        (place.address_components[0] && place.address_components[0].short_name || ''),
-        (place.address_components[1] && place.address_components[1].short_name || ''),
-        (place.address_components[2] && place.address_components[2].short_name || '')
-      ].join(' ');
-    }
-
-    infowindow.setContent('<div><strong>' + place.name + '</strong><br>' + address);
-    infowindow.open(map, marker);
-  });
-
-  // Sets a listener on a radio button to change the filter type on Places
-  // Autocomplete.
-  function setupClickListener(id, types) {
-    var radioButton = document.getElementById(id);
-    google.maps.event.addDomListener(radioButton, 'click', function() {
-      autocomplete.setTypes(types);
-    });
-  }
-
-  setupClickListener('changetype-all', []);
-  setupClickListener('changetype-address', ['address']);
-  setupClickListener('changetype-establishment', ['establishment']);
-  setupClickListener('changetype-geocode', ['geocode']);
-}
-
-google.maps.event.addDomListener(window, 'load', initialize);
-
+      google.maps.event.addDomListener(window, 'load', initialize);
     </script>
   
 
@@ -620,5 +599,34 @@ Dropzone.options.myAwesomeDropzone = {
 
 
 
+<!--Escenarios modal-->
 
 
+
+                        
+
+
+
+
+
+<div class="modal fade" id="modalesenarios" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true" >
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header" style="background: #09AFDF !important; ">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h4  style="color: white; !important" class="modal-title" id="myModalLabel">Versión</h4>
+            </div>
+            <div class="modal-body">
+                <h3>Enid Service version 1.2</h3>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                <div id="masInfo" align="right">
+                    <a href="http://localhost/Enidservicemain/home/index.php/reportecontrolador">¿Tienes alguna sugerencia o comentario?</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--Termina Escenarios modal-->

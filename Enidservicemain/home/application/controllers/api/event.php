@@ -14,6 +14,22 @@ class Event extends REST_Controller{
 
 
 
+    function updateubicacion_post(){
+
+        if ($this->sessionclass->is_logged_in() == 1){
+
+            $nueva_ubicacion = $this->post("ubicacion");
+            $idevento = $this->post("evento");
+
+            $this->response($this->eventmodel->updateUbicacion($nueva_ubicacion , $idevento ) );
+
+        }else{
+            $this->sessionclass->logout();    
+        }   
+
+    
+    }   
+
 
     function updatenombre_post(){
 

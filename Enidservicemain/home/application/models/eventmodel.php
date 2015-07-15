@@ -101,6 +101,13 @@ function updateDescripcion($nueva_descripcion , $idevento ) {
 }
 
 
+function updateUbicacion($nueva_ubicacion , $idevento ) {
+	
+	$update_ubicacion = "UPDATE evento SET ubicacion='". $nueva_ubicacion ."' WHERE idevento ='".$idevento."'  ";		
+	return  $this->db->query($update_ubicacion);
+
+}
+
 
 /*Termina modelo */
 }

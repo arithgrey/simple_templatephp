@@ -51,11 +51,17 @@ class Eventos extends CI_Controller {
 
                         $idempresa =  $this->sessionclass->getidempresa();                        
                         $idevento = $this->input->get("evento");                        
+                        $inicio = $this->input->get("start");                        
+                        $termino = $this->input->get("end");
+
                         
 
                             if ($this->checkifexist($idevento , $idempresa) == 1 ) {
 
                                     $data["evento"] = $idevento;
+                                    $data["inicio"] = $inicio;
+                                    $data["termino"] = $termino;
+
 
 
                                     

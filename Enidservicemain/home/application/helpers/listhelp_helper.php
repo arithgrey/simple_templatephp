@@ -62,7 +62,7 @@ if(!function_exists('invierte_date_time')){
 		
         foreach ($ultimos_eventos as $row){
 			
-			$urlnext = base_url('index.php/eventos/nuevo?evento='.$row["idevento"]);
+			$urlnext = base_url('index.php/eventos/nuevo?evento='.$row["idevento"]."&start=".$row["fecha_inicio"] ."&end=".$row["fecha_termino"] );
 			$portada = "";
 			if(validatenotnullnotspace($row["portada"])){
 				
