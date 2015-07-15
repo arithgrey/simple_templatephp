@@ -8,11 +8,86 @@ class Event extends REST_Controller{
             $this->load->model("eventmodel");                
             $this->load->library('sessionclass');
             
-            
-
         }     
 
+
+
+
+
+
+    function updatenombre_post(){
+
+        if ($this->sessionclass->is_logged_in() == 1){
+
+            $nuevo_nombre = $this->post("nombre");
+            $idevento = $this->post("evento");
+
+            $this->response($this->eventmodel->updateNombre($nuevo_nombre , $idevento ) );
+
+        }else{
+            $this->sessionclass->logout();    
+        }   
+
+    }    
+
     
+
+
+    function updateedicion_post(){
+
+        if ($this->sessionclass->is_logged_in() == 1){
+
+            $nuevo_edicion = $this->post("edicion");
+            $idevento = $this->post("evento");
+
+            $this->response($this->eventmodel->updateEdicion($nuevo_edicion , $idevento ) );
+
+        }else{
+            $this->sessionclass->logout();    
+        }   
+
+    }    
+
+
+
+    
+    
+
+    function updatedescripcion_post(){
+
+        if ($this->sessionclass->is_logged_in() == 1){
+
+            $nueva_descripcion = $this->post("descripcion_evento");
+            $idevento = $this->post("evento");
+
+            $this->response($this->eventmodel->updateDescripcion($nueva_descripcion , $idevento ) );
+
+        }else{
+            $this->sessionclass->logout();    
+        }   
+
+    }    
+
+
+
+/*****************************************************************************/
+    
+    function get_event_by_id_get(){
+        
+
+        if ($this->sessionclass->is_logged_in() == 1) {
+
+            $idevento = $this->get("evento");
+
+            $this->response($this->eventmodel->getEventbyid($idevento));
+
+        }else{
+            $this->sessionclass->logout();    
+        }    
+
+    }    
+
+
 
     function nuevo_evento_POST(){
                 

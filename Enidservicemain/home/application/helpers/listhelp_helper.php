@@ -32,16 +32,52 @@ if(!function_exists('invierte_date_time')){
 	function getLastEventsEstratega($ultimos_eventos){
 		$elements ="";
 
+
+
+		if (count($ultimos_eventos) == 0 ) {
+			$elements .= "
+								<div class='panel'>
+                                    <div class='panel-body ' style='' >
+                                        <div class='media blog-cmnt'>
+                                                <a href='javascript:;' class='pull-left'>
+                                                    <img alt='' src='". base_url('application/img/example.jpg') ."' class='media-object'>
+                                                </a>
+                                                <div class='media-body'>
+                                                    <h4 class='media-heading' >
+                                                        <a  href='#'>Fantastic event (ejemplo)</a>
+                                                    </h4>
+                                                    <p class='mp-less'>
+                                                        Celebrando un exitoso año y cumpliendo ya 15 años haciendo historia de la música electrónica en México, nos enorgullecemos en presentar nuestra tercera edición del Festival I love this generation ...
+                                                    </p>
+                                                    07/02/2015 - 07/04/2015 
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>";
+
+
+		}
+
+
 		
         foreach ($ultimos_eventos as $row){
 			
 			$urlnext = base_url('index.php/eventos/nuevo?evento='.$row["idevento"]);
+			$portada = "";
+			if(validatenotnullnotspace($row["portada"])){
+				
+				$portada =  $row["portada"];	
+
+			}else{
+				
+				$portada = base_url('application/img/example.jpg');
+			}
 
 			$elements .="<div class='panel'>
                                     <div class='panel-body ' style='' >
                                         <div class='media blog-cmnt'>
                                                 <a href='$urlnext' class='pull-left'>
-                                                    <img   class='media-object'>
+                                                    <img src='$portada' class='media-object'>
                                                 </a>
                                                 <div class='media-body'>
                                                     <h4 class='media-heading' >
@@ -58,11 +94,7 @@ if(!function_exists('invierte_date_time')){
                                             </div>
                                         </div>
                                     </div>";
-
-
-
         }                            
-
 		return $elements;                                    	
 	}
 

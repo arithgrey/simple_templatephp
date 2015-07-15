@@ -24,25 +24,9 @@
                                 </header>
                                 <div class="panel-body" style="background:  none repeat scroll 0% 0% #124048">                    
                                     
-                                    <div class="panel">
-                                    <div class="panel-body " style='' >
-                                        <div class="media blog-cmnt">
-                                                <a href="javascript:;" class="pull-left">
-                                                    <img alt="" src="<?=base_url('application/img/example.jpg')?>" class="media-object">
-                                                </a>
-                                                <div class="media-body">
-                                                    <h4 class="media-heading" >
-                                                        <a  href="#">Fantastic event (ejemplo)</a>
-                                                    </h4>
-                                                    <p class="mp-less">
-                                                        Celebrando un exitoso año y cumpliendo ya 15 años haciendo historia de la música electrónica en México, nos enorgullecemos en presentar nuestra tercera edición del Festival "I love this generation" ...
-                                                    </p>
-                                                    07/02/2015 - 07/04/2015 
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                                
 
+                                    
 
 
                                     <!--last 5 -->

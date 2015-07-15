@@ -3,7 +3,6 @@
 
 <script src="<?=base_url('application/js/js/jquery-tags-input/jquery.tagsinput.js')?>"></script>
 <script src="<?=base_url('application/js/js/tagsinput-init.js')?>"></script>
-
 <script type="text/javascript" src="<?=base_url('application/js/evento/principal.js')?>"> </script>
 
 
@@ -28,10 +27,12 @@
     background: red;
 }
 .section-enid-events-left{
-    background: #043544;
+
+
 }
 .p-states.green-box{
-    background: #09AFDF !important;
+    background: white !important;
+
     
 }
 .green-box {
@@ -44,9 +45,14 @@
     background:  #13979C;
     color: white;
 }
+
+.nombre-evento-h1, .edicion-evento , .white{
+    color: white !important;
+}
 .nombre-evento-h1:hover{
     font-size: 1.5em;
     cursor: pointer;
+
 }
 .edicion-evento:hover{
  font-size: 1.2em;   
@@ -57,7 +63,7 @@
  cursor: pointer;
 }
 .dropzone{
-    margin-top: -40px !important;
+    margin-top: -10px !important;
 
 }
 .ubicacion-panel:hover , .accesos-panel:hover{
@@ -81,7 +87,15 @@
     background: white;
     padding: 5px;
     border-radius: 5px;
-
+}
+#my-awesome-dropzone{
+    background: white;
+}
+h4{
+    color: black !important;
+}
+#accesos-plus:hover{
+    font-size: 1.2em;
 }
 </style>
 
@@ -125,59 +139,43 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+<form id='form-general-ev'>        
+    <input type="hidden" value="<?=$evento;?>" id="evento" name='evento'>
+</form>        
 
                     
                 <div class="col-md-9 section-enid-events-r">
                     <div class="row">
 
                         <div class="col-md-12">
+
                             <div class="panel" >
-                                <div class="panel-body">
+                                <header class="panel-heading" style="background: #CD1E3B">
+                                    General
+                                    <span class="tools pull-right">
+                                        <a class="fa fa-chevron-down" href="javascript:;"></a>
+                                        <a class="fa fa-times" href="javascript:;"></a>
+                                     </span>
+                                </header>
+                            
+
+
+
+                                <div class="panel-body" style='background : #124048'>
                                     <div class="profile-desk">
-                                        <h1 class='nombre-evento-h1'>Nombre de tu evento</h1>
+                                        <h1 class='nombre-evento-h1'></h1>
                                         
 
 
                                          <div class="form-group nombre" >
-                                        <input placeholder="Registra el nombre del evento" class="form-control"  type="text"  name='nombre-input' >
+                                        <input placeholder="Registra el nombre del evento" class="form-control"  type="text"  id="nombre-input" name='nombre-input' >
 
                                         </div>
 
 
-                                         <input id="evento" name='evento'  >
+                                         
                                         
-                                        <span class="designation edicion-evento">Edición 3 nueva era</span>
+                                        <span class="designation edicion-evento"></span>
                                             
 
                                             <div class="form-group">
@@ -202,7 +200,7 @@
 
 
 
-                                        <label>Generos</label>
+                                        <label class='white'>Generos</label>
                                        <input style="display: none;" id="tags_1" class="tags" value="Trance, House, Minimal" type="text">                             
                                         
                                             
@@ -235,8 +233,8 @@
 
                     
                         <div class="col-md-12">
-                            <div class="panel" style="background: #CD1E3B">
-                                <header class="panel-heading">
+                            <div class="panel" >
+                                <header class="panel-heading" style="background: #CD1E3B">
                                     Artistas que se presentarán en el evento
                                     <span class="tools pull-right">
                                         <a class="fa fa-chevron-down" href="javascript:;"></a>
@@ -284,129 +282,134 @@
 
 
                             </div>
-
-
-
-                
-                    
-
-
-
-
                         </div>
-
-
-
                     </div>
                 </div>
 
-                    <div class="col-md-3 section-enid-events-left">
+
+
+
+
+<!--Inicia section tres -->
+
+
+    
+
+
+                            
                     
-                    <div class="row">
+
+
+
+
+
+
+
+
+                    <div class="col-md-3 section-enid-events-left">
+
+                        <div class="panel" >
+                                <header class="panel-heading" style="background: black">
+                                    <i class="fa fa-credit-card"></i> Accesos
+                                    <span class="tools pull-right">
+                                        <a class="fa fa-chevron-down" href="javascript:;"></a>
+                                        
+                                     </span>
+                                </header>
+                            
+
+
+
+                                <div class="panel-body">
+                                        <!--Inicia panel body-->
+
+                                    <div class="panel">                                        
+                                               
+
+                                            <div class="form-group">                                        
+                                                    <div class="col-sm-2">
+                                                        <i class="fa fa-plus-circle"></i>
+                                                    </div>
+                                                    
+                                                    <div class="col-sm-10">
+                                                        <input placeholder="200"  class="form-control">
+                                                        <span class="help-inline">Primer preventa</span>
+                                                    </div>
+                                            </div>
+                                    </div>
                         
+                   
 
-                        <div class="col-md-12">
-                            <br>    
-                            <div class="panel">
 
-                                <div class="panel-body p-states green-box accesos-panel">
 
-                                    <div class="summary pull-left">
-                                        <h4 class='accesos-lab'>
-                                            <i class="fa fa-money"></i> Accesos 
-                                        </h4>
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+                            
+                        
+                            
+                            
+
+
+                                        <!--Termina panel body-->
+                                </div>    
+
+                            </div>            
+
+
+
+
+                                
+                              <div class="panel" >
+                                <header class="panel-heading" style="background: black">
+                                    <i class="fa fa-map-marker"></i>
+                                    Ubicación
+                                    <span class="tools pull-right">
+                                        <a class="fa fa-chevron-down" href="javascript:;"></a>
+                                        
+                                     </span>
+                                </header>
+                            
+
+
+
+                                <div class="panel-body">
+                                        <!--Inicia panel body-->
+
+                                    <div class="panel">                                        
+                                               
+                                            <div class="form-group">
+                                                <input id="pac-input" class="controls" type="text" placeholder="Ubicación">
+                                            </div>    
+                                            <div id="mapsection">
+                                                    <div id="map-canvas"></div>
+                                            </div>
+
+                                            <div class='textnotfound-location'></div>  
 
 
                                             
                                     </div>
+                                        <!--Termina panel body-->
+                                </div>    
 
-                                    
-                                </div>
-                            </div>
-                        </div>
-                        
+                            </div>            
 
 
-
-                        <div class="col-md-12">
-                            <div class="panel">
-                                <div class="panel-body p-states green-box">
-                                    <div class="summary pull-left">
-                                        <h4>                                        
-                                      <i class="fa fa-cutlery"></i>
-                                      Servicios
-                                        </h4>                                    
-                                        
-                                        
-                                        
-                                    </div>
-                                    
-                                </div>
-                            </div>
-                        </div>
-
-
-
-                        <div class="col-md-12">
-                            <div class="panel">
-                                <div class="panel-body p-states green-box">
-                                    <div class="summary pull-left">
-                                        <h4>                                        
-                                      <i class="fa fa-flag"></i>
-
-
-                                      Social
-                                        </h4>                                    
-                                        
-                                        
-                                        
-                                    </div>
-                                    
-                                </div>
-                            </div>
-                        </div>
-
-
-                        <div class="col-md-12">
-                            <div class="panel">
-                                <div class="panel-body p-states green-box">
-                                    <div class="summary pull-left">
-                                        <h4>                                        
-                                            <i class="fa fa-calendar"></i>
-                                            Fecha
-                                        </h4>                                    
-                                        
-                                    </div>
-                                    
-                                </div>
-                            </div>
-                        </div>
-
-
-
-<!--Inicia ubicación-->
-                        <div class="col-md-12">
-                            <a href="#mapsection">
-                            <div class="panel">
-                                <div class="panel-body p-states green-box ubicacion-panel">
-                                    <div class="summary pull-left">
-                                        <h4>
-                                            <i class="fa fa-map-marker"></i>
-                                            Ubicación
-                                        </h4>                                   
-                                        
-                                    </div>
-                                    
-                                </div>
-                            </div>
-                            </a>
-                        </div>
-
-<!--Termina ubicación-->
+                    
                     </div>
-                </div>
-            </div>
+<!--Termina  section tres -->
 
 
 
@@ -421,72 +424,6 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div id='map-section' class='col-md-12'>
-    <span id='span-ubicacion'>Ubicación</span>
-            <div class="form-group">
-                <input id="pac-input" class="controls" type="text" placeholder="Ubicación">
-            </div>    
-    <div id="mapsection">
-            <div id="map-canvas"></div>
-    </div>
-
-    <div class='textnotfound-location'></div>  
-
-</div>
 
 
 
