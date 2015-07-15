@@ -29,6 +29,44 @@ if(!function_exists('invierte_date_time')){
 	}/*Termina función*/
 
 
+	function getLastEventsEstratega($ultimos_eventos){
+		$elements ="";
+
+		
+        foreach ($ultimos_eventos as $row){
+			
+			$urlnext = base_url('index.php/eventos/nuevo?evento='.$row["idevento"]);
+
+			$elements .="<div class='panel'>
+                                    <div class='panel-body ' style='' >
+                                        <div class='media blog-cmnt'>
+                                                <a href='$urlnext' class='pull-left'>
+                                                    <img   class='media-object'>
+                                                </a>
+                                                <div class='media-body'>
+                                                    <h4 class='media-heading' >
+                                                        <a  href='$urlnext'> <label>".$row["nombre_evento"] ."</label>
+                                                        ".$row["edicion"]."</a>
+
+                                                    </h4>
+                                                    <p class='mp-less'>
+                                                        ".$row["descripcion_evento"]."
+                                                    </p>
+                                                     ".$row["fecha_inicio"]." -
+                                                     ".$row["fecha_termino"] ."
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>";
+
+
+
+        }                            
+
+		return $elements;                                    	
+	}
+
+
 
 }/*Termina el helper*/
  

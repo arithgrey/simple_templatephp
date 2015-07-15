@@ -9,17 +9,35 @@ function __construct(){
 }
 
 
-function update_event_name($nuevonombre ,  $idempresa ){
+function create( $nombre , $edicion , $inicio , $termino , $idusuario , $idempresa , $perfiles  ) {
+
+	
+	$query_insert ="INSERT INTO evento (nombre_evento , edicion , idempresa , idusuario , fecha_inicio , fecha_termino )
+	 VALUES( '$nombre' , '$edicion' , '$idempresa' ,   '$idusuario' , '$inicio' , '$termino'  )";
+	$dbresponse =  $this->db->query($query_insert);
 
 
-    $insertuser = "INSERT INTO comentario (comentario, usuario) 
-    VALUES ('".$comentario."' , '".$user."' )"; 
-    
-    $result = $this->db->query($insertuser);       
-            
-    return $result;
+	if ($dbresponse) {
+		
+		/*Último elemento insertado*/
+		$idlastelement = $this->db->insert_id(); 							
+		return $idlastelement;
 
-}/*Termina la función */
+	}else{
+		/**/
+		return "Problemas al registrar reportar al administrador";
+	}			
+}
+
+
+function getLastEvents($idempresa , $num ){
+
+	
+	$query_select ="select * from evento where idempresa='$idempresa' LIMIT $num ";
+	$result = $this->db->query($query_select);
+	return $result ->result_array();      
+
+}
 
 
 

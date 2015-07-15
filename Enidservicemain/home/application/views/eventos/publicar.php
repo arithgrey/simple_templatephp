@@ -60,9 +60,28 @@
     margin-top: -40px !important;
 
 }
-.ubicacion-panel:hover{
+.ubicacion-panel:hover , .accesos-panel:hover{
     padding: 10px;    
     cursor: pointer;
+}
+#map-section{
+    background:  #09AFDF;
+   //background: none repeat scroll 0% 0% #13979C;
+    padding: 10px;
+}
+#span-ubicacion{
+    font-size: 1.3em;
+    color: white;
+}
+.panel-heading {
+    color: white;
+}
+.activity-list li{
+
+    background: white;
+    padding: 5px;
+    border-radius: 5px;
+
 }
 </style>
 
@@ -70,27 +89,88 @@
 
 
 
-
-
-
-
-
-
                 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                     
                 <div class="col-md-9 section-enid-events-r">
                     <div class="row">
 
                         <div class="col-md-12">
-                            <div class="panel">
+                            <div class="panel" >
                                 <div class="panel-body">
                                     <div class="profile-desk">
                                         <h1 class='nombre-evento-h1'>Nombre de tu evento</h1>
                                         
 
 
-                                         <div class="form-group">
-                                            <input placeholder="Registra el nombre del evento" class="form-control"  type="text" id="nombre-input" name='nombre-input'>
+                                         <div class="form-group nombre" >
+                                        <input placeholder="Registra el nombre del evento" class="form-control"  type="text"  name='nombre-input' >
 
                                         </div>
 
@@ -155,7 +235,14 @@
 
                     
                         <div class="col-md-12">
-                            <div class="panel">
+                            <div class="panel" style="background: #CD1E3B">
+                                <header class="panel-heading">
+                                    Artistas que se presentarán en el evento
+                                    <span class="tools pull-right">
+                                        <a class="fa fa-chevron-down" href="javascript:;"></a>
+                                        <a class="fa fa-times" href="javascript:;"></a>
+                                     </span>
+                                </header>
                                 
                                 <div class="panel-body">
                                     <ul class="activity-list">
@@ -177,8 +264,39 @@
 
                                     </ul>
                                 </div>
+                    
+                    <div class="panel">
+                        
+                        <div style="display: block;" class="panel-body">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    
+                                        <div class="form-group todo-entry">
+                                            <input placeholder="Busca tu artista en soundcloud" class="form-control" style="width: 100%" type="text">
+                                        </div>
+                                        <button class="btn btn-primary pull-right" type="submit">+</button>
+                                    
+                                </div>
                             </div>
                         </div>
+                    </div>
+                
+
+
+                            </div>
+
+
+
+                
+                    
+
+
+
+
+                        </div>
+
+
+
                     </div>
                 </div>
 
@@ -186,51 +304,23 @@
                     
                     <div class="row">
                         
-                    
-
-                    
 
                         <div class="col-md-12">
-                            <br>
-                            <div class="panel ">
-                                <a href="#mapsaction">    
-                                <div class="panel-body p-states ubicacion-panel green-box">
-                                    
-                                    <div class="summary pull-left">
-                                        <h4>
-                                            <i class="fa fa-map-marker"></i>
-                                            Ubicación
-                                        </h4>
-                                        
-                                        
-                                        
-
-                                                <span class='text-ubicacion'></span>
-                                                
-                                                <input placeholder="Dónde será el evento" 
-                                                class="form-control"  type="text" id="ubicacion-input" 
-                                                name='ubicacion-input'>                                                      
-
-
-                                    </div>
-                                    
-                                </div>
-                                </a>
-                            </div>
-                        </div>
-                    
-
-
-                        <div class="col-md-12">
-                            
+                            <br>    
                             <div class="panel">
 
-                                <div class="panel-body p-states green-box">
+                                <div class="panel-body p-states green-box accesos-panel">
 
                                     <div class="summary pull-left">
-                                        <h4>    <i class="fa fa-money"></i> Accesos </h4>
-                                       
+                                        <h4 class='accesos-lab'>
+                                            <i class="fa fa-money"></i> Accesos 
+                                        </h4>
+
+
+
+                                            
                                     </div>
+
                                     
                                 </div>
                             </div>
@@ -292,10 +382,115 @@
                                 </div>
                             </div>
                         </div>
-                       
+
+
+
+<!--Inicia ubicación-->
+                        <div class="col-md-12">
+                            <a href="#mapsection">
+                            <div class="panel">
+                                <div class="panel-body p-states green-box ubicacion-panel">
+                                    <div class="summary pull-left">
+                                        <h4>
+                                            <i class="fa fa-map-marker"></i>
+                                            Ubicación
+                                        </h4>                                   
+                                        
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                            </a>
+                        </div>
+
+<!--Termina ubicación-->
                     </div>
                 </div>
             </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div id='map-section' class='col-md-12'>
+    <span id='span-ubicacion'>Ubicación</span>
+            <div class="form-group">
+                <input id="pac-input" class="controls" type="text" placeholder="Ubicación">
+            </div>    
+    <div id="mapsection">
+            <div id="map-canvas"></div>
+    </div>
+
+    <div class='textnotfound-location'></div>  
+
+</div>
+
+
+
+
 
 
 
@@ -334,7 +529,10 @@ function initialize() {
     marker.setVisible(false);
     var place = autocomplete.getPlace();
     if (!place.geometry) {
-      window.alert("Autocomplete's returned place contains no geometry");
+      
+      
+      llenaelementoHTML(".textnotfound-location" , "La ubicación no ha sido encontrada");
+
       return;
     }
 
@@ -388,16 +586,6 @@ google.maps.event.addDomListener(window, 'load', initialize);
     </script>
   
 
-<div class='row'>
-    <div id="mapsaction">
-            <div class="form-group">
-                <input id="pac-input" class="controls" type="text" placeholder="Ubicación">
-            </div>    
-            <div id="map-canvas"></div>
-    </div>
-</div>
-  
-
 
 
 
@@ -448,6 +636,29 @@ Dropzone.options.myAwesomeDropzone = {
     };
 
 </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

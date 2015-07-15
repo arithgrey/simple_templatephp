@@ -29,6 +29,21 @@ if(!function_exists('invierte_date_time')){
 		//return $time;
 	}
 
+	function validatenotnullnotspace($cadena){	
+
+		if (strlen($cadena )>0  ) {
+			if ($cadena == null ) {
+				return false;
+			}else{
+				return true;
+			}
+		}else{
+			return false;
+		}
+
+
+	}/*End function*/
+
 
 
 

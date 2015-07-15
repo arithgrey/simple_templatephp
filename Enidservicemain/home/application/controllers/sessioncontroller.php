@@ -4,7 +4,7 @@ class Sessioncontroller extends CI_Controller {
 
 	function __construct(){        
         parent::__construct();            
-
+        $this->load->model("eventmodel");                
         $this->load->library('sessionclass');        
     }         
 
@@ -70,11 +70,14 @@ class Sessioncontroller extends CI_Controller {
 				$data["menu"] = $menu;
 				$nombre = $this->sessionclass->getnombre();			
 				$data["nombre"]= $nombre;				
-				$perfil = $this->sessionclass->getperfiles();			
-				
-				$data["perfilactual"] =  $this->sessionclass->getnameperfilactual(); 
-				
-				
+				$perfil = $this->sessionclass->getperfiles();							
+				$data["perfilactual"] =  $this->sessionclass->getnameperfilactual(); 				
+
+
+
+					$idempresa =  $this->sessionclass->getidempresa();
+					$data["ultimos_eventos"] =$this->eventmodel->getLastEvents($idempresa , 5 );
+					
 				$this->load->view('TemplateEnid/header_template', $data);		
 				$this->load->view(displayviewpresentacion( $perfil ) , $data);
 				$this->load->view('TemplateEnid/footer_template', $data);	
