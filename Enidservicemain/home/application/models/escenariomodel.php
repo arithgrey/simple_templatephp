@@ -39,7 +39,21 @@ function loadbyevent( $evento ,  $idempresa  ){
 }	
 
 
+function updatedescripcion( $nueva_descripcion , $evento , $idescenario,  $idempresa ) {
 
+	$query_upload ="UPDATE  escenario set descripcion = '$nueva_descripcion' WHERE idevento = '".$evento."' and  idescenario ='$idescenario' ";
+	$result = $this->db->query($query_upload);
+	return $result;	
+
+}
+
+
+function deleteescenariobyid( $idescenario,  $idempresa ){
+
+	$query_deletebyid ="DELETE  FROM  escenario WHERE  idescenario ='$idescenario' ";
+	$result = $this->db->query($query_deletebyid);
+	return $result;	
+}
 
 /**/
 

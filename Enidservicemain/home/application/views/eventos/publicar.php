@@ -18,6 +18,15 @@
 
 <style type="text/css">
 
+
+.newdescripesenario{
+  display: none;
+}
+.descripcion_escenario_update:hover{
+  font-size: 1.2em;
+  cursor: pointer;
+}
+
 .title-page-enid{
     display: none;
 }
@@ -570,9 +579,27 @@ Dropzone.options.myAwesomeDropzone = {
 
 
 
+<!---->
+<div id="confirmationdeleteescenario" class="modal fade">
+<div class="modal-dialog">
+<div class="modal-content">
+  <!-- dialog body -->
+  <div class="modal-body">
+    
+  
+  
+           <div class="modal-footer">
+                Realmente decea eliminar el escenario ??
+                <button type="button" class="btn btn-default" id="aceptar-delete" data-dismiss="modal">Aceptar</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                
+            </div>
 
-
-
+</div>
+</div>
+</div>
+<!---->
+ 
 
 
 

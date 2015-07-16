@@ -68,6 +68,54 @@ class Escenario extends REST_Controller{
 
 
 
+    function updatedescripcionescenario_post(){
+
+        if ( $this->sessionclass->is_logged_in() == 1) {  
+            
+                
+                
+                $nueva_descripcion =$this->post("nuevadescripcion");
+                $evento =  $this->post("evento_escenario");
+                $idescenario =  $this->post("idescenario");
+                $idempresa =  $this->sessionclass->getidempresa();            
+
+
+                
+                $this->response($this->escenariomodel->updatedescripcion( $nueva_descripcion ,
+                 $evento , $idescenario,  $idempresa ) );
+                
+
+        }else{
+
+            $this->sessionclass->logout();        
+        }    
+
+
+    }/*Termina la función*/
+
+
+/************************************************************************/
+
+    function deleteescenario_post(){
+
+        if ( $this->sessionclass->is_logged_in() == 1) {  
+            
+                
+                $idescenario =  $this->post("idescenario");
+                $idempresa =  $this->sessionclass->getidempresa();            
+
+
+                $this->response($this->escenariomodel->deleteescenariobyid( $idescenario,  $idempresa ) );
+                
+
+        }else{
+
+            $this->sessionclass->logout();        
+        }    
+
+    }
+
+
 
 
     /*Termina rest*/
