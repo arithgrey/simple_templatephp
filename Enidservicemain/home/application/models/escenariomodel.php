@@ -13,8 +13,8 @@ function __construct(){
 function nuevo( $nombre , $evento ,  $idempresa  ){
 
 
-	$query_insert ="INSERT INTO escenario (nombre , idevento, idtipo_escenario ) 
-	values ('$nombre' , '$evento ' , '1' )";
+	$query_insert ="INSERT INTO escenario (nombre , idevento  ) 
+	values ('$nombre' , '$evento '  )";
 
 	return $this->db->query($query_insert);
 
@@ -23,9 +23,26 @@ function nuevo( $nombre , $evento ,  $idempresa  ){
 }	
 
 
-/**/
 
 
+
+
+/**************************************************************/
+
+
+function loadescenariobyid( $idescenario,  $idempresa ){
+
+
+	$query_load ="SELECT * FROM escenario WHERE idescenario = '".$idescenario."' ";
+	$result = $this->db->query($query_load);
+	return $result->result_array();
+
+
+
+}	
+
+
+/**************************************************************/
 
 function loadbyevent( $evento ,  $idempresa  ){
 

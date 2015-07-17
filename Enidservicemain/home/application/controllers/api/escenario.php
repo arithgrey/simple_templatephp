@@ -115,10 +115,24 @@ class Escenario extends REST_Controller{
 
     }
 
+    /********************************/
+    function loadescenariobyid_get(){
+        if ( $this->sessionclass->is_logged_in() == 1) {  
+
+                $idescenario =  $this->get("idescenario");
+                $idempresa =  $this->sessionclass->getidempresa();                            
+                $info =  $this->escenariomodel->loadescenariobyid( $idescenario,  $idempresa );
 
 
 
-    /*Termina rest*/
+                $this->response( infoescenario($info)  ); 
+                
+        }else{
+
+            $this->sessionclass->logout();        
+        } 
+
+    }/*Termina rest*/
 
 }
 ?>

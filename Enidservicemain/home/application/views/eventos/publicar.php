@@ -18,6 +18,9 @@
 
 <style type="text/css">
 
+.todo-title, #title-modal-heading{
+  color: black;
+}
 
 .newdescripesenario{
   display: none;
@@ -529,7 +532,6 @@ h4{
 
 
 
-
 <script type="text/javascript">
 
 
@@ -572,6 +574,92 @@ Dropzone.options.myAwesomeDropzone = {
 
 
 
+<!--Escenarios modal-->
+<div id="modalesenariosedit"  class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+
+
+
+
+
+<section id="services" class="services bg-primary">
+    <br>
+  <div class="row col-xs-12" >
+    
+    <form id="updateescenariomodal-form">
+        <input type='hidden' id="idescenarioupdatemodal" name="idescenarioupdatemodal"  class="idescenarioupdatemodal" >
+
+    </form>
+
+
+    <div class="col-xs-12  col-sm-3">
+
+
+
+
+    <div class='general-info-modal'></div>
+
+    </div>
+
+
+
+    <div class="col-xs-12  col-sm-9">
+     
+
+
+
+                <div class="panel">
+                        <header class="panel-heading" id='title-modal-heading'>
+                            <span id=''> Artistas </span>
+                            <span class="tools pull-right">
+                                <a class="fa fa-chevron-down" href="javascript:;"></a>                                
+                             </span>
+                        </header>
+                        <div class="panel-body">
+                            <ul class="to-do-list ui-sortable" id="sortable-todo">
+                               
+                               
+                                
+                                <li class="clearfix">
+                                    <span class="drag-marker">
+                                    <i></i>
+                                    </span>
+                                    <div class="todo-check pull-left">
+                                        <input type="checkbox" value="None" id="todo-check4">
+                                        <label for="todo-check4"></label>
+                                    </div>
+                                    <p class="todo-title">
+                                        paul kkb dj (ejemplo)
+                                    </p>
+                                    <div class="todo-actionlist pull-right clearfix">
+
+                                        <a href="#" class="todo-remove"><i class="fa fa-times"></i></a>
+                                    </div>
+                                </li>
+
+                            </ul>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <form role="form" class="form-inline">
+                                        <div class="form-group todo-entry">
+                                            <input type="text" placeholder="Enter your ToDo List" class="form-control" style="width: 100%">
+                                        </div>
+                                        <button class="btn btn-primary pull-right" type="submit">+</button>
+                                    </form>
+                                </div>
+                            </div>
+                            <br>
+                            <div class='row'>
+                              
+                              <div class='well'>
+                                
+                              <span style="color: black" class='descripcion-modal-text'></span>
+                              </div>
+                            </div>
+
+                        </div>
+                    </div>
 
 
 
@@ -579,7 +667,73 @@ Dropzone.options.myAwesomeDropzone = {
 
 
 
-<!---->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </div>
+   
+  </div>
+
+
+      
+
+
+      <div class="modal-footer">                      
+        <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times-circle"></i></button>                
+      </div>
+
+
+
+</section>
+
+
+
+
+    </div>
+    
+
+  </div>
+</div>
+
+
+
+
+
+    
+
+<!--Termina Escenarios modal-->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--************************************CONFIRMAR  **********************************-->
 <div id="confirmationdeleteescenario" class="modal fade">
 <div class="modal-dialog">
 <div class="modal-content">
@@ -598,62 +752,6 @@ Dropzone.options.myAwesomeDropzone = {
 </div>
 </div>
 </div>
-<!---->
- 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<!--Escenarios modal-->
-
-
-
-                        
-
-
-
-
-
-<div class="modal fade" id="modalesenarios" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true" >
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header" style="background: #09AFDF !important; ">
-            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-            <h4  style="color: white; !important" class="modal-title" id="myModalLabel">Versión</h4>
-            </div>
-            <div class="modal-body">
-                <h3>Enid Service version 1.2</h3>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-                <div id="masInfo" align="right">
-                    <a href="http://localhost/Enidservicemain/home/index.php/reportecontrolador">¿Tienes alguna sugerencia o comentario?</a>
-                </div>
-            </div>
-        </div>
-    </div>
 </div>
-
-<!--Termina Escenarios modal-->
+<!--************************************TERMINA CONFIRMAR  **********************************-->
+ 

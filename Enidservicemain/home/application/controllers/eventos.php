@@ -70,7 +70,7 @@ class Eventos extends CI_Controller {
                                     $this->load->view('TemplateEnid/footer_template', $data);    
 
                             }else{
-                                  header('Location:' . base_url());
+                                  header('Location:' . base_url('index.php/inicio/eventos'));
                             }
 
                         

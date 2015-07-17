@@ -4,7 +4,7 @@ class Sessioncontroller extends CI_Controller {
 
 	function __construct(){        
         parent::__construct();            
-        $this->load->model("eventmodel");                
+                    
         $this->load->library('sessionclass');        
     }         
 
@@ -63,24 +63,38 @@ class Sessioncontroller extends CI_Controller {
 
 			if ( $this->sessionclass->is_logged_in() == 1) {			
 
-				$data['titulo']='Bienvenido';
-				$data['nombre']= $this->sessionclass->getnombre();
-				$perfil = $this->sessionclass->getperfiles();
-				$menu = $this->sessionclass->generadinamymenu();			
-				$data["menu"] = $menu;
-				$nombre = $this->sessionclass->getnombre();			
-				$data["nombre"]= $nombre;				
+				
 				$perfil = $this->sessionclass->getperfiles();							
-				$data["perfilactual"] =  $this->sessionclass->getnameperfilactual(); 				
+				$idperfilnow =  $perfil[0]["idperfil"];
+
+
+				switch ($idperfilnow) {
+							case 5:
+								redirect( base_url('index.php/inicio/eventos') );	
+								break;							
+							
+							default:
+							
+							case 3:
+								redirect( base_url('index.php/inicio/administrador') );	
+								break;							
+							default:
 
 
 
-					$idempresa =  $this->sessionclass->getidempresa();
-					$data["ultimos_eventos"] =$this->eventmodel->getLastEvents($idempresa , 5 );
+							case 4:
+								redirect( base_url('index.php/inicio/administradorcuenta') );	
+								break;							
+							default:
+
+
+								
+								break;
+						}		
 					
-				$this->load->view('TemplateEnid/header_template', $data);		
-				$this->load->view(displayviewpresentacion( $perfil ) , $data);
-				$this->load->view('TemplateEnid/footer_template', $data);	
+				
+								
+				
 
 			}else{
 			/*Terminamos la session*/
@@ -91,11 +105,9 @@ class Sessioncontroller extends CI_Controller {
 
 
 
+	/************************/
 
-
-
-
-
+	
 
 	function logout(){
 			

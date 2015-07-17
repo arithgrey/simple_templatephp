@@ -20,9 +20,9 @@ function listescenariosonloadevent($responsedbescenario){
                                             <div class='avatar'>
                                             <img src=". base_url('application/img/blue.png'). " >
                                             </div>
-                                            <div class='activity-desk'>
+                                            <div class='activity-desk'>                                            
 
-                                                <h5><a data-toggle='modal' data-target='#modalesenarios' href='#'>Escenario 1 ejemplo</a> 
+                                                <h5><a data-toggle='modal' data-target='#modalesenarios' href='#modalesenarios'>Escenario 1 ejemplo</a> 
                                                     <span>La experiencia que se vivirá aquí será única</span></h5>
                                                     <p class='text-muted'>Artistas incluidos #10</p>
                                             </div>
@@ -56,14 +56,14 @@ function listescenariosonloadevent($responsedbescenario){
                                             </div>
                                             <div class='activity-desk'>
 
-                                                <h5><a data-toggle='modal' data-target='#modalesenarios' href='#'>". $row["nombre"] ."</a> 
+                                                <h5><a data-toggle='modal' data-target='#modalesenariosedit' class='edita-modal-escenario' id='". $row["idescenario"] ."'  >". $row["nombre"] ."</a> 
                                                 <br>
 
                                            <span class='descripcion_escenario_update' id='".
                                             $row["idescenario"] . "'    >". 
                                             $descripcion ."</span>
-                                            <input type='text' value='". $row["descripcion"] ."' name='newdescripesenario' class='newdescripesenario'
-                                             id=". $inpu_escenario  ." >
+                                           
+                                            <textarea  name='newdescripesenario' class='newdescripesenario form-control'  rows='3' id=". $inpu_escenario  .">".$row["descripcion"]."</textarea>
 
                                                     </h5>
                                                     <p class='text-muted'>Artistas incluidos #</p>
@@ -82,6 +82,51 @@ function listescenariosonloadevent($responsedbescenario){
 	
 	
 }
+
+
+/*****************+****************+****************+****************+****************+*/
+
+    function infoescenario($arrayinfo){
+
+
+        $e ="";
+        $e = "
+        <div class='well' style='color : black' >
+
+                    <div class='row'>
+
+                         
+                    <button class='col-lg-12 btn btn-primary' type='button'> <i class='fa fa-flag-checkered'></i> ". $arrayinfo[0]["nombre"] ."</button>
+                        <aside class='mail-nav'>
+                    
+                    <div class='mail-nav-body'>
+                        
+                        <ul class='nav nav-pills nav-stacked mail-navigation'>
+                            
+                            <li><a href='#'> <i class='fa fa-envelope-o'></i> Send Mail</a></li>
+                            <li><a href='#'> <i class='fa fa-certificate'></i> Important</a></li>
+                            <li><a href='#'> <i class='fa fa-heart-o'></i> ".$arrayinfo[0]["tipoescenario"]." <span class='label label-info pull-right inbox-notification'>*</span></a></li>
+                            
+
+
+                        </ul>
+
+                       
+                    </div>
+                   
+                </aside>
+
+
+                </div>
+            ";
+        $data[0] = $e;
+        $data['descripcion'] =   $arrayinfo[0]['descripcion']; 
+        return $data;
+
+    }
+
+/*****************+****************+****************+****************+****************+*/
+
 
 
 }/*Termina el helper*/

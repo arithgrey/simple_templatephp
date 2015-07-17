@@ -39,6 +39,7 @@ function  loadescenarioss(){
 
 			$(".descripcion_escenario_update").click(updatedescription);
 			$(".deleteescenario").click(deleteescenario);
+			$(".edita-modal-escenario").click(updateescenariomodal);
 
 	}).fail(function(){
 		
@@ -142,5 +143,32 @@ function deleteescenario(e){
 
 		});	
 
+
+}
+
+
+
+
+
+
+/********************************************************************+*/
+function updateescenariomodal(e){
+
+	idescenario = e.target.id;
+	url = now + "index.php/api/escenario/loadescenariobyid/format/json/";
+ 		
+		$.get(url , { "idescenario" :  idescenario } )
+			.done(function(data){
+
+				
+				llenaelementoHTML( ".general-info-modal" , data[0] );
+				llenaelementoHTML(".descripcion-modal-text", data["descripcion"]);
+
+
+			}).fail(function(){
+				
+				alert(genericresponse[0]);
+
+			});
 
 }
