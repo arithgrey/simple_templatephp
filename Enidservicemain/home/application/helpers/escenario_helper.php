@@ -90,13 +90,20 @@ function listescenariosonloadevent($responsedbescenario){
 
 
         $e ="";
+
+        
+
+        $tipoescenario = $arrayinfo["general"][0]["tipoescenario"];
+        $nombreescenario =  $arrayinfo["general"][0]["nombre"];
+        $descripcion = $arrayinfo["general"][0]['descripcion']; 
         $e = "
         <div class='well' style='color : black' >
 
                     <div class='row'>
 
                          
-                    <button class='col-lg-12 btn btn-primary' type='button'> <i class='fa fa-flag-checkered'></i> ". $arrayinfo[0]["nombre"] ."</button>
+                    <button class='col-lg-12 btn btn-primary' type='button'> 
+                    <i class='fa fa-flag-checkered'></i> ". $nombreescenario ."</button>
                         <aside class='mail-nav'>
                     
                     <div class='mail-nav-body'>
@@ -105,7 +112,8 @@ function listescenariosonloadevent($responsedbescenario){
                             
                             <li><a href='#'> <i class='fa fa-envelope-o'></i> Send Mail</a></li>
                             <li><a href='#'> <i class='fa fa-certificate'></i> Important</a></li>
-                            <li><a href='#'> <i class='fa fa-heart-o'></i> ".$arrayinfo[0]["tipoescenario"]." <span class='label label-info pull-right inbox-notification'>*</span></a></li>
+                            <li><a href='#'> <i class='fa fa-heart-o'></i> ".$tipoescenario ." 
+                            <span class='label label-info pull-right inbox-notification'>*</span></a></li>
                             
 
 
@@ -119,8 +127,51 @@ function listescenariosonloadevent($responsedbescenario){
 
                 </div>
             ";
+        
+
+
+
+                                
+
+
+
+            $listartistas ="";
+            foreach ($arrayinfo["artistas"] as $xrow) {
+                
+
+                $idartista = $xrow["idartista"];
+
+                $listartistas .= "<li class='clearfix'>
+                                    <span class='drag-marker'>
+                                    <i></i>
+                                    </span>
+                                    <div class='todo-check pull-left'>
+                                        <input type='checkbox' value='None' id='todo-check4'>
+                                        <label for='todo-check4'></label>
+                                    </div>
+                                    <p class='todo-title'>
+                                        ". $xrow["nombre_artista"] ."
+                                    </p>
+                                    <div class='todo-actionlist pull-right clearfix'>
+
+                                        <a href='#' class='todo-remove remove-artista' id='".$idartista."'><i class='fa fa-times'></i></a>
+                                    </div>
+                                </li>
+                            ";
+    
+            }
+
+            
+
+
+
+
+
         $data[0] = $e;
-        $data['descripcion'] =   $arrayinfo[0]['descripcion']; 
+        $data['descripcion'] =   $descripcion; 
+        $data['artistas'] =  $listartistas;
+
+
         return $data;
 
     }

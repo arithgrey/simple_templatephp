@@ -3,6 +3,7 @@ $(document).on("ready", function(){
 	
 	$("#form-escenario").submit(nuevoescenario);
 	$("footer").ready(loadescenarioss);
+	$("#form-artistas").submit(nuevoartistaescenario);
 });
 
 
@@ -163,6 +164,65 @@ function updateescenariomodal(e){
 				
 				llenaelementoHTML( ".general-info-modal" , data[0] );
 				llenaelementoHTML(".descripcion-modal-text", data["descripcion"]);
+				llenaelementoHTML(".general-artistas" , data["artistas"]);
+				
+				valorHTML("#idescenariomodalartistas" , idescenario);
+
+			}).fail(function(){
+				
+				alert(genericresponse[0]);
+
+			});
+
+}
+
+
+
+function nuevoartistaescenario(){
+
+	artistainput = $("#artistainput").val();
+	idescenario = $("#idescenariomodalartistas").val();
+	
+
+	if (artistainput.length > 0 ) {
+
+
+
+			url = now + "index.php/api/escenario/registraartistaescenario/format/json/";
+
+			
+			$.post( url , $("#form-artistas").serialize() )
+			  .done(function( data ) {
+			    
+			  	
+			  		loadataescenario(idescenario);
+			  })
+			  .fail(function() {
+			    
+			    alert(genericresponse[0]);
+			});
+
+	}
+	
+	return false;
+}
+
+
+
+function loadataescenario(idescenario){
+
+	url = now + "index.php/api/escenario/loadescenariobyid/format/json/";
+ 	
+
+		$.get(url , { "idescenario" :  idescenario } )
+			.done(function(data){
+
+				
+				llenaelementoHTML( ".general-info-modal" , data[0] );
+				llenaelementoHTML(".descripcion-modal-text", data["descripcion"]);
+				llenaelementoHTML(".general-artistas" , data["artistas"]);
+
+				valorHTML("#idescenariomodalartistas" , idescenario);
 
 
 			}).fail(function(){
@@ -170,5 +230,6 @@ function updateescenariomodal(e){
 				alert(genericresponse[0]);
 
 			});
+
 
 }

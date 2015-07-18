@@ -6,7 +6,8 @@ class Escenario extends REST_Controller{
             parent::__construct();
                 
             $this->load->helper("escenario");      
-            $this->load->model("escenariomodel");                
+            $this->load->model("escenariomodel");
+            $this->load->model("escenarioartistamodel");                
             $this->load->library('sessionclass');
             
         }     
@@ -133,6 +134,34 @@ class Escenario extends REST_Controller{
         } 
 
     }/*Termina rest*/
+
+
+/********************************************************/
+
+    function registraartistaescenario_post(){
+         
+         if ( $this->sessionclass->is_logged_in() == 1) {  
+
+                $idescenario =  $this->post("idescenario");
+                $nuevoartista =  $this->post("nuevoartista");
+
+                $idempresa =  $this->sessionclass->getidempresa();                            
+                
+
+                $responsedb = $this->escenarioartistamodel->registraartistaescenario($idescenario , $nuevoartista , $idempresa);
+
+                $this->response($responsedb); 
+                
+        }else{
+
+            $this->sessionclass->logout();        
+        } 
+    }
+    
+
+
+
+
 
 }
 ?>

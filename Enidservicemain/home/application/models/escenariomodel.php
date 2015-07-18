@@ -35,7 +35,17 @@ function loadescenariobyid( $idescenario,  $idempresa ){
 
 	$query_load ="SELECT * FROM escenario WHERE idescenario = '".$idescenario."' ";
 	$result = $this->db->query($query_load);
-	return $result->result_array();
+	$data["general"] =  $result->result_array();
+
+
+	$artistas_load = "SELECT * FROM artista as a , escenario_artista as ea WHERE  
+	 ea.idartista =  a.idartista and ea.idescenario='". $idescenario."' ";
+
+	$resultartistas = $this->db->query($artistas_load);
+	$data["artistas"] =  $resultartistas->result_array();
+
+	return $data;
+
 
 
 

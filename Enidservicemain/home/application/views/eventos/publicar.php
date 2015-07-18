@@ -144,18 +144,6 @@ h4{
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
                                         
 
 
@@ -575,6 +563,9 @@ Dropzone.options.myAwesomeDropzone = {
 
 
 <!--Escenarios modal-->
+
+<script src="//connect.soundcloud.com/sdk-2.0.0.js"></script>
+
 <div id="modalesenariosedit"  class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
@@ -594,6 +585,8 @@ Dropzone.options.myAwesomeDropzone = {
 
 
     <div class="col-xs-12  col-sm-3">
+
+
 
 
 
@@ -621,29 +614,24 @@ Dropzone.options.myAwesomeDropzone = {
                                
                                
                                 
-                                <li class="clearfix">
-                                    <span class="drag-marker">
-                                    <i></i>
-                                    </span>
-                                    <div class="todo-check pull-left">
-                                        <input type="checkbox" value="None" id="todo-check4">
-                                        <label for="todo-check4"></label>
-                                    </div>
-                                    <p class="todo-title">
-                                        paul kkb dj (ejemplo)
-                                    </p>
-                                    <div class="todo-actionlist pull-right clearfix">
-
-                                        <a href="#" class="todo-remove"><i class="fa fa-times"></i></a>
-                                    </div>
-                                </li>
+                                <div class="general-artistas"></div>
 
                             </ul>
                             <div class="row">
                                 <div class="col-md-12">
-                                    <form role="form" class="form-inline">
+                                    <form role="form" class="form-inline" id="form-artistas" >
                                         <div class="form-group todo-entry">
-                                            <input type="text" placeholder="Enter your ToDo List" class="form-control" style="width: 100%">
+
+
+                                          
+                                          <datalist id="dinamic-artistas">              
+                                          </datalist>
+
+
+
+                                          <input id='idescenariomodalartistas' name="idescenario" type='hidden'>
+                                          <input  name="nuevoartista" type="text" list="dinamic-artistas" id='artistainput'  
+                                          placeholder="Artista que se presentará en el escenario" class="form-control" style="width: 100%">
                                         </div>
                                         <button class="btn btn-primary pull-right" type="submit">+</button>
                                     </form>
@@ -666,6 +654,51 @@ Dropzone.options.myAwesomeDropzone = {
 
 
 
+
+
+
+
+
+
+<script type="text/javascript">     
+    
+    $('#artistainput').keyup(function (e){ 
+
+        Stringentrante = $(this).val(); 
+        
+            buscarartista(Stringentrante);
+    });
+
+    function buscarartista(Stringentrante){        
+        SC.initialize({
+            lient_id: '1ce2bf4dcd83ee01f111219905b4f943'
+        });
+         
+        SC.get('/tracks', { q: Stringentrante   }, function(tracks) {
+          
+                //document.write( "<pre><xmp>" + JSON.stringify(tracks) + "</xmp></pre>");
+
+                newcontenidodatalist ="";                
+                   for(var x in tracks ) {
+
+
+                    /*Genero del artista*/
+                    genre =  tracks[x]["genre"];
+                    username = tracks[x]["user"].username;
+                    avatar_url =  tracks[x]["user"].avatar_url;
+                    uri =   tracks[x]["user"].uri;
+                    id = tracks[x]["id"].id;
+
+                        newcontenidodatalist += "<option value='"+ username  +"'>" ;
+                   }
+                   
+                   document.getElementById('dinamic-artistas').innerHTML= newcontenidodatalist;                
+        });
+
+        
+    }
+
+</script>
 
 
 
