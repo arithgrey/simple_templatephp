@@ -247,6 +247,113 @@ function updatedescripcionescenariobyid_post(){
 
 
 
+    function updatenombreescenariobyid_post(){
+
+
+        if ( $this->sessionclass->is_logged_in() == 1) {  
+
+
+
+
+                $idescenario =  $this->post("idescenario");
+                $nuevonombre =  $this->post("nuevonombre");
+                $idempresa =  $this->sessionclass->getidempresa();                            
+                
+
+                $responsedb = $this->escenariomodel->updateescenarionombrebyid($idescenario , $nuevonombre, $idempresa);
+
+                $this->response($responsedb); 
+                
+        }else{
+
+            $this->sessionclass->logout();        
+        } 
+    }
+
+/*************************************************************************************/
+
+    function updateinicioterminobyid_post(){
+
+        if ( $this->sessionclass->is_logged_in() == 1) {  
+
+
+
+
+                $idescenario =  $this->post("idescenario");
+                $nuevoinicio =  $this->post("nuevoinicio");
+                $nuevotermino = $this->post("nuevotermino");                
+                $idempresa =  $this->sessionclass->getidempresa();                            
+                
+
+                $responsedb = $this->escenariomodel->updateescenarioinicioterminobyid($idescenario , $idempresa , $nuevoinicio , $nuevotermino);
+
+                $this->response($responsedb); 
+                
+        }else{
+
+            $this->sessionclass->logout();        
+        } 
+
+    }
+
+
+    /*********************************************************/
+
+
+    function updateescenariotipo_post(){
+
+        if ( $this->sessionclass->is_logged_in() == 1) {  
+
+
+
+
+                $idescenario =  $this->post("idescenario");
+                $tipoescenario =  $this->post("tipoescenario");
+
+                $idempresa =  $this->sessionclass->getidempresa();                            
+                
+
+                $responsedb = $this->escenariomodel->updateescenariotipobyid($idescenario , $tipoescenario , $idempresa);
+
+                $this->response($responsedb); 
+                
+        }else{
+
+            $this->sessionclass->logout();        
+        } 
+
+    }
+
+/**************************************************************************/
+
+    function updateinicioterminoartistabyid_post(){
+        if ( $this->sessionclass->is_logged_in() == 1) {  
+
+
+
+                 
+                
+                $idartista = $this->post("idartista");
+                $idescenario =  $this->post("idescenario");
+                $hiartista = $this->post("hiartista");
+                $htartista = $this->post("htartista");
+                $idempresa =  $this->sessionclass->getidempresa();                            
+                
+
+                $responsedb = $this->escenarioartistamodel->updateinicioterminoartistabyid($idartista , $idescenario  , $hiartista  , $htartista , $idempresa);
+
+                $this->response($responsedb); 
+                
+        }else{
+
+            $this->sessionclass->logout();        
+        } 
+
+
+    }/*Termina*/
+
+
+
 
 
 }

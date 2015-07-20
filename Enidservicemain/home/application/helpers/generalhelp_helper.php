@@ -47,5 +47,98 @@ if(!function_exists('invierte_date_time')){
 
 
 
+	function generatehorarioartista($namestart , $nameend){
+
+		$generado ="<table class='table col-lg-12'> 
+				<tr>
+					<td><select class='form-control input-sm'class=". $namestart." id=". $namestart." name=". $namestart." >";
+							
+        $inhorario ="";                        
+        $inhorariob  ="";
+                             
+
+        for ($i=0; $i <24 ; $i++) { 
+
+
+        	if ($i <12) {
+        		$inhorario =" AM "; 
+        	}else{
+        		$inhorario =" PM "; 
+        	}
+
+          if ($i <10  ){
+
+          			$i = "0".$i;	
+          }
+
+          $pt= $i . $inhorario;
+
+          $generado .="<option value=". $pt .">". $pt ."</option>";  
+
+
+          	for ($r=0; $r < 60; $r++) { 
+
+          		if ($r <10) {
+          			$r = "0".$r;
+          		}
+          		$minutosI=$i .":" . $r; 
+
+              $pi = $minutosI . $inhorario;
+          		$generado .="<option value=". $pi .">". $pi."</option>";  
+
+          	}
+
+
+        } 
+
+        $generado .="</select></td>";
+        
+        $generado .="
+        			<td><select class='form-control input-sm' id=". $nameend ." class=". $nameend ." name=" . $nameend .">";
+							
+                                
+                             
+
+        for ($b=0; $b <24 ; $b++) { 
+
+
+        	if ($b< 12) {
+        		$inhorariob =" AM "; 
+        	}else{
+        		$inhorariob =" PM "; 
+        	}
+
+
+        	if ($b <10) {
+        		$b = "0".$b;
+        	}
+
+          $pii = $b . $inhorariob ;
+        	$generado .="<option value=". $pii .">". $pii ."</option>";            
+
+        	for ($x=0; $x < 60; $x++) { 
+
+        		if ($x <10) {
+          			$x = "0".$x;
+          		}
+
+        		$minutosT=$b .":" . $x; 
+            $poo = $minutosT . $inhorariob;
+        		$generado .="<option value=". $poo .">". $poo ."</option>";            
+        	}
+          
+        } 
+
+        $generado .="</select></td></tr></table>";
+
+
+
+        return $generado;
+
+	}
+
+
+
+
 }/*Termina el helper*/
  

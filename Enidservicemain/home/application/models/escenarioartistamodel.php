@@ -64,6 +64,18 @@ function deleteescenarioartosta($idescenario , $artista_quitar , $idempresa){
 
 
 
+function updateinicioterminoartistabyid($idartista , $idescenario  , $hiartista  , $htartista , $idempresa){
+
+	$query_update ="UPDATE  escenario_artista set hora_inicio = '". $hiartista ."' , hora_termino='".$htartista."' 
+	WHERE   idescenario ='$idescenario' AND idartista='$idartista' ";
+	$result = $this->db->query($query_update);
+	return $result;	
+
+
+
+}
+
+
 /*Termina modelo */
 }
 

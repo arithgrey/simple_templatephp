@@ -109,6 +109,33 @@ function deleteescenariobyid( $idescenario,  $idempresa ){
 /**/
 
 
+function updateescenariotipobyid($idescenario , $tipoescenario , $idempresa){
+	
+	$query_upload ="UPDATE  escenario set tipoescenario = '$tipoescenario' WHERE   idescenario ='$idescenario' ";
+	$result = $this->db->query($query_upload);
+	return $result;	
+
+}
+
+
+function updateescenarionombrebyid($idescenario , $nuevonombre, $idempresa){
+	$query_update ="UPDATE  escenario set nombre = '$nuevonombre' WHERE   idescenario ='$idescenario' ";
+	$result = $this->db->query($query_update);
+	return $result;	
+
+}
+/************************************************************************/
+
+function updateescenarioinicioterminobyid($idescenario , $idempresa , $nuevoinicio , $nuevotermino){
+	
+	$query_update ="UPDATE  escenario set fecha_presentacion_inicio = '$nuevoinicio' , fecha_presentacion_termino='$nuevotermino' 
+	WHERE   idescenario ='$idescenario' ";
+	$result = $this->db->query($query_update);
+	return $result;	
+
+}
+
+
 /*Termina modelo */
 }
 

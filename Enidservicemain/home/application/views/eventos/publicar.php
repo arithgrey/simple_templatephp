@@ -9,12 +9,13 @@
 
 
 
+
+
+
 <script src="<?=base_url('application/js/js/jquery-tags-input/jquery.tagsinput.js')?>"></script>
 <script src="<?=base_url('application/js/js/tagsinput-init.js')?>"></script>
 <script type="text/javascript" src="<?=base_url('application/js/evento/principal.js')?>"> </script>
 <script type="text/javascript" src="<?=base_url('application/js/evento/escenarios.js')?>"> </script>
-
-
 
 <style type="text/css">
 
@@ -30,7 +31,7 @@
 .newdescripesenario{
   display: none;
 }
-.descripcion_escenario_update:hover{
+.descripcion_escenario_update:hover, .nombre-escenario-modal:hover{
   font-size: 1.2em;
   cursor: pointer;
 }
@@ -38,7 +39,8 @@
 .title-page-enid{
     display: none;
 }
-#nombre-input, #edicion-input , #evento , #descripcion-evento, #ubicacion-input, .descripcion-in-modal-escenario{
+#nombre-input, #edicion-input , #evento , #descripcion-evento, #ubicacion-input, 
+.descripcion-in-modal-escenario, .nombre-escenario-input-modal, .day_escenario_inputs{
     display: none;
 }
 
@@ -129,7 +131,7 @@ h4{
 
 
 
-
+                          
 
                 
 
@@ -138,12 +140,7 @@ h4{
 
 
 
-
-
-
-
-
-
+                                    
 
 
 
@@ -151,6 +148,9 @@ h4{
 
                                         
 
+
+
+      
 
 
                                       
@@ -238,27 +238,6 @@ h4{
 
                         </div>
 
-
-
-
-                          
-
-
-
-
-                        
-
-                    
-                 
-
-
-
-
-
-
-
-                    
-                    
                     </div>
 
 
@@ -331,7 +310,7 @@ h4{
                             <td class='blue-col-enid'>
                               
 
-                                                      <div class="input-group  custom-date-range" data-date="13/01/2015" data-date-format="mm/dd/yyyy">
+                                                      <div class="input-group  custom-date-range" data-date="" data-date-format="mm/dd/yyyy">
                                                             <input class="form-control dpd1" name="nuevo_inicio" type="text">
                                                             <span class="input-group-addon"></span>
                                                             <input class="form-control dpd2" name="nuevo_termino" type="text">
@@ -387,8 +366,8 @@ h4{
 
                         <div class="panel" >
                                 <header class="panel-heading" style="background: #032132">
-                                  <i class="fa fa-play"></i>
-                                Escenarios
+                                  <div class="numero_escenarios" id="numero_escenarios"></div>
+                                  
                                     <span class="tools pull-right">
                                         <a class="fa fa-chevron-down" href="javascript:;"></a>
                                         
@@ -431,7 +410,12 @@ h4{
 
 
 
+                        <div class='panel'>
+                                    <label>Generos musicales </label> 
+                                    <input id="tags_1" type="text" class="tags" 
+                                    value="House, electrónica, minimal, techno" style="display: none;">
 
+                         </div>
 
 
 
@@ -578,14 +562,21 @@ Dropzone.options.myAwesomeDropzone = {
 
 
 <div class='well col-xs-12'>
-  <h3 class='nombre-escenario-modal'></h3>
+  <button type="button" class="close" data-dismiss="modal">&times;</button>
+  <i class='fa fa-star'></i> <h3 class='nombre-escenario-modal'></h3>
+
+  <input type="text" data-trigger="click" 
+  class="form-control popovers nombre-escenario-input-modal" id='nombre-escenario-input-modal' placeholder="Escenario">
       
 
       
         <div class='row'>
            
            <div class='panel'>
-            <span style="color: black" class='descripcion-modal-text' >+ agregar descripción del escenario</span>
+            
+            <div style="color: black" class='descripcion-modal-text well ' >
+              + agregar descripción del escenario
+            </div>
             
             <div class="form-group">
               <textarea class='descripcion-in-modal-escenario col-xs-12' ></textarea>
@@ -610,7 +601,7 @@ Dropzone.options.myAwesomeDropzone = {
         
   <div class='row'>
 
-              <button type="button" class="close" data-dismiss="modal">&times;</button>
+              
               
              <form id="updateescenariomodal-form">
                             <input type='hidden' id="idescenarioupdatemodal" name="idescenarioupdatemodal"  class="idescenarioupdatemodal" >
@@ -645,7 +636,7 @@ Dropzone.options.myAwesomeDropzone = {
 
                   <div class="panel">
                         <header class="panel-heading">
-                            <span style='color:black '>Artistas</span>
+                            <span style='color:black '><i class="fa fa-play"></i> Artistas</span>
                             <span class="tools pull-right">
                                 <a class="fa fa-chevron-down" href="javascript:;"></a>
                                 
@@ -697,8 +688,47 @@ Dropzone.options.myAwesomeDropzone = {
 
 <div class="col-xs-12  col-sm-4">
   <div class='row'>
-    <button class="btn btn-info btn-lg col-xs-12" type="button"><div class='nombre-in-button'></div></button>
-    <button class="btn btn-primary btn-lg col-xs-12" type="button">Large button</button>
+
+    <button class="btn btn-info btn-lg col-xs-12 day_escenario_button" type="button" style="font-size: 1em !important;" > <span class='day_escenario'></span></button>
+
+    
+      
+    <button class="btn btn-info btn-lg col-xs-12 day_escenario_inputs" type="button">
+      
+      <div class="input-group  custom-date-range" data-date="" data-date-format="mm/dd/yyyy">
+            <input class="form-control dpd1" name="nuevo_inicio_escenario" id="nuevo_inicio_escenario" type="text">
+            <span class="input-group-addon"></span>
+            <input class="form-control dpd2" name="nuevo_termino_escenario" id="nuevo_termino_escenario" type="text">
+      </div>
+                                    
+    </button>  
+
+
+    
+
+                          <div class="input-group m-bot15">
+                                <div class="input-group-btn">
+                                    
+                                    <button tabindex="-1" data-toggle="dropdown" class="btn btn-default dropdown-toggle" type="button">
+                                        Tipo<span class="caret"></span>
+                                    </button>
+                                    <ul role="menu" class="dropdown-menu">
+                                        <li ><a class='tipo-evento-modal' id='General' href="#">General</a></li>
+                                        <li ><a class='tipo-evento-modal' id='Principal' href="#">Principal</a></li>
+                                        <li ><a class='tipo-evento-modal' id='Especial' href="#">Especial</a></li>
+                                        
+                                        
+                                    </ul>
+                                </div>
+                                <input type="text"  class="form-control input_tipo" >
+                            </div>
+
+
+
+
+
+
+
   </div>
 </div>  
 
@@ -711,14 +741,6 @@ Dropzone.options.myAwesomeDropzone = {
 </div>
 
 
-
-
-<div class='row'>
-       <label>Generos musicales </label> 
-      <input id="tags_1" type="text" class="tags" 
-      value="House, electrónica, minimal, techno" style="display: none;">
-
-      </div>
 
 
 
@@ -812,3 +834,43 @@ Dropzone.options.myAwesomeDropzone = {
 </div>
 <!--************************************TERMINA CONFIRMAR  **********************************-->
  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div id="horarioartista" class="modal fade">
+<div class="modal-dialog">
+<div class="modal-content">
+  <!-- dialog body -->
+  <div class="modal-body">    
+           <div class="modal-footer">               
+                <?=generatehorarioartista("hiartista" , "htartista" );?>
+               <button type="button" class="btn btn-default" id="tregistrohorario" data-dismiss="modal">Cerrar</button>                
+          </div>
+  </div>
+</div>
+</div>
+</div>

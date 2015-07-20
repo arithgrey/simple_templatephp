@@ -41,6 +41,7 @@ function listescenariosonloadevent($responsedbescenario){
         //conartistas
 
     $idescenariovalidation  = $row["idescenario"];
+    $tipoescenario =  $row["tipoescenario"];
 
     $numero_artistas = 0;
     $numero_artistas =  getnumeroartistas( $responsedbescenario["conartistas"] ,
@@ -72,7 +73,9 @@ function listescenariosonloadevent($responsedbescenario){
                                             <textarea  name='newdescripesenario' class='newdescripesenario form-control'  rows='3' id=". $inpu_escenario  .">".$row["descripcion"]."</textarea>
 
                                                     </h5>
-                                                    <p class='text-muted'>Artistas incluidos #".$numero_artistas."</p>
+                                                    <p class='text-muted'>Artistas incluidos #".$numero_artistas." ,  ".$tipoescenario." </p>
+
+
                                                     <i data-toggle='modal' data-target='#confirmationdeleteescenario' class='fa fa-times deleteescenario' id='". $row["idescenario"] ."' ></i>
 
                                             </div>
@@ -84,7 +87,9 @@ function listescenariosonloadevent($responsedbescenario){
 
 
 	$list .="</ul>";
-	return $list;
+    $data["info"] = $list;
+    $data["numero_escenarios"] = count($responsedbescenario["todos"]);
+	return $data;
 	
 	
 }
@@ -137,17 +142,17 @@ function listescenariosonloadevent($responsedbescenario){
                 
 
                 $idartista = $xrow["idartista"];
+                $horainicioterminoartista = $xrow["hora_inicio"] . " - " . $xrow["hora_termino"];
 
                 $listartistas .= "<li class='clearfix'>
                                     <span class='drag-marker'>
                                     <i></i>
                                     </span>
                                     <div class='todo-check pull-left'>
-                                        <input type='checkbox' value='None' id='todo-check4'>
-                                        <label for='todo-check4'></label>
+                                        <i data-toggle='modal' data-target='#horarioartista' class='fa fa-clock-o horario_artista' id='".$idartista."'></i>
                                     </div>
                                     <p class='todo-title'>
-                                        ". $xrow["nombre_artista"] ."
+                                        ". $xrow["nombre_artista"] ."   , ". $horainicioterminoartista."
                                     </p>
                                     <div class='todo-actionlist pull-right clearfix'>
 
@@ -170,9 +175,15 @@ function listescenariosonloadevent($responsedbescenario){
         if (strlen($descripcion)<1 ) {
             $descripcion =  "+ agregar descripción";
         }
+
+
+        $iniciotermino =  $arrayinfo["general"][0]["fecha_presentacion_inicio"] . "-" .  $arrayinfo["general"][0]["fecha_presentacion_termino"];
+        
         $data['descripcion'] =   $descripcion; 
         $data['artistas'] =  $listartistas;
-        $data['nombreescenariomodal'] = "<i class='fa fa-star'></i> ". $nombreescenario;
+        $data['tipoescenario'] =  $tipoescenario;
+        $data['nombreescenariomodal'] = $nombreescenario;
+        $data['iniciotermino'] = $iniciotermino;
 
 
         return $data;
@@ -180,6 +191,9 @@ function listescenariosonloadevent($responsedbescenario){
     }
 
 /*****************+****************+****************+****************+****************+*/
+
+
+    
 
 
 

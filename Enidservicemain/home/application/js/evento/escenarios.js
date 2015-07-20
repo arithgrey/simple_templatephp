@@ -36,11 +36,13 @@ function  loadescenarioss(){
 	
 	$.post(url , $("#form-escenario").serialize() ).done(function(data){
 
-			llenaelementoHTML("#list_escenarios" , data);
+			llenaelementoHTML("#list_escenarios" , data["info"]);
+			llenaelementoHTML("#numero_escenarios" , "<i class='fa fa-play'></i> Escenarios #" +  data["numero_escenarios"] );
 
 			$(".descripcion_escenario_update").click(updatedescription);
 			$(".deleteescenario").click(deleteescenario);
 			$(".edita-modal-escenario").click(updateescenariomodal);
+
 
 	}).fail(function(){
 		
@@ -165,15 +167,22 @@ function updateescenariomodal(e){
 				llenaelementoHTML( ".general-info-modal" , data[0] );
 				llenaelementoHTML(".descripcion-modal-text", data["descripcion"]);
 				llenaelementoHTML(".general-artistas" , data["artistas"]);
-				llenaelementoHTML(".nombre-in-button", data["nombreescenariomodal"]);
+				llenaelementoHTML(".day_escenario_button" , "<i class='fa fa-calendar'></i> " + data["iniciotermino"]);
+
+
 				llenaelementoHTML(".nombre-escenario-modal" , data["nombreescenariomodal"]);
+				valorHTML("#nombre-escenario-input-modal" ,  data["nombreescenariomodal"] );
+				valorHTML(".input_tipo" , data["tipoescenario"] );
 				valorHTML("#idescenariomodalartistas" , idescenario);
 				valorHTML(".descripcion-in-modal-escenario" , data["descripcion"]);
 
 
 				$(".descripcion-modal-text").click(updatedescriptioninmodal);
 				$(".remove-artista").click(removeartistaescenario);
-
+				$(".tipo-evento-modal").click(updatetipoescenario);
+				$(".nombre-escenario-modal").click(updatenombreescenario);
+				$('.day_escenario_button').click(updatedaysescenario);
+				$('.horario_artista').click(updatehorarioartista);
 
 			}).fail(function(){
 				
@@ -226,19 +235,29 @@ function loadataescenario(idescenario){
 			.done(function(data){
 
 							
+				
 				llenaelementoHTML( ".general-info-modal" , data[0] );
 				llenaelementoHTML(".descripcion-modal-text", data["descripcion"]);
-				llenaelementoHTML(".general-artistas" , data["artistas"]);
-				llenaelementoHTML(".nombre-in-button", data["nombreescenariomodal"]);
+				llenaelementoHTML(".general-artistas" , data["artistas"]);			
 				llenaelementoHTML(".nombre-escenario-modal" , data["nombreescenariomodal"]);
+
+				llenaelementoHTML(".day_escenario_button" , "<i class='fa fa-calendar'></i> " + data["iniciotermino"]);
+				
+				valorHTML("#nombre-escenario-input-modal" ,  data["nombreescenariomodal"] );
+				valorHTML(".input_tipo" , data["tipoescenario"] );
 				valorHTML("#idescenariomodalartistas" , idescenario);
 				valorHTML(".descripcion-in-modal-escenario" , data["descripcion"]);
 
 
+
+
 				$(".descripcion-modal-text").click(updatedescriptioninmodal);
 				$(".remove-artista").click(removeartistaescenario);
+				$(".tipo-evento-modal").click(updatetipoescenario);
+				$(".nombre-escenario-modal").click(updatenombreescenario);
+				$('.day_escenario_button').click(updatedaysescenario);
+				$('.horario_artista').click(updatehorarioartista);
 
-	
 
 
 			}).fail(function(){
@@ -313,3 +332,150 @@ function removeartistaescenario(e){
 
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/**********************************************************************/
+function updatetipoescenario(e){
+
+	nuevovalotipoescenario  = e.target.id;
+	idescenario = $("#idescenariomodalartistas").val();
+	url = now + "index.php/api/escenario/updateescenariotipo/format/json/";
+ 	
+
+	$.post(url, {idescenario : idescenario , tipoescenario : nuevovalotipoescenario}).done(function(data){
+
+			
+					loadataescenario(idescenario);	
+					loadescenarioss();
+
+	}).fail(function(){
+		alert(genericresponse[0]);
+	});	
+
+
+}
+
+
+
+function updatenombreescenario(){
+
+	showonehideone(".nombre-escenario-input-modal" , ".nombre-escenario-modal" );
+	$(".nombre-escenario-input-modal").blur(function(){
+
+				url = now + "index.php/api/escenario/updatenombreescenariobyid/format/json/";
+			 	nuevonombre = $(this).val();
+			 	idescenario  =  $("#idescenariomodalartistas").val();	
+
+			 	$.post(url , {nuevonombre : nuevonombre , idescenario : idescenario  })
+			 	.done(function(data){
+			 		
+			 		showonehideone(  ".nombre-escenario-modal" , ".nombre-escenario-input-modal");
+
+			 	}).fail(function(){
+			 			alert(genericresponse[0]);
+			 	});
+
+	});
+
+		
+
+
+
+}	
+ 
+
+
+
+
+
+
+
+ function updatedaysescenario(){
+
+ 	showonehideone( ".day_escenario_inputs" , ".day_escenario_button" );
+ 	$("#nuevo_termino_escenario").blur(function(){
+
+
+ 		nuevo_inicio =  $("#nuevo_inicio_escenario").val();
+ 		nuevo_termino = $("#nuevo_termino_escenario").val();
+ 		idescenario  =  $("#idescenariomodalartistas").val();	
+
+ 				url = now + "index.php/api/escenario/updateinicioterminobyid/format/json/";
+			 	$.post(url , {nuevoinicio : nuevo_inicio , nuevotermino : nuevo_termino , idescenario : idescenario  })
+			 	.done(function(data){
+			 			
+
+			 		showonehideone(  ".day_escenario_button" , ".day_escenario_inputs" );
+			 		loadataescenario(idescenario);	
+					loadescenarioss();
+
+			 	}).fail(function(){
+			 			alert(genericresponse[0]);
+			 	});
+
+
+
+
+
+ 	});
+ 	
+ 		
+ }
+ 
+
+
+
+
+ function updatehorarioartista(e){
+
+ 	idartista = e.target.id;
+ 	idescenario = $("#idescenariomodalartistas").val();
+
+ 	$("#tregistrohorario").click(function(){
+
+ 		
+ 		hiartista = $("#hiartista").val();
+ 		htartista = $("#htartista").val();
+
+
+
+ 			url = now + "index.php/api/escenario/updateinicioterminoartistabyid/format/json/";
+			 	$.post(url , { idartista : idartista , idescenario : idescenario , hiartista : hiartista , htartista : htartista })
+			 	.done(function(data){
+			 			
+
+			 		
+			 		loadataescenario(idescenario);	
+					//loadescenarioss();
+
+			 	}).fail(function(){
+			 			alert(genericresponse[0]);
+			 	});
+
+
+
+
+
+
+
+
+ 	});
+ 	
+
+
+
+ }
+
