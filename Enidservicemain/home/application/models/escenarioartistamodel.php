@@ -49,9 +49,19 @@ function nuevoescenarioartista($idescenario , $idartista){
 		$query_insert ="INSERT INTO escenario_artista (idescenario , idartista ) 
 		values ( '$idescenario', '$idartista' )";
 		return  $this->db->query($query_insert);
-		
 
 }
+
+
+
+
+/******************************************************************/
+function deleteescenarioartosta($idescenario , $artista_quitar , $idempresa){
+
+	$delet_escenario_artista ="DELETE FROM escenario_artista  WHERE idescenario = '".$idescenario."' and idartista ='".$artista_quitar."' ";
+	return $this->db->query($delet_escenario_artista);
+}
+
 
 
 /*Termina modelo */

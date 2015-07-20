@@ -59,7 +59,17 @@ function loadbyevent( $evento ,  $idempresa  ){
 
 	$query_load ="SELECT * FROM escenario WHERE idevento = '".$evento."'";
 	$result = $this->db->query($query_load);
-	return $result->result_array();
+	$data["todos"] =   $result->result_array();
+
+
+	$query_artistas = "select e.idescenario , a.idartista, count(*) as numeroartistas
+	 from escenario as e  ,  artista as a,  escenario_artista  as ea 
+	  where ea.idescenario = e.idescenario and ea.idartista = a.idartista and e.idevento= '".$evento."'  
+	   group by idescenario";
+	$result_artista  = $this->db->query($query_artistas);
+	$data["conartistas"] = $result_artista ->result_array();
+	   
+	return $data;
 
 
 
@@ -75,7 +85,21 @@ function updatedescripcion( $nueva_descripcion , $evento , $idescenario,  $idemp
 }
 
 
+
+
+function updatedescripcionbyid( $nueva_descripcion , $idescenario,  $idempresa ){
+	$query_upload ="UPDATE  escenario set descripcion = '$nueva_descripcion' WHERE   idescenario ='$idescenario' ";
+	$result = $this->db->query($query_upload);
+	return $result;	
+
+}
+
+
 function deleteescenariobyid( $idescenario,  $idempresa ){
+
+
+	$query_delete_artistas_escenario = "DELETE FROM escenario_artista   WHERE idescenario = $idescenario  ";
+	$result_delete_escenario_artistas  = $this->db->query($query_delete_artistas_escenario );
 
 	$query_deletebyid ="DELETE  FROM  escenario WHERE  idescenario ='$idescenario' ";
 	$result = $this->db->query($query_deletebyid);

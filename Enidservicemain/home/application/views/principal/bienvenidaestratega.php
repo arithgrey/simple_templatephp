@@ -26,10 +26,6 @@
                                 <div class="panel-body" style="background:  none repeat scroll 0% 0% #124048">                    
                                     
                                 
-
-                                    
-
-
                                     <!--last 5 -->
 
                                     <?=getLastEventsEstratega($ultimos_eventos);?>
@@ -50,12 +46,12 @@
                                 <div class="col-md-12">
                                     <form role="form" class="form-inline" method="POST" id="nuevo-evento-form"  action=""> 
                                         <div class="form-group todo-entry">
-                                            <input name='nuevo_evento' placeholder="Nombre, ejemplo 'Galactic Mus' " class="form-control" style="width: 100%" type="text">
+                                            <input name='nuevo_evento' placeholder="Evento ejemplo Galactic Festival " class="form-control" style="width: 100%" type="text">
 
 
                                             <!--Campos ocultos-->
                                             <div id='dinamic-field'>
-                                                        <input name='nueva_edicion' placeholder="Edición del evento, ejemplo 'Revolution in the space' " class="form-control" style="width: 100%" type="text">
+                                                        <input name='nueva_edicion' placeholder="Edicióne jemplo Revolution 2015 " class="form-control" style="width: 100%" type="text">
 
 
                                                         <div class="input-group  custom-date-range" data-date="13/01/2015" data-date-format="mm/dd/yyyy">

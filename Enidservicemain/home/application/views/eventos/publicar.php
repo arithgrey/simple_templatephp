@@ -18,6 +18,11 @@
 
 <style type="text/css">
 
+.descripcion-modal-text:hover{
+  font-size: 1.2em;
+  cursor: pointer;
+
+}
 .todo-title, #title-modal-heading{
   color: black;
 }
@@ -33,7 +38,7 @@
 .title-page-enid{
     display: none;
 }
-#nombre-input, #edicion-input , #evento , #descripcion-evento, #ubicacion-input{
+#nombre-input, #edicion-input , #evento , #descripcion-evento, #ubicacion-input, .descripcion-in-modal-escenario{
     display: none;
 }
 
@@ -486,13 +491,8 @@ h4{
 
 
 
-<!--
-<div class='row'>
 
-<label class='white'>Generos</label>
-<input style="display: none;" id="tags_1" class="tags" value="Trance, House, Minimal" type="text">                             
-</div>
--->
+
 
 
     <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true&libraries=places"></script>
@@ -563,88 +563,111 @@ Dropzone.options.myAwesomeDropzone = {
 
 
 <!--Escenarios modal-->
-
 <script src="//connect.soundcloud.com/sdk-2.0.0.js"></script>
 
-<div id="modalesenariosedit"  class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+
+
+
+
+
+<div id="modalesenariosedit"  class="modal fade bs-example-modal-lg" tabindex="-1"
+ role="dialog" aria-labelledby="myLargeModalLabel">  
   <div class="modal-dialog modal-lg">
-    <div class="modal-content">
+  
+
+
+
+<div class='well col-xs-12'>
+  <h3 class='nombre-escenario-modal'></h3>
+      
+
+      
+        <div class='row'>
+           
+           <div class='panel'>
+            <span style="color: black" class='descripcion-modal-text' >+ agregar descripción del escenario</span>
+            
+            <div class="form-group">
+              <textarea class='descripcion-in-modal-escenario col-xs-12' ></textarea>
+            </div> 
+           </div> 
+
+        </div>
+
+</div>
+
+
+
+ <div class='well'>
+
+
+
+  
+
+
+
+ 
+        
+  <div class='row'>
+
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+              
+             <form id="updateescenariomodal-form">
+                            <input type='hidden' id="idescenarioupdatemodal" name="idescenarioupdatemodal"  class="idescenarioupdatemodal" >
+              </form>
+
+  </div>
+
+<div class='row'>
 
 
 
 
 
-<section id="services" class="services bg-primary">
-    <br>
-  <div class="row col-xs-12" >
-    
-    <form id="updateescenariomodal-form">
-        <input type='hidden' id="idescenarioupdatemodal" name="idescenarioupdatemodal"  class="idescenarioupdatemodal" >
-
-    </form>
-
-
-    <div class="col-xs-12  col-sm-3">
 
 
 
 
 
 
-    <div class='general-info-modal'></div>
 
-    </div>
+<div class="col-xs-12  col-sm-8">  
+    <div class='row'>
 
-
-
-    <div class="col-xs-12  col-sm-9">
-     
+        
 
 
+         <div class="col-md-12">
 
-                <div class="panel">
-                        <header class="panel-heading" id='title-modal-heading'>
-                            <span id=''> Artistas </span>
+
+
+
+
+                  <div class="panel">
+                        <header class="panel-heading">
+                            <span style='color:black '>Artistas</span>
                             <span class="tools pull-right">
-                                <a class="fa fa-chevron-down" href="javascript:;"></a>                                
+                                <a class="fa fa-chevron-down" href="javascript:;"></a>
+                                
                              </span>
                         </header>
-                        <div class="panel-body">
-                            <ul class="to-do-list ui-sortable" id="sortable-todo">
-                               
-                               
-                                
-                                <div class="general-artistas"></div>
+                        <div class="panel-body">                          
+                                      <ul class="to-do-list ui-sortable" id="sortable-todo">                                   
+                                        <div class="general-artistas"></div>
+                                      </ul>
 
-                            </ul>
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <form role="form" class="form-inline" id="form-artistas" >
-                                        <div class="form-group todo-entry">
+                                      <form role="form" class="form-inline" id="form-artistas" >
+                                                        <div class="form-group todo-entry">
+                                                          <datalist id="dinamic-artistas">              
+                                                          </datalist>
+                                                          <input id='idescenariomodalartistas' name="idescenario" type='hidden'>
+                                                          <input  name="nuevoartista" type="text" list="dinamic-artistas" id='artistainput'  
+                                                          placeholder="Artista que se presentará en el escenario" class="form-control" style="width: 100%">
+                                                        </div>
+                                                        <button class="btn btn-primary pull-right" type="submit">+</button>
+                                      </form>
+                            
 
-
-                                          
-                                          <datalist id="dinamic-artistas">              
-                                          </datalist>
-
-
-
-                                          <input id='idescenariomodalartistas' name="idescenario" type='hidden'>
-                                          <input  name="nuevoartista" type="text" list="dinamic-artistas" id='artistainput'  
-                                          placeholder="Artista que se presentará en el escenario" class="form-control" style="width: 100%">
-                                        </div>
-                                        <button class="btn btn-primary pull-right" type="submit">+</button>
-                                    </form>
-                                </div>
-                            </div>
-                            <br>
-                            <div class='row'>
-                              
-                              <div class='well'>
-                                
-                              <span style="color: black" class='descripcion-modal-text'></span>
-                              </div>
-                            </div>
 
                         </div>
                     </div>
@@ -654,6 +677,54 @@ Dropzone.options.myAwesomeDropzone = {
 
 
 
+
+
+
+
+
+
+
+
+        
+
+
+                                                   
+          </div>
+
+    </div>
+
+</div>
+
+<div class="col-xs-12  col-sm-4">
+  <div class='row'>
+    <button class="btn btn-info btn-lg col-xs-12" type="button"><div class='nombre-in-button'></div></button>
+    <button class="btn btn-primary btn-lg col-xs-12" type="button">Large button</button>
+  </div>
+</div>  
+
+
+
+
+
+
+
+</div>
+
+
+
+
+<div class='row'>
+       <label>Generos musicales </label> 
+      <input id="tags_1" type="text" class="tags" 
+      value="House, electrónica, minimal, techno" style="display: none;">
+
+      </div>
+
+
+
+    </div>
+  </div>
+</div>
 
 
 
@@ -700,54 +771,7 @@ Dropzone.options.myAwesomeDropzone = {
 
 </script>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    </div>
-   
-  </div>
-
-
-      
-
-
-      <div class="modal-footer">                      
-        <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times-circle"></i></button>                
-      </div>
-
-
-
-</section>
-
-
-
-
-    </div>
-    
-
-  </div>
-</div>
-
-
-
-
-
+     
     
 
 <!--Termina Escenarios modal-->

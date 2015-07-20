@@ -11,10 +11,9 @@ function listescenariosonloadevent($responsedbescenario){
 
 	$list = "<ul class='activity-list'>";
 
-	if (count($responsedbescenario) == 0 ) {
+	if (count($responsedbescenario["todos"]) == 0 ) {
 	
 	$list .="		
-
 									
                                         <li>                                          
                                             <div class='avatar'>
@@ -22,9 +21,9 @@ function listescenariosonloadevent($responsedbescenario){
                                             </div>
                                             <div class='activity-desk'>                                            
 
-                                                <h5><a data-toggle='modal' data-target='#modalesenarios' href='#modalesenarios'>Escenario 1 ejemplo</a> 
-                                                    <span>La experiencia que se vivirá aquí será única</span></h5>
-                                                    <p class='text-muted'>Artistas incluidos #10</p>
+                                                <h5><a data-toggle='modal' data-target='#modalesenarios' href='#modalesenarios'>Escenario principal </a> 
+                                                    <br><span>La experiencia que se vivirá aquí será única ...</span></h5>
+                                                    <p class='text-muted'>Artistas incluidos # 10</p>
                                             </div>
 
                                         </li>                                        
@@ -35,24 +34,31 @@ function listescenariosonloadevent($responsedbescenario){
 
 
 
-	foreach ($responsedbescenario as $row) {
-	
-	$descripcion = $row["descripcion"];
+	foreach ($responsedbescenario["todos"] as $row) {
 	
 
+        
+        //conartistas
+
+    $idescenariovalidation  = $row["idescenario"];
+
+    $numero_artistas = 0;
+    $numero_artistas =  getnumeroartistas( $responsedbescenario["conartistas"] ,
+    $idescenariovalidation );
+        
+	$descripcion = $row["descripcion"];
 	if (strlen($descripcion ) == 0 ) {
 		$descripcion = "<br>+ agregar descripción";			
 	}		
 
 	$inpu_escenario ="inpu_escenario_" . $row["idescenario"];
 	
-
 	$list .="		
 
 									
                                         <li>                                          
                                             <div class='avatar'>
-                                            <img src=". base_url('application/img/blue.png'). " >
+                                            <img data-toggle='modal' data-target='#modalesenariosedit' class='edita-modal-escenario' id='". $row["idescenario"] ."'  src=". base_url('application/img/blue.png'). " >
                                             </div>
                                             <div class='activity-desk'>
 
@@ -61,12 +67,12 @@ function listescenariosonloadevent($responsedbescenario){
 
                                            <span class='descripcion_escenario_update' id='".
                                             $row["idescenario"] . "'    >". 
-                                            $descripcion ."</span>
+                                            substr($descripcion, 0 , 200)   ."..</span>
                                            
                                             <textarea  name='newdescripesenario' class='newdescripesenario form-control'  rows='3' id=". $inpu_escenario  .">".$row["descripcion"]."</textarea>
 
                                                     </h5>
-                                                    <p class='text-muted'>Artistas incluidos #</p>
+                                                    <p class='text-muted'>Artistas incluidos #".$numero_artistas."</p>
                                                     <i data-toggle='modal' data-target='#confirmationdeleteescenario' class='fa fa-times deleteescenario' id='". $row["idescenario"] ."' ></i>
 
                                             </div>
@@ -82,7 +88,29 @@ function listescenariosonloadevent($responsedbescenario){
 	
 	
 }
+    
 
+
+
+
+    function getnumeroartistas($responsedbescenario, $idescenariovalidation ){
+
+        $numero_artistas = 0;
+
+
+        foreach ($responsedbescenario as $row) {
+            
+            if ($row["idescenario"] ==  $idescenariovalidation) {
+                $numero_artistas = $row["numeroartistas"];         
+            }
+        }
+
+        return $numero_artistas;
+
+      
+
+    }
+        
 
 /*****************+****************+****************+****************+****************+*/
 
@@ -92,41 +120,10 @@ function listescenariosonloadevent($responsedbescenario){
         $e ="";
 
         
-
+        $nombreescenario ="";
         $tipoescenario = $arrayinfo["general"][0]["tipoescenario"];
         $nombreescenario =  $arrayinfo["general"][0]["nombre"];
         $descripcion = $arrayinfo["general"][0]['descripcion']; 
-        $e = "
-        <div class='well' style='color : black' >
-
-                    <div class='row'>
-
-                         
-                    <button class='col-lg-12 btn btn-primary' type='button'> 
-                    <i class='fa fa-flag-checkered'></i> ". $nombreescenario ."</button>
-                        <aside class='mail-nav'>
-                    
-                    <div class='mail-nav-body'>
-                        
-                        <ul class='nav nav-pills nav-stacked mail-navigation'>
-                            
-                            <li><a href='#'> <i class='fa fa-envelope-o'></i> Send Mail</a></li>
-                            <li><a href='#'> <i class='fa fa-certificate'></i> Important</a></li>
-                            <li><a href='#'> <i class='fa fa-heart-o'></i> ".$tipoescenario ." 
-                            <span class='label label-info pull-right inbox-notification'>*</span></a></li>
-                            
-
-
-                        </ul>
-
-                       
-                    </div>
-                   
-                </aside>
-
-
-                </div>
-            ";
         
 
 
@@ -154,7 +151,7 @@ function listescenariosonloadevent($responsedbescenario){
                                     </p>
                                     <div class='todo-actionlist pull-right clearfix'>
 
-                                        <a href='#' class='todo-remove remove-artista' id='".$idartista."'><i class='fa fa-times'></i></a>
+                                        <a href='#' ><i class='fa fa-times todo-remove remove-artista' id='".$idartista."' ></i></a>
                                     </div>
                                 </li>
                             ";
@@ -168,8 +165,14 @@ function listescenariosonloadevent($responsedbescenario){
 
 
         $data[0] = $e;
+
+
+        if (strlen($descripcion)<1 ) {
+            $descripcion =  "+ agregar descripción";
+        }
         $data['descripcion'] =   $descripcion; 
         $data['artistas'] =  $listartistas;
+        $data['nombreescenariomodal'] = "<i class='fa fa-star'></i> ". $nombreescenario;
 
 
         return $data;

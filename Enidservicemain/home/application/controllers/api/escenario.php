@@ -95,6 +95,61 @@ class Escenario extends REST_Controller{
     }/*Termina la función*/
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+function updatedescripcionescenariobyid_post(){
+
+        if ( $this->sessionclass->is_logged_in() == 1) {  
+            
+                
+                
+                $nueva_descripcion =$this->post("nuevadescripcion");                
+                $idescenario =  $this->post("idescenario");
+                $idempresa =  $this->sessionclass->getidempresa();            
+
+
+                  
+                $this->response($this->escenariomodel->updatedescripcionbyid( $nueva_descripcion , 
+                    $idescenario,  $idempresa ) );
+                
+
+        }else{
+
+            $this->sessionclass->logout();        
+        }    
+
+
+    }/*Termina la función*/
+
+
+
 /************************************************************************/
 
     function deleteescenario_post(){
@@ -157,6 +212,37 @@ class Escenario extends REST_Controller{
             $this->sessionclass->logout();        
         } 
     }
+
+
+
+
+
+    /*****************************************************************************************/
+
+
+    function deleteartistaescenario_post(){
+        
+        if ( $this->sessionclass->is_logged_in() == 1) {  
+
+
+
+
+                $idescenario =  $this->post("idescenario");
+                $artista_quitar =  $this->post("artista_quitar");
+
+                $idempresa =  $this->sessionclass->getidempresa();                            
+                
+
+                $responsedb = $this->escenarioartistamodel->deleteescenarioartosta($idescenario , $artista_quitar , $idempresa);
+
+                $this->response($responsedb); 
+                
+        }else{
+
+            $this->sessionclass->logout();        
+        } 
+
+    }/*Termina la función*/
     
 
 

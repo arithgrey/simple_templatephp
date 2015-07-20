@@ -165,8 +165,15 @@ function updateescenariomodal(e){
 				llenaelementoHTML( ".general-info-modal" , data[0] );
 				llenaelementoHTML(".descripcion-modal-text", data["descripcion"]);
 				llenaelementoHTML(".general-artistas" , data["artistas"]);
-				
+				llenaelementoHTML(".nombre-in-button", data["nombreescenariomodal"]);
+				llenaelementoHTML(".nombre-escenario-modal" , data["nombreescenariomodal"]);
 				valorHTML("#idescenariomodalartistas" , idescenario);
+				valorHTML(".descripcion-in-modal-escenario" , data["descripcion"]);
+
+
+				$(".descripcion-modal-text").click(updatedescriptioninmodal);
+				$(".remove-artista").click(removeartistaescenario);
+
 
 			}).fail(function(){
 				
@@ -196,6 +203,7 @@ function nuevoartistaescenario(){
 			    
 			  	
 			  		loadataescenario(idescenario);
+			  		loadescenarioss();
 			  })
 			  .fail(function() {
 			    
@@ -217,17 +225,89 @@ function loadataescenario(idescenario){
 		$.get(url , { "idescenario" :  idescenario } )
 			.done(function(data){
 
-				
+							
 				llenaelementoHTML( ".general-info-modal" , data[0] );
 				llenaelementoHTML(".descripcion-modal-text", data["descripcion"]);
 				llenaelementoHTML(".general-artistas" , data["artistas"]);
-
+				llenaelementoHTML(".nombre-in-button", data["nombreescenariomodal"]);
+				llenaelementoHTML(".nombre-escenario-modal" , data["nombreescenariomodal"]);
 				valorHTML("#idescenariomodalartistas" , idescenario);
+				valorHTML(".descripcion-in-modal-escenario" , data["descripcion"]);
+
+
+				$(".descripcion-modal-text").click(updatedescriptioninmodal);
+				$(".remove-artista").click(removeartistaescenario);
+
+	
 
 
 			}).fail(function(){
 				
 				alert(genericresponse[0]);
+
+			});
+
+
+}
+
+
+
+
+
+function updatedescriptioninmodal(){	
+	
+	$(".descripcion-in-modal-escenario").val($(this).text());
+
+	showonehideone(".descripcion-in-modal-escenario" , ".descripcion-modal-text" );
+	$(".descripcion-in-modal-escenario").blur(function(){
+
+		 	nuevadescripcion = $(this).val();
+		 	evento_escenario =  $("#idescenariomodalartistas").val();	
+		
+ 			url = now + "index.php/api/escenario/updatedescripcionescenariobyid/format/json/";
+ 		
+			$.post(url , {nuevadescripcion  : nuevadescripcion  ,  idescenario :  evento_escenario  } )
+			.done(function(data){
+
+					loadataescenario(idescenario);	
+					loadescenarioss();	
+					showonehideone(".descripcion-modal-text" , ".descripcion-in-modal-escenario"  );
+
+			}).fail(function(){
+				
+				alert("ERR");
+
+			});
+
+	});
+
+	
+
+
+}
+/********************************************************************************************/
+
+
+function removeartistaescenario(e){	
+	
+	artista_quitar = e.target.id;
+	idescenario = $("#idescenariomodalartistas").val();
+
+
+
+	url = now + "index.php/api/escenario/deleteartistaescenario/format/json/";
+ 		
+			$.post(url , {artista_quitar  : artista_quitar  ,  idescenario :  idescenario  } )
+			.done(function(data){
+
+
+					loadataescenario(idescenario);	
+					loadescenarioss();	
+					
+
+			}).fail(function(){
+				
+				alert("ERR");
 
 			});
 
