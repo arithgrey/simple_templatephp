@@ -12,7 +12,21 @@ class Event extends REST_Controller{
 
 
 
+    function updategeneros_post(){
 
+        if ($this->sessionclass->is_logged_in() == 1){
+
+            $nuevos_generos = $this->post("generos");
+            $idevento = $this->post("evento");
+
+            $this->response($this->eventmodel->updategeneros($nuevos_generos , $idevento ) );
+
+        }else{
+            $this->sessionclass->logout();    
+        }   
+
+
+    }/*Termina la función*/    
 
     function updateubicacion_post(){
 

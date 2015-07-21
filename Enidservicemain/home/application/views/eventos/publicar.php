@@ -16,6 +16,7 @@
 <script src="<?=base_url('application/js/js/tagsinput-init.js')?>"></script>
 <script type="text/javascript" src="<?=base_url('application/js/evento/principal.js')?>"> </script>
 <script type="text/javascript" src="<?=base_url('application/js/evento/escenarios.js')?>"> </script>
+<script type="text/javascript" src="<?=base_url('application/js/evento/accesos.js')?>"> </script>
 
 <style type="text/css">
 
@@ -39,8 +40,10 @@
 .title-page-enid{
     display: none;
 }
-#nombre-input, #edicion-input , #evento , #descripcion-evento, #ubicacion-input, 
-.descripcion-in-modal-escenario, .nombre-escenario-input-modal, .day_escenario_inputs{
+#guardar-generos{
+  display: none;
+}
+#nombre-input, #edicion-input , #evento , #descripcion-evento, #ubicacion-input, .descripcion-in-modal-escenario, .nombre-escenario-input-modal, .day_escenario_inputs{
     display: none;
 }
 
@@ -158,6 +161,14 @@ h4{
     <input type="hidden" value="<?=$evento;?>" id="evento" name='evento'>
 </form>        
 
+
+
+
+
+
+
+
+
                     
                 <div class="col-md-8 section-enid-events-r">
 
@@ -231,112 +242,9 @@ h4{
 
 
                                 </div>
-
-
-
                             </div>
-
                         </div>
-
                     </div>
-
-
-
-
-                    <!-- inicioa Mapa-->
-
-
-
-                                    
-
-
-                                    <div class="panel">                                        
-                                            
-                                                <input id="pac-input" class="controls" type="text" placeholder="Ubicación">
-                                                  <div id="mapsection">
-                                                          <div id="map-canvas"></div>
-                                                          <div class='textnotfound-location'></div>  
-                                                  </div>                                            
-                                    </div>
-
-
-
-
-                    <!--termina Mapa -->
-
-
-
-
-
-
-                    <!--Accesoso-->
-
-
-                     <div class="panel" >
-                                <header class="panel-heading" style="background:  #032132">
-                                    <i class="fa fa-credit-card"></i> Accesos 
-                                    <span class="tools pull-right">
-                                        <a class="fa fa-chevron-down" href="javascript:;"></a>
-                                        
-                                     </span>
-                                </header>
-                            
-
-
-
-                                <div class="panel-body">
-                                        <!--Inicia panel body-->
-
-      <section id="flip-scroll">
-
-                    <span ><?=$inicio;?> - <?=$termino;?></span>
-                    <table class="table table-bordered table-striped table-condensed cf">
-                        <thead class="cf ">
-                        <tr>
-                            <th class='blue-col-enid'>Periodo</th>
-                            <th>
-                              <i class="fa fa-ticket text-center"></i>
-                            </th>
-                            <th class="numeric text-center">
-                              <i class="fa fa-usd"></i>
-
-                            </th>                            
-                            
-                            
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr>
-                            <td class='blue-col-enid'>
-                              
-
-                                                      <div class="input-group  custom-date-range" data-date="" data-date-format="mm/dd/yyyy">
-                                                            <input class="form-control dpd1" name="nuevo_inicio" type="text">
-                                                            <span class="input-group-addon"></span>
-                                                            <input class="form-control dpd2" name="nuevo_termino" type="text">
-                                                        </div>
-                                                        
-
-                            </td>
-                            <td>Venta</td>
-                            <td class="numeric">$1.38</td>
-                            
-                            
-                            
-                            
-                        </tr>
-                        </tbody>
-                    </table>
-                    <div style="position: relative;" class="external-event label label-primary ui-draggable">+ agregar </div>
-
-                </section>
-</div>
-
-                                        <!--Termina panel body-->
-                      </div> 
-
-                    <!--Termina accesos -->
-
                 </div>
 
 
@@ -344,52 +252,34 @@ h4{
 
 
 <!--Inicia section tres -->
-
-
-    
-
-
-                            
-                    
-
-
-
-
-
-
-
-
                     <div class="col-md-4 section-enid-events-left">
 
 
-                         
+
+
+                      <!--Accesos button-->    
+                      <div class="panel" >
+                        <button id="accesos-button" data-toggle="modal" data-target="#accesosmodal" class="btn btn-info col-xs-12  col-sm-12 col-md-12 col-lg-12 accesos-button" style="text-align: left; padding: 10px!important; " ><strong> <i class="fa fa-credit-card"></i>  ACCESOS </strong></button>
+
+                        
+                      </div> <br><br>
+
+                      <!--Termina acceso button-->
+
+
+
 
                         <div class="panel" >
                                 <header class="panel-heading" style="background: #032132">
-                                  <div class="numero_escenarios" id="numero_escenarios"></div>
-                                  
+                                  <div class="numero_escenarios" id="numero_escenarios"></div>                                  
                                     <span class="tools pull-right">
                                         <a class="fa fa-chevron-down" href="javascript:;"></a>
                                         
                                      </span>
-                                </header>
-                                
-                               
-
-
-                                <div class="panel-body" style="background: #F3F8FB">
-                                    
-
+                                </header>                              
+                                <div class="panel-body" style="background: #F3F8FB">                                    
                                     <div id="list_escenarios"></div>
-
-
                                 </div>
-                                
-
-
-
-
-
                                 <div class="panel-body">                                    
                                         
                                       <form id="form-escenario" method="POST">
@@ -398,56 +288,15 @@ h4{
 
                                             <input placeholder="Añadir escenario" class="form-control" style="width: 100%" type="text" name='nuevoescenario'>
                                         </div>
-
-
                                         <button style="background:black !important" class="btn btn-primary pull-right" type="submit" id="nuevo-escenario">
                                           <i class="fa fa-plus"></i>
                                         </button>
                                       </form>
-                                </div>
-                                  
+                                </div>                                
                         </div>
 
-
-
-                        <div class='panel'>
-                                    <label>Generos musicales </label> 
-                                    <input id="tags_1" type="text" class="tags" 
-                                    value="House, electrónica, minimal, techno" style="display: none;">
-
-                         </div>
-
-
-
-
-
-
-
-
-
-
-
-                          
-
-                            
-
-
-
-
-                                
-
-
-                            
-                            
-
-
-
-
-                                       
-                           
-
-
-                    
+                      
+                  
                     </div>
 <!--Termina  section tres -->
 
@@ -456,8 +305,13 @@ h4{
 
 
 
-
-
+<div class='col-xs-12  col-sm-12 col-md-12 col-lg-12'>
+<input id="pac-input" class="controls" type="text" placeholder="Ubicación">
+<div id="mapsection">
+  <div id="map-canvas"></div>
+  <div class='textnotfound-location'></div>  
+</div> 
+</div>
   
 
 
@@ -482,7 +336,7 @@ h4{
     <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true&libraries=places"></script>
 
     <script>
-      google.maps.event.addDomListener(window, 'load', initialize);
+     google.maps.event.addDomListener(window, 'load', initialize);
     </script>
   
 
@@ -505,12 +359,12 @@ h4{
 
 
 <script type="text/javascript">
-
+/*
 
 var acceptedFileTypes = ".jpeg,.jpg,.png,.JPEG,.JPG,.PNG";
 Dropzone.options.myAwesomeDropzone = {
 
-      paramName: "imgportada", //Pagarametro name 
+      paramName: "imgportada", 
       headers: {"eventosupload" : "test data"},       
       maxThumbnailFilesize: 3,
       maxFilesize: 1, // MB    
@@ -533,7 +387,7 @@ Dropzone.options.myAwesomeDropzone = {
 
 
     };
-
+*/
 </script>
 
 
@@ -868,9 +722,166 @@ Dropzone.options.myAwesomeDropzone = {
   <div class="modal-body">    
            <div class="modal-footer">               
                 <?=generatehorarioartista("hiartista" , "htartista" );?>
-               <button type="button" class="btn btn-default" id="tregistrohorario" data-dismiss="modal">Cerrar</button>                
+               <button type="button" class="btn btn-default" id="tregistrohorario" data-dismiss="modal">Guardar</button>                
           </div>
   </div>
 </div>
 </div>
 </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--Accesos modal-->
+<div id="accesosmodal" class="modal fade">
+
+<div class="modal-dialog modal-lg">
+
+<div class="modal-content">
+
+  <!-- dialog body -->
+  <div class="modal-body">    
+    <button type="button" class="close" data-dismiss="modal">&times;</button>
+    <!--inicia  modal body-->       
+                <table class="table table-bordered table-invoice">
+                    <thead>
+                    <tr>
+                        <th><i class="fa fa-list-ol"></i></th>
+                        <th><i class="fa fa-star"></i> Acceso</th>
+                        <th class="text-center"><i class="fa fa-credit-card"></i> Precio</th>
+                        <th class="text-center"><i class="fa fa-calendar-o"></i> Periodo</th>
+                        <th class="text-center"><i class="fa fa-minus-circle"></i></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>
+                            <h4>Service One</h4>                            
+                        </td>
+                        <td class="text-center"><strong>$ 599.00</strong></td>
+                        <td class="text-center"><strong>4</strong></td>
+                        <td class="text-center"><strong>$2396.00</strong></td>
+                    </tr>
+                    
+                    </tbody>
+                </table>
+
+
+
+                <table class="table well">
+                  <form class='form-accesos-modal' id="form-accesos-modal">
+                    <input type="hidden" value="<?=$evento;?>" id="evaccesos" name='evaccesos'>
+                   <tr>
+                        
+                        <td>
+                            
+                            <select class='form-control data-option-accesos' name='acceso-tipo-modal'> 
+
+                            </select>
+                               
+
+                            
+
+                        </td>  
+                        <td>
+
+                            <div class="input-group">
+                                <span class="input-group-addon">$</span>
+                                <input type="text" name='precio-acceso-modal' class="form-control">
+                                <span class="input-group-addon ">.00</span>
+                            </div>
+
+
+                        </td>
+
+                        
+      
+
+
+
+                        <td>
+                                <div class="input-group  custom-date-range" data-date="" data-date-format="mm/dd/yyyy">
+                                    <input class="form-control dpd1" name="nuevo_inicio_acceso" id="nuevo_inicio_acceso" type="text">
+                                    <span class="input-group-addon"></span>
+                                    <input class="form-control dpd2" name="nuevo_termino_acceso" id="nuevo_termino_acceso" type="text">
+                              </div>  
+
+                        </td>
+
+                        <td>
+                                        <button style="background:black !important" class="btn btn-primary pull-right" type="submit" id="nuevo-acceso">
+                                          <i class="fa fa-plus"></i>
+                                        </button>
+
+                        </td>
+                        
+                    </tr>
+
+                    </form>
+                </table>
+
+    <!--Termina modal body-->       
+  </div>
+</div>
+</div>
+</div>
+<!--Termina accesos modal-->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

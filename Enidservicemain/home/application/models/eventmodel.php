@@ -109,6 +109,16 @@ function updateUbicacion($nueva_ubicacion , $idevento ) {
 }
 
 
+function updategeneros($nuevos_generos , $idevento ){
+
+	$update_genero = "UPDATE evento SET genero_tupla='". $nuevos_generos ."' WHERE idevento ='".$idevento."'  ";		
+	return  $this->db->query($update_genero);
+}
+
+
+	
+
+
 /*Termina modelo */
 }
 

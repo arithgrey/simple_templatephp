@@ -6,7 +6,10 @@ $(document).on("ready", function(){
 	$(".descripcion-p").click(updatedescripcion);
 	//$(".ubicacion-panel").click(updateubicacion);
 	$("#pac-input").click(updateubicacion);
-	
+		
+	$("#tags_1_tag").keyup(tryrecordgeneros);
+
+
 });
 
 
@@ -58,7 +61,12 @@ function loadinhtml(data){
 			edicion = data[x].edicion;
 			descripcion_evento = data[x].descripcion_evento;
 			ubicacion =  data[x].ubicacion;
+			//generosmusicales = data[x].genero_tupla;
+			//valorHTML("#tags_1_tagsinput" , generosmusicales );
 
+			
+			
+			
 			/*In THML*/
 
 				/*Nombre del evento */
@@ -83,6 +91,10 @@ function loadinhtml(data){
 
 				valorHTML("#pac-input" , ubicacion);		
 
+				/*generos*/
+				
+				
+
 
 
 
@@ -91,6 +103,8 @@ function loadinhtml(data){
 	
 
 }/*Termina función*/
+
+
 
 
 
@@ -403,3 +417,38 @@ function initialize() {
   setupClickListener('changetype-establishment', ['establishment']);
   setupClickListener('changetype-geocode', ['geocode']);
 }
+
+
+
+
+
+function tryrecordgeneros(e){
+	
+	if (e.keyCode == 13){
+
+ 		 generos = $("#tags_1").val();	
+
+		 	url =  now + "index.php/api/event/updategeneros/format/json/";    
+
+			$.post(url , { "generos" : generos  , "evento" : $("#evento").val() } )
+			.done(function(data){
+					
+				
+				loaddata();
+
+			}).fail(function(){
+
+				alert(genericresponse[0]);
+			});
+
+
+
+
+
+
+ 	}
+}
+
+
+
+
