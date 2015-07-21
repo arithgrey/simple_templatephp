@@ -16,14 +16,15 @@ class Accesos extends REST_Controller{
 
                 $idempresa =  $this->sessionclass->getidempresa();    
                 
-                $evento = $this->post("evaccesos");                        
+                $evento = $this->post("evento");                        
 
 
 
-
+                
                 $responsedb = $this->accesosmodel->getDataByidEvent($idempresa, $evento);
 
                 $this->response(getData($responsedb)); 
+                //$this->response($responsedb);
                 
         }else{
 
@@ -44,10 +45,6 @@ class Accesos extends REST_Controller{
                 $precio = $this->post("precio-acceso-modal");                        
                 $inicio = $this->post("nuevo_inicio_acceso");
                 $termino = $this->post("nuevo_termino_acceso");                
-
-
-
-
                 
                 $dbrespose = $this->accesosmodel->insert( $precio , $inicio , $termino , $evento , $acceso_tipo);
 
@@ -62,7 +59,26 @@ class Accesos extends REST_Controller{
     }
 
 
+    /******************************************************************************************/
 
+    function deletebyid_post(){
+        if ( $this->sessionclass->is_logged_in() == 1) {  
+
+               
+                $evento = $this->post("evento");      
+                $acceso = $this->post("acceso");      
+                
+                
+
+                $this->response($this->accesosmodel->deletebyid( $evento , $acceso )); 
+                
+        }else{
+
+            $this->sessionclass->logout();        
+        } 
+
+    }
+/**************************************************************************************/
 
    
                 

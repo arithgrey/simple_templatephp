@@ -6,17 +6,12 @@
 
 <script type="text/javascript" src="<?=base_url('application/js/js/bootstrap-datepicker/js/bootstrap-datepicker.js')?>"></script>
 <script src="<?=base_url('application/js/js/pickers-init.js')?>"></script>
-
-
-
-
-
-
 <script src="<?=base_url('application/js/js/jquery-tags-input/jquery.tagsinput.js')?>"></script>
 <script src="<?=base_url('application/js/js/tagsinput-init.js')?>"></script>
 <script type="text/javascript" src="<?=base_url('application/js/evento/principal.js')?>"> </script>
 <script type="text/javascript" src="<?=base_url('application/js/evento/escenarios.js')?>"> </script>
 <script type="text/javascript" src="<?=base_url('application/js/evento/accesos.js')?>"> </script>
+<script type="text/javascript" src="<?=base_url('application/js/evento/servicios.js')?>"> </script>
 
 <style type="text/css">
 
@@ -257,14 +252,8 @@ h4{
 
 
 
-                      <!--Accesos button-->    
-                      <div class="panel" >
-                        <button id="accesos-button" data-toggle="modal" data-target="#accesosmodal" class="btn btn-info col-xs-12  col-sm-12 col-md-12 col-lg-12 accesos-button" style="text-align: left; padding: 10px!important; " ><strong> <i class="fa fa-credit-card"></i>  ACCESOS </strong></button>
 
-                        
-                      </div> <br><br>
 
-                      <!--Termina acceso button-->
 
 
 
@@ -296,7 +285,43 @@ h4{
                         </div>
 
                       
-                  
+                      
+
+                      <!--Accesos button-->    
+                      <div class="panel" >
+                        <button id="accesos-button" data-toggle="modal" data-target="#accesosmodal" class="btn btn-info col-xs-12  col-sm-12 col-md-12 col-lg-12 accesos-button" style="text-align: left; padding: 10px!important; " ><strong> <i class="fa fa-credit-card"></i>  ACCESOS AL EVENTO </strong></button>
+
+                        
+                      </div> <br><br>
+
+                      <!--Termina acceso button-->
+
+
+
+                      <!--Servicios button-->    
+                      <div class="panel" >
+                        <button id="servicios-button" data-toggle="modal" data-target="#serviciosmodal" class="btn btn-info col-xs-12  col-sm-12 col-md-12 col-lg-12 accesos-button" style="text-align: left; padding: 10px!important; " ><strong> <i class="fa fa-cutlery"></i> SERVICIOS INCLUIDOS </strong></button>
+
+                        
+                      </div> <br>
+
+                      <!--Termina servicios button-->
+
+
+
+                      <!--Servicios button-->    
+                      <div class="panel" >
+                        <a href="#mapgooglemap"><button class="btn btn-info col-xs-12  col-sm-12 col-md-12 col-lg-12 accesos-button" style="text-align: left; padding: 10px!important; " >
+                          <strong> <i class="fa fa-map-marker"></i> LOCACIÓN</strong></button></a>
+
+                        
+                      </div> <br><br>
+
+                      <!--Termina servicios button-->
+
+
+
+
                     </div>
 <!--Termina  section tres -->
 
@@ -305,7 +330,7 @@ h4{
 
 
 
-<div class='col-xs-12  col-sm-12 col-md-12 col-lg-12'>
+<div class='col-xs-12  col-sm-12 col-md-12 col-lg-12' id="mapgooglemap">
 <input id="pac-input" class="controls" type="text" placeholder="Ubicación">
 <div id="mapsection">
   <div id="map-canvas"></div>
@@ -417,7 +442,7 @@ Dropzone.options.myAwesomeDropzone = {
 
 <div class='well col-xs-12'>
   <button type="button" class="close" data-dismiss="modal">&times;</button>
-  <i class='fa fa-star'></i> <h3 class='nombre-escenario-modal'></h3>
+  <h3 class='nombre-escenario-modal'></h3>
 
   <input type="text" data-trigger="click" 
   class="form-control popovers nombre-escenario-input-modal" id='nombre-escenario-input-modal' placeholder="Escenario">
@@ -787,19 +812,11 @@ Dropzone.options.myAwesomeDropzone = {
                         <th><i class="fa fa-star"></i> Acceso</th>
                         <th class="text-center"><i class="fa fa-credit-card"></i> Precio</th>
                         <th class="text-center"><i class="fa fa-calendar-o"></i> Periodo</th>
-                        <th class="text-center"><i class="fa fa-minus-circle"></i></th>
+                        <th class="text-center"></th>
                     </tr>
                     </thead>
-                    <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>
-                            <h4>Service One</h4>                            
-                        </td>
-                        <td class="text-center"><strong>$ 599.00</strong></td>
-                        <td class="text-center"><strong>4</strong></td>
-                        <td class="text-center"><strong>$2396.00</strong></td>
-                    </tr>
+                    <tbody class='list-accesos-modal'>
+                   
                     
                     </tbody>
                 </table>
@@ -808,7 +825,14 @@ Dropzone.options.myAwesomeDropzone = {
 
                 <table class="table well">
                   <form class='form-accesos-modal' id="form-accesos-modal">
-                    <input type="hidden" value="<?=$evento;?>" id="evaccesos" name='evaccesos'>
+                    <input type="hidden" value="<?=$evento;?>" id="evaccesos"  class='evaccesos' name='evaccesos'>
+                   
+                    <tr>
+                      <td class='text-center'>Tipo</td>
+                      <td class='text-center'>Precio</td>
+                      <td class='text-center'>Periodo</td>
+
+                    </tr>
                    <tr>
                         
                         <td>
@@ -885,3 +909,95 @@ Dropzone.options.myAwesomeDropzone = {
 
 
 
+<div id="confirmationdeleteacceso" class="modal fade">
+<div class="modal-dialog">
+<div class="modal-content">
+  <!-- dialog body -->
+  <div class="modal-body">
+    
+  
+  
+           <div class="modal-footer">
+                Realmente decea quitar de la lista el acceso??
+                <button type="button" class="btn btn-default" id="aceptar-delete-acceso" data-dismiss="modal">Aceptar</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                
+            </div>
+
+</div>
+</div>
+</div>
+</div>
+
+
+
+
+
+
+<!--serviciosmodal start -->
+
+
+
+
+
+
+
+
+
+<div id="serviciosmodal" class="modal fade">
+
+<div class="modal-dialog modal-lg">
+
+<div class="modal-content">
+
+  <!-- dialog body -->
+  <div class="modal-body">    
+    <button type="button" class="close" data-dismiss="modal">&times;</button>
+    <!--inicia  modal body-->                     
+    <div class='panel'>
+
+
+
+
+
+
+
+
+
+      <h1>Servicios</h1>
+       <input type="hidden" value="<?=$evento;?>" id="eventoservicios"  class='eventoservicios' name='eventoservicios'>
+      <div class='servicios-evento-modal'></div>        
+
+
+      
+
+
+
+
+
+
+
+
+
+
+                    
+
+
+
+
+
+
+
+
+                                
+                           
+                    
+    </div>
+    <!--Termina modal body-->       
+  </div>
+</div>
+</div>
+</div>
+
+
+<!--serviciosmodal end  -->

@@ -13,7 +13,21 @@ function __construct(){
 
 function getDataByidEvent($idempresa, $evento){
 	
+	
+
+	$select_byid ="SELECT * FROM acceso, tipo_acceso WHERE 
+	 tipo_acceso.idtipo_acceso= acceso.idtipo_acceso AND acceso.idevento='". $evento . "' order by termino_acceso desc";
+
+	$result_acceso = $this->db->query($select_byid); 
+
+
+
+
 	$data["tipo_acceso"] = $this->getTipoEscenario();
+	$data["listaccesos"] = $result_acceso-> result_array();
+
+
+
 	return $data;
 
 }
@@ -36,6 +50,18 @@ function insert( $precio , $inicio_acceso , $termino_acceso , $idevento , $idtip
 
 }
 
+
+
+/*********************/
+
+function deletebyid( $evento , $acceso ){
+
+
+	$query_delete ="DELETE FROM acceso WHERE idacceso = '$acceso'  ";
+	return  $this->db->query($query_delete);
+	
+
+}
 /*Termina modelo */
 }
 

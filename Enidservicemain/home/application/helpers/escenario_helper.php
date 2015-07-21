@@ -14,7 +14,9 @@ function listescenariosonloadevent($responsedbescenario){
 	if (count($responsedbescenario["todos"]) == 0 ) {
 	
 	$list .="		
-									
+									   
+                        
+
                                         <li>                                          
                                             <div class='avatar'>
                                             <img src=". base_url('application/img/blue.png'). " >
@@ -27,6 +29,8 @@ function listescenariosonloadevent($responsedbescenario){
                                             </div>
 
                                         </li>                                        
+
+                                        
                                     ";
 
 	}
