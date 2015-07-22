@@ -115,9 +115,17 @@ function updategeneros($nuevos_generos , $idevento ){
 	return  $this->db->query($update_genero);
 }
 
-
+function updateurl($nueva_url , $idevento  ) {
 	
+	$update_url = "UPDATE evento SET url_social='". $nueva_url ."'  WHERE idevento ='".$idevento."'  ";		
+	return  $this->db->query($update_url);
+}
+	
+function updateurlyout($nueva_url , $idevento ){
+	$update_url = "UPDATE evento SET url_social_youtube='". $nueva_url ."'  WHERE idevento ='".$idevento."'  ";		
+	return  $this->db->query($update_url);
 
+}
 
 /*Termina modelo */
 }

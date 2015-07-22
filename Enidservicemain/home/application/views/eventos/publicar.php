@@ -38,7 +38,7 @@
 #guardar-generos{
   display: none;
 }
-#nombre-input, #edicion-input , #evento , #descripcion-evento, #ubicacion-input, .descripcion-in-modal-escenario, .nombre-escenario-input-modal, .day_escenario_inputs{
+#nombre-input, #edicion-input , #evento , #descripcion-evento, #ubicacion-input, .descripcion-in-modal-escenario, .nombre-escenario-input-modal, .day_escenario_inputs ,.social-media-event{
     display: none;
 }
 
@@ -148,6 +148,14 @@ h4{
 
 
 
+
+
+
+
+
+
+
+
       
 
 
@@ -253,6 +261,84 @@ h4{
 
 
 
+                       <!--Accesos button-->    
+                      <div class="panel" >
+                        <button id="accesos-button" data-toggle="modal" data-target="#accesosmodal" class="btn btn-info col-xs-12  col-sm-12 col-md-12 col-lg-12 accesos-button" style="text-align: left; padding: 10px!important; " ><strong> <i class="fa fa-credit-card"></i>  ACCESOS AL EVENTO </strong></button>
+
+                        
+                      </div> <br>
+
+                      <!--Termina acceso button-->
+
+
+
+                      <!--Servicios button-->    
+                      <div class="panel" >
+                        <button id="servicios-button" data-toggle="modal" data-target="#serviciosmodal" class="btn btn-info col-xs-12  col-sm-12 col-md-12 col-lg-12 accesos-button" style="text-align: left; padding: 10px!important; " ><strong> <i class="fa fa-cutlery"></i> SERVICIOS INCLUIDOS </strong></button>
+
+                        
+                      </div> <br>
+
+                      <!--Termina servicios button-->
+
+
+
+
+                      <!--Servicios button-->    
+                      <div class="panel" >
+                        <button id="social-button" class="btn btn-info col-xs-12  col-sm-12 col-md-12 col-lg-12 accesos-button" style="text-align: left; padding: 10px!important; " >
+                          <strong> <i class="fa fa-flag"></i> SOCIAL </strong>
+                        </button>
+
+                      
+
+
+                          <div class='social-media-event'>
+                                    <form class="form-horizontal" id='form-social' role="form">                                     
+                                                
+                                                <input type="hidden" name="evento_social" id="evento_social" value="<?=$evento;?>">
+                                                
+                                                <div class="input-group margin-bottom-sm">
+                                                  <span class="input-group-addon"><i class="fa fa-facebook "></i> </span>
+                                                  <input class="form-control" name='url_social_evento' type="text" id="url_social" placeholder="La url de tu evento en Facebook" required>
+                                                </div>                                       
+                                    </form>
+                                     <form class="form-horizontal" id='form-social-youtube'> 
+                                                <input type="hidden" name="evento_social_y" id="evento_social_y" value="<?=$evento;?>">                                    
+                                                <div class="input-group">
+                                                  <span class="input-group-addon"><i class="fa fa-youtube-play"></i></span>
+                                                  <input class="form-control" name='url_social_evento_youtube' type="text" id="url_social_evento_youtube" placeholder="La url de tu canal en youtube" required>
+                                                </div>         
+                                     </form>           
+                          </div>   
+
+
+
+                                                           
+                      </div> 
+
+                      <!--Termina servicios button-->
+
+
+
+
+
+
+                      <!--Localcion button-->    
+                      <div class="panel" >
+                        <a href="#mapgooglemap"><button class="btn btn-info col-xs-12  col-sm-12 col-md-12 col-lg-12 accesos-button" style="text-align: left; padding: 10px!important; " >
+                          <strong> <i class="fa fa-map-marker"></i> LOCACIÓN</strong></button></a>
+
+                        
+                      </div> <br><br><br>
+
+                      <!--Termina localcion button-->
+
+
+
+
+
+
 
 
 
@@ -287,37 +373,7 @@ h4{
                       
                       
 
-                      <!--Accesos button-->    
-                      <div class="panel" >
-                        <button id="accesos-button" data-toggle="modal" data-target="#accesosmodal" class="btn btn-info col-xs-12  col-sm-12 col-md-12 col-lg-12 accesos-button" style="text-align: left; padding: 10px!important; " ><strong> <i class="fa fa-credit-card"></i>  ACCESOS AL EVENTO </strong></button>
-
-                        
-                      </div> <br><br>
-
-                      <!--Termina acceso button-->
-
-
-
-                      <!--Servicios button-->    
-                      <div class="panel" >
-                        <button id="servicios-button" data-toggle="modal" data-target="#serviciosmodal" class="btn btn-info col-xs-12  col-sm-12 col-md-12 col-lg-12 accesos-button" style="text-align: left; padding: 10px!important; " ><strong> <i class="fa fa-cutlery"></i> SERVICIOS INCLUIDOS </strong></button>
-
-                        
-                      </div> <br>
-
-                      <!--Termina servicios button-->
-
-
-
-                      <!--Servicios button-->    
-                      <div class="panel" >
-                        <a href="#mapgooglemap"><button class="btn btn-info col-xs-12  col-sm-12 col-md-12 col-lg-12 accesos-button" style="text-align: left; padding: 10px!important; " >
-                          <strong> <i class="fa fa-map-marker"></i> LOCACIÓN</strong></button></a>
-
-                        
-                      </div> <br><br>
-
-                      <!--Termina servicios button-->
+                     
 
 
 
@@ -956,42 +1012,9 @@ Dropzone.options.myAwesomeDropzone = {
     <!--inicia  modal body-->                     
     <div class='panel'>
 
-
-
-
-
-
-
-
-
-      <h1>Servicios</h1>
-       <input type="hidden" value="<?=$evento;?>" id="eventoservicios"  class='eventoservicios' name='eventoservicios'>
+      <input type="hidden" value="<?=$evento;?>" id="eventoservicios"  class='eventoservicios' name='eventoservicios'>
       <div class='servicios-evento-modal'></div>        
-
-
-      
-
-
-
-
-
-
-
-
-
-
-                    
-
-
-
-
-
-
-
-
-                                
-                           
-                    
+          
     </div>
     <!--Termina modal body-->       
   </div>
@@ -1001,3 +1024,49 @@ Dropzone.options.myAwesomeDropzone = {
 
 
 <!--serviciosmodal end  -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+     

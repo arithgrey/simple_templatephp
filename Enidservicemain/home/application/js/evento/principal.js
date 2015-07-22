@@ -8,7 +8,7 @@ $(document).on("ready", function(){
 	$("#pac-input").click(updateubicacion);
 		
 	$("#tags_1_tag").keyup(tryrecordgeneros);
-
+	$("#social-button").click(showformsocial);
 
 });
 
@@ -60,42 +60,28 @@ function loadinhtml(data){
 			nombre_evento = data[x].nombre_evento;
 			edicion = data[x].edicion;
 			descripcion_evento = data[x].descripcion_evento;
-			ubicacion =  data[x].ubicacion;
-			//generosmusicales = data[x].genero_tupla;
-			//valorHTML("#tags_1_tagsinput" , generosmusicales );
+			url_social = data[x].url_social;
+			url_social_youtube = data[x].url_social_youtube;
 
 			
 			
-			
-			/*In THML*/
-
-				/*Nombre del evento */
 				
 				llenaelementoHTML(".nombre-evento-h1", nombre_evento);	
-				valorHTML("#nombre-input" , nombre_evento );	
-
-				/*Edición del evento */
+				valorHTML("#nombre-input" , nombre_evento );					
 
 				llenaelementoHTML(".edicion-evento", edicion);	
 				valorHTML("#edicion-input" , edicion );	
 
+				valorHTML("#url_social" , url_social);
+				valorHTML("#url_social_evento_youtube", url_social_youtube);
+
+
+
 				/*Valiadamos info*/		
-				if (descripcion_evento.length >0 ) {
-
-					llenaelementoHTML(".descripcion-p", descripcion_evento );	
-					valorHTML("#descripcion-evento" , descripcion_evento );		
-				}
+				llenaelementoHTML(".descripcion-p", descripcion_evento );	
+				valorHTML("#descripcion-evento" , descripcion_evento );		
 				
-
-				/*Ubicación*/
-
-				valorHTML("#pac-input" , ubicacion);		
-
-				/*generos*/
-				
-				
-
-
+					
 
 
 		}
@@ -330,7 +316,7 @@ function updateubicacionindb(nuevotexto){
 
 
 
-
+/*
 
 function initialize() {
 
@@ -343,8 +329,7 @@ function initialize() {
   var map = new google.maps.Map(document.getElementById('map-canvas'),
     mapOptions);
 
-  var input = /** @type {HTMLInputElement} */(
-      document.getElementById('pac-input'));
+  var input =(document.getElementById('pac-input'));
 
   var types = document.getElementById('type-selector');
   map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
@@ -368,19 +353,19 @@ function initialize() {
     if (!place.geometry) {
       
       
-      //llenaelementoHTML(".textnotfound-location" , "La ubicación no ha sido encontrada");
+     
 
       return;
     }
 
-    // If the place has a geometry, then present it on a map.
+  
     if (place.geometry.viewport) {
       map.fitBounds(place.geometry.viewport);
     } else {
       map.setCenter(place.geometry.location);
-      map.setZoom(17);  // Why 17? Because it looks good.
+      map.setZoom(17);  
     }
-    marker.setIcon(/** @type {google.maps.Icon} */({
+    marker.setIcon(({
       url: place.icon,
       size: new google.maps.Size(71, 71),
       origin: new google.maps.Point(0, 0),
@@ -403,8 +388,7 @@ function initialize() {
     infowindow.open(map, marker);
   });
 
-  // Sets a listener on a radio button to change the filter type on Places
-  // Autocomplete.
+  
   function setupClickListener(id, types) {
     var radioButton = document.getElementById(id);
     google.maps.event.addDomListener(radioButton, 'click', function() {
@@ -419,7 +403,7 @@ function initialize() {
 }
 
 
-
+*/
 
 
 function tryrecordgeneros(e){
@@ -451,4 +435,68 @@ function tryrecordgeneros(e){
 
 
 
+
+
+
+
+
+function showformsocial(){
+
+	if ($(".social-media-event").is(":visible")) {
+		
+		$(".social-media-event").hide();
+
+	}else{
+		$(".social-media-event").show();
+
+
+			$("#form-social").submit(function(){				
+					url =  now + "index.php/api/event/updateurlbyid/format/json/";    					
+					$.post(url ,  $("#form-social").serialize() )
+					.done(function(data){
+							
+								loaddata();
+
+					}).fail(function(){
+
+						alert(genericresponse[0]);
+					});
+
+					/**/
+
+				return false;	
+			});
+
+
+
+
+			$("#form-social-youtube").submit(function(){				
+					url =  now + "index.php/api/event/updateurlyoutubebyid/format/json/";    					
+					$.post(url ,  $("#form-social-youtube").serialize() )
+					.done(function(data){
+							
+								loaddata();
+
+					}).fail(function(){
+
+						alert(genericresponse[0]);
+					});
+
+					/**/
+
+				return false;	
+			});
+
+
+
+
+
+
+
+
+
+	}
+	
+	
+}
 

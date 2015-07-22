@@ -12,6 +12,55 @@ class Event extends REST_Controller{
 
 
 
+
+
+
+    function updateurlbyid_post(){
+
+        if ($this->sessionclass->is_logged_in() == 1){
+
+            $nueva_url = $this->post("url_social_evento");            
+            $idevento = $this->post("evento_social");
+
+
+            $this->response($this->eventmodel->updateurl($nueva_url , $idevento ) );
+
+        }else{
+            $this->sessionclass->logout();    
+        }   
+
+
+    }/*Termina la función*/    
+
+
+
+
+    function updateurlyoutubebyid_post(){
+        
+        if ($this->sessionclass->is_logged_in() == 1){
+
+            $nueva_url = $this->post("url_social_evento_youtube");            
+            $idevento = $this->post("evento_social_y");
+
+
+            $this->response($this->eventmodel->updateurlyout($nueva_url , $idevento ) );
+
+        }else{
+            $this->sessionclass->logout();    
+        }   
+
+    }
+
+
+
+
+
+
+
+
+
+    /**/    
+
     function updategeneros_post(){
 
         if ($this->sessionclass->is_logged_in() == 1){

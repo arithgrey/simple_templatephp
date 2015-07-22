@@ -73,9 +73,9 @@ function filtra($arreglo ){
 
       if ($bandera >0 ) {
         
-        $input_incluido= "<div class='todo-check ' ><input class='serviciocheck'  id='".$idservicio."'  type='checkbox' value='' checked></div>";  
+        $input_incluido= "<div class='checkbox'><input class='serviciocheck'  id='".$idservicio."'  type='checkbox' value='' checked></div>";  
       }else{
-        $input_incluido= "<div class='todo-check ' ><input class='serviciocheck'  id='".$idservicio."'  type='checkbox' value=''></div>";
+        $input_incluido= "<div class='checkbox'><input class='serviciocheck'  id='".$idservicio."'  type='checkbox' value=''></div>";
       }
       
 			

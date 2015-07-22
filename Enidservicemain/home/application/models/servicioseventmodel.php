@@ -13,7 +13,7 @@ function __construct(){
 function getserviciosevento( $evento , $idempresa ){
 
 
-	$query_select  ="SELECT * FROM servicio";
+	$query_select  ="SELECT * FROM servicio ORDER BY servicio";
 	$servicios_result = $this->db->query($query_select);
 	$data["servicios"] =   $servicios_result ->result_array();
 
