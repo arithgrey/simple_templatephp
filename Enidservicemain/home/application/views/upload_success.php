@@ -1,12 +1,18 @@
 <html>
 <head>
-<title>Exito</title>
+<title>Upload Form</title>
 </head>
-<center>
 <body>
-<?=heading('El archivo se ha subido correctamente', 4);?>
 
-<h5><?=anchor('files/info', 'Listado de archivos para descargar'); ?></h5>
+<h3>Your file was successfully uploaded!</h3>
 
-</body></center>
+<ul>
+<?php foreach ($upload_data as $item => $value):?>
+<li><?php echo $item;?>: <?php echo $value;?></li>
+<?php endforeach; ?>
+</ul>
+
+<p><?php echo anchor('upload', 'Upload Another File!'); ?></p>
+
+</body>
 </html>

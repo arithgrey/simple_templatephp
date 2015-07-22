@@ -5,42 +5,40 @@ if(!function_exists('invierte_date_time')){
 
 /*******************************************************************************************************/
 /*Retornamos la vista que desplegará  en principal*/
-	
-
-
 
 	function serviciosevent($arreglo){
 
-
+    $fila = "";        
+    $pos =1;  
 		$servicios = "
 		<table class='table table-bordered table-striped dataTable' id='dynamic-table'>
-        <thead>
-        <tr role='row'>
-          <th>
-          	#
-          </th>
-          <th>
-          	Servicio
-          </th>
-          <th>
-          	Incluido
-          </th>
-        
-        </tr>
-        </thead>
-        
+    <thead><tr role='row'><th>#</th><th>Servicio</th><th>Incluido</th></tr></thead><tbody >";
 
-        <tbody >";
+        foreach ($arreglo as $row){
 
 
-          
+            $idservicio =  $row["idservicio"];
+            $nombreservicio = $row["servicio"];
+            $idserviciointer  =  $row["idserviciointer"];
 
-   	$servicios .= filtra($arreglo );  	    
+                if ($idserviciointer  == $idservicio) {
+                  
+                  $dinamiccheck ="<input type='checkbox' class='serviciocheck' id='". $idservicio ."' checked>";  
+                }else{
+                  $dinamiccheck ="<input type='checkbox' class='serviciocheck' id='". $idservicio ."'>";
+                }
 
-    $servicios .= "
-        </tbody>
-      </table>
-      ";
+                $fila .="<tr class='gradeX even'>
+                      <td class=' '> ". $pos . "</td>
+                      <td class=' '>". $nombreservicio ."</td>
+                      <td class=' '>". $dinamiccheck."</td>
+                
+                    </tr>";
+
+               $pos ++;
+          }  
+  $servicios .= $fila;     
+  $servicios .= "</tbody></table>";
 	return 	$servicios;
 
 
@@ -50,50 +48,6 @@ if(!function_exists('invierte_date_time')){
 
 
 
-function filtra($arreglo ){	
-
-	$fila ="";
-	$in =1;
-
-	foreach ($arreglo["servicios"] as $rowservicios) {
-			
-			$idservicio =  $rowservicios["idservicio"];
-			$nombreservicio = $rowservicios["servicio"];
-
-
-      $bandera=0;
-
-      foreach ($arreglo["eventoservicios"] as $roweventoservicios) {
-        
-          if ($roweventoservicios["idservicio"] == $idservicio ) {
-            $bandera ++;
-          }
-      }
-
-
-      if ($bandera >0 ) {
-        
-        $input_incluido= "<div class='checkbox'><input class='serviciocheck'  id='".$idservicio."'  type='checkbox' value='' checked></div>";  
-      }else{
-        $input_incluido= "<div class='checkbox'><input class='serviciocheck'  id='".$idservicio."'  type='checkbox' value=''></div>";
-      }
-      
-			
-
-			$fila .="<tr class='gradeX even'>
-			            <td class=' '>". $in . "</td>
-			            <td class=' '>". $nombreservicio ."</td>
-			            <td class=' '>". $input_incluido."</td>
-            
-          			</tr>";
-
-
-          			$in ++;
-	}/*End for*/
-
-
-return $fila;
-}
 
 
 }/*Termina el helper*/

@@ -24,7 +24,7 @@ function getDataByidEvent($idempresa, $evento){
 
 
 	$data["tipo_acceso"] = $this->getTipoEscenario();
-	$data["listaccesos"] = $result_acceso-> result_array();
+	$data["listaccesos"] = $result_acceso->result_array();
 
 
 

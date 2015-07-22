@@ -14,6 +14,8 @@ function loadinformationservicios(){
 	$.get(url , { evento : evento }  ).done(function(data){
 
 
+
+
 		llenaelementoHTML(".servicios-evento-modal" , data);		
 		$(".serviciocheck").click(serviciocheck);
 		

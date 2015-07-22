@@ -20,11 +20,12 @@ class Serviciosevento extends REST_Controller{
 
 
                 
-                $serviciodb= $this->servicioseventmodel->getserviciosevento( $evento , $idempresa );
+                $serviciodb = $this->servicioseventmodel->getserviciosevento( $evento , $idempresa );
 
 
-                $this->response(serviciosevent($serviciodb));
-                //$this->response($responsedb);
+
+                $this->response(serviciosevent($serviciodb ));
+              
                 
         }else{
 

@@ -13,6 +13,7 @@ function __construct(){
 function getserviciosevento( $evento , $idempresa ){
 
 
+	/*
 	$query_select  ="SELECT * FROM servicio ORDER BY servicio";
 	$servicios_result = $this->db->query($query_select);
 	$data["servicios"] =   $servicios_result ->result_array();
@@ -22,9 +23,20 @@ function getserviciosevento( $evento , $idempresa ){
 	$query_evento_s ="SELECT * FROM evento_servicio WHERE idevento ='".$evento."' ";
 	$evento_servicio = $this->db->query($query_evento_s);
 	$data["eventoservicios"] =   $evento_servicio ->result_array();
-	return $data;
+	*/
+
+
+	
+	$query_select  = "select s.idservicio , s.servicio , ev.idservicio  as idserviciointer, ev.idevento as ideventointer  from servicio as s
+					left outer join evento_servicio  as ev 
+					on s.idservicio = ev.idservicio and ev.idevento = '".$evento."'   ";
+	
+	$servicios_result = $this->db->query($query_select);
+	return  $servicios_result ->result_array();
+	
 
 }
+
 
 
 function update( $evento , $idservicio ,  $idempresa ){

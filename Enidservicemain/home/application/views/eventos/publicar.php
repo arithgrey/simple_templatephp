@@ -1,17 +1,180 @@
 
+<div class="content">
+  <div class="container">     
+    <div class="row">
+   
 
-<link href="<?=base_url('application/js/js/dropzone/css/dropzone.css')?>" rel="stylesheet"/>
-<link rel="stylesheet" type="text/css" href="<?=base_url('application/js/js/jquery-tags-input/jquery.tagsinput.css')?>" />
+     
+
+    <div class="row">
+      
+
+      <div class="col-md-12">
+        <!-- BEGIN Portlet PORTLET-->
+        <div class="portlet">
+          <div class="portlet-title">
+            <div class="caption caption-red">
+              <i class="glyphicon glyphicon-pushpin"></i>
+              
+              
+            </div>
+            <ul class="nav nav-tabs">
+              <li>
+                <a href="#portlet_tab3" data-toggle="tab">
+
+                <i class="fa fa-exclamation-triangle"></i> Lo prohibido </a>
+              </li>
+              <li>
+                <a href="#portlet_tab2" data-toggle="tab">
+                <i class="fa fa-check"></i> Lo permitido </a>
+              </li>
+              <li class="">
+                <a href="#portlet_tab1" data-toggle="tab">
+                <i class="fa fa-circle"></i> Políticas </a>
+              </li>
+
+              <li class="active">
+                <a href="#portlet_tab4" data-toggle="tab">
+                <i class="fa fa-info"></i> Evento </a>
+              </li>
+
+            </ul>
+          </div>
+          <div class="portlet-body">
+            <div class="tab-content">
+              <div class="tab-pane" id="portlet_tab1">
+                
+                
+                
+
+                <h3>Políticas del festival</h3>  
 
 
-<script type="text/javascript" src="<?=base_url('application/js/js/bootstrap-datepicker/js/bootstrap-datepicker.js')?>"></script>
-<script src="<?=base_url('application/js/js/pickers-init.js')?>"></script>
-<script src="<?=base_url('application/js/js/jquery-tags-input/jquery.tagsinput.js')?>"></script>
-<script src="<?=base_url('application/js/js/tagsinput-init.js')?>"></script>
-<script type="text/javascript" src="<?=base_url('application/js/evento/principal.js')?>"> </script>
-<script type="text/javascript" src="<?=base_url('application/js/evento/escenarios.js')?>"> </script>
-<script type="text/javascript" src="<?=base_url('application/js/evento/accesos.js')?>"> </script>
-<script type="text/javascript" src="<?=base_url('application/js/evento/servicios.js')?>"> </script>
+                      <p class='politicas-p'>
+                         
+                      </p>
+                      <div class="form-group">
+                          <textarea id='politicas-evento' placeholder ='' rows="6" class="form-control"></textarea>
+                      </div>  
+
+
+
+                
+              </div>
+              <div class="tab-pane" id="portlet_tab2">
+                
+
+
+
+                     <h3>Lo permitido en el evento</h3>  
+
+
+                      <p class='permitido-p'>
+                         
+                      </p>
+                      <div class="form-group">
+                          <textarea id='permitido-evento' placeholder ='' rows="6" class="form-control"></textarea>
+                      </div> 
+
+
+
+
+
+              </div>
+              <div class="tab-pane" id="portlet_tab3">
+
+                      
+                     <h3>Restricciones en el evento</h3>  
+
+
+                      <p class='restricciones-p'>
+                         
+                      </p>
+                      <div class="form-group">
+                          <textarea id='restricciones-evento' placeholder ='' rows="6" class="form-control"></textarea>
+                      </div> 
+
+
+
+              </div>
+
+
+
+
+              <div class="tab-pane active" id="portlet_tab4">
+                <h3>  La experiencia</h3>                
+                      <p class='descripcion-p'>
+                          
+                      </p>
+                      <div class="form-group">
+                          <textarea id='descripcion-evento' placeholder ='Celebrando un exitoso año y cumpliendo ya 15 años haciendo historia de la música electrónica en México, nos enorgullecemos en presentar nuestra tercera edición del Festival "I love this generation" el cual tendrá lugar en nuestro mítico Club Coco Dance club, presentándose en el más de 20 artistas de esta tendencia y de más de 3 naciones, vive esta única experiencia.' rows="6" class="form-control"></textarea>
+                      </div>        
+
+              </div>
+
+
+
+            </div>            
+          </div>
+        </div>
+        <!-- END Portlet PORTLET-->
+      </div>
+    </div>
+  </div>
+</div>
+
+<br>
+<br>
+<center>
+
+</center>
+<br>
+<br>
+
+
+
+
+
+           
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 <style type="text/css">
 
@@ -38,7 +201,7 @@
 #guardar-generos{
   display: none;
 }
-#nombre-input, #edicion-input , #evento , #descripcion-evento, #ubicacion-input, .descripcion-in-modal-escenario, .nombre-escenario-input-modal, .day_escenario_inputs ,.social-media-event{
+#nombre-input, #edicion-input , #evento , #descripcion-evento, #ubicacion-input, .descripcion-in-modal-escenario, .nombre-escenario-input-modal, .day_escenario_inputs ,.social-media-event, #restricciones-evento ,  #politicas-evento, #permitido-evento {
     display: none;
 }
 
@@ -124,6 +287,11 @@ h4{
 }
 #accesos-plus:hover{
     font-size: 1.2em;
+}
+.restricciones-p:hover , .politicas-p:hover , .permitido-p{
+
+  cursor: pointer;
+  font-size: 1.2em;
 }
 </style>
 
@@ -220,14 +388,7 @@ h4{
                                                 </form>
 
                                                 
-                                              <div class='well descripcion-evento-p'>
-                                                <p class='descripcion-p'><strong>
-                                              Celebrando un exitoso año y cumpliendo ya 15 años haciendo historia de la música electrónica en México, nos enorgullecemos en presentar nuestra tercera edición del Festival "I love this generation" el cual tendrá lugar en nuestro mítico Club Coco Dance club, presentándose en el más de 20 artistas de esta tendencia y de más de 3 naciones, vive esta única experiencia.                                                   
-                                                </strong></p>
-                                                <div class="form-group">
-                                                    <textarea id='descripcion-evento' placeholder ='Celebrando un exitoso año y cumpliendo ya 15 años haciendo historia de la música electrónica en México, nos enorgullecemos en presentar nuestra tercera edición del Festival "I love this generation" el cual tendrá lugar en nuestro mítico Club Coco Dance club, presentándose en el más de 20 artistas de esta tendencia y de más de 3 naciones, vive esta única experiencia.' rows="6" class="form-control"></textarea>
-                                                </div>        
-                                            </div>   
+                                               
       
                                          <div class='dropzone-previews'></div>       
             
@@ -320,6 +481,27 @@ h4{
                       <!--Termina servicios button-->
 
 
+                      <!--politivas button -->
+
+                      <div class="panel" >
+                        <button id="politicasmodal-button" data-toggle="modal" data-target="#politicasmodal" class="btn btn-info col-xs-12  col-sm-12 col-md-12 col-lg-12 accesos-button" style="text-align: left; padding: 10px!important; " >
+                          <strong> <i class="fa fa-credit-card"></i> 
+                           REGLAS DEL EVENTO
+                            </strong>
+                        </button>
+
+                        
+                      </div> <br>
+
+                      <!--termina politivas button -->
+
+
+
+
+
+
+
+
 
 
 
@@ -387,7 +569,7 @@ h4{
 
 
 <div class='col-xs-12  col-sm-12 col-md-12 col-lg-12' id="mapgooglemap">
-<input id="pac-input" class="controls" type="text" placeholder="Ubicación">
+<input id="pac-input" class="controls ubicacioninput" type="text" placeholder="Ubicación">
 <div id="mapsection">
   <div id="map-canvas"></div>
   <div class='textnotfound-location'></div>  
@@ -410,79 +592,6 @@ h4{
 
 
 
-
-
-
-
-    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true&libraries=places"></script>
-
-    <script>
-     google.maps.event.addDomListener(window, 'load', initialize);
-    </script>
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<script type="text/javascript">
-/*
-
-var acceptedFileTypes = ".jpeg,.jpg,.png,.JPEG,.JPG,.PNG";
-Dropzone.options.myAwesomeDropzone = {
-
-      paramName: "imgportada", 
-      headers: {"eventosupload" : "test data"},       
-      maxThumbnailFilesize: 3,
-      maxFilesize: 1, // MB    
-      maxFiles: 2,    
-      acceptedFiles: ".jpeg, .jpg, .png, .JPEG, .JPG, .PNG",      
-      accept: function(file, done) {
-           
-            
-            if (file.name == "a.png") {
-              done("Naha, you don't.");
-            
-            }else { 
-                done();
-            }
-
-      }, error: function (){
-
-            alert("El formato de la imagen no corresponde con el solicitado, este archivo no se subirá ");
-      }
-
-
-    };
-*/
-</script>
-
-
-
-
-
-
-
-
-
-
-
-<!--Escenarios modal-->
-<script src="//connect.soundcloud.com/sdk-2.0.0.js"></script>
 
 
 
@@ -905,7 +1014,7 @@ Dropzone.options.myAwesomeDropzone = {
 
                             <div class="input-group">
                                 <span class="input-group-addon">$</span>
-                                <input type="text" name='precio-acceso-modal' class="form-control">
+                                <input type="number" name='precio-acceso-modal' class="form-control">
                                 <span class="input-group-addon ">.00</span>
                             </div>
 
@@ -960,6 +1069,24 @@ Dropzone.options.myAwesomeDropzone = {
 
 
 
+
+
+<div id="politicasmodal" class="modal fade">
+<div class="modal-dialog">
+<div class="modal-content">
+  
+  <div class="modal-body">
+    <!-- dialog body -->
+  
+  
+             
+    <!-- terminam   body -->
+  </div>
+</div>
+</div>
+</div>
+
+<!--************************************************************-->
 
 
 
@@ -1063,6 +1190,79 @@ Dropzone.options.myAwesomeDropzone = {
 
 
 
+
+
+
+
+
+
+
+
+<link href="<?=base_url('application/js/js/dropzone/css/dropzone.css')?>" rel="stylesheet"/>
+<link rel="stylesheet" type="text/css" href="<?=base_url('application/js/js/jquery-tags-input/jquery.tagsinput.css')?>" />
+
+
+
+
+<link rel="stylesheet" type="text/css" href="<?=base_url('application/js/js/bootstrap-datepicker/css/datepicker-custom.css')?>" />
+<script type="text/javascript" src="<?=base_url('application/js/js/bootstrap-datepicker/js/bootstrap-datepicker.js')?>"></script>
+<script type="text/javascript" src="<?=base_url('application/js/js/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js')?>"></script>
+<script type="text/javascript" src="<?=base_url('application/js/js/bootstrap-daterangepicker/moment.min.js')?>"></script>
+<script type="text/javascript" src="<?=base_url('application/js/js/bootstrap-daterangepicker/daterangepicker.js')?>"></script>
+<script type="text/javascript" src="<?=base_url('application/js/js/bootstrap-colorpicker/js/bootstrap-colorpicker.js')?>"></script>
+<script type="text/javascript" src="<?=base_url('application/js/js/bootstrap-timepicker/js/bootstrap-timepicker.js')?>"></script>
+<script src="<?=base_url('application/js/js/pickers-init.js')?>"></script>
+
+
+
+<script src="<?=base_url('application/js/js/jquery-tags-input/jquery.tagsinput.js')?>"></script>
+<script src="<?=base_url('application/js/js/tagsinput-init.js')?>"></script>
+
+
+<script type="text/javascript" src="<?=base_url('application/js/evento/principal.js')?>"> </script>
+<script type="text/javascript" src="<?=base_url('application/js/evento/escenarios.js')?>"> </script>
+<script type="text/javascript" src="<?=base_url('application/js/evento/accesos.js')?>"> </script>
+<script type="text/javascript" src="<?=base_url('application/js/evento/servicios.js')?>"> </script>
+<!--Escenarios modal-->
+<script src="//connect.soundcloud.com/sdk-2.0.0.js"></script>
+
+<script type="text/javascript" src="<?=base_url('application/js/evento/gmap.js')?>"></script>
+<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true&libraries=places"></script>
+
+<script>
+  google.maps.event.addDomListener(window, 'load', initialize);
+</script>
+<script type="text/javascript">
+
+
+var acceptedFileTypes = ".jpeg,.jpg,.png,.JPEG,.JPG,.PNG";
+Dropzone.options.myAwesomeDropzone = {
+
+      paramName: "imgportada", 
+      headers: {"eventosupload" : "test data"},       
+      maxThumbnailFilesize: 3,
+      maxFilesize: 1, // MB    
+      maxFiles: 2,    
+      acceptedFiles: ".jpeg, .jpg, .png, .JPEG, .JPG, .PNG",      
+      accept: function(file, done) {
+           
+            
+            if (file.name == "a.png") {
+              done("Naha, you don't.");
+            
+            }else { 
+                done();
+            }
+
+      }, error: function (){
+
+            alert("El formato de la imagen no corresponde con el solicitado, este archivo no se subirá ");
+      }
+
+
+    };
+
+</script>
 
 
 

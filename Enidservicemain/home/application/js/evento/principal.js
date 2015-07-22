@@ -4,7 +4,12 @@ $(document).on("ready", function(){
 	$(".nombre-evento-h1").click(updatenameevent);
 	$(".edicion-evento").click(updateedicion);
 	$(".descripcion-p").click(updatedescripcion);
-	//$(".ubicacion-panel").click(updateubicacion);
+	$(".politicas-p").click(updatepoliticas);
+	$(".permitido-p").click(updatepermitido);
+	$(".restricciones-p").click(updaterestricciones);
+
+
+	
 	$("#pac-input").click(updateubicacion);
 		
 	$("#tags_1_tag").keyup(tryrecordgeneros);
@@ -62,8 +67,14 @@ function loadinhtml(data){
 			descripcion_evento = data[x].descripcion_evento;
 			url_social = data[x].url_social;
 			url_social_youtube = data[x].url_social_youtube;
+			ubicacion = data[x].ubicacion;
+			politicas = data[x].politicas;			
+			objetospermitidos = data[x].objetospermitidos;
+			restriciones =  data[x].restricciones;
+			permitido = data[x].permitido;
 
-			
+
+
 			
 				
 				llenaelementoHTML(".nombre-evento-h1", nombre_evento);	
@@ -77,9 +88,93 @@ function loadinhtml(data){
 
 
 
+				valorHTML(".ubicacioninput" , ubicacion);
+
 				/*Valiadamos info*/		
-				llenaelementoHTML(".descripcion-p", descripcion_evento );	
-				valorHTML("#descripcion-evento" , descripcion_evento );		
+
+
+				if (descripcion_evento == null ) {
+
+					llenaelementoHTML(".descripcion-p" , "<i class='fa fa-plus'></i>  Lo que se vivirá en el evento");
+
+				}else if(descripcion_evento ==  "" ){
+					llenaelementoHTML(".descripcion-p" , "<i class='fa fa-plus'></i> Lo que se vivirá en el evento");
+				}else{
+
+					llenaelementoHTML(".descripcion-p" , descripcion_evento);
+					valorHTML("#descripcion-evento" , descripcion_evento);
+				}
+				
+
+
+
+
+
+
+
+
+
+
+
+				/************------------**************/
+
+
+
+				if (politicas == null ) {
+
+					llenaelementoHTML(".politicas-p" , "<i class='fa fa-plus'></i> Lo que podría anticiparse como reembolsos o cambios");
+
+				}else if(politicas ==  "" ){
+					llenaelementoHTML(".politicas-p" , "<i class='fa fa-plus'></i>  Lo que podría anticiparse como reembolsos o cambios");
+				}else{
+
+					llenaelementoHTML(".politicas-p" , politicas);
+					valorHTML("#politicas-evento" , politicas);
+				}
+
+				/****************************/
+				
+				
+
+
+
+
+				if (permitido == null ) {
+
+					llenaelementoHTML(".permitido-p" , "<i class='fa fa-plus'></i> Lo que las personas podrían hacer e ingresar al evento");
+
+				}else if(permitido ==  "" ){
+					llenaelementoHTML(".permitido-p" , "<i class='fa fa-plus'></i>Lo que las personas podrían hacer e ingresar al evento");
+				}else{
+
+					llenaelementoHTML(".permitido-p" , permitido);
+					valorHTML("#permitido-evento" , permitido);
+				}
+
+
+
+
+
+
+
+
+				/************------------**************/
+
+
+
+				if (restriciones == null ) {
+
+					llenaelementoHTML(".restricciones-p" , "<i class='fa fa-plus'></i> Lo que podría anticiparse dentro del evento");
+
+				}else if(restriciones ==  "" ){
+					llenaelementoHTML(".restricciones-p" , "<i class='fa fa-plus'></i>  Lo que podría anticiparse dentro del evento");
+				}else{
+
+					llenaelementoHTML(".restricciones-p" , restriciones);
+					valorHTML("#restricciones-evento" , restriciones);
+				}
+
+				/****************************/
 				
 					
 
@@ -223,9 +318,16 @@ function updatedescripcion(e){
 	$("#descripcion-evento").blur(function(){
 			
 		nuevotexto = $("#descripcion-evento").val(); 
-		if (nuevotexto.length >0 ) {			
-			updateindbdescripcion(nuevotexto);
+		
+
+
+		
+		if (nuevotexto != null  ) {	
+
+			updateindbdescripcion( nuevotexto.trim() );
+			
 		}else{
+
 			llenaelementoHTML(".descripcion-p" , "Describe la experiencia que se vivirá en el espectáculo" ); 						
 		}
 		showonehideone( ".descripcion-p" , "#descripcion-evento");
@@ -236,21 +338,14 @@ function updatedescripcion(e){
 }
 
 
-
 function updateindbdescripcion(nuevotexto){
 
-	
 	url =  now + "index.php/api/event/updatedescripcion/format/json/";    
-
 	$.post(url , { "descripcion_evento" : nuevotexto , "evento" : $("#evento").val() } )
 	.done(function(data){
 		
 
 		loaddata();
-
-
-
-
 
 
 	}).fail(function(){
@@ -259,6 +354,252 @@ function updateindbdescripcion(nuevotexto){
 	});
 
 }
+
+/************************updatepoliticas *******************************/
+
+
+
+
+
+
+
+function updatepoliticas(e){
+
+
+
+
+	showonehideone( "#politicas-evento" , ".politicas-p" );
+
+	$("#politicas-evento").blur(function(){
+			
+		nuevotexto = $("#politicas-evento").val(); 
+		
+
+
+		
+		if (nuevotexto != null  ) {	
+
+			updateindbpoliticas( nuevotexto.trim() );
+			
+		}else{
+
+			llenaelementoHTML(".politicas-p" , "Describe la experiencia que se vivirá en el espectáculo" ); 						
+		}
+		showonehideone( ".politicas-p" , "#politicas-evento");
+		
+		
+	});
+
+}
+
+
+function updateindbpoliticas(nuevotexto){
+
+	url =  now + "index.php/api/event/updatepoliticas/format/json/";    
+	$.post(url , { "politicas_evento" : nuevotexto , "evento" : $("#evento").val() } )
+	.done(function(data){
+		
+
+		loaddata();
+
+
+	}).fail(function(){
+
+		alert("Falla al actualizar");
+	});
+
+}
+
+
+/*Permitido Permitido Permitido Permitido Permitido Permitido Permitido */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+function updatepermitido(e){
+
+
+
+
+	showonehideone( "#permitido-evento" , ".permitido-p" );
+
+	$("#permitido-evento").blur(function(){
+			
+		nuevotexto = $("#permitido-evento").val(); 
+		
+
+
+		
+		if (nuevotexto != null  ) {	
+
+			updateindbpermitido( nuevotexto.trim() );
+			
+		}else{
+
+			llenaelementoHTML(".permitido-p" , "Describe com que podrá acceder al evento el cliente" ); 						
+		}
+		showonehideone( ".permitido-p" , "#permitido-evento");
+		
+		
+	});
+
+}
+
+
+function updateindbpermitido(nuevotexto){
+
+	url =  now + "index.php/api/event/updatepermitido/format/json/";    
+	$.post(url , { "permitido_evento" : nuevotexto , "evento" : $("#evento").val() } )
+	.done(function(data){
+		
+
+		loaddata();
+
+
+	}).fail(function(){
+
+		alert("Falla al actualizar");
+	});
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*End permitido *End permitido *End permitido *End permitido *End permitido *End permitido */
+
+
+
+
+
+
+
+function updaterestricciones(e){
+
+
+
+
+	showonehideone( "#restricciones-evento" , ".restricciones-p" );
+
+	$("#restricciones-evento").blur(function(){
+			
+		nuevotexto = $("#restricciones-evento").val(); 
+		
+
+
+		
+		if (nuevotexto != null  ) {	
+
+			updateindbrestricciones( nuevotexto.trim() );
+			
+		}else{
+
+			llenaelementoHTML(".restricciones-p" , "Describe com que podrá acceder al evento el cliente" ); 						
+		}
+		showonehideone( ".restricciones-p" , "#restricciones-evento");
+		
+		
+	});
+
+}
+
+
+function updateindbrestricciones(nuevotexto){
+
+	url =  now + "index.php/api/event/updaterestricciones/format/json/";    
+	$.post(url , { "restricciones_evento" : nuevotexto , "evento" : $("#evento").val() } )
+	.done(function(data){
+		
+
+		loaddata();
+
+
+	}).fail(function(){
+
+		alert("Falla al actualizar");
+	});
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/************************************************************************************************/
+
+
+
+
 
 
 
@@ -296,116 +637,7 @@ function updateubicacionindb(nuevotexto){
 	});
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*
-
-function initialize() {
-
-  var mapOptions = {
-    center: new google.maps.LatLng(-33.8688, 151.2195),
-    zoom: 13
-  };
-
-  
-  var map = new google.maps.Map(document.getElementById('map-canvas'),
-    mapOptions);
-
-  var input =(document.getElementById('pac-input'));
-
-  var types = document.getElementById('type-selector');
-  map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
-  map.controls[google.maps.ControlPosition.TOP_LEFT].push(types);
-
-  var autocomplete = new google.maps.places.Autocomplete(input);
-
-
-  autocomplete.bindTo('bounds', map);
-
-  var infowindow = new google.maps.InfoWindow();
-  var marker = new google.maps.Marker({
-    map: map,
-    anchorPoint: new google.maps.Point(0, -29)
-  });
-
-  google.maps.event.addListener(autocomplete, 'place_changed', function() {
-    infowindow.close();
-    marker.setVisible(false);
-    var place = autocomplete.getPlace();
-    if (!place.geometry) {
-      
-      
-     
-
-      return;
-    }
-
-  
-    if (place.geometry.viewport) {
-      map.fitBounds(place.geometry.viewport);
-    } else {
-      map.setCenter(place.geometry.location);
-      map.setZoom(17);  
-    }
-    marker.setIcon(({
-      url: place.icon,
-      size: new google.maps.Size(71, 71),
-      origin: new google.maps.Point(0, 0),
-      anchor: new google.maps.Point(17, 34),
-      scaledSize: new google.maps.Size(35, 35)
-    }));
-    marker.setPosition(place.geometry.location);
-    marker.setVisible(true);
-
-    var address = '';
-    if (place.address_components) {
-      address = [
-        (place.address_components[0] && place.address_components[0].short_name || ''),
-        (place.address_components[1] && place.address_components[1].short_name || ''),
-        (place.address_components[2] && place.address_components[2].short_name || '')
-      ].join(' ');
-    }
-
-    infowindow.setContent('<div><strong>' + place.name + '</strong><br>' + address);
-    infowindow.open(map, marker);
-  });
-
-  
-  function setupClickListener(id, types) {
-    var radioButton = document.getElementById(id);
-    google.maps.event.addDomListener(radioButton, 'click', function() {
-      autocomplete.setTypes(types);
-    });
-  }
-
-  setupClickListener('changetype-all', []);
-  setupClickListener('changetype-address', ['address']);
-  setupClickListener('changetype-establishment', ['establishment']);
-  setupClickListener('changetype-geocode', ['geocode']);
-}
-
-
-*/
-
-
+/*******************************************/
 function tryrecordgeneros(e){
 	
 	if (e.keyCode == 13){

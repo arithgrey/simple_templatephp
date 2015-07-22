@@ -1,5 +1,12 @@
+<link rel="stylesheet" type="text/css" href="<?=base_url('application/js/js/bootstrap-datepicker/css/datepicker-custom.css')?>" />
 <script type="text/javascript" src="<?=base_url('application/js/js/bootstrap-datepicker/js/bootstrap-datepicker.js')?>"></script>
+<script type="text/javascript" src="<?=base_url('application/js/js/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js')?>"></script>
+<script type="text/javascript" src="<?=base_url('application/js/js/bootstrap-daterangepicker/moment.min.js')?>"></script>
+<script type="text/javascript" src="<?=base_url('application/js/js/bootstrap-daterangepicker/daterangepicker.js')?>"></script>
+<script type="text/javascript" src="<?=base_url('application/js/js/bootstrap-colorpicker/js/bootstrap-colorpicker.js')?>"></script>
+<script type="text/javascript" src="<?=base_url('application/js/js/bootstrap-timepicker/js/bootstrap-timepicker.js')?>"></script>
 <script src="<?=base_url('application/js/js/pickers-init.js')?>"></script>
+
 <script type="text/javascript" src="<?=base_url('application/js/estratega/evento/principal.js')?>"></script>
 
 
@@ -15,16 +22,27 @@
                 <div class="col-md-8" style="">
                     <div class="row">
                         <div class="col-md-12">
+
+                            
+
+
                             <div class="panel" >
                                 <header class="panel-heading" style='background:#CD1E3B; color: white'> 
-                                    Últimos eventos anunciados
+                                    Últimos eventos anunciados 
                                     <span class="tools pull-right">
+                                        
                                         <a class="fa fa-chevron-down" href="javascript:;"></a>
-                                        <a class="fa fa-times" href="javascript:;"></a>
+                                        
                                      </span>
                                 </header>
+                                <button class="btn btn-block btn-info" type="button">
+                             <span class="pull-left"> <span class="bold">+ Ver todos</span></span> 
+                             
+                            </button>
                                 <div class="panel-body" style="background:  none repeat scroll 0% 0% #124048">                    
                                     
+                                    
+
                                 
                                     <!--last 5 -->
 
@@ -179,3 +197,12 @@
             </div>
 
         
+
+
+
+
+
+
+
+
+

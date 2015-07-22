@@ -15,6 +15,7 @@ function loadaccesosevento(){
 
 	$.post(url , { evento : evento }  ).done(function(data){
 
+		
 
 
 		llenaelementoHTML(".list-accesos-modal" , data["accesos"]);		

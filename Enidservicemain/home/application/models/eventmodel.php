@@ -101,6 +101,40 @@ function updateDescripcion($nueva_descripcion , $idevento ) {
 }
 
 
+
+
+
+
+
+function updatePoliticas($nueva_politica , $idevento ){
+	
+	$update_nombre = "UPDATE evento SET  politicas='". $nueva_politica ."' WHERE idevento ='".$idevento."'  ";		
+	return  $this->db->query($update_nombre);
+
+}
+
+
+function updatePermitido($nuevo_permitido , $idevento ){
+
+	$update_nombre = "UPDATE evento SET  permitido='". $nuevo_permitido ."' WHERE idevento ='".$idevento."'  ";		
+	return  $this->db->query($update_nombre);
+}
+
+
+
+
+
+function updateRestricciones($nuevo_restriccion , $idevento ){
+
+	$update_nombre = "UPDATE evento SET  restricciones ='". $nuevo_restriccion ."' WHERE idevento ='".$idevento."'  ";		
+	return  $this->db->query($update_nombre);
+}
+
+
+
+
+
+
 function updateUbicacion($nueva_ubicacion , $idevento ) {
 	
 	$update_ubicacion = "UPDATE evento SET ubicacion='". $nueva_ubicacion ."' WHERE idevento ='".$idevento."'  ";		

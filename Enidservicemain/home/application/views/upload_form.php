@@ -1,15 +1,20 @@
 <html>
 <head>
-<title>Subir Archivos</title>
+<title>Upload Form</title>
 </head>
-<body>  
-<?=heading('Suba un archivo zip, rar, pdf, docx o txt', 3);?>
+<body>
 
-<?=form_open_multipart('files/do_upload');?>
+<?php echo $error;?>
+
+<?php echo form_open_multipart('upload/do_upload');?>
+
 <input type="file" name="userfile" size="20" />
-<br />
-<input type="submit" value="Subir Archivo" />
-<?=form_close()?>
-<h5><?=br(1).anchor('files/info', 'Listado de archivos para descargar'); ?></h5>
+
+<br /><br />
+
+<input type="submit" value="upload" />
+
+</form>
+
 </body>
 </html>

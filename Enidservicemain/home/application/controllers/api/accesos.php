@@ -12,6 +12,7 @@ class Accesos extends REST_Controller{
         }     
 
     function load_post(){
+
         if ( $this->sessionclass->is_logged_in() == 1) {  
 
                 $idempresa =  $this->sessionclass->getidempresa();    
@@ -24,6 +25,8 @@ class Accesos extends REST_Controller{
                 $responsedb = $this->accesosmodel->getDataByidEvent($idempresa, $evento);
 
                 $this->response(getData($responsedb)); 
+
+                
                 //$this->response($responsedb);
                 
         }else{

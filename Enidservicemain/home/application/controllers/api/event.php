@@ -149,6 +149,81 @@ class Event extends REST_Controller{
 
 
 
+
+
+    /*updatepoliticas********+updatepoliticasupdatepoliticasupdatepoliticasupdatepoliticasupdatepolit*/
+
+
+
+    function updatepoliticas_post(){
+
+        if ($this->sessionclass->is_logged_in() == 1){
+
+            $nueva_politica = $this->post("politicas_evento");
+            $idevento = $this->post("evento");
+
+            $this->response($this->eventmodel->updatePoliticas($nueva_politica , $idevento ) );
+
+        }else{
+            $this->sessionclass->logout();    
+        }   
+
+    }    
+
+
+
+
+/*****************Permitido *Permitido *Permitido *Permitido *Permitido *Permitido *****/
+
+
+
+
+
+
+
+function updatepermitido_post(){
+
+        if ($this->sessionclass->is_logged_in() == 1){
+
+            $nuevo_permitido = $this->post("permitido_evento");
+            $idevento = $this->post("evento");
+
+            $this->response($this->eventmodel->updatePermitido($nuevo_permitido , $idevento ) );
+
+        }else{
+            $this->sessionclass->logout();    
+        }   
+
+    }    
+
+/*restricciones **restricciones **restricciones **restricciones **restricciones ***/
+
+
+
+
+
+function updaterestricciones_post(){
+
+        if ($this->sessionclass->is_logged_in() == 1){
+
+            $nueva_restriccion = $this->post("restricciones_evento");
+            $idevento = $this->post("evento");
+
+            $this->response($this->eventmodel->updateRestricciones($nueva_restriccion , $idevento ) );
+
+        }else{
+            $this->sessionclass->logout();    
+        }   
+
+    }   
+
+
+
+
+
+
+
+
 /*****************************************************************************/
     
     function get_event_by_id_get(){
