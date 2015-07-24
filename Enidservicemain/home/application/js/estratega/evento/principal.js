@@ -1,4 +1,5 @@
 $(document).on("ready", function(){
+	$(".vertodos").click(show_eventos_pasados);
 	$("#nuevo-evento-form").submit(trynewevent);
 	
 	$(".todo-entry").click(function(){
@@ -40,4 +41,11 @@ function trynewevent(){
 	});
 
 	return false;
+}
+
+
+
+function show_eventos_pasados(){
+	url = now + "index.php/eventos/pasados";
+	redirect(url);
 }

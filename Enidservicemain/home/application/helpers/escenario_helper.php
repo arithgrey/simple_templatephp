@@ -56,6 +56,7 @@ function listescenariosonloadevent($responsedbescenario){
 		$descripcion = "<br>+ agregar descripción";			
 	}		
 
+
 	$inpu_escenario ="inpu_escenario_" . $row["idescenario"];
 	
 	$list .="		
@@ -72,7 +73,7 @@ function listescenariosonloadevent($responsedbescenario){
 
                                            <span class='descripcion_escenario_update' id='".
                                             $row["idescenario"] . "'    >". 
-                                            substr($descripcion, 0 , 200)   ."..</span>
+                                            substr(  addslashes( $descripcion) , 0 , 200)   ."..</span>
                                            
                                             <textarea  name='newdescripesenario' class='newdescripesenario form-control'  rows='3' id=". $inpu_escenario  .">".$row["descripcion"]."</textarea>
 

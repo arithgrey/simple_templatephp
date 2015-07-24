@@ -9,6 +9,36 @@ function __construct(){
 }
 
 
+
+
+function update_obj_permitidobyId($idevento, $idobjeto){
+
+
+	$query_exist ="SELECT * FROM evento_objetopermitido WHERE  idevento ='".$idevento."' AND  
+	idobjetopermitido='". $idobjeto ."' ";
+
+
+	$result_eventoobjto = $this->db->query($query_exist);
+	$exist = $result_eventoobjto ->num_rows();
+
+	if ($exist >0 ) {
+		/*Delete */
+		$dinamic_query ="DELETE FROM evento_objetopermitido WHERE idevento = '".$idevento."' 
+		AND  idobjetopermitido = '". $idobjeto ."' ";
+
+
+	}else{
+		/*insert*/
+		$dinamic_query ="INSERT INTO evento_objetopermitido (idevento , idobjetopermitido ) 
+		VALUES('".$idevento."' , '". $idobjeto ."' )";		
+
+	}
+
+
+	return $this->db->query($dinamic_query);
+
+}
+
 function create( $nombre , $edicion , $inicio , $termino , $idusuario , $idempresa , $perfiles  ) {
 
 	
@@ -33,7 +63,15 @@ function create( $nombre , $edicion , $inicio , $termino , $idusuario , $idempre
 function getLastEvents($idempresa , $num ){
 
 	
-	$query_select ="select * from evento where idempresa='$idempresa' LIMIT $num ";
+	$query_select ="SELECT  e.idevento , e.nombre_evento, e.descripcion_evento, e.fecha_inicio , 
+	e.fecha_termino ,
+	e.url_social, e.url_social_youtube, e.portada , e.status  as estadoevento , e.edicion ,
+	count(es.idescenario) as totalescenarios 
+	FROM evento as e
+	left outer join escenario as es 
+	on e.idevento = es.idevento 
+	where e.idempresa ='". $idempresa."' 
+	group by e.idevento LIMIT $num ";
 	$result = $this->db->query($query_select);
 	return $result ->result_array();      
 
@@ -160,6 +198,42 @@ function updateurlyout($nueva_url , $idevento ){
 	return  $this->db->query($update_url);
 
 }
+
+
+
+
+function getObjetosPermitidos($idevento ){
+
+	$query_select = " select o.idobjetopermitido, nombre , eo.idobjetopermitido  as idpermitido , eo.idevento  from objetopermitido as o   left outer join evento_objetopermitido as eo 
+	on o.idobjetopermitido = eo.idobjetopermitido and eo.idevento ='".$idevento."' group by o.nombre;";
+	$result = $this->db->query($query_select);
+	return $result ->result_array();      
+	
+}
+
+
+
+/*Pasados **Pasados **Pasados **Pasados **Pasados **Pasados **Pasados */
+
+function get_time_events_byid($idempresa){
+
+
+	$query_select ="SELECT  e.idevento , e.nombre_evento, e.descripcion_evento, e.fecha_inicio , 
+	e.fecha_termino ,
+	e.url_social, e.url_social_youtube, e.portada , e.status  as estadoevento , e.edicion ,
+	count(es.idescenario) as totalescenarios 
+	FROM evento as e
+	left outer join escenario as es 
+	on e.idevento = es.idevento 
+	where e.idempresa ='". $idempresa."' 
+	group by e.idevento";
+	$result = $this->db->query($query_select);
+	return $result ->result_array();   
+}
+
+
+/**End Pasados **End Pasados **End Pasados **End Pasados **End Pasados **/
+
 
 /*Termina modelo */
 }

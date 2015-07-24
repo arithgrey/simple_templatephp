@@ -226,6 +226,9 @@
         .title-page-enid{
             margin-top: -1px;
         }
+        .wrapper{
+    background: rgb(255, 252, 231);
+}
 
 
         </style>

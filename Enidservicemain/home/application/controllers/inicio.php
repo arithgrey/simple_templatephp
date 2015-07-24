@@ -30,7 +30,8 @@ function eventos(){
 							$idempresa =  $this->sessionclass->getidempresa();	
 							$data["perfilactual"] =  $this->sessionclass->getnameperfilactual(); 				
 
-							$data["ultimos_eventos"] =$this->eventmodel->getLastEvents($idempresa , 5 );					
+							$data["ultimos_eventos"] =$this->eventmodel->getLastEvents($idempresa , 3 );					
+
 							$this->load->view('TemplateEnid/header_template', $data);		
 							$this->load->view('principal/bienvenidaestratega' , $data);
 							$this->load->view('TemplateEnid/footer_template', $data);	

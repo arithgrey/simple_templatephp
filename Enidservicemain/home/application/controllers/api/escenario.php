@@ -82,7 +82,7 @@ class Escenario extends REST_Controller{
 
 
                 
-                $this->response($this->escenariomodel->updatedescripcion( $nueva_descripcion ,
+                $this->response($this->escenariomodel->updatedescripcion( strip_tags($nueva_descripcion ),
                  $evento , $idescenario,  $idempresa ) );
                 
 

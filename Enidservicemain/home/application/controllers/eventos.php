@@ -36,6 +36,44 @@ class Eventos extends CI_Controller {
 
 
 
+/*Pasados ** Pasados ***  Pasados ** Pasados ** PasadosPasados*Pasados ** Pasados ***  Pasados ** Pasados ** PasadosPasados*/
+
+         function pasados(){
+
+            if( $this->sessionclass->is_logged_in() == 1){            
+                    
+                        $this->load->helper("timelineevent");
+
+                        $menu = $this->sessionclass->generadinamymenu();            
+                        $data["menu"] = $menu;
+                        $nombre = $this->sessionclass->getnombre();
+                        
+                        $data["nombre"]= $nombre;
+                        $data["perfilactual"] =  $this->sessionclass->getnameperfilactual(); 
+                        $data['titulo']='Pasados';
+
+                        $idempresa =  $this->sessionclass->getidempresa();
+                        
+                        $arreglo_time_line = $this->eventmodel->get_time_events_byid($idempresa);
+                        $data["time_line"] = get_time_line_event($arreglo_time_line);
+
+                        
+
+                        $this->load->view('TemplateEnid/header_template', $data);
+                        $this->load->view('eventos/eventos_pasados' , $data);
+                        $this->load->view('TemplateEnid/footer_template', $data);
+
+                }else{
+            /*Terminamos la session*/
+            $this->sessionclass->logout();
+        }   
+    }/*Termina la función*/
+
+
+/***********End pasados *End pasados *End pasados *End pasados *End pasados *End pasados *******/
+
+
+
         function nuevo(){
 
             if( $this->sessionclass->is_logged_in() == 1){            

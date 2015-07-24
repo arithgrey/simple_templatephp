@@ -49,7 +49,7 @@ if(!function_exists('invierte_date_time')){
                                                     <p class='mp-less'>
                                                         Celebrando un exitoso año y cumpliendo ya 15 años haciendo historia de la música electrónica en México, nos enorgullecemos en presentar nuestra tercera edición del Festival I love this generation ...
                                                     </p>
-                                                    07/02/2015 - 07/04/2015 
+                                                   <i class='fa fa-calendar-o'></i> 07/02/2015 - 07/04/2015 
                                                 </div>
                                             </div>
                                         </div>
@@ -73,8 +73,39 @@ if(!function_exists('invierte_date_time')){
 				$portada = base_url('application/img/example.jpg');
 			}
 
+
+
+			$estadoevento =0;
+
+			switch ($row["estadoevento"]) {
+				case 0:
+					$estadoevento = "En edición";
+					break;
+				case 1:
+					$estadoevento = "Visible para el público";
+					break;
+				case 2:
+					$estadoevento = "Pospuesto";
+					break;
+
+				case 2:
+					$estadoevento = "Pasado";
+					break;
+
+				default:
+
+					break;
+			}
+			
 			$elements .="<div class='panel'>
+
+
+			
+
+
+
                                     <div class='panel-body ' style='' >
+
                                         <div class='media blog-cmnt'>
                                                 <a href='$urlnext' class='pull-left'>
                                                     <img src='$portada' class='media-object'>
@@ -82,17 +113,36 @@ if(!function_exists('invierte_date_time')){
                                                 <div class='media-body'>
                                                     <h4 class='media-heading' >
                                                         <a  href='$urlnext'> <label>".$row["nombre_evento"] ."</label>
-                                                        ".$row["edicion"]."</a>
+                                                        ".  $row["edicion"] ." </a>
 
                                                     </h4>
                                                     <p class='mp-less'>
-                                                        ".$row["descripcion_evento"]."
+                                                        ". substr ($row["descripcion_evento"] , 0, 270) ."...
                                                     </p>
-                                                     ".$row["fecha_inicio"]." -
-                                                     ".$row["fecha_termino"] ."
+                                                    
                                                 </div>
+
+                                                
+                                                 
+
+
                                             </div>
+                                            <ul class='revenue-nav'>
+		                                        <li><a href='#'><i class='fa fa-play'></i> Escenarios ". $row["totalescenarios"]."</a></li>
+		                                        
+		                                        <li >
+		                                        <a href='#'>
+
+		                                        		<i class='fa fa-calendar-o'></i>
+	                                                     ".  $row["fecha_inicio"]." -
+	                                                     ".$row["fecha_termino"] ."
+	                                            </a>
+                                                </li>
+                                                <li class='active' ><a href='#'>". $estadoevento ."</a></li>
+		                                    </ul>
+
                                         </div>
+
                                     </div>";
         }                            
 		return $elements;                                    	

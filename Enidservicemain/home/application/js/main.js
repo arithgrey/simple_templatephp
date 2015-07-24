@@ -17,6 +17,7 @@ function outsystem(){
 }
 function llenaelementoHTML(idelement , data){
 
+	
 	$(idelement).html(data);
 } 
 function valorHTML(idelement , data){

@@ -4,14 +4,59 @@ class Event extends REST_Controller{
       
     function __construct(){
             parent::__construct();
-            
+                
+             
             $this->load->model("eventmodel");                
+            $this->load->helper("eventosh");   
             $this->load->library('sessionclass');
+
             
         }     
 
 
 
+
+    function update_objeto_permitido_post(){
+
+
+
+
+
+        if ($this->sessionclass->is_logged_in() == 1){
+
+            
+            $idevento = $this->post("evento");
+            $idobjeto =  $this->post("objetopermitido");
+
+
+            $responsedb = $this->eventmodel->update_obj_permitidobyId($idevento, $idobjeto);
+            $this->response($responsedb);
+
+        }else{
+            $this->sessionclass->logout();    
+        }   
+
+
+
+
+
+    }    
+
+    function objetospermitidos_get(){
+
+        if ($this->sessionclass->is_logged_in() == 1){
+
+            
+            $idevento = $this->get("evento");
+
+
+            $this->response( listobjetosp($this->eventmodel->getObjetosPermitidos($idevento ) ));
+
+        }else{
+            $this->sessionclass->logout();    
+        }   
+
+    }    
 
 
 
@@ -139,7 +184,7 @@ class Event extends REST_Controller{
             $nueva_descripcion = $this->post("descripcion_evento");
             $idevento = $this->post("evento");
 
-            $this->response($this->eventmodel->updateDescripcion($nueva_descripcion , $idevento ) );
+            $this->response($this->eventmodel->updateDescripcion( strip_tags($nueva_descripcion)  , $idevento ) );
 
         }else{
             $this->sessionclass->logout();    
@@ -162,7 +207,7 @@ class Event extends REST_Controller{
             $nueva_politica = $this->post("politicas_evento");
             $idevento = $this->post("evento");
 
-            $this->response($this->eventmodel->updatePoliticas($nueva_politica , $idevento ) );
+            $this->response($this->eventmodel->updatePoliticas( strip_tags($nueva_politica) , $idevento ) );
 
         }else{
             $this->sessionclass->logout();    
@@ -188,7 +233,7 @@ function updatepermitido_post(){
             $nuevo_permitido = $this->post("permitido_evento");
             $idevento = $this->post("evento");
 
-            $this->response($this->eventmodel->updatePermitido($nuevo_permitido , $idevento ) );
+            $this->response($this->eventmodel->updatePermitido( strip_tags($nuevo_permitido) , $idevento ) );
 
         }else{
             $this->sessionclass->logout();    
@@ -209,7 +254,7 @@ function updaterestricciones_post(){
             $nueva_restriccion = $this->post("restricciones_evento");
             $idevento = $this->post("evento");
 
-            $this->response($this->eventmodel->updateRestricciones($nueva_restriccion , $idevento ) );
+            $this->response($this->eventmodel->updateRestricciones( strip_tags($nueva_restriccion) , $idevento ) );
 
         }else{
             $this->sessionclass->logout();    
@@ -264,7 +309,7 @@ function updaterestricciones_post(){
                         if (validatenotnullnotspace($inicio) ==  true && validatenotnullnotspace($termino)) {
                             
 
-                                $dbresponse = $this->eventmodel->create( $nombre , $edicion , $inicio , $termino , $idusuario , $idempresa,  $perfiles  );
+                                $dbresponse = $this->eventmodel->create(  $nombre , $edicion , $inicio , $termino , $idusuario , $idempresa,  $perfiles  );
                                 if (is_numeric($dbresponse)) {
 
                                     $data[0]= true;

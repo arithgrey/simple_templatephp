@@ -9,7 +9,8 @@ $(document).on("ready", function(){
 	$(".restricciones-p").click(updaterestricciones);
 
 
-	
+	$(".permitidonow").click(loadobjetospermitidos );
+
 	$("#pac-input").click(updateubicacion);
 		
 	$("#tags_1_tag").keyup(tryrecordgeneros);
@@ -33,7 +34,7 @@ function loaddata(){
 		
 	}).fail(function(){
 		
-		alert("erro");
+		alert("Err on loaddata");
 
 	});
 }
@@ -147,7 +148,7 @@ function loadinhtml(data){
 					llenaelementoHTML(".permitido-p" , "<i class='fa fa-plus'></i>Lo que las personas podrían hacer e ingresar al evento");
 				}else{
 
-					llenaelementoHTML(".permitido-p" , permitido);
+					llenaelementoHTML(".permitido-p" ,  permitido);
 					valorHTML("#permitido-evento" , permitido);
 				}
 
@@ -197,6 +198,7 @@ function updatenameevent(e){
 		
 
 		nuevotexto = $("#nombre-input").val();
+				
 
 		if (nuevotexto.length > 0 ) {
 
@@ -248,6 +250,7 @@ function updateedicion(e){
 	$("#edicion-input").blur(function(){
 			
 		nuevotexto = $("#edicion-input").val(); 
+				
 		if (nuevotexto.length >0 ) {			
 			
 				updateindebenicion(nuevotexto);
@@ -318,6 +321,7 @@ function updatedescripcion(e){
 	$("#descripcion-evento").blur(function(){
 			
 		nuevotexto = $("#descripcion-evento").val(); 
+				
 		
 
 
@@ -373,6 +377,7 @@ function updatepoliticas(e){
 	$("#politicas-evento").blur(function(){
 			
 		nuevotexto = $("#politicas-evento").val(); 
+				
 		
 
 
@@ -448,6 +453,7 @@ function updatepermitido(e){
 	$("#permitido-evento").blur(function(){
 			
 		nuevotexto = $("#permitido-evento").val(); 
+				
 		
 
 
@@ -471,7 +477,8 @@ function updatepermitido(e){
 function updateindbpermitido(nuevotexto){
 
 	url =  now + "index.php/api/event/updatepermitido/format/json/";    
-	$.post(url , { "permitido_evento" : nuevotexto , "evento" : $("#evento").val() } )
+	evento = $("#evento").val();
+	$.post(url , { "permitido_evento" : nuevotexto , "evento" : evento  } )
 	.done(function(data){
 		
 
@@ -517,7 +524,7 @@ function updaterestricciones(e){
 	$("#restricciones-evento").blur(function(){
 			
 		nuevotexto = $("#restricciones-evento").val(); 
-		
+				
 
 
 		
@@ -613,6 +620,7 @@ function updateubicacion(){
 	$("#pac-input").blur(function(){
 			
 		nuevotexto = $("#pac-input").val(); 
+				
 
 		updateubicacionindb(nuevotexto);
 		

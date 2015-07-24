@@ -24,9 +24,9 @@
 
                 <i class="fa fa-exclamation-triangle"></i> Lo prohibido </a>
               </li>
-              <li>
+              <li class='permitidonow'>
                 <a href="#portlet_tab2" data-toggle="tab">
-                <i class="fa fa-check"></i> Lo permitido </a>
+                <i class="fa fa-check permitidonow" ></i> Lo permitido </a>
               </li>
               <li class="">
                 <a href="#portlet_tab1" data-toggle="tab">
@@ -69,17 +69,31 @@
                      <h3>Lo permitido en el evento</h3>  
 
 
-                      <p class='permitido-p'>
-                         
-                      </p>
-                      <div class="form-group">
-                          <textarea id='permitido-evento' placeholder ='' rows="6" class="form-control"></textarea>
-                      </div> 
+
+                    <div class='col-xs-12  col-sm-6 col-md-6 col-lg-6 '>
+                      
+                      <table class="table table-condensed">
+                        <div class='objetospermitidosf'><div>
+                      </table>
+
+                    </div>
+                    <div class='col-xs-12  col-sm-6 col-md-6 col-lg-6 '>
+
+                            <p class='permitido-p'>
+                               
+                            </p>
+                            <div class="form-group">
+                                <textarea id='permitido-evento' placeholder ='' rows="6" class="form-control"></textarea>
+                            </div> 
 
 
+                            <div class='objetos_permitidos' ></div>
 
 
+                    </div>
 
+                      
+                      
               </div>
               <div class="tab-pane" id="portlet_tab3">
 
@@ -481,20 +495,7 @@ h4{
                       <!--Termina servicios button-->
 
 
-                      <!--politivas button -->
-
-                      <div class="panel" >
-                        <button id="politicasmodal-button" data-toggle="modal" data-target="#politicasmodal" class="btn btn-info col-xs-12  col-sm-12 col-md-12 col-lg-12 accesos-button" style="text-align: left; padding: 10px!important; " >
-                          <strong> <i class="fa fa-credit-card"></i> 
-                           REGLAS DEL EVENTO
-                            </strong>
-                        </button>
-
-                        
-                      </div> <br>
-
-                      <!--termina politivas button -->
-
+             
 
 
 
@@ -1223,6 +1224,7 @@ h4{
 <script type="text/javascript" src="<?=base_url('application/js/evento/escenarios.js')?>"> </script>
 <script type="text/javascript" src="<?=base_url('application/js/evento/accesos.js')?>"> </script>
 <script type="text/javascript" src="<?=base_url('application/js/evento/servicios.js')?>"> </script>
+<script type="text/javascript" src="<?=base_url('application/js/evento/objetospermitidos.js')?>"></script>
 <!--Escenarios modal-->
 <script src="//connect.soundcloud.com/sdk-2.0.0.js"></script>
 
