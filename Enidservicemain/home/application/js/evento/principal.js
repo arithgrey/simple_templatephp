@@ -8,13 +8,24 @@ $(document).on("ready", function(){
 	$(".permitido-p").click(updatepermitido);
 	$(".restricciones-p").click(updaterestricciones);
 
+	$(".permitidonow").click(loadobjetospermitidos );	
+//	$("#tags_1_tag").keyup(tryrecordgeneros);
+	
 
-	$(".permitidonow").click(loadobjetospermitidos );
-
-	$("#pac-input").click(updateubicacion);
-		
-	$("#tags_1_tag").keyup(tryrecordgeneros);
 	$("#social-button").click(showformsocial);
+	$("#generosenid-button").click(showformtagsgeneros);
+	$("#accesos-button").click(loadaccesosevento);	
+	$("#form-accesos-modal").submit(registraacceso);
+	$("#servicios-button").click(loadinformationservicios);
+	$("#pac-input").click(updateubicacion);	
+	$("footer").ready(loadescenarioss);
+
+	
+	$("#form-escenario").submit(nuevoescenario);
+	$("#form-artistas").submit(nuevoartistaescenario);
+
+
+	initialize();
 
 });
 
@@ -349,6 +360,7 @@ function updateindbdescripcion(nuevotexto){
 	.done(function(data){
 		
 
+
 		loaddata();
 
 
@@ -650,7 +662,7 @@ function tryrecordgeneros(e){
 	
 	if (e.keyCode == 13){
 
- 		 generos = $("#tags_1").val();	
+ 		 generos = $("#tags_enid_input").val();	
 
 		 	url =  now + "index.php/api/event/updategeneros/format/json/";    
 
@@ -673,6 +685,12 @@ function tryrecordgeneros(e){
  	}
 }
 
+
+/*recordgenerosrecordgenerosrecordgenerosrecordgenerosrecordgenerosrecordgenerosrecordgeneros*/
+
+
+
+/*tagr record */
 
 
 
@@ -740,3 +758,20 @@ function showformsocial(){
 	
 }
 
+
+
+
+
+function showformtagsgeneros(){
+	
+
+	if ($(".section_generosmusicales").is(":visible")) {
+
+		$(".section_generosmusicales").hide();
+
+	}else{
+
+		$(".section_generosmusicales").show();
+	}
+
+}

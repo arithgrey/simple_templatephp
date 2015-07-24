@@ -166,10 +166,7 @@
         <script type="text/javascript" language="javascript" src="<?=base_url('application/js/js/advanced-datatable/js/jquery.dataTables.js')?>"></script>
         <script type="text/javascript" src="<?=base_url('application/js/js/data-tables/DT_bootstrap.js')?>"></script>
         <script type="text/javascript" src="<?=base_url('application/js/js/dynamic_table_init.js')?>"></script>
-
-        <script src="<?=base_url('application/js/js/dropzone/dropzone.js')?>"></script>
         <script type="text/javascript" src="<?=base_url('application/js/main.js')?>"></script>  
-
         <script src="<?=base_url('application/js/jsapi.js')?>"></script> 
         
         

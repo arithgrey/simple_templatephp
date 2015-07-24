@@ -1,19 +1,7 @@
-$(document).on("ready", function(){
-
-	
-	$("#form-escenario").submit(nuevoescenario);
-	$("footer").ready(loadescenarioss);
-	$("#form-artistas").submit(nuevoartistaescenario);
-});
-
-
-
 function  nuevoescenario(){
 
 	url =  now  + "index.php/api/escenario/nuevo/format/json/";		
 
-	
-	
 	$.post(url , $("#form-escenario").serialize() ).done(function(data){
 
 			loadescenarioss();

@@ -138,7 +138,17 @@ if(!function_exists('invierte_date_time')){
 	}
 
 
+  /*Filtros */
+
+  function validate_text($texto){
+
+       $texto = str_replace('"','*', strip_tags($texto ));  
+       $texto = str_replace("'",'*', strip_tags($texto ));   
+       return $texto;
+
+  }
 
 
 }/*Termina el helper*/
  
+

@@ -24,7 +24,7 @@ class Escenario extends REST_Controller{
                 $nombre= $this->post("nuevoescenario");    
                 $idempresa =  $this->sessionclass->getidempresa();
 
-                $this->response($this->escenariomodel->nuevo( $nombre , $evento ,  $idempresa  )  );
+                $this->response($this->escenariomodel->nuevo( validate_text($nombre)  , $evento ,  $idempresa  )  );
 
 
                                 
@@ -82,7 +82,7 @@ class Escenario extends REST_Controller{
 
 
                 
-                $this->response($this->escenariomodel->updatedescripcion( strip_tags($nueva_descripcion ),
+                $this->response($this->escenariomodel->updatedescripcion( validate_text($nueva_descripcion ),
                  $evento , $idescenario,  $idempresa ) );
                 
 
@@ -136,7 +136,7 @@ function updatedescripcionescenariobyid_post(){
 
 
                   
-                $this->response($this->escenariomodel->updatedescripcionbyid( $nueva_descripcion , 
+                $this->response($this->escenariomodel->updatedescripcionbyid(  validate_text($nueva_descripcion) , 
                     $idescenario,  $idempresa ) );
                 
 
@@ -203,7 +203,7 @@ function updatedescripcionescenariobyid_post(){
                 $idempresa =  $this->sessionclass->getidempresa();                            
                 
 
-                $responsedb = $this->escenarioartistamodel->registraartistaescenario($idescenario , $nuevoartista , $idempresa);
+                $responsedb = $this->escenarioartistamodel->registraartistaescenario($idescenario , validate_text($nuevoartista)  , $idempresa);
 
                 $this->response($responsedb); 
                 
@@ -260,7 +260,7 @@ function updatedescripcionescenariobyid_post(){
                 $idempresa =  $this->sessionclass->getidempresa();                            
                 
 
-                $responsedb = $this->escenariomodel->updateescenarionombrebyid($idescenario , $nuevonombre, $idempresa);
+                $responsedb = $this->escenariomodel->updateescenarionombrebyid($idescenario , validate_text($nuevonombre), $idempresa);
 
                 $this->response($responsedb); 
                 

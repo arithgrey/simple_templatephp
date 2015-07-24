@@ -1,12 +1,3 @@
-$(document).on("ready", function(){
-	
-	$("#form-accesos-modal").submit(registraacceso);
-	$("#accesos-button").click(loadaccesosevento);	
-});
-
-
-
-
 function loadaccesosevento(){
 
 	url = now + "index.php/api/accesos/load/format/json/";

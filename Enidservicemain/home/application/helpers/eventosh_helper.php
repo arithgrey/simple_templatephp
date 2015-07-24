@@ -1,5 +1,3 @@
-
-
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
  
 //si no existe la función invierte_date_time la creamos
@@ -13,6 +11,7 @@ function listobjetosp( $arreglo ){
 
 	$list ="";
 	
+
 	$b =1;
 
 	foreach ( $arreglo as $row) {

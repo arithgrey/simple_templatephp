@@ -146,7 +146,7 @@ class Event extends REST_Controller{
             $nuevo_nombre = $this->post("nombre");
             $idevento = $this->post("evento");
 
-            $this->response($this->eventmodel->updateNombre($nuevo_nombre , $idevento ) );
+            $this->response($this->eventmodel->updateNombre( validate_text($nuevo_nombre)  , $idevento ) );
 
         }else{
             $this->sessionclass->logout();    
@@ -164,7 +164,8 @@ class Event extends REST_Controller{
             $nuevo_edicion = $this->post("edicion");
             $idevento = $this->post("evento");
 
-            $this->response($this->eventmodel->updateEdicion($nuevo_edicion , $idevento ) );
+
+            $this->response($this->eventmodel->updateEdicion( validate_text($nuevo_edicion) , $idevento ) );
 
         }else{
             $this->sessionclass->logout();    
@@ -181,10 +182,16 @@ class Event extends REST_Controller{
 
         if ($this->sessionclass->is_logged_in() == 1){
 
+            
             $nueva_descripcion = $this->post("descripcion_evento");
             $idevento = $this->post("evento");
 
-            $this->response($this->eventmodel->updateDescripcion( strip_tags($nueva_descripcion)  , $idevento ) );
+
+
+
+            
+
+            $this->response($this->eventmodel->updateDescripcion( validate_text( $nueva_descripcion)  , $idevento ) );
 
         }else{
             $this->sessionclass->logout();    
@@ -207,7 +214,7 @@ class Event extends REST_Controller{
             $nueva_politica = $this->post("politicas_evento");
             $idevento = $this->post("evento");
 
-            $this->response($this->eventmodel->updatePoliticas( strip_tags($nueva_politica) , $idevento ) );
+            $this->response($this->eventmodel->updatePoliticas( validate_text($nueva_politica) , $idevento ) );
 
         }else{
             $this->sessionclass->logout();    
@@ -233,7 +240,7 @@ function updatepermitido_post(){
             $nuevo_permitido = $this->post("permitido_evento");
             $idevento = $this->post("evento");
 
-            $this->response($this->eventmodel->updatePermitido( strip_tags($nuevo_permitido) , $idevento ) );
+            $this->response($this->eventmodel->updatePermitido( validate_text($nuevo_permitido)  , $idevento ) );
 
         }else{
             $this->sessionclass->logout();    
@@ -254,7 +261,7 @@ function updaterestricciones_post(){
             $nueva_restriccion = $this->post("restricciones_evento");
             $idevento = $this->post("evento");
 
-            $this->response($this->eventmodel->updateRestricciones( strip_tags($nueva_restriccion) , $idevento ) );
+            $this->response($this->eventmodel->updateRestricciones( validate_text( $nueva_restriccion )  , $idevento ) );
 
         }else{
             $this->sessionclass->logout();    
@@ -343,11 +350,8 @@ function updaterestricciones_post(){
         }    
     }
 
-
-
-
-
     /*Termina rest*/
 
 }
 ?>
+

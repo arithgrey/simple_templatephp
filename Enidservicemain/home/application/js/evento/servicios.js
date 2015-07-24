@@ -1,9 +1,3 @@
-$(document).on("ready" , function(){
-
-	$("#servicios-button").click(loadinformationservicios);
-
-});
-
 
 function loadinformationservicios(){
 

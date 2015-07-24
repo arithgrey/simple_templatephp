@@ -32,11 +32,17 @@
                 <a href="#portlet_tab1" data-toggle="tab">
                 <i class="fa fa-circle"></i> Políticas </a>
               </li>
+              
 
               <li class="active">
                 <a href="#portlet_tab4" data-toggle="tab">
                 <i class="fa fa-info"></i> Evento </a>
               </li>
+
+              
+
+              
+
 
             </ul>
           </div>
@@ -112,6 +118,9 @@
 
               </div>
 
+   
+
+
 
 
 
@@ -122,7 +131,13 @@
                       </p>
                       <div class="form-group">
                           <textarea id='descripcion-evento' placeholder ='Celebrando un exitoso año y cumpliendo ya 15 años haciendo historia de la música electrónica en México, nos enorgullecemos en presentar nuestra tercera edición del Festival "I love this generation" el cual tendrá lugar en nuestro mítico Club Coco Dance club, presentándose en el más de 20 artistas de esta tendencia y de más de 3 naciones, vive esta única experiencia.' rows="6" class="form-control"></textarea>
-                      </div>        
+                      </div> 
+
+
+
+                
+
+
 
               </div>
 
@@ -184,130 +199,6 @@
 
 
 
-
-
-
-
-
-
-<style type="text/css">
-
-.descripcion-modal-text:hover{
-  font-size: 1.2em;
-  cursor: pointer;
-
-}
-.todo-title, #title-modal-heading{
-  color: black;
-}
-
-.newdescripesenario{
-  display: none;
-}
-.descripcion_escenario_update:hover, .nombre-escenario-modal:hover{
-  font-size: 1.2em;
-  cursor: pointer;
-}
-
-.title-page-enid{
-    display: none;
-}
-#guardar-generos{
-  display: none;
-}
-#nombre-input, #edicion-input , #evento , #descripcion-evento, #ubicacion-input, .descripcion-in-modal-escenario, .nombre-escenario-input-modal, .day_escenario_inputs ,.social-media-event, #restricciones-evento ,  #politicas-evento, #permitido-evento {
-    display: none;
-}
-
-.tag span{
-    color: white;
-}
-
-.tag-items-form{
-    
-    background: none repeat scroll 0% 0% #043544 !important;    
-}
-
-.panel-enid-right{
-    background: red;
-}
-.section-enid-events-left{
-
-
-}
-.p-states.green-box{
-    background: white !important;
-
-    
-}
-.green-box {
-    box-shadow: 0px 5px 0px #09AFDF !important;
-}
-.direccion-event-lab{
-    color: white;
-}
-.descripcion-evento-p{
-    background:  #13979C;
-    color: white;
-}
-
-.nombre-evento-h1, .edicion-evento , .white{
-    color: white !important;
-}
-.nombre-evento-h1:hover{
-    font-size: 1.5em;
-    cursor: pointer;
-
-}
-.edicion-evento:hover{
- font-size: 1.2em;   
- cursor: pointer;
-}
-.descripcion-p:hover{
- font-size: 1.1em;      
- cursor: pointer;
-}
-.dropzone{
-    margin-top: -10px !important;
-
-}
-.ubicacion-panel:hover , .accesos-panel:hover{
-    padding: 10px;    
-    cursor: pointer;
-}
-#map-section{
-    background:  #09AFDF;
-   //background: none repeat scroll 0% 0% #13979C;
-    padding: 10px;
-}
-#span-ubicacion{
-    font-size: 1.3em;
-    color: white;
-}
-.panel-heading {
-    color: white;
-}
-.activity-list li{
-
-    background: white;
-    padding: 5px;
-    border-radius: 5px;
-}
-#my-awesome-dropzone{
-    background: white;
-}
-h4{
-    color: black !important;
-}
-#accesos-plus:hover{
-    font-size: 1.2em;
-}
-.restricciones-p:hover , .politicas-p:hover , .permitido-p{
-
-  cursor: pointer;
-  font-size: 1.2em;
-}
-</style>
 
 
 
@@ -423,6 +314,18 @@ h4{
                             </div>
                         </div>
                     </div>
+
+                  <div class='row'  id="mapgooglemap">
+                    <div class='col-xs-12  col-sm-12 col-md-12 col-lg-12'>
+<input id="pac-input" class="controls ubicacioninput" type="text" placeholder="Ubicación">
+<div id="mapsection">
+  <div id="map-canvas"></div>
+  <div class='textnotfound-location'></div>  
+</div> 
+</div>
+
+                  </div>
+
                 </div>
 
 
@@ -453,6 +356,24 @@ h4{
 
                         
                       </div> <br>
+
+
+
+
+
+
+                      <div class="panel" >
+                        <button id="generosenid-button" class="btn btn-info col-xs-12  col-sm-12 col-md-12 col-lg-12 accesos-button" style="text-align: left; padding: 10px!important; " ><strong> 
+                          <i class="fa fa-volume-off"></i> GENEROS MUSICALES </strong></button>
+
+                          <div class='section_generosmusicales'>
+                            <label>Generos musicales</label>
+                             <input type="text"> 
+                          </div>
+
+                        
+                      </div> <br>
+
 
                       <!--Termina servicios button-->
 
@@ -569,13 +490,6 @@ h4{
 
 
 
-<div class='col-xs-12  col-sm-12 col-md-12 col-lg-12' id="mapgooglemap">
-<input id="pac-input" class="controls ubicacioninput" type="text" placeholder="Ubicación">
-<div id="mapsection">
-  <div id="map-canvas"></div>
-  <div class='textnotfound-location'></div>  
-</div> 
-</div>
   
 
 
@@ -1199,11 +1113,135 @@ h4{
 
 
 
+
+<style type="text/css">
+
+.descripcion-modal-text:hover{
+  font-size: 1.2em;
+  cursor: pointer;
+
+}
+.todo-title, #title-modal-heading{
+  color: black;
+}
+
+.newdescripesenario{
+  display: none;
+}
+.descripcion_escenario_update:hover, .nombre-escenario-modal:hover{
+  font-size: 1.2em;
+  cursor: pointer;
+}
+
+.title-page-enid{
+    display: none;
+}
+#guardar-generos{
+  display: none;
+}
+#nombre-input, #edicion-input , #evento , #descripcion-evento, #ubicacion-input, .descripcion-in-modal-escenario, .nombre-escenario-input-modal, .day_escenario_inputs ,.social-media-event, #restricciones-evento ,  #politicas-evento, #permitido-evento {
+    display: none;
+}
+
+.tag span{
+    color: white;
+}
+
+.tag-items-form{
+    
+    background: none repeat scroll 0% 0% #043544 !important;    
+}
+
+.panel-enid-right{
+    background: red;
+}
+.section-enid-events-left{
+
+
+}
+.p-states.green-box{
+    background: white !important;
+
+    
+}
+.green-box {
+    box-shadow: 0px 5px 0px #09AFDF !important;
+}
+.direccion-event-lab{
+    color: white;
+}
+.descripcion-evento-p{
+    background:  #13979C;
+    color: white;
+}
+
+.nombre-evento-h1, .edicion-evento , .white{
+    color: white !important;
+}
+.nombre-evento-h1:hover{
+    font-size: 1.5em;
+    cursor: pointer;
+
+}
+.edicion-evento:hover{
+ font-size: 1.2em;   
+ cursor: pointer;
+}
+.descripcion-p:hover{
+ font-size: 1.1em;      
+ cursor: pointer;
+}
+.dropzone{
+    margin-top: -10px !important;
+
+}
+.ubicacion-panel:hover , .accesos-panel:hover{
+    padding: 10px;    
+    cursor: pointer;
+}
+#map-section{
+    background:  #09AFDF;
+   //background: none repeat scroll 0% 0% #13979C;
+    padding: 10px;
+}
+#span-ubicacion{
+    font-size: 1.3em;
+    color: white;
+}
+.panel-heading {
+    color: white;
+}
+.activity-list li{
+
+    background: white;
+    padding: 5px;
+    border-radius: 5px;
+}
+#my-awesome-dropzone{
+    background: white;
+}
+h4{
+    color: black !important;
+}
+#accesos-plus:hover{
+    font-size: 1.2em;
+}
+.restricciones-p:hover , .politicas-p:hover , .permitido-p{
+
+  cursor: pointer;
+  font-size: 1.2em;
+}
+.section_generosmusicales{
+  display: none;
+
+}
+</style>
+
+
+
+
+
 <link href="<?=base_url('application/js/js/dropzone/css/dropzone.css')?>" rel="stylesheet"/>
-<link rel="stylesheet" type="text/css" href="<?=base_url('application/js/js/jquery-tags-input/jquery.tagsinput.css')?>" />
-
-
-
 
 <link rel="stylesheet" type="text/css" href="<?=base_url('application/js/js/bootstrap-datepicker/css/datepicker-custom.css')?>" />
 <script type="text/javascript" src="<?=base_url('application/js/js/bootstrap-datepicker/js/bootstrap-datepicker.js')?>"></script>
@@ -1216,8 +1254,6 @@ h4{
 
 
 
-<script src="<?=base_url('application/js/js/jquery-tags-input/jquery.tagsinput.js')?>"></script>
-<script src="<?=base_url('application/js/js/tagsinput-init.js')?>"></script>
 
 
 <script type="text/javascript" src="<?=base_url('application/js/evento/principal.js')?>"> </script>
@@ -1225,50 +1261,8 @@ h4{
 <script type="text/javascript" src="<?=base_url('application/js/evento/accesos.js')?>"> </script>
 <script type="text/javascript" src="<?=base_url('application/js/evento/servicios.js')?>"> </script>
 <script type="text/javascript" src="<?=base_url('application/js/evento/objetospermitidos.js')?>"></script>
+
 <!--Escenarios modal-->
 <script src="//connect.soundcloud.com/sdk-2.0.0.js"></script>
-
 <script type="text/javascript" src="<?=base_url('application/js/evento/gmap.js')?>"></script>
 <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true&libraries=places"></script>
-
-<script>
-  google.maps.event.addDomListener(window, 'load', initialize);
-</script>
-<script type="text/javascript">
-
-
-var acceptedFileTypes = ".jpeg,.jpg,.png,.JPEG,.JPG,.PNG";
-Dropzone.options.myAwesomeDropzone = {
-
-      paramName: "imgportada", 
-      headers: {"eventosupload" : "test data"},       
-      maxThumbnailFilesize: 3,
-      maxFilesize: 1, // MB    
-      maxFiles: 2,    
-      acceptedFiles: ".jpeg, .jpg, .png, .JPEG, .JPG, .PNG",      
-      accept: function(file, done) {
-           
-            
-            if (file.name == "a.png") {
-              done("Naha, you don't.");
-            
-            }else { 
-                done();
-            }
-
-      }, error: function (){
-
-            alert("El formato de la imagen no corresponde con el solicitado, este archivo no se subirá ");
-      }
-
-
-    };
-
-</script>
-
-
-
-
-
-
-     
