@@ -19,8 +19,8 @@ if(!function_exists('invierte_date_time')){
                             <h4>". $rowccesos["tipo"] ." </h4>                            
                         </td>
                         <td class='text-center'>
-                        	<strong> ". money_format( "%i" ,  $rowccesos["precio"] ) ."</strong></td>
-                        	<td class='text-center'><strong>  ". $periodo  . "</strong></td>
+                        	<strong> $". money_format( "%i" ,  $rowccesos["precio"] ) ."</strong></td>
+                        	<td class='text-center'><strong> ". $periodo  . "</strong></td>
                         <td class='text-center'>
                         <strong><i data-toggle='modal' data-target='#confirmationdeleteacceso'  class='fa fa-minus-circle remove-acceso' id='". $rowccesos["idacceso"] ."'></i> </strong></td>
                     </tr>";

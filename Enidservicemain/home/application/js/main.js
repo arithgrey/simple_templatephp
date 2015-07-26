@@ -157,3 +157,13 @@ function  suscribenewsletters(e) {
 	$(".progress-xs").show();
 	return false;
 }
+function show_section_dinamic_button(seccion){
+
+	if ($(seccion).is(":visible")) {
+
+		$(seccion).hide();
+	}else{
+
+		$(seccion).show();
+	}	
+}

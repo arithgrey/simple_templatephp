@@ -10,6 +10,32 @@ function __construct(){
 
 
 
+function getTematicaByid($idevento , $idempresa )
+{
+	
+
+	
+	$query_get_byid ="SELECT t.idtematica , t.tematica_evento, t.status , t.descripcion, 
+	et.idevento , et.idtematica as idtem 	
+	FROM tematica as t
+	LEFT OUTER JOIN  evento_tematica as et
+	ON t.idtematica = et.idtematica and et.idevento = '".$idevento."' ";
+
+	$result = $this->db->query($query_get_byid);
+	return $result->result_array();
+
+}
+
+function update_tematicaby_id( $idevento , $idtematica, $idempresa ){
+
+	
+	
+	$delete_query ="DELETE FROM evento_tematica WHERE idevento ='".$idevento."' ";
+	$resultado_count = $this->db->query($delete_query);
+	$dinamic_query ="INSERT INTO evento_tematica VALUES( '".$idevento."' , '".$idtematica."' )";
+	$r = $this->db->query($dinamic_query);
+	return $r;
+}
 
 function update_obj_permitidobyId($idevento, $idobjeto){
 

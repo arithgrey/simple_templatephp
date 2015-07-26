@@ -1,12 +1,15 @@
 $(document).on("ready", function(){
+
+
+
 	$(".vertodos").click(show_eventos_pasados);
 	$("#nuevo-evento-form").submit(trynewevent);
-	
-	$(".todo-entry").click(function(){
-		
-		
+	$(".todo-entry").click(function(){			
 		$("#dinamic-field").show();
+		
 	});
+
+
 
 
 });

@@ -9,8 +9,8 @@ $(document).on("ready", function(){
 	$(".restricciones-p").click(updaterestricciones);
 
 	$(".permitidonow").click(loadobjetospermitidos );	
-//	$("#tags_1_tag").keyup(tryrecordgeneros);
-	
+	$(".genero_musical_input").click(update_genero_evento);
+	$("#generos_musicales_button").click(show_section_generos);
 
 	$("#social-button").click(showformsocial);
 	$("#generosenid-button").click(showformtagsgeneros);
@@ -24,6 +24,11 @@ $(document).on("ready", function(){
 	$("#form-escenario").submit(nuevoescenario);
 	$("#form-artistas").submit(nuevoartistaescenario);
 
+
+	$("#tematica-button").click( function (){
+		show_section_dinamic_button(".tematica_section");	
+		load_data_tematica();
+	});
 
 	initialize();
 
@@ -774,4 +779,22 @@ function showformtagsgeneros(){
 		$(".section_generosmusicales").show();
 	}
 
+}
+
+
+
+
+function show_section_generos(){
+	
+
+
+	if ($(".generos_musicales_div").is(":visible")) {
+
+		$(".generos_musicales_div").hide();
+
+	}else{
+
+		$(".generos_musicales_div").show();
+	}
+	
 }

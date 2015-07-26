@@ -1,15 +1,29 @@
+<div class="col-md-12">
+                    <div class="panel">
+                        <header class="panel-heading">                            
+                            <span class="tools pull-right">
+                                <a href="javascript:;" class="fa fa-chevron-down"></a>
+                                
+                             </span>
+                        </header>
+                        <div class="panel-body">
+                           
 
-<div class="content">
-  <div class="container">     
-    <div class="row">
-   
 
-     
 
-    <div class="row">
-      
 
-      <div class="col-md-12">
+
+
+
+
+
+
+
+
+
+
+
+<div class="col-md-12">
         <!-- BEGIN Portlet PORTLET-->
         <div class="portlet">
           <div class="portlet-title">
@@ -36,7 +50,7 @@
 
               <li class="active">
                 <a href="#portlet_tab4" data-toggle="tab">
-                <i class="fa fa-info"></i> Evento </a>
+                 Evento </a>
               </li>
 
               
@@ -132,6 +146,11 @@
                       <div class="form-group">
                           <textarea id='descripcion-evento' placeholder ='Celebrando un exitoso año y cumpliendo ya 15 años haciendo historia de la música electrónica en México, nos enorgullecemos en presentar nuestra tercera edición del Festival "I love this generation" el cual tendrá lugar en nuestro mítico Club Coco Dance club, presentándose en el más de 20 artistas de esta tendencia y de más de 3 naciones, vive esta única experiencia.' rows="6" class="form-control"></textarea>
                       </div> 
+                      <button class='btn btn-info' id='generos_musicales_button'>Géneros musicales</button>
+                      <div class='generos_musicales_div'>
+                      <?=$list_generos;?>
+                      </div>
+
 
 
 
@@ -148,88 +167,30 @@
         </div>
         <!-- END Portlet PORTLET-->
       </div>
-    </div>
-  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+                            <div class="text-center"><a href="#"></a></div>
+                        </div>
+                    </div>
 </div>
 
-<br>
-<br>
-<center>
 
-</center>
-<br>
-<br>
 
 
 
 
 
-           
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                          
-
-                
-
-
-
-
-
-
-                                    
-
-
-
-
-
-                                        
-
-
-
-
-
-
-
-
-
-
-
-      
 
 
                                       
@@ -334,62 +295,25 @@
 
 <!--Inicia section tres -->
                     <div class="col-md-4 section-enid-events-left">
-
-
-
-
-
                        <!--Accesos button-->    
                       <div class="panel" >
                         <button id="accesos-button" data-toggle="modal" data-target="#accesosmodal" class="btn btn-info col-xs-12  col-sm-12 col-md-12 col-lg-12 accesos-button" style="text-align: left; padding: 10px!important; " ><strong> <i class="fa fa-credit-card"></i>  ACCESOS AL EVENTO </strong></button>
-
-                        
                       </div> <br>
 
                       <!--Termina acceso button-->
 
-
-
                       <!--Servicios button-->    
                       <div class="panel" >
                         <button id="servicios-button" data-toggle="modal" data-target="#serviciosmodal" class="btn btn-info col-xs-12  col-sm-12 col-md-12 col-lg-12 accesos-button" style="text-align: left; padding: 10px!important; " ><strong> <i class="fa fa-cutlery"></i> SERVICIOS INCLUIDOS </strong></button>
-
-                        
                       </div> <br>
-
-
-
-
-
-
-                      <div class="panel" >
-                        <button id="generosenid-button" class="btn btn-info col-xs-12  col-sm-12 col-md-12 col-lg-12 accesos-button" style="text-align: left; padding: 10px!important; " ><strong> 
-                          <i class="fa fa-volume-off"></i> GENEROS MUSICALES </strong></button>
-
-                          <div class='section_generosmusicales'>
-                            <label>Generos musicales</label>
-                             <input type="text"> 
-                          </div>
-
-                        
-                      </div> <br>
-
-
                       <!--Termina servicios button-->
 
-
-
-
                       <!--Servicios button-->    
-                      <div class="panel" >
+                      <div class="panel">
                         <button id="social-button" class="btn btn-info col-xs-12  col-sm-12 col-md-12 col-lg-12 accesos-button" style="text-align: left; padding: 10px!important; " >
                           <strong> <i class="fa fa-flag"></i> SOCIAL </strong>
                         </button>
-
-                      
-
-
-                          <div class='social-media-event'>
+                          <div class='social-media-event col-xs-12  col-sm-12 col-md-12 col-lg-12'>
                                     <form class="form-horizontal" id='form-social' role="form">                                     
                                                 
                                                 <input type="hidden" name="evento_social" id="evento_social" value="<?=$evento;?>">
@@ -406,14 +330,39 @@
                                                   <input class="form-control" name='url_social_evento_youtube' type="text" id="url_social_evento_youtube" placeholder="La url de tu canal en youtube" required>
                                                 </div>         
                                      </form>           
-                          </div>   
-
-
-
-                                                           
+                          </div>                                                             
                       </div> 
 
+
+
+
                       <!--Termina servicios button-->
+
+
+
+
+                      <!--Temática ******************************************** Temática **************+-->
+                        <div class="panel" >
+                        <button id="tematica-button" class="btn btn-info col-xs-12  col-sm-12 col-md-12 col-lg-12 tematica-button" style="text-align: left; padding: 10px!important; " >
+                          <strong> <i class="fa fa-tree"></i> TEMÁTICA </strong>
+                        </button>
+                          
+
+                          <div class='tematica_section col-xs-12  col-sm-12 col-md-12 col-lg-12' id="tematica_section"> 
+                                    <form class="form-horizontal" id='form-tematica'> 
+                                                <input type="hidden" name="id_evento_tematica" id="id_evento_tematica" value="<?=$evento;?>">                                    
+                                                <div class="input-group">
+                                                  <span class="input-group-addon"><i class="fa fa-tree"></i></span>
+                                                  <select class="form-control m-bot15" id="tematica_select" name="tematica_select">
+                                                      
+                                                  </select>
+                                                </div>         
+                                     </form> 
+                          </div>                                                            
+                      </div> <br><br>
+                      <!--end Temática ******************************************** End Temática **************+-->
+
+
 
 
              
@@ -432,8 +381,6 @@
                       <div class="panel" >
                         <a href="#mapgooglemap"><button class="btn btn-info col-xs-12  col-sm-12 col-md-12 col-lg-12 accesos-button" style="text-align: left; padding: 10px!important; " >
                           <strong> <i class="fa fa-map-marker"></i> LOCACIÓN</strong></button></a>
-
-                        
                       </div> <br><br><br>
 
                       <!--Termina localcion button-->
@@ -448,7 +395,7 @@
 
 
 
-                        <div class="panel" >
+                        <div class="panel">
                                 <header class="panel-heading" style="background: #032132">
                                   <div class="numero_escenarios" id="numero_escenarios"></div>                                  
                                     <span class="tools pull-right">
@@ -689,7 +636,9 @@
 
 
   </div>
+
 </div>  
+
 
 
 
@@ -1231,18 +1180,14 @@ h4{
   cursor: pointer;
   font-size: 1.2em;
 }
-.section_generosmusicales{
+.section_generosmusicales, .generos_musicales_div{
   display: none;
-
 }
+#tematica_section , .tematica_section{
+  display: none;
+ }
 </style>
-
-
-
-
-
 <link href="<?=base_url('application/js/js/dropzone/css/dropzone.css')?>" rel="stylesheet"/>
-
 <link rel="stylesheet" type="text/css" href="<?=base_url('application/js/js/bootstrap-datepicker/css/datepicker-custom.css')?>" />
 <script type="text/javascript" src="<?=base_url('application/js/js/bootstrap-datepicker/js/bootstrap-datepicker.js')?>"></script>
 <script type="text/javascript" src="<?=base_url('application/js/js/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js')?>"></script>
@@ -1255,12 +1200,13 @@ h4{
 
 
 
-
+<script type="text/javascript" src="<?=base_url('application/js/evento/generosmusicales.js')?>"></script>
 <script type="text/javascript" src="<?=base_url('application/js/evento/principal.js')?>"> </script>
 <script type="text/javascript" src="<?=base_url('application/js/evento/escenarios.js')?>"> </script>
 <script type="text/javascript" src="<?=base_url('application/js/evento/accesos.js')?>"> </script>
 <script type="text/javascript" src="<?=base_url('application/js/evento/servicios.js')?>"> </script>
 <script type="text/javascript" src="<?=base_url('application/js/evento/objetospermitidos.js')?>"></script>
+<script type="text/javascript" src="<?=base_url('application/js/evento/tematica.js')?>"></script>
 
 <!--Escenarios modal-->
 <script src="//connect.soundcloud.com/sdk-2.0.0.js"></script>

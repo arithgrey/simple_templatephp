@@ -1,28 +1,3 @@
-
-            
-            
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 <link rel="stylesheet" type="text/css" href="<?=base_url('application/js/js/bootstrap-datepicker/css/datepicker-custom.css')?>" />
 <script type="text/javascript" src="<?=base_url('application/js/js/bootstrap-datepicker/js/bootstrap-datepicker.js')?>"></script>
 <script type="text/javascript" src="<?=base_url('application/js/js/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js')?>"></script>
@@ -31,15 +6,39 @@
 <script type="text/javascript" src="<?=base_url('application/js/js/bootstrap-colorpicker/js/bootstrap-colorpicker.js')?>"></script>
 <script type="text/javascript" src="<?=base_url('application/js/js/bootstrap-timepicker/js/bootstrap-timepicker.js')?>"></script>
 <script src="<?=base_url('application/js/js/pickers-init.js')?>"></script>
-
 <script type="text/javascript" src="<?=base_url('application/js/estratega/evento/principal.js')?>"></script>
+
 
 
 <style type="text/css">
 #dinamic-field , #success-alert{
     display: none;
 }
+ #scroll{
+        border:1px solid;            
+        overflow-y:scroll;
+        overflow-x:hidden;
+
+    }
+
 </style>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -102,12 +101,12 @@
                                 <div class="col-md-12">
                                     <form role="form" class="form-inline" method="POST" id="nuevo-evento-form"  action=""> 
                                         <div class="form-group todo-entry">
-                                            <input name='nuevo_evento' placeholder="Evento ejemplo Galactic Festival " class="form-control" style="width: 100%" type="text">
+                                            <input name='nuevo_evento' placeholder="Evento ejemplo Gala Festival " class="form-control" style="width: 100%" type="text">
 
 
                                             <!--Campos ocultos-->
                                             <div id='dinamic-field'>
-                                                        <input name='nueva_edicion' placeholder="Edicióne jemplo Revolution 2015 " class="form-control" style="width: 100%" type="text">
+                                                        <input name='nueva_edicion' placeholder="Edición México 2015 " class="form-control" style="width: 100%" type="text">
 
 
                                                         <div class="input-group  custom-date-range" data-date="13/01/2015" data-date-format="mm/dd/yyyy">

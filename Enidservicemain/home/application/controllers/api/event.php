@@ -225,14 +225,52 @@ class Event extends REST_Controller{
 
 
 
+
+
+
+/**Load temántica *Load temántica *Load temántica *Load temántica *Load temántica *Load temántica **/
+function loadtematicabyid_get(){
+    if ($this->sessionclass->is_logged_in() == 1){
+
+            $idevento = $this->get("id_evento_tematica");
+            $idempresa =  $this->sessionclass->getidempresa();
+            $this->response($this->eventmodel->getTematicaByid($idevento , $idempresa));
+
+        }else{
+            $this->sessionclass->logout();    
+        }   
+
+}
+
+
+
+
+/*End tematica load End tematica load End tematica load End tematica load End tematica load */
+
+
+
+
+function update_tematica_by_id_post(){
+
+    if ($this->sessionclass->is_logged_in() == 1){
+
+
+            
+            
+            $idevento = $this->post("id_evento_tematica");
+            $tematica_select = $this->post("tematica_select");
+            $idempresa =  $this->sessionclass->getidempresa();
+            $this->response($this->eventmodel->update_tematicaby_id( $idevento , $tematica_select, $idempresa ));
+
+        }else{
+            $this->sessionclass->logout();    
+        }   
+}
+
+
+
+
 /*****************Permitido *Permitido *Permitido *Permitido *Permitido *Permitido *****/
-
-
-
-
-
-
-
 function updatepermitido_post(){
 
         if ($this->sessionclass->is_logged_in() == 1){

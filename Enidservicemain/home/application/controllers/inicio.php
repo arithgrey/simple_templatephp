@@ -145,7 +145,9 @@ function administrador(){
 
 
 /**/
-   
+
+
+	
 
 	function logout(){
 	

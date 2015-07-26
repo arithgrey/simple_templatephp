@@ -4,6 +4,8 @@ class Eventos extends CI_Controller {
     function __construct(){
         parent::__construct();
 
+        $this->load->helper('generoshelp');
+        $this->load->model('generosmusicalesmodel');
         $this->load->model("eventmodel");
         $this->load->library('sessionclass');      
     }
@@ -92,6 +94,7 @@ class Eventos extends CI_Controller {
                         $inicio = $this->input->get("start");                        
                         $termino = $this->input->get("end");
 
+
                         
 
                             if ($this->checkifexist($idevento , $idempresa) == 1 ) {
@@ -100,6 +103,10 @@ class Eventos extends CI_Controller {
                                     $data["inicio"] = $inicio;
                                     $data["termino"] = $termino;
 
+
+                                   
+                                    $responsedb = $this->generosmusicalesmodel->getDataByidEvent($idempresa, $idevento);                                    
+                                    $data["list_generos"] = list_generos_musicales($responsedb);
 
 
                                     
