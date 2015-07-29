@@ -10,6 +10,7 @@ function listobjetosp( $arreglo ){
 //objetospermitidos
 
 	$list ="";
+
 	
 
 	$b =1;

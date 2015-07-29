@@ -85,5 +85,7 @@ function displayviewusuario( $perfil ){
 
 
 
+
+
 }/*Termina el helper*/
  

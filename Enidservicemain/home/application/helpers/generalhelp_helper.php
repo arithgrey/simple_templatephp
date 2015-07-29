@@ -142,8 +142,8 @@ if(!function_exists('invierte_date_time')){
 
   function validate_text($texto){
 
-       $texto = str_replace('"','*', strip_tags($texto ));  
-       $texto = str_replace("'",'*', strip_tags($texto ));   
+       $texto = str_replace('"','', strip_tags($texto ));  
+       $texto = str_replace("'",'', strip_tags($texto ));   
        return $texto;
 
   }

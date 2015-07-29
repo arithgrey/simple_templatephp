@@ -259,7 +259,13 @@ function get_time_events_byid($idempresa){
 
 
 /**End Pasados **End Pasados **End Pasados **End Pasados **End Pasados **/
+function get_servicios_evento_by_id($id_evento){
 
+	$query_servicios_list ="select * from servicio as s, evento_servicio as es
+	 where es.idevento = '".$id_evento."' and s.idservicio = es.idservicio";
+	$result = $this->db->query($query_servicios_list);
+	return $result->result_array();
+}
 
 /*Termina modelo */
 }

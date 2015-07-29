@@ -1,41 +1,48 @@
 <?php
-
 class Upload extends CI_Controller {
 
-    function __construct()
-    {
+    function __construct(){
         parent::__construct();
-        $this->load->helper(array('form', 'url'));
-        $this->folder = 'application/upload/';
+        $this->load->helper(array('form', 'url'));      
     }
 
-    function index()
-    {
-        $this->load->view('upload_form', array('error' => ' ' ));
-    }
+    function index(){
 
-    function do_upload()
-    {
-        $config['upload_path'] = $this->folder;
-        $config['allowed_types'] = 'gif|jpg|png|txt|pdf|docx|odt';
-        $config['max_size'] = '9100';
-        $config['max_width']  = '90924';
-        $config['max_height']  = '9768';
 
-        $this->load->library('upload', $config);
+                $ds = "/";  
+                 
+                $storeFolder = 'uploads';   
+                if (!empty($_FILES)) {
+                     
+                    $tempFile = $_FILES['file']['tmp_name'];         
+                    $targetPath = dirname( __FILE__ ) . $ds. $storeFolder . $ds;  
 
-        if ( ! $this->upload->do_upload())
-        {
-            $error = array('error' => $this->upload->display_errors());
+                    
+                    $targetFile =  $targetPath. $_FILES['file']['name'];  
+                    move_uploaded_file($tempFile , $targetFile); //6
+                     
+                }
 
-            $this->load->view('upload_form', $error);
-        }
-        else
-        {
-            $data = array('upload_data' => $this->upload->data());
 
-            $this->load->view('upload_success', $data);
-        }
-    }
+                
+    }/*termina la funcion*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }
 ?>

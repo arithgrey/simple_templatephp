@@ -5,6 +5,8 @@ class Eventos extends CI_Controller {
         parent::__construct();
 
         $this->load->helper('generoshelp');
+        $this->load->helper('accesos');
+        $this->load->model("accesosmodel");
         $this->load->model('generosmusicalesmodel');
         $this->load->model("eventmodel");
         $this->load->library('sessionclass');      
@@ -104,7 +106,8 @@ class Eventos extends CI_Controller {
                                     $data["termino"] = $termino;
 
 
-                                   
+                                    $carpeta_evento_img = base_url().'application/uploads/upload.php?e='.$idevento;                                   
+                                    $data["carpeta_evento_img"]= $carpeta_evento_img;
                                     $responsedb = $this->generosmusicalesmodel->getDataByidEvent($idempresa, $idevento);                                    
                                     $data["list_generos"] = list_generos_musicales($responsedb);
 
@@ -125,6 +128,140 @@ class Eventos extends CI_Controller {
             $this->sessionclass->logout();
         }
     }/*termina la función*/
+
+
+
+    /*Pre visualizar  ********************** pre visualizar */
+
+
+
+
+
+
+
+
+
+
+
+        function previsualizar(){
+
+            if( $this->sessionclass->is_logged_in() == 1){            
+                
+                        $menu = $this->sessionclass->generadinamymenu();            
+                        $data["menu"] = $menu;
+                        $nombre = $this->sessionclass->getnombre();
+                        
+                        $data["nombre"]= $nombre;
+                        $data["perfilactual"] =  $this->sessionclass->getnameperfilactual(); 
+                        $data['titulo']='';
+                        $idempresa =  $this->sessionclass->getidempresa();                        
+                        $idevento = $this->input->get("evento");                        
+                          
+
+                        
+
+                            if ($this->checkifexist($idevento , $idempresa) == 1 ) {
+                                    $this->load->helper('servicios');
+                                    $dataevent = $this->eventmodel->getEventbyid($idevento);
+                                    $data["evento"] =  $dataevent[0];
+
+                                    $array_servicios_includos = $this->eventmodel->get_servicios_evento_by_id($idevento);
+                                    $data["servicios_evento"] = list_services_default_view($array_servicios_includos); 
+                                    $data["idevento"] = $idevento;
+
+                                    $this->load->view('TemplateEnid/header_template', $data);
+                                    $this->load->view('eventos/previsualizarevent', $data);  
+                                    $this->load->view('TemplateEnid/footer_template', $data);    
+
+                            }else{
+                                    header('Location:' . base_url('index.php/inicio/eventos'));
+                            }
+
+                        
+
+                }else{
+            /*Terminamos la session*/
+            $this->sessionclass->logout();
+        }
+    }
+
+
+
+
+
+
+/*termina la función pre visualizar */
+ 
+
+
+
+
+
+
+
+
+        function puntosventa(){
+
+            if( $this->sessionclass->is_logged_in() == 1){            
+                
+                        $menu = $this->sessionclass->generadinamymenu();            
+                        $data["menu"] = $menu;
+                        $nombre = $this->sessionclass->getnombre();
+                        
+                        $data["nombre"]= $nombre;
+                        $data["perfilactual"] =  $this->sessionclass->getnameperfilactual(); 
+                        $data['titulo']='';
+                        $idempresa =  $this->sessionclass->getidempresa();                        
+                        $idevento = $this->input->get("evento");                        
+                          
+
+                        
+
+                            if ($this->checkifexist($idevento , $idempresa) == 1 ) {
+                                    
+                                    
+
+                                    $data["idevento"] = $idevento;
+
+                                    $accesosdata = $this->accesosmodel->get_acceso_by_event($idevento);    
+                                    $data["accesos_evento"]= accesos_view_default($accesosdata);
+
+
+                                    $this->load->view('TemplateEnid/header_template', $data);
+                                    $this->load->view('eventos/puntos_venta', $data);  
+                                    $this->load->view('TemplateEnid/footer_template', $data);    
+
+                            }else{
+                                    header('Location:' . base_url('index.php/inicio/eventos'));
+                            }
+
+                        
+
+                }else{
+            /*Terminamos la session*/
+            $this->sessionclass->logout();
+        }
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

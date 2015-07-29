@@ -24,13 +24,18 @@ function  loadescenarioss(){
 	
 	$.post(url , $("#form-escenario").serialize() ).done(function(data){
 
-			llenaelementoHTML("#list_escenarios" , data["info"]);
-			llenaelementoHTML("#numero_escenarios" , "<i class='fa fa-play'></i> Escenarios #" +  data["numero_escenarios"] );
+			
+			if (data != null ) {
+				
+				llenaelementoHTML("#list_escenarios" , data["info"]);
+				llenaelementoHTML("#numero_escenarios" , "<i class='fa fa-play'></i> Escenarios #" +  data["numero_escenarios"] );
 
-			$(".descripcion_escenario_update").click(updatedescription);
-			$(".deleteescenario").click(deleteescenario);
-			$(".edita-modal-escenario").click(updateescenariomodal);
-
+				$(".descripcion_escenario_update").click(updatedescription);
+				$(".deleteescenario").click(deleteescenario);
+				$(".edita-modal-escenario").click(updateescenariomodal);
+	
+			}		
+			
 
 	}).fail(function(){
 		

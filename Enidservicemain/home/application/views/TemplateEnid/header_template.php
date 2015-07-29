@@ -14,7 +14,7 @@
 
 
 
-<?=link_tag('application/js/js/iCheck/skins/minimal/minimal.css');?>
+<?=link_tag('application/js/js/iCheck/skins/minimal/mi.css');?>
 <?=link_tag('application/js/js/iCheck/skins/square/square.css');?>
 <?=link_tag('application/js/js/iCheck/skins/square/red.css');?>
 <?=link_tag('application/js/js/iCheck/skins/square/blue.css');?>
@@ -226,7 +226,14 @@
         .wrapper{
     background: rgb(255, 252, 231);
 }
-
+        
+        .modal-header{
+            background: #09AFDF !important;
+            
+        }   
+        .modal-title{
+            color: white !important;
+        }   
 
         </style>
        

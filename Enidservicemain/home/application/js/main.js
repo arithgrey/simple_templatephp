@@ -8,15 +8,12 @@ $(document).on("ready" , function(){
 	, "Ocurio un error al intentar registrar cambio, reporte al administrador del sistema" ];
 
 
-	
-
 });
 function outsystem(){
 	urlnext = $(".now").val()+"index.php/sessioncontroller/logout/";		
 	redirect(urlnext);	
 }
 function llenaelementoHTML(idelement , data){
-
 	
 	$(idelement).html(data);
 } 

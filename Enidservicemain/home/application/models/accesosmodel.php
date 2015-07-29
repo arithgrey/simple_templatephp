@@ -32,6 +32,19 @@ function getDataByidEvent($idempresa, $evento){
 
 }
 
+
+
+function get_acceso_by_event($id_evento){
+
+
+	$select_byid ="SELECT * FROM acceso, tipo_acceso WHERE 
+	 tipo_acceso.idtipo_acceso= acceso.idtipo_acceso AND
+	  acceso.idevento='". $id_evento . "' order by termino_acceso desc";
+
+	$result_acceso = $this->db->query($select_byid); 
+	return $result_acceso ->result_array();
+
+}	
 function getTipoEscenario(){
 	
 	$get_tipo ="SELECT * FROM tipo_acceso";	

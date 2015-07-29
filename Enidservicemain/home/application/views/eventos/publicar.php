@@ -1,3 +1,145 @@
+<style type="text/css">
+
+.descripcion-modal-text:hover{
+  font-size: 1.2em;
+  cursor: pointer;
+
+}
+.todo-title, #title-modal-heading{
+  color: black;
+}
+
+.newdescripesenario{
+  display: none;
+}
+.descripcion_escenario_update:hover, .nombre-escenario-modal:hover{
+  font-size: 1.2em;
+  cursor: pointer;
+}
+.title-page-enid{
+    display: none;
+}
+#guardar-generos{
+  display: none;
+}
+#file_input{
+  display: none;
+}
+#nombre-input, #edicion-input , #evento , #descripcion-evento, #ubicacion-input, .descripcion-in-modal-escenario, .nombre-escenario-input-modal, .day_escenario_inputs ,.social-media-event, #restricciones-evento ,  #politicas-evento, #permitido-evento {
+    display: none;
+}
+.tag span{
+    color: white;
+}
+.tag-items-form{
+    
+    background: none repeat scroll 0% 0% #043544 !important;    
+}
+.panel-enid-right{
+    background: red;
+}
+.p-states.green-box{
+    background: white !important;   
+}
+.green-box {
+    box-shadow: 0px 5px 0px #09AFDF !important;
+}
+.direccion-event-lab{
+    color: white;
+}
+.descripcion-evento-p{
+    background:  #13979C;
+    color: white;
+}
+.nombre-evento-h1, .edicion-evento , .white{
+    color: white !important;
+}
+.nombre-evento-h1:hover{
+    font-size: 1.5em;
+    cursor: pointer;
+}
+.edicion-evento:hover{
+ font-size: 1.2em;   
+ cursor: pointer;
+}
+.descripcion-p:hover{
+ font-size: 1.1em;      
+ cursor: pointer;
+}
+.dropzone{
+    margin-top: -10px !important;
+}
+.ubicacion-panel:hover , .accesos-panel:hover{
+    padding: 10px;    
+    cursor: pointer;
+}
+#map-section{
+    background:  #09AFDF;
+   //background: none repeat scroll 0% 0% #13979C;
+    padding: 10px;
+}
+#span-ubicacion{
+    font-size: 1.3em;
+    color: white;
+}
+.panel-heading {
+    color: white;
+}
+.activity-list li{
+    background: white;
+    padding: 5px;
+    border-radius: 5px;
+}
+#my-awesome-dropzone{
+    background: white;
+}
+h4{
+    color: black !important;
+}
+#accesos-plus:hover{
+    font-size: 1.2em;
+}
+.restricciones-p:hover , .politicas-p:hover , .permitido-p{
+
+  cursor: pointer;
+  font-size: 1.2em;
+}
+.section_generosmusicales, .generos_musicales_div{
+  display: none;
+}
+#tematica_section , .tematica_section{
+  display: none;
+ }
+</style>
+
+<link href="<?=base_url('application/js/js/dropzone/css/dropzone.css')?>" rel="stylesheet"/>
+<link rel="stylesheet" type="text/css" href="<?=base_url('application/js/js/bootstrap-datepicker/css/datepicker-custom.css')?>" />
+<script type="text/javascript" src="<?=base_url('application/js/js/bootstrap-datepicker/js/bootstrap-datepicker.js')?>"></script>
+<script type="text/javascript" src="<?=base_url('application/js/js/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js')?>"></script>
+<script type="text/javascript" src="<?=base_url('application/js/js/bootstrap-daterangepicker/moment.min.js')?>"></script>
+<script type="text/javascript" src="<?=base_url('application/js/js/bootstrap-daterangepicker/daterangepicker.js')?>"></script>
+<script type="text/javascript" src="<?=base_url('application/js/js/bootstrap-colorpicker/js/bootstrap-colorpicker.js')?>"></script>
+<script type="text/javascript" src="<?=base_url('application/js/js/bootstrap-timepicker/js/bootstrap-timepicker.js')?>"></script>
+<script src="<?=base_url('application/js/js/pickers-init.js')?>"></script>
+
+
+
+
+<script type="text/javascript" src="<?=base_url('application/js/evento/generosmusicales.js')?>"></script>
+<script type="text/javascript" src="<?=base_url('application/js/evento/principal.js')?>"> </script>
+<script type="text/javascript" src="<?=base_url('application/js/evento/escenarios.js')?>"> </script>
+<script type="text/javascript" src="<?=base_url('application/js/evento/accesos.js')?>"> </script>
+<script type="text/javascript" src="<?=base_url('application/js/evento/servicios.js')?>"> </script>
+<script type="text/javascript" src="<?=base_url('application/js/evento/objetospermitidos.js')?>"></script>
+<script type="text/javascript" src="<?=base_url('application/js/evento/tematica.js')?>"></script>
+
+<!--Escenarios modal-->
+<script src="//connect.soundcloud.com/sdk-2.0.0.js"></script>
+<script type="text/javascript" src="<?=base_url('application/js/evento/gmap.js')?>"></script>
+<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true&libraries=places"></script>
+
+
+
 <div class="col-md-12">
                     <div class="panel">
                         <header class="panel-heading">                            
@@ -90,28 +232,51 @@
 
 
 
-                    <div class='col-xs-12  col-sm-6 col-md-6 col-lg-6 '>
-                      
-                      <table class="table table-condensed">
-                        <div class='objetospermitidosf'><div>
-                      </table>
+                  <div class='col-xs-12  col-sm-12 col-md-12 col-lg-12'>
+                        
 
-                    </div>
-                    <div class='col-xs-12  col-sm-6 col-md-6 col-lg-6 '>
 
-                            <p class='permitido-p'>
+                          <p class='permitido-p'>
                                
                             </p>
                             <div class="form-group">
                                 <textarea id='permitido-evento' placeholder ='' rows="6" class="form-control"></textarea>
                             </div> 
-
-
                             <div class='objetos_permitidos' ></div>
 
+                  
+                      
+                            <section class="panel">
+                              <header class="panel-heading">
+                                  Basic Table
+                                      <span class="tools pull-right">
+                                          <a href="javascript:;" class="fa fa-chevron-down"></a>                      
+                                       </span>
+                              </header>
+                              <div class="panel-body">
+                                  <table class="table">
+                                      <thead>
+                                      <tr>
+                                          <th>#</th>
+                                          <th>First Name</th>
+                                          <th>Last Name</th>
+                                          
+                                      </tr>
+                                      </thead>
+                                      <tbody class='objetospermitidosf'>
+                                      </tbody>
+                                  </table>
+                              </div>
 
+                             </section>
+
+
+
+
+
+                        
                     </div>
-
+                    
                       
                       
               </div>
@@ -250,10 +415,34 @@
                                             </div>
 
 
-                                          <form action="<?=base_url('application/js/js/dropzone/upload.php')?>" class="dropzone" id="my-awesome-dropzone">
-                                                </form>
 
-                                                
+
+
+
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    
+      Dropzone.autoDiscover = false;
+      var myDropzone = new Dropzone("#event-img");
+
+
+  });
+</script>
+
+<link href="<?=base_url('application/js/js/dropzone/css/dropzone.css')?>" rel="stylesheet"/>
+<!--dropzone-->
+<script src="<?=base_url('application/js/js/dropzone/dropzone.js')?>"></script>
+
+
+
+
+
+
+                                                  <form action="<?=$carpeta_evento_img?>" class="dropzone" id="event-img">
+                                                    <input id="file_input" type="file" name="file">                                                                                                          
+                                                  </form>
+                                                   
                                                
       
                                          <div class='dropzone-previews'></div>       
@@ -420,21 +609,21 @@
                                       </form>
                                 </div>                                
                         </div>
-
-                      
-                      
-
-                     
-
-
-
-
                     </div>
 <!--Termina  section tres -->
 
 
 
 
+<div class="col-md-12">
+  <!--******************** button pre visualizar ***************************** -->
+  <center>
+    <a href="<?=base_url('index.php/eventos/previsualizar?evento=')?><?=$evento;?>">
+    <button class="btn btn-primary btn-lg" type="button"> Siguiente </button>
+    </a>
+  </center>  
+  <!--******************** button pre visualizar ***************************** -->
+</div>
 
 
   
@@ -462,97 +651,88 @@
 
 <div id="modalesenariosedit"  class="modal fade bs-example-modal-lg" tabindex="-1"
  role="dialog" aria-labelledby="myLargeModalLabel">  
-  <div class="modal-dialog modal-lg">
+    <div class="modal-dialog modal-lg">
+
+     <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>        
+        <h3 class='nombre-escenario-modal'></h3>
+        <input type="text" data-trigger="click" class="form-control popovers nombre-escenario-input-modal" id='nombre-escenario-input-modal' placeholder="Escenario">
+      </div>
+
+         
+    <form id="updateescenariomodal-form">
+          <input type='hidden' id="idescenarioupdatemodal" name="idescenarioupdatemodal"  class="idescenarioupdatemodal" >
+      </form>
+      
+
+     <div class="modal-body">        
+        
   
-
-
-
-<div class='well col-xs-12'>
-  <button type="button" class="close" data-dismiss="modal">&times;</button>
-  <h3 class='nombre-escenario-modal'></h3>
-
-  <input type="text" data-trigger="click" 
-  class="form-control popovers nombre-escenario-input-modal" id='nombre-escenario-input-modal' placeholder="Escenario">
-      
-
-      
-        <div class='row'>
-           
-           <div class='panel'>
-            
-            <div style="color: black" class='descripcion-modal-text well ' >
+       
+        
+              
+<div class='row'>
+                    
+            <div class='descripcion-modal-text col-xs-12  col-sm-12 col-md-12 col-lg-12 ' >
               + agregar descripción del escenario
             </div>
-            
+                    
             <div class="form-group">
-              <textarea class='descripcion-in-modal-escenario col-xs-12' ></textarea>
+                <textarea class='descripcion-in-modal-escenario col-xs-12  col-sm-12 col-md-12 col-lg-12 ' ></textarea>
             </div> 
+</div>                      
+<div class='row'>
+           <div class='col-xs-12  col-sm-6 col-md-6 col-lg-6 '>
+
+                <button class="btn btn-info  col-xs-12 day_escenario_button" type="button" > 
+                  <span class='day_escenario'></span>
+                </button>
+                
+                <button class="btn btn-info  col-xs-12 day_escenario_inputs" type="button">            
+                    <div class="input-group  custom-date-range" data-date="" data-date-format="mm/dd/yyyy">
+                        <input class="form-control dpd1" name="nuevo_inicio_escenario" id="nuevo_inicio_escenario" type="text">
+                        <span class="input-group-addon">hasta</span>
+                        <input class="form-control dpd2" name="nuevo_termino_escenario" id="nuevo_termino_escenario" type="text">
+                    </div>
+                </button>  
            </div> 
 
-        </div>
-
-</div>
-
-
-
- <div class='well'>
-
-
-
-  
-
-
-
- 
-        
-  <div class='row'>
-
-              
-              
-             <form id="updateescenariomodal-form">
-                            <input type='hidden' id="idescenarioupdatemodal" name="idescenarioupdatemodal"  class="idescenarioupdatemodal" >
-              </form>
-
-  </div>
-
-<div class='row'>
+         <!--**************** **********************  ******************* -->
+        <div class="col-xs-12  col-sm-6 col-md-6 col-lg-6 ">
+                                  <div class="input-group">
+                                        <div class="input-group-btn">
+                                            
+                                            <button tabindex="-1" data-toggle="dropdown" class="btn btn-default dropdown-toggle" type="button">
+                                                Tipo<span class="caret"></span>
+                                            </button>
+                                            <ul role="menu" class="dropdown-menu">
+                                                <li ><a class='tipo-evento-modal' id='General' href="#">General</a></li>
+                                                <li ><a class='tipo-evento-modal' id='Principal' href="#">Principal</a></li>
+                                                <li ><a class='tipo-evento-modal' id='Especial' href="#">Especial</a></li>                                                                              
+                                            </ul>
+                                        </div>
+                                        <input type="text"  class="form-control input_tipo" >
+                                    </div>
+        </div>  
+</div>        
 
 
-
-
-
-
-
-
-
-
-
-
-<div class="col-xs-12  col-sm-8">  
-    <div class='row'>
-
-        
-
-
+        <!--**************** **********************  ******************* -->
+        <!--**************** **********************  ******************* -->         
+<div class='row'>        
          <div class="col-md-12">
-
-
-
-
-
                   <div class="panel">
                         <header class="panel-heading">
                             <span style='color:black '><i class="fa fa-play"></i> Artistas</span>
                             <span class="tools pull-right">
                                 <a class="fa fa-chevron-down" href="javascript:;"></a>
-                                
                              </span>
                         </header>
                         <div class="panel-body">                          
                                       <ul class="to-do-list ui-sortable" id="sortable-todo">                                   
                                         <div class="general-artistas"></div>
                                       </ul>
-
                                       <form role="form" class="form-inline" id="form-artistas" >
                                                         <div class="form-group todo-entry">
                                                           <datalist id="dinamic-artistas">              
@@ -562,99 +742,30 @@
                                                           placeholder="Artista que se presentará en el escenario" class="form-control" style="width: 100%">
                                                         </div>
                                                         <button class="btn btn-primary pull-right" type="submit">+</button>
-                                      </form>
-                            
-
-
+                                      </form>                          
                         </div>
                     </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
-
-
-                                                   
           </div>
 
-    </div>
 
-</div>
+</div>          
+          <!--**************** **********************  ******************* -->
+            
 
-<div class="col-xs-12  col-sm-4">
-  <div class='row'>
 
-    <button class="btn btn-info btn-lg col-xs-12 day_escenario_button" type="button" style="font-size: 1em !important;" > <span class='day_escenario'></span></button>
 
-    
-      
-    <button class="btn btn-info btn-lg col-xs-12 day_escenario_inputs" type="button">
-      
-      <div class="input-group  custom-date-range" data-date="" data-date-format="mm/dd/yyyy">
-            <input class="form-control dpd1" name="nuevo_inicio_escenario" id="nuevo_inicio_escenario" type="text">
-            <span class="input-group-addon"></span>
-            <input class="form-control dpd2" name="nuevo_termino_escenario" id="nuevo_termino_escenario" type="text">
       </div>
-                                    
-    </button>  
 
-
-    
-
-                          <div class="input-group m-bot15">
-                                <div class="input-group-btn">
-                                    
-                                    <button tabindex="-1" data-toggle="dropdown" class="btn btn-default dropdown-toggle" type="button">
-                                        Tipo<span class="caret"></span>
-                                    </button>
-                                    <ul role="menu" class="dropdown-menu">
-                                        <li ><a class='tipo-evento-modal' id='General' href="#">General</a></li>
-                                        <li ><a class='tipo-evento-modal' id='Principal' href="#">Principal</a></li>
-                                        <li ><a class='tipo-evento-modal' id='Especial' href="#">Especial</a></li>
-                                        
-                                        
-                                    </ul>
-                                </div>
-                                <input type="text"  class="form-control input_tipo" >
-                            </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+      </div>
 
 
 
-
-
-
-
-  </div>
-
-</div>  
-
-
-
-
-
-
-
-
-</div>
-
-
-
-
-
+      </div>
     </div>
-  </div>
 </div>
+
 
 
 
@@ -675,14 +786,9 @@
             lient_id: '1ce2bf4dcd83ee01f111219905b4f943'
         });
          
-        SC.get('/tracks', { q: Stringentrante   }, function(tracks) {
-          
-                //document.write( "<pre><xmp>" + JSON.stringify(tracks) + "</xmp></pre>");
-
+        SC.get('/tracks', { q: Stringentrante }, function(tracks) {                        
                 newcontenidodatalist ="";                
                    for(var x in tracks ) {
-
-
                     /*Genero del artista*/
                     genre =  tracks[x]["genre"];
                     username = tracks[x]["user"].username;
@@ -772,13 +878,21 @@
 <div id="horarioartista" class="modal fade">
 <div class="modal-dialog">
 <div class="modal-content">
+  <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Establecer horario en que se presentará el artista</h4>
+      </div>
   <!-- dialog body -->
   <div class="modal-body">    
-           <div class="modal-footer">               
-                <?=generatehorarioartista("hiartista" , "htartista" );?>
+
+            <?=generatehorarioartista("hiartista" , "htartista" );?>
                <button type="button" class="btn btn-default" id="tregistrohorario" data-dismiss="modal">Guardar</button>                
-          </div>
+          
   </div>
+  <div class="modal-footer">               
+    
+  </div>
+
 </div>
 </div>
 </div>
@@ -829,11 +943,18 @@
 <div class="modal-dialog modal-lg">
 
 <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Acceso al evento</h4>
+      </div>
+
+
 
   <!-- dialog body -->
   <div class="modal-body">    
-    <button type="button" class="close" data-dismiss="modal">&times;</button>
+    
     <!--inicia  modal body-->       
+      <div class='row'>
                 <table class="table table-bordered table-invoice">
                     <thead>
                     <tr>
@@ -850,9 +971,9 @@
                     </tbody>
                 </table>
 
-
-
-                <table class="table well">
+      </div>          
+      <div class='row'>
+                <table class="table">
                   <form class='form-accesos-modal' id="form-accesos-modal">
                     <input type="hidden" value="<?=$evento;?>" id="evaccesos"  class='evaccesos' name='evaccesos'>
                    
@@ -909,10 +1030,15 @@
                     </tr>
 
                     </form>
-                </table>
+                </table>  
+      </div>          
 
     <!--Termina modal body-->       
   </div>
+   <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+    </div>
+
 </div>
 </div>
 </div>
@@ -935,20 +1061,6 @@
 
 
 
-<div id="politicasmodal" class="modal fade">
-<div class="modal-dialog">
-<div class="modal-content">
-  
-  <div class="modal-body">
-    <!-- dialog body -->
-  
-  
-             
-    <!-- terminam   body -->
-  </div>
-</div>
-</div>
-</div>
 
 <!--************************************************************-->
 
@@ -959,19 +1071,19 @@
 <div id="confirmationdeleteacceso" class="modal fade">
 <div class="modal-dialog">
 <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Eliminar</h4>
+      </div>
   <!-- dialog body -->
-  <div class="modal-body">
-    
-  
-  
+  <div class="modal-body">  
            <div class="modal-footer">
                 Realmente decea quitar de la lista el acceso??
                 <button type="button" class="btn btn-default" id="aceptar-delete-acceso" data-dismiss="modal">Aceptar</button>
                 <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
                 
             </div>
-
-</div>
+  </div>
 </div>
 </div>
 </div>
@@ -992,25 +1104,32 @@
 
 
 <div id="serviciosmodal" class="modal fade">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+               <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Servicios que incluira en evento</h4>
+              </div>
 
-<div class="modal-dialog modal-lg">
+              <!-- dialog body -->
+              <div class="modal-body">    
+                
+                <div class='row'>
+                  <div class='panel'>
 
-<div class="modal-content">
+                    <input type="hidden" value="<?=$evento;?>" id="eventoservicios"  class='eventoservicios' name='eventoservicios'>
+                    <div class='servicios-evento-modal'></div>                            
+                  </div>
+                </div>  
+                
+              </div>
 
-  <!-- dialog body -->
-  <div class="modal-body">    
-    <button type="button" class="close" data-dismiss="modal">&times;</button>
-    <!--inicia  modal body-->                     
-    <div class='panel'>
+               <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+              </div>
 
-      <input type="hidden" value="<?=$evento;?>" id="eventoservicios"  class='eventoservicios' name='eventoservicios'>
-      <div class='servicios-evento-modal'></div>        
-          
-    </div>
-    <!--Termina modal body-->       
-  </div>
-</div>
-</div>
+            </div>
+        </div>
 </div>
 
 
@@ -1061,154 +1180,3 @@
 
 
 
-
-
-<style type="text/css">
-
-.descripcion-modal-text:hover{
-  font-size: 1.2em;
-  cursor: pointer;
-
-}
-.todo-title, #title-modal-heading{
-  color: black;
-}
-
-.newdescripesenario{
-  display: none;
-}
-.descripcion_escenario_update:hover, .nombre-escenario-modal:hover{
-  font-size: 1.2em;
-  cursor: pointer;
-}
-
-.title-page-enid{
-    display: none;
-}
-#guardar-generos{
-  display: none;
-}
-#nombre-input, #edicion-input , #evento , #descripcion-evento, #ubicacion-input, .descripcion-in-modal-escenario, .nombre-escenario-input-modal, .day_escenario_inputs ,.social-media-event, #restricciones-evento ,  #politicas-evento, #permitido-evento {
-    display: none;
-}
-
-.tag span{
-    color: white;
-}
-
-.tag-items-form{
-    
-    background: none repeat scroll 0% 0% #043544 !important;    
-}
-
-.panel-enid-right{
-    background: red;
-}
-.section-enid-events-left{
-
-
-}
-.p-states.green-box{
-    background: white !important;
-
-    
-}
-.green-box {
-    box-shadow: 0px 5px 0px #09AFDF !important;
-}
-.direccion-event-lab{
-    color: white;
-}
-.descripcion-evento-p{
-    background:  #13979C;
-    color: white;
-}
-
-.nombre-evento-h1, .edicion-evento , .white{
-    color: white !important;
-}
-.nombre-evento-h1:hover{
-    font-size: 1.5em;
-    cursor: pointer;
-
-}
-.edicion-evento:hover{
- font-size: 1.2em;   
- cursor: pointer;
-}
-.descripcion-p:hover{
- font-size: 1.1em;      
- cursor: pointer;
-}
-.dropzone{
-    margin-top: -10px !important;
-
-}
-.ubicacion-panel:hover , .accesos-panel:hover{
-    padding: 10px;    
-    cursor: pointer;
-}
-#map-section{
-    background:  #09AFDF;
-   //background: none repeat scroll 0% 0% #13979C;
-    padding: 10px;
-}
-#span-ubicacion{
-    font-size: 1.3em;
-    color: white;
-}
-.panel-heading {
-    color: white;
-}
-.activity-list li{
-
-    background: white;
-    padding: 5px;
-    border-radius: 5px;
-}
-#my-awesome-dropzone{
-    background: white;
-}
-h4{
-    color: black !important;
-}
-#accesos-plus:hover{
-    font-size: 1.2em;
-}
-.restricciones-p:hover , .politicas-p:hover , .permitido-p{
-
-  cursor: pointer;
-  font-size: 1.2em;
-}
-.section_generosmusicales, .generos_musicales_div{
-  display: none;
-}
-#tematica_section , .tematica_section{
-  display: none;
- }
-</style>
-<link href="<?=base_url('application/js/js/dropzone/css/dropzone.css')?>" rel="stylesheet"/>
-<link rel="stylesheet" type="text/css" href="<?=base_url('application/js/js/bootstrap-datepicker/css/datepicker-custom.css')?>" />
-<script type="text/javascript" src="<?=base_url('application/js/js/bootstrap-datepicker/js/bootstrap-datepicker.js')?>"></script>
-<script type="text/javascript" src="<?=base_url('application/js/js/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js')?>"></script>
-<script type="text/javascript" src="<?=base_url('application/js/js/bootstrap-daterangepicker/moment.min.js')?>"></script>
-<script type="text/javascript" src="<?=base_url('application/js/js/bootstrap-daterangepicker/daterangepicker.js')?>"></script>
-<script type="text/javascript" src="<?=base_url('application/js/js/bootstrap-colorpicker/js/bootstrap-colorpicker.js')?>"></script>
-<script type="text/javascript" src="<?=base_url('application/js/js/bootstrap-timepicker/js/bootstrap-timepicker.js')?>"></script>
-<script src="<?=base_url('application/js/js/pickers-init.js')?>"></script>
-
-
-
-
-<script type="text/javascript" src="<?=base_url('application/js/evento/generosmusicales.js')?>"></script>
-<script type="text/javascript" src="<?=base_url('application/js/evento/principal.js')?>"> </script>
-<script type="text/javascript" src="<?=base_url('application/js/evento/escenarios.js')?>"> </script>
-<script type="text/javascript" src="<?=base_url('application/js/evento/accesos.js')?>"> </script>
-<script type="text/javascript" src="<?=base_url('application/js/evento/servicios.js')?>"> </script>
-<script type="text/javascript" src="<?=base_url('application/js/evento/objetospermitidos.js')?>"></script>
-<script type="text/javascript" src="<?=base_url('application/js/evento/tematica.js')?>"></script>
-
-<!--Escenarios modal-->
-<script src="//connect.soundcloud.com/sdk-2.0.0.js"></script>
-<script type="text/javascript" src="<?=base_url('application/js/evento/gmap.js')?>"></script>
-<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true&libraries=places"></script>

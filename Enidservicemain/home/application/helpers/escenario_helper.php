@@ -73,7 +73,7 @@ function listescenariosonloadevent($responsedbescenario){
 
                                            <span class='descripcion_escenario_update' id='".
                                             $row["idescenario"] . "'    >". 
-                                            substr(  addslashes( $descripcion) , 0 , 200)   ."..</span>
+                                            substr( validate_text($descripcion)  , 0 , 200 )   ."..</span>
                                            
                                             <textarea  name='newdescripesenario' class='newdescripesenario form-control'  rows='3' id=". $inpu_escenario  .">".$row["descripcion"]."</textarea>
 
@@ -184,7 +184,7 @@ function listescenariosonloadevent($responsedbescenario){
 
         $iniciotermino =  $arrayinfo["general"][0]["fecha_presentacion_inicio"] . "-" .  $arrayinfo["general"][0]["fecha_presentacion_termino"];
         
-        $data['descripcion'] =   $descripcion; 
+        $data['descripcion'] =   validate_text($descripcion); 
         $data['artistas'] =  $listartistas;
         $data['tipoescenario'] =  $tipoescenario;
         $data['nombreescenariomodal'] = $nombreescenario;

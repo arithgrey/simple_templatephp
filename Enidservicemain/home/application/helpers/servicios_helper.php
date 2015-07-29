@@ -48,6 +48,27 @@ if(!function_exists('invierte_date_time')){
 
 
 
+/******************** in view main visualization  *********************   */
+
+function list_services_default_view($arreglo){
+
+  $list_servicios ='';
+
+  foreach ($arreglo as $row) {
+      
+      $list_servicios.='<li>'. $row["servicio"] .'<i class="icon-check-1"></i></li>';    
+  }
+
+   
+
+  return $list_servicios;
+}
+
+
+/******************** in view main visualization  end *********************   */
+
+
+
 
 
 }/*Termina el helper*/
