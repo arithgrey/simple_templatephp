@@ -51,7 +51,7 @@ if(!function_exists('invierte_date_time')){
 
 		$generado ="<table class='table col-lg-12'> 
 				<tr>
-					<td><select class='form-control input-sm'class=". $namestart." id=". $namestart." name=". $namestart." >";
+					<td><select class='form-control'class=". $namestart." id=". $namestart." name=". $namestart." >";
 							
         $inhorario ="";                        
         $inhorariob  ="";
@@ -94,7 +94,7 @@ if(!function_exists('invierte_date_time')){
         $generado .="</select></td>";
         
         $generado .="
-        			<td><select class='form-control input-sm' id=". $nameend ." class=". $nameend ." name=" . $nameend .">";
+        			<td><select class='form-control' id=". $nameend ." class=". $nameend ." name=" . $nameend .">";
 							
                                 
                              

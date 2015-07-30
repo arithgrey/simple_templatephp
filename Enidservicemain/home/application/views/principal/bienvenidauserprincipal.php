@@ -1,25 +1,63 @@
+
+
+
+ 
+
+
+<input name='evento' id="evento" value="1" type='hidden'>
+
+
+
+
+
+<link href="<?=base_url('application/views/principal/dropzone.css')?>" rel="stylesheet"/>
+<script src="<?=base_url('application/views/principal/dropzone.js')?>"></script>
+
+
+
+
 <script type="text/javascript">
+
 $(document).ready(function(){
-	
-		Dropzone.autoDiscover = false;
-		var myDropzone = new Dropzone("#event-img");
+
+		
+		var myDropzone = new Dropzone("#event-img");		
+		id_evento =  $("#evento").val();
+		url = $(".now").val() + "application/uploads/upload.php?e="+id_evento;
+
+		$.get(url).done(function(data){
+					url_folder = $(".now").val() + "/application/uploads/uploads/" +id_evento + "/";
+					
+			
+
+					 $.each(data, function(key,value){                 
+
+		                var mockFile = { name: value.name, size: value.size };                 
+		                myDropzone.options.addedfile.call(myDropzone , mockFile);
+		                myDropzone.options.thumbnail.call(myDropzone, mockFile, url_folder+value.name);                 
+		            });
+
+		}).fail(function(){
+			alert("false");
+		});		
+
 
 
 });
+
 </script>
 
-<link href="<?=base_url('application/js/js/dropzone/css/dropzone.css')?>" rel="stylesheet"/>
-<!--dropzone-->
-<script src="<?=base_url('application/js/js/dropzone/dropzone.js')?>"></script>
+
+
+
 
 <?php
-	$evento_carpet  =  base_url().'application/uploads/upload.php?e=5';
+	$evento_carpet  =  base_url().'application/uploads/upload.php?e=1';
 ?>
 
-
 <form action="<?=$evento_carpet?>" class="dropzone" id="event-img">
-
-	<input type="file" name="file">
 	
-    
 </form>
+
+
+

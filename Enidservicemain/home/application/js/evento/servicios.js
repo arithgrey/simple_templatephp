@@ -1,4 +1,3 @@
-
 function loadinformationservicios(){
 
 	url = now + "index.php/api/serviciosevento/load/format/json/";

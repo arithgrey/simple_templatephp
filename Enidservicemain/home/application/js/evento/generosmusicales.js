@@ -1,10 +1,3 @@
-$(document).on("ready" ,function(){
-
-	$("#generos_musicales_btn").click(load_data_genero);
-
-});
-
-
 function load_data_genero(){
 
 	url = now + "index.php/generosmusicales/get_byid_evento/format/json";

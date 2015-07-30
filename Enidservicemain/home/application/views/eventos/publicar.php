@@ -112,16 +112,6 @@ h4{
  }
 </style>
 
-<link href="<?=base_url('application/js/js/dropzone/css/dropzone.css')?>" rel="stylesheet"/>
-<link rel="stylesheet" type="text/css" href="<?=base_url('application/js/js/bootstrap-datepicker/css/datepicker-custom.css')?>" />
-<script type="text/javascript" src="<?=base_url('application/js/js/bootstrap-datepicker/js/bootstrap-datepicker.js')?>"></script>
-<script type="text/javascript" src="<?=base_url('application/js/js/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js')?>"></script>
-<script type="text/javascript" src="<?=base_url('application/js/js/bootstrap-daterangepicker/moment.min.js')?>"></script>
-<script type="text/javascript" src="<?=base_url('application/js/js/bootstrap-daterangepicker/daterangepicker.js')?>"></script>
-<script type="text/javascript" src="<?=base_url('application/js/js/bootstrap-colorpicker/js/bootstrap-colorpicker.js')?>"></script>
-<script type="text/javascript" src="<?=base_url('application/js/js/bootstrap-timepicker/js/bootstrap-timepicker.js')?>"></script>
-<script src="<?=base_url('application/js/js/pickers-init.js')?>"></script>
-
 
 
 
@@ -132,6 +122,29 @@ h4{
 <script type="text/javascript" src="<?=base_url('application/js/evento/servicios.js')?>"> </script>
 <script type="text/javascript" src="<?=base_url('application/js/evento/objetospermitidos.js')?>"></script>
 <script type="text/javascript" src="<?=base_url('application/js/evento/tematica.js')?>"></script>
+
+<link href="<?=base_url('application/views/principal/dropzone.css')?>" rel="stylesheet"/>
+<script src="<?=base_url('application/views/principal/dropzone.js')?>"></script>
+
+
+
+<script type="text/javascript" src="<?=base_url('application/js/evento/img_events.js')?>"></script>
+
+
+
+
+<link rel="stylesheet" type="text/css" href="<?=base_url('application/js/js/bootstrap-datepicker/css/datepicker-custom.css')?>" />
+<script type="text/javascript" src="<?=base_url('application/js/js/bootstrap-datepicker/js/bootstrap-datepicker.js')?>"></script>
+
+<script type="text/javascript" src="<?=base_url('application/js/js/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js')?>"></script>
+<script type="text/javascript" src="<?=base_url('application/js/js/bootstrap-daterangepicker/moment.min.js')?>"></script>
+<script type="text/javascript" src="<?=base_url('application/js/js/bootstrap-daterangepicker/daterangepicker.js')?>"></script>
+<script type="text/javascript" src="<?=base_url('application/js/js/bootstrap-colorpicker/js/bootstrap-colorpicker.js')?>"></script>
+<script type="text/javascript" src="<?=base_url('application/js/js/bootstrap-timepicker/js/bootstrap-timepicker.js')?>"></script>
+<script src="<?=base_url('application/js/js/pickers-init.js')?>"></script>
+
+
+
 
 <!--Escenarios modal-->
 <script src="//connect.soundcloud.com/sdk-2.0.0.js"></script>
@@ -390,7 +403,7 @@ h4{
 
 
 
-                                <div class="panel-body" style='background : #124048'>
+                                <div class="panel-body" >
 
 
                                     <div class="profile-desk">
@@ -414,38 +427,11 @@ h4{
 
                                             </div>
 
-
-
-
-
-
-
-<script type="text/javascript">
-  $(document).ready(function(){
-    
-      Dropzone.autoDiscover = false;
-      var myDropzone = new Dropzone("#event-img");
-
-
-  });
-</script>
-
-<link href="<?=base_url('application/js/js/dropzone/css/dropzone.css')?>" rel="stylesheet"/>
-<!--dropzone-->
-<script src="<?=base_url('application/js/js/dropzone/dropzone.js')?>"></script>
-
-
-
-
-
-
-                                                  <form action="<?=$carpeta_evento_img?>" class="dropzone" id="event-img">
-                                                    <input id="file_input" type="file" name="file">                                                                                                          
-                                                  </form>
+                          <form action="<?=$carpeta_evento_img?>" class="dropzone" id="event-img"></form>
                                                    
                                                
       
-                                         <div class='dropzone-previews'></div>       
+                                         
             
                                             
                                              
@@ -886,7 +872,7 @@ h4{
   <div class="modal-body">    
 
             <?=generatehorarioartista("hiartista" , "htartista" );?>
-               <button type="button" class="btn btn-default" id="tregistrohorario" data-dismiss="modal">Guardar</button>                
+            <button type="button" class="btn btn-default" id="tregistrohorario" data-dismiss="modal">Guardar</button>                
           
   </div>
   <div class="modal-footer">               

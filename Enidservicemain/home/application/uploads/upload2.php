@@ -27,7 +27,7 @@ if (!empty($_FILES)) {
         foreach ( $files as $file ) {
             if ( '.'!=$file && '..'!=$file) {       //2
                 $obj['name'] = $file;
-                $obj['size'] = filesize($carpeta_creada.$ds.$file);
+                $obj['size'] = filesize($storeFolder.$ds.$file);
                 $result[] = $obj;
             }
         }

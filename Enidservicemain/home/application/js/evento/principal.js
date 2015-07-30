@@ -1,4 +1,6 @@
-$(document).on("ready", function(){
+$(document).on("ready", function (){
+
+
 
 	$("footer").ready(loaddata);	
 	$(".nombre-evento-h1").click(updatenameevent);
@@ -20,7 +22,7 @@ $(document).on("ready", function(){
 	$("#pac-input").click(updateubicacion);	
 	$("footer").ready(loadescenarioss);
 
-	
+	$("#generos_musicales_btn").click(load_data_genero);
 	$("#form-escenario").submit(nuevoescenario);
 	$("#form-artistas").submit(nuevoartistaescenario);
 
@@ -29,10 +31,24 @@ $(document).on("ready", function(){
 		show_section_dinamic_button(".tematica_section");	
 		load_data_tematica();
 	});
-
 	initialize();
+	
 
+	generate_img();
+
+
+
+	
+	
 });
+
+/**************************                   ******************* */          
+
+
+
+
+	//
+	
 
 
 
@@ -798,3 +814,4 @@ function show_section_generos(){
 	}
 	
 }
+
