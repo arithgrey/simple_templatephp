@@ -3,8 +3,7 @@
 //si no existe la función invierte_date_time la creamos
 if(!function_exists('invierte_date_time')){
 
-/*******************************************************************************************************/
-/*Retornamos la vista que desplegará  en principal*/
+
 
 function get_time_line_event($arreglo_time_line){
 
@@ -32,6 +31,7 @@ function get_time_line_event($arreglo_time_line){
       $status = $row["estadoevento"];
       $edicion = $row["edicion"];
       $totalescenarios = $row["totalescenarios"];
+      $url_complete = base_url('index.php/eventos/nuevo?evento='.$idevento."&start=".$fecha_inicio."&end=".$fecha_termino );
 
       $fecha_time = $fecha_inicio ." al día " . $fecha_termino  ;
       $i++; 
@@ -46,7 +46,7 @@ function get_time_line_event($arreglo_time_line){
                                           <span class='timeline-icon'>". $b ."</span>
                                           <span class='timeline-date'>10:00 am</span>
                                           
-                                          <h1 class=''><a href='#'>".$nombre_evento."</a></h1>
+                                          <h1 class=''><a href='$url_complete'>".$nombre_evento."</a></h1>
                                             <p class=' auth-row white-p'>
                                                 Edición <a href='#'>". $edicion ."</a>   |   ". $fecha_time ."   | <a href='#''>".$totalescenarios." Escenarios</a>
                                             </p>
@@ -75,7 +75,7 @@ function get_time_line_event($arreglo_time_line){
                                           <span class='timeline-icon'>". $b ."</span>
                                           <span class='timeline-date'>08:25 am</span>
                                             
-                                            <h1 class=''><a href='#'>".$nombre_evento."</a></h1>
+                                            <h1 class=''><a href='$url_complete'>".$nombre_evento."</a></h1>
                                             <p class=' auth-row '>
                                                 Edición <a href='#'>". $edicion ."</a>   |  ".$fecha_time."   | <a href='#''>".$totalescenarios." Escenarios</a>
                                             </p>

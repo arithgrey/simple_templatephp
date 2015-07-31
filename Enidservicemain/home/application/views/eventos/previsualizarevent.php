@@ -8,12 +8,7 @@
 
 <script type="text/javascript" src="<?=base_url('application/tema/js/template.js')?>"></script>
 
-
-<?=$img_first?>
-<?=$img_second?>
-    
-        
-    <div class="banner clearfix">
+   <div class="banner clearfix">
       <div class="slideshow">          
           <div class="slider-banner-container">
             <div class="slider-banner-fullscreen">

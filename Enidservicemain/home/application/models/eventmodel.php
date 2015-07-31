@@ -100,7 +100,6 @@ function getLastEvents($idempresa , $num ){
 	group by e.idevento ORDER BY e.fecha_registro DESC LIMIT $num ";
 	$result = $this->db->query($query_select);
 	return $result ->result_array();      
-
 }
 
 

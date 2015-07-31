@@ -180,8 +180,15 @@ class Eventos extends CI_Controller {
                                     }*/
                                     
 
-                                    $data["img_first"]= base_url() ."application/uploads/uploads/".$idevento."/" .$img_f[0]["name"];
-                                    $data["img_second"]= base_url() ."application/uploads/uploads/".$idevento."/" .$img_f[1]["name"];
+
+                                    if (count($img_f)>2 ) {
+                                        $data["img_first"]= base_url() ."application/uploads/uploads/".$idevento."/" .$img_f[0]["name"];
+                                        $data["img_second"]= base_url() ."application/uploads/uploads/".$idevento."/" .$img_f[2]["name"];    
+                                    }else{
+                                        $data["img_first"]= base_url() ."application/uploads/uploads/".$idevento."/" .$img_f[0]["name"];
+                                        $data["img_second"]= base_url() ."application/uploads/uploads/".$idevento."/" .$img_f[1]["name"];
+                                    }
+                                    
 
 
 
