@@ -158,10 +158,33 @@ class Eventos extends CI_Controller {
                         $idevento = $this->input->get("evento");                        
                           
 
+
+
+
+
                         
 
                             if ($this->checkifexist($idevento , $idempresa) == 1 ) {
+                                    
+
                                     $this->load->helper('servicios');
+                                    $this->load->helper('img_eventsh');
+
+                                    $img_f = get_img_by_event_in_directory($idevento);                                    
+                                    
+                                    /*$data["img_second"]= $img_f[1]["name"];
+                                    if (count($img_f) > 2) {                                        
+                                        $num_img_aleatoria = rand ( 1 , count($img_f)  );
+                                        $data["img_second"]= $img_f[$num_img_aleatoria]["name"];
+
+                                    }*/
+                                    
+
+                                    $data["img_first"]= base_url() ."application/uploads/uploads/".$idevento."/" .$img_f[0]["name"];
+                                    $data["img_second"]= base_url() ."application/uploads/uploads/".$idevento."/" .$img_f[1]["name"];
+
+
+
                                     $dataevent = $this->eventmodel->getEventbyid($idevento);
                                     $data["evento"] =  $dataevent[0];
 

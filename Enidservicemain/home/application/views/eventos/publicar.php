@@ -51,7 +51,7 @@
     background:  #13979C;
     color: white;
 }
-.nombre-evento-h1, .edicion-evento , .white{
+ .white{
     color: white !important;
 }
 .nombre-evento-h1:hover{
@@ -122,30 +122,17 @@ h4{
 <script type="text/javascript" src="<?=base_url('application/js/evento/servicios.js')?>"> </script>
 <script type="text/javascript" src="<?=base_url('application/js/evento/objetospermitidos.js')?>"></script>
 <script type="text/javascript" src="<?=base_url('application/js/evento/tematica.js')?>"></script>
-
 <link href="<?=base_url('application/views/principal/dropzone.css')?>" rel="stylesheet"/>
 <script src="<?=base_url('application/views/principal/dropzone.js')?>"></script>
-
-
-
 <script type="text/javascript" src="<?=base_url('application/js/evento/img_events.js')?>"></script>
-
-
-
-
 <link rel="stylesheet" type="text/css" href="<?=base_url('application/js/js/bootstrap-datepicker/css/datepicker-custom.css')?>" />
 <script type="text/javascript" src="<?=base_url('application/js/js/bootstrap-datepicker/js/bootstrap-datepicker.js')?>"></script>
-
 <script type="text/javascript" src="<?=base_url('application/js/js/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js')?>"></script>
 <script type="text/javascript" src="<?=base_url('application/js/js/bootstrap-daterangepicker/moment.min.js')?>"></script>
 <script type="text/javascript" src="<?=base_url('application/js/js/bootstrap-daterangepicker/daterangepicker.js')?>"></script>
 <script type="text/javascript" src="<?=base_url('application/js/js/bootstrap-colorpicker/js/bootstrap-colorpicker.js')?>"></script>
 <script type="text/javascript" src="<?=base_url('application/js/js/bootstrap-timepicker/js/bootstrap-timepicker.js')?>"></script>
 <script src="<?=base_url('application/js/js/pickers-init.js')?>"></script>
-
-
-
-
 <!--Escenarios modal-->
 <script src="//connect.soundcloud.com/sdk-2.0.0.js"></script>
 <script type="text/javascript" src="<?=base_url('application/js/evento/gmap.js')?>"></script>

@@ -1,3 +1,6 @@
+<script src="<?=base_url('application/js/jsapi.js')?>"></script> 
+        
+       
 <script type="text/javascript" src="<?=base_url('application/js/reportes/listarReportes.js')?>"></script>            
 <script type="text/javascript">
     google.load("visualization", "1", {packages:["corechart"]});

@@ -1,8 +1,5 @@
 <link href="<?=base_url('application/tema/plugins/rs-plugin/css/settings.css')?>" rel="stylesheet">
-<link href="<?=base_url('application/tema/css/animations.css')?>" rel="stylesheet">
-<link href="<?=base_url('application/tema/plugins/owl-carousel/owl.carousel.css')?>" rel="stylesheet">
 <link href="<?=base_url('application/tema/plugins/owl-carousel/owl.transitions.css')?>" rel="stylesheet">
-<link href="<?=base_url('application/tema/plugins/hover/hover-min.css')?>" rel="stylesheet">    
 <link href="<?=base_url('application/tema/css/style.css')?>" rel="stylesheet" >
 <script type="text/javascript" src="<?=base_url('application/tema/plugins/modernizr.js')?>"></script>
 <script type="text/javascript" src="<?=base_url('application/tema/plugins/rs-plugin/js/jquery.themepunch.tools.min.js')?>"></script>
@@ -12,26 +9,24 @@
 <script type="text/javascript" src="<?=base_url('application/tema/js/template.js')?>"></script>
 
 
-
-
-
+<?=$img_first?>
+<?=$img_second?>
     
-
         
-      <div class="banner clearfix">
-      <div class="slideshow">
-          
-          <!-- slider revolution start -->
-          <!-- ================ -->
+    <div class="banner clearfix">
+      <div class="slideshow">          
           <div class="slider-banner-container">
             <div class="slider-banner-fullscreen">
               <ul class="slides">
                 <!-- slide 1 start -->
                 <!-- ================ -->
-                <li data-transition="random" data-slotamount="7" data-masterspeed="500" data-saveperformance="on" data-title="La experiencia">
-                
-                <!-- main image -->
-                <img src="<?=base_url('application/img/Enid2.png')?>" alt="slidebg1" data-bgposition="center top"  data-bgrepeat="no-repeat" data-bgfit="cover">
+
+
+
+
+
+<li data-transition="random" data-slotamount="7" data-masterspeed="500" data-saveperformance="on" data-title="La experiencia">                
+<img src="<?=$img_first;?>" alt="slidebg1" data-bgposition="center top"  data-bgrepeat="no-repeat" data-bgfit="cover">
                 
                 <!-- Transparent Background -->
                 <div class="tp-caption dark-translucent-bg"
@@ -84,10 +79,6 @@
                   data-splitout="chars"
                   data-endspeed="400"><?=$evento["fecha_inicio"]?>  al <?=$evento["fecha_termino"]?>
                 </div> 
-
-
-
-
                 <!-- LAYER NR. 4 -->
                 <div class="tp-caption sft fadeout text-center large_white"
                   data-x="center"
@@ -99,8 +90,6 @@
 
                   <span class="logo-font">
                     <span class="text-default"><?=$evento["nombre_evento"]?></span>
-
-
                 </div>  
 
                 <!-- LAYER NR. 5 -->
@@ -172,14 +161,13 @@
                     <i class="icon-down-open-big"></i><i class="icon-down-open-big"></i>
                     <i class="icon-down-open-big"></i></a>
                 </div>
-                </li>
+  </li>
 
 
 
-                 <li data-transition="random" data-slotamount="7" data-masterspeed="500"
-                  data-saveperformance="on" data-title="<?=$evento['nombre_evento'];?>  <?=$evento['fecha_inicio']?> - <?=$evento['fecha_termino']?>">
-                
-                <img src="<?=base_url('application/img/EnidLarg.png')?>" alt="slidebg2" data-bgposition="center top"  data-bgrepeat="no-repeat" data-bgfit="cover">
+
+<li data-transition="random" data-slotamount="7" data-masterspeed="500" data-saveperformance="on" data-title="<?=$evento['nombre_evento'];?>  <?=$evento['fecha_inicio']?> - <?=$evento['fecha_termino']?>">                
+<img src="<?=$img_second?>" alt="slidebg2" data-bgposition="center top"  data-bgrepeat="no-repeat" data-bgfit="cover">
 
                 <div class="tp-caption dark-translucent-bg"
                   data-x="center"
@@ -228,24 +216,87 @@
                   data-speed="500"
                   data-start="1900"
                   data-easing="easeOutQuad"
-                  data-endspeed="600"><span class="icon default-bg circle small hidden-xs"><i class="fa fa-pie-chart"></i>
-</span>Adquiere ahora.!
+                  data-endspeed="600">
+                  <span class="icon default-bg circle small hidden-xs"><i class="fa fa-pie-chart"></i>
+                </span>Adquiere ahora.!
                 </div>
               
+            
+          </li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+             </ul>
+
             </div>
           </div>
-          <!-- slider revolution end -->
-
         </div>
-        <!-- slideshow end -->
-
       </div>
-      
 
 
 
 
 <!--*************************************************** *************************************+-->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -313,7 +364,7 @@
           
           <h3>Servicios incluidos</h3>
           <!--aquí  el mapa  de google -->
-          <img class="to-right-block" src="images/medical-section-image-1.jpg" alt="">
+          <img class="to-right-block" src="<?=$img_second;?>" alt="">
           <div class="full-image-overlay text-right">
            
             <ul class="list-icons">

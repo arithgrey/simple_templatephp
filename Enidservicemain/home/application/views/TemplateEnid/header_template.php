@@ -21,8 +21,6 @@
   
 <?=link_tag('application/js/js/gritter/css/jquery.gritter.css');?>   
 <?=link_tag('application/css/css/style.css');?>
-
-
 <?=link_tag('application/js/js/advanced-datatable/css/demo_page.css')?>
 <?=link_tag('application/js/js/advanced-datatable/css/demo_table.css')?>
 <?=link_tag('application/js/js/data-tables/DT_bootstrap.css')?>
@@ -153,21 +151,13 @@
         
         
 
-        <script src="<?=base_url('application/js/js/iCheck/jquery.icheck.js')?>"></script>
-        <script src="<?=base_url('application/js/js/icheck-init.js')?>"></script>
-
-        <script src="<?=base_url('application/js/js/flot-chart/jquery.flot.js')?>"></script>
-        <script src="<?=base_url('application/js/js/flot-chart/jquery.flot.tooltip.js')?>"></script>
-        <script src="<?=base_url('application/js/js/flot-chart/jquery.flot.resize.js')?>"></script>
-
+      
 
     
         <script type="text/javascript" language="javascript" src="<?=base_url('application/js/js/advanced-datatable/js/jquery.dataTables.js')?>"></script>
         <script type="text/javascript" src="<?=base_url('application/js/js/data-tables/DT_bootstrap.js')?>"></script>
         <script type="text/javascript" src="<?=base_url('application/js/js/dynamic_table_init.js')?>"></script>
         <script type="text/javascript" src="<?=base_url('application/js/main.js')?>"></script>  
-        <script src="<?=base_url('application/js/jsapi.js')?>"></script> 
-        
         
         
         
@@ -470,3 +460,4 @@
             </h3>
             
         
+

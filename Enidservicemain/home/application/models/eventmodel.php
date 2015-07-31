@@ -97,7 +97,7 @@ function getLastEvents($idempresa , $num ){
 	left outer join escenario as es 
 	on e.idevento = es.idevento 
 	where e.idempresa ='". $idempresa."' 
-	group by e.idevento LIMIT $num ";
+	group by e.idevento ORDER BY e.fecha_registro DESC LIMIT $num ";
 	$result = $this->db->query($query_select);
 	return $result ->result_array();      
 
