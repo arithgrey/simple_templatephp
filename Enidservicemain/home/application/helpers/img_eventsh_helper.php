@@ -21,10 +21,6 @@ if(!function_exists('invierte_date_time')){
                 $result[] = $obj;
             }
         }
-
-
-
-        
   
 
         return $result;

@@ -59,51 +59,26 @@ if(!function_exists('invierte_date_time')){
 		}
 
 
+
 		
         foreach ($ultimos_eventos as $row){
 			
 			$urlnext = base_url('index.php/eventos/nuevo?evento='.$row["idevento"]."&start=".$row["fecha_inicio"] ."&end=".$row["fecha_termino"] );
-			$portada = "";
-			if(validatenotnullnotspace($row["portada"])){
-				
-				$portada =  $row["portada"];	
+			
+			
 
+			
+			$id_evento = $row["idevento"];
+			if (strlen(getimg_event($id_evento)) > 0){
+
+				$portada = base_url()."application/uploads/uploads/".$id_evento."/" . getimg_event($id_evento);
 			}else{
-				
-				$portada = base_url('application/img/example.jpg');
+				$portada = base_url("application/img/example.jpg");					
 			}
 
-
-
-			$estadoevento =0;
-
-			switch ($row["estadoevento"]) {
-				case 0:
-					$estadoevento = "En edición";
-					break;
-				case 1:
-					$estadoevento = "Visible para el público";
-					break;
-				case 2:
-					$estadoevento = "Pospuesto";
-					break;
-
-				case 2:
-					$estadoevento = "Pasado";
-					break;
-
-				default:
-
-					break;
-			}
 			
+			$estadoevento = get_statusevent($row["estadoevento"]);			 
 			$elements .="<div class='panel'>
-
-
-			
-
-
-
                                     <div class='panel-body ' style='' >
 
                                         <div class='media blog-cmnt'>
@@ -121,24 +96,18 @@ if(!function_exists('invierte_date_time')){
                                                     </p>
                                                     
                                                 </div>
-
-                                                
-                                                 
-
-
                                             </div>
                                             <ul class='revenue-nav'>
-		                                        <li><a href='#'><i class='fa fa-play'></i> Escenarios ". $row["totalescenarios"]."</a></li>
-		                                        
+		                                        <li><a href='#'><i class='fa fa-play'></i> Escenarios ". $row["totalescenarios"]."</a></li>		                                        
 		                                        <li >
 		                                        <a href='#'>
-
 		                                        		<i class='fa fa-calendar-o'></i>
 	                                                     ".  $row["fecha_inicio"]." -
 	                                                     ".$row["fecha_termino"] ."
 	                                            </a>
                                                 </li>
                                                 <li class='active' ><a href='#'>". $estadoevento ."</a></li>
+                                                <li class=''> <a class='delete_evento' id='".$id_evento. "'  ><i class='delete_evento fa fa-trash-o' id='".$id_evento."'></i></a></li>
 		                                    </ul>
 
                                         </div>
@@ -147,6 +116,67 @@ if(!function_exists('invierte_date_time')){
         }                            
 		return $elements;                                    	
 	}
+
+
+/*****************************************************************************************/
+	function get_statusevent($status){
+
+			switch ($status) {
+						case 0:
+							$estado_evento = "En edición";
+							break;
+						case 1:
+							$estado_evento = "Visible para el público";
+							break;
+						case 2:
+							$estado_evento = "Pospuesto";
+							break;
+
+						case 2:
+							$estado_evento = "Pasado";
+							break;
+
+						default:
+
+							break;
+					}
+
+		return $estado_evento;			
+
+	}		
+/*************************************************** ******************************************/
+
+	
+
+	function getimg_event($id_event){
+
+
+        $ds = "/";  
+        $storeFolder = 'uploads';           
+        $directorio = dirname(dirname(__FILE__)). "/". $storeFolder."/".$storeFolder."/".$id_event."/";
+        
+        
+       
+        $result  = array();        
+        $files = scandir($directorio);     
+        $img_name ="";
+        foreach ( $files as $file ) {
+            if ( '.'!=$file && '..'!=$file) {       //2
+                $obj['name'] = $file;                
+                $img_name = $file;
+                $result[] = $obj;
+            }
+        }
+  
+
+
+
+        
+  		return $img_name;
+
+
+	}
+
 
 
 

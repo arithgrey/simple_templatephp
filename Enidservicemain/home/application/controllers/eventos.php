@@ -6,9 +6,11 @@ class Eventos extends CI_Controller {
 
         $this->load->helper('generoshelp');
         $this->load->helper('accesos');
+        $this->load->helper('escenario');
         $this->load->model("accesosmodel");
         $this->load->model('generosmusicalesmodel');
         $this->load->model("eventmodel");
+        $this->load->model("escenariomodel");
         $this->load->library('sessionclass');      
     }
 
@@ -170,29 +172,19 @@ class Eventos extends CI_Controller {
                                     $this->load->helper('servicios');
                                     $this->load->helper('img_eventsh');
 
-                                    $img_f = get_img_by_event_in_directory($idevento);                                    
                                     
-                                    /*$data["img_second"]= $img_f[1]["name"];
-                                    if (count($img_f) > 2) {                                        
-                                        $num_img_aleatoria = rand ( 1 , count($img_f)  );
-                                        $data["img_second"]= $img_f[$num_img_aleatoria]["name"];
-
-                                    }*/
+                                    $data["img_event"]=  get_img_by_event_in_directory($idevento);                                    
+                                    $data["base_img"]= base_url()."application/uploads/uploads/". $idevento."/";
                                     
-
-
-                                    if (count($img_f)>2 ) {
-                                        $data["img_first"]= base_url() ."application/uploads/uploads/".$idevento."/" .$img_f[0]["name"];
-                                        $data["img_second"]= base_url() ."application/uploads/uploads/".$idevento."/" .$img_f[2]["name"];    
-                                    }else{
-                                        $data["img_first"]= base_url() ."application/uploads/uploads/".$idevento."/" .$img_f[0]["name"];
-                                        $data["img_second"]= base_url() ."application/uploads/uploads/".$idevento."/" .$img_f[1]["name"];
-                                    }
+                                    
+                                    
                                     
 
 
 
                                     $dataevent = $this->eventmodel->getEventbyid($idevento);
+                                    $list_escenarios = $this->escenariomodel->get_escenarios_byidevent($idevento);
+                                    $data["escenarios"] = list_resum_escenarios($list_escenarios);
                                     $data["evento"] =  $dataevent[0];
 
                                     $array_servicios_includos = $this->eventmodel->get_servicios_evento_by_id($idevento);

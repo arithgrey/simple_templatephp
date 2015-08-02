@@ -13,6 +13,7 @@
 
 
 
+
 <?=link_tag('application/js/js/iCheck/skins/minimal/mi.css');?>
 <?=link_tag('application/js/js/iCheck/skins/square/square.css');?>
 <?=link_tag('application/js/js/iCheck/skins/square/red.css');?>
@@ -56,7 +57,7 @@
 
 
 
-<body class="sticky-header">
+<body class="sticky-header left-side-collapsed">
 
 
 <section>
@@ -67,28 +68,39 @@
         <!--logo and iconic logo start-->
         <div class="logo">
             <a href="<?=base_url()?>">
-                <img style="width: 25%"  src="<?=base_url('application/img/Enid2.png')?>" alt="Enid Service">
+                <img style="width: 20%"  src="<?=base_url('application/img/Enid2.png')?>" alt="Enid Service">
 
             </a>            
         </div>
+
+
         <div class="logo-icon text-center">
-            <a href="<?=base_url()?>"><img style="width: 35%" src="<?=base_url('application/img/Enid2.png')?>" alt="Enid Service"></a>
+            <a href="<?=base_url()?>"><img style="width: 30%" src="<?=base_url('application/img/Enid2.png')?>" alt="Enid Service"></a>
 
         </div>
+
+
+
+        
+
+
         <!--logo and iconic logo end-->
 
 
         <div class="left-side-inner">
 
             <!-- visible to small devices only -->
+
+
+              <!-- visible to small devices only -->
+           
+
             <div class="visible-xs hidden-sm hidden-md hidden-lg">
                 <div class="media logged-user">
                     <img alt="" src="" class="media-object">
                     <div class="media-body">
                         <h4><a href="#"><?=$nombre;?></a></h4> 
                         <span><?=$perfilactual;?></span>
-
-
                     </div>
                 </div>
 
@@ -98,7 +110,7 @@
 
 
                     <li><a href="" data-toggle="modal"  data-target="#basicModal">
-                            <i class="fa fa-code"></i> Versión del sistema</a></li>
+                     <i class="fa fa-code"></i> Versión del sistema</a></li>
 
                     <li><a href="<?=base_url('index.php/sessioncontroller/logout')?>"><i class="fa fa-sign-out"></i> <span>Salir</span></a></li>
                 </ul>
@@ -108,6 +120,23 @@
 
 
             <ul class="nav nav-pills nav-stacked custom-nav">
+
+                
+                <li class="menu-list ">
+                    <a href=""><i class="fa fa-laptop"></i> 
+                        <span>Layouts</span>
+                    </a>
+
+                    <ul class="sub-menu-list">
+                        <li ><a href="blank_page.html"> Blank Page</a></li>
+                        <li><a href="boxed_view.html"> Boxed Page</a></li>
+                        <li class="active"><a href="leftmenu_collapsed_view.html"> Sidebar Collapsed</a></li>
+                        <li><a href="horizontal_menu.html"> Horizontal Menu</a></li>
+
+                    </ul>
+                </li>
+
+
                 <?php echo $menu;  ?>
             </ul>
             <!--sidebar nav end-->

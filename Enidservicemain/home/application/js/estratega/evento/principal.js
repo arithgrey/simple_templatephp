@@ -1,7 +1,5 @@
 $(document).on("ready", function(){
 
-
-
 	$(".vertodos").click(show_eventos_pasados);
 	$("#nuevo-evento-form").submit(trynewevent);
 	$(".todo-entry").click(function(){			
@@ -10,7 +8,7 @@ $(document).on("ready", function(){
 	});
 
 
-
+	$(".delete_evento").click(delete_evento);
 
 });
 
@@ -52,3 +50,23 @@ function show_eventos_pasados(){
 	url = now + "index.php/eventos/pasados";
 	redirect(url);
 }
+
+function delete_evento(e){
+
+	id_evento = e.target.id;
+
+
+	url = now + "index.php/api/event/delete_byid/format/json/";
+	$.post(url , {evento : id_evento}).done(function(data){	
+	});
+	redirect("");
+
+}
+/***            ***************************************                  ***************** **/
+
+
+
+
+
+
+

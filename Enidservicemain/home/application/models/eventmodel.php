@@ -67,9 +67,9 @@ function update_obj_permitidobyId($idevento, $idobjeto){
 
 function create( $nombre , $edicion , $inicio , $termino , $idusuario , $idempresa , $perfiles  ) {
 
-	
-	$query_insert ="INSERT INTO evento (nombre_evento , edicion , idempresa , idusuario , fecha_inicio , fecha_termino )
-	 VALUES( '$nombre' , '$edicion' , '$idempresa' ,   '$idusuario' , '$inicio' , '$termino'  )";
+	$portada ="application/img/example.jpg";
+	$query_insert ="INSERT INTO evento (nombre_evento , edicion , idempresa , idusuario , fecha_inicio , fecha_termino, portada )
+	 VALUES( '$nombre' , '$edicion' , '$idempresa' ,   '$idusuario' , '$inicio' , '$termino' ,  '$portada' )";
 	$dbresponse =  $this->db->query($query_insert);
 
 
@@ -265,6 +265,22 @@ function get_servicios_evento_by_id($id_evento){
 	$result = $this->db->query($query_servicios_list);
 	return $result->result_array();
 }
+
+
+
+
+/*********************        **************************               *****************/
+
+function delete_byid($id_evento , $id_usuario , $id_empresa ){
+
+	$query_delete_event="call delete_evento_all_data('". $id_evento ."'  , '". $id_usuario ."' )";
+	return $this->db->query($query_delete_event);
+	
+
+
+}
+
+
 
 /*Termina modelo */
 }

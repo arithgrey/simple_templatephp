@@ -14,13 +14,31 @@ class Event extends REST_Controller{
         }     
 
 
+/**/
+    function delete_byid_post(){
+    
+
+        if ($this->sessionclass->is_logged_in() == 1){
+
+            $id_usuario = $this->sessionclass->getidusuario();    
+            $id_empresa =  $this->sessionclass->getidempresa();            
+            $id_evento = $this->post("evento");
+
+          
+            $responsedb = $this->eventmodel->delete_byid($id_evento , $id_usuario , $id_empresa );
+            $this->response($responsedb);
+
+        }else{
+            $this->sessionclass->logout();    
+        }   
 
 
+
+
+    }    
+
+/**/
     function update_objeto_permitido_post(){
-
-
-
-
 
         if ($this->sessionclass->is_logged_in() == 1){
 
@@ -355,10 +373,14 @@ function updaterestricciones_post(){
                             
 
                                 $dbresponse = $this->eventmodel->create(  $nombre , $edicion , $inicio , $termino , $idusuario , $idempresa,  $perfiles  );
+                                
+
                                 if (is_numeric($dbresponse)) {
 
                                     $data[0]= true;
+                                    $extra = $this->create_directorio($dbresponse); 
                                     $data[1]= base_url('index.php/eventos/nuevo?evento='.$dbresponse);
+                                       
                                     $this->response($data); 
                                 }else{
                                     $this->response($generic_response[0]);             
@@ -387,6 +409,16 @@ function updaterestricciones_post(){
         
         }    
     }
+
+/****************************** ******************************* **************************/
+function create_directorio($id_event){
+    
+        
+        $storeFolder = 'uploads';           
+        $directorio = dirname(dirname( __FILE__ )). "/". $storeFolder."/".$storeFolder."/".$id_event."/";            
+        return $directorio;
+}
+
 
     /*Termina rest*/
 

@@ -27,6 +27,25 @@ function nuevo( $nombre , $evento ,  $idempresa  ){
 
 
 
+function get_escenarios_byidevent($id_evento){
+	$query_select ="select e.idescenario , SUBSTRING( e.descripcion , 1,  135 ) as descripcion_escenario , 
+	e.nombre, e.tipoescenario, e.portada_escenario ,  
+	count(a.idartista) as num_artistas
+	from escenario as e
+	left outer join escenario_artista as ea 
+	on e.idescenario = ea.idescenario
+	left outer join artista as a 
+	on ea.idartista = a.idartista
+	where e.idevento = '".$id_evento."'
+	group by e.idescenario order by tipoescenario  desc";
+
+	$result= $this->db->query($query_select);
+	return $result-> result_array();
+
+}
+
+
+
 /**************************************************************/
 
 
@@ -97,13 +116,17 @@ function updatedescripcionbyid( $nueva_descripcion , $idescenario,  $idempresa )
 
 function deleteescenariobyid( $idescenario,  $idempresa ){
 
-
-	$query_delete_artistas_escenario = "DELETE FROM escenario_artista   WHERE idescenario = $idescenario  ";
+	/*
+	$query_delete_artistas_escenario = "DELETE FROM escenario_artista   WHERE idescenario = $idescenario";
 	$result_delete_escenario_artistas  = $this->db->query($query_delete_artistas_escenario );
 
 	$query_deletebyid ="DELETE  FROM  escenario WHERE  idescenario ='$idescenario' ";
 	$result = $this->db->query($query_deletebyid);
-	return $result;	
+	*/
+
+	$query_delete ="call delete_escenacio_evento('". $idescenario ."')";
+	return $this->db->query($query_delete);
+	 
 }
 
 /**/

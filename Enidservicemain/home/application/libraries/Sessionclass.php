@@ -78,31 +78,40 @@ class Sessionclass extends CI_Controller{
 		$perfiles = $this->getperfiles();
 
 		$data = $this->perfilrecursomodel->displayrecursobyperfiles($perfiles);
-		$menu ="";
+		$menu ='';
+
+
+
+			
 
 		foreach ($data as $row) {
 
 			$mainpage = base_url($row["urlpaginaweb"]);	
 			$icono = $row["iconorecurso"];
-			
+			$nombre = $row["nombre"];
 
-            $menu .="<li class='menu-list'><a href='$mainpage'>
-                    <i class='$icono'></i>". $row["nombre"] ."</a>
-                    <ul class='sub-menu-list'>";
+
+            $menu .= '<li class="menu-list">
+            		<a href="'. $mainpage.'" ><i class="'.$icono.'" ></i> 	
+            		 <span>' . $nombre . '</span>
+                    </a>
+                    <ul class="sub-menu-list">';
             
             $datasubpaginas = $row["subpaginas"];
-	        $subpaginasli = ""; 
+	        $subpaginasli = ''; 
+
 	        foreach ($datasubpaginas as $row) {
 	        	
 	        	$urlpag = base_url($row["urlpaginaweb"]); 
 	        	$iconosub = $row["iconpermiso"];				        		        	
-				$subpaginasli .= "<li> <a href='$urlpag'><i class='$iconosub'></i> ". $row["nombrepermiso"] ." </a></li>";
+	        	$nombresubpage  = $row["nombrepermiso"];
+				$subpaginasli .= ' <li ><a href="'. $urlpag .'"> '.$nombresubpage.'</a></li>';
                 
                 }
 
 	        $menu.= $subpaginasli;		           	    
-		    $menu.= "</ul>
-	        </li>";	
+		    $menu.= '</ul>
+	        </li>';	
 
 		}	
 
