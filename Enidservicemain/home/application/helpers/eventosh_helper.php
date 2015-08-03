@@ -5,6 +5,8 @@ if(!function_exists('invierte_date_time')){
 
 /*******************************************************************************************************/
 
+
+
 function listobjetosp( $arreglo ){ 
 	
 //objetospermitidos

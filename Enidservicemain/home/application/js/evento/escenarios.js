@@ -244,6 +244,7 @@ function loadataescenario(idescenario){
 
 
 
+
 				$(".descripcion-modal-text").click(updatedescriptioninmodal);
 				$(".remove-artista").click(removeartistaescenario);
 				$(".tipo-evento-modal").click(updatetipoescenario);

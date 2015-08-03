@@ -1,6 +1,10 @@
 <style type="text/css">
 
-.descripcion-modal-text:hover{
+#eslogan-evento{
+  display: none;
+}
+
+.descripcion-modal-text:hover , .eslogan-p:hover{
   font-size: 1.2em;
   cursor: pointer;
 
@@ -110,6 +114,10 @@ h4{
 #tematica_section , .tematica_section{
   display: none;
  }
+
+.eslogan-input{
+  display: none;
+}
 </style>
 
 
@@ -305,13 +313,33 @@ h4{
 
               <div class="tab-pane active" id="portlet_tab4">
                 <h3>  La experiencia</h3>                
+                <!--Eslogan  Eslogan  Eslogan  Eslogan  Eslogan  Eslogan  Eslogan  Eslogan  Eslogan  Eslogan  Eslogan  -->
+                        <div class="form-group">
+
+                          
+
+                          
+                            
+                          <span class='eslogan-p' id='eslogan-p'>Eslogan del evento</span>
+                          
+                          <input class="form-control eslogan-evento" id="eslogan-evento" name='eslogan-evento'  placeholder="Si es en méxico, estará lleno de colores" required>
+                        </div>
+<!--Termina el eslogan Termina el eslogan Termina el eslogan Termina el eslogan Termina el eslogan Termina el eslogan -->
+
                       <p class='descripcion-p'>
                           
                       </p>
                       <div class="form-group">
                           <textarea id='descripcion-evento' placeholder ='Celebrando un exitoso año y cumpliendo ya 15 años haciendo historia de la música electrónica en México, nos enorgullecemos en presentar nuestra tercera edición del Festival "I love this generation" el cual tendrá lugar en nuestro mítico Club Coco Dance club, presentándose en el más de 20 artistas de esta tendencia y de más de 3 naciones, vive esta única experiencia.' rows="6" class="form-control"></textarea>
                       </div> 
+
+                        
+
+
+
+
                       <button class='btn btn-info' id='generos_musicales_button'>Géneros musicales</button>
+
                       <div class='generos_musicales_div'>
                       <?=$list_generos;?>
                       </div>
@@ -662,13 +690,13 @@ h4{
                   <span class='day_escenario'></span>
                 </button>
                 
-                <button class="btn btn-info  col-xs-12 day_escenario_inputs" type="button">            
+                <div class='day_escenario_inputs' id='day_escenario_inputs'>
                     <div class="input-group  custom-date-range" data-date="" data-date-format="mm/dd/yyyy">
                         <input class="form-control dpd1" name="nuevo_inicio_escenario" id="nuevo_inicio_escenario" type="text">
                         <span class="input-group-addon">hasta</span>
                         <input class="form-control dpd2" name="nuevo_termino_escenario" id="nuevo_termino_escenario" type="text">
                     </div>
-                </button>  
+                </div>
            </div> 
 
          <!--**************** **********************  ******************* -->

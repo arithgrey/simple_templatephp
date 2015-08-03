@@ -282,6 +282,26 @@ function delete_byid($id_evento , $id_usuario , $id_empresa ){
 
 
 
+function get_list_generos_musicales_byidev($id_evento){
+
+	$generos_list ="select g.idgenero_musical, g.nombre  from genero_musical as g 
+		inner join evento_genero_musical as egm
+		on   g.idgenero_musical = egm.idgenero_musical 
+		where egm.idevento = '".$id_evento. "'";
+
+	$result = $this->db->query($generos_list);				
+	return $result->result_array();
+	
+
+}
+/****************** ****************** ****************** ****************** ****************** */
+
+function update_eslogan($id_evento , $eslogan){
+	$query_update_eslogan ="UPDATE evento SET eslogan= '$eslogan' WHERE idevento = '".$id_evento."' ";
+	return $this->db->query($query_update_eslogan);
+
+}
+
 /*Termina modelo */
 }
 

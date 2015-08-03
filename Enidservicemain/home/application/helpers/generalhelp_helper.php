@@ -138,6 +138,21 @@ if(!function_exists('invierte_date_time')){
 	}
 
 
+
+
+
+function get_tags_generos($arreglo_generos){  
+
+    $tags_generos ='<ul class="revenue-nav">';
+
+    foreach ($arreglo_generos as $row) {      
+      $tags_generos .='<li><a style="text-decoration:none; background:#060B33!important;" href="#">'.$row["nombre"].'</a></li>';
+    }
+    $tags_generos .="</ul>";
+    return $tags_generos;
+
+}
+
   /*Filtros */
 
   function validate_text($texto){

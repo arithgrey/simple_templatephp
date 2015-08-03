@@ -12,14 +12,24 @@ function list_resum_escenarios($array_escenario){
     foreach ($array_escenario as $row){
          $nombre = $row["nombre"];
          $descripcion = $row["descripcion_escenario"];
+
+         if ($row["tipoescenario"] == "General") {
+              $tipo_escenario ='<li ><a style="text-decoration: none;" href="#">'.$row["tipoescenario"] .'</a></li>';      
+         }else{
+              $tipo_escenario ='<li ><a style="text-decoration: none;" href="#"> <i class="fa fa-star"></i>'.$row["tipoescenario"] .'</a></li>';
+         }
+       
          $list .=' <div class="media">                   
                     <div class="media-body">
                       <h4 class="media-heading">'. $nombre. '</h4>
                       '. $descripcion   .'...
                     </div>
                                     <ul class="revenue-nav">
-                                        <li ><a style="text-decoration: none;" href="#">'.$row["tipoescenario"] .'</a></li>                                        
-                                        <li class="active"><a style="text-decoration: none;" href="#">'.$row["num_artistas"] .' Artistas </a></li>                                        
+                                        
+
+                                        '.$tipo_escenario.'
+                                        <li class="active"><a style="text-decoration: none;" href="#"><i class="fa fa-play-circle-o"></i>
+ '.$row["num_artistas"] .' Artistas </a></li>                                        
                                     </ul>
                   </div>';       
     }

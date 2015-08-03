@@ -353,10 +353,10 @@
               <div class="call-to-action text-center">
                 <div class="row">
                   <div class="col-sm-8">
-                    <h1 class="title">WE OFFER MORE POSSIBILITIES TO MEET YOUR EVERY NEED</h1></div>
+                    <h1 class="title"><?=$evento["eslogan"]?></h1></div>
                   <div class="col-sm-4">
                     <br>
-                    <p style="background:white"><a href="#" class="btn btn-lg btn-gray-transparent btn-animated">Learn More<i class="fa fa-arrow-right pl-20"></i></a>
+                    <p style="background:white"><a href="#" class="btn btn-lg btn-gray-transparent btn-animated">Más detalles<i class="fa fa-arrow-right pl-20"></i></a>
                     </p>
                   </div>
                 </div>
@@ -420,32 +420,25 @@
                 </div>
                 <div class="col-md-8">
                   <h2>TODO A TU ALCANCE</h2>
-                  <p><?=$evento["descripcion_evento"];  ?>...
+                  <label><?=$evento["nombre_evento"]?>  edición <?=$evento["edicion"]?></label>
+                  <p><?=$evento["descripcion_evento"];  ?>
 
                   </p>
 
+                  <i class='fa fa-calendar'></i> <?=$evento["fecha_inicio"]?> - <?=$evento["fecha_termino"]?>
+                  <?=$generos_musicales_tags;?>
+
+
+
                  
-                  <a href="#" class="btn btn-lg btn-default btn-animated">Conoce más <i class="fa fa-cart-arrow-down pl-20"></i></a>
+                  
                 </div>
+                
+               
+
               </div>
               <hr>
-              <div class="row">
-                <div class="col-md-6 col-md-push-6">
-                  <img class="pv-30" src="images/section-image-2.png" alt="">   
-                </div>
-                <div class="col-md-6 col-md-pull-6">
-                  <h2>You Will Love It!</h2>
-                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Culpa facere possimus, inventore ipsam at autem! Necessitatibus aliquam qui itaque quasi, laborum fugit? Eos minima quasi aperiam, incidunt dolores aliquid neque!</p>
-                  <ul class="list-icons">
-                    <li><i class="icon-check-1"></i> Extremly Simple to Use</li>
-                    <li><i class="icon-check-1"></i> Customize it in no time</li>
-                    <li><i class="icon-check-1"></i> Unlimited options and variations</li>
-                    <li><i class="icon-check-1"></i> We are here to support you</li>
-                  </ul>
-                  <p>Libero cum iusto doloribus officiis delectus alias consectetur ullam, animi totam assumenda, ad earum quis non nostrum placeat provident dolores ratione similique!</p>
-                  <a href="#" class="btn btn-lg btn-default btn-animated">Purchase <i class="fa fa-cart-arrow-down pl-20"></i></a>
-                </div>
-              </div>
+             
             </div>
             <!-- main end -->
 
@@ -482,4 +475,152 @@
 
 
 
-      
+
+
+
+
+
+
+
+
+      <div style='background: #0A142D !important;' class="dark-bg  default-hovered footer-top animated-text">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="call-to-action text-center">
+                <div class="row">
+                  <div class="col-sm-8">
+                    <h2>Consigue tus accesos</h2>
+                    <h2>Promociones increibles</h2>
+                  </div>
+                  <div class="col-sm-4">
+                    <p class="mt-10"><a href="#" class="btn btn-animated btn-lg btn-gray-transparent ">Dónde<i class="fa fa-cart-arrow-down pl-20"></i></a></p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+  <div class="row mb-20">
+            <div class="col-md-4">
+              
+                
+                
+                
+
+
+                
+                  <h2><i class="fa fa-map-marker"></i> Locación</h2>
+                  <p><?=$evento["ubicacion"]?></p>                  
+                
+
+
+
+
+              
+            </div>
+            <div class="col-md-4">
+              
+                
+                   
+                
+
+
+
+
+
+                  <h2>El día del evento </h2>                  
+                  
+
+
+
+                  <div class="media">                    
+                    <div class="media-left">
+                        <h4 class="">Lo permitido </h4>
+                        <a href="#">                        
+                          <span class="icon circle small default-bg"><i class="fa fa-check"></i> 
+                          </span>
+                          <?=substr($evento["permitido"], 0 , 130); ?> ....
+                        </a>
+                        <button class='btn btn-lg btn-default btn-animated'>Artículos permitidos </button>
+                    </div>                                    
+                  </div>
+
+              
+
+
+
+                  <div class="media">                    
+                    <div class="media-right">
+                        <h4 class="">Politicas del evento</h4>
+                        <a href="#">                        
+                          <span class="icon circle small default-bg"><i class="fa fa-circle"></i> 
+                          </span>
+                          <?=substr($evento["politicas"],  0 , 140); ?>...
+                        </a>
+                       
+                    </div>                                    
+                  </div>
+
+
+
+                  
+
+                  <div class="media">                    
+                    <div class="media-right">
+                        <h4 class="media-heading">Lo prohibido</h4>
+                        <a href="#">                        
+                          <span class="icon circle small default-bg"><i class="fa fa-exclamation-triangle"></i> 
+                          </span>
+                          <?=substr($evento["restricciones"] , 0 ,  140 ); ?>... 
+                        </a>
+                       
+                    </div>                                    
+                  </div>
+
+
+            </div>
+
+
+
+
+            <div class="col-md-4">
+              
+                
+
+              <div class="alert alert-icon alert-success">
+                <i class="fa fa-check-square"></i>Solicita tu artista <code>(futuros eventos)</code> 
+                </div>
+
+
+                <div class="alert alert-icon alert-info" role="alert">
+                  <i class="fa  fa-spinner"></i>Pide nuestros eventos <code>(En tu ciudad)</code> 
+                </div>
+                <div class="alert alert-icon alert-warning" role="alert">
+                  <i class="fa  fa-heart"></i>Comparte <code></code> 
+                </div>
+
+
+              
+            </div>
+          </div>

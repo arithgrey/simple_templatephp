@@ -31,10 +31,16 @@ $(document).on("ready", function (){
 		show_section_dinamic_button(".tematica_section");	
 		load_data_tematica();
 	});
+
+
+
+	/*Eslogan del evento */
+	$(".eslogan-p").click(updateeslogan);
+
 	initialize();
 	
 
-	generate_img();
+	//generate_img();
 
 
 
@@ -60,13 +66,48 @@ function loaddata(){
 	$.get(url , $("#form-general-ev").serialize()).done(function(data){
 
 		
+		/******************************************************************************/
 
-		loadinhtml(data);
+		for (var x in data) {
+			/*Data*/	
+			nombre_evento = data[x].nombre_evento;
+			edicion = data[x].edicion;
+			descripcion_evento = data[x].descripcion_evento;
+			url_social = data[x].url_social;
+			url_social_youtube = data[x].url_social_youtube;
+			ubicacion = data[x].ubicacion;
+			politicas = data[x].politicas;			
+			objetospermitidos = data[x].objetospermitidos;
+			restriciones =  data[x].restricciones;
+			permitido = data[x].permitido;
+			eslogan = data[x].eslogan;
 
+				
+				
+				llenaelementoHTML(".nombre-evento-h1", nombre_evento);	
+				valorHTML("#nombre-input" , nombre_evento );					
+
+				
+
+				valorHTML("#url_social" , url_social);
+				valorHTML("#url_social_evento_youtube", url_social_youtube);
+				valorHTML(".ubicacioninput" , ubicacion);
+				/*Valiadamos info*/		
+				valida_text_replace( descripcion_evento ,  ".descripcion-p" , "#descripcion-evento" , "<i class='fa fa-plus'></i>  Lo que se vivirá en el evento" , "<i class='fa fa-plus'></i> Lo que se vivirá en el evento" );
+				valida_text_replace( edicion ,  ".edicion-evento" , "#edicion-input" , "<i class='fa fa-plus'></i> Edicioón del evento" , "<i class='fa fa-plus'></i> Edicioón del evento" );			
+				valida_text_replace(politicas ,  ".politicas-p" , "#politicas-evento"  , "<i class='fa fa-plus'></i> Lo que podría anticiparse como reembolsos o cambios" , "<i class='fa fa-plus'></i>  Lo que podría anticiparse como reembolsos o cambios" );
+				valida_text_replace(permitido ,  ".permitido-p"  , "#permitido-evento" , "<i class='fa fa-plus'></i> Lo que las personas podrían hacer e ingresar al evento" , "<i class='fa fa-plus'></i>Lo que las personas podrían hacer e ingresar al evento" );
+				valida_text_replace(restriciones , ".restricciones-p"  , "#restricciones-evento" ,  "<i class='fa fa-plus'></i> Lo que podría anticiparse dentro del evento" , "<i class='fa fa-plus'></i>  Lo que podría anticiparse dentro del evento" );
+				valida_text_replace(eslogan , ".eslogan-p"  , "#eslogan-evento" ,  "<i class='fa fa-space-shuttle'></i> Mensaje eslogan del evento" , "<i class='fa fa-space-shuttle'></i>  Eslogan del evento" );
+
+
+		}
+
+		/******************************************************************************/
 		
 	}).fail(function(){
 		
-		alert("Err on loaddata");
+		alert("Error al  actualizar los datos, reportar al administrador si se sigue presentando el error");
 
 	});
 }
@@ -86,141 +127,26 @@ function loaddata(){
 
 
 
-/*In the front end */
 
 
-function loadinhtml(data){
+/**/
+function valida_text_replace(texto_a_validar,  text_tag , text_val, null_msj, sin_text_msj ){
 
-	
+				if (texto_a_validar == null ) {					
+					llenaelementoHTML(text_tag , null_msj);
 
-		for (var x in data) {
-			/*Data*/	
-			nombre_evento = data[x].nombre_evento;
-			edicion = data[x].edicion;
-			descripcion_evento = data[x].descripcion_evento;
-			url_social = data[x].url_social;
-			url_social_youtube = data[x].url_social_youtube;
-			ubicacion = data[x].ubicacion;
-			politicas = data[x].politicas;			
-			objetospermitidos = data[x].objetospermitidos;
-			restriciones =  data[x].restricciones;
-			permitido = data[x].permitido;
-
-
-
-			
-				
-				llenaelementoHTML(".nombre-evento-h1", nombre_evento);	
-				valorHTML("#nombre-input" , nombre_evento );					
-
-				llenaelementoHTML(".edicion-evento", edicion);	
-				valorHTML("#edicion-input" , edicion );	
-
-				valorHTML("#url_social" , url_social);
-				valorHTML("#url_social_evento_youtube", url_social_youtube);
-
-
-
-				valorHTML(".ubicacioninput" , ubicacion);
-
-				/*Valiadamos info*/		
-
-
-				if (descripcion_evento == null ) {
-
-					llenaelementoHTML(".descripcion-p" , "<i class='fa fa-plus'></i>  Lo que se vivirá en el evento");
-
-				}else if(descripcion_evento ==  "" ){
-					llenaelementoHTML(".descripcion-p" , "<i class='fa fa-plus'></i> Lo que se vivirá en el evento");
-				}else{
-
-					llenaelementoHTML(".descripcion-p" , descripcion_evento);
-					valorHTML("#descripcion-evento" , descripcion_evento);
-				}
-				
-
-
-
-
-
-
-
-
-
-
-
-				/************------------**************/
-
-
-
-				if (politicas == null ) {
-
-					llenaelementoHTML(".politicas-p" , "<i class='fa fa-plus'></i> Lo que podría anticiparse como reembolsos o cambios");
-
-				}else if(politicas ==  "" ){
-					llenaelementoHTML(".politicas-p" , "<i class='fa fa-plus'></i>  Lo que podría anticiparse como reembolsos o cambios");
-				}else{
-
-					llenaelementoHTML(".politicas-p" , politicas);
-					valorHTML("#politicas-evento" , politicas);
-				}
-
-				/****************************/
-				
-				
-
-
-
-
-				if (permitido == null ) {
-
-					llenaelementoHTML(".permitido-p" , "<i class='fa fa-plus'></i> Lo que las personas podrían hacer e ingresar al evento");
-
-				}else if(permitido ==  "" ){
-					llenaelementoHTML(".permitido-p" , "<i class='fa fa-plus'></i>Lo que las personas podrían hacer e ingresar al evento");
-				}else{
-
-					llenaelementoHTML(".permitido-p" ,  permitido);
-					valorHTML("#permitido-evento" , permitido);
-				}
-
-
-
-
-
-
-
-
-				/************------------**************/
-
-
-
-				if (restriciones == null ) {
-
-					llenaelementoHTML(".restricciones-p" , "<i class='fa fa-plus'></i> Lo que podría anticiparse dentro del evento");
-
-				}else if(restriciones ==  "" ){
-					llenaelementoHTML(".restricciones-p" , "<i class='fa fa-plus'></i>  Lo que podría anticiparse dentro del evento");
-				}else{
-
-					llenaelementoHTML(".restricciones-p" , restriciones);
-					valorHTML("#restricciones-evento" , restriciones);
-				}
-
-				/****************************/
-				
+				}else if(texto_a_validar ==  "" ){
 					
+					llenaelementoHTML(text_tag , sin_text_msj);
+				}else{
 
-
-		}
-
-	
-
-}/*Termina función*/
-
-
-
-
+					//llenaelementoHTML(text_tag , texto_a_validar);
+					
+					set_text_element(text_tag , texto_a_validar );
+					valorHTML( text_val , texto_a_validar);
+				}
+}
+/**/
 
 /*update nombre evento*/
 function updatenameevent(e){
@@ -279,16 +205,12 @@ function updateindebname(nuevotexto){
 function updateedicion(e){
 
 	showonehideone( "#edicion-input" , ".edicion-evento" );
-	$("#edicion-input").blur(function(){
-			
-		nuevotexto = $("#edicion-input").val(); 
-				
-		if (nuevotexto.length >0 ) {			
-			
+	$("#edicion-input").blur(function(){			
+		nuevotexto = $("#edicion-input").val(); 				
+		if (nuevotexto.length >0 ) {						
 				updateindebenicion(nuevotexto);
-
 		}else{
-			llenaelementoHTML(".edicion-evento" , "Edición 3 nueva era"  ); 						
+			llenaelementoHTML(".edicion-evento" , "Edición del evento"  ); 						
 		}
 		showonehideone( ".edicion-evento" , "#edicion-input");
 		
@@ -327,24 +249,6 @@ function updateindebenicion(nuevotexto){
 
 
 /******************************************************************/
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 function updatedescripcion(e){
 
 
@@ -801,8 +705,6 @@ function showformtagsgeneros(){
 
 
 function show_section_generos(){
-	
-
 
 	if ($(".generos_musicales_div").is(":visible")) {
 
@@ -813,5 +715,50 @@ function show_section_generos(){
 		$(".generos_musicales_div").show();
 	}
 	
+}
+
+
+
+
+/**********************************************************/
+
+
+
+
+function updateeslogan(e){
+
+	showonehideone( "#eslogan-evento" , ".eslogan-p");
+	$("#eslogan-evento").blur(function(){
+			
+		nuevotexto = $("#eslogan-evento").val(); 
+		if (nuevotexto != null  ) {	
+			updateindbeslogan(nuevotexto);			
+		}else{
+			llenaelementoHTML(".eslogan-p" , "Eslogan publicitario evento" ); 						
+		}
+		showonehideone( ".eslogan-p" , "#eslogan-evento");
+		
+		
+	});
+
+}
+
+
+
+function updateindbeslogan(nuevotexto){
+
+	evento = $("#evento").val();
+	url =  now + "index.php/api/event/update_eslogan/format/json/";    
+	eslogan_text = $("#eslogan-evento").val();
+	$.post(url , {evento : evento , eslogan : eslogan_text}).done(function(data){
+
+				
+				loaddata();
+
+	}).fail(function(){
+				/*Error*/
+			alert("Error");
+	});
+
 }
 

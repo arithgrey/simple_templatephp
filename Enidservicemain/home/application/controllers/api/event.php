@@ -420,7 +420,21 @@ function create_directorio($id_event){
 }
 
 
-    /*Termina rest*/
+function update_eslogan_post(){
+
+        if ( $this->sessionclass->is_logged_in() == 1) {  
+                
+                $id_evento= $this->post("evento");
+                $eslogan = $this->post("eslogan");
+
+                $this->response($this->eventmodel->update_eslogan($id_evento , validate_text($eslogan)) );
+        }else{
+            $this->sessionclass->logout();    
+        }  
+
+}/*Termina rest*/
+
+
 
 }
 ?>

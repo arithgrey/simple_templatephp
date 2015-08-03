@@ -13,7 +13,7 @@ function outsystem(){
 	urlnext = $(".now").val()+"index.php/sessioncontroller/logout/";		
 	redirect(urlnext);	
 }
-function llenaelementoHTML(idelement , data){
+function llenaelementoHTML(idelement , data ){
 	
 	$(idelement).html(data);
 } 
@@ -21,6 +21,10 @@ function valorHTML(idelement , data){
 
 	$(idelement).val(data);
 } 
+
+function set_text_element(text_tag , texto ){
+	$(text_tag).text(texto);
+}
 function redirect(url){
 	window.location.replace(url);
 }

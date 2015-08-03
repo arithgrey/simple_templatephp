@@ -155,7 +155,7 @@ class Eventos extends CI_Controller {
                         
                         $data["nombre"]= $nombre;
                         $data["perfilactual"] =  $this->sessionclass->getnameperfilactual(); 
-                        $data['titulo']='';
+                        $data['titulo']='previsualizando evento';
                         $idempresa =  $this->sessionclass->getidempresa();                        
                         $idevento = $this->input->get("evento");                        
                           
@@ -185,6 +185,9 @@ class Eventos extends CI_Controller {
                                     $dataevent = $this->eventmodel->getEventbyid($idevento);
                                     $list_escenarios = $this->escenariomodel->get_escenarios_byidevent($idevento);
                                     $data["escenarios"] = list_resum_escenarios($list_escenarios);
+
+                                    $list_generosdb = $this->eventmodel->get_list_generos_musicales_byidev($idevento);
+                                    $data["generos_musicales_tags"] = get_tags_generos($list_generosdb);
                                     $data["evento"] =  $dataevent[0];
 
                                     $array_servicios_includos = $this->eventmodel->get_servicios_evento_by_id($idevento);
