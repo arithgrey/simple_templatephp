@@ -158,6 +158,32 @@ function updateescenarioinicioterminobyid($idescenario , $idempresa , $nuevoinic
 
 }
 
+/*************************************** ****************************************/
+
+function get_escenariobyId($id_escenario){
+
+	$get_escenario ="SELECT * FROM escenario WHERE idescenario ='".$id_escenario."' ";
+	$result = $this->db->query($get_escenario);
+	return $result->result_array();	
+
+}
+
+
+/*Todos los escenarios menos uno*/
+
+function get_escenarios_byidevent_menosuno($id_evento, $id_escenario){
+	$query_select ="select e.idescenario , SUBSTRING( e.descripcion , 1,  135 ) 
+	as descripcion_escenario ,  e.nombre, e.tipoescenario, e.portada_escenario ,   
+	count(a.idartista) as num_artistas from escenario
+	as e left outer join escenario_artista as ea  on e.idescenario = ea.idescenario 
+	left outer join artista as a  
+	on ea.idartista = a.idartista where e.idevento = '". $id_evento ."' and
+	e.idescenario != '". $id_escenario ."' group by e.idescenario order by tipoescenario  desc";
+
+	$result= $this->db->query($query_select);
+	return $result-> result_array();
+
+}
 
 /*Termina modelo */
 }

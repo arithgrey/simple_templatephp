@@ -42,8 +42,24 @@ function listobjetosp( $arreglo ){
 }
     
 
+/*********************************************************************************+*/
+function get_list_objpermitidos( $array_objpermitidos ){
 
+	$list_objpermitidos ='';
+	$delay = 100;
+	foreach ($array_objpermitidos as $row) {
+		$list_objpermitidos .= '<li class="object-non-visible animated object-visible fadeIn" data-animation-effect="fadeIn" data-effect-delay="'.$delay.'"><i class="fa fa-check text-default"></i> '. $row["nombre"] .'</li>';
 
+		if ($delay < 600) {
+			$delay = $delay + 100;	
+		}else{
+			$delay = $delay - 100;	
+
+		}
+		
+	}
+    return $list_objpermitidos;								
+}
 
 
 }/*Termina el helper*/

@@ -302,6 +302,24 @@ function update_eslogan($id_evento , $eslogan){
 
 }
 
+
+/* get listobjetos permitidos del evento */
+
+
+function get_objetos_permitidosin_event($id_evento){
+	$query_get_objeto = "SELECT op.idobjetopermitido ,  op.nombre FROM  objetopermitido AS op 
+	INNER JOIN  evento_objetopermitido eop 
+	ON  op.idobjetopermitido = eop.idobjetopermitido 
+	WHERE  eop.idevento='". $id_evento."' ORDER BY  nombre";
+	
+	$result_obj = $this->db->query($query_get_objeto);
+	return $result_obj->result_array();
+
+}
+
+
+
+
 /*Termina modelo */
 }
 

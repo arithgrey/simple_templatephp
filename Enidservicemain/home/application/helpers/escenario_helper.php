@@ -6,7 +6,7 @@ if(!function_exists('invierte_date_time')){
 /*******************************************************************************************************/
 
 
-function list_resum_escenarios($array_escenario){
+function list_resum_escenarios($array_escenario, $id_evento){
 
     $list ='';
     foreach ($array_escenario as $row){
@@ -19,10 +19,12 @@ function list_resum_escenarios($array_escenario){
               $tipo_escenario ='<li ><a style="text-decoration: none;" href="#"> <i class="fa fa-star"></i>'.$row["tipoescenario"] .'</a></li>';
          }
        
-         $list .=' <div class="media">                   
+
+        $url_escenario = base_url("index.php/escenario/inevento?escenario="). $row["idescenario"]. "&evento=".$id_evento; 
+         $list .=' <div class="media bloc_escenario_desc">                   
                     <div class="media-body">
-                      <h4 class="media-heading">'. $nombre. '</h4>
-                      '. $descripcion   .'...
+                      <a style="text-decoration:none;" href="'. $url_escenario .'"> <h4 class="media-heading">'. $nombre. '</h4></a>
+                      <div class="descripcion-esc">'. $descripcion   .'...</div>
                     </div>
                                     <ul class="revenue-nav">
                                         
@@ -234,6 +236,7 @@ function listescenariosonloadevent($responsedbescenario){
 
 /*****************+******_es**********+****************+****************+****************+*/
 
+ 
    
 
 

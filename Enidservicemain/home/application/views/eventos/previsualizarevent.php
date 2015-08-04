@@ -1,6 +1,7 @@
 <link href="<?=base_url('application/tema/plugins/rs-plugin/css/settings.css')?>" rel="stylesheet">
 <link href="<?=base_url('application/tema/plugins/owl-carousel/owl.transitions.css')?>" rel="stylesheet">
 <link href="<?=base_url('application/tema/css/style.css')?>" rel="stylesheet" >
+
 <script type="text/javascript" src="<?=base_url('application/tema/plugins/modernizr.js')?>"></script>
 <script type="text/javascript" src="<?=base_url('application/tema/plugins/rs-plugin/js/jquery.themepunch.tools.min.js')?>"></script>
 <script type="text/javascript" src="<?=base_url('application/tema/plugins/rs-plugin/js/jquery.themepunch.revolution.min.js')?>"></script>
@@ -557,12 +558,12 @@
                   <div class="media">                    
                     <div class="media-left">
                         <h4 class="">Lo permitido </h4>
-                        <a href="#">                        
+                        <a href="<?=base_url('index.php/eventos/diaevento?evento='.$evento["idevento"]."#permitido")?>">                        
                           <span class="icon circle small default-bg"><i class="fa fa-check"></i> 
                           </span>
                           <?=substr($evento["permitido"], 0 , 130); ?> ....
                         </a>
-                        <button class='btn btn-lg btn-default btn-animated'>Artículos permitidos </button>
+                        <a href="<?=base_url('index.php/eventos/diaevento?evento='.$evento["idevento"]."#articulos-permitidos")?>"><button class='btn btn-lg btn-default btn-animated'>Artículos permitidos </button></a>
                     </div>                                    
                   </div>
 
@@ -573,7 +574,7 @@
                   <div class="media">                    
                     <div class="media-right">
                         <h4 class="">Politicas del evento</h4>
-                        <a href="#">                        
+                        <a href="<?=base_url('index.php/eventos/diaevento?evento='.$evento["idevento"]."#politicas")?>">                        
                           <span class="icon circle small default-bg"><i class="fa fa-circle"></i> 
                           </span>
                           <?=substr($evento["politicas"],  0 , 140); ?>...
@@ -589,7 +590,7 @@
                   <div class="media">                    
                     <div class="media-right">
                         <h4 class="media-heading">Lo prohibido</h4>
-                        <a href="#">                        
+                        <a href="<?=base_url('index.php/eventos/diaevento?evento='.$evento["idevento"]."#lo-prohibido")?>">                        
                           <span class="icon circle small default-bg"><i class="fa fa-exclamation-triangle"></i> 
                           </span>
                           <?=substr($evento["restricciones"] , 0 ,  140 ); ?>... 
@@ -597,6 +598,13 @@
                        
                     </div>                                    
                   </div>
+
+
+                  <ul class="social-links dark circle">
+                      <li><a target="_blank" href="<?=$evento["url_social"]?>"><i class="fa fa-facebook"></i></a></li>                      
+                      <li><a target="_blank" href="<?=$evento["url_social_youtube"]?>"><i class="fa fa-google-plus"></i></a></li>
+                
+                  </ul>
 
 
             </div>
@@ -616,11 +624,12 @@
                 <div class="alert alert-icon alert-info" role="alert">
                   <i class="fa  fa-spinner"></i>Pide nuestros eventos <code>(En tu ciudad)</code> 
                 </div>
-                <div class="alert alert-icon alert-warning" role="alert">
-                  <i class="fa  fa-heart"></i>Comparte <code></code> 
-                </div>
-
+                
 
               
             </div>
           </div>
+
+
+
+

@@ -4,6 +4,7 @@ class Eventos extends CI_Controller {
     function __construct(){
         parent::__construct();
 
+        $this->load->helper('eventosh');
         $this->load->helper('generoshelp');
         $this->load->helper('accesos');
         $this->load->helper('escenario');
@@ -133,22 +134,55 @@ class Eventos extends CI_Controller {
 
 
 
-    /*Pre visualizar  ********************** pre visualizar */
+/**********************************  *************************************************/
 
 
 
-
-
-
-
-
-
-
-
-        function previsualizar(){
-
-            if( $this->sessionclass->is_logged_in() == 1){            
+function diaevento(){
+ if( $this->sessionclass->is_logged_in() == 1){            
                 
+                        $menu = $this->sessionclass->generadinamymenu();            
+                        $data["menu"] = $menu;
+                        $nombre = $this->sessionclass->getnombre();
+                        
+                        $data["nombre"]= $nombre;
+                        $data["perfilactual"] =  $this->sessionclass->getnameperfilactual(); 
+                        $data['titulo']='previsualizando evento, día del evento';
+                        $idempresa =  $this->sessionclass->getidempresa();                        
+                        $idevento = $this->input->get("evento");                        
+                        
+                            if ($this->checkifexist($idevento , $idempresa) == 1 ) {
+
+
+                                    $dataevent = $this->eventmodel->getEventbyid($idevento);
+                                    $data["evento"] =  $dataevent[0];
+
+                                    $list_obj= $this->eventmodel->get_objetos_permitidosin_event($idevento);    
+                                    $data["list_obj_permitidos"] = get_list_objpermitidos( $list_obj );
+
+                                    $this->load->view('TemplateEnid/header_template', $data);
+                                    $this->load->view('eventos/dia_evento', $data);  
+                                    $this->load->view('TemplateEnid/footer_template', $data);    
+
+
+
+                            }else{
+                                    header('Location:' . base_url('index.php/inicio/eventos'));
+                            }
+
+                        
+
+                }else{
+            /*Terminamos la session*/
+            $this->sessionclass->logout();
+        }
+}/*Termina la función */
+
+
+
+    /*Pre visualizar  ********************** pre visualizar */
+        function previsualizar(){
+            if( $this->sessionclass->is_logged_in() == 1){                            
                         $menu = $this->sessionclass->generadinamymenu();            
                         $data["menu"] = $menu;
                         $nombre = $this->sessionclass->getnombre();
@@ -158,14 +192,7 @@ class Eventos extends CI_Controller {
                         $data['titulo']='previsualizando evento';
                         $idempresa =  $this->sessionclass->getidempresa();                        
                         $idevento = $this->input->get("evento");                        
-                          
-
-
-
-
-
                         
-
                             if ($this->checkifexist($idevento , $idempresa) == 1 ) {
                                     
 
@@ -184,7 +211,7 @@ class Eventos extends CI_Controller {
 
                                     $dataevent = $this->eventmodel->getEventbyid($idevento);
                                     $list_escenarios = $this->escenariomodel->get_escenarios_byidevent($idevento);
-                                    $data["escenarios"] = list_resum_escenarios($list_escenarios);
+                                    $data["escenarios"] = list_resum_escenarios($list_escenarios, $idevento);
 
                                     $list_generosdb = $this->eventmodel->get_list_generos_musicales_byidev($idevento);
                                     $data["generos_musicales_tags"] = get_tags_generos($list_generosdb);
@@ -217,75 +244,6 @@ class Eventos extends CI_Controller {
 
 /*termina la función pre visualizar */
  
-
-
-
-
-
-
-
-
-        function puntosventa(){
-
-            if( $this->sessionclass->is_logged_in() == 1){            
-                
-                        $menu = $this->sessionclass->generadinamymenu();            
-                        $data["menu"] = $menu;
-                        $nombre = $this->sessionclass->getnombre();
-                        
-                        $data["nombre"]= $nombre;
-                        $data["perfilactual"] =  $this->sessionclass->getnameperfilactual(); 
-                        $data['titulo']='';
-                        $idempresa =  $this->sessionclass->getidempresa();                        
-                        $idevento = $this->input->get("evento");                        
-                          
-
-                        
-
-                            if ($this->checkifexist($idevento , $idempresa) == 1 ) {
-                                    
-                                    
-
-                                    $data["idevento"] = $idevento;
-
-                                    $accesosdata = $this->accesosmodel->get_acceso_by_event($idevento);    
-                                    $data["accesos_evento"]= accesos_view_default($accesosdata);
-
-
-                                    $this->load->view('TemplateEnid/header_template', $data);
-                                    $this->load->view('eventos/puntos_venta', $data);  
-                                    $this->load->view('TemplateEnid/footer_template', $data);    
-
-                            }else{
-                                    header('Location:' . base_url('index.php/inicio/eventos'));
-                            }
-
-                        
-
-                }else{
-            /*Terminamos la session*/
-            $this->sessionclass->logout();
-        }
-    }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
