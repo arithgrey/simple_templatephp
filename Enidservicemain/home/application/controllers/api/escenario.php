@@ -48,13 +48,10 @@ class Escenario extends REST_Controller{
         if ( $this->sessionclass->is_logged_in() == 1) {  
             
                 
-                $evento =  $this->post("evento_escenario");
-                $idempresa =  $this->sessionclass->getidempresa();            
-
-
-                $responsedbescenario = $this->escenariomodel->loadbyevent( $evento ,  $idempresa  );
-
-                $this->response(listescenariosonloadevent($responsedbescenario));
+                $id_evento =  $this->post("evento_escenario");
+                $id_empresa =  $this->sessionclass->getidempresa();            
+                $response_db_escenario = $this->escenariomodel->load_by_event( $id_evento ,  $id_empresa  );
+                $this->response(list_escenarios_on_loadevent($response_db_escenario));
 
 
                                 
@@ -177,10 +174,8 @@ function updatedescripcionescenariobyid_post(){
 
                 $idescenario =  $this->get("idescenario");
                 $idempresa =  $this->sessionclass->getidempresa();                            
-                $info =  $this->escenariomodel->loadescenariobyid( $idescenario,  $idempresa );
 
-
-
+                $info =  $this->escenariomodel->load_escenario_byid( $idescenario,  $idempresa );
                 $this->response( infoescenario($info)  ); 
                 
         }else{

@@ -12,7 +12,7 @@ class Escenario  extends CI_Controller {
 	}
 	
 
-	function inevento(){
+	function inevento($id_escenario , $id_evento){
 
 		if ( $this->sessionclass->is_logged_in() == 1) {			
 			
@@ -23,9 +23,7 @@ class Escenario  extends CI_Controller {
                         $data["nombre"]= $nombre;
                         $data["perfilactual"] =  $this->sessionclass->getnameperfilactual(); 
                         $data['titulo']='Pre visualizando escenario';                       	
-                       	$id_escenario = $this->input->get("escenario");
-                        $id_evento = $this->input->get("evento");
-
+                       
 
         $artistas_array = $this->escenarioartistamodel->get_artistas_inevent($id_escenario);
         $escenariodb= $this->escenariomodel->get_escenariobyId($id_escenario);

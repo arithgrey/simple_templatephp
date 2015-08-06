@@ -5,7 +5,7 @@ if(!function_exists('invierte_date_time')){
 
 
 
-function get_time_line_event($arreglo_time_line){
+function get_time_line_event($arreglo_time_line , $longitud_descripcion_text){
 
   $time_list ="";
   $i=0;
@@ -22,7 +22,7 @@ function get_time_line_event($arreglo_time_line){
       $idevento = $row["idevento"];
       $nombre_evento = $row["nombre_evento"];
       $descripcion_evento = $row["descripcion_evento"];
-      $descripcion_evento = substr($descripcion_evento , 0 , 150 );
+      $descripcion_evento = substr($descripcion_evento , 0 , $longitud_descripcion_text );
       $fecha_inicio = $row["fecha_inicio"];
       $fecha_termino =  $row["fecha_termino"];
       $url_social = $row["url_social"];
@@ -31,7 +31,7 @@ function get_time_line_event($arreglo_time_line){
       $status = $row["estadoevento"];
       $edicion = $row["edicion"];
       $totalescenarios = $row["totalescenarios"];
-      $url_complete = base_url('index.php/eventos/nuevo?evento='.$idevento."&start=".$fecha_inicio."&end=".$fecha_termino );
+      $url_complete = base_url('index.php/eventos/nuevo/'.$idevento."?start=".$fecha_inicio."&end=".$fecha_termino );
 
       $fecha_time = $fecha_inicio ." al día " . $fecha_termino  ;
       $i++; 

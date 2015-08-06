@@ -95,9 +95,6 @@
 
 <style type="text/css">
 
-.descripcion-esc{
-	display: none;
-}
 .bloc_escenario_desc{
 	//background: black;
 }

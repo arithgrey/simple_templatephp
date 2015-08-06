@@ -13,8 +13,7 @@
 
   $img_f = $base_img. $img_event[0]["name"];
   $img_s = $base_img. $img_event[1]["name"];
-
-
+  
    $img_t = '<span class="icon large circle"><i class="fa fa-play-circle"></i></span>';
    $img_c = '<span class="icon large circle"><i class="fa fa-heart"></i></span>';
    $img_cc = '<span class="icon large circle"><i class="fa fa-chevron-right"></i></span>';
@@ -558,7 +557,7 @@
                   <div class="media">                    
                     <div class="media-left">
                         <h4 class="">Lo permitido </h4>
-                        <a href="<?=base_url('index.php/eventos/diaevento?evento='.$evento["idevento"]."#permitido")?>">                        
+                        <a href="<?=base_url('index.php/eventos/diaevento/'.$evento["idevento"]."#permitido")?>">                        
                           <span class="icon circle small default-bg"><i class="fa fa-check"></i> 
                           </span>
                           <?=substr($evento["permitido"], 0 , 130); ?> ....
@@ -574,7 +573,7 @@
                   <div class="media">                    
                     <div class="media-right">
                         <h4 class="">Politicas del evento</h4>
-                        <a href="<?=base_url('index.php/eventos/diaevento?evento='.$evento["idevento"]."#politicas")?>">                        
+                        <a href="<?=base_url('index.php/eventos/diaevento/'.$evento["idevento"]."#politicas")?>">                        
                           <span class="icon circle small default-bg"><i class="fa fa-circle"></i> 
                           </span>
                           <?=substr($evento["politicas"],  0 , 140); ?>...
@@ -590,7 +589,7 @@
                   <div class="media">                    
                     <div class="media-right">
                         <h4 class="media-heading">Lo prohibido</h4>
-                        <a href="<?=base_url('index.php/eventos/diaevento?evento='.$evento["idevento"]."#lo-prohibido")?>">                        
+                        <a href="<?=base_url('index.php/eventos/diaevento/'.$evento["idevento"]."#lo-prohibido")?>">                        
                           <span class="icon circle small default-bg"><i class="fa fa-exclamation-triangle"></i> 
                           </span>
                           <?=substr($evento["restricciones"] , 0 ,  140 ); ?>... 

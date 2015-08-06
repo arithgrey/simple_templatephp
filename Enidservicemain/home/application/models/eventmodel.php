@@ -86,7 +86,7 @@ function create( $nombre , $edicion , $inicio , $termino , $idusuario , $idempre
 }
 
 
-function getLastEvents($idempresa , $num ){
+function get_last_events($idempresa , $num ){
 
 	
 	$query_select ="SELECT  e.idevento , e.nombre_evento, e.descripcion_evento, e.fecha_inicio , 
@@ -240,10 +240,10 @@ function getObjetosPermitidos($idevento ){
 
 /*Pasados **Pasados **Pasados **Pasados **Pasados **Pasados **Pasados */
 
-function get_time_events_byid($idempresa){
+function get_time_events_byid($idempresa ){
 
 
-	$query_select ="SELECT  e.idevento , e.nombre_evento, e.descripcion_evento, e.fecha_inicio , 
+	$query_select ="SELECT  e.idevento , e.nombre_evento, e.descripcion_evento , e.fecha_inicio , 
 	e.fecha_termino ,
 	e.url_social, e.url_social_youtube, e.portada , e.status  as estadoevento , e.edicion ,
 	count(es.idescenario) as totalescenarios 

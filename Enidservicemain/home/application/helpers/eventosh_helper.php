@@ -61,6 +61,62 @@ function get_list_objpermitidos( $array_objpermitidos ){
     return $list_objpermitidos;								
 }
 
+/****************************+ Pagination  **********************************/
+
+function get_paginarion_principal($limit_display){
+
+	$anterior = "";
+			switch ($limit_display) {
+				case 3:
+					$anterior = '<li class="active"><a href="'. base_url('index.php/inicio/eventos/') .'">3</a></li>
+                    <li><a href="'. base_url('index.php/inicio/eventos/10') .'">10</a></li>
+                    <li><a href="'. base_url('index.php/inicio/eventos/50').'">50</a></li>                    
+                    <li><a href="'. base_url('index.php/inicio/eventos/1000').'">TODOS</a></li>';
+					break;
+				case 10:
+					$anterior = '<li><a href="'. base_url('index.php/inicio/eventos/') .'">ANTERIOR</a></li>
+					<li><a href="'. base_url('index.php/inicio/eventos/') .'">3</a></li>
+                    <li class="active"><a href="'. base_url('index.php/inicio/eventos/10') .'">10</a></li>
+                    <li><a href="'. base_url('index.php/inicio/eventos/50').'">50</a></li>                    
+                    <li><a href="'. base_url('index.php/inicio/eventos/1000').'">TODOS</a></li>';
+					break;
+				case 50:
+					$anterior = '<li><a href="'. base_url('index.php/inicio/eventos/10') .'">ANTERIOR</a></li>
+					<li ><a href="'. base_url('index.php/inicio/eventos/') .'">3</a></li>
+                    <li><a href="'. base_url('index.php/inicio/eventos/10') .'">10</a></li>
+                    <li class="active"><a href="'. base_url('index.php/inicio/eventos/50').'">50</a></li>                    
+                    <li><a href="'. base_url('index.php/inicio/eventos/1000').'">TODOS</a></li>';
+					break;
+
+				break;
+				case 1000:
+					$anterior = '<li><a href="'. base_url('index.php/inicio/eventos/50') .'">ANTERIOR</a></li>
+					<li ><a href="'. base_url('index.php/inicio/eventos/') .'">3</a></li>
+                    <li><a href="'. base_url('index.php/inicio/eventos/10') .'">10</a></li>
+                    <li ><a href="'. base_url('index.php/inicio/eventos/50').'">50</a></li>                    
+                    <li class="active"><a href="'. base_url('index.php/inicio/eventos/1000').'">TODOS</a></li>';
+					break;
+						
+
+				default:
+					$anterior = "";
+					break;
+			}
+
+
+		$dinamic_pagination = '<div class="text-center">
+                <ul class="pagination blog-pagination">                    
+                	'. $anterior.'	
+                </ul>
+
+            </div>';
+            return  $dinamic_pagination;
+
+}
+
+/***********************************END PAGINATION ****************************/
+
+
 
 }/*Termina el helper*/
  

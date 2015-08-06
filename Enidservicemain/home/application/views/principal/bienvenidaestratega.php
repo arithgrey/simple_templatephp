@@ -43,20 +43,25 @@
 
 
 
-
+            <?=$pagination_event;?>
     
             <div class="row">
+
                 <div class="col-md-8" style="">
+
                     <div class="row">
                         <div class="col-md-12">
+
 
 
                             
 
 
                             <div class="panel" >
+
                                 <header class="panel-heading" style='background:#CD1E3B; color: white'> 
                                     Últimos eventos anunciados 
+
 
                                     
                                     <span class="tools pull-right">

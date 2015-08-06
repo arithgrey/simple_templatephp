@@ -139,6 +139,7 @@ function nuevo_artista_escenario(){
 			$.post( url , $("#form-artistas").serialize() )
 			  .done(function( data ) {			    			  
 			  		load_data_escenario(idescenario);
+			  		load_data_escenarios();
 			  		
 			  })
 			  .fail(function() {
@@ -208,6 +209,7 @@ function update_description_in_modal(){
 			updates_send(url , data_send);			
 			load_data_escenario($("#idescenariomodalartistas").val() );
 			showonehideone(".descripcion-modal-text" , ".descripcion-in-modal-escenario"  );
+			load_data_escenarios();
 
 	});
 
@@ -224,7 +226,7 @@ function remove_artista_in_escenario(e){
 			.done(function(data){
 
 					load_data_escenario(idescenario);	
-					loadescenarioss();						
+					load_data_escenarios();					
 
 			}).fail(function(){
 				
@@ -298,6 +300,7 @@ function update_nombre_escenario(){
 			data_send = { idartista : idartista , idescenario : idescenario , hiartista : hiartista , htartista : htartista }
 			updates_send(url , data_send);
 			load_data_escenario(idescenario);	
+			load_data_escenarios();
 
  	});
  	

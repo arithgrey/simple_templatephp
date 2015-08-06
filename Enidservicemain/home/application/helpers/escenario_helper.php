@@ -20,7 +20,7 @@ function list_resum_escenarios($array_escenario, $id_evento){
          }
        
 
-        $url_escenario = base_url("index.php/escenario/inevento?escenario="). $row["idescenario"]. "&evento=".$id_evento; 
+        $url_escenario = base_url("index.php/escenario/inevento"). "/".$row["idescenario"]. "/".$id_evento; 
          $list .=' <div class="media bloc_escenario_desc">                   
                     <div class="media-body">
                       <a style="text-decoration:none;" href="'. $url_escenario .'"> <h4 class="media-heading">'. $nombre. '</h4></a>
@@ -42,99 +42,85 @@ function list_resum_escenarios($array_escenario, $id_evento){
 
 
  
+/*TEMPLATE EN CUANTO REGISTRE UN EVENTO*/
+function get_default_template_escenario(){
+    
+    $list_template ="<li>                                          
+                <div class='avatar'>
+                    <img src=". base_url('application/img/blue.png'). " >
+                        </div>
+                            <div class='activity-desk'>                                            
+                                <h5><a data-toggle='modal' data-target='#modalesenarios' href='#modalesenarios'>Escenario principal </a> 
+                                    <br><span>La experiencia que se vivirá aquí será única ...</span></h5>
+                                        <p class='text-muted'>Artistas incluidos # 10</p>
+                            </div>
+            </li>                                                                              
+            ";
+            return $list_template;
+}
 
 
-
-
-function listescenariosonloadevent($responsedbescenario){
+function list_escenarios_on_loadevent($responsedbescenario){
 
 	$list = "<ul class='activity-list'>";
 
-	if (count($responsedbescenario["todos"]) == 0 ) {
-	
-	$list .="		
-									   
-                        
+	if (count($responsedbescenario) == 0 ) {
+	       $list.= get_default_template_escenario();	
+	}else{
+        /*CONSTRUIMOS LA INFORMACIÓN A DESPLEGAR*/
 
-                                        <li>                                          
-                                            <div class='avatar'>
-                                            <img src=". base_url('application/img/blue.png'). " >
-                                            </div>
-                                            <div class='activity-desk'>                                            
-
-                                                <h5><a data-toggle='modal' data-target='#modalesenarios' href='#modalesenarios'>Escenario principal </a> 
-                                                    <br><span>La experiencia que se vivirá aquí será única ...</span></h5>
-                                                    <p class='text-muted'>Artistas incluidos # 10</p>
-                                            </div>
-
-                                        </li>                                        
-
-                                        
-                                    ";
-
-	}
-
-
-
-
-	foreach ($responsedbescenario["todos"] as $row) {
-	
-
+        foreach ($responsedbescenario as $row) {
         
-        //conartistas
-
-    $idescenariovalidation  = $row["idescenario"];
-    $tipoescenario =  $row["tipoescenario"];
-
-    $numero_artistas = 0;
-    $numero_artistas =  getnumeroartistas( $responsedbescenario["conartistas"] ,
-    $idescenariovalidation );
-        
-	$descripcion = $row["descripcion"];
-	if (strlen($descripcion ) == 0 ) {
-		$descripcion = "<br>+ agregar descripción";			
-	}		
+        $idescenariovalidation  = $row["idescenario"];
+        $tipoescenario =  $row["tipoescenario"];
+        $numero_artistas = 0;
+        $numero_artistas =  $row["numero_artistas"];            
+        $fecha_escenario = $row["fecha_presentacion_inicio"] ."-".$row["fecha_presentacion_termino"];
 
 
-	$inpu_escenario ="inpu_escenario_" . $row["idescenario"];
-	
-	$list .="		
+            
+            $descripcion = $row["descripcion"];
+            if (strlen($descripcion ) == 0 ) {
+                $descripcion = "<br>+ agregar descripción";         
+            }       
 
-									
-                                        <li>                                          
-                                            <div class='avatar'>
-                                            <img data-toggle='modal' data-target='#modalesenariosedit' class='edita-modal-escenario' id='". $row["idescenario"] ."'  src=". base_url('application/img/blue.png'). " >
-                                            </div>
-                                            <div class='activity-desk'>
+            $inpu_escenario ="inpu_escenario_" . $row["idescenario"];        
+            $list .="       
+                    <li>                                          
+                        <div class='avatar text-center'>
+                            <img data-toggle='modal' data-target='#modalesenariosedit' class='edita-modal-escenario' id='". $row["idescenario"] ."'  src=". base_url('application/img/blue.png'). " >
+                        </div>
+                        <div class='activity-desk'>
+                            <h5><a data-toggle='modal' data-target='#modalesenariosedit' class='edita-modal-escenario ' id='". $row["idescenario"] ."'  >". $row["nombre"] ."</a> 
+                    <br>
+                     <span class='descripcion_escenario_update text-center' id='".
+                        $row["idescenario"] . "'    >". 
+                                substr( validate_text($descripcion)  , 0 , 200 )   ."..</span>                                       
+                        <textarea  name='newdescripesenario' class='newdescripesenario form-control'  rows='3' id=". $inpu_escenario  .">".$row["descripcion"]."</textarea>
+                        </h5>
+                        <p class='text-muted text-center'>Artistas #".$numero_artistas."|".$tipoescenario." | ".$fecha_escenario ." </p>
 
-                                                <h5><a data-toggle='modal' data-target='#modalesenariosedit' class='edita-modal-escenario' id='". $row["idescenario"] ."'  >". $row["nombre"] ."</a> 
-                                                <br>
+                    <i data-toggle='modal' data-target='#confirmationdeleteescenario' class='fa fa-times deleteescenario' id='". $row["idescenario"] ."' ></i>
+                    </div>
+                    </li>                                        
+                    ";
 
-                                           <span class='descripcion_escenario_update' id='".
-                                            $row["idescenario"] . "'    >". 
-                                            substr( validate_text($descripcion)  , 0 , 200 )   ."..</span>
-                                           
-                                            <textarea  name='newdescripesenario' class='newdescripesenario form-control'  rows='3' id=". $inpu_escenario  .">".$row["descripcion"]."</textarea>
-
-                                                    </h5>
-                                                    <p class='text-muted'>Artistas incluidos #".$numero_artistas." ,  ".$tipoescenario." </p>
+    }
 
 
-                                                    <i data-toggle='modal' data-target='#confirmationdeleteescenario' class='fa fa-times deleteescenario' id='". $row["idescenario"] ."' ></i>
 
-                                            </div>
+        /*TERMINA LA CONSTRUCCIÓN DE LA LISTA DE ESCENARIOS*/
+    }
 
-                                        </li>                                        
-                                    ";
 
-	}
+
+
 
 
 	$list .="</ul>";
     $data["info"] = $list;
-    $data["numero_escenarios"] = count($responsedbescenario["todos"]);
+    $data["numero_escenarios"] = count($responsedbescenario);
 	return $data;
-	
 	
 }
     
@@ -142,23 +128,6 @@ function listescenariosonloadevent($responsedbescenario){
 
 
 
-    function getnumeroartistas($responsedbescenario, $idescenariovalidation ){
-
-        $numero_artistas = 0;
-
-
-        foreach ($responsedbescenario as $row) {
-            
-            if ($row["idescenario"] ==  $idescenariovalidation) {
-                $numero_artistas = $row["numeroartistas"];         
-            }
-        }
-
-        return $numero_artistas;
-
-      
-
-    }
         
 
 /*****************+****************+****************+****************+****************+*/

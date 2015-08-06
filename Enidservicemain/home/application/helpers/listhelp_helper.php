@@ -29,13 +29,9 @@ if(!function_exists('invierte_date_time')){
 	}/*Termina función*/
 
 
-	function getLastEventsEstratega($ultimos_eventos){
-		$elements ="";
-
-
-
-		if (count($ultimos_eventos) == 0 ) {
-			$elements .= "
+	/*RETORNA LA PLANTILLA EN CASO DE QUE EL CLIENTE AÚN NO HAYA REGISTRADO EVENTOS */
+	function default_template_eventos(){
+					$elements = "
 								<div class='panel'>
                                     <div class='panel-body ' style='' >
                                         <div class='media blog-cmnt'>
@@ -54,13 +50,18 @@ if(!function_exists('invierte_date_time')){
                                             </div>
                                         </div>
                                     </div>";
+		return $elements;
 
+	}
+	
+	function getLastEventsEstratega($ultimos_eventos){
+		$elements ="";
+		
+		if (count($ultimos_eventos) == 0 ) {
 
+			$elements.= default_template_eventos();
 		}
 
-
-
-		
         foreach ($ultimos_eventos as $row){
 			
 			$urlnext = base_url('index.php/eventos/nuevo/'.$row["idevento"]."?start=".$row["fecha_inicio"] ."&end=".$row["fecha_termino"] );

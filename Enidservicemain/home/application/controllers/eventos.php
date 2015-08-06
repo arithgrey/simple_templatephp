@@ -56,12 +56,12 @@ class Eventos extends CI_Controller {
                         
                         $data["nombre"]= $nombre;
                         $data["perfilactual"] =  $this->sessionclass->getnameperfilactual(); 
-                        $data['titulo']='Pasados';
+                        $data['titulo']='Linea de tiempo';
 
                         $idempresa =  $this->sessionclass->getidempresa();
-                        
+                        $longitud_descripcion_text = 400;
                         $arreglo_time_line = $this->eventmodel->get_time_events_byid($idempresa);
-                        $data["time_line"] = get_time_line_event($arreglo_time_line);
+                        $data["time_line"] = get_time_line_event($arreglo_time_line, $longitud_descripcion_text);
 
                         
 
@@ -138,7 +138,7 @@ class Eventos extends CI_Controller {
 
 
 
-function diaevento(){
+function diaevento($id_evento){
  if( $this->sessionclass->is_logged_in() == 1){            
                 
                         $menu = $this->sessionclass->generadinamymenu();            
@@ -149,15 +149,15 @@ function diaevento(){
                         $data["perfilactual"] =  $this->sessionclass->getnameperfilactual(); 
                         $data['titulo']='previsualizando evento, día del evento';
                         $idempresa =  $this->sessionclass->getidempresa();                        
-                        $idevento = $this->input->get("evento");                        
                         
-                            if ($this->checkifexist($idevento , $idempresa) == 1 ) {
+                        
+                            if ($this->checkifexist($id_evento , $idempresa) == 1 ) {
 
 
-                                    $dataevent = $this->eventmodel->getEventbyid($idevento);
+                                    $dataevent = $this->eventmodel->getEventbyid($id_evento);
                                     $data["evento"] =  $dataevent[0];
 
-                                    $list_obj= $this->eventmodel->get_objetos_permitidosin_event($idevento);    
+                                    $list_obj= $this->eventmodel->get_objetos_permitidosin_event($id_evento);    
                                     $data["list_obj_permitidos"] = get_list_objpermitidos( $list_obj );
 
                                     $this->load->view('TemplateEnid/header_template', $data);
@@ -212,7 +212,6 @@ function diaevento(){
                                     $dataevent = $this->eventmodel->getEventbyid($id_evento);
                                     $list_escenarios = $this->escenariomodel->get_escenarios_byidevent($id_evento);
                                     $data["escenarios"] = list_resum_escenarios($list_escenarios, $id_evento);
-
                                     $list_generosdb = $this->eventmodel->get_list_generos_musicales_byidev($id_evento);
                                     $data["generos_musicales_tags"] = get_tags_generos($list_generosdb);
                                     $data["evento"] =  $dataevent[0];
@@ -222,7 +221,7 @@ function diaevento(){
                                     $data["idevento"] = $id_evento;
 
                                     $this->load->view('TemplateEnid/header_template', $data);
-                                    $this->load->view('eventos/previsualizarevent', $data);  
+                                    $this->load->view('eventos/previsualizarevent', $data);                                      
                                     $this->load->view('TemplateEnid/footer_template', $data);    
 
                             }else{

@@ -4,14 +4,16 @@ class Inicio extends CI_Controller {
 
 
 	function __construct(){        
-        parent::__construct();            
+        parent::__construct();     
+
+        $this->load->helper("eventosh");       
         $this->load->model("eventmodel");    
         $this->load->library('sessionclass');
     }     
 
 
 
-function eventos(){
+function eventos($limit_events=3){
 
 		if ( $this->sessionclass->is_logged_in() == 1) {			
 
@@ -30,7 +32,8 @@ function eventos(){
 							$idempresa =  $this->sessionclass->getidempresa();	
 							$data["perfilactual"] =  $this->sessionclass->getnameperfilactual(); 				
 
-							$data["ultimos_eventos"] =$this->eventmodel->getLastEvents($idempresa , 3 );					
+							$data["pagination_event"] = get_paginarion_principal($limit_events);
+							$data["ultimos_eventos"] =$this->eventmodel->get_last_events($idempresa , $limit_events );					
 
 							$this->load->view('TemplateEnid/header_template', $data);		
 							$this->load->view('principal/bienvenidaestratega' , $data);
