@@ -379,7 +379,7 @@ function updaterestricciones_post(){
 
                                     $data[0]= true;
                                     $extra = $this->create_directorio($dbresponse); 
-                                    $data[1]= base_url('index.php/eventos/nuevo?evento='.$dbresponse);
+                                    $data[1]= base_url('index.php/eventos/nuevo/'.$dbresponse);
                                        
                                     $this->response($data); 
                                 }else{

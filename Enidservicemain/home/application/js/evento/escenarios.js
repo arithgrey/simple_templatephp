@@ -1,41 +1,30 @@
-function  nuevoescenario(){
-
+function  nuevo_escenario(){
 	url =  now  + "index.php/api/escenario/nuevo/format/json/";		
-
 	$.post(url , $("#form-escenario").serialize() ).done(function(data){
 
-			loadescenarioss();
+			load_data_escenarios();
 
 	}).fail(function(){
 		
 		alert("ERR");
-
 	});
-
 	return false;
 }
 
 
-function  loadescenarioss(){
+function load_data_escenarios(){
 	
 	url =  now  + "index.php/api/escenario/load/format/json/";		
-
-	
-	
 	$.post(url , $("#form-escenario").serialize() ).done(function(data){
-
 			
 			if (data != null ) {
-				
+
 				llenaelementoHTML("#list_escenarios" , data["info"]);
 				llenaelementoHTML("#numero_escenarios" , "<i class='fa fa-play'></i> Escenarios #" +  data["numero_escenarios"] );
-
-				$(".descripcion_escenario_update").click(updatedescription);
-				$(".deleteescenario").click(deleteescenario);
-				$(".edita-modal-escenario").click(updateescenariomodal);
-	
-			}		
-			
+				$(".descripcion_escenario_update").click(update_description_escenario);
+				$(".deleteescenario").click(delete_escenario);
+				$(".edita-modal-escenario").click(update_escenario_modal);
+			}					
 
 	}).fail(function(){
 		
@@ -46,68 +35,30 @@ function  loadescenarioss(){
 
 }
 
-function updatedescription(e){
-	
-
-
+function update_description_escenario(e){	
 	idescenario = e.target.id;
 	inpu_escenario_ =  "#inpu_escenario_" + idescenario;		
-
 	span= "#"+ idescenario;
+	showonehideone( inpu_escenario_ , span );
 
-		showonehideone( inpu_escenario_ , span );
-		
 		$(inpu_escenario_).blur(function(){
-
 			nuevovalor =  $(this).val(); 
-			updatedescriptionindb( idescenario , nuevovalor);
+			update_description_in_db( idescenario , nuevovalor);
+
 
 		});
-
-
 	/*Registramos cambios */	
 
 }
 
 
 
- function updatedescriptionindb(idescenario , nuevadescripcion ){ 	
-
-
-
- 		evento_escenario =  $("#evento_escenario").val();
- 		
- 		url = now + "index.php/api/escenario/updatedescripcionescenario/format/json/";
- 		
-			$.post(url , {"idescenario" :  idescenario , "nuevadescripcion" :  nuevadescripcion, "evento_escenario" :  evento_escenario } )
-			.done(function(data){
-
-					loadescenarioss();	
-
-			}).fail(function(){
-				
-				alert("ERR");
-
-			});
-
-
-
- 	/*
- 	if (e.keyCode == 13){
-
- 		url = now + "index.php/api/escenario/updatedescripcion/format/json/";
- 		
-			$.post(url , $("#form-escenario").serialize() ).done(function(data){
-
-					loadescenarioss();
-
-			}).fail(function(){
-				
-				alert("ERR");
-
-			});
- 	}*/
-
+ function update_description_in_db(idescenario , nuevadescripcion ){ 	
+ 		evento_escenario =  $("#evento").val(); 		
+ 		url = now + "index.php/api/escenario/updatedescripcionescenario/format/json/"; 				
+		data_send = {"idescenario" :  idescenario , "nuevadescripcion" :  nuevadescripcion, "evento_escenario" :  evento_escenario }
+		updates_send(url , data_send);
+		load_data_escenarios();	
 
  }
 
@@ -115,31 +66,22 @@ function updatedescription(e){
 
 /*************************************************************************/
 
-function deleteescenario(e){
-	
-
+function delete_escenario(e){
 		$("#aceptar-delete").click(function(){
-
-
 		idescenario = e.target.id;
 		url = now + "index.php/api/escenario/deleteescenario/format/json/";
  		
 			$.post(url , {"idescenario" :  idescenario } )
 			.done(function(data){
 
-				loadescenarioss();
+				load_data_escenarios();
 
 			}).fail(function(){
 				
 				alert(genericresponse[0]);
 
 			});
-
-
-
 		});	
-
-
 }
 
 
@@ -148,7 +90,7 @@ function deleteescenario(e){
 
 
 /********************************************************************+*/
-function updateescenariomodal(e){
+function update_escenario_modal(e){
 
 	idescenario = e.target.id;
 	url = now + "index.php/api/escenario/loadescenariobyid/format/json/";
@@ -169,14 +111,15 @@ function updateescenariomodal(e){
 				valorHTML("#idescenariomodalartistas" , idescenario);
 				valorHTML(".descripcion-in-modal-escenario" , data["descripcion"]);
 
-
-				$(".descripcion-modal-text").click(updatedescriptioninmodal);
-				$(".remove-artista").click(removeartistaescenario);
-				$(".tipo-evento-modal").click(updatetipoescenario);
-				$(".nombre-escenario-modal").click(updatenombreescenario);
-				$('.day_escenario_button').click(updatedaysescenario);
-				$('.horario_artista').click(updatehorarioartista);
-
+				
+				$(".descripcion-modal-text").click(update_description_in_modal);
+				$(".remove-artista").click(remove_artista_in_escenario);
+				$(".tipo-evento-modal").click(update_tipo_escenario);
+				$(".nombre-escenario-modal").click(update_nombre_escenario);
+				$('.day_escenario_button').click(update_days_escenario);
+				$('.horario_artista').click(update_horario_artista);
+				load_data_escenarios();
+				
 			}).fail(function(){
 				
 				alert(genericresponse[0]);
@@ -187,25 +130,16 @@ function updateescenariomodal(e){
 
 
 
-function nuevoartistaescenario(){
+function nuevo_artista_escenario(){
 
 	artistainput = $("#artistainput").val();
 	idescenario = $("#idescenariomodalartistas").val();
-	
-
 	if (artistainput.length > 0 ) {
-
-
-
 			url = now + "index.php/api/escenario/registraartistaescenario/format/json/";
-
-			
 			$.post( url , $("#form-artistas").serialize() )
-			  .done(function( data ) {
-			    
-			  	
-			  		loadataescenario(idescenario);
-			  		loadescenarioss();
+			  .done(function( data ) {			    			  
+			  		load_data_escenario(idescenario);
+			  		
 			  })
 			  .fail(function() {
 			    
@@ -219,7 +153,7 @@ function nuevoartistaescenario(){
 
 
 
-function loadataescenario(idescenario){
+function load_data_escenario(idescenario){
 
 	url = now + "index.php/api/escenario/loadescenariobyid/format/json/";
  	
@@ -241,16 +175,12 @@ function loadataescenario(idescenario){
 				valorHTML("#idescenariomodalartistas" , idescenario);
 				valorHTML(".descripcion-in-modal-escenario" , data["descripcion"]);
 
-
-
-
-
-				$(".descripcion-modal-text").click(updatedescriptioninmodal);
-				$(".remove-artista").click(removeartistaescenario);
-				$(".tipo-evento-modal").click(updatetipoescenario);
-				$(".nombre-escenario-modal").click(updatenombreescenario);
-				$('.day_escenario_button').click(updatedaysescenario);
-				$('.horario_artista').click(updatehorarioartista);
+				$(".descripcion-modal-text").click(update_description_in_modal);
+				$(".remove-artista").click(remove_artista_in_escenario);
+				$(".tipo-evento-modal").click(update_tipo_escenario);
+				$(".nombre-escenario-modal").click(update_nombre_escenario);
+				$('.day_escenario_button').click(update_days_escenario);
+				$('.horario_artista').click(update_horario_artista);
 
 
 
@@ -267,125 +197,67 @@ function loadataescenario(idescenario){
 
 
 
-function updatedescriptioninmodal(){	
-	
-	$(".descripcion-in-modal-escenario").val($(this).text());
+function update_description_in_modal(){	
 
+	$(".descripcion-in-modal-escenario").val($(this).text());
 	showonehideone(".descripcion-in-modal-escenario" , ".descripcion-modal-text" );
 	$(".descripcion-in-modal-escenario").blur(function(){
 
-		 	nuevadescripcion = $(this).val();
-		 	evento_escenario =  $("#idescenariomodalartistas").val();	
-		
- 			url = now + "index.php/api/escenario/updatedescripcionescenariobyid/format/json/";
- 		
-			$.post(url , {nuevadescripcion  : nuevadescripcion  ,  idescenario :  evento_escenario  } )
-			.done(function(data){
-
-					loadataescenario(idescenario);	
-					loadescenarioss();	
-					showonehideone(".descripcion-modal-text" , ".descripcion-in-modal-escenario"  );
-
-			}).fail(function(){
-				
-				alert("ERR");
-
-			});
+		 	url = now + "index.php/api/escenario/updatedescripcionescenariobyid/format/json/";
+			data_send = {nuevadescripcion  : $(this).val()  ,  idescenario :  $("#idescenariomodalartistas").val()  }	
+			updates_send(url , data_send);			
+			load_data_escenario($("#idescenariomodalartistas").val() );
+			showonehideone(".descripcion-modal-text" , ".descripcion-in-modal-escenario"  );
 
 	});
-
-	
-
 
 }
 /********************************************************************************************/
 
 
-function removeartistaescenario(e){	
+function remove_artista_in_escenario(e){	
 	
 	artista_quitar = e.target.id;
 	idescenario = $("#idescenariomodalartistas").val();
-
-
-
-	url = now + "index.php/api/escenario/deleteartistaescenario/format/json/";
- 		
+	url = now + "index.php/api/escenario/deleteartistaescenario/format/json/"; 		
 			$.post(url , {artista_quitar  : artista_quitar  ,  idescenario :  idescenario  } )
 			.done(function(data){
 
-
-					loadataescenario(idescenario);	
-					loadescenarioss();	
-					
+					load_data_escenario(idescenario);	
+					loadescenarioss();						
 
 			}).fail(function(){
 				
 				alert("ERR");
-
 			});
-
-
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 /**********************************************************************/
-function updatetipoescenario(e){
+function update_tipo_escenario(e){
 
-	nuevovalotipoescenario  = e.target.id;
-	idescenario = $("#idescenariomodalartistas").val();
-	url = now + "index.php/api/escenario/updateescenariotipo/format/json/";
- 	
-
-	$.post(url, {idescenario : idescenario , tipoescenario : nuevovalotipoescenario}).done(function(data){
-
-			
-					loadataescenario(idescenario);	
-					loadescenarioss();
-
-	}).fail(function(){
-		alert(genericresponse[0]);
-	});	
-
+	nuevovalotipoescenario  = e.target.id;	
+	url = now + "index.php/api/escenario/updateescenariotipo/format/json/"; 	
+	data_send = {idescenario : $("#idescenariomodalartistas").val() , tipoescenario : nuevovalotipoescenario}
+	updates_send(url , data_send);
+	load_data_escenario($("#idescenariomodalartistas").val());
+	load_data_escenarios();
 
 }
 
 
 
-function updatenombreescenario(){
+function update_nombre_escenario(){
 
 	showonehideone(".nombre-escenario-input-modal" , ".nombre-escenario-modal" );
 	$(".nombre-escenario-input-modal").blur(function(){
 
-				url = now + "index.php/api/escenario/updatenombreescenariobyid/format/json/";
-			 	nuevonombre = $(this).val();
-			 	idescenario  =  $("#idescenariomodalartistas").val();	
-
-			 	$.post(url , {nuevonombre : nuevonombre , idescenario : idescenario  })
-			 	.done(function(data){
-			 		
-			 		showonehideone(  ".nombre-escenario-modal" , ".nombre-escenario-input-modal");
-
-			 	}).fail(function(){
-			 			alert(genericresponse[0]);
-			 	});
-
+				url = now + "index.php/api/escenario/updatenombreescenariobyid/format/json/";			 	
+			 	data_send = {nuevonombre : $(this).val() , idescenario : $("#idescenariomodalartistas").val() }			 	
+			 	updates_send(url , data_send);
+			 	load_data_escenario($("#idescenariomodalartistas").val());
+			 	load_data_escenarios();
+			 	showonehideone(  ".nombre-escenario-modal" , ".nombre-escenario-input-modal");			 	
 	});
-
-		
-
 
 
 }	
@@ -397,74 +269,35 @@ function updatenombreescenario(){
 
 
 
- function updatedaysescenario(){
-
+ function update_days_escenario(){
  	showonehideone( ".day_escenario_inputs" , ".day_escenario_button" );
  	$("#nuevo_termino_escenario").blur(function(){
 
-
- 		nuevo_inicio =  $("#nuevo_inicio_escenario").val();
- 		nuevo_termino = $("#nuevo_termino_escenario").val();
- 		idescenario  =  $("#idescenariomodalartistas").val();	
+		 		nuevo_inicio =  $("#nuevo_inicio_escenario").val();
+		 		nuevo_termino = $("#nuevo_termino_escenario").val();
+		 		idescenario  =  $("#idescenariomodalartistas").val();	
 
  				url = now + "index.php/api/escenario/updateinicioterminobyid/format/json/";
-			 	$.post(url , {nuevoinicio : nuevo_inicio , nuevotermino : nuevo_termino , idescenario : idescenario  })
-			 	.done(function(data){
-			 			
-
-			 		showonehideone(  ".day_escenario_button" , ".day_escenario_inputs" );
-			 		loadataescenario(idescenario);	
-					loadescenarioss();
-
-			 	}).fail(function(){
-			 			alert(genericresponse[0]);
-			 	});
-
-
-
-
-
- 	});
- 	
- 		
+ 				data_send = {nuevoinicio : nuevo_inicio , nuevotermino : nuevo_termino , idescenario : idescenario  }
+ 				updates_send(url, data_send);
+ 				showonehideone(".day_escenario_button" , ".day_escenario_inputs" );
+			 	load_data_escenario(idescenario);	
+				load_data_escenarios();
+ 	}); 	 	
  }
  
-
-
-
-
- function updatehorarioartista(e){
+ function update_horario_artista(e){
 
  	idartista = e.target.id;
  	idescenario = $("#idescenariomodalartistas").val();
-
  	$("#tregistrohorario").click(function(){
-
- 		
- 		hiartista = $("#hiartista").val();
- 		htartista = $("#htartista").val();
-
-
-
- 			url = now + "index.php/api/escenario/updateinicioterminoartistabyid/format/json/";
-			 	$.post(url , { idartista : idartista , idescenario : idescenario , hiartista : hiartista , htartista : htartista })
-			 	.done(function(data){
-			 			
-
-			 		
-			 		loadataescenario(idescenario);	
-					//loadescenarioss();
-
-			 	}).fail(function(){
-			 			alert(genericresponse[0]);
-			 	});
-
-
-
-
-
-
-
+ 
+ 			hiartista = $("#hiartista").val();
+ 			htartista = $("#htartista").val();
+	 		url = now + "index.php/api/escenario/updateinicioterminoartistabyid/format/json/";
+			data_send = { idartista : idartista , idescenario : idescenario , hiartista : hiartista , htartista : htartista }
+			updates_send(url , data_send);
+			load_data_escenario(idescenario);	
 
  	});
  	

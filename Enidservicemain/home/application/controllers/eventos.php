@@ -44,8 +44,7 @@ class Eventos extends CI_Controller {
 
 
 /*Pasados ** Pasados ***  Pasados ** Pasados ** PasadosPasados*Pasados ** Pasados ***  Pasados ** Pasados ** PasadosPasados*/
-
-         function pasados(){
+         function timeline(){
 
             if( $this->sessionclass->is_logged_in() == 1){            
                     

@@ -168,3 +168,28 @@ function show_section_dinamic_button(seccion){
 		$(seccion).show();
 	}	
 }
+
+function show_section_dinamic_on_click(dinamic_section){
+
+
+	if ($(dinamic_section).is(":visible")) {
+
+		$(dinamic_section).hide();
+
+	}else{
+
+		$(dinamic_section).show();
+	}
+
+}
+
+/**************************************************************************************/
+function updates_send(url , data_send ){
+
+	$.post(url , data_send ).done(function(data){
+
+	}).fail(function(){
+		alert("Falla al actualizar");
+	});
+
+}

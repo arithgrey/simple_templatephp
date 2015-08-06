@@ -11,21 +11,6 @@ function __construct(){
 
 
 function getserviciosevento( $evento , $idempresa ){
-
-
-	/*
-	$query_select  ="SELECT * FROM servicio ORDER BY servicio";
-	$servicios_result = $this->db->query($query_select);
-	$data["servicios"] =   $servicios_result ->result_array();
-
-
-
-	$query_evento_s ="SELECT * FROM evento_servicio WHERE idevento ='".$evento."' ";
-	$evento_servicio = $this->db->query($query_evento_s);
-	$data["eventoservicios"] =   $evento_servicio ->result_array();
-	*/
-
-
 	
 	$query_select  = "select s.idservicio , s.servicio , ev.idservicio  as idserviciointer, ev.idevento as ideventointer  from servicio as s
 					left outer join evento_servicio  as ev 
@@ -65,7 +50,6 @@ $query_d ="DELETE FROM evento_servicio WHERE idevento='".$evento."'  AND idservi
 
 	return  $this->db->query($query_d);
 }
-
 
 
 /*Termina modelo */

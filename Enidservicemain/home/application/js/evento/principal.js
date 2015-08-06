@@ -1,30 +1,35 @@
 $(document).on("ready", function (){
 
-
-
-	$("footer").ready(loaddata);	
-	$(".nombre-evento-h1").click(updatenameevent);
-	$(".edicion-evento").click(updateedicion);
-	$(".descripcion-p").click(updatedescripcion);
-	$(".politicas-p").click(updatepoliticas);
-	$(".permitido-p").click(updatepermitido);
+	$("footer").ready(load_data_evento);	
+	$(".nombre-evento-h1").click(update_name_evento);
+	$(".edicion-evento").click(update_edicion_evento);
+	$(".descripcion-p").click(update_descripcion_evento);
+	$(".politicas-p").click(update_politicas_evento);
+	$(".permitido-p").click(update_permitido_evento);
 	$(".restricciones-p").click(updaterestricciones);
 
-	$(".permitidonow").click(loadobjetospermitidos );	
+	$(".permitidonow").click(load_objetospermitidos_evento);	
 	$(".genero_musical_input").click(update_genero_evento);
-	$("#generos_musicales_button").click(show_section_generos);
+	
 
-	$("#social-button").click(showformsocial);
-	$("#generosenid-button").click(showformtagsgeneros);
-	$("#accesos-button").click(loadaccesosevento);	
-	$("#form-accesos-modal").submit(registraacceso);
-	$("#servicios-button").click(loadinformationservicios);
-	$("#pac-input").click(updateubicacion);	
-	$("footer").ready(loadescenarioss);
+	$("#social-button").click(function(){
+			show_section_dinamic_on_click(".social-media-event");
+	});
+	$("#generos_musicales_button").click( function(){
+		show_section_dinamic_on_click(".generos_musicales_div") 
+	});
+	$("#generosenid-button").click(function(){
+		show_section_dinamic_on_click(".section_generosmusicales");
+	});
+	$("#accesos-button").click(load_accesos_evento);	
+	$("#form-accesos-modal").submit(registra_acceso);
+	$("#servicios-button").click(load_data_servicios);
+	$("#pac-input").click(update_ubicacion_evento);	
+	$("footer").ready(load_data_escenarios);
 
 	$("#generos_musicales_btn").click(load_data_genero);
-	$("#form-escenario").submit(nuevoescenario);
-	$("#form-artistas").submit(nuevoartistaescenario);
+	$("#form-escenario").submit(nuevo_escenario);
+	$("#form-artistas").submit(nuevo_artista_escenario);
 
 
 	$("#tematica-button").click( function (){
@@ -35,32 +40,19 @@ $(document).on("ready", function (){
 
 
 	/*Eslogan del evento */
-	$(".eslogan-p").click(updateeslogan);
+	$(".eslogan-p").click(update_eslogan_evento);
 
 	initialize();
 	
 
 	//generate_img();
-
-
-
-	
 	
 });
 
 /**************************                   ******************* */          
 
-
-
-
-	//
-	
-
-
-
-
 /*Load datos */
-function loaddata(){
+function load_data_evento(){
 	
 	url = now + "index.php/api/event/get_event_by_id/format/json/";	
 	$.get(url , $("#form-general-ev").serialize()).done(function(data){
@@ -100,7 +92,8 @@ function loaddata(){
 				valida_text_replace(restriciones , ".restricciones-p"  , "#restricciones-evento" ,  "<i class='fa fa-plus'></i> Lo que podría anticiparse dentro del evento" , "<i class='fa fa-plus'></i>  Lo que podría anticiparse dentro del evento" );
 				valida_text_replace(eslogan , ".eslogan-p"  , "#eslogan-evento" ,  "<i class='fa fa-space-shuttle'></i> Mensaje eslogan del evento" , "<i class='fa fa-space-shuttle'></i>  Eslogan del evento" );
 
-
+				$("#url_social").blur(update_social_fb);
+				$("#url_social_evento_youtube").blur(update_social_youtube);
 		}
 
 		/******************************************************************************/
@@ -116,20 +109,8 @@ function loaddata(){
 
 
 
-	
 
-
-
-
-
-
-
-
-
-
-
-
-/**/
+/*UPDATES UPDATES UPDATES UPDATES UPDATES UPDATES UPDATES UPDATES UPDATES UPDATES UPDATES UPDATES */
 function valida_text_replace(texto_a_validar,  text_tag , text_val, null_msj, sin_text_msj ){
 
 				if (texto_a_validar == null ) {					
@@ -149,7 +130,13 @@ function valida_text_replace(texto_a_validar,  text_tag , text_val, null_msj, si
 /**/
 
 /*update nombre evento*/
-function updatenameevent(e){
+
+
+
+
+
+
+function update_name_evento(e){
 
 	showonehideone( "#nombre-input" , ".nombre-evento-h1" );
 	$("#nombre-input").blur(function(){
@@ -161,7 +148,10 @@ function updatenameevent(e){
 		if (nuevotexto.length > 0 ) {
 
 				
-				updateindebname( nuevotexto );
+				url =  now + "index.php/api/event/updatenombre/format/json/";    
+				data_send  ={ "nombre" : nuevotexto , "evento" : $("#evento").val() }
+				updates_send(url , data_send );
+				load_data_evento();
 
 		}else{
 				llenaelementoHTML(".nombre-evento-h1" , "Nombre de tu evento"  ); 					
@@ -174,25 +164,6 @@ function updatenameevent(e){
 
 }
 
-function updateindebname(nuevotexto){
-
-	
-	url =  now + "index.php/api/event/updatenombre/format/json/";    
-
-	$.post(url , { "nombre" : nuevotexto , "evento" : $("#evento").val() } ).done(function(data){
-
-		loaddata();
-
-	}).fail(function(){
-
-		alert("Falla al actualizar");
-	});
-
-
-
-}
-
-
 
 
 
@@ -202,13 +173,19 @@ function updateindebname(nuevotexto){
 
 
 /*Update descripción*/
-function updateedicion(e){
+function update_edicion_evento(e){
 
 	showonehideone( "#edicion-input" , ".edicion-evento" );
 	$("#edicion-input").blur(function(){			
 		nuevotexto = $("#edicion-input").val(); 				
-		if (nuevotexto.length >0 ) {						
-				updateindebenicion(nuevotexto);
+		if (nuevotexto.length >0 ) {		
+
+
+				url =  now + "index.php/api/event/updateedicion/format/json/";    
+				data_send= { "edicion" : nuevotexto , "evento" : $("#evento").val() }
+				updates_send(url , data_send );
+				load_data_evento();
+
 		}else{
 			llenaelementoHTML(".edicion-evento" , "Edición del evento"  ); 						
 		}
@@ -219,52 +196,24 @@ function updateedicion(e){
 }
 
 
-function updateindebenicion(nuevotexto){
-
-	
-	url =  now + "index.php/api/event/updateedicion/format/json/";    
-
-	$.post(url , { "edicion" : nuevotexto , "evento" : $("#evento").val() } ).done(function(data){
-
-
-		loaddata();
-
-	}).fail(function(){
-
-		alert("Falla al actualizar");
-	});
-
-
-
-}
-
-
-
-
-
-
-
-
-
-
 
 /******************************************************************/
-function updatedescripcion(e){
+function update_descripcion_evento(e){
 
 
 	showonehideone( "#descripcion-evento" , ".descripcion-p" );
 
 	$("#descripcion-evento").blur(function(){
 			
-		nuevotexto = $("#descripcion-evento").val(); 
-				
-		
-
-
-		
+		nuevotexto = $("#descripcion-evento").val(); 			
 		if (nuevotexto != null  ) {	
 
-			updateindbdescripcion( nuevotexto.trim() );
+			
+				url =  now + "index.php/api/event/updatedescripcion/format/json/";
+				data_send = { "descripcion_evento" : nuevotexto , "evento" : $("#evento").val() }     
+				updates_send(url , data_send );
+				load_data_evento();
+
 			
 		}else{
 
@@ -277,37 +226,8 @@ function updatedescripcion(e){
 
 }
 
-
-function updateindbdescripcion(nuevotexto){
-
-	url =  now + "index.php/api/event/updatedescripcion/format/json/";    
-	$.post(url , { "descripcion_evento" : nuevotexto , "evento" : $("#evento").val() } )
-	.done(function(data){
-		
-
-
-		loaddata();
-
-
-	}).fail(function(){
-
-		alert("Falla al actualizar");
-	});
-
-}
-
-/************************updatepoliticas *******************************/
-
-
-
-
-
-
-
-function updatepoliticas(e){
-
-
-
+/************************update_politicas_evento *******************************/
+function update_politicas_evento(e){
 
 	showonehideone( "#politicas-evento" , ".politicas-p" );
 
@@ -321,7 +241,10 @@ function updatepoliticas(e){
 		
 		if (nuevotexto != null  ) {	
 
-			updateindbpoliticas( nuevotexto.trim() );
+			url =  now + "index.php/api/event/updatepoliticas/format/json/";    
+			data_send = { "politicas_evento" : nuevotexto , "evento" : $("#evento").val() }
+			updates_send(url , data_send );
+			load_data_evento();
 			
 		}else{
 
@@ -335,52 +258,9 @@ function updatepoliticas(e){
 }
 
 
-function updateindbpoliticas(nuevotexto){
-
-	url =  now + "index.php/api/event/updatepoliticas/format/json/";    
-	$.post(url , { "politicas_evento" : nuevotexto , "evento" : $("#evento").val() } )
-	.done(function(data){
-		
-
-		loaddata();
-
-
-	}).fail(function(){
-
-		alert("Falla al actualizar");
-	});
-
-}
-
-
 /*Permitido Permitido Permitido Permitido Permitido Permitido Permitido */
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-function updatepermitido(e){
+function update_permitido_evento(e){
 
 
 
@@ -390,14 +270,13 @@ function updatepermitido(e){
 	$("#permitido-evento").blur(function(){
 			
 		nuevotexto = $("#permitido-evento").val(); 
-				
-		
 
-
-		
 		if (nuevotexto != null  ) {	
 
-			updateindbpermitido( nuevotexto.trim() );
+			url =  now + "index.php/api/event/updatepermitido/format/json/";    
+			data_send = { "permitido_evento" : nuevotexto , "evento" : evento  } 
+			updates_send(url , data_send);
+			load_data_evento();
 			
 		}else{
 
@@ -410,147 +289,34 @@ function updatepermitido(e){
 
 }
 
-
-function updateindbpermitido(nuevotexto){
-
-	url =  now + "index.php/api/event/updatepermitido/format/json/";    
-	evento = $("#evento").val();
-	$.post(url , { "permitido_evento" : nuevotexto , "evento" : evento  } )
-	.done(function(data){
-		
-
-		loaddata();
-
-
-	}).fail(function(){
-
-		alert("Falla al actualizar");
-	});
-
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /*End permitido *End permitido *End permitido *End permitido *End permitido *End permitido */
-
-
-
-
-
 
 
 function updaterestricciones(e){
 
-
-
-
 	showonehideone( "#restricciones-evento" , ".restricciones-p" );
-
-	$("#restricciones-evento").blur(function(){
-			
-		nuevotexto = $("#restricciones-evento").val(); 
-				
-
-
-		
+	$("#restricciones-evento").blur(function(){			
+		nuevotexto = $("#restricciones-evento").val(); 				
 		if (nuevotexto != null  ) {	
 
-			updateindbrestricciones( nuevotexto.trim() );
-			
+			url =  now + "index.php/api/event/updaterestricciones/format/json/";    
+			data_send = { "restricciones_evento" : nuevotexto , "evento" : $("#evento").val() }
+			updates_send(url ,data_send);
+			load_data_evento();			
 		}else{
 
 			llenaelementoHTML(".restricciones-p" , "Describe com que podrá acceder al evento el cliente" ); 						
 		}
 		showonehideone( ".restricciones-p" , "#restricciones-evento");
-		
-		
+				
 	});
 
 }
-
-
-function updateindbrestricciones(nuevotexto){
-
-	url =  now + "index.php/api/event/updaterestricciones/format/json/";    
-	$.post(url , { "restricciones_evento" : nuevotexto , "evento" : $("#evento").val() } )
-	.done(function(data){
-		
-
-		loaddata();
-
-
-	}).fail(function(){
-
-		alert("Falla al actualizar");
-	});
-
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/************************************************************************************************/
-
-
-
-
 
 
 
 /*Nueva dirección */
-
-
-function updateubicacion(){
+function update_ubicacion_evento(){
 	
 	showonehideone( "#ubicacion-input" , ".text-ubicacion" );
 
@@ -558,8 +324,10 @@ function updateubicacion(){
 			
 		nuevotexto = $("#pac-input").val(); 
 				
-
-		updateubicacionindb(nuevotexto);
+		url =  now + "index.php/api/event/updateubicacion/format/json/";  
+		data_send = { "ubicacion" : nuevotexto , "evento" : $("#evento").val() }  
+		updates_send(url , data_send);
+		load_data_evento();
 		
 		
 	});
@@ -567,21 +335,6 @@ function updateubicacion(){
 }
 
 
-function updateubicacionindb(nuevotexto){
-	
-	url =  now + "index.php/api/event/updateubicacion/format/json/";    
-
-	$.post(url , { "ubicacion" : nuevotexto , "evento" : $("#evento").val() } )
-	.done(function(data){
-		
-		loaddata();
-
-	}).fail(function(){
-
-		alert("Falla al actualizar");
-	});
-
-}
 /*******************************************/
 function tryrecordgeneros(e){
 	
@@ -595,144 +348,49 @@ function tryrecordgeneros(e){
 			.done(function(data){
 					
 				
-				loaddata();
+				load_data_evento();
 
 			}).fail(function(){
 
 				alert(genericresponse[0]);
 			});
 
-
-
-
-
-
  	}
 }
 
+/***************************************************************************+++*/
 
-/*recordgenerosrecordgenerosrecordgenerosrecordgenerosrecordgenerosrecordgenerosrecordgeneros*/
-
-
-
-/*tagr record */
-
-
-
-
-
-
-
-function showformsocial(){
-
-	if ($(".social-media-event").is(":visible")) {
-		
-		$(".social-media-event").hide();
-
-	}else{
-		$(".social-media-event").show();
-
-
-			$("#form-social").submit(function(){				
-					url =  now + "index.php/api/event/updateurlbyid/format/json/";    					
-					$.post(url ,  $("#form-social").serialize() )
-					.done(function(data){
-							
-								loaddata();
-
-					}).fail(function(){
-
-						alert(genericresponse[0]);
-					});
-
-					/**/
-
-				return false;	
-			});
-
-
-
-
-			$("#form-social-youtube").submit(function(){				
-					url =  now + "index.php/api/event/updateurlyoutubebyid/format/json/";    					
-					$.post(url ,  $("#form-social-youtube").serialize() )
-					.done(function(data){
-							
-								loaddata();
-
-					}).fail(function(){
-
-						alert(genericresponse[0]);
-					});
-
-					/**/
-
-				return false;	
-			});
-
-
-
-
-
-
-
-
-
-	}
-	
-	
+function update_social_fb(){
+			
+		url =  now + "index.php/api/event/updateurlbyid/format/json/";    							
+		data_send= updates_send(url , $("#form-social").serialize());		
+		updates_send(url , data_send);
+		load_data_evento();		
 }
 
+/*************************************+*/
 
-
-
-
-function showformtagsgeneros(){
-	
-
-	if ($(".section_generosmusicales").is(":visible")) {
-
-		$(".section_generosmusicales").hide();
-
-	}else{
-
-		$(".section_generosmusicales").show();
-	}
-
+function update_social_youtube(){
+	url =  now + "index.php/api/event/updateurlyoutubebyid/format/json/";    					
+	data_send = $("#form-social-youtube").serialize();
+	updates_send(url , data_send);
+	load_data_evento();					
 }
-
-
-
-
-function show_section_generos(){
-
-	if ($(".generos_musicales_div").is(":visible")) {
-
-		$(".generos_musicales_div").hide();
-
-	}else{
-
-		$(".generos_musicales_div").show();
-	}
-	
-}
-
-
-
 
 /**********************************************************/
-
-
-
-
-function updateeslogan(e){
+function update_eslogan_evento(e){
 
 	showonehideone( "#eslogan-evento" , ".eslogan-p");
 	$("#eslogan-evento").blur(function(){
 			
 		nuevotexto = $("#eslogan-evento").val(); 
 		if (nuevotexto != null  ) {	
-			updateindbeslogan(nuevotexto);			
+			
+			url =  now + "index.php/api/event/update_eslogan/format/json/";    			
+			data_send = {evento : $("#evento").val() , eslogan : $("#eslogan-evento").val()}
+			updates_send(url , data_send);
+			load_data_evento();
+
 		}else{
 			llenaelementoHTML(".eslogan-p" , "Eslogan publicitario evento" ); 						
 		}
@@ -743,22 +401,4 @@ function updateeslogan(e){
 
 }
 
-
-
-function updateindbeslogan(nuevotexto){
-
-	evento = $("#evento").val();
-	url =  now + "index.php/api/event/update_eslogan/format/json/";    
-	eslogan_text = $("#eslogan-evento").val();
-	$.post(url , {evento : evento , eslogan : eslogan_text}).done(function(data){
-
-				
-				loaddata();
-
-	}).fail(function(){
-				/*Error*/
-			alert("Error");
-	});
-
-}
 

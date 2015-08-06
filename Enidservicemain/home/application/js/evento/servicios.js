@@ -1,4 +1,4 @@
-function loadinformationservicios(){
+function load_data_servicios(){
 
 	url = now + "index.php/api/serviciosevento/load/format/json/";
 	evento = $(".eventoservicios").val();
@@ -35,7 +35,7 @@ function serviciocheck(e){
 	$.post(url , { evento : evento , idservicio : idservicio  }  ).done(function(data){
 
 
-			loadinformationservicios();
+			load_data_servicios();
 
 	}).fail(function(){
 		alert(genericresponse[0]);
