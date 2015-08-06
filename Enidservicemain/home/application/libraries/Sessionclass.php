@@ -7,12 +7,7 @@ class Sessionclass extends CI_Controller{
 		date_default_timezone_set('America/Mexico_City');
 		$this->load->model("perfilrecursomodel");
 		
-		
-
-		
 	}
-
-
 	function is_logged_in()  {			
 		$is_logged_in = $this->session->userdata('logged_in');	
 		if(!isset($is_logged_in) || $is_logged_in != true) {

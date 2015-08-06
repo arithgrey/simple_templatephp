@@ -20,30 +20,13 @@
             return count($resultado);
           }                
     }
-    /*Registra al usuario general*/    
+    /*Registra al usuario general*/ 
+
     function recordusergeneral($usuario , $mail , $pw ,  $idempresaregistrada){
       
       $query_insert ="INSERT INTO usuario (nombre , email , password , idempresa  ) 
       VALUES ('". $usuario."' , '".trim($mail)."' , '".trim($pw)."' , '".$idempresaregistrada."')"; 
-      $resultado = $this->db->query($query_insert);
-
-
-
-      $query_lastuser ="SELECT MAX(idusuario) AS idusuario FROM usuario";
-      $resultusuario  = $this->db->query($query_lastuser);
-      $idusuario = 0;
-      $idperfil = 4;   
-
-      foreach ($resultusuario->result_array() as $row) {
-          
-          $idusuario = $row["idusuario"];
-      }
-
-
-      $insertqueryperfilusuario = "INSERT INTO usuario_perfil (idusuario , idperfil ) values ( $idusuario , $idperfil )";
-      $this->db->query($insertqueryperfilusuario);
-
-
+      $resultado = $this->db->query($query_insert);    
       return $resultado;
 
     }
@@ -81,7 +64,7 @@
 
     function validauserrecord($mail , $secret){
 
-        $query_select ="SELECT * FROM usuario WHERE email = '".$mail."' AND password ='".$secret."' ";
+        $query_select ="SELECT * FROM usuario WHERE email='".$mail."' AND password ='".$secret."' ";
         $result_user = $this->db->query($query_select);       
         return $result_user ->result_array();      
     }

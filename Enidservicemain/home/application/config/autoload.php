@@ -64,7 +64,7 @@ $autoload['libraries'] = array('encrypt', 'email' ,  'session' , 'parser');
 |	$autoload['helper'] = array('url', 'file');
 */
 
-$autoload['helper'] = array('html', 'url', 'ayudaview', 'generalhelp' , 'listhelp');
+$autoload['helper'] = array('html', 'url', 'ayudaview', 'generalhelp' , 'listhelp' );
 
 
 /*

@@ -18,8 +18,7 @@ function trysession(){
 			}else{
 
 				pwpost = ""+CryptoJS.SHA1(pw);
-				$("#secret").val(pwpost);
-				//alert($("#in").serialize());	
+				$("#secret").val(pwpost);				
 				url = $(".now").val()+"index.php/api/sessionrestcontroller/startsessionusergeneral/format/json";
 				$.post(url , $("#in").serialize()).done(function(data){
 

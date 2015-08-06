@@ -4,6 +4,10 @@ class Eventos extends CI_Controller {
     function __construct(){
         parent::__construct();
 
+
+
+        $this->load->helper('servicios');
+        $this->load->helper('img_eventsh');
         $this->load->helper('eventosh');
         $this->load->helper('generoshelp');
         $this->load->helper('accesos');
@@ -82,20 +86,8 @@ class Eventos extends CI_Controller {
 
         function nuevo($id_evento){
 
-            if( $this->sessionclass->is_logged_in() == 1){            
-                        
-                        
-                        $menu = $this->sessionclass->generadinamymenu();            
-                        $data["menu"] = $menu;
-                        $nombre = $this->sessionclass->getnombre();
-                        
-                        $data["nombre"]= $nombre;
-                        $data["perfilactual"] =  $this->sessionclass->getnameperfilactual(); 
-                        $data['titulo']='Nuevo';
-
-
-                        $idempresa =  $this->sessionclass->getidempresa();                        
-                        
+                        $data = $this->validate_user_sesssion("Edición");
+                        $idempresa =  $this->sessionclass->getidempresa();                                                
                         $inicio = $this->input->get("start");                        
                         $termino = $this->input->get("end");
 
@@ -126,10 +118,6 @@ class Eventos extends CI_Controller {
 
                         
 
-                }else{
-            /*Terminamos la session*/
-            $this->sessionclass->logout();
-        }
     }/*termina la función*/
 
 
@@ -139,76 +127,52 @@ class Eventos extends CI_Controller {
 
 
 function diaevento($id_evento){
- if( $this->sessionclass->is_logged_in() == 1){            
-                
-                        $menu = $this->sessionclass->generadinamymenu();            
-                        $data["menu"] = $menu;
-                        $nombre = $this->sessionclass->getnombre();
-                        
-                        $data["nombre"]= $nombre;
-                        $data["perfilactual"] =  $this->sessionclass->getnameperfilactual(); 
-                        $data['titulo']='previsualizando evento, día del evento';
-                        $idempresa =  $this->sessionclass->getidempresa();                        
+
+    $data = $this->validate_user_sesssion("'previsualizando evento, día del evento'");                        
+    $idempresa =  $this->sessionclass->getidempresa();                        
                         
                         
-                            if ($this->checkifexist($id_evento , $idempresa) == 1 ) {
+        if ($this->checkifexist($id_evento , $idempresa) == 1 ) {
 
 
-                                    $dataevent = $this->eventmodel->getEventbyid($id_evento);
-                                    $data["evento"] =  $dataevent[0];
+            $dataevent = $this->eventmodel->getEventbyid($id_evento);
+            $data["evento"] =  $dataevent[0];
 
-                                    $list_obj= $this->eventmodel->get_objetos_permitidosin_event($id_evento);    
-                                    $data["list_obj_permitidos"] = get_list_objpermitidos( $list_obj );
+            $list_obj= $this->eventmodel->get_objetos_permitidosin_event($id_evento);    
+            $data["list_obj_permitidos"] = get_list_objpermitidos( $list_obj );
 
-                                    $this->load->view('TemplateEnid/header_template', $data);
-                                    $this->load->view('eventos/dia_evento', $data);  
-                                    $this->load->view('TemplateEnid/footer_template', $data);    
+            $this->load->view('TemplateEnid/header_template', $data);
+            $this->load->view('eventos/dia_evento', $data);  
+            $this->load->view('TemplateEnid/footer_template', $data);    
 
 
 
-                            }else{
-                                    header('Location:' . base_url('index.php/inicio/eventos'));
-                            }
+            }else{
+                header('Location:' . base_url('index.php/inicio/eventos'));
+            }
 
                         
 
-                }else{
-            /*Terminamos la session*/
-            $this->sessionclass->logout();
-        }
 }/*Termina la función */
 
 
 
     /*Pre visualizar  ********************** pre visualizar */
         function previsualizar($id_evento){
-            if( $this->sessionclass->is_logged_in() == 1){                            
-                        $menu = $this->sessionclass->generadinamymenu();            
-                        $data["menu"] = $menu;
-                        $nombre = $this->sessionclass->getnombre();
-                        
-                        $data["nombre"]= $nombre;
-                        $data["perfilactual"] =  $this->sessionclass->getnameperfilactual(); 
-                        $data['titulo']='previsualizando evento';
+            
+
+                        $data = $this->validate_user_sesssion("Visualizando antes de hacer público el evento");
                         $idempresa =  $this->sessionclass->getidempresa();                        
                         
                         
                             if ($this->checkifexist($id_evento , $idempresa) == 1 ) {
                                     
 
-                                    $this->load->helper('servicios');
-                                    $this->load->helper('img_eventsh');
+                                    
 
                                     
                                     $data["img_event"]=  get_img_by_event_in_directory($id_evento);                                    
-                                    $data["base_img"]= base_url()."application/uploads/uploads/". $id_evento."/";
-                                    
-                                    
-                                    
-                                    
-
-
-
+                                    $data["base_img"]= base_url()."application/uploads/uploads/". $id_evento."/";                                    
                                     $dataevent = $this->eventmodel->getEventbyid($id_evento);
                                     $list_escenarios = $this->escenariomodel->get_escenarios_byidevent($id_evento);
                                     $data["escenarios"] = list_resum_escenarios($list_escenarios, $id_evento);
@@ -230,10 +194,6 @@ function diaevento($id_evento){
 
                         
 
-                }else{
-            /*Terminamos la session*/
-            $this->sessionclass->logout();
-        }
     }
 
 
@@ -253,6 +213,30 @@ function diaevento($id_evento){
         return $this->eventmodel->checkifexist((int)$idevento , (int)$idempresa);
         
     }/*Termina la función*/
+
+
+
+
+    function validate_user_sesssion($titulo_dinamico_page){
+
+            if ( $this->sessionclass->is_logged_in() == 1) {                        
+                    
+                    
+                    $menu = $this->sessionclass->generadinamymenu();
+                    $nombre = $this->sessionclass->getnombre();                                         
+                    $data['titulo']=$titulo_dinamico_page;              
+                    $data["menu"] = $menu;              
+                    $data["nombre"]= $nombre;                                               
+                    $data["perfilactual"] =  $this->sessionclass->getnameperfilactual();                
+
+                    return $data;
+
+                }else{
+                /*Terminamos la session*/
+                $this->sessionclass->logout();
+            }   
+    }
+
 
 
 }/*Termina en controlador*/

@@ -78,10 +78,10 @@ class Usergeneralrest extends REST_Controller{
 
 
 
-        function empresaexist( $nombreempresa ){
+        function empresaexist( $nombre_empresa ){
 
             
-            return  $this->empresamodel->existcompanybyname( $nombreempresa );
+            return  $this->empresamodel->exist_company_byname( $nombre_empresa );
         }
 
 

@@ -12,35 +12,10 @@ class Recursocontroller extends CI_Controller {
 	/**/
 	function perfiles(){
 		
-//echo sha1("administradortest");
-		
-		if ( $this->sessionclass->is_logged_in() == 1) {	
-				/*Load data*/				
-				$menu = $this->sessionclass->generadinamymenu();			
-				$data["menu"] = $menu;
-				$nombre = $this->sessionclass->getnombre();
-				//$data["datosperfil"] = $this->sessionclass->getuserdataperfil();			
-				$data["nombre"]= $nombre;
-				
-				$data["perfilactual"] =  $this->sessionclass->getnameperfilactual(); 
-										
-
-				$data['titulo']='Perfiles';
-				
-				
-				$this->load->view('TemplateEnid/header_template', $data);		
-				
-				$this->load->view('perfiles/principal', $data);			
-				
-				$this->load->view('TemplateEnid/footer_template', $data);	
-				
-				
-				
-
-			}else{
-			/*Terminamos la session*/
-			$this->sessionclass->logout();
-		}		
+			$data = $this->validate_user_sesssion("Perfiles");			
+			$this->load->view('TemplateEnid/header_template', $data);						
+			$this->load->view('perfiles/principal', $data);							
+			$this->load->view('TemplateEnid/footer_template', $data);	
 		
 	}	
 
@@ -51,57 +26,11 @@ class Recursocontroller extends CI_Controller {
 
 
 
-	function test(){
-
-		if ( $this->sessionclass->is_logged_in() == 1) {		
-				/*Load data*/				
-				$menu = $this->sessionclass->generadinamymenu();			
-				$data["perfilactual"] =  $this->sessionclass->getnameperfilactual(); 
-				
-				$data["menu"] = $menu;					
-				$nombre = $this->sessionclass->getnombre();			
-				$data["nombre"]= $nombre;
-				$perfil = $this->sessionclass->getperfiles();
-
-				$data['titulo']='Usuarios';
-
-				
-				$this->load->view('Template/header_test', $data);
-				
-				
-
-			}else{
-			/*Terminamos la session*/
-			$this->sessionclass->logout();
-		}		
-	}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 	function usuarios(){
 
-		if ( $this->sessionclass->is_logged_in() == 1) {		
-				/*Load data*/				
-				$menu = $this->sessionclass->generadinamymenu();			
-				$data["perfilactual"] =  $this->sessionclass->getnameperfilactual(); 
-				
-				$data["menu"] = $menu;					
-				$nombre = $this->sessionclass->getnombre();			
-				$data["nombre"]= $nombre;
 				$perfil = $this->sessionclass->getperfiles();
 
-				$data['titulo']='Usuarios';
+				$data= $this->validate_user_sesssion("Miembros de la cuenta ");
 				
 				$iduser  = $this->sessionclass->getidusuario();
 		        $integrantes  = $this->cuentageneralmodel->getintegrantesinforme($iduser);
@@ -114,11 +43,7 @@ class Recursocontroller extends CI_Controller {
 
 
 
-
-			}else{
-			/*Terminamos la session*/
-			$this->sessionclass->logout();
-		}		
+	
 	}
 
 	function tiposeventos(){
@@ -334,6 +259,30 @@ class Recursocontroller extends CI_Controller {
 		}		
 		
 	}/*Termina perfil avanzado*/	
+
+
+
+
+	function validate_user_sesssion($titulo_dinamico_page){
+
+            if ( $this->sessionclass->is_logged_in() == 1) {                        
+                    
+                    
+                    $menu = $this->sessionclass->generadinamymenu();
+                    $nombre = $this->sessionclass->getnombre();                                         
+                    $data['titulo']=$titulo_dinamico_page;              
+                    $data["menu"] = $menu;              
+                    $data["nombre"]= $nombre;                                               
+                    $data["perfilactual"] =  $this->sessionclass->getnameperfilactual();                
+
+                    return $data;
+
+                }else{
+                /*Terminamos la session*/
+                $this->sessionclass->logout();
+            }   
+    }
+
 
 
 
