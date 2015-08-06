@@ -63,11 +63,7 @@ if(!function_exists('invierte_date_time')){
 		
         foreach ($ultimos_eventos as $row){
 			
-			$urlnext = base_url('index.php/eventos/nuevo?evento='.$row["idevento"]."&start=".$row["fecha_inicio"] ."&end=".$row["fecha_termino"] );
-			
-			
-
-			
+			$urlnext = base_url('index.php/eventos/nuevo/'.$row["idevento"]."?start=".$row["fecha_inicio"] ."&end=".$row["fecha_termino"] );
 			$id_evento = $row["idevento"];
 			if (strlen(getimg_event($id_evento)) > 0){
 

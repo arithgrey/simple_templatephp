@@ -81,10 +81,11 @@ class Eventos extends CI_Controller {
 
 
 
-        function nuevo(){
+        function nuevo($id_evento){
 
             if( $this->sessionclass->is_logged_in() == 1){            
-                
+                        
+                        
                         $menu = $this->sessionclass->generadinamymenu();            
                         $data["menu"] = $menu;
                         $nombre = $this->sessionclass->getnombre();
@@ -95,23 +96,23 @@ class Eventos extends CI_Controller {
 
 
                         $idempresa =  $this->sessionclass->getidempresa();                        
-                        $idevento = $this->input->get("evento");                        
+                        
                         $inicio = $this->input->get("start");                        
                         $termino = $this->input->get("end");
 
 
                         
+                        
+                            if ($this->checkifexist($id_evento , $idempresa) == 1 ) {
 
-                            if ($this->checkifexist($idevento , $idempresa) == 1 ) {
-
-                                    $data["evento"] = $idevento;
+                                    $data["evento"] = $id_evento;
                                     $data["inicio"] = $inicio;
                                     $data["termino"] = $termino;
 
 
-                                    $carpeta_evento_img = base_url().'application/uploads/upload.php?e='.$idevento;                                   
+                                    $carpeta_evento_img = base_url().'application/uploads/upload.php?e='.$id_evento;                                   
                                     $data["carpeta_evento_img"]= $carpeta_evento_img;
-                                    $responsedb = $this->generosmusicalesmodel->getDataByidEvent($idempresa, $idevento);                                    
+                                    $responsedb = $this->generosmusicalesmodel->getDataByidEvent($idempresa, $id_evento);                                    
                                     $data["list_generos"] = list_generos_musicales($responsedb);
 
 
@@ -181,7 +182,7 @@ function diaevento(){
 
 
     /*Pre visualizar  ********************** pre visualizar */
-        function previsualizar(){
+        function previsualizar($id_evento){
             if( $this->sessionclass->is_logged_in() == 1){                            
                         $menu = $this->sessionclass->generadinamymenu();            
                         $data["menu"] = $menu;
@@ -191,17 +192,17 @@ function diaevento(){
                         $data["perfilactual"] =  $this->sessionclass->getnameperfilactual(); 
                         $data['titulo']='previsualizando evento';
                         $idempresa =  $this->sessionclass->getidempresa();                        
-                        $idevento = $this->input->get("evento");                        
                         
-                            if ($this->checkifexist($idevento , $idempresa) == 1 ) {
+                        
+                            if ($this->checkifexist($id_evento , $idempresa) == 1 ) {
                                     
 
                                     $this->load->helper('servicios');
                                     $this->load->helper('img_eventsh');
 
                                     
-                                    $data["img_event"]=  get_img_by_event_in_directory($idevento);                                    
-                                    $data["base_img"]= base_url()."application/uploads/uploads/". $idevento."/";
+                                    $data["img_event"]=  get_img_by_event_in_directory($id_evento);                                    
+                                    $data["base_img"]= base_url()."application/uploads/uploads/". $id_evento."/";
                                     
                                     
                                     
@@ -209,17 +210,17 @@ function diaevento(){
 
 
 
-                                    $dataevent = $this->eventmodel->getEventbyid($idevento);
-                                    $list_escenarios = $this->escenariomodel->get_escenarios_byidevent($idevento);
-                                    $data["escenarios"] = list_resum_escenarios($list_escenarios, $idevento);
+                                    $dataevent = $this->eventmodel->getEventbyid($id_evento);
+                                    $list_escenarios = $this->escenariomodel->get_escenarios_byidevent($id_evento);
+                                    $data["escenarios"] = list_resum_escenarios($list_escenarios, $id_evento);
 
-                                    $list_generosdb = $this->eventmodel->get_list_generos_musicales_byidev($idevento);
+                                    $list_generosdb = $this->eventmodel->get_list_generos_musicales_byidev($id_evento);
                                     $data["generos_musicales_tags"] = get_tags_generos($list_generosdb);
                                     $data["evento"] =  $dataevent[0];
 
-                                    $array_servicios_includos = $this->eventmodel->get_servicios_evento_by_id($idevento);
+                                    $array_servicios_includos = $this->eventmodel->get_servicios_evento_by_id($id_evento);
                                     $data["servicios_evento"] = list_services_default_view($array_servicios_includos); 
-                                    $data["idevento"] = $idevento;
+                                    $data["idevento"] = $id_evento;
 
                                     $this->load->view('TemplateEnid/header_template', $data);
                                     $this->load->view('eventos/previsualizarevent', $data);  

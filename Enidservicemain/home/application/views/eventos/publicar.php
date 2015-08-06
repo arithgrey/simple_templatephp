@@ -619,7 +619,7 @@ h4{
 <div class="col-md-12">
   <!--******************** button pre visualizar ***************************** -->
   <center>
-    <a href="<?=base_url('index.php/eventos/previsualizar?evento=')?><?=$evento;?>">
+    <a href="<?=base_url('index.php/eventos/previsualizar')?>/<?=$evento;?>">
     <button class="btn btn-primary btn-lg" type="button"> Siguiente </button>
     </a>
   </center>  
