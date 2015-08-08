@@ -25,6 +25,8 @@
 
 
 
+
+
 <div class="main col-md-12">
 
 							<!-- page-title start -->
@@ -116,3 +118,14 @@
 								<li><a target="_blank" href=""><i class="fa fa-google-plus"></i></a></li>
 								
 							</ul>
+
+
+
+
+<center>
+	<h3>Servicios incluidos</h3>
+	
+	<ul class="revenue-nav">
+		<?=$list_servicios_incluidos;?>
+	</ul>
+</center>

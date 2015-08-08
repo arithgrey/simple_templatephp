@@ -242,7 +242,7 @@
 
         </style>
        
-
+        
 
         <div class="menu-right">
             
@@ -471,9 +471,9 @@
 
         <!--body wrapper start-->
         <div class="wrapper">
-            <h3 class='title-page-enid'>
+            <h1>
                  &raquo; <?=$titulo;?>
-            </h3>
+            </h1>
             
         
 

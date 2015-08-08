@@ -356,7 +356,11 @@
                     <h1 class="title"><?=$evento["eslogan"]?></h1></div>
                   <div class="col-sm-4">
                     <br>
-                    <p style="background:white"><a href="#" class="btn btn-lg btn-gray-transparent btn-animated">Más detalles<i class="fa fa-arrow-right pl-20"></i></a>
+                    <p style="background:white">
+                      <a href="#" class="btn btn-lg btn-gray-transparent btn-animated">
+                        Conoce nuestra historia
+                        <i class="fa fa-arrow-right pl-20"></i>
+                      </a>
                     </p>
                   </div>
                 </div>
@@ -485,6 +489,7 @@
 
       <div style='background: #0A142D !important;' class="dark-bg  default-hovered footer-top animated-text">
         <div class="container">
+          <a href="<?=base_url('index.php/eventos/accesosalevento/'. $evento['idevento'])?> ">
           <div class="row">
             <div class="col-md-12">
               <div class="call-to-action text-center">
@@ -500,6 +505,8 @@
               </div>
             </div>
           </div>
+          </a>
+
         </div>
       </div>
 

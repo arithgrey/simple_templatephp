@@ -11,8 +11,8 @@ if(!function_exists('invierte_date_time')){
     $fila = "";        
     $pos =1;  
 		$servicios = "
-		<table class='table table-bordered table-striped dataTable' id='dynamic-table'>
-    <thead><tr role='row'><th>#</th><th>Servicio</th><th>Incluido</th></tr></thead><tbody >";
+		<table class='table' id='dynamic-table'>
+    <thead class=''><tr role='row'><th class='blue-col-enid'>#</th><th>Servicio</th><th><button class='btn btn-info'><i class='fa fa-check-square'></i></button></th></tr></thead><tbody >";
 
         foreach ($arreglo as $row){
 
@@ -29,7 +29,7 @@ if(!function_exists('invierte_date_time')){
                 }
 
                 $fila .="<tr class='gradeX even'>
-                      <td class=' '> ". $pos . "</td>
+                      <td class='blue-col-enid'> ". $pos . "</td>
                       <td class=' '>". $nombreservicio ."</td>
                       <td class=' '>". $dinamiccheck."</td>
                 
@@ -68,6 +68,20 @@ function list_services_default_view($arreglo){
 /******************** in view main visualization  end *********************   */
 
 
+
+
+
+
+function get_servicios_inclidos_event($data_servicios_array){
+
+  $list_servicios ='';
+  /*Cliclo */
+  foreach ($data_servicios_array as $row) {      
+    $list_servicios .='<li><a style="text-decoration:none; background: #09AFDF !important" href="#">'.$row["servicio"].'</a></li>';
+  }
+
+  return $list_servicios;
+}
 
 
 

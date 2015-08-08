@@ -1,5 +1,4 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-require_once('generalcontroller.php');
 class Sessioncontroller extends CI_Controller {
 
 	function __construct(){        
@@ -7,95 +6,58 @@ class Sessioncontroller extends CI_Controller {
                     
         $this->load->library('sessionclass');        
     }         
-
     function iniciosessionuser(){
 
-    	if ( $this->sessionclass->is_logged_in() == 1) {			
-
+    	if ( $this->sessionclass->is_logged_in() == 1) {			    		
     		redirect(base_url('index.php/sessioncontroller/presentacion/'));
-
     	}else{
 
-    		$data['titulo']='Sign In';
-    				
-
-    		
+    		$data['titulo']='Sign In';    		
 			$this->load->view('Template/header_white', $data);
 			$this->load->view('user/signin', $data);
-			$this->load->view('Template/footer', $data);	
-			
+			$this->load->view('Template/footer', $data);				
 			
     	}
 
     }
-
-
-	function presentacion(){		
-						
-		
+	function presentacion(){									
 		/*Validamo session*/
 		if( $this->sessionclass->is_logged_in() == 1){				
-			
-			
-			$first =$this->input->get("first");
 
+			$first =$this->input->get("first");
 				if ($first == 1) {
 						
 					/*Redirect plan */		
 					$next =  site_url("plan");
 					redirect($next , $method = 'location', 302);
-
-
 				}else{
 					$this->usuarioregistrado();	
-				}	
-			
-
-
+				}			
 		}else{
 			/*Terminamos la session*/
 			$this->sessionclass->logout();
 		}	
-	}
-
-
+	}/**/
 	function usuarioregistrado(){
 
-			if ( $this->sessionclass->is_logged_in() == 1) {			
-
+		if ( $this->sessionclass->is_logged_in() == 1) {			
+						
+			$perfil = $this->sessionclass->getperfiles();							
+			$idperfilnow =  $perfil[0]["idperfil"];
+			switch ($idperfilnow) {
+				case 5:
+				redirect( base_url('index.php/inicio/eventos') );	
+					break;																								
+				case 3:
+					redirect( base_url('index.php/inicio/administrador') );	
+					break;														
+				case 4:
+					redirect( base_url('index.php/inicio/administradorcuenta') );	
+					break;							
+				default:
+					break;
+				}		
 				
-				$perfil = $this->sessionclass->getperfiles();							
-				$idperfilnow =  $perfil[0]["idperfil"];
-
-
-				switch ($idperfilnow) {
-							case 5:
-								redirect( base_url('index.php/inicio/eventos') );	
-								break;							
-							
-							default:
-							
-							case 3:
-								redirect( base_url('index.php/inicio/administrador') );	
-								break;							
-							default:
-
-
-
-							case 4:
-								redirect( base_url('index.php/inicio/administradorcuenta') );	
-								break;							
-							default:
-
-
-								
-								break;
-						}		
-					
-				
-								
-				
-
 			}else{
 			/*Terminamos la session*/
 			$this->sessionclass->logout();
@@ -103,17 +65,8 @@ class Sessioncontroller extends CI_Controller {
 
 	}/*Termina la función */
 
-
-
-	/************************/
-
-	
-
-	function logout(){
-			
-				
-		$this->sessionclass->logout();
-		
+	function logout(){						
+		$this->sessionclass->logout();		
 	}	
 
 }

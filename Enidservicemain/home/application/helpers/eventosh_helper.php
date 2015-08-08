@@ -118,8 +118,53 @@ function get_paginarion_principal($limit_display){
 
 
 
+function get_experiencia_last_events_by_empresa($data_eventos){
+$elements ="";
+
+
+	foreach ($data_eventos as $row){
+			
+			$urlnext = base_url();
+			$id_evento = $row["idevento"];			
+			
+			$estadoevento = get_statusevent($row["estadoevento"]);			 
+			$elements .="<div class='panel'>
+                                    <div class='panel-body ' style='' >
+
+                                        <div class='media blog-cmnt'>
+                                                
+                                                <div class='media-body'>
+                                                    <h4 class='media-heading' >
+                                                        <a  href='$urlnext'> <label>".$row["nombre_evento"] ."</label>
+                                                        ".  $row["edicion"] ." </a>
+
+                                                    </h4>
+                                                      <ul class='revenue-nav'>
+				                                        <li><a href='#'><i class='fa fa-play'></i> Escenarios ". $row["totalescenarios"]."</a></li>		                                        		                                        
+				                                    </ul>
+                                                    
+                                                </div>
+                                            </div>
+                                          
+
+                                        </div>
+
+                                    </div>";
+        }                            
+		return $elements;                                    	
+
+
+
+
+
+}	
+
+
 }/*Termina el helper*/
  
+
+
+
 
 
 

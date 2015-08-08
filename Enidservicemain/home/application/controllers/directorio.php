@@ -8,67 +8,50 @@ class Directorio  extends CI_Controller {
 	
 
 	function proveedoresadv(){
-
-		if ( $this->sessionclass->is_logged_in() == 1) {			
-			
-                        $menu = $this->sessionclass->generadinamymenu();            
-                        $data["menu"] = $menu;
-                        $nombre = $this->sessionclass->getnombre();
-                        
-                        $data["nombre"]= $nombre;
-                        $data["perfilactual"] =  $this->sessionclass->getnameperfilactual(); 
-                        $data['titulo']='Proveedor';
-
+				
+                        $data = $this->validate_user_sesssion("Proveedor");                        
                        	$idproveedor = $this->input->get("p"); 	
                        	$data["proveedor"] = $idproveedor;
 
                         $this->load->view('TemplateEnid/header_template', $data);
                         $this->load->view('directorio/proveedores_directorio_avanzado', $data);
                         $this->load->view('TemplateEnid/footer_template', $data);
-
-				
-    	}else{
-			/*Terminamos la session*/
-			$this->sessionclass->logout();
-		}			
-
-
 	}
 
 
 
 	function proveedores(){
-		if ( $this->sessionclass->is_logged_in() == 1) {			
-
-
-			
-                        $menu = $this->sessionclass->generadinamymenu();            
-                        $data["menu"] = $menu;
-                        $nombre = $this->sessionclass->getnombre();
-                        
-                        $data["nombre"]= $nombre;
-                        $data["perfilactual"] =  $this->sessionclass->getnameperfilactual(); 
-                        $data['titulo']='Proveedores';
-                        $idempresa =  $this->sessionclass->getidempresa();
-                        
-                      
-                       
-
-                        
-
-                        $this->load->view('TemplateEnid/header_template', $data);
-                        $this->load->view('directorio/proveedores_directorio', $data);
-                        $this->load->view('TemplateEnid/footer_template', $data);
-
-				
-    	}else{
-			/*Terminamos la session*/
-			$this->sessionclass->logout();
-		}			
-
-
+    		
+        $data = $this->validate_user_sesssion("Proveedores");
+        $this->load->view('TemplateEnid/header_template', $data);
+        $this->load->view('directorio/proveedores_directorio', $data);
+        $this->load->view('TemplateEnid/footer_template', $data);
 
 	}/*Termina la función*/
+
+
+     function validate_user_sesssion($titulo_dinamico_page){
+
+            if ( $this->sessionclass->is_logged_in() == 1) {                        
+                    
+                    
+                    $menu = $this->sessionclass->generadinamymenu();
+                    $nombre = $this->sessionclass->getnombre();                                         
+                    $data['titulo']=$titulo_dinamico_page;              
+                    $data["menu"] = $menu;              
+                    $data["nombre"]= $nombre;                                               
+                    $data["perfilactual"] =  $this->sessionclass->getnameperfilactual();                
+
+                    return $data;
+
+                }else{
+                /*Terminamos la session*/
+                $this->sessionclass->logout();
+            }   
+    }
+
+
+
 
 
 

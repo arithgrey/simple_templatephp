@@ -7,7 +7,7 @@ if(!function_exists('invierte_date_time')){
     function list_generos_musicales($value){
 
     $table_list ='<table aria-describedby="dynamic-table_info" class="display table table-bordered table-striped dataTable" id="dynamic-table">
-        <thead>
+        <thead class="blue-col-enid">
         <tr role="row">
             <th aria-label="Rendering engine: activate to sort column ascending"  colspan="1" rowspan="1" aria-controls="dynamic-table" tabindex="0" role="columnheader" class="sorting">#</th>
             <th aria-label="Browser: activate to sort column descending" aria-sort="ascending"  colspan="1" rowspan="1" aria-controls="dynamic-table" tabindex="0" role="columnheader" class="sorting_asc">Género</th>

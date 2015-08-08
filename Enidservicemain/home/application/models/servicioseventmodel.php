@@ -10,6 +10,19 @@ function __construct(){
 
 
 
+
+function get_servicios_by_evento($id_evento){
+
+	$get_servicios = "SELECT s.servicio  FROM servicio  as s , evento_servicio as es , evento as e
+	WHERE s.idservicio = es.idservicio  AND es.idevento = e.idevento
+	AND e.idevento = '".$id_evento."' ";
+	
+	$result= $this->db->query($get_servicios);
+	return $result->result_array();
+
+}
+
+
 function getserviciosevento( $evento , $idempresa ){
 	
 	$query_select  = "select s.idservicio , s.servicio , ev.idservicio  as idserviciointer, ev.idevento as ideventointer  from servicio as s

@@ -21,6 +21,12 @@ $(document).on("ready", function (){
 	$("#generosenid-button").click(function(){
 		show_section_dinamic_on_click(".section_generosmusicales");
 	});
+
+	$(".articulos-permitidos-button").click(function(){
+		show_section_dinamic_on_click("#section-articulos-permitidos");
+	});
+
+
 	$("#accesos-button").click(load_accesos_evento);	
 	$("#form-accesos-modal").submit(registra_acceso);
 	$("#servicios-button").click(load_data_servicios);

@@ -86,6 +86,25 @@ function create( $nombre , $edicion , $inicio , $termino , $idusuario , $idempre
 }
 
 
+
+
+/*Los ultimos eventos vividos */
+function get_last_events_experience($idempresa , $num ){
+
+	$query_select ="SELECT  e.idevento , e.nombre_evento, e.descripcion_evento, e.fecha_inicio , 
+	e.fecha_termino ,
+	e.url_social, e.url_social_youtube, e.portada , e.status  as estadoevento , e.edicion ,
+	count(es.idescenario) as totalescenarios 
+	FROM evento as e
+	left outer join escenario as es 
+	on e.idevento = es.idevento 
+	where e.idempresa ='". $idempresa."' 
+	group by e.idevento ORDER BY e.fecha_registro DESC LIMIT $num ";
+	$result = $this->db->query($query_select);
+	return $result ->result_array();      
+	
+}
+
 function get_last_events($idempresa , $num ){
 
 	
