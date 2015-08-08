@@ -336,7 +336,19 @@ function get_objetos_permitidosin_event($id_evento){
 
 }
 
+function update_all_in_event_obj_inter($id_evento){
 
+	$consul_if_exist ="select * from evento_objetopermitido where idevento='".$id_evento."' limit 1";
+	$result  = $this->db->query($consul_if_exist );
+	$exist = $result->num_rows();	
+	$dinamic_query ="";
+		if ($exist > 0 ) {
+			$dinamic_query = "DELETE FROM evento_objetopermitido WHERE idevento = '". $id_evento. "' ";		
+		}else{
+			$dinamic_query = "INSERT INTO evento_objetopermitido SELECT  $id_evento , idobjetopermitido FROM objetopermitido";
+		}
+	return $this->db->query($dinamic_query);	
+}
 
 
 /*Termina modelo */

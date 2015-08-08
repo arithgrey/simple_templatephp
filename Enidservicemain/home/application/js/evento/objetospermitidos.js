@@ -22,3 +22,17 @@ function  load_objetospermitidos_evento() {
 	});
 }
 
+function update_all_objects(e){
+	id_evento = e.target.id;
+	url = now + "index.php/api/event/objetos_permitidos_all_update/format/json/";		
+	$.get(url , {"evento" : id_evento }).done(function(data){
+
+		load_objetospermitidos_evento();
+	}).fail(function(){
+
+		alert("Error reportar al sistema ");
+	});
+
+
+
+}

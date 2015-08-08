@@ -435,6 +435,17 @@ function update_eslogan_post(){
 }/*Termina rest*/
 
 
+function objetos_permitidos_all_update_get(){
+        if ( $this->sessionclass->is_logged_in() == 1) {  
+                
+                $id_evento= $this->get("evento");                
+                $this->response($this->eventmodel->update_all_in_event_obj_inter($id_evento) );
+        }else{
+            $this->sessionclass->logout();    
+        } 
+}
+
+
 
 }
 ?>

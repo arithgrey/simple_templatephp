@@ -2,7 +2,45 @@
 <link rel="stylesheet" type="text/css" href="<?=base_url('application/css/eventos/edicion.css')?>">
 <link rel="stylesheet" type="text/css" href="<?=base_url('application/js/js/bootstrap-datepicker/css/datepicker-custom.css')?>" />
 
-<div class="col-md-12">
+
+
+
+
+<form id='form-general-ev'>        
+    <input type="hidden" value="<?=$evento;?>" id="evento" name='evento'>
+</form>        
+
+<div class="col-md-8 section-enid-events-r">
+    
+
+    <!--Inicia el row donde se cargan imagens y se edita el nombre y demás detalles -->
+    <div class="row">            
+        <div class="panel" >
+          <header class="panel-heading blue-col-enid" >
+            General 
+            <span class="tools pull-right">
+              <a class="fa  fa-caret-down" href="javascript:;"></a>
+            </span>
+          </header>                          
+          <!--Inicia  la seccion general del eveto -->
+          <div class="panel-body" >        
+                <h2 class='nombre-evento-h1'></h2>
+                <div class="form-group nombre" >
+                  <input placeholder="Registra el nombre del evento" class="form-control"  type="text"  id="nombre-input" name='nombre-input' >
+                </div>
+
+                <span class="designation edicion-evento"></span>              
+                <div class="form-group">
+                    <input placeholder="Registra qué edición tiene el evento" class="form-control"  type="text" id="edicion-input" name='edicion-input'>
+                </div>
+
+                <form action="<?=$carpeta_evento_img?>" class="dropzone" id="event-img"></form>            
+          </div>
+
+
+          <div class="panel-body">
+               <div class='row'>
+        <div class="col-md-12">
       <div class="panel">
         
         <header class="panel-heading ">                            
@@ -62,7 +100,7 @@
                             <table class="table">
                               <thead>
                                 <tr>
-                                   <th>#</th><th>Articulo que se permitirá ingresar al evento</th><th><button class='btn btn-info'><i class='fa fa-check-square'></i></button> </th>
+                                   <th>#</th><th>Articulo que se permitirá ingresar al evento</th><th><button class='btn btn-info btn-all-articulos' id="<?=$evento;?>"><i class='fa fa-check-square'></i></button> </th>
                                 </tr>
                               </thead>
                               <tbody class='objetospermitidosf'></tbody>
@@ -116,38 +154,12 @@
 </div><!--Termina 12 colums -->
 
 
-
-
-<form id='form-general-ev'>        
-    <input type="hidden" value="<?=$evento;?>" id="evento" name='evento'>
-</form>        
-
-<div class="col-md-8 section-enid-events-r">
-    
-
-    <!--Inicia el row donde se cargan imagens y se edita el nombre y demás detalles -->
-    <div class="row">            
-        <div class="panel" >
-          <header class="panel-heading blue-col-enid" >
-            General 
-            <span class="tools pull-right">
-              <a class="fa  fa-caret-down" href="javascript:;"></a>
-            </span>
-          </header>                          
-          <!--Inicia  la seccion general del eveto -->
-          <div class="panel-body" >        
-                <h2 class='nombre-evento-h1'></h2>
-                <div class="form-group nombre" >
-                  <input placeholder="Registra el nombre del evento" class="form-control"  type="text"  id="nombre-input" name='nombre-input' >
-                </div>
-
-                <span class="designation edicion-evento"></span>              
-                <div class="form-group">
-                    <input placeholder="Registra qué edición tiene el evento" class="form-control"  type="text" id="edicion-input" name='edicion-input'>
-                </div>
-
-                <form action="<?=$carpeta_evento_img?>" class="dropzone" id="event-img"></form>            
+      </div>
           </div>
+
+
+
+
           <!--Termina la seccion general del eveto -->
         </div><!--Termina el panel -->                      
       </div><!--Termina el Row -->                      
@@ -163,6 +175,7 @@
           <div class='textnotfound-location'></div>  
         </div> 
       </div>
+
 
 
 </div><!--TERMINA LA SECCION DE 8 -->
@@ -266,8 +279,7 @@
   <!--******************** button pre visualizar ***************************** -->
   <center>
     <a href="<?=base_url('index.php/eventos/previsualizar')?>/<?=$evento;?>">
-    <button class="btn btn-primary btn-lg" type="button"> Visualizar antes de publicar  </button>
-    <button class="btn btn-primary btn-lg" type="button"> Visualizar antes de publicar  </button>
+    <button class="btn btn-primary btn-lg" type="button"> Visualizar antes de publicar  </button>    
 
     </a>
   </center>  
@@ -511,7 +523,7 @@
       
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Servicios que incluira en evento</h4>
+        <h4 class="modal-title">Servicios que incluirá en evento</h4>
       </div>            
       <div class="modal-body">    
                 

@@ -25,12 +25,13 @@ $(document).on("ready", function (){
 	$(".articulos-permitidos-button").click(function(){
 		show_section_dinamic_on_click("#section-articulos-permitidos");
 	});
-
+	$(".btn-all-articulos").click(update_all_objects);
 
 	$("#accesos-button").click(load_accesos_evento);	
 	$("#form-accesos-modal").submit(registra_acceso);
 	$("#servicios-button").click(load_data_servicios);
 	$("#pac-input").click(update_ubicacion_evento);	
+	
 	$("footer").ready(load_data_escenarios);
 
 	$("#generos_musicales_btn").click(load_data_genero);
