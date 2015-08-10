@@ -32,6 +32,7 @@ function get_time_line_event($arreglo_time_line , $longitud_descripcion_text){
       $edicion = $row["edicion"];
       $totalescenarios = $row["totalescenarios"];
       $url_complete = base_url('index.php/eventos/nuevo/'.$idevento."?start=".$fecha_inicio."&end=".$fecha_termino."&status=" . $status );
+      $url_complete_view = base_url('index.php/eventos/visualizar/'.$idevento."?start=".$fecha_inicio."&end=".$fecha_termino."&status=" . $status );
 
       $fecha_time = $fecha_inicio ." al día " . $fecha_termino  ;
       $i++; 
@@ -46,7 +47,8 @@ function get_time_line_event($arreglo_time_line , $longitud_descripcion_text){
                                           <span class='timeline-icon'>". $b ."</span>
                                           <span class='timeline-date'>10:00 am</span>
                                           
-                                          <h1 class=''><a href='$url_complete'>".$nombre_evento."</a></h1>
+                                          <h1 class=''><i class='fa fa-edit'></i><a href='$url_complete'>".$nombre_evento."</a></h1>
+                                          <h1 class=''><i class='fa  fa-eye'></i><a href='$url_complete_view'> Ver </a></h1>
                                             <p class=' auth-row white-p'>
                                                 Edición <a href='#'>". $edicion ."</a>   |   ". $fecha_time ."   | <a href='#''>".$totalescenarios." Escenarios| ". get_statusevent($status) ."</a>
                                             </p>
@@ -75,7 +77,8 @@ function get_time_line_event($arreglo_time_line , $longitud_descripcion_text){
                                           <span class='timeline-icon'>". $b ."</span>
                                           <span class='timeline-date'>08:25 am</span>
                                             
-                                            <h1 class=''><a href='$url_complete'>".$nombre_evento."</a></h1>
+                                            <h1 class=''><i class='fa fa-edit'></i><a href='$url_complete'>".$nombre_evento."</a></h1>
+                                            <h1 class=''><i class='fa  fa-eye'></i><a href='$url_complete_view'>Ver</a></h1>
                                             <p class=' auth-row '>
                                                 Edición <a href='#'>". $edicion ."</a>   |  ".$fecha_time."   | <a href='#''>".$totalescenarios." Escenarios</a>
                                             </p>
