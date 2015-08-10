@@ -39,10 +39,10 @@ if(!function_exists('invierte_date_time')){
                     $input_check = '<input type="checkbox" class="genero_musical_input" id="'. $idgenero_musical.'" checked>';                    
             }
 
-                $table_list .='<tr class="gradeU odd">
+                $table_list .='<tr class="gradeU odd genero_musical_input" id="'. $idgenero_musical.'">
                 <td class="">'. $b .'</td>
-                <td class=" sorting_1">'. $nombre.'</td>
-                <td class="">'.$input_check.'</td>
+                <td class="sorting_1 genero_musical_input" id="'. $idgenero_musical.'">'. $nombre.'</td>
+                <td class="genero_musical_input" id="'. $idgenero_musical.'">'.$input_check.'</td>
                 ';
 
                 $b++;

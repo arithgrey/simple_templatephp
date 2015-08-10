@@ -487,9 +487,10 @@
 
 
 
+
       <div style='background: #0A142D !important;' class="dark-bg  default-hovered footer-top animated-text">
         <div class="container">
-          <a href="<?=base_url('index.php/eventos/accesosalevento/'. $evento['idevento'])?> ">
+          <a href="<?=base_url('index.php/eventos/accesosalevento/'. $evento['idevento']) ."/" .$evento['status'] ?> ">
           <div class="row">
             <div class="col-md-12">
               <div class="call-to-action text-center">
@@ -621,13 +622,13 @@
             <div class="col-md-4">
               
                 
-              <a href="<?=base_url('index.php/emp/solicitatusartistaspreferidos/')?>">
+              <a href="<?=base_url('index.php/emp/solicitatusartistaspreferidos'. '/'. $evento["idevento"] ."/" . $evento["status"] )?>">
                 <div class="alert alert-icon alert-success">
                   <i class="fa fa-check-square"></i>Solicita tu artista
                 </div>
               </a>
 
-              <a href="<?=base_url('index.php/emp/entuciudad/')?>">
+              <a href="<?=base_url('index.php/emp/entuciudad/'. $evento["idevento"] ."/" . $evento["status"] )?>">
                 <div class="alert alert-icon alert-info" role="alert">
                   <i class="fa  fa-spinner"></i>Pide nuestros eventos
                 </div>

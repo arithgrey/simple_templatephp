@@ -275,7 +275,7 @@
 <div class="col-md-12">
   <!--******************** button pre visualizar ***************************** -->
   <center>
-    <a href="<?=base_url('index.php/eventos/previsualizar')?>/<?=$evento;?>">
+    <a href="<?=base_url('index.php/eventos/visualizar')?>/<?=$evento;?>">
     <button class="btn btn-primary btn-lg" type="button"> Visualizar antes de publicar  </button>    
 
     </a>

@@ -4,6 +4,7 @@ class Escenario  extends CI_Controller {
 	function __construct(){
 		parent::__construct();
 
+        $this->load->model("eventmodel");
         $this->load->model("escenarioartistamodel");
         $this->load->model("escenariomodel");
         $this->load->helper("artistas");
@@ -33,8 +34,9 @@ class Escenario  extends CI_Controller {
 
 	function inevento($id_escenario , $id_evento){
 
-		
-        $data = $this->validate_user_sesssion("Visualizando escenario antes de publicar");
+		$dataevent = $this->eventmodel->getEventbyid($id_evento);
+
+        $data = $this->validate_user_session_event("Escenarios" , $dataevent[0]["status"]);
         $artistas_array = $this->escenarioartistamodel->get_artistas_inevent($id_escenario);
         $escenariodb= $this->escenariomodel->get_escenariobyId($id_escenario);
         $data["escenario"] =$escenariodb[0]; 
@@ -74,7 +76,26 @@ class Escenario  extends CI_Controller {
                 $this->sessionclass->logout();
             }   
     }
+    function validate_user_session_event($titulo_dinamico_page , $status_event ){
 
+        if ( $this->sessionclass->is_logged_in() == 1) {                                        
+                    
+                    $menu = $this->sessionclass->generadinamymenu();
+                    $nombre = $this->sessionclass->getnombre();                                         
+                    $data['titulo']= $titulo_dinamico_page ." <span class='btn btn-info'>". get_statusevent($status_event . "</span>");              
+                    $data["menu"] = $menu;              
+                    $data["nombre"]= $nombre;                                               
+                    $data["perfilactual"] =  $this->sessionclass->getnameperfilactual();                
+
+                    return $data;
+
+        }else{
+            
+            $data['titulo']=$titulo_dinamico_page;              
+            return $data;
+        }   
+
+    }
 
 
 	

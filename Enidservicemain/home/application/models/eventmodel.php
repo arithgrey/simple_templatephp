@@ -125,11 +125,11 @@ function get_last_events($idempresa , $num ){
 
 
 /*check if exist*/
-function checkifexist($idevento , $idempresa){
+function checkifexist($idevento){
 
 
 
-	$query_exist ="SELECT * FROM evento where idempresa='". $idempresa. "' AND idevento ='". $idevento ."' ";
+	$query_exist ="SELECT * FROM evento where  idevento ='". $idevento ."' ";
 	$result = $this->db->query($query_exist);
 		
 		$num =0;

@@ -14,7 +14,6 @@ class Emp  extends CI_Controller {
 
         
         $data = $this->validate_user_sesssion("Nuestra historia");        
-
         $this->load->view('TemplateEnid/header_template', $data);
         $this->load->view('empresa/historia');
         $this->load->view('TemplateEnid/footer_template', $data);
@@ -25,15 +24,16 @@ class Emp  extends CI_Controller {
     }/**************************La historia de la empresa  **************++*/
 
 
-    function solicitatusartistaspreferidos(){
-        $data = $this->validate_user_sesssion("Tus artistas preferidos a tu alcance");        
+    function solicitatusartistaspreferidos($id_evento , $status){
+
+        $data = $this->validate_user_session_event("Tus artistas preferidos a tu alcance" , $status ); 
         $this->load->view('TemplateEnid/header_template', $data);
         $this->load->view('empresa/solicita_artistas');
         $this->load->view('TemplateEnid/footer_template', $data);
     }
     
-    function entuciudad(){
-        $data = $this->validate_user_sesssion("Nosotros en tu ciudad");        
+    function entuciudad($id_evento , $status){
+        $data = $this->validate_user_session_event("Nosotros en tu ciudad" , $status );         
         $this->load->view('TemplateEnid/header_template', $data);
         $this->load->view('empresa/en_tu_ciudad');
         $this->load->view('TemplateEnid/footer_template', $data);
@@ -60,6 +60,26 @@ class Emp  extends CI_Controller {
                 /*Terminamos la session*/
                 $this->sessionclass->logout();
             }   
+    }
+    function validate_user_session_event($titulo_dinamico_page , $status_event ){
+
+        if ( $this->sessionclass->is_logged_in() == 1) {                                        
+                    
+                    $menu = $this->sessionclass->generadinamymenu();
+                    $nombre = $this->sessionclass->getnombre();                                         
+                    $data['titulo']= $titulo_dinamico_page ." <span class='btn btn-info'>". get_statusevent($status_event . "</span>");              
+                    $data["menu"] = $menu;              
+                    $data["nombre"]= $nombre;                                               
+                    $data["perfilactual"] =  $this->sessionclass->getnameperfilactual();                
+
+                    return $data;
+
+        }else{
+            
+            $data['titulo']=$titulo_dinamico_page;              
+            return $data;
+        }   
+
     }
 
 

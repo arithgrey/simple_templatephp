@@ -44,12 +44,13 @@ class Eventos extends CI_Controller {
     }/*Termina la función*/
     function nuevo($id_evento){
 
-        $data = $this->validate_user_sesssion("Edición");
+
+        $data = $this->validate_user_sesssion(get_statusevent($this->input->get("status")) );
         $idempresa =  $this->sessionclass->getidempresa();                                                
         $inicio = $this->input->get("start");                        
         $termino = $this->input->get("end");                
                         
-        if ($this->checkifexist($id_evento , $idempresa) == 1 ) {
+        if ($this->checkifexist($id_evento) == 1 ) {
 
                 $data["evento"] = $id_evento;
                 $data["inicio"] = $inicio;
@@ -83,12 +84,14 @@ class Eventos extends CI_Controller {
 
 function diaevento($id_evento){
 
-    $data = $this->validate_user_sesssion("'previsualizando evento, día del evento'");                        
-    $idempresa =  $this->sessionclass->getidempresa();                        
+
                                             
-        if ($this->checkifexist($id_evento , $idempresa) == 1 ) {
+        if ($this->checkifexist($id_evento ) == 1 ) {
 
             $dataevent = $this->eventmodel->getEventbyid($id_evento);
+            $data = $this->validate_user_session_event("El día del evento " , $dataevent[0]["status"] );
+            
+
             $data["evento"] =  $dataevent[0];
 
             $list_obj= $this->eventmodel->get_objetos_permitidosin_event($id_evento);    
@@ -109,14 +112,14 @@ function diaevento($id_evento){
 
 
 /****************************** Accesos al evento ************************************/
-function accesosalevento($id_evento){
+function accesosalevento($id_evento , $status){
 
-    $data = $this->validate_user_sesssion("Accesos al evento");                        
-    $idempresa =  $this->sessionclass->getidempresa();                        
-                                            
-        if ($this->checkifexist($id_evento , $idempresa) == 1 ) {
     
+        if ($this->checkifexist($id_evento) == 1 ) {
     
+             
+            $data = $this->validate_user_session_event("Accesos al evento " , $status);    
+            $idempresa =  $this->sessionclass->getidempresa();                                                                                                                    
             $data_accesos_evento= $this->accesosmodel->get_acceso_by_event($id_evento);
             $data["accesos_evento"] = accesos_view_default($data_accesos_evento);
 
@@ -143,16 +146,16 @@ function accesosalevento($id_evento){
 
 
 /*Pre visualizar  ********************** pre visualizar */
-    function previsualizar($id_evento){
+    function visualizar($id_evento){
 
-        $data = $this->validate_user_sesssion("Visualizando antes de hacer público el evento");
-        $idempresa =  $this->sessionclass->getidempresa();                                                
-                        
-        if ($this->checkifexist($id_evento , $idempresa) == 1 ) {
+        if ($this->checkifexist($id_evento) == 1 ) {
+
+            $dataevent = $this->eventmodel->getEventbyid($id_evento);
+            $data =  $this->validate_user_session_event($dataevent[0]["nombre_evento"] , $dataevent[0]["status"]);                                
                                     
             $data["img_event"]=  get_img_by_event_in_directory($id_evento);                                    
             $data["base_img"]= base_url()."application/uploads/uploads/". $id_evento."/";                                    
-            $dataevent = $this->eventmodel->getEventbyid($id_evento);
+            
             $list_escenarios = $this->escenariomodel->get_escenarios_byidevent($id_evento);
             $data["escenarios"] = list_resum_escenarios($list_escenarios, $id_evento);
             $list_generosdb = $this->eventmodel->get_list_generos_musicales_byidev($id_evento);
@@ -169,19 +172,39 @@ function accesosalevento($id_evento){
 
             }else{
                 header('Location:' . base_url('index.php/inicio/eventos'));
-            }            
-
+        }            
     }/*Termina la función */
 
-    function checkifexist($idevento , $idempresa){
-        return $this->eventmodel->checkifexist((int)$idevento , (int)$idempresa);        
+    function checkifexist($idevento){
+        return $this->eventmodel->checkifexist((int)$idevento );        
     }/*Termina la función*/
 
+
+
+    function validate_user_session_event($titulo_dinamico_page , $status_event ){
+
+        if ( $this->sessionclass->is_logged_in() == 1) {                                        
+                    
+                    $menu = $this->sessionclass->generadinamymenu();
+                    $nombre = $this->sessionclass->getnombre();                                         
+                    $data['titulo']= $titulo_dinamico_page ." <span class='btn btn-info'>". get_statusevent($status_event . "</span>");              
+                    $data["menu"] = $menu;              
+                    $data["nombre"]= $nombre;                                               
+                    $data["perfilactual"] =  $this->sessionclass->getnameperfilactual();                
+
+                    return $data;
+
+        }else{
+            
+            $data['titulo']=$titulo_dinamico_page;              
+            return $data;
+        }   
+
+    }
     function validate_user_sesssion($titulo_dinamico_page){
 
             if ( $this->sessionclass->is_logged_in() == 1) {                        
-                    
-                    
+                                        
                     $menu = $this->sessionclass->generadinamymenu();
                     $nombre = $this->sessionclass->getnombre();                                         
                     $data['titulo']=$titulo_dinamico_page;              
