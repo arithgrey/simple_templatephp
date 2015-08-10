@@ -118,8 +118,10 @@ function update_escenario_modal(e){
 				$(".nombre-escenario-modal").click(update_nombre_escenario);
 				$('.day_escenario_button').click(update_days_escenario);
 				$('.horario_artista').click(update_horario_artista);
-				load_data_escenarios();
-				
+				$('#avanzado-config-escenario').click(function(){
+					redirect( now + "index.php/escenario/configuracionavanzada/"+idescenario );
+				});				
+
 			}).fail(function(){
 				
 				alert(genericresponse[0]);
@@ -176,13 +178,15 @@ function load_data_escenario(idescenario){
 				valorHTML("#idescenariomodalartistas" , idescenario);
 				valorHTML(".descripcion-in-modal-escenario" , data["descripcion"]);
 
+
 				$(".descripcion-modal-text").click(update_description_in_modal);
 				$(".remove-artista").click(remove_artista_in_escenario);
 				$(".tipo-evento-modal").click(update_tipo_escenario);
 				$(".nombre-escenario-modal").click(update_nombre_escenario);
 				$('.day_escenario_button').click(update_days_escenario);
 				$('.horario_artista').click(update_horario_artista);
-
+				
+				
 
 
 			}).fail(function(){

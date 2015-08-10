@@ -21,6 +21,7 @@ if(!function_exists('invierte_date_time')){
 		                        <td class='text-center'>
 		                        	 $". money_format( "%i" ,  $rowccesos["precio"] ) ."</td>
 		                        	<td class='text-center'>". $periodo  . "</td>
+		                        <td class='text-center avanzado-accesos' id='".$rowccesos["idacceso"]."'><i class='avanzado-accesos fa fa-angle-double-right' id='".$rowccesos["idacceso"]."' ></i></td>	
 		                        <td class='text-center'>
 		                        <strong><i data-toggle='modal' data-target='#confirmationdeleteacceso'  class='fa fa-minus-circle remove-acceso' id='". $rowccesos["idacceso"] ."'></i> </strong></td>
                     			</tr>";
@@ -94,10 +95,4 @@ if(!function_exists('invierte_date_time')){
 		return $blog_tikects;
 	}
 
-
-
-
-
-	
 }/*Termina el helper*/
- 

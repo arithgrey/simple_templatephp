@@ -12,6 +12,25 @@ class Escenario  extends CI_Controller {
 	}
 	
 
+
+    /**************************Configuracion del escenario avanzado **************++*/
+
+    function configuracionavanzada($id_escenario){
+
+        
+        $data = $this->validate_user_sesssion("Escenarios avanzado");        
+
+        $this->load->view('TemplateEnid/header_template', $data);
+        $this->load->view('escenarios/configuracion_avanzado', $data);
+        $this->load->view('TemplateEnid/footer_template', $data);
+
+                
+        
+
+    }/**************************Termina Configuracion del escenario avanzado **************++*/
+
+
+
 	function inevento($id_escenario , $id_evento){
 
 		

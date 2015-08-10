@@ -126,7 +126,7 @@ function accesosalevento($id_evento){
             $fecha_hora_actual =  mdate($datestring, $time);
             $data["fecha_hora_actual"] = $fecha_hora_actual;
 
-            $data_eventos_experiencia = $this->eventmodel->get_last_events_experience($idempresa , 5 );                  
+            $data_eventos_experiencia = $this->eventmodel->get_last_events_experience($idempresa , 5 , $id_evento);                  
 
             $data["ultimos_eventos_experiencia"] = get_experiencia_last_events_by_empresa($data_eventos_experiencia );
 

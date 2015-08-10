@@ -30,6 +30,7 @@ $(document).on("ready", function (){
 	$("#accesos-button").click(load_accesos_evento);	
 	$("#form-accesos-modal").submit(registra_acceso);
 	$("#servicios-button").click(load_data_servicios);
+
 	$("#pac-input").click(update_ubicacion_evento);	
 	
 	$("footer").ready(load_data_escenarios);
@@ -99,8 +100,8 @@ function load_data_evento(){
 				valida_text_replace(restriciones , ".restricciones-p"  , "#restricciones-evento" ,  "<i class='fa fa-plus'></i> Lo que podría anticiparse dentro del evento" , "<i class='fa fa-plus'></i>  Lo que podría anticiparse dentro del evento" );
 				valida_text_replace(eslogan , ".eslogan-p"  , "#eslogan-evento" ,  "<i class='fa fa-space-shuttle'></i> Mensaje eslogan del evento" , "<i class='fa fa-space-shuttle'></i>  Eslogan del evento" );
 
-				$("#url_social").blur(update_social_fb);
-				$("#url_social_evento_youtube").blur(update_social_youtube);
+				$("#url_social").blur(update_social);
+				$("#url_social_evento_youtube").blur(update_social);
 		}
 
 		/******************************************************************************/
@@ -367,21 +368,12 @@ function tryrecordgeneros(e){
 
 /***************************************************************************+++*/
 
-function update_social_fb(){
+function update_social(){
 			
-		url =  now + "index.php/api/event/updateurlbyid/format/json/";    							
+		url =  now + "index.php/api/event/updateurlbyid/format/json/";    								
 		data_send= updates_send(url , $("#form-social").serialize());		
 		updates_send(url , data_send);
-		load_data_evento();		
-}
-
-/*************************************+*/
-
-function update_social_youtube(){
-	url =  now + "index.php/api/event/updateurlyoutubebyid/format/json/";    					
-	data_send = $("#form-social-youtube").serialize();
-	updates_send(url , data_send);
-	load_data_evento();					
+			
 }
 
 /**********************************************************/

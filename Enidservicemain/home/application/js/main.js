@@ -193,3 +193,15 @@ function updates_send(url , data_send ){
 	});
 
 }
+
+/**************************************************************************************/
+function updates_send_test(url , data_send ){
+
+	$.post(url , data_send ).done(function(data){
+
+		alert(data);
+	}).fail(function(){
+		alert("Falla al actualizar");
+	});
+
+}

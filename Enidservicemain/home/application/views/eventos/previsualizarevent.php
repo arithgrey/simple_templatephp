@@ -357,7 +357,7 @@
                   <div class="col-sm-4">
                     <br>
                     <p style="background:white">
-                      <a href="#" class="btn btn-lg btn-gray-transparent btn-animated">
+                      <a href="<?=base_url('index.php/emp/lahistoria')?>" class="btn btn-lg btn-gray-transparent btn-animated">
                         Conoce nuestra historia
                         <i class="fa fa-arrow-right pl-20"></i>
                       </a>
@@ -569,7 +569,7 @@
                           </span>
                           <?=substr($evento["permitido"], 0 , 130); ?> ....
                         </a>
-                        <a href="<?=base_url('index.php/eventos/diaevento?evento='.$evento["idevento"]."#articulos-permitidos")?>"><button class='btn btn-lg btn-default btn-animated'>Artículos permitidos </button></a>
+                        <a href="<?=base_url('index.php/eventos/diaevento/'.$evento["idevento"]."#articulos-permitidos")?>"><button class='btn btn-lg btn-default btn-animated'>Artículos permitidos </button></a>
                     </div>                                    
                   </div>
 
@@ -621,15 +621,17 @@
             <div class="col-md-4">
               
                 
-
-              <div class="alert alert-icon alert-success">
-                <i class="fa fa-check-square"></i>Solicita tu artista <code>(futuros eventos)</code> 
+              <a href="<?=base_url('index.php/emp/solicitatusartistaspreferidos/')?>">
+                <div class="alert alert-icon alert-success">
+                  <i class="fa fa-check-square"></i>Solicita tu artista
                 </div>
+              </a>
 
-
+              <a href="<?=base_url('index.php/emp/entuciudad/')?>">
                 <div class="alert alert-icon alert-info" role="alert">
-                  <i class="fa  fa-spinner"></i>Pide nuestros eventos <code>(En tu ciudad)</code> 
+                  <i class="fa  fa-spinner"></i>Pide nuestros eventos
                 </div>
+              </a>
                 
 
               

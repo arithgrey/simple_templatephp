@@ -33,12 +33,7 @@
                     <div class="blog-post">
                         <h3> La experiencia en eventos pasados</h3>
                         <ul>	
-                        	<?=$ultimos_eventos_experiencia?>
-                            <li><a href="javascript:;"><i class="  fa fa-angle-right"></i> May 2013</a></li>
-                            <li><a href="javascript:;"><i class="  fa fa-angle-right"></i> April 2013</a></li>
-                            <li><a href="javascript:;"><i class="  fa fa-angle-right"></i> March 2013</a></li>
-                            <li><a href="javascript:;"><i class="  fa fa-angle-right"></i> February 2013</a></li>
-                            <li><a href="javascript:;"><i class="  fa fa-angle-right"></i> January 2013</a></li>
+                        	<?=$ultimos_eventos_experiencia?>                            
                         </ul>
                     </div>
                 </div>

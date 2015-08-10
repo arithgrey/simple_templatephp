@@ -1,3 +1,4 @@
+
 <link rel="stylesheet" type="text/css" href="<?=base_url('application/js/js/bootstrap-datepicker/css/datepicker-custom.css')?>" />
 <script type="text/javascript" src="<?=base_url('application/js/js/bootstrap-datepicker/js/bootstrap-datepicker.js')?>"></script>
 <script type="text/javascript" src="<?=base_url('application/js/js/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js')?>"></script>
@@ -66,10 +67,11 @@
                                     
                                     <span class="tools pull-right">
                                         
-                                        <button class="btn btn-block btn-info" type="button">
+                                        <button class="btn btn-block btn-info ver-todos" type="button">
                                            
                                             <span class="pull-left"> 
-                                             <span class="bold vertodos">+ Ver todos </span> </span> 
+                                             <span class="">+ Ver todos </span> 
+                                            </span> 
                                                
                                         </button>    
                                         
@@ -114,10 +116,10 @@
                                                         <input name='nueva_edicion' placeholder="Edición México 2015 " class="form-control" style="width: 100%" type="text">
 
 
-                                                        <div class="input-group  custom-date-range" data-date="13/01/2015" data-date-format="mm/dd/yyyy">
-                                                            <input class="form-control dpd1" name="nuevo_inicio" type="text">
+                                                        <div class="input-group">
+                                                            <input class="form-control dpd1" name="nuevo_inicio" type="text" required>
                                                             <span class="input-group-addon">hasta</span>
-                                                            <input class="form-control dpd2" name="nuevo_termino" type="text">
+                                                            <input class="form-control dpd2" name="nuevo_termino" type="text" required>
                                                         </div>
                                                         <span class="help-block">Periodo del evento</span>
                                             </div>

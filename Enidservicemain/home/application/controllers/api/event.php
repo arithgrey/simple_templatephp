@@ -4,449 +4,212 @@ class Event extends REST_Controller{
       
     function __construct(){
             parent::__construct();
-                
-             
+                             
             $this->load->model("eventmodel");                
             $this->load->helper("eventosh");   
             $this->load->library('sessionclass');
-
+            
             
         }     
 
 
-/**/
+    /*Elimina*/
     function delete_byid_post(){
-    
+        $this->validate_user_sesssion();            
+        $id_usuario = $this->sessionclass->getidusuario();    
+        $id_empresa =  $this->sessionclass->getidempresa();            
+        $id_evento = $this->post("evento");
 
-        if ($this->sessionclass->is_logged_in() == 1){
-
-            $id_usuario = $this->sessionclass->getidusuario();    
-            $id_empresa =  $this->sessionclass->getidempresa();            
-            $id_evento = $this->post("evento");
-
-          
-            $responsedb = $this->eventmodel->delete_byid($id_evento , $id_usuario , $id_empresa );
-            $this->response($responsedb);
-
-        }else{
-            $this->sessionclass->logout();    
-        }   
-
-
-
+        $responsedb = $this->eventmodel->delete_byid($id_evento , $id_usuario , $id_empresa );
+        $this->response($responsedb);
 
     }    
 
-/**/
+    /*update objetos permitidos del evento */
     function update_objeto_permitido_post(){
-
-        if ($this->sessionclass->is_logged_in() == 1){
-
-            
-            $idevento = $this->post("evento");
-            $idobjeto =  $this->post("objetopermitido");
-
-
-            $responsedb = $this->eventmodel->update_obj_permitidobyId($idevento, $idobjeto);
-            $this->response($responsedb);
-
-        }else{
-            $this->sessionclass->logout();    
-        }   
-
-
-
-
-
+        $idevento = $this->post("evento");
+        $idobjeto =  $this->post("objetopermitido");
+        $responsedb = $this->eventmodel->update_obj_permitidobyId($idevento, $idobjeto);
+        $this->response($responsedb);
     }    
-
-    function objetospermitidos_get(){
-
-        if ($this->sessionclass->is_logged_in() == 1){
-
-            
-            $idevento = $this->get("evento");
-
-
-            $this->response( listobjetosp($this->eventmodel->getObjetosPermitidos($idevento ) ));
-
-        }else{
-            $this->sessionclass->logout();    
-        }   
-
+    /**/
+    function objetospermitidos_get(){        
+        $idevento = $this->get("evento");
+        $this->response( listobjetosp($this->eventmodel->getObjetosPermitidos($idevento ) ));
     }    
-
-
-
+    /*Update url social */
     function updateurlbyid_post(){
 
-        if ($this->sessionclass->is_logged_in() == 1){
+        $this->validate_user_sesssion();                        
+        $idevento = $this->post("evento_social");
+        $nueva_url_fb  = $this->post("url_social_evento");            
+        $url_social_evento_youtube =  $this->post("url_social_evento_youtube");
 
-            $nueva_url = $this->post("url_social_evento");            
-            $idevento = $this->post("evento_social");
-
-
-            $this->response($this->eventmodel->updateurl($nueva_url , $idevento ) );
-
-        }else{
-            $this->sessionclass->logout();    
-        }   
-
+        $this->response($this->eventmodel->updateurl($nueva_url_fb , $url_social_evento_youtube , $idevento ) );
 
     }/*Termina la función*/    
+    function updateurlyoutubebyid_post(){        
 
-
-
-
-    function updateurlyoutubebyid_post(){
-        
-        if ($this->sessionclass->is_logged_in() == 1){
-
-            $nueva_url = $this->post("url_social_evento_youtube");            
-            $idevento = $this->post("evento_social_y");
-
-
-            $this->response($this->eventmodel->updateurlyout($nueva_url , $idevento ) );
-
-        }else{
-            $this->sessionclass->logout();    
-        }   
+        $this->validate_user_sesssion();           
+        $nueva_url = $this->post("url_social_evento_youtube");            
+        $idevento = $this->post("evento_social_y");
+        $this->response($this->eventmodel->updateurlyout($nueva_url , $idevento ) );
+    }
+    /**/
+    function updategeneros_post(){     
+        $this->validate_user_sesssion();            
+        $nuevos_generos = $this->post("generos");
+        $idevento = $this->post("evento");
+        $this->response($this->eventmodel->updategeneros($nuevos_generos , $idevento ) );
 
     }
-
-
-
-
-
-
-
-
-
-    /**/    
-
-    function updategeneros_post(){
-
-        if ($this->sessionclass->is_logged_in() == 1){
-
-            $nuevos_generos = $this->post("generos");
-            $idevento = $this->post("evento");
-
-            $this->response($this->eventmodel->updategeneros($nuevos_generos , $idevento ) );
-
-        }else{
-            $this->sessionclass->logout();    
-        }   
-
-
-    }/*Termina la función*/    
-
+    /**/
     function updateubicacion_post(){
+        $this->validate_user_sesssion();            
+        $nueva_ubicacion = $this->post("ubicacion");
+        $idevento = $this->post("evento");
+        $this->response($this->eventmodel->updateUbicacion($nueva_ubicacion , $idevento ) );
 
-        if ($this->sessionclass->is_logged_in() == 1){
-
-            $nueva_ubicacion = $this->post("ubicacion");
-            $idevento = $this->post("evento");
-
-            $this->response($this->eventmodel->updateUbicacion($nueva_ubicacion , $idevento ) );
-
-        }else{
-            $this->sessionclass->logout();    
-        }   
-
-    
     }   
-
-
+    /**/
     function updatenombre_post(){
-
-        if ($this->sessionclass->is_logged_in() == 1){
-
-            $nuevo_nombre = $this->post("nombre");
-            $idevento = $this->post("evento");
-
-            $this->response($this->eventmodel->updateNombre( validate_text($nuevo_nombre)  , $idevento ) );
-
-        }else{
-            $this->sessionclass->logout();    
-        }   
-
+        $this->validate_user_sesssion();            
+        $nuevo_nombre = $this->post("nombre");
+        $idevento = $this->post("evento");
+        $this->response($this->eventmodel->updateNombre( validate_text($nuevo_nombre)  , $idevento ) );
     }    
-
-    
-
-
+    /**/
     function updateedicion_post(){
-
-        if ($this->sessionclass->is_logged_in() == 1){
-
-            $nuevo_edicion = $this->post("edicion");
-            $idevento = $this->post("evento");
-
-
-            $this->response($this->eventmodel->updateEdicion( validate_text($nuevo_edicion) , $idevento ) );
-
-        }else{
-            $this->sessionclass->logout();    
-        }   
-
+        $this->validate_user_sesssion();            
+        $nuevo_edicion = $this->post("edicion");
+        $idevento = $this->post("evento");
+        $this->response($this->eventmodel->updateEdicion( validate_text($nuevo_edicion) , $idevento ) );
     }    
-
-
-
-    
-    
-
+    /**/
     function updatedescripcion_post(){
 
-        if ($this->sessionclass->is_logged_in() == 1){
-
-            
-            $nueva_descripcion = $this->post("descripcion_evento");
-            $idevento = $this->post("evento");
-
-
-
-
-            
-
-            $this->response($this->eventmodel->updateDescripcion( validate_text( $nueva_descripcion)  , $idevento ) );
-
-        }else{
-            $this->sessionclass->logout();    
-        }   
+        $this->validate_user_sesssion();            
+        $nueva_descripcion = $this->post("descripcion_evento");
+        $idevento = $this->post("evento");
+        $this->response($this->eventmodel->updateDescripcion( validate_text( $nueva_descripcion)  , $idevento ) );
 
     }    
-
-
-
-
-
     /*updatepoliticas********+updatepoliticasupdatepoliticasupdatepoliticasupdatepoliticasupdatepolit*/
-
-
-
     function updatepoliticas_post(){
-
-        if ($this->sessionclass->is_logged_in() == 1){
-
-            $nueva_politica = $this->post("politicas_evento");
-            $idevento = $this->post("evento");
-
-            $this->response($this->eventmodel->updatePoliticas( validate_text($nueva_politica) , $idevento ) );
-
-        }else{
-            $this->sessionclass->logout();    
-        }   
+        $this->validate_user_sesssion();            
+        $nueva_politica = $this->post("politicas_evento");
+        $idevento = $this->post("evento");
+        $this->response($this->eventmodel->updatePoliticas( validate_text($nueva_politica) , $idevento ) );
 
     }    
+    /**Load temántica *Load temántica *Load temántica *Load temántica *Load temántica *Load temántica **/
+    function loadtematicabyid_get(){
+        $idevento = $this->get("id_evento_tematica");
+        $idempresa =  $this->sessionclass->getidempresa();
+        $this->response($this->eventmodel->getTematicaByid($idevento , $idempresa));
+    }
+    /*End tematica load End tematica load End tematica load End tematica load End tematica load */
+    function update_tematica_by_id_post(){
+        
+        $this->validate_user_sesssion();            
+        $idevento = $this->post("id_evento_tematica");
+        $tematica_select = $this->post("tematica_select");
+        $idempresa =  $this->sessionclass->getidempresa();
+        $this->response($this->eventmodel->update_tematicaby_id( $idevento , $tematica_select, $idempresa ));    
+    }
+    /*****************Permitido *Permitido *Permitido *Permitido *Permitido *Permitido *****/
+    function updatepermitido_post(){
 
-
-
-
-
-
-
-/**Load temántica *Load temántica *Load temántica *Load temántica *Load temántica *Load temántica **/
-function loadtematicabyid_get(){
-    if ($this->sessionclass->is_logged_in() == 1){
-
-            $idevento = $this->get("id_evento_tematica");
-            $idempresa =  $this->sessionclass->getidempresa();
-            $this->response($this->eventmodel->getTematicaByid($idevento , $idempresa));
-
-        }else{
-            $this->sessionclass->logout();    
-        }   
-
-}
-
-
-
-
-/*End tematica load End tematica load End tematica load End tematica load End tematica load */
-
-
-
-
-function update_tematica_by_id_post(){
-
-    if ($this->sessionclass->is_logged_in() == 1){
-
-
-            
-            
-            $idevento = $this->post("id_evento_tematica");
-            $tematica_select = $this->post("tematica_select");
-            $idempresa =  $this->sessionclass->getidempresa();
-            $this->response($this->eventmodel->update_tematicaby_id( $idevento , $tematica_select, $idempresa ));
-
-        }else{
-            $this->sessionclass->logout();    
-        }   
-}
-
-
-
-
-/*****************Permitido *Permitido *Permitido *Permitido *Permitido *Permitido *****/
-function updatepermitido_post(){
-
-        if ($this->sessionclass->is_logged_in() == 1){
-
-            $nuevo_permitido = $this->post("permitido_evento");
-            $idevento = $this->post("evento");
-
-            $this->response($this->eventmodel->updatePermitido( validate_text($nuevo_permitido)  , $idevento ) );
-
-        }else{
-            $this->sessionclass->logout();    
-        }   
-
+        $this->validate_user_sesssion();            
+        $nuevo_permitido = $this->post("permitido_evento");
+        $idevento = $this->post("evento");
+        $this->response($this->eventmodel->updatePermitido( validate_text($nuevo_permitido)  , $idevento ) );
     }    
-
-/*restricciones **restricciones **restricciones **restricciones **restricciones ***/
-
-
-
-
-
-function updaterestricciones_post(){
-
-        if ($this->sessionclass->is_logged_in() == 1){
-
-            $nueva_restriccion = $this->post("restricciones_evento");
-            $idevento = $this->post("evento");
-
-            $this->response($this->eventmodel->updateRestricciones( validate_text( $nueva_restriccion )  , $idevento ) );
-
-        }else{
-            $this->sessionclass->logout();    
-        }   
-
+    /*restricciones **restricciones **restricciones **restricciones **restricciones ***/
+    function updaterestricciones_post(){
+        $this->validate_user_sesssion();            
+        $nueva_restriccion = $this->post("restricciones_evento");
+        $idevento = $this->post("evento");
+        $this->response($this->eventmodel->updateRestricciones( validate_text( $nueva_restriccion )  , $idevento ) );
     }   
-
-
-
-
-
-
-
-
-/*****************************************************************************/
-    
+    /*****************************************************************************/    
     function get_event_by_id_get(){
-        
 
-        if ($this->sessionclass->is_logged_in() == 1) {
-
-            $idevento = $this->get("evento");
-
-            $this->response($this->eventmodel->getEventbyid($idevento));
-
-        }else{
-            $this->sessionclass->logout();    
-        }    
-
+        $idevento = $this->get("evento");
+        $this->response($this->eventmodel->getEventbyid($idevento));
     }    
+    /**/
+    function nuevo_evento_POST(){                        
+        /*Capturamos datos*/
+        $this->validate_user_sesssion();            
+        $generic_response = ["Nombre muy corto para el evento" , "Registre fecha"];        
 
-
-
-    function nuevo_evento_POST(){
-                
-        if ( $this->sessionclass->is_logged_in() == 1) {  
-            /*Capturamos datos*/
-                $generic_response = ["Nombre muy corto para el evento" , "Registre fecha"];        
-
-
-                $nombre  = $this->post("nuevo_evento");
-                $edicion = $this->post("nueva_edicion");
-                $inicio = $this->post("nuevo_inicio");
-                $termino = $this->post("nuevo_termino");
-
-                $idusuario = $this->sessionclass->getidusuario();    
-                $idempresa =  $this->sessionclass->getidempresa();
-                $perfiles  =  $this->sessionclass->getperfiles();
-                $data[0]= false;
-                    
-                    if (validatenotnullnotspace($nombre)) {
-                        if (validatenotnullnotspace($inicio) ==  true && validatenotnullnotspace($termino)) {
-                            
-
-                                $dbresponse = $this->eventmodel->create(  $nombre , $edicion , $inicio , $termino , $idusuario , $idempresa,  $perfiles  );
-                                
-
-                                if (is_numeric($dbresponse)) {
-
-                                    $data[0]= true;
-                                    $extra = $this->create_directorio($dbresponse); 
-                                    $data[1]= base_url('index.php/eventos/nuevo/'.$dbresponse);
-                                       
-                                    $this->response($data); 
-                                }else{
-                                    $this->response($generic_response[0]);             
-                                } 
-                                
-
-
-                        }else{
-                                $this->response($generic_response[1]);
-                        }
+        $nombre  = $this->post("nuevo_evento");
+        $edicion = $this->post("nueva_edicion");
+        $inicio = $this->post("nuevo_inicio");
+        $termino = $this->post("nuevo_termino");
+        $idusuario = $this->sessionclass->getidusuario();    
+        $idempresa =  $this->sessionclass->getidempresa();
+        $perfiles  =  $this->sessionclass->getperfiles();
+        $data[0]= false;
                         
-                            
+        if (validatenotnullnotspace($nombre)) {
+           if (validatenotnullnotspace($inicio) ==  true && validatenotnullnotspace($termino)) {                                
+                $dbresponse = $this->eventmodel->create(  $nombre , $edicion , $inicio , $termino , $idusuario , $idempresa,  $perfiles  );                                    
+                    if (is_numeric($dbresponse)) {
 
-                            
-                                
-
-
+                            $data[0]= true;
+                            $extra = $this->create_directorio($dbresponse); 
+                            $data[1]= base_url('index.php/eventos/nuevo/'.$dbresponse);                                        
+                            $this->response($data); 
+                        }else{
+                            $this->response($generic_response[0]);             
+                            } 
+                                    
+                        }else{
+                            $this->response($generic_response[1]);
+                        }
+                    
                     }else{
-                        $this->response($generic_response[0]);
-                    }
-
-                
-                
-        }else{
-            $this->sessionclass->logout();
-        
-        }    
+                    $this->response($generic_response[0]);
+                }
     }
 
-/****************************** ******************************* **************************/
-function create_directorio($id_event){
-    
+    /****************************** ******************************* **************************/
+    function create_directorio($id_event){
         
-        $storeFolder = 'uploads';           
-        $directorio = dirname(dirname( __FILE__ )). "/". $storeFolder."/".$storeFolder."/".$id_event."/";            
-        return $directorio;
-}
+            $this->validate_user_sesssion();            
+            $storeFolder = 'uploads';           
+            $directorio = dirname(dirname( __FILE__ )). "/". $storeFolder."/".$storeFolder."/".$id_event."/";            
+            return $directorio;
+    }
+    /**/
+    function update_eslogan_post(){
 
+        $this->validate_user_sesssion();                    
+        $id_evento= $this->post("evento");
+        $eslogan = $this->post("eslogan");
+        $this->response($this->eventmodel->update_eslogan($id_evento , validate_text($eslogan)) );
+             
 
-function update_eslogan_post(){
+    }/*Termina rest*/
 
-        if ( $this->sessionclass->is_logged_in() == 1) {  
-                
-                $id_evento= $this->post("evento");
-                $eslogan = $this->post("eslogan");
+    function objetos_permitidos_all_update_get(){
+            
+        $this->validate_user_sesssion();                                
+        $id_evento= $this->get("evento");                
+        $this->response($this->eventmodel->update_all_in_event_obj_inter($id_evento) );        
+    }
+    /*Validar session para modificar datos*/
+    function validate_user_sesssion(){
+                if( $this->sessionclass->is_logged_in() == 1) {                        
 
-                $this->response($this->eventmodel->update_eslogan($id_evento , validate_text($eslogan)) );
-        }else{
-            $this->sessionclass->logout();    
-        }  
+                    }else{
+                    /*Terminamos la session*/
+                    $this->sessionclass->logout();
+                }   
+    }/*termina validar session */
 
-}/*Termina rest*/
-
-
-function objetos_permitidos_all_update_get(){
-        if ( $this->sessionclass->is_logged_in() == 1) {  
-                
-                $id_evento= $this->get("evento");                
-                $this->response($this->eventmodel->update_all_in_event_obj_inter($id_evento) );
-        }else{
-            $this->sessionclass->logout();    
-        } 
-}
-
-
-
-}
+}/*Termina el controlador rest */
 ?>
 

@@ -65,6 +65,15 @@ $query_d ="DELETE FROM evento_servicio WHERE idevento='".$evento."'  AND idservi
 }
 
 
+/*update all services in evento */
+function update_all_in_event($id_evento){
+
+	$query_prodedure ="call update_all_servicios_in_event($id_evento)";
+	$result = $this->db->query($query_prodedure);
+	return $result->result_array();
+
+}
+
 /*Termina modelo */
 }
 

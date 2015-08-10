@@ -1,12 +1,10 @@
 $(document).on("ready", function(){
 
-	$(".vertodos").click(show_eventos_pasados);
+	$(".ver-todos").click(show_eventos_pasados);
 	$("#nuevo-evento-form").submit(trynewevent);
 	$(".todo-entry").click(function(){			
-		$("#dinamic-field").show();
-		
+		$("#dinamic-field").show();		
 	});
-
 
 	$(".delete_evento").click(delete_evento);
 
@@ -47,7 +45,8 @@ function trynewevent(){
 
 
 function show_eventos_pasados(){
-	url = now + "index.php/eventos/pasados";
+
+	url = now + "index.php/eventos/timeline";
 	redirect(url);
 }
 

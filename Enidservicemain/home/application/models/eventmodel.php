@@ -89,7 +89,7 @@ function create( $nombre , $edicion , $inicio , $termino , $idusuario , $idempre
 
 
 /*Los ultimos eventos vividos */
-function get_last_events_experience($idempresa , $num ){
+function get_last_events_experience($idempresa , $num , $less ){
 
 	$query_select ="SELECT  e.idevento , e.nombre_evento, e.descripcion_evento, e.fecha_inicio , 
 	e.fecha_termino ,
@@ -99,6 +99,7 @@ function get_last_events_experience($idempresa , $num ){
 	left outer join escenario as es 
 	on e.idevento = es.idevento 
 	where e.idempresa ='". $idempresa."' 
+	and e.idevento != '".$less."'
 	group by e.idevento ORDER BY e.fecha_registro DESC LIMIT $num ";
 	$result = $this->db->query($query_select);
 	return $result ->result_array();      
@@ -231,9 +232,9 @@ function updategeneros($nuevos_generos , $idevento ){
 	return  $this->db->query($update_genero);
 }
 
-function updateurl($nueva_url , $idevento  ) {
+function updateurl($nueva_url , $url_social_evento_youtube , $idevento ) {
 	
-	$update_url = "UPDATE evento SET url_social='". $nueva_url ."'  WHERE idevento ='".$idevento."'  ";		
+	$update_url = "UPDATE evento SET url_social='". $nueva_url ."' , url_social_youtube='". $url_social_evento_youtube ."'   WHERE idevento ='".$idevento."'  ";		
 	return  $this->db->query($update_url);
 }
 	
@@ -338,16 +339,9 @@ function get_objetos_permitidosin_event($id_evento){
 
 function update_all_in_event_obj_inter($id_evento){
 
-	$consul_if_exist ="select * from evento_objetopermitido where idevento='".$id_evento."' limit 1";
-	$result  = $this->db->query($consul_if_exist );
-	$exist = $result->num_rows();	
-	$dinamic_query ="";
-		if ($exist > 0 ) {
-			$dinamic_query = "DELETE FROM evento_objetopermitido WHERE idevento = '". $id_evento. "' ";		
-		}else{
-			$dinamic_query = "INSERT INTO evento_objetopermitido SELECT  $id_evento , idobjetopermitido FROM objetopermitido";
-		}
-	return $this->db->query($dinamic_query);	
+	$query_procedimiento_update_all ="call update_all_obj_in_event( $id_evento )";		
+	$result = $this->db->query($query_procedimiento_update_all);			
+	return $result->result_array();
 }
 
 

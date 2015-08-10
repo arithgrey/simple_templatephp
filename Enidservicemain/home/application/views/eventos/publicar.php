@@ -211,10 +211,7 @@
                   <div class="input-group margin-bottom-sm">
                     <span class="input-group-addon"><i class="fa fa-facebook "></i> </span>
                     <input class="form-control" name='url_social_evento' type="text" id="url_social" placeholder="La url de tu evento en Facebook" required>
-                  </div>                                       
-                </form>
-                <form class="form-horizontal" id='form-social-youtube'> 
-                  <input type="hidden" name="evento_social_y" id="evento_social_y" value="<?=$evento;?>">                                    
+                  </div>                                                                                       
                   <div class="input-group">
                   <span class="input-group-addon"><i class="fa fa-youtube-play"></i></span>
                   <input class="form-control" name='url_social_evento_youtube' type="text" id="url_social_evento_youtube" placeholder="La url de tu canal en youtube" required>
@@ -316,7 +313,7 @@
         <div class='col-xs-12  col-sm-6 col-md-6 col-lg-6'>
           <button class="btn btn-info  col-xs-12 day_escenario_button" type="button" ><span class='day_escenario'></span></button>                
           <div class='day_escenario_inputs' id='day_escenario_inputs'>
-            <div class="input-group  custom-date-range" data-date="" data-date-format="mm/dd/yyyy">
+            <div class="input-group">
                 <input class="form-control dpd1" name="nuevo_inicio_escenario" id="nuevo_inicio_escenario" type="text">
                 <span class="input-group-addon">hasta</span>
                 <input class="form-control dpd2" name="nuevo_termino_escenario" id="nuevo_termino_escenario" type="text">
@@ -379,6 +376,8 @@
 </div><!--Termina el boby de modal -->
 
 <div class="modal-footer">
+    
+    <button id="avanzado-config-escenario" class='btn btn-info'><i class='fa fa-angle-double-right'></i> Avandado </button>
     <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
 </div>
       </div><!--Termina el contect --> 
@@ -442,6 +441,8 @@
             <th><i class="fa fa-star"></i> Acceso</th>
             <th class="text-center"><i class="fa fa-credit-card"></i> Precio</th>
             <th class="text-center"><i class="fa fa-calendar-o"></i> Periodo</th>
+            <th class="text-center"><i class="fa fa-angle-double-right"></i>Avanzado</th>
+
             <th class="text-center"></th>
             </tr>
           </thead>
@@ -466,10 +467,10 @@
                 </div>
               </td>
               <td>
-                <div class="input-group  custom-date-range" data-date="" data-date-format="mm/dd/yyyy">
-                    <input class="form-control dpd1" name="nuevo_inicio_acceso" id="nuevo_inicio_acceso" type="date" required>
+                <div class="input-group" >
+                    <input class="form-control dpd1" name="nuevo_inicio_acceso" id="nuevo_inicio_acceso" type="text" required>
                     <span class="input-group-addon"></span>
-                    <input class="form-control dpd2" name="nuevo_termino_acceso" id="nuevo_termino_acceso" type="date" required>
+                    <input class="form-control dpd2" name="nuevo_termino_acceso" id="nuevo_termino_acceso" type="text" required>
                 </div>  
               </td>
               <td>

@@ -8,6 +8,11 @@ function load_accesos_evento(){
 		llenaelementoHTML( ".data-option-accesos" , data["tipo"] );
 
 		$(".remove-acceso").click(remove_acceso);
+		$(".avanzado-accesos").click(function(e){
+			
+			id_acceso  =e.target.id;
+			redirect(now +'index.php/accesos/configuracionavanzada/'+id_acceso+"/" + evento +"/"  );
+		});
 
 	}).fail(function(){
 		alert(genericresponse[0]);

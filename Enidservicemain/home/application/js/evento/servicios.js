@@ -11,6 +11,7 @@ function load_data_servicios(){
 
 		llenaelementoHTML(".servicios-evento-modal" , data);		
 		$(".serviciocheck").click(serviciocheck);
+		$(".up-all-serv").click(update_all_services);
 		
 
 	}).fail(function(){
@@ -18,6 +19,7 @@ function load_data_servicios(){
 	});
 	
 
+	
 
 
 }
@@ -40,9 +42,14 @@ function serviciocheck(e){
 	}).fail(function(){
 		alert(genericresponse[0]);
 	});
-
-
-
-
-
 }	
+
+
+function update_all_services(){
+	
+	id_evento = $("#evento").val();
+	url = now + "index.php/api/serviciosevento/update_all_in_event/format/json/"; 
+	updates_send(url , {"evento" : id_evento});
+	load_data_servicios();
+	
+}

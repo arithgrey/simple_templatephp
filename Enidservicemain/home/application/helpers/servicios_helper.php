@@ -12,7 +12,7 @@ if(!function_exists('invierte_date_time')){
     $pos =1;  
 		$servicios = "
 		<table class='table' id='dynamic-table'>
-    <thead class=''><tr role='row'><th class='blue-col-enid'>#</th><th>Servicio</th><th><button class='btn btn-info'><i class='fa fa-check-square'></i></button></th></tr></thead><tbody >";
+    <thead class=''><tr role='row'><th class='blue-col-enid'>#</th><th>Servicio</th><th><button class='btn btn-info up-all-serv'><i class='fa fa-check-square '></i></button></th></tr></thead><tbody >";
 
         foreach ($arreglo as $row){
 

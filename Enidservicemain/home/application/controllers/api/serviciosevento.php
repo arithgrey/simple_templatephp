@@ -11,6 +11,28 @@ class Serviciosevento extends REST_Controller{
             
         }     
 
+
+    /*update all services in event */    
+
+    function update_all_in_event_post(){
+
+        if ( $this->sessionclass->is_logged_in() == 1) {  
+                
+
+                $id_evento = $this->post("evento");                        
+                $serviciodb = $this->servicioseventmodel->update_all_in_event($id_evento);
+                $this->response($serviciodb);
+              
+                
+        }else{
+
+            $this->sessionclass->logout();        
+        } 
+
+
+
+    }
+
     function load_get(){
         if ( $this->sessionclass->is_logged_in() == 1) {  
 
