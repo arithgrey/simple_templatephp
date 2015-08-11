@@ -343,8 +343,21 @@ function update_all_in_event_obj_inter($id_evento){
 	$result = $this->db->query($query_procedimiento_update_all);			
 	return $result->result_array();
 }
+/**/
+function update_status_by_id( $id_evento , $nuevo_status ,  $id_usuario ){
 
+	$query_procedure ="call onupdate( '".$nuevo_status."', ". $id_evento  . ", ".$id_usuario." )";
+	$r = $this->db->query($query_procedure);
+	return $r->result_array();
+}
 
+function get_event_text_by_id( $id_evento , $campo ){
+	
+
+	$query_select = "SELECT $campo FROM evento WHERE idevento = '". $id_evento ."' ";
+	$result = $this->db->query($query_select);
+	return $result ->result_array();
+}
 /*Termina modelo */
 }
 

@@ -116,31 +116,8 @@ if(!function_exists('invierte_date_time')){
 
 
 /*****************************************************************************************/
-	function get_statusevent($status){
 
-			switch ($status) {
-						case 0:
-							$estado_evento = "En edición";
-							break;
-						case 1:
-							$estado_evento = "Visible para el público";
-							break;
-						case 2:
-							$estado_evento = "Pospuesto";
-							break;
-
-						case 2:
-							$estado_evento = "Pasado";
-							break;
-
-						default:
-
-							break;
-					}
-
-		return $estado_evento;			
-
-	}		
+		
 /*************************************************** ******************************************/
 
 	

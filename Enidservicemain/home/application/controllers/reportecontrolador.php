@@ -10,10 +10,9 @@ class Reportecontrolador extends CI_Controller {
 
     function index(){
 
-        $data = $this->validate_user_sesssion("Ayudanos a mejorar el sistema ");           
-        $this->load->view('TemplateEnid/header_template', $data);
-        $this->load->view('reporte/reportes');
-        $this->load->view('TemplateEnid/footer_template', $data);    	
+        $data = $this->validate_user_sesssion("Ayudanos a mejorar el sistema ");               
+        $this->dinamic_view_event('reporte/reportes', $data);
+        
     }
 
      function listarReportes(){
@@ -21,9 +20,9 @@ class Reportecontrolador extends CI_Controller {
         $data= $this->validate_user_sesssion("Reportes y mejoras del sistema");
         $list_repo_system = $this->reportemodel->listarReportes();                    
         $data["list_repo_system"] = $list_repo_system;
-        $this->load->view('TemplateEnid/header_template', $data);
-        $this->load->view('reporte/listarReportes/listado');
-        $this->load->view('TemplateEnid/footer_template', $data);
+        
+        $this->dinamic_view_event('reporte/listarReportes/listado' , $data);
+        
     }    
     function validate_user_sesssion($titulo_dinamico_page){
 
@@ -43,6 +42,12 @@ class Reportecontrolador extends CI_Controller {
                 /*Terminamos la session*/
                 $this->sessionclass->logout();
             }   
+    }
+    /**/
+    function dinamic_view_event($center_view , $data){
+            $this->load->view('TemplateEnid/header_template', $data);
+            $this->load->view($center_view, $data);                                      
+            $this->load->view('TemplateEnid/footer_template', $data);    
     }
 
 

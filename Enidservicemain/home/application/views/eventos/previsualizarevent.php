@@ -1,13 +1,7 @@
+
 <link href="<?=base_url('application/tema/plugins/rs-plugin/css/settings.css')?>" rel="stylesheet">
 <link href="<?=base_url('application/tema/plugins/owl-carousel/owl.transitions.css')?>" rel="stylesheet">
 <link href="<?=base_url('application/tema/css/style.css')?>" rel="stylesheet" >
-
-<script type="text/javascript" src="<?=base_url('application/tema/plugins/modernizr.js')?>"></script>
-<script type="text/javascript" src="<?=base_url('application/tema/plugins/rs-plugin/js/jquery.themepunch.tools.min.js')?>"></script>
-<script type="text/javascript" src="<?=base_url('application/tema/plugins/rs-plugin/js/jquery.themepunch.revolution.min.js')?>"></script>
-<script type="text/javascript" src="<?=base_url('application/tema/plugins/owl-carousel/owl.carousel.js')?>"></script>
-
-<script type="text/javascript" src="<?=base_url('application/tema/js/template.js')?>"></script>
 
 <?php 
 
@@ -640,5 +634,14 @@
           </div>
 
 
+<!--***********************************INICIA SERVICIOS MODAL  *************************-->
+  <?php $this->load->view("eventos/modal_config_event_template");?>
+<!--***********************************TERMINA SERVICIOS MODAL  *************************-->
 
 
+<script type="text/javascript" src="<?=base_url('application/tema/plugins/modernizr.js')?>"></script>
+<script type="text/javascript" src="<?=base_url('application/tema/plugins/rs-plugin/js/jquery.themepunch.tools.min.js')?>"></script>
+<script type="text/javascript" src="<?=base_url('application/tema/plugins/rs-plugin/js/jquery.themepunch.revolution.min.js')?>"></script>
+<script type="text/javascript" src="<?=base_url('application/tema/plugins/owl-carousel/owl.carousel.js')?>"></script>
+<script type="text/javascript" src="<?=base_url('application/tema/js/template.js')?>"></script>
+<script type="text/javascript" src="<?=base_url('application/js/evento/client/principal.js')?>"></script>

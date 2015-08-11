@@ -5,7 +5,7 @@ if(!function_exists('invierte_date_time')){
 
 
 	/*Mes en letras*/
-
+  
 	function getTimeFormat3($time){
 
 		$new_time = "";
@@ -162,6 +162,59 @@ function get_tags_generos($arreglo_generos){
        return $texto;
 
   }
+
+
+  /**/
+
+  function valida_text_replace($texto_a_validar, $null_msj , $sin_text_msj ){
+
+        if ($texto_a_validar == null ) {         
+          
+            return $null_msj;
+
+        }else if( strlen($texto_a_validar) ==  0 ){        
+          
+            return $sin_text_msj;
+
+        }else if( trim($texto_a_validar) ==  "" ){        
+          
+            return $sin_text_msj;
+
+        }else{
+            return  $texto_a_validar;
+        }
+}
+function get_statusevent($status){
+
+      $estado_evento ="";
+      switch ($status) {
+            case 0:
+              $estado_evento = "Edición";
+              break;
+            case 1:
+              $estado_evento = "Visible";
+              break;
+            case 2:
+              $estado_evento = "Visible cancelado";
+              break;            
+            case 3:
+              $estado_evento = "Visible pospuesto";
+              break;            
+            case 4:
+              $estado_evento = "Cancelado";             
+              break;                            
+            case 5:
+              $estado_evento = "Programado";              
+              break;                              
+            default:
+
+              break;
+          }
+
+    return $estado_evento;      
+
+  } 
+  
 
 
 }/*Termina el helper*/

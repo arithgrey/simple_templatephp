@@ -10,42 +10,33 @@ class Recursocontroller extends CI_Controller {
 	/**/
 	function perfiles(){
 		
-			$data = $this->validate_user_sesssion("Perfiles");			
-			$this->load->view('TemplateEnid/header_template', $data);						
-			$this->load->view('perfiles/principal', $data);							
-			$this->load->view('TemplateEnid/footer_template', $data);			
+			$data = $this->validate_user_sesssion("Perfiles");											
+			$this->dinamic_view_event('perfiles/principal', $data);							
+			
 	}	
 	function usuarios(){
 
 			$perfil = $this->sessionclass->getperfiles();
-			$data= $this->validate_user_sesssion("Miembros de la cuenta ");
-				
+			$data= $this->validate_user_sesssion("Miembros de la cuenta ");				
 			$iduser  = $this->sessionclass->getidusuario();
-		    $integrantes  = $this->cuentageneralmodel->getintegrantesinforme($iduser);
-								
-		    $data["integrantes"]= $integrantes;
-			$this->load->view('TemplateEnid/header_template', $data);
-			$this->load->view(displayviewusuario( $perfil ), $data);	
-			$this->load->view('TemplateEnid/footer_template', $data);
+		    $integrantes  = $this->cuentageneralmodel->getintegrantesinforme($iduser);								
+		    $data["integrantes"]= $integrantes;			
+			$this->dinamic_view_event(displayviewusuario( $perfil ), $data);	
+			
 	}		
 	function informacioncuenta(){
 				
-			$data = $this->validate_user_sesssion("Mi cuenta");		
-			$this->load->view('TemplateEnid/header_template', $data);						
-			$this->load->view('micuenta/principal' , $data);	
-			$this->load->view('TemplateEnid/footer_template', $data);	
-			
+			$data = $this->validate_user_sesssion("Mi cuenta");					
+			$this->dinamic_view_event('micuenta/principal' , $data);				
 	}	
 	/*Inicia perfil avanzado*/
 	function perfilesavanzado(){
 		
 			$data = $this->validate_user_sesssion("Configuración perfiles");	
 			$recurso = $this->input->get("moduloconfig");					
-			$data["modulo"] = $recurso;
+			$data["modulo"] = $recurso;			
+			$this->dinamic_view_event('modulo/moduloconfig.php' , $data);				
 			
-			$this->load->view('TemplateEnid/header_template', $data);		
-			$this->load->view('modulo/moduloconfig.php' , $data);				
-			$this->load->view('TemplateEnid/footer_template', $data);						
 	}/*Termina perfil avanzado*/	
 	function validate_user_sesssion($titulo_dinamico_page){
 
@@ -65,6 +56,12 @@ class Recursocontroller extends CI_Controller {
                 /*Terminamos la session*/
                 $this->sessionclass->logout();
             }   
+    }
+    /**/
+    function dinamic_view_event($center_view , $data){
+            $this->load->view('TemplateEnid/header_template', $data);
+            $this->load->view($center_view, $data);                                      
+            $this->load->view('TemplateEnid/footer_template', $data);    
     }
 
 

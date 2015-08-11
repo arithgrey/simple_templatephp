@@ -17,21 +17,11 @@ class Escenario  extends CI_Controller {
     /**************************Configuracion del escenario avanzado **************++*/
 
     function configuracionavanzada($id_escenario){
-
         
         $data = $this->validate_user_sesssion("Escenarios avanzado");        
-
-        $this->load->view('TemplateEnid/header_template', $data);
-        $this->load->view('escenarios/configuracion_avanzado', $data);
-        $this->load->view('TemplateEnid/footer_template', $data);
-
-                
-        
-
-    }/**************************Termina Configuracion del escenario avanzado **************++*/
-
-
-
+        $this->dinamic_view_event( 'escenarios/configuracion_avanzado' , $data);            
+    }
+    /**************************Termina Configuracion del escenario avanzado **************++*/
 	function inevento($id_escenario , $id_evento){
 
 		$dataevent = $this->eventmodel->getEventbyid($id_evento);
@@ -44,19 +34,10 @@ class Escenario  extends CI_Controller {
         $data["otros_escenarios"]= list_resum_escenarios($list_escenarios, $id_evento);
 
         $data["artitas"]= get_artistas_default_template($artistas_array);
-
-        $this->load->view('TemplateEnid/header_template', $data);
-        $this->load->view('escenarios/principal_escenario', $data);
-        $this->load->view('TemplateEnid/footer_template', $data);
-
-				
-    	
-
+        $this->dinamic_view_event('escenarios/principal_escenario' , $data);
+        
 	}
-
-
-
-
+    /**/
     function validate_user_sesssion($titulo_dinamico_page){
 
             if ( $this->sessionclass->is_logged_in() == 1) {                        
@@ -96,6 +77,15 @@ class Escenario  extends CI_Controller {
         }   
 
     }
+    /**/
+        /**/
+    function dinamic_view_event($center_view , $data){
+            $this->load->view('TemplateEnid/header_template', $data);
+            $this->load->view($center_view, $data);                                      
+            $this->load->view('TemplateEnid/footer_template', $data);    
+    }
+
+
 
 
 	

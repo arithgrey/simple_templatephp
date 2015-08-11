@@ -2,10 +2,6 @@
 <link rel="stylesheet" type="text/css" href="<?=base_url('application/css/eventos/edicion.css')?>">
 <link rel="stylesheet" type="text/css" href="<?=base_url('application/js/js/bootstrap-datepicker/css/datepicker-custom.css')?>" />
 
-
-
-
-
 <form id='form-general-ev'>        
     <input type="hidden" value="<?=$evento;?>" id="evento" name='evento'>
 </form>        
@@ -24,14 +20,14 @@
           </header>                          
           <!--Inicia  la seccion general del eveto -->
           <div class="panel-body" >        
-                <h2 class='nombre-evento-h1'></h2>
+                <h2 class='nombre-evento-h1'><?=$data_evento['nombre_evento'];?></h2>
                 <div class="form-group nombre" >
-                  <input placeholder="Registra el nombre del evento" class="form-control"  type="text"  id="nombre-input" name='nombre-input' >
+                  <input placeholder="Registra el nombre del evento" class="form-control"  type="text" value="<?=$data_evento['nombre_evento'];?>"  id="nombre-input" name='nombre-input' >
                 </div>
 
-                <span class="designation edicion-evento"></span>              
+                <span class="designation edicion-evento"><?=valida_text_replace($data_evento['edicion'] , "<i class='fa fa-plus'></i> Edicioón del evento" , "<i class='fa fa-plus'></i> Edicioón del evento" );?></span>              
                 <div class="form-group">
-                    <input placeholder="Registra qué edición tiene el evento" class="form-control"  type="text" id="edicion-input" name='edicion-input'>
+                    <input placeholder="Registra qué edición tiene el evento" class="form-control"  type="text" id="edicion-input" name='edicion-input' value="<?=$data_evento['edicion'];?>">
                 </div>
 
                 <form action="<?=$carpeta_evento_img?>" class="dropzone" id="event-img"></form>            
@@ -78,19 +74,25 @@
               <!--Politicas tab-->
               <div class="tab-pane" id="portlet_tab1">            
                 <h2>Políticas del festival</h2>  
-                  <p class='politicas-p'></p>
+                  <p class='politicas-p'>
+                    <?=valida_text_replace($data_evento["politicas"] ,  "<i class='fa fa-plus'></i> Lo que podría anticiparse como reembolsos o cambios" , "<i class='fa fa-plus'></i>  Lo que podría anticiparse como reembolsos o cambios" );?>
+                  </p>
                   <div class="form-group">
-                      <textarea id='politicas-evento' placeholder ='' rows="6" class="form-control"></textarea>
+                      <textarea id='politicas-evento' placeholder ='' rows="6" class="form-control" >
+                        <?=$data_evento["politicas"];?>
+                      </textarea>
                   </div>  
               </div>
               <!--Politicas Tab-->
               <!--Lo permitido  Tab-->
               <div class="tab-pane" id="portlet_tab2">
                     <h2>Lo permitido en el evento</h2>  
-                     <p class='permitido-p'></p>
+                     <p class='permitido-p'><?=valida_text_replace($data_evento["permitido"] , "<i class='fa fa-plus'></i> Lo que las personas podrían hacer e ingresar al evento" , "<i class='fa fa-plus'></i>Lo que las personas podrían hacer e ingresar al evento" );?></p>
                                            
                       <div class="form-group">
-                          <textarea id='permitido-evento' placeholder ='' rows="6" class="form-control"></textarea>
+                          <textarea id='permitido-evento' placeholder ='' rows="6" class="form-control">
+                            <?=$data_evento["permitido"];?>
+                          </textarea>
                       </div> 
                       <!--Lista de objetos permitidos -->
 
@@ -112,9 +114,11 @@
               <!--Inicia las restricciones -->
               <div class="tab-pane" id="portlet_tab3">                      
                      <h2>Restricciones en el evento</h2>  
-                      <p class='restricciones-p'></p>
+                      <p class='restricciones-p'><?=valida_text_replace($data_evento["restricciones"] , "<i class='fa fa-plus'></i> Lo que podría anticiparse dentro del evento" , "<i class='fa fa-plus'></i>  Lo que podría anticiparse dentro del evento" );?></p>
                       <div class="form-group">
-                          <textarea id='restricciones-evento' placeholder ='' rows="6" class="form-control"></textarea>
+                          <textarea id='restricciones-evento' placeholder ='' rows="6" class="form-control">
+                            <?=$data_evento["restricciones"];?>
+                          </textarea>
                       </div> 
               </div>
               <!--Termina las  restricciones -->
@@ -124,16 +128,24 @@
                   <!--Inicia Eslogan del evento-->
                   <div>
                     <div class="form-group alert alert-info">                            
-                      <i class="fa fa-flag"></i> Eslogan: <span class='eslogan-p' id='eslogan-p'>Eslogan del evento</span>                          
+                      <i class="fa fa-flag"></i> Eslogan: <span class='eslogan-p' id='eslogan-p'> <?=valida_text_replace($data_evento["eslogan"],  "<i class='fa fa-space-shuttle'></i> Mensaje eslogan del evento" , "<i class='fa fa-space-shuttle'></i>  Eslogan del evento" );?> </span>                          
                       <input class="form-control eslogan-evento" id="eslogan-evento" name='eslogan-evento'  placeholder="Si es en méxico, estará lleno de colores" required>
                     </div>
                   </div>
                   <!--Termina Inicia Eslogan del evento-->
                   <!--Inicia descripcion del evento -->
                   <div>
-                    <p class='descripcion-p'></p>
+                    <div class='place place_description' id='place_description'></div>
+                    <p class='descripcion-p'>
+                      <?=valida_text_replace( $data_evento["descripcion_evento"] , "<i class='fa fa-plus'></i> Lo que se vivirá en el evento" , "<i class='fa fa-plus'></i> Lo que se vivirá en el evento" );?>
+                      
+                    </p>
+
+
                     <div class="form-group">
-                      <textarea id='descripcion-evento' placeholder ='Celebrando un exitoso año y cumpliendo ya 15 años haciendo historia de la música electrónica en México, nos enorgullecemos en presentar nuestra tercera edición del Festival "I love this generation" el cual tendrá lugar en nuestro mítico Club Coco Dance club, presentándose en el más de 20 artistas de esta tendencia y de más de 3 naciones, vive esta única experiencia.' rows="6" class="form-control"></textarea>
+                      <textarea id='descripcion-evento' placeholder ='Celebrando un exitoso año y cumpliendo ya 15 años haciendo historia de la música electrónica en México, nos enorgullecemos en presentar nuestra tercera edición del Festival "I love this generation" el cual tendrá lugar en nuestro mítico Club Coco Dance club, presentándose en el más de 20 artistas de esta tendencia y de más de 3 naciones, vive esta única experiencia.' rows="6" class="form-control">
+                        <?=$data_evento["descripcion_evento"];?>  
+                      </textarea>
                     </div> 
                   </div> 
                   <!--Termina  descripcion del evento -->
@@ -169,7 +181,7 @@
 
       <!--Inicia la seccion del google maps para el evento-->
       <div class='row'  id="mapgooglemap">                    
-        <input id="pac-input" class="controls ubicacioninput" type="text" placeholder="Ubicación">
+        <input id="pac-input" class="controls ubicacioninput" type="text" placeholder="Ubicación" value="<?=$data_evento['ubicacion']?>">
         <div id="mapsection">
           <div id="map-canvas"></div>
           <div class='textnotfound-location'></div>  
@@ -210,11 +222,11 @@
                   <input type="hidden" name="evento_social" id="evento_social" value="<?=$evento;?>">
                   <div class="input-group margin-bottom-sm">
                     <span class="input-group-addon"><i class="fa fa-facebook "></i> </span>
-                    <input class="form-control" name='url_social_evento' type="text" id="url_social" placeholder="La url de tu evento en Facebook" required>
+                    <input class="form-control" name='url_social_evento' type="text" id="url_social" placeholder="La url de tu evento en Facebook"  value="<?=$data_evento['url_social']?>" required>
                   </div>                                                                                       
                   <div class="input-group">
                   <span class="input-group-addon"><i class="fa fa-youtube-play"></i></span>
-                  <input class="form-control" name='url_social_evento_youtube' type="text" id="url_social_evento_youtube" placeholder="La url de tu canal en youtube" required>
+                  <input class="form-control" name='url_social_evento_youtube' type="text" id="url_social_evento_youtube" placeholder="La url de tu canal en youtube"  value="<?=$data_evento['url_social_youtube']?>" required>
                   </div>         
                 </form>           
               </div>  

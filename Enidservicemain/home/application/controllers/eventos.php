@@ -1,5 +1,5 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-class Eventos extends CI_Controller {
+class Eventos extends CI_Controller{
 
     function __construct(){
         parent::__construct();
@@ -14,7 +14,6 @@ class Eventos extends CI_Controller {
         $this->load->model("eventmodel");
         $this->load->model("escenariomodel");
         $this->load->model("servicioseventmodel");
-
         $this->load->library('sessionclass');      
     }
 
@@ -44,8 +43,9 @@ class Eventos extends CI_Controller {
     }/*Termina la función*/
     function nuevo($id_evento){
 
-
-        $data = $this->validate_user_sesssion(get_statusevent($this->input->get("status")) );
+        $status = $this->input->get("status");
+        $text_status = get_statusevent($status);
+        $data = $this->validate_user_sesssion($text_status);
         $idempresa =  $this->sessionclass->getidempresa();                                                
         $inicio = $this->input->get("start");                        
         $termino = $this->input->get("end");                
@@ -55,12 +55,14 @@ class Eventos extends CI_Controller {
                 $data["evento"] = $id_evento;
                 $data["inicio"] = $inicio;
                 $data["termino"] = $termino;
-
+                
 
                 $carpeta_evento_img = base_url().'application/uploads/upload.php?e='.$id_evento;                                   
                 $data["carpeta_evento_img"]= $carpeta_evento_img;
                 $responsedb = $this->generosmusicalesmodel->getDataByidEvent($idempresa, $id_evento);                                    
                 $data["list_generos"] = list_generos_musicales($responsedb);
+                $data_evento = $this->eventmodel->getEventbyid($id_evento);
+                $data["data_evento"] = $data_evento[0];
 
 
                                     
@@ -101,9 +103,11 @@ function diaevento($id_evento){
             $data["list_servicios_incluidos"] = get_servicios_inclidos_event($array_servicios_incluidos);
             
             /* Vistas */
-            $this->load->view('TemplateEnid/header_template', $data);
-            $this->load->view('eventos/dia_evento', $data);  
-            $this->load->view('TemplateEnid/footer_template', $data);    
+            
+            
+            
+            $this->dinamic_view_event('eventos/dia_evento' , $data);
+
         }else{
             header('Location:' . base_url('index.php/inicio/eventos'));
         }                
@@ -150,25 +154,25 @@ function accesosalevento($id_evento , $status){
 
         if ($this->checkifexist($id_evento) == 1 ) {
 
-            $dataevent = $this->eventmodel->getEventbyid($id_evento);
-            $data =  $this->validate_user_session_event($dataevent[0]["nombre_evento"] , $dataevent[0]["status"]);                                
-                                    
-            $data["img_event"]=  get_img_by_event_in_directory($id_evento);                                    
-            $data["base_img"]= base_url()."application/uploads/uploads/". $id_evento."/";                                    
-            
-            $list_escenarios = $this->escenariomodel->get_escenarios_byidevent($id_evento);
-            $data["escenarios"] = list_resum_escenarios($list_escenarios, $id_evento);
-            $list_generosdb = $this->eventmodel->get_list_generos_musicales_byidev($id_evento);
-            $data["generos_musicales_tags"] = get_tags_generos($list_generosdb);
-            $data["evento"] =  $dataevent[0];
+                $dataevent = $this->eventmodel->getEventbyid($id_evento);
 
-            $array_servicios_includos = $this->eventmodel->get_servicios_evento_by_id($id_evento);
-            $data["servicios_evento"] = list_services_default_view($array_servicios_includos); 
-            $data["idevento"] = $id_evento;
+                $data =  $this->validate_user_session_event($dataevent[0]["nombre_evento"] , $dataevent[0]["status"]);                                
+                                        
+                $data["img_event"]=  get_img_by_event_in_directory($id_evento);                                    
+                $data["base_img"]= base_url()."application/uploads/uploads/". $id_evento."/";                                    
+                
+                $list_escenarios = $this->escenariomodel->get_escenarios_byidevent($id_evento);
+                $data["escenarios"] = list_resum_escenarios($list_escenarios, $id_evento);
+                $list_generosdb = $this->eventmodel->get_list_generos_musicales_byidev($id_evento);
+                $data["generos_musicales_tags"] = get_tags_generos($list_generosdb);
+                $data["evento"] =  $dataevent[0];
 
-            $this->load->view('TemplateEnid/header_template', $data);
-            $this->load->view('eventos/previsualizarevent', $data);                                      
-            $this->load->view('TemplateEnid/footer_template', $data);    
+                $array_servicios_includos = $this->eventmodel->get_servicios_evento_by_id($id_evento);
+                $data["servicios_evento"] = list_services_default_view($array_servicios_includos); 
+                $data["idevento"] = $id_evento;
+
+                    
+                $this->dinamic_view_event('eventos/previsualizarevent' , $data);
 
             }else{
                 header('Location:' . base_url('index.php/inicio/eventos'));
@@ -187,20 +191,22 @@ function accesosalevento($id_evento , $status){
                     
                     $menu = $this->sessionclass->generadinamymenu();
                     $nombre = $this->sessionclass->getnombre();                                         
-                    $data['titulo']= $titulo_dinamico_page ." <span class='btn btn-info'>". get_statusevent($status_event . "</span>");              
+                    $data['titulo']= $titulo_dinamico_page . "<span class='btn btn-info edit-status-event'><a data-toggle='modal' data-target='#update-status-ev-modal'>" . get_statusevent($status_event) . " <i class='fa fa-edit'></i></span></a>";              
                     $data["menu"] = $menu;              
                     $data["nombre"]= $nombre;                                               
                     $data["perfilactual"] =  $this->sessionclass->getnameperfilactual();                
-
+                    $data["in_session"] = 1;
                     return $data;
 
         }else{
             
             $data['titulo']=$titulo_dinamico_page;              
+            $data["in_session"] = 0;
             return $data;
         }   
 
     }
+    /**/
     function validate_user_sesssion($titulo_dinamico_page){
 
             if ( $this->sessionclass->is_logged_in() == 1) {                        
@@ -218,6 +224,12 @@ function accesosalevento($id_evento , $status){
                 /*Terminamos la session*/
                 $this->sessionclass->logout();
             }   
+    }
+    /**/
+    function dinamic_view_event($center_view , $data){
+            $this->load->view('TemplateEnid/header_template', $data);
+            $this->load->view($center_view, $data);                                      
+            $this->load->view('TemplateEnid/footer_template', $data);    
     }
 
 

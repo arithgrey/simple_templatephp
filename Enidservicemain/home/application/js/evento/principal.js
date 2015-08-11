@@ -1,6 +1,8 @@
 $(document).on("ready", function (){
 
-	$("footer").ready(load_data_evento);	
+	//$("footer").ready(load_data_evento);	
+	$("#url_social").blur(update_social);
+	$("#url_social_evento_youtube").blur(update_social);
 	$(".nombre-evento-h1").click(update_name_evento);
 	$(".edicion-evento").click(update_edicion_evento);
 	$(".descripcion-p").click(update_descripcion_evento);
@@ -11,7 +13,6 @@ $(document).on("ready", function (){
 	$(".permitidonow").click(load_objetospermitidos_evento);	
 	$(".genero_musical_input").click(update_genero_evento);
 	
-
 	$("#social-button").click(function(){
 			show_section_dinamic_on_click(".social-media-event");
 	});
@@ -33,9 +34,7 @@ $(document).on("ready", function (){
 
 	$("#pac-input").click(update_ubicacion_evento);	
 	
-	$("footer").ready(load_data_escenarios);
-
-	$("#generos_musicales_btn").click(load_data_genero);
+	$("footer").ready(load_data_escenarios);	
 	$("#form-escenario").submit(nuevo_escenario);
 	$("#form-artistas").submit(nuevo_artista_escenario);
 
@@ -56,94 +55,21 @@ $(document).on("ready", function (){
 	//generate_img();
 	
 });
-
-/**************************                   ******************* */          
-
-/*Load datos */
-function load_data_evento(){
-	
-	url = now + "index.php/api/event/get_event_by_id/format/json/";	
-	$.get(url , $("#form-general-ev").serialize()).done(function(data){
-
-		
-		/******************************************************************************/
-
-		for (var x in data) {
-			/*Data*/	
-			nombre_evento = data[x].nombre_evento;
-			edicion = data[x].edicion;
-			descripcion_evento = data[x].descripcion_evento;
-			url_social = data[x].url_social;
-			url_social_youtube = data[x].url_social_youtube;
-			ubicacion = data[x].ubicacion;
-			politicas = data[x].politicas;			
-			objetospermitidos = data[x].objetospermitidos;
-			restriciones =  data[x].restricciones;
-			permitido = data[x].permitido;
-			eslogan = data[x].eslogan;
-
-				
-				
-				llenaelementoHTML(".nombre-evento-h1", nombre_evento);	
-				valorHTML("#nombre-input" , nombre_evento );					
-
-				
-
-				valorHTML("#url_social" , url_social);
-				valorHTML("#url_social_evento_youtube", url_social_youtube);
-				valorHTML(".ubicacioninput" , ubicacion);
-				/*Valiadamos info*/		
-				valida_text_replace( descripcion_evento ,  ".descripcion-p" , "#descripcion-evento" , "<i class='fa fa-plus'></i>  Lo que se vivirá en el evento" , "<i class='fa fa-plus'></i> Lo que se vivirá en el evento" );
-				valida_text_replace( edicion ,  ".edicion-evento" , "#edicion-input" , "<i class='fa fa-plus'></i> Edicioón del evento" , "<i class='fa fa-plus'></i> Edicioón del evento" );			
-				valida_text_replace(politicas ,  ".politicas-p" , "#politicas-evento"  , "<i class='fa fa-plus'></i> Lo que podría anticiparse como reembolsos o cambios" , "<i class='fa fa-plus'></i>  Lo que podría anticiparse como reembolsos o cambios" );
-				valida_text_replace(permitido ,  ".permitido-p"  , "#permitido-evento" , "<i class='fa fa-plus'></i> Lo que las personas podrían hacer e ingresar al evento" , "<i class='fa fa-plus'></i>Lo que las personas podrían hacer e ingresar al evento" );
-				valida_text_replace(restriciones , ".restricciones-p"  , "#restricciones-evento" ,  "<i class='fa fa-plus'></i> Lo que podría anticiparse dentro del evento" , "<i class='fa fa-plus'></i>  Lo que podría anticiparse dentro del evento" );
-				valida_text_replace(eslogan , ".eslogan-p"  , "#eslogan-evento" ,  "<i class='fa fa-space-shuttle'></i> Mensaje eslogan del evento" , "<i class='fa fa-space-shuttle'></i>  Eslogan del evento" );
-
-				$("#url_social").blur(update_social);
-				$("#url_social_evento_youtube").blur(update_social);
-		}
-
-		/******************************************************************************/
-		
-	}).fail(function(){
-		
-		alert("Error al  actualizar los datos, reportar al administrador si se sigue presentando el error");
-
-	});
-}
-
-
-
-
-
-
-/*UPDATES UPDATES UPDATES UPDATES UPDATES UPDATES UPDATES UPDATES UPDATES UPDATES UPDATES UPDATES */
-function valida_text_replace(texto_a_validar,  text_tag , text_val, null_msj, sin_text_msj ){
-
-				if (texto_a_validar == null ) {					
-					llenaelementoHTML(text_tag , null_msj);
-
-				}else if(texto_a_validar ==  "" ){
-					
-					llenaelementoHTML(text_tag , sin_text_msj);
-				}else{
-
-					//llenaelementoHTML(text_tag , texto_a_validar);
-					
-					set_text_element(text_tag , texto_a_validar );
-					valorHTML( text_val , texto_a_validar);
-				}
-}
 /**/
+function load_data_evento( text_visible , val , text_evento , place , null_msj , sin_text_msj  ){
 
-/*update nombre evento*/
+		url = now + "index.php/api/event/get_event_texts/format/json/";	
+		evento = $("#evento").val();
+		$.get(url , {"evento" : evento  , "text" : text_evento , "null_msj" : null_msj , "sin_text_msj" : sin_text_msj }).done(function(data){
+			
+			llenaelementoHTML(text_visible  , data);
+			
+		}).fail(function(){
+			llenaelementoHTML( place ,  genericresponse[0]);			
+		});
 
-
-
-
-
-
+}
+/**/	
 function update_name_evento(e){
 
 	showonehideone( "#nombre-input" , ".nombre-evento-h1" );
@@ -159,7 +85,10 @@ function update_name_evento(e){
 				url =  now + "index.php/api/event/updatenombre/format/json/";    
 				data_send  ={ "nombre" : nuevotexto , "evento" : $("#evento").val() }
 				updates_send(url , data_send );
-				load_data_evento();
+				load_data_evento(".nombre-evento-h1" , "#nombre-input" , "nombre_evento" , ".place_nombre" , "+" , "+");
+				
+				
+				
 
 		}else{
 				llenaelementoHTML(".nombre-evento-h1" , "Nombre de tu evento"  ); 					
@@ -192,7 +121,7 @@ function update_edicion_evento(e){
 				url =  now + "index.php/api/event/updateedicion/format/json/";    
 				data_send= { "edicion" : nuevotexto , "evento" : $("#evento").val() }
 				updates_send(url , data_send );
-				load_data_evento();
+				load_data_evento(".edicion-evento" , "#edicion-input" , "edicion" , ".place_edicion"  , "<i class='fa fa-plus'></i> Edicioón del evento" , "<i class='fa fa-plus'></i> Edicioón del evento");
 
 		}else{
 			llenaelementoHTML(".edicion-evento" , "Edición del evento"  ); 						
@@ -220,7 +149,7 @@ function update_descripcion_evento(e){
 				url =  now + "index.php/api/event/updatedescripcion/format/json/";
 				data_send = { "descripcion_evento" : nuevotexto , "evento" : $("#evento").val() }     
 				updates_send(url , data_send );
-				load_data_evento();
+				load_data_evento( ".descripcion-p" , "#descripcion-evento" , "descripcion_evento" , ".place_description" , "<i class='fa fa-plus'></i> Lo que se vivirá en el evento" , "<i class='fa fa-plus'></i> Lo que se vivirá en el evento");
 
 			
 		}else{
@@ -242,17 +171,13 @@ function update_politicas_evento(e){
 	$("#politicas-evento").blur(function(){
 			
 		nuevotexto = $("#politicas-evento").val(); 
-				
-		
 
-
-		
 		if (nuevotexto != null  ) {	
 
 			url =  now + "index.php/api/event/updatepoliticas/format/json/";    
 			data_send = { "politicas_evento" : nuevotexto , "evento" : $("#evento").val() }
 			updates_send(url , data_send );
-			load_data_evento();
+			load_data_evento(".politicas-p" , "#politicas-evento" , "politicas" , ".place_politicas"  ,  "<i class='fa fa-plus'></i> Lo que podría anticiparse como reembolsos o cambios" , "<i class='fa fa-plus'></i>  Lo que podría anticiparse como reembolsos o cambios" );
 			
 		}else{
 
@@ -284,7 +209,7 @@ function update_permitido_evento(e){
 			url =  now + "index.php/api/event/updatepermitido/format/json/";    
 			data_send = { "permitido_evento" : nuevotexto , "evento" : evento  } 
 			updates_send(url , data_send);
-			load_data_evento();
+			load_data_evento(".permitido-p" ,  "#permitido-evento" , "permitido" , ".place_permitido" , "<i class='fa fa-plus'></i> Lo que las personas podrían hacer e ingresar al evento" , "<i class='fa fa-plus'></i>Lo que las personas podrían hacer e ingresar al evento");
 			
 		}else{
 
@@ -310,7 +235,7 @@ function updaterestricciones(e){
 			url =  now + "index.php/api/event/updaterestricciones/format/json/";    
 			data_send = { "restricciones_evento" : nuevotexto , "evento" : $("#evento").val() }
 			updates_send(url ,data_send);
-			load_data_evento();			
+			load_data_evento(".restricciones-p" ,  "#restricciones-evento" , "restricciones" , ".place_restricciones" ,  "<i class='fa fa-plus'></i> Lo que podría anticiparse dentro del evento" , "<i class='fa fa-plus'></i>  Lo que podría anticiparse dentro del evento" );
 		}else{
 
 			llenaelementoHTML(".restricciones-p" , "Describe com que podrá acceder al evento el cliente" ); 						
@@ -335,7 +260,7 @@ function update_ubicacion_evento(){
 		url =  now + "index.php/api/event/updateubicacion/format/json/";  
 		data_send = { "ubicacion" : nuevotexto , "evento" : $("#evento").val() }  
 		updates_send(url , data_send);
-		load_data_evento();
+		
 		
 		
 	});
@@ -356,7 +281,7 @@ function tryrecordgeneros(e){
 			.done(function(data){
 					
 				
-				load_data_evento();
+				
 
 			}).fail(function(){
 
@@ -367,7 +292,6 @@ function tryrecordgeneros(e){
 }
 
 /***************************************************************************+++*/
-
 function update_social(){
 			
 		url =  now + "index.php/api/event/updateurlbyid/format/json/";    								
@@ -388,7 +312,8 @@ function update_eslogan_evento(e){
 			url =  now + "index.php/api/event/update_eslogan/format/json/";    			
 			data_send = {evento : $("#evento").val() , eslogan : $("#eslogan-evento").val()}
 			updates_send(url , data_send);
-			load_data_evento();
+			load_data_evento(".eslogan-p" ,  "#eslogan-evento" , "eslogan" , ".place_restricciones" ,  "<i class='fa fa-space-shuttle'></i> Mensaje eslogan del evento" , "<i class='fa fa-space-shuttle'></i>  Eslogan del evento" );
+			
 
 		}else{
 			llenaelementoHTML(".eslogan-p" , "Eslogan publicitario evento" ); 						
@@ -399,5 +324,6 @@ function update_eslogan_evento(e){
 	});
 
 }
+
 
 

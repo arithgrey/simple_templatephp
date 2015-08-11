@@ -10,9 +10,19 @@ class Event extends REST_Controller{
             $this->load->library('sessionclass');
             
             
-        }     
+    }     
+    /**/
+    function update_status_post(){
+       
+        $this->validate_user_sesssion();            
+        $id_usuario = $this->sessionclass->getidusuario();            
+        $id_evento = $this->post("evento");
+        $nuevo_status = $this->post("nuevo_status");
 
-
+        $responsedb = $this->eventmodel->update_status_by_id( $id_evento , $nuevo_status ,  $id_usuario );
+        $this->response($responsedb);
+        
+    }       
     /*Elimina*/
     function delete_byid_post(){
         $this->validate_user_sesssion();            
@@ -22,7 +32,6 @@ class Event extends REST_Controller{
 
         $responsedb = $this->eventmodel->delete_byid($id_evento , $id_usuario , $id_empresa );
         $this->response($responsedb);
-
     }    
 
     /*update objetos permitidos del evento */
@@ -132,13 +141,25 @@ class Event extends REST_Controller{
         $idevento = $this->post("evento");
         $this->response($this->eventmodel->updateRestricciones( validate_text( $nueva_restriccion )  , $idevento ) );
     }   
-    /*****************************************************************************/    
+    /************************Dinamic select From event *****************************************************/    
+    function get_event_texts_get(){
+
+        $id_evento = $this->get("evento");
+        $campo = $this->get("text");
+        $null_msj = $this->get("null_msj");
+        $sin_text_msj = $this->get("sin_text_msj");
+
+        $response_db = $this->eventmodel->get_event_text_by_id($id_evento , $campo );
+        
+        $this->response( valida_text_replace( $response_db[0][$campo] , $null_msj , $sin_text_msj  ) );
+    }       
+    /**/
     function get_event_by_id_get(){
 
         $idevento = $this->get("evento");
         $this->response($this->eventmodel->getEventbyid($idevento));
-    }    
-    /**/
+    }
+    /**/    
     function nuevo_evento_POST(){                        
         /*Capturamos datos*/
         $this->validate_user_sesssion();            

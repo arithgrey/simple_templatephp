@@ -1,5 +1,6 @@
 function  nuevo_escenario(){
 	url =  now  + "index.php/api/escenario/nuevo/format/json/";		
+	
 	$.post(url , $("#form-escenario").serialize() ).done(function(data){
 
 			load_data_escenarios();
@@ -8,6 +9,7 @@ function  nuevo_escenario(){
 		
 		alert("ERR");
 	});
+
 	return false;
 }
 
