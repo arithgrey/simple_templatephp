@@ -24,9 +24,10 @@ class Escenario  extends CI_Controller {
     /**************************Termina Configuracion del escenario avanzado **************++*/
 	function inevento($id_escenario , $id_evento){
 
-		$dataevent = $this->eventmodel->getEventbyid($id_evento);
-
+		$dataevent = $this->eventmodel->getEventbyid($id_evento);    
+        
         $data = $this->validate_user_session_event("Escenarios" , $dataevent[0]["status"]);
+        $data["evento"] =  $dataevent[0];
         $artistas_array = $this->escenarioartistamodel->get_artistas_inevent($id_escenario);
         $escenariodb= $this->escenariomodel->get_escenariobyId($id_escenario);
         $data["escenario"] =$escenariodb[0]; 
@@ -57,27 +58,29 @@ class Escenario  extends CI_Controller {
                 $this->sessionclass->logout();
             }   
     }
+    
     function validate_user_session_event($titulo_dinamico_page , $status_event ){
 
         if ( $this->sessionclass->is_logged_in() == 1) {                                        
                     
                     $menu = $this->sessionclass->generadinamymenu();
                     $nombre = $this->sessionclass->getnombre();                                         
-                    $data['titulo']= $titulo_dinamico_page ." <span class='btn btn-info'>". get_statusevent($status_event . "</span>");              
+                    $data['titulo']= $titulo_dinamico_page . "<span class='btn btn-info edit-status-event'><a data-toggle='modal' data-target='#update-status-ev-modal'>" . get_statusevent($status_event) . " <i class='fa fa-edit'></i></span></a>";              
                     $data["menu"] = $menu;              
                     $data["nombre"]= $nombre;                                               
                     $data["perfilactual"] =  $this->sessionclass->getnameperfilactual();                
-
+                    $data["in_session"] = 1;
                     return $data;
 
         }else{
             
             $data['titulo']=$titulo_dinamico_page;              
+            $data["in_session"] = 0;
             return $data;
         }   
 
-    }
-    /**/
+    } 
+   /**/
         /**/
     function dinamic_view_event($center_view , $data){
             $this->load->view('TemplateEnid/header_template', $data);

@@ -4,24 +4,25 @@ class Accesos extends CI_Controller {
 	function __construct(){
 		parent::__construct();
 
-        
+        $this->load->model("accesosmodel");
+        $this->load->helper("accesos");
 		$this->load->library('sessionclass');    
 	}
 	
-
+    /*****************************************************************************/
 
     /**************************Configuracion de Acceso  avanzado **************++*/
-    function configuracionavanzada($id_acceso){
+    function configuracionavanzada($id_acceso, $id_evento){
 
-        
         $data = $this->validate_user_sesssion("Acceso más configuraciones");        
-
-        $this->load->view('TemplateEnid/header_template', $data);
-        $this->load->view('escenarios/configuracion_avanzado', $data);
-        $this->load->view('TemplateEnid/footer_template', $data);
-
-                
         
+
+        $data_accesos = $this->accesosmodel->get_acceso_by_event($id_evento);                                                                                                                      
+        $data["evento"] = $id_evento;                
+        $data["accesos_in_event"] = display_complete_info($data_accesos);
+        $data["tipos_accesos"] =list_tipos_accesos( $this->accesosmodel->get_tipos_accesos());
+        
+        $this->dinamic_view_event('accesos/avanzado', $data);        
 
     }/**************************Termina Configuracion del acceso avanzado **************++*/
 
@@ -44,6 +45,14 @@ class Accesos extends CI_Controller {
                 $this->sessionclass->logout();
             }   
     }
+    /**/
+     function dinamic_view_event($center_view , $data){
+            $this->load->view('TemplateEnid/header_template', $data);
+            $this->load->view($center_view, $data);                                      
+            $this->load->view('TemplateEnid/footer_template', $data);    
+    }
+
+
 
 
 

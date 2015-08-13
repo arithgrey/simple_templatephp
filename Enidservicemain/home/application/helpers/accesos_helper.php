@@ -57,9 +57,9 @@ if(!function_exists('invierte_date_time')){
 		$blog_tikects = '';
 		foreach ($arreglo_accesos as $row) {
 
-			$descripcion_acceso = $row["descripcion"];
-			$precio =  $row["precio"];
-				$precio =  money_format( "%i" , $precio );
+			$descripcion_acceso = $row["nota"];
+
+			$precio =  $row["precio"];				
 
 			$inicio_acceso = $row["inicio_acceso"];
 			$termino_acceso = $row["termino_acceso"];
@@ -82,7 +82,7 @@ if(!function_exists('invierte_date_time')){
 				                            </p>
 
 				                            <p>
-
+				                            '.$descripcion_acceso.'
 				                            </p>
 				                            <a href="#" class="more"><i class="fa fa-credit-card"></i> $'. $precio .'</a>
 				                        </div>
@@ -94,5 +94,64 @@ if(!function_exists('invierte_date_time')){
 		
 		return $blog_tikects;
 	}
+	/*Despliega la información de los accesos en avanzado */
 
+	function display_complete_info($data_accesos){
+
+		$l='';
+		$flag =1;
+		foreach ($data_accesos as $row){
+			
+			/*datos tabla general */
+			$idacceso  =  $row["idacceso"];  
+			$nota  =  $row["nota"];    
+			$precio  = $row["precio"];              
+			$inicio_acceso =  $row["inicio_acceso"]; 
+			$termino_acceso =$row["termino_acceso"];
+			
+			$idevento  = $row["idevento"];          
+			$idtipo_acceso = $row["idtipo_acceso"]; 
+			
+			$vigencia = $inicio_acceso ." al día ".   $termino_acceso;
+			$idtipo_acceso = $row["idtipo_acceso"];
+			$tipo = $row["tipo"];                 				
+
+			$delete = '<i data-toggle="modal" data-target="#confirma-delete-acceso" class="fa  fa-times delete-acceso" id="'.$idacceso.'"  ><i>';
+			$edit = '<i data-toggle="modal" data-target="#editar-acceso"    class="fa fa-pencil-square-o editar-acceso" id="'.$idacceso.'"><i>';
+			
+			if (!$nota) {
+				$nota  ="<i  class='fa fa-plus'></i> nota";
+			}
+
+
+				$l.= '<tr class="acceso_event" id="' . $idacceso. '">
+						<td>'. $flag .'	</td>
+						<td>'. $tipo  .'	</td>
+						<td>$'. $precio  .'	</td>
+						<td>'. $vigencia .'	</td>
+						<td data-toggle="modal" data-target="#editar-acceso" class="editar-acceso" id="'.$idacceso.'" >'. $nota  .'	</td>						
+						<td>'. $delete .'	</td>
+						<td>'. $edit .'	</td>
+					  </tr>';	
+
+			$flag ++;
+			
+				
+		}
+
+		return $l;
+
+	}
+
+
+	/*lista loa tipos de accesos*/
+	function list_tipos_accesos($data_tipos_accesos){
+		$option_acceso ='';
+
+		foreach ($data_tipos_accesos as $row) {
+			$option_acceso .='<option value="'. $row["idtipo_acceso"].'">'. $row["tipo"].'</option>';	
+		}
+		return $option_acceso;
+	}
+	/**/
 }/*Termina el helper*/

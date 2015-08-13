@@ -99,3 +99,6 @@
 	//background: black;
 }
 </style>
+<!--***********************************INICIA SERVICIOS MODAL  *************************-->
+  <?php $this->load->view("eventos/modal_config_event_template");?>
+<!--***********************************TERMINA SERVICIOS MODAL  *************************-->

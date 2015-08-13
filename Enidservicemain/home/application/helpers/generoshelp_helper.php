@@ -6,23 +6,23 @@ if(!function_exists('invierte_date_time')){
 
     function list_generos_musicales($value){
 
-    $table_list ='<table aria-describedby="dynamic-table_info" class="display table table-bordered table-striped dataTable" id="dynamic-table">
+    $table_list ='<table class="table" id="dynamic-table">
         <thead class="blue-col-enid">
         <tr role="row">
-            <th aria-label="Rendering engine: activate to sort column ascending"  colspan="1" rowspan="1" aria-controls="dynamic-table" tabindex="0" role="columnheader" class="sorting">#</th>
-            <th aria-label="Browser: activate to sort column descending" aria-sort="ascending"  colspan="1" rowspan="1" aria-controls="dynamic-table" tabindex="0" role="columnheader" class="sorting_asc">Género</th>
-            <th aria-label=""  colspan="1" rowspan="1" aria-controls="dynamic-table" tabindex="0" role="columnheader" class="sorting"></th>
+            <th>#</th>
+            <th>Género</th>
+            <th></th>
         </tr>
         </thead>
         
         <tfoot>
         <tr>
-            <th colspan="1" rowspan="1">#</th>
-            <th colspan="1" rowspan="1">Género</th>
-            <th colspan="1" rowspan="1"></th>
+            <th>#</th>
+            <th>Género</th>
+            <th></th>
         </tr>
         </tfoot>
-        <tbody aria-relevant="all" aria-live="polite" role="alert">';
+        <tbody>';
 
         $b =1;
         foreach ($value as $row ) {
@@ -39,9 +39,9 @@ if(!function_exists('invierte_date_time')){
                     $input_check = '<input type="checkbox" class="genero_musical_input" id="'. $idgenero_musical.'" checked>';                    
             }
 
-                $table_list .='<tr class="gradeU odd genero_musical_input" id="'. $idgenero_musical.'">
-                <td class="">'. $b .'</td>
-                <td class="sorting_1 genero_musical_input" id="'. $idgenero_musical.'">'. $nombre.'</td>
+                $table_list .='<tr class="genero_musical_input" id="'. $idgenero_musical.'">
+                <td class="text-center">'. $b .'</td>
+                <td class="genero_musical_input" id="'. $idgenero_musical.'">'. $nombre.'</td>
                 <td class="genero_musical_input" id="'. $idgenero_musical.'">'.$input_check.'</td>
                 ';
 
