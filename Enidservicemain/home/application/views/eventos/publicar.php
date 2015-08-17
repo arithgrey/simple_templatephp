@@ -13,7 +13,7 @@
     <div class="row">            
         <div class="panel" >
           <header class="panel-heading blue-col-enid" >
-            General 
+            Fecha del evento <?=$fecha_evento; ?> 
             <span class="tools pull-right">
               <a class="fa  fa-caret-down" href="javascript:;"></a>
             </span>
@@ -82,6 +82,7 @@
                         <?=$data_evento["politicas"];?>
                       </textarea>
                   </div>  
+                  <button class='btn  btn-template'><i class='fa fa-sticky-note'></i>Plantilla</button>
               </div>
               <!--Politicas Tab-->
               <!--Lo permitido  Tab-->
@@ -94,6 +95,7 @@
                             <?=$data_evento["permitido"];?>
                           </textarea>
                       </div> 
+                      <button class='btn  btn-template'><i class='fa fa-sticky-note'></i>Plantilla</button>
                       <!--Lista de objetos permitidos -->
 
                       <button class='btn btn-info articulos-permitidos-button'><i class='fa fa-caret-down'></i> Articulos permitidos</button>
@@ -114,12 +116,14 @@
               <!--Inicia las restricciones -->
               <div class="tab-pane" id="portlet_tab3">                      
                      <h2>Restricciones en el evento</h2>  
+
                       <p class='restricciones-p'><?=valida_text_replace($data_evento["restricciones"] , "<i class='fa fa-plus'></i> Lo que podría anticiparse dentro del evento" , "<i class='fa fa-plus'></i>  Lo que podría anticiparse dentro del evento" );?></p>
                       <div class="form-group">
                           <textarea id='restricciones-evento' placeholder ='' rows="6" class="form-control">
                             <?=$data_evento["restricciones"];?>
                           </textarea>
                       </div> 
+                      <button class='btn  btn-template'><i class='fa fa-sticky-note'></i>Plantilla</button>
               </div>
               <!--Termina las  restricciones -->
               <!-- Inicia la experiencia -->                            
@@ -135,8 +139,10 @@
                   <!--Termina Inicia Eslogan del evento-->
                   <!--Inicia descripcion del evento -->
                   <div>
-                    <div class='place place_description' id='place_description'></div>
+                    <h4><i class="fa fa-file-text"></i>  Descripción del evento</h4>
+                    <div class='place place_description' id='place_description'></div>                    
                     <p class='descripcion-p'>
+
                       <?=valida_text_replace( $data_evento["descripcion_evento"] , "<i class='fa fa-plus'></i> Lo que se vivirá en el evento" , "<i class='fa fa-plus'></i> Lo que se vivirá en el evento" );?>
                       
                     </p>
@@ -150,7 +156,8 @@
                   </div> 
                   <!--Termina  descripcion del evento -->
                   <div>
-                    <button class='btn btn-info' id='generos_musicales_button'><i class='fa fa-caret-down'></i> Géneros musicales</button>
+                  <button class='btn  btn-template'><i class='fa fa-sticky-note'></i>Plantilla</button>
+                  <button class='btn btn-info' id='generos_musicales_button'><i class='fa fa-caret-down'></i> Géneros musicales</button>
                     <div class='generos_musicales_div'>
                       <?=$list_generos;?>
                     </div>
@@ -267,10 +274,12 @@
                                 <div class="panel-body">                                    
                                         
                                       <form id="form-escenario" method="POST">
+                                        <h2> <i class="fa fa-plus"></i>
+ Escenario</h2>  
                                         <div class="form-group todo-entry">
                                             <input type="hidden" name="evento_escenario" id="evento_escenario" value="<?=$evento;?>">
 
-                                            <input placeholder="Añadir escenario" class="form-control" style="width: 100%" type="text" name='nuevoescenario'>
+                                            <input placeholder="Añadir escenario" class="form-control nuevo-escenario-input" style="width: 100%" type="text" id='nuevo-escenario-input' name='nuevoescenario' >
                                         </div>
                                         <button style="background:black !important" class="btn btn-primary pull-right" type="submit" id="nuevo-escenario">
                                           <i class="fa fa-plus"></i>
@@ -322,8 +331,13 @@
 <!--*****************  La fecha del escenario  + el tipo  **************** -->
 <div class='row'>
         <!--**************** **********************  ******************* -->
+
         <div class='col-xs-12  col-sm-6 col-md-6 col-lg-6'>
-          <button class="btn btn-info  col-xs-12 day_escenario_button" type="button" ><span class='day_escenario'></span></button>                
+
+          <button class="btn btn-info  col-xs-12 day_escenario_button" type="button" >            
+            <span class='day_escenario'></span>            
+          </button>                
+
           <div class='day_escenario_inputs' id='day_escenario_inputs'>
             <div class="input-group">
                 <input class="form-control dpd1" name="nuevo_inicio_escenario" id="nuevo_inicio_escenario" type="text">
@@ -353,7 +367,7 @@
 <div class='row'>        
   <div class="panel">
     <header class="panel-heading">
-      <span style='color:black '><i class="fa fa-play"></i> Artistas</span>
+      <span style='color:black '><i class="fa fa-play"></i> Horarios y  Artistas</span>
       <span class="tools pull-right">
         <a class="fa  fa-caret-down" href="javascript:;"></a>
       </span>
@@ -377,12 +391,21 @@
 
 <div class='row'>       
 
+  <header class="panel-heading">
+      <span style='color:black '><i class="fa fa-file-text"></i> Descripción del escenario </span>
+      <span class="tools pull-right">
+        <a class="fa  fa-caret-down" href="javascript:;"></a>
+      </span>
+    </header>
+
+
   <div class='descripcion-modal-text col-xs-12  col-sm-12 col-md-12 col-lg-12' >
     + agregar descripción del escenario
   </div>                          
   <div class="form-group">
     <textarea class='descripcion-in-modal-escenario col-xs-12  col-sm-12 col-md-12 col-lg-12 ' ></textarea>
   </div> 
+  <button class='btn  btn-template'><i class='fa fa-sticky-note'></i>Plantilla</button>
 </div>  
 
 </div><!--Termina el boby de modal -->
@@ -440,12 +463,16 @@
       <div class="modal-header"><!--Inicia el header -->
         <button type="button" class="close" data-dismiss="modal">&times;</button>
         <h4 class="modal-title"><i class="fa fa-money"></i> Ventas, promociones, preventas ... </h4>
+
       </div><!--Termina el header -->
 
   
-  <div class="modal-body"><!-- dialog body -->   
-        
+  <div class="modal-body"><!-- dialog body -->           
+        <h4>          
+          Fecha del evento <?=$fecha_evento;?>
+        </h4>
     <!--************INICIA LA LISTA DE PRECIOS DEL EVENTO ****************-->
+
         <table class="table">
           <thead class='enid-header-table'>
             <tr>
@@ -466,6 +493,7 @@
     <!--************FORMULARIO DE REGISTRO   ****************-->  
         <table class="table">
           <form class='form-accesos-modal' id="form-accesos-modal">
+
             <input type="hidden" value="<?=$evento;?>" id="evaccesos"  class='evaccesos' name='evaccesos'>                                          
             <tr>                        
               <td>                           

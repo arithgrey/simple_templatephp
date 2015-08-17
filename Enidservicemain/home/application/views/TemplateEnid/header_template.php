@@ -239,7 +239,10 @@
         .modal-title{
             color: white !important;
         }   
-
+        .btn-template{
+            background: #1A6174 !important;
+            color: white !important;
+        }
         </style>
        
         

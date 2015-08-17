@@ -97,7 +97,8 @@ if(!function_exists('invierte_date_time')){
                                             <ul class='revenue-nav'>
 		                                        <li><a href='#'><i class='fa fa-play'></i> Escenarios ". $row["totalescenarios"]."</a></li>		                                        
 		                                        <li >
-		                                        <a href='#'>
+
+		                                        <a class='edith-fecha-evento'  data-toggle='modal' data-target='#modal-update-evento'   id='". $row["idevento"]  ."'>
 		                                        		<i class='fa fa-calendar-o'></i>
 	                                                     ".  $row["fecha_inicio"]." -
 	                                                     ".$row["fecha_termino"] ."

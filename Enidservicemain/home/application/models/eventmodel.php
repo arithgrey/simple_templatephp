@@ -358,6 +358,12 @@ function get_event_text_by_id( $id_evento , $campo ){
 	$result = $this->db->query($query_select);
 	return $result ->result_array();
 }
+function update_date($id_evento , $nuevo_inicio , $nuevo_termino ){
+
+	$query_update ="UPDATE evento SET fecha_inicio = '". $nuevo_inicio."' , fecha_termino ='".$nuevo_termino."' WHERE idevento='".$id_evento."'  ";
+	return $this->db->query($query_update);
+
+}
 /*Termina modelo */
 }
 

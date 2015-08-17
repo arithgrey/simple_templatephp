@@ -40,32 +40,30 @@ class Eventos extends CI_Controller{
             $this->load->view('TemplateEnid/footer_template', $data);
 
             
-    }/*Termina la función*/
+    }/*Termina la función*/    
     function nuevo($id_evento){
 
         $status = $this->input->get("status");
         $text_status = get_statusevent($status);
         $data = $this->validate_user_sesssion($text_status);
         $idempresa =  $this->sessionclass->getidempresa();                                                
-        $inicio = $this->input->get("start");                        
-        $termino = $this->input->get("end");                
+        
                         
         if ($this->checkifexist($id_evento) == 1 ) {
 
                 $data["evento"] = $id_evento;
-                $data["inicio"] = $inicio;
-                $data["termino"] = $termino;
-                
+                    
+
 
                 $carpeta_evento_img = base_url().'application/uploads/upload.php?e='.$id_evento;                                   
                 $data["carpeta_evento_img"]= $carpeta_evento_img;
                 $responsedb = $this->generosmusicalesmodel->getDataByidEvent($idempresa, $id_evento);                                    
                 $data["list_generos"] = list_generos_musicales($responsedb);
                 $data_evento = $this->eventmodel->getEventbyid($id_evento);
-                $data["data_evento"] = $data_evento[0];
 
-
-                                    
+                $data["data_evento"] = $data_evento[0];                
+                $data["fecha_evento"]= get_date_event_format($data_evento[0]["fecha_inicio"] , $data_evento[0]["fecha_termino"]);
+                                                
                 $this->load->view('TemplateEnid/header_template', $data);
                 $this->load->view('eventos/publicar');
                 $this->load->view('TemplateEnid/footer_template', $data);    

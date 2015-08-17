@@ -1,4 +1,3 @@
-
 <link rel="stylesheet" type="text/css" href="<?=base_url('application/js/js/bootstrap-datepicker/css/datepicker-custom.css')?>" />
 <script type="text/javascript" src="<?=base_url('application/js/js/bootstrap-datepicker/js/bootstrap-datepicker.js')?>"></script>
 <script type="text/javascript" src="<?=base_url('application/js/js/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js')?>"></script>
@@ -15,13 +14,11 @@
 #dinamic-field , #success-alert{
     display: none;
 }
- #scroll{
+#scroll{
         border:1px solid;            
         overflow-y:scroll;
         overflow-x:hidden;
-
-    }
-
+}
 </style>
 
 
@@ -60,7 +57,7 @@
 
                             <div class="panel" >
 
-                                <header class="panel-heading" style='background:#CD1E3B; color: white'> 
+                                <header class="panel-heading blue-col-enid" > 
                                     Últimos eventos anunciados 
 
 
@@ -234,10 +231,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
-               
-                
-               
+                </div>                                       
             </div>
 
         
@@ -249,4 +243,48 @@
 
 
 
+
+
+
+
+
+
+
+<!--*************************        Modal update fecha del evento    ************************* -->
+<div class="modal fade" id="modal-update-evento" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            
+        <h4 class="modal-title" id="myModalLabel"><i class="fa fa-calendar-o"></i> Fecha del evento </h4>
+            </div>
+            <div class="modal-body">
+                
+                <h4>Actualizar la fecha del evento </h4>
+
+                <!---->
+                <form method="POST" class='update-fecha-evento-form' id="update-fecha-evento-form">
+                    <input type="hidden" name='update_evento' id='update_evento'>
+                    <div class="input-group">
+                        <input class="form-control dpd1" id="update_inicio" name="update_inicio" type="text" required>
+                        <span class="input-group-addon"> al día </span>
+                        <input class="form-control dpd2" id="update_termino" name="update_termino" type="text" required>
+                    </div>
+                    <span class="help-block" >Fecha del evento </span>
+                    <button class="btn btn-info">Guardar</button>
+                    
+                    <div class="alert alert-success" id="update-susses" role="alert">Cambios registrados </div>
+                </form>                    
+                <!---->
+
+
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>                                
+            </div>
+        </div>
+    </div>
+</div>
 

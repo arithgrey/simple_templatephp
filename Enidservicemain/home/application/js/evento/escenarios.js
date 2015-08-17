@@ -4,6 +4,8 @@ function  nuevo_escenario(){
 	$.post(url , $("#form-escenario").serialize() ).done(function(data){
 
 			load_data_escenarios();
+			$(".nuevo-escenario-input").val("");
+
 
 	}).fail(function(){
 		
@@ -104,7 +106,7 @@ function update_escenario_modal(e){
 				llenaelementoHTML( ".general-info-modal" , data[0] );
 				llenaelementoHTML(".descripcion-modal-text", data["descripcion"]);
 				llenaelementoHTML(".general-artistas" , data["artistas"]);
-				llenaelementoHTML(".day_escenario_button" , "<i class='fa fa-calendar'></i> " + data["iniciotermino"]);
+				llenaelementoHTML(".day_escenario_button" , "<i class='fa fa-calendar'></i> Presentación " + data["iniciotermino"]);
 
 
 				llenaelementoHTML(".nombre-escenario-modal" , data["nombreescenariomodal"]);
@@ -144,6 +146,7 @@ function nuevo_artista_escenario(){
 			  .done(function( data ) {			    			  
 			  		load_data_escenario(idescenario);
 			  		load_data_escenarios();
+			  		$("#artistainput").val("");
 			  		
 			  })
 			  .fail(function() {
@@ -173,7 +176,7 @@ function load_data_escenario(idescenario){
 				llenaelementoHTML(".general-artistas" , data["artistas"]);			
 				llenaelementoHTML(".nombre-escenario-modal" , data["nombreescenariomodal"]);
 
-				llenaelementoHTML(".day_escenario_button" , "<i class='fa fa-calendar'></i> " + data["iniciotermino"]);
+				llenaelementoHTML(".day_escenario_button" , "<i class='fa fa-calendar'></i> Presentación " + data["iniciotermino"]);
 				
 				valorHTML("#nombre-escenario-input-modal" ,  data["nombreescenariomodal"] );
 				valorHTML(".input_tipo" , data["tipoescenario"] );

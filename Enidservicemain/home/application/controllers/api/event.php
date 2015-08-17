@@ -214,7 +214,15 @@ class Event extends REST_Controller{
              
 
     }/*Termina rest*/
-
+    /*Actualiza la fecha del evento */
+    function update_date_by_id_post(){
+        $this->validate_user_sesssion();          
+        
+        $id_evento = $this->post("evento");                           
+        $nuevo_inicio = $this->post("nuevo_inicio");
+        $nuevo_termino = $this->post("nuevo_termino");
+        $this->response($this->eventmodel->update_date($id_evento , $nuevo_inicio , $nuevo_termino ));
+    }
     function objetos_permitidos_all_update_get(){
             
         $this->validate_user_sesssion();                                
@@ -230,6 +238,7 @@ class Event extends REST_Controller{
                     $this->sessionclass->logout();
                 }   
     }/*termina validar session */
+
 
 }/*Termina el controlador rest */
 ?>

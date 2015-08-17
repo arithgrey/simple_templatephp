@@ -158,6 +158,17 @@ $elements ="";
 
 }	
 
+function get_date_event_format($inicio , $termino){
+
+	$date="";
+	if ($inicio == $termino) {
+		$date = $inicio;		
+	}else{
+		$date = $inicio ." al " . $termino;
+	}
+	return $date;
+}
+
 
 }/*Termina el helper*/
  
