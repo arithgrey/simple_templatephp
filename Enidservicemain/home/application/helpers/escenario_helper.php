@@ -101,6 +101,7 @@ function list_escenarios_on_loadevent($responsedbescenario){
                         <p class='text-muted text-center'>Artistas #".$numero_artistas."|".$tipoescenario." | ".$fecha_escenario ." </p>
 
                     <i data-toggle='modal' data-target='#confirmationdeleteescenario' class='fa fa-times deleteescenario' id='". $row["idescenario"] ."' ></i>
+                    
                     </div>
                     </li>                                        
                     ";

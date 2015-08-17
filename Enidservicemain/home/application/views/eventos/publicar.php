@@ -412,6 +412,8 @@
 
 <div class="modal-footer">
     
+
+
     <button id="avanzado-config-escenario" class='btn btn-info'><i class='fa fa-angle-double-right'></i> Avandado </button>
     <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
 </div>

@@ -165,6 +165,10 @@
 
 
 
+    <button id="avanzado-config-acceso" class='btn btn-info'>
+      <i class="fa fa-eye"></i>
+      Ver
+    </button>
 <!--***********************************INICIA   CONFIRMAR DELETE ACCESOS MODAL *************************-->
 <div id="confirma-delete-acceso" class="modal fade">
   <div class="modal-dialog">
