@@ -7,17 +7,15 @@ class Event extends REST_Controller{
                              
             $this->load->model("eventmodel");                
             $this->load->helper("eventosh");   
-            $this->load->library('sessionclass');
-            
-            
+            $this->load->library('sessionclass');                    
     }     
     /**/
-    function update_status_post(){
+    function update_status_put(){
        
         $this->validate_user_sesssion();            
         $id_usuario = $this->sessionclass->getidusuario();            
-        $id_evento = $this->post("evento");
-        $nuevo_status = $this->post("nuevo_status");
+        $id_evento = $this->put("evento");
+        $nuevo_status = $this->put("nuevo_status");
 
         $responsedb = $this->eventmodel->update_status_by_id( $id_evento , $nuevo_status ,  $id_usuario );
         $this->response($responsedb);
@@ -35,9 +33,9 @@ class Event extends REST_Controller{
     }    
 
     /*update objetos permitidos del evento */
-    function update_objeto_permitido_post(){
-        $idevento = $this->post("evento");
-        $idobjeto =  $this->post("objetopermitido");
+    function objeto_permitido_put(){
+        $idevento = $this->put("evento");
+        $idobjeto =  $this->put("objetopermitido");
         $responsedb = $this->eventmodel->update_obj_permitidobyId($idevento, $idobjeto);
         $this->response($responsedb);
     }    
@@ -47,67 +45,75 @@ class Event extends REST_Controller{
         $this->response( listobjetosp($this->eventmodel->getObjetosPermitidos($idevento ) ));
     }    
     /*Update url social */
-    function updateurlbyid_post(){
+    function urlbyid_put(){
 
         $this->validate_user_sesssion();                        
-        $idevento = $this->post("evento_social");
-        $nueva_url_fb  = $this->post("url_social_evento");            
-        $url_social_evento_youtube =  $this->post("url_social_evento_youtube");
+        $idevento = $this->put("evento_social");
+        $nueva_url_fb  = $this->put("url_social_evento");            
+        $url_social_evento_youtube =  $this->put("url_social_evento_youtube");
 
         $this->response($this->eventmodel->updateurl($nueva_url_fb , $url_social_evento_youtube , $idevento ) );
 
     }/*Termina la función*/    
-    function updateurlyoutubebyid_post(){        
+    function updateurlyoutubebyid_put(){        
 
         $this->validate_user_sesssion();           
-        $nueva_url = $this->post("url_social_evento_youtube");            
-        $idevento = $this->post("evento_social_y");
+        $nueva_url = $this->put("url_social_evento_youtube");            
+        $idevento = $this->put("evento_social_y");
         $this->response($this->eventmodel->updateurlyout($nueva_url , $idevento ) );
     }
     /**/
-    function updategeneros_post(){     
+    function genero_put(){     
         $this->validate_user_sesssion();            
-        $nuevos_generos = $this->post("generos");
-        $idevento = $this->post("evento");
+        $nuevos_generos = $this->put("generos");
+        $idevento = $this->put("evento");
         $this->response($this->eventmodel->updategeneros($nuevos_generos , $idevento ) );
 
     }
     /**/
-    function updateubicacion_post(){
+    function ubicacion_put(){
         $this->validate_user_sesssion();            
-        $nueva_ubicacion = $this->post("ubicacion");
-        $idevento = $this->post("evento");
+        $nueva_ubicacion = $this->put("ubicacion");
+        $idevento = $this->put("evento");
         $this->response($this->eventmodel->updateUbicacion($nueva_ubicacion , $idevento ) );
 
     }   
     /**/
-    function updatenombre_post(){
+    function nombre_put(){
         $this->validate_user_sesssion();            
-        $nuevo_nombre = $this->post("nombre");
-        $idevento = $this->post("evento");
+        $nuevo_nombre = $this->put("nombre");
+        $idevento = $this->put("evento");
         $this->response($this->eventmodel->updateNombre( validate_text($nuevo_nombre)  , $idevento ) );
     }    
     /**/
-    function updateedicion_post(){
+    function edicion_put(){
         $this->validate_user_sesssion();            
-        $nuevo_edicion = $this->post("edicion");
-        $idevento = $this->post("evento");
+        $nuevo_edicion = $this->put("edicion");
+        $idevento = $this->put("evento");
         $this->response($this->eventmodel->updateEdicion( validate_text($nuevo_edicion) , $idevento ) );
     }    
     /**/
-    function updatedescripcion_post(){
+    function descripcion_put(){
 
         $this->validate_user_sesssion();            
-        $nueva_descripcion = $this->post("descripcion_evento");
-        $idevento = $this->post("evento");
+        $nueva_descripcion = $this->put("descripcion_evento");
+        $idevento = $this->put("evento");
         $this->response($this->eventmodel->updateDescripcion( validate_text( $nueva_descripcion)  , $idevento ) );
 
-    }    
-    /*updatepoliticas********+updatepoliticasupdatepoliticasupdatepoliticasupdatepoliticasupdatepolit*/
-    function updatepoliticas_post(){
+    }   
+    /**/ 
+    function descripcion_template_put(){
         $this->validate_user_sesssion();            
-        $nueva_politica = $this->post("politicas_evento");
-        $idevento = $this->post("evento");
+        $id_contenido  = $this->put("template_content");
+        $id_evento = $this->put("evento");
+        $response_up= $this->eventmodel->update_descripcion_by_content($id_contenido , $id_evento );
+        $this->response($response_up);
+    }
+    /*updatepoliticas********+updatepoliticasupdatepoliticasupdatepoliticasupdatepoliticasupdatepolit*/
+    function politicas_put(){
+        $this->validate_user_sesssion();            
+        $nueva_politica = $this->put("politicas_evento");
+        $idevento = $this->put("evento");
         $this->response($this->eventmodel->updatePoliticas( validate_text($nueva_politica) , $idevento ) );
 
     }    
@@ -118,27 +124,27 @@ class Event extends REST_Controller{
         $this->response($this->eventmodel->getTematicaByid($idevento , $idempresa));
     }
     /*End tematica load End tematica load End tematica load End tematica load End tematica load */
-    function update_tematica_by_id_post(){
+    function tematica_by_id_put(){
         
         $this->validate_user_sesssion();            
-        $idevento = $this->post("id_evento_tematica");
-        $tematica_select = $this->post("tematica_select");
+        $idevento = $this->put("id_evento_tematica");
+        $tematica_select = $this->put("tematica_select");
         $idempresa =  $this->sessionclass->getidempresa();
         $this->response($this->eventmodel->update_tematicaby_id( $idevento , $tematica_select, $idempresa ));    
     }
     /*****************Permitido *Permitido *Permitido *Permitido *Permitido *Permitido *****/
-    function updatepermitido_post(){
+    function permitido_put(){
 
         $this->validate_user_sesssion();            
-        $nuevo_permitido = $this->post("permitido_evento");
-        $idevento = $this->post("evento");
+        $nuevo_permitido = $this->put("permitido_evento");
+        $idevento = $this->put("evento");
         $this->response($this->eventmodel->updatePermitido( validate_text($nuevo_permitido)  , $idevento ) );
     }    
     /*restricciones **restricciones **restricciones **restricciones **restricciones ***/
-    function updaterestricciones_post(){
+    function restricciones_put(){
         $this->validate_user_sesssion();            
-        $nueva_restriccion = $this->post("restricciones_evento");
-        $idevento = $this->post("evento");
+        $nueva_restriccion = $this->put("restricciones_evento");
+        $idevento = $this->put("evento");
         $this->response($this->eventmodel->updateRestricciones( validate_text( $nueva_restriccion )  , $idevento ) );
     }   
     /************************Dinamic select From event *****************************************************/    
@@ -205,28 +211,28 @@ class Event extends REST_Controller{
             return $directorio;
     }
     /**/
-    function update_eslogan_post(){
+    function eslogan_put(){
 
         $this->validate_user_sesssion();                    
-        $id_evento= $this->post("evento");
-        $eslogan = $this->post("eslogan");
+        $id_evento= $this->put("evento");
+        $eslogan = $this->put("eslogan");
         $this->response($this->eventmodel->update_eslogan($id_evento , validate_text($eslogan)) );
              
 
     }/*Termina rest*/
     /*Actualiza la fecha del evento */
-    function update_date_by_id_post(){
+    function date_by_id_put(){
         $this->validate_user_sesssion();          
         
-        $id_evento = $this->post("evento");                           
-        $nuevo_inicio = $this->post("nuevo_inicio");
-        $nuevo_termino = $this->post("nuevo_termino");
+        $id_evento = $this->put("evento");                           
+        $nuevo_inicio = $this->put("nuevo_inicio");
+        $nuevo_termino = $this->put("nuevo_termino");
         $this->response($this->eventmodel->update_date($id_evento , $nuevo_inicio , $nuevo_termino ));
     }
-    function objetos_permitidos_all_update_get(){
+    function all_objetos_permitidos_put(){
             
         $this->validate_user_sesssion();                                
-        $id_evento= $this->get("evento");                
+        $id_evento= $this->put("evento");                
         $this->response($this->eventmodel->update_all_in_event_obj_inter($id_evento) );        
     }
     /*Validar session para modificar datos*/

@@ -95,7 +95,7 @@
                             <?=$data_evento["permitido"];?>
                           </textarea>
                       </div> 
-                      <button class='btn  btn-template'><i class='fa fa-sticky-note'></i>Plantilla</button>
+                      
                       <!--Lista de objetos permitidos -->
 
                       <button class='btn btn-info articulos-permitidos-button'><i class='fa fa-caret-down'></i> Articulos permitidos</button>
@@ -123,7 +123,18 @@
                             <?=$data_evento["restricciones"];?>
                           </textarea>
                       </div> 
-                      <button class='btn  btn-template'><i class='fa fa-sticky-note'></i>Plantilla</button>
+
+
+                      
+                      <h3>Lista de restricciones</h3>
+                      <button  data-toggle="modal" data-target="#templa-restricciones"   class='btn btn-template'><i class='fa fa-sticky-note'></i>+ agregar</button>
+                      
+                      <br><br>
+                      
+
+                      <div class='restricciones-evento-list' id='restricciones-evento-list'>
+                        <?=$restricciones_record;?>
+                      </div>
               </div>
               <!--Termina las  restricciones -->
               <!-- Inicia la experiencia -->                            
@@ -156,7 +167,7 @@
                   </div> 
                   <!--Termina  descripcion del evento -->
                   <div>
-                  <button class='btn  btn-template'><i class='fa fa-sticky-note'></i>Plantilla</button>
+                  <button class='btn  btn-template' data-toggle="modal" data-target="#templa-descripcion-contenido" ><i class='fa fa-file-text-o'></i> Plantilla de descripciones</button>
                   <button class='btn btn-info' id='generos_musicales_button'><i class='fa fa-caret-down'></i> Géneros musicales</button>
                     <div class='generos_musicales_div'>
                       <?=$list_generos;?>
@@ -536,6 +547,9 @@
 </div>
 
 <!--***********************************TERMINA ACCESOS MODAL *************************-->
+<!--************************************************************************************-->
+
+
 
 <!--***********************************INICIA   CONFIRMAR DELETE ACCESOS MODAL *************************-->
 <div id="confirmationdeleteacceso" class="modal fade">
@@ -587,9 +601,86 @@
 </div>
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <!--***********************************TERMINA  SERVICIOS MODAL  *************************-->
+<div id="templa-restricciones" class="modal fade">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Restricciones del evento</h4>
+      </div>            
+      <div class="modal-body">    
+                
+        <div class='panel'>
+          <?=$plantilla_restricciones;?>                        
+        </div>
+                
+                
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+      </div>
+
+    </div>
+  </div>
+</div>
 
 
+
+              
+<!--***********************************TERMINA  SERVICIOS MODAL  *************************-->
+<div id="templa-descripcion-contenido" class="modal fade">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Servicios que incluirá en evento</h4>
+      </div>            
+      <div class="modal-body">    
+                
+        <div class='panel'>
+          <?=$plantillas_descripcion;?>                                    
+        </div>
+                
+                
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+      </div>
+
+    </div>
+  </div>
+</div>
 
 
 
@@ -694,3 +785,4 @@
 </script>
 
      
+

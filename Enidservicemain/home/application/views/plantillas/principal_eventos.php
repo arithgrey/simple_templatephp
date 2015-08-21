@@ -1,8 +1,4 @@
 <script type="text/javascript" src="<?=base_url('application/js/plantillas/principal.js')?>"></script>
-<span>
-    El uso de plantillas es recomendable 
-    te permitirán agilizar  la redacción de información en futuros eventos.    
-</span>
 
 <div class="container">
 	<div class="row">
@@ -12,6 +8,30 @@
                 <div class="connecting-line"></div>
                 <ul class="nav nav-tabs" role="tablist">
 
+                    
+                    <li role="presentation" class="restriccion-section disabled">
+                        <a data-original-title="Step 2" href="#step2" data-toggle="tab" aria-controls="step2" role="tab" title="">
+                            <span class="round-tab">
+                                <i class="glyphicon fa fa-exclamation-triangle"></i>
+                            </span>
+                        </a>
+                    </li>
+
+                    <li role="presentation" class="disabled">
+                        <a data-original-title="Step 3" href="#step3" data-toggle="tab" aria-controls="step3" role="tab" title="">
+                            <span class="round-tab">
+                                <i class="glyphicon fa fa-check"></i>
+                            </span>
+                        </a>
+                    </li>
+
+                    <li role="presentation" class="disabled">
+                        <a data-original-title="Complete" href="#complete" data-toggle="tab" aria-controls="complete" role="tab" title="">
+                            <span class="round-tab">
+                                <i class="glyphicon fa fa-circle"></i>
+                            </span>
+                        </a>
+                    </li>
                     <li role="presentation" class="active">
                         <a data-original-title="Step 1" href="#plantillas_descripciones" data-toggle="tab" aria-controls="plantillas_descripciones" role="tab" title="">
                             <span class="round-tab">
@@ -20,28 +40,7 @@
                         </a>
                     </li>
 
-                    <li role="presentation" class="disabled">
-                        <a data-original-title="Step 2" href="#step2" data-toggle="tab" aria-controls="step2" role="tab" title="">
-                            <span class="round-tab">
-                                <i class="glyphicon glyphicon-pencil"></i>
-                            </span>
-                        </a>
-                    </li>
-                    <li role="presentation" class="disabled">
-                        <a data-original-title="Step 3" href="#step3" data-toggle="tab" aria-controls="step3" role="tab" title="">
-                            <span class="round-tab">
-                                <i class="glyphicon glyphicon-picture"></i>
-                            </span>
-                        </a>
-                    </li>
 
-                    <li role="presentation" class="disabled">
-                        <a data-original-title="Complete" href="#complete" data-toggle="tab" aria-controls="complete" role="tab" title="">
-                            <span class="round-tab">
-                                <i class="glyphicon glyphicon-ok"></i>
-                            </span>
-                        </a>
-                    </li>
                 </ul>
             </div>
 
@@ -71,19 +70,28 @@
                                     <div class="col-md-12">
 
 
-                                        <div class="input-group">
-                                        <span class="input-group-addon" id="sizing-addon1">Nombre de la plantilla</span>
+                                        
 
-                                          <input type="text"  id="nombre-tmpl" name="nombre_tmpl" class="form-control" placeholder="" aria-describedby="sizing-addon1" required>
-                                          <input type="hidden" name="tipo_templ" value="1">
+                                        <div class='list-templ-descripcion' id='list-templ-descripcion'>
+                                            <?=$plantillas_descripcion;?>
                                         </div>
+
+                                        
 
                                         <br>
                                         <div class="col-md-1"></div>
 
                                         <div class="col-md-10">
+
                                                 <div class="input-group">
-                                                <span class="input-group-addon" id="sizing-addon1">Titulo del primer contenido en ésta plantilla </span>                                        
+                                                <span class="input-group-addon" id="sizing-addon1">Nombre de la plantilla</span>
+
+                                                  <input type="text"  id="nombre-tmpl" name="nombre_tmpl" class="form-control" placeholder="" aria-describedby="sizing-addon1" required>
+                                                  <input type="hidden" name="tipo_templ" value="1">
+                                                </div>
+
+                                                <div class="input-group">
+                                                <span class="input-group-addon" id="sizing-addon1">Titulo del contenido </span>                                        
                                                   <input type="text"  id="titulo-contenido-tmpl" name="titulo_contenido_tmpl" class="form-control" placeholder="" aria-describedby="sizing-addon1" required>                                          
                                                 </div>
 
@@ -116,8 +124,59 @@
                          </div>                    
                     </div>
                     <div class="tab-pane" role="tabpanel" id="step2">
-                        <h3>Step 2</h3>
-                        <p>This is step 2</p>
+                        
+
+                        
+                                <div class="form-group">
+                                    <div class="col-md-12">
+
+
+                                        
+                                        <div class="page-header">
+                                          <h1>Mis plantillas<small> restricciones</small></h1>
+                                        </div>
+
+                                        
+                                        
+
+                                        <br>
+                                        <div class="col-md-1"></div>
+
+                                        <div class="col-md-10">
+
+                                            <div class="panel">
+                        
+                        <div class="panel-body">
+                            
+                            <div class='restricciones-user' id='restricciones-user'></div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <form role="form" class="form-inline" id="new-restriccion-form">
+                                        <div class="form-group todo-entry">
+
+                                            <textarea placeholder="Registra la descripción de la restricción" id='restriccion_text' class='restriccion_text' name='restriccion_text' class="form-control" style="width: 100%" ></textarea>
+
+                                        </div>
+                                        <button class="btn btn-primary pull-right" type="submit">+</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                                               
+                                        </div>        
+                                        <div class="col-md-1"></div>
+
+
+                                    </div>
+                                </div>
+                            
+
+                        
+                        
+
                         <ul class="list-inline pull-right">
                             <li><button type="button" class="btn btn-default prev-step">Previous</button></li>
                             <li><button type="button" class="btn btn-primary next-step">Save and continue</button></li>

@@ -3,12 +3,17 @@ class Eventos extends CI_Controller{
 
     function __construct(){
         parent::__construct();
+
+
+        
+        $this->load->helper("plantillas");        
         $this->load->helper('servicios');
         $this->load->helper('img_eventsh');
         $this->load->helper('eventosh');
         $this->load->helper('generoshelp');
         $this->load->helper('accesos');
         $this->load->helper('escenario');
+        $this->load->model("templmodel");
         $this->load->model("accesosmodel");
         $this->load->model('generosmusicalesmodel');
         $this->load->model("eventmodel");
@@ -53,6 +58,19 @@ class Eventos extends CI_Controller{
 
                 $data["evento"] = $id_evento;
                     
+
+                $id_user = $this->sessionclass->getidusuario();        
+                $plantillas_descripcion = $this->templmodel->get_templates_contenido_user_type($id_user, 1);
+                $data["plantillas_descripcion"] = display_contenido_templ($plantillas_descripcion);
+
+                /*Plantilla de mis restricciones*/
+
+                $restricciones_data = $this->templmodel->get_restriciones($id_evento);    
+                $data["restricciones_record"]= display_record_list($restricciones_data);
+
+                $plantillas_restriccion = $this->templmodel->get_templ_restricciones($id_user);        
+                $data["plantilla_restricciones"]= display_record_list($plantillas_restriccion, 1 , 1 );
+
 
 
                 $carpeta_evento_img = base_url().'application/uploads/upload.php?e='.$id_evento;                                   

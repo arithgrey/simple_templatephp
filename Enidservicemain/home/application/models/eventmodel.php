@@ -182,7 +182,11 @@ function updateDescripcion($nueva_descripcion , $idevento ) {
 	return  $this->db->query($update_nombre);
 
 }
-
+/*Actualiza el campo descripcion por uno que ya se encuentra registrado en un contenido*/
+function update_descripcion_by_content($id_contenido , $id_evento ){
+	$update_query ="UPDATE evento SET descripcion_evento = (SELECT descripcion_contenido FROM contenido WHERE  idcontenido='". $id_contenido ."' ) WHERE idevento='".$id_evento."' ";
+	return $this->db->query($update_query);	
+}
 
 
 
@@ -364,6 +368,8 @@ function update_date($id_evento , $nuevo_inicio , $nuevo_termino ){
 	return $this->db->query($query_update);
 
 }
+/**/
+
 /*Termina modelo */
 }
 

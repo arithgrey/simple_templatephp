@@ -73,8 +73,8 @@ function update_fecha_evento_evento(e){
 	 	
 	 	update_inicio = $("#update_inicio").val();
 	 	update_termino = $("#update_termino").val();
-	 	url = now + "index.php/api/event/update_date_by_id/format/json/";	 		 	
-	 	updates_send(url , { "evento" : id_evento , "nuevo_inicio" : update_inicio , "nuevo_termino" : update_termino } );
+	 	url = now + "index.php/api/event/date_by_id/format/json/";	 		 	
+	 	actualiza_data(url , { "evento" : id_evento , "nuevo_inicio" : update_inicio , "nuevo_termino" : update_termino } );
 		id_new_tag = "#"+ id_evento;
 		new_date = "<i class='fa fa-calendar-o'></i> " + update_inicio + "-" + update_termino; 	
 		llenaelementoHTML(id_new_tag , new_date);	 

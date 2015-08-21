@@ -36,15 +36,8 @@ function load_data_tematica(){
 function update_tematica_evento(){
 
 
-		url =now + "index.php/api/event/update_tematica_by_id/format/json/";
-		$.post(url ,  $("#form-tematica").serialize()  ).done(function(){
-
-			load_data_tematica();
-			
-		}).fail(function(){
-			alert(genericresponse[0]);
-		});
-		
-
+		url =now + "index.php/api/event/tematica_by_id/format/json/";
+		actualiza_data(url ,  $("#form-tematica").serialize() );
+		load_data_tematica();
 		
 }

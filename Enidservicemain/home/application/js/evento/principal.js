@@ -45,7 +45,9 @@ $(document).on("ready", function (){
 	});
 
 
-
+	$(".contenido-text-templ").click(update_descripcion_evento_by_template);
+	$(".templ-restriccion-up").click(new_restriction);
+	$(".delete_restriccion").click(delete_restriccion_evento);
 	/*Eslogan del evento */
 	$(".eslogan-p").click(update_eslogan_evento);
 
@@ -82,9 +84,9 @@ function update_name_evento(e){
 		if (nuevotexto.length > 0 ) {
 
 				
-				url =  now + "index.php/api/event/updatenombre/format/json/";    
+				url =  now + "index.php/api/event/nombre/format/json/";    
 				data_send  ={ "nombre" : nuevotexto , "evento" : $("#evento").val() }
-				updates_send(url , data_send );
+				actualiza_data(url , data_send );
 				load_data_evento(".nombre-evento-h1" , "#nombre-input" , "nombre_evento" , ".place_nombre" , "+" , "+");
 				
 				
@@ -118,9 +120,9 @@ function update_edicion_evento(e){
 		if (nuevotexto.length >0 ) {		
 
 
-				url =  now + "index.php/api/event/updateedicion/format/json/";    
+				url =  now + "index.php/api/event/edicion/format/json/";    
 				data_send= { "edicion" : nuevotexto , "evento" : $("#evento").val() }
-				updates_send(url , data_send );
+				actualiza_data(url , data_send );
 				load_data_evento(".edicion-evento" , "#edicion-input" , "edicion" , ".place_edicion"  , "<i class='fa fa-plus'></i> Edicioón del evento" , "<i class='fa fa-plus'></i> Edicioón del evento");
 
 		}else{
@@ -146,9 +148,9 @@ function update_descripcion_evento(e){
 		if (nuevotexto != null  ) {	
 
 			
-				url =  now + "index.php/api/event/updatedescripcion/format/json/";
+				url =  now + "index.php/api/event/descripcion/format/json/";
 				data_send = { "descripcion_evento" : nuevotexto , "evento" : $("#evento").val() }     
-				updates_send(url , data_send );
+				actualiza_data(url , data_send );
 				load_data_evento( ".descripcion-p" , "#descripcion-evento" , "descripcion_evento" , ".place_description" , "<i class='fa fa-plus'></i> Lo que se vivirá en el evento" , "<i class='fa fa-plus'></i> Lo que se vivirá en el evento");
 
 			
@@ -174,9 +176,9 @@ function update_politicas_evento(e){
 
 		if (nuevotexto != null  ) {	
 
-			url =  now + "index.php/api/event/updatepoliticas/format/json/";    
+			url =  now + "index.php/api/event/politicas/format/json/";    
 			data_send = { "politicas_evento" : nuevotexto , "evento" : $("#evento").val() }
-			updates_send(url , data_send );
+			actualiza_data(url , data_send );
 			load_data_evento(".politicas-p" , "#politicas-evento" , "politicas" , ".place_politicas"  ,  "<i class='fa fa-plus'></i> Lo que podría anticiparse como reembolsos o cambios" , "<i class='fa fa-plus'></i>  Lo que podría anticiparse como reembolsos o cambios" );
 			
 		}else{
@@ -206,9 +208,9 @@ function update_permitido_evento(e){
 
 		if (nuevotexto != null  ) {	
 
-			url =  now + "index.php/api/event/updatepermitido/format/json/";    
+			url =  now + "index.php/api/event/permitido/format/json/";    
 			data_send = { "permitido_evento" : nuevotexto , "evento" : evento  } 
-			updates_send(url , data_send);
+			actualiza_data(url , data_send);
 			load_data_evento(".permitido-p" ,  "#permitido-evento" , "permitido" , ".place_permitido" , "<i class='fa fa-plus'></i> Lo que las personas podrían hacer e ingresar al evento" , "<i class='fa fa-plus'></i>Lo que las personas podrían hacer e ingresar al evento");
 			
 		}else{
@@ -232,9 +234,9 @@ function updaterestricciones(e){
 		nuevotexto = $("#restricciones-evento").val(); 				
 		if (nuevotexto != null  ) {	
 
-			url =  now + "index.php/api/event/updaterestricciones/format/json/";    
+			url =  now + "index.php/api/event/restricciones/format/json/";    
 			data_send = { "restricciones_evento" : nuevotexto , "evento" : $("#evento").val() }
-			updates_send(url ,data_send);
+			actualiza_data(url ,data_send);
 			load_data_evento(".restricciones-p" ,  "#restricciones-evento" , "restricciones" , ".place_restricciones" ,  "<i class='fa fa-plus'></i> Lo que podría anticiparse dentro del evento" , "<i class='fa fa-plus'></i>  Lo que podría anticiparse dentro del evento" );
 		}else{
 
@@ -257,9 +259,9 @@ function update_ubicacion_evento(){
 			
 		nuevotexto = $("#pac-input").val(); 
 				
-		url =  now + "index.php/api/event/updateubicacion/format/json/";  
+		url =  now + "index.php/api/event/ubicacion/format/json/";  
 		data_send = { "ubicacion" : nuevotexto , "evento" : $("#evento").val() }  
-		updates_send(url , data_send);
+		actualiza_data(url , data_send);
 		
 		
 		
@@ -275,7 +277,7 @@ function tryrecordgeneros(e){
 
  		 generos = $("#tags_enid_input").val();	
 
-		 	url =  now + "index.php/api/event/updategeneros/format/json/";    
+		 	url =  now + "index.php/api/event/genero/format/json/";    
 
 			$.post(url , { "generos" : generos  , "evento" : $("#evento").val() } )
 			.done(function(data){
@@ -294,9 +296,9 @@ function tryrecordgeneros(e){
 /***************************************************************************+++*/
 function update_social(){
 			
-		url =  now + "index.php/api/event/updateurlbyid/format/json/";    								
+		url =  now + "index.php/api/event/urlbyid/format/json/";    								
 		data_send= updates_send(url , $("#form-social").serialize());		
-		updates_send(url , data_send);
+		actualiza_data(url , data_send);
 			
 }
 
@@ -309,9 +311,9 @@ function update_eslogan_evento(e){
 		nuevotexto = $("#eslogan-evento").val(); 
 		if (nuevotexto != null  ) {	
 			
-			url =  now + "index.php/api/event/update_eslogan/format/json/";    			
+			url =  now + "index.php/api/event/eslogan/format/json/";    			
 			data_send = {evento : $("#evento").val() , eslogan : $("#eslogan-evento").val()}
-			updates_send(url , data_send);
+			actualiza_data(url , data_send);
 			load_data_evento(".eslogan-p" ,  "#eslogan-evento" , "eslogan" , ".place_restricciones" ,  "<i class='fa fa-space-shuttle'></i> Mensaje eslogan del evento" , "<i class='fa fa-space-shuttle'></i>  Eslogan del evento" );
 			
 
@@ -325,5 +327,31 @@ function update_eslogan_evento(e){
 
 }
 
+/**/
+
+function update_descripcion_evento_by_template(e){
+	template_content =  e.target.id;	
+	evento = $("#evento").val();
+	url =  now + "index.php/api/event/descripcion_template/format/json/";
+	actualiza_data(url , { "template_content" : template_content , "evento" : evento } );
+	load_data_evento( ".descripcion-p" , "#descripcion-evento" , "descripcion_evento" , ".place_description" , "<i class='fa fa-plus'></i> Lo que se vivirá en el evento" , "<i class='fa fa-plus'></i> Lo que se vivirá en el evento");
+}
 
 
+function new_restriction(e){
+	
+	restriccion  = e.target.id;
+	evento = $("#evento").val();
+	url = now + "index.php/api/templ/retriccion_evento/format/json/";
+	registra_data(url , {"evento" : evento, "restriccion" :  restriccion}  );
+}
+/*Quita del evento la restriccion*/
+function delete_restriccion_evento(e){
+
+	restriccion = e.target.id;
+	evento = $("#evento").val();
+	url = now + "index.php/api/templ/retriccion_evento/format/json/";	
+	eliminar_data(url , { "evento" : evento , "restriccion" : restriccion }  );
+
+
+}
