@@ -12,11 +12,16 @@ class Templates extends CI_Controller {
         
         $data = $this->validate_user_sesssion("Mis plantillas");
         $id_user = $this->sessionclass->getidusuario();        
+        $id_empresa =  $this->sessionclass->getidempresa();   
 
         $plantillas_descripcion = $this->templmodel->get_templates_contenido_user_type($id_user, 1);
+        
+        $plantilla_obj_permitidos = $this->templmodel->get_templ_obj_permitidos($id_empresa);
+        
         $plantillas_restricciones = $this->templmodel->get_templates_contenido_user_type($id_user, 2);
-        $data["plantillas_descripcion"] = display_contenido_templ($plantillas_descripcion);
-        $data["plantillas_restricciones"] =  display_contenido_templ($plantillas_restricciones);
+        $data["plantillas_descripcion"] = display_contenido_templ($plantillas_descripcion ,  1);
+        $data["plantilla_obj_permitidos"] = list_objetos_permitidos_empresa($plantilla_obj_permitidos);
+        $data["plantillas_restricciones"] =  display_contenido_templ($plantillas_restricciones , 1);
 
         $this->dinamic_view_event("plantillas/principal_eventos" , $data);
 

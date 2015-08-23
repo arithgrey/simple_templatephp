@@ -132,6 +132,7 @@
                       <br><br>
                       
 
+                      
                       <div class='restricciones-evento-list' id='restricciones-evento-list'>
                         <?=$restricciones_record;?>
                       </div>

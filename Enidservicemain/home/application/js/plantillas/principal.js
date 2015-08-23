@@ -7,21 +7,12 @@ $(document).on("ready", function(){
 /*Registro de plantilla descripción de eventos */
 function registra_plantilla_descripcion(){
 
-	
+	url = now + "index.php/api/templ/templates_descripcion_evento/format/json/";	
 
-	url = now + "index.php/api/templ/templ_usuario/format/json/";	
-	$.post( url ,  $("#nueva-descripcion-template").serialize() ).done(function(data){
+	registra_data( url ,  $("#nueva-descripcion-template").serialize() );
+	load_descriptions();	
+	clean_form_contenido();
 
-		load_descriptions();	
-		clean_form_contenido();
-
-	}).fail(function(){
-		alert(genericresponse[0]);
-
-	});
-
-
-	
 	
 	return false;
 

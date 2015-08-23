@@ -8,31 +8,25 @@ if(!function_exists('invierte_date_time')){
 
 function listobjetosp( $arreglo ){ 
 	
-//objetospermitidos
-
 	$list ="";
-
-	
-
 	$b =1;
 
 	foreach ( $arreglo as $row) {
-		
 		  
+		   
 		$idobjetopermitido = $row["idobjetopermitido"];
-		$idpermitido = $row["idpermitido"];
 		$nombre = $row["nombre"];
+		$descripcion = $row["descripcion"];
+		$idevento = $row["idevento"];
+		
 
-		if ($idobjetopermitido == $idpermitido  ) {
+		if ($idevento != null  ) {
 			$input ="<input type='checkbox' class='objpermitido' id='". $idobjetopermitido ."' checked >";	
 		}else{
 			$input ="<input type='checkbox' class='objpermitido' id='".$idobjetopermitido ."' >";
-		}
-
-		
+		}		
 		$list .=  "<tr><td>".$b."   </td><td>  ". $nombre."</td><td>". $input ."</td><tr>";
 		$b++;
-
 
 	}
 

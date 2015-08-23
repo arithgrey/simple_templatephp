@@ -12,8 +12,7 @@ if(!function_exists('invierte_date_time')){
         $count_now=1;
         foreach ($data as $row) {
 
-            $idrestriccion  = $row["idrestriccion"];     
-            
+            $idrestriccion  = $row["idrestriccion"];                 
             $text_restriccion  = $row["text_restriccion"];          
             $fecha_registro = $row["fecha_registro"];    
 
@@ -40,7 +39,7 @@ if(!function_exists('invierte_date_time')){
                         $list.= '</li>';
 
                         if ($check!= '' ) {
-                            $list.= '<button class="btn btn-template templ-restriccion-up" id="'. $idrestriccion. '" >+Agregar</button>';                              
+                            $list.= '<button class="btn btn-template templ-restriccion-up" id="'. $idrestriccion. '" >+ agregar</button>';                              
                         }
                         
                     $list.= '</ul>';
@@ -50,41 +49,82 @@ if(!function_exists('invierte_date_time')){
     }
 
 
-function display_contenido_templ($data_contenido){
+function display_contenido_templ($data_contenido, $del=0 ){
 
         
-    $list_templa_contenido='';
+    $list_templa_contenido='<div class="panel">
+                                <div class="panel-body">
+                                    <ul class="to-do-list ui-sortable" id="sortable-todo">';
+
+    $flag = 1;                                       
     foreach ($data_contenido as $row) {
        
        $idcontenido = $row["idcontenido"];
        $nombre_contenido =  $row["nombre_contenido"];
        $descripcion_contenido = $row["descripcion_contenido"];
-       $nombre_platilla  =  $row["nombre_platilla"];
-       $fecha_registro =  $row["fecha_registro"];
-       $status =  $row["status"];
-       
+        
 
+        $list_templa_contenido.= '<li class="clearfix">
+                                    <span class="drag-marker"><i></i></span> '.$flag .'.-                                     
+                                    <a class="contenido-text-templ" id="'. $idcontenido .'" >'. $nombre_contenido .'</a>                                    
+                                    <p class="contenido-text-templ todo-title"  id="'. $idcontenido .'" >'.$descripcion_contenido .'</p>
+                                    ';
 
-        $list_templa_contenido.= '<div class="mis-plantillas" >'. $nombre_platilla .'
-                                    <div class="media blog-cmnt">
-                                        <a  class="pull-left">
-                                            <img alt="" src="images/blog/blog-avatar.jpg" class="media-object">
-                                        </a>
-                                        <div class="media-body"> 
-                                            <h4 class="media-heading"  id="'. $idcontenido .'" >
-                                                <a class="contenido-text-templ" id="'. $idcontenido .'">'. $nombre_contenido .'</a>
-                                            </h4>
-                                            <p class="contenido-text-templ mp-less" id="'. $idcontenido .'" >'. $descripcion_contenido.'</p>
-                                            '. $fecha_registro .' | '. get_status_text($status) .' |  
-                                        </div>                                                
-                                    </div>     
-                                </div>';
-
+                                    if ($del == 1 ) {
+                                    $list_templa_contenido.='    <div class="todo-actionlist pull-right clearfix">
+                                            <a href="#" class="todo-remove"><i class="fa fa-times"></i></a>
+                                        </div>';    
+                                    }
+                                    
+                                $list_templa_contenido.='</li>';
+                                $flag++;
     }
-                   
+    $list_templa_contenido .= '</ul></div>  </div>' ;                   
     return  $list_templa_contenido;
 
 }
+
+
+/***********************************OBJETOS PERMITIDOS  ***************************************/
+
+function list_objetos_permitidos_empresa( $arreglo ){ 
+
+    $list ='<table class="table table-bordered table-striped dataTable" >
+        <thead>
+        <tr>
+            <th class="sorting">#</th>
+            <th></th>
+            <th class="sorting">Articulo</th>
+            <th class="sorting">Nota</th></tr>
+        </thead>
+        
+        <tfoot>
+        <tr>
+            <th>#</th>
+            <th></th>
+            <th>Articulo</th>
+            <th>Nota</th>
+        </tr>
+        </tfoot><tbody>';
+
+    
+    $b =0;
+    foreach ( $arreglo as $row) {
+                  
+        $idobjetopermitido = $row["idobjetopermitido"];
+        $nombre = $row["nombre"];        
+        $descripcion = $row["descripcion"];
+
+        $list .= "<tr><td>".$b."</td><td><i class='fa fa-times'></i></td><td>  ". $nombre."</td><td>".$descripcion."</td><tr>";
+        $b++;
+    }
+    $list .="</tbody></table>";
+
+    
+    return $list;
+}
+    
+
 /**/
 function get_status_text($status){
 

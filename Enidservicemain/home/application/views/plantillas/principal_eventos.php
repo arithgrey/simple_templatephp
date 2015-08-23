@@ -79,14 +79,14 @@
                                         
 
                                         <br>
-                                        <div class="col-md-1"></div>
+                                        
 
-                                        <div class="col-md-10">
+                                        
 
                                                 <div class="input-group">
-                                                <span class="input-group-addon" id="sizing-addon1">Nombre de la plantilla</span>
+                                                
 
-                                                  <input type="text"  id="nombre-tmpl" name="nombre_tmpl" class="form-control" placeholder="" aria-describedby="sizing-addon1" required>
+                                                  
                                                   <input type="hidden" name="tipo_templ" value="1">
                                                 </div>
 
@@ -101,8 +101,8 @@
                                                     <i class="fa fa-file-text"></i>
                                                     Registrar plantilla
                                                 </button>
-                                        </div>        
-                                        <div class="col-md-1"></div>
+                                               
+                                        
 
 
                                     </div>
@@ -140,9 +140,9 @@
                                         
 
                                         <br>
-                                        <div class="col-md-1"></div>
+                                        
 
-                                        <div class="col-md-10">
+                                        
 
                                             <div class="panel">
                         
@@ -166,9 +166,7 @@
 
 
                                                
-                                        </div>        
-                                        <div class="col-md-1"></div>
-
+                                        
 
                                     </div>
                                 </div>
@@ -183,13 +181,14 @@
                         </ul>
                     </div>
                     <div class="tab-pane" role="tabpanel" id="step3">
-                        <h3>Step 3</h3>
-                        <p>This is step 3</p>
-                        <ul class="list-inline pull-right">
-                            <li><button type="button" class="btn btn-default prev-step">Previous</button></li>
-                            <li><button type="button" class="btn btn-default next-step">Skip</button></li>
-                            <li><button type="button" class="btn btn-primary btn-info-full next-step">Save and continue</button></li>
-                        </ul>
+                        
+
+                        <h1>Mis plantillas<small> articulos permitidos</small></h1>
+
+                        
+                        <?=$plantilla_obj_permitidos;?>
+
+
                     </div>
                     <div class="tab-pane" role="tabpanel" id="complete">
                         <h3>Complete</h3>

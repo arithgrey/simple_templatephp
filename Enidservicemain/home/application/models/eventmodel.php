@@ -36,7 +36,7 @@ function update_tematicaby_id( $idevento , $idtematica, $idempresa ){
 	$r = $this->db->query($dinamic_query);
 	return $r;
 }
-
+/*Actualiza los objetos permitidos dentro del evento*/
 function update_obj_permitidobyId($idevento, $idobjeto){
 
 
@@ -251,10 +251,16 @@ function updateurlyout($nueva_url , $idevento ){
 
 
 
-function getObjetosPermitidos($idevento ){
+function getObjetosPermitidos($id_evento , $id_empresa){
 
-	$query_select = " select o.idobjetopermitido, nombre , eo.idobjetopermitido  as idpermitido , eo.idevento  from objetopermitido as o   left outer join evento_objetopermitido as eo 
-	on o.idobjetopermitido = eo.idobjetopermitido and eo.idevento ='".$idevento."' group by o.nombre;";
+	$query_select = "select  o.idobjetopermitido  , o. nombre , o.descripcion , eo.idempresa , evo.idevento 	
+	from objetopermitido as o 
+	inner join empresa_objetopermitido as eo 
+	on o.idobjetopermitido = eo.idobjetopermitido
+	and eo.idempresa=  '". $id_empresa."' 
+	left outer join evento_objetopermitido as evo 
+	on eo.idobjetopermitido = evo.idobjetopermitido
+	and evo.idevento = '".$id_evento."' group by o.nombre";
 	$result = $this->db->query($query_select);
 	return $result ->result_array();      
 	
@@ -341,9 +347,9 @@ function get_objetos_permitidosin_event($id_evento){
 
 }
 
-function update_all_in_event_obj_inter($id_evento){
+function update_all_in_event_obj_inter($id_evento , $id_empresa ){
 
-	$query_procedimiento_update_all ="call update_all_obj_in_event( $id_evento )";		
+	$query_procedimiento_update_all ="call update_all_obj_in_event( $id_evento , $id_empresa )";		
 	$result = $this->db->query($query_procedimiento_update_all);			
 	return $result->result_array();
 }

@@ -123,6 +123,7 @@ function update_edicion_evento(e){
 				url =  now + "index.php/api/event/edicion/format/json/";    
 				data_send= { "edicion" : nuevotexto , "evento" : $("#evento").val() }
 				actualiza_data(url , data_send );
+				$("#edicion-input").val(nuevotexto);
 				load_data_evento(".edicion-evento" , "#edicion-input" , "edicion" , ".place_edicion"  , "<i class='fa fa-plus'></i> Edicioón del evento" , "<i class='fa fa-plus'></i> Edicioón del evento");
 
 		}else{
@@ -334,6 +335,7 @@ function update_descripcion_evento_by_template(e){
 	evento = $("#evento").val();
 	url =  now + "index.php/api/event/descripcion_template/format/json/";
 	actualiza_data(url , { "template_content" : template_content , "evento" : evento } );
+
 	load_data_evento( ".descripcion-p" , "#descripcion-evento" , "descripcion_evento" , ".place_description" , "<i class='fa fa-plus'></i> Lo que se vivirá en el evento" , "<i class='fa fa-plus'></i> Lo que se vivirá en el evento");
 }
 
@@ -344,6 +346,7 @@ function new_restriction(e){
 	evento = $("#evento").val();
 	url = now + "index.php/api/templ/retriccion_evento/format/json/";
 	registra_data(url , {"evento" : evento, "restriccion" :  restriccion}  );
+	load_restricciones_evento();
 }
 /*Quita del evento la restriccion*/
 function delete_restriccion_evento(e){
@@ -353,5 +356,20 @@ function delete_restriccion_evento(e){
 	url = now + "index.php/api/templ/retriccion_evento/format/json/";	
 	eliminar_data(url , { "evento" : evento , "restriccion" : restriccion }  );
 
+
+}
+function load_restricciones_evento(){
+	
+	evento = $("#evento").val();
+	url = now + "index.php/api/templ/retriccion_evento/format/json/";
+	$.get(url , {"evento" : evento}  ).done(function(data){
+		
+
+
+		llenaelementoHTML(".restricciones-evento-list", data);
+
+	}).fail(function(){
+		alert("Fallo");
+	});
 
 }

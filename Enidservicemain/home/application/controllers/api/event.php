@@ -40,9 +40,12 @@ class Event extends REST_Controller{
         $this->response($responsedb);
     }    
     /**/
-    function objetospermitidos_get(){        
-        $idevento = $this->get("evento");
-        $this->response( listobjetosp($this->eventmodel->getObjetosPermitidos($idevento ) ));
+    function objetospermitidos_get(){  
+        
+        $this->validate_user_sesssion();         
+        $id_evento = $this->get("evento");
+        $id_empresa =  $this->sessionclass->getidempresa();            
+        $this->response( listobjetosp($this->eventmodel->getObjetosPermitidos( $id_evento , $id_empresa  ) ));
     }    
     /*Update url social */
     function urlbyid_put(){
@@ -231,9 +234,10 @@ class Event extends REST_Controller{
     }
     function all_objetos_permitidos_put(){
             
-        $this->validate_user_sesssion();                                
+        $this->validate_user_sesssion();   
+        $idempresa =  $this->sessionclass->getidempresa();
         $id_evento= $this->put("evento");                
-        $this->response($this->eventmodel->update_all_in_event_obj_inter($id_evento) );        
+        $this->response($this->eventmodel->update_all_in_event_obj_inter($id_evento , $idempresa ) );        
     }
     /*Validar session para modificar datos*/
     function validate_user_sesssion(){

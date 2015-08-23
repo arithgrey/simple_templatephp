@@ -61,7 +61,7 @@ class Eventos extends CI_Controller{
 
                 $id_user = $this->sessionclass->getidusuario();        
                 $plantillas_descripcion = $this->templmodel->get_templates_contenido_user_type($id_user, 1);
-                $data["plantillas_descripcion"] = display_contenido_templ($plantillas_descripcion);
+                $data["plantillas_descripcion"] = display_contenido_templ($plantillas_descripcion, 0);
 
                 /*Plantilla de mis restricciones*/
 
