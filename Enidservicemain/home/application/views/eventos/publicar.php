@@ -49,7 +49,7 @@
 
             <!--- Menu text evento  -->
             <ul class="nav nav-tabs">
-                      <li>
+                      <li class="restricciones_section_content">
                         <a href="#portlet_tab3" data-toggle="tab">
                         <i class="fa fa-exclamation-triangle"></i>Lo prohibido </a>
                       </li>
@@ -57,7 +57,7 @@
                         <a href="#portlet_tab2" data-toggle="tab">
                         <i class="fa fa-check permitidonow" ></i>Lo permitido </a>
                       </li>
-                      <li class="">
+                      <li class="politicas_section_content">
                         <a href="#portlet_tab1" data-toggle="tab">
                         <i class="fa fa-circle"></i>Políticas </a>
                       </li>                    
@@ -77,12 +77,15 @@
                   <p class='politicas-p'>
                     <?=valida_text_replace($data_evento["politicas"] ,  "<i class='fa fa-plus'></i> Lo que podría anticiparse como reembolsos o cambios" , "<i class='fa fa-plus'></i>  Lo que podría anticiparse como reembolsos o cambios" );?>
                   </p>
+
                   <div class="form-group">
                       <textarea id='politicas-evento' placeholder ='' rows="6" class="form-control" >
                         <?=$data_evento["politicas"];?>
                       </textarea>
                   </div>  
-                  <button class='btn  btn-template'><i class='fa fa-sticky-note'></i>Plantilla</button>
+                  
+                  <button  data-toggle="modal" data-target="#templa-politicas"   class='btn btn-template'><i class='fa fa-sticky-note'></i>+ agregar</button>
+                  <div class="list_politicas_evento" id="list_politicas_evento"> </div>
               </div>
               <!--Politicas Tab-->
               <!--Lo permitido  Tab-->
@@ -134,7 +137,7 @@
 
                       
                       <div class='restricciones-evento-list' id='restricciones-evento-list'>
-                        <?=$restricciones_record;?>
+                        <div class="list_restricciones_evento" id="list_restricciones_evento"></div>
                       </div>
               </div>
               <!--Termina las  restricciones -->
@@ -628,7 +631,7 @@
 
 
 
-<!--***********************************TERMINA  SERVICIOS MODAL  *************************-->
+<!--***********************************Restricciones   *************************-->
 <div id="templa-restricciones" class="modal fade">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
@@ -654,6 +657,37 @@
   </div>
 </div>
 
+<!--**********************************************-->
+
+
+
+<div id="templa-politicas" class="modal fade">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Políticas del evento</h4>
+      </div>            
+      <div class="modal-body">    
+                
+        <div class='panel'>
+
+          <?=$plantilla_politicas;?>                        
+        </div>
+                
+                
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
 
 
               
@@ -665,6 +699,7 @@
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
         <h4 class="modal-title">Servicios que incluirá en evento</h4>
+        <p>Da click en tu plantilla  para cargar tu descripción, los cambios se verán reflejados automáticamente en la sección, descripción del evento. </p>
       </div>            
       <div class="modal-body">    
                 
@@ -672,7 +707,10 @@
           <?=$plantillas_descripcion;?>                                    
         </div>
                 
-                
+         <a href="<?=base_url('index.php/templates/eventos')?>"><p>Registrar más plantillas, con esta herramienta 
+          tendrás listo en cada evento texto pre cargado listos para ser utilizado.
+
+         </p></a>
       </div>
 
       <div class="modal-footer">

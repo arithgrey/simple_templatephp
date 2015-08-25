@@ -224,6 +224,16 @@ function registra_data(url , data_send ){
 		alert("Falla al registrar");
 	});
 }
+/***/
+function registra_data_test(url , data_send ){
+
+	$.post(url , data_send ).done(function(data){
+		alert(data);
+	}).fail(function(){
+		alert("Falla al registrar");
+	});
+}
+
 /**/
 function eliminar_data(url , data_send ){
 	$.ajax({
@@ -231,6 +241,16 @@ function eliminar_data(url , data_send ){
 	   type: 'DELETE',
 	   data : data_send }).done(function(data){
 	   	
+	}).fail(function(){
+	   		alert("falla al intentar actualizar");
+	});
+}
+function eliminar_data_test(url , data_send ){
+	$.ajax({
+	   url: url,
+	   type: 'DELETE',
+	   data : data_send }).done(function(data){
+	   	alert(data);
 	}).fail(function(){
 	   		alert("falla al intentar actualizar");
 	});

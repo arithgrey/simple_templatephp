@@ -9,7 +9,18 @@ $(document).on("ready", function (){
 	$(".politicas-p").click(update_politicas_evento);
 	$(".permitido-p").click(update_permitido_evento);
 	$(".restricciones-p").click(updaterestricciones);
+	
+	$(".politicas_section_content").click(function(){
+		get_contenido_evento_temp(4,  "#list_politicas_evento");
+	});
+	$(".restricciones_section_content").click(function(){
+		get_contenido_evento_temp(3 , "#list_restricciones_evento");		
+	});
+	/*Elimina contenido del evento */
 
+	
+
+	
 	$(".permitidonow").click(load_objetospermitidos_evento);	
 	$(".genero_musical_input").click(update_genero_evento);
 	
@@ -45,7 +56,12 @@ $(document).on("ready", function (){
 	});
 
 
-	$(".contenido-text-templ").click(update_descripcion_evento_by_template);
+	$(".contenido-text-templ").click(update_descripcion_evento_by_template);	
+	
+	$(".new_politica_template").click(record_contenido_evento_template);
+	$(".new_restricciones_templ").click(record_contenido_evento_template);
+	
+
 	$(".templ-restriccion-up").click(new_restriction);
 	$(".delete_restriccion").click(delete_restriccion_evento);
 	/*Eslogan del evento */
@@ -65,7 +81,10 @@ function load_data_evento( text_visible , val , text_evento , place , null_msj ,
 		$.get(url , {"evento" : evento  , "text" : text_evento , "null_msj" : null_msj , "sin_text_msj" : sin_text_msj }).done(function(data){
 			
 			llenaelementoHTML(text_visible  , data);
+			$(val).val(data);
 			
+
+
 		}).fail(function(){
 			llenaelementoHTML( place ,  genericresponse[0]);			
 		});
@@ -331,45 +350,50 @@ function update_eslogan_evento(e){
 /**/
 
 function update_descripcion_evento_by_template(e){
+
 	template_content =  e.target.id;	
 	evento = $("#evento").val();
 	url =  now + "index.php/api/event/descripcion_template/format/json/";
 	actualiza_data(url , { "template_content" : template_content , "evento" : evento } );
-
 	load_data_evento( ".descripcion-p" , "#descripcion-evento" , "descripcion_evento" , ".place_description" , "<i class='fa fa-plus'></i> Lo que se vivirá en el evento" , "<i class='fa fa-plus'></i> Lo que se vivirá en el evento");
+
+
 }
-
-
-function new_restriction(e){
-	
-	restriccion  = e.target.id;
+/**/
+function record_contenido_evento_template(e){	
+	contenido = e.target.id;
 	evento = $("#evento").val();
-	url = now + "index.php/api/templ/retriccion_evento/format/json/";
-	registra_data(url , {"evento" : evento, "restriccion" :  restriccion}  );
-	load_restricciones_evento();
+	url = now  + "index.php/api/templ/templates_contenido_evento/format/json/";	
+	registra_data(url , {"contenido": contenido , "evento" : evento }  );
+	get_contenido_evento_temp(4,  "#list_politicas_evento");
+	get_contenido_evento_temp(3 , "#list_restricciones_evento");
 }
-/*Quita del evento la restriccion*/
-function delete_restriccion_evento(e){
+/**/
+function get_contenido_evento_temp(type,  place){
 
-	restriccion = e.target.id;
-	evento = $("#evento").val();
-	url = now + "index.php/api/templ/retriccion_evento/format/json/";	
-	eliminar_data(url , { "evento" : evento , "restriccion" : restriccion }  );
-
-
-}
-function load_restricciones_evento(){
 	
 	evento = $("#evento").val();
-	url = now + "index.php/api/templ/retriccion_evento/format/json/";
-	$.get(url , {"evento" : evento}  ).done(function(data){
-		
+	url = now  + "index.php/api/templ/templates_contenido_evento/format/json/";	
+	
+	$.get(url , {"type": type , "evento" : evento } ).done(function(data){
 
-
-		llenaelementoHTML(".restricciones-evento-list", data);
-
+		llenaelementoHTML( place , data );
+		$(".delete_contenido_templ").click(delete_contenido_evento_temp);
 	}).fail(function(){
-		alert("Fallo");
+		alert(genericresponse[0]);
 	});
-
 }
+/*DELETE contenido evento */
+function delete_contenido_evento_temp(e){
+	
+	contenido = e.target.id;
+	evento = $("#evento").val();
+	
+	url = now  + "index.php/api/templ/templates_contenido_evento/format/json/";	
+	eliminar_data(url , {"contenido": contenido , "evento" : evento }  );
+	get_contenido_evento_temp(4,  "#list_politicas_evento");
+	get_contenido_evento_temp(3 , "#list_restricciones_evento");	
+}
+
+
+

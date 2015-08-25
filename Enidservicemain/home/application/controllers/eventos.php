@@ -60,16 +60,28 @@ class Eventos extends CI_Controller{
                     
 
                 $id_user = $this->sessionclass->getidusuario();        
-                $plantillas_descripcion = $this->templmodel->get_templates_contenido_user_type($id_user, 1);
-                $data["plantillas_descripcion"] = display_contenido_templ($plantillas_descripcion, 0);
+                $plantillas_descripcion = $this->templmodel->get_templ_contenido($id_user, 1 );
+                $data["plantillas_descripcion"] = display_contenido_templ($plantillas_descripcion, 0 , 0 ,  "contenido-text-templ");
+
+
+
+                /*plantilla de politicas */
+                $plantillas_politicas = $this->templmodel->get_templ_contenido($id_user, 4);
+                $data["plantilla_politicas"] = display_contenido_templ($plantillas_politicas ,  0 , 1 , 'new_politica_template');
+
 
                 /*Plantilla de mis restricciones*/
 
-                $restricciones_data = $this->templmodel->get_restriciones($id_evento);    
-                $data["restricciones_record"]= display_record_list($restricciones_data);
+                
+                $plantillas_restriccion = $this->templmodel->get_templ_contenido($id_user, 3);        
+                $data["plantilla_restricciones"]= display_contenido_templ($plantillas_restriccion, 0 , 1 ,  "new_restricciones_templ");
 
-                $plantillas_restriccion = $this->templmodel->get_templ_restricciones($id_user);        
-                $data["plantilla_restricciones"]= display_record_list($plantillas_restriccion, 1 , 1 );
+
+                $restricciones_data = $this->templmodel->get_evento_contenido($id_evento, 3);    
+                $data["restricciones_record"]= display_contenido_templ($restricciones_data );
+
+
+
 
 
 

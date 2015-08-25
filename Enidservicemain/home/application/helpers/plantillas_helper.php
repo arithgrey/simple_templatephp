@@ -4,52 +4,10 @@ if(!function_exists('invierte_date_time')){
 
 
 /*Desplegamos las listas de restricciones*/ 
+    
+    
 
-    function display_record_list($data , $status = '' , $check=''){
-
-
-        $list ='';  
-        $count_now=1;
-        foreach ($data as $row) {
-
-            $idrestriccion  = $row["idrestriccion"];                 
-            $text_restriccion  = $row["text_restriccion"];          
-            $fecha_registro = $row["fecha_registro"];    
-
-
-            $list .='<ul class="to-do-list ui-sortable" >
-                        <li class="clearfix">
-                          
-                        
-                            <span class="drag-marker">
-                            <i></i>
-                            </span>
-                        
-                        <p class="todo-title">                                        
-                         '. $count_now . ".-  ".  $text_restriccion .'
-                        </p>';
-
-                        if ($status  == '' ) {
-                            $list.= '<div class="todo-actionlist pull-right clearfix" >
-                            <a  href="#" class="delete_restriccion todo-remove" id="'.$idrestriccion.'"><i class="delete_restriccion fa fa-times" id="'.$idrestriccion.'" ></i></a>
-                            </div>';    
-                        }
-                        
-
-                        $list.= '</li>';
-
-                        if ($check!= '' ) {
-                            $list.= '<button class="btn btn-template templ-restriccion-up" id="'. $idrestriccion. '" >+ agregar</button>';                              
-                        }
-                        
-                    $list.= '</ul>';
-                    $count_now ++;
-        }
-        return $list;
-    }
-
-
-function display_contenido_templ($data_contenido, $del=0 ){
+function display_contenido_templ($data_contenido, $del=0 , $check=0 , $identificador = 'identificador' ){
 
         
     $list_templa_contenido='<div class="panel">
@@ -62,20 +20,27 @@ function display_contenido_templ($data_contenido, $del=0 ){
        $idcontenido = $row["idcontenido"];
        $nombre_contenido =  $row["nombre_contenido"];
        $descripcion_contenido = $row["descripcion_contenido"];
+       $status = $row["status"];
         
 
         $list_templa_contenido.= '<li class="clearfix">
                                     <span class="drag-marker"><i></i></span> '.$flag .'.-                                     
-                                    <a class="contenido-text-templ" id="'. $idcontenido .'" >'. $nombre_contenido .'</a>                                    
-                                    <p class="contenido-text-templ todo-title"  id="'. $idcontenido .'" >'.$descripcion_contenido .'</p>
+                                    <a class="'.$identificador.'" id="'. $idcontenido .'" >'. $nombre_contenido .'</a>                                    
+                                    <p class="'.$identificador.' todo-title"  id="'. $idcontenido .'" >'.$descripcion_contenido .'</p>
                                     ';
 
                                     if ($del == 1 ) {
                                     $list_templa_contenido.='    <div class="todo-actionlist pull-right clearfix">
-                                            <a href="#" class="todo-remove"><i class="fa fa-times"></i></a>
-                                        </div>';    
+                                            <a href="#" class="delete_contenido_templ todo-remove" id="'. $idcontenido .'" ><i class="delete_contenido_templ fa fa-times" id="'. $idcontenido .'" ></i></a>
+                                        </div>                                        
+                                    ';    
                                     }
                                     
+
+                        if ($check!= '' ) {
+                            $list_templa_contenido.= '<button class="'. $identificador .'   btn btn-template" id="'. $idcontenido . '" >+ agregar</button>';                              
+                        }
+                        
                                 $list_templa_contenido.='</li>';
                                 $flag++;
     }
@@ -89,11 +54,11 @@ function display_contenido_templ($data_contenido, $del=0 ){
 
 function list_objetos_permitidos_empresa( $arreglo ){ 
 
-    $list ='<table class="table table-bordered table-striped dataTable" >
+    $list ='<table id="obj-permitidos" class="table table-bordered table-striped dataTable" >
         <thead>
         <tr>
             <th class="sorting">#</th>
-            <th></th>
+            <th><i class="fa fa-trash"></i></th>
             <th class="sorting">Articulo</th>
             <th class="sorting">Nota</th></tr>
         </thead>
@@ -101,7 +66,7 @@ function list_objetos_permitidos_empresa( $arreglo ){
         <tfoot>
         <tr>
             <th>#</th>
-            <th></th>
+            <th><i class="fa fa-trash"></i></th>
             <th>Articulo</th>
             <th>Nota</th>
         </tr>
@@ -115,7 +80,7 @@ function list_objetos_permitidos_empresa( $arreglo ){
         $nombre = $row["nombre"];        
         $descripcion = $row["descripcion"];
 
-        $list .= "<tr><td>".$b."</td><td><i class='fa fa-times'></i></td><td>  ". $nombre."</td><td>".$descripcion."</td><tr>";
+        $list .= "<tr><td>".$b."</td><td class='del_obj_permitido' id='". $idobjetopermitido."'><i class='del_obj_permitido fa fa-times'  id='". $idobjetopermitido."' ></i></td><td>  ". $nombre."</td><td>".$descripcion."</td><tr>";
         $b++;
     }
     $list .="</tbody></table>";

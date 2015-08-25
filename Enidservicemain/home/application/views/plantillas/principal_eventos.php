@@ -25,7 +25,7 @@
                         </a>
                     </li>
 
-                    <li role="presentation" class="disabled">
+                    <li role="presentation" class="politicas-section disabled">
                         <a data-original-title="Complete" href="#complete" data-toggle="tab" aria-controls="complete" role="tab" title="">
                             <span class="round-tab">
                                 <i class="glyphicon fa fa-circle"></i>
@@ -65,6 +65,7 @@
                              </span>
                         </header>
                         <div class="panel-body">
+                            
                             <form action="" class="form-horizontal nueva-descripcion-template" id="nueva-descripcion-template">
                                 <div class="form-group">
                                     <div class="col-md-12">
@@ -73,7 +74,7 @@
                                         
 
                                         <div class='list-templ-descripcion' id='list-templ-descripcion'>
-                                            <?=$plantillas_descripcion;?>
+                                            
                                         </div>
 
                                         
@@ -87,16 +88,16 @@
                                                 
 
                                                   
-                                                  <input type="hidden" name="tipo_templ" value="1">
+                                                  <input type="hidden" name="type" value="1">
                                                 </div>
 
                                                 <div class="input-group">
                                                 <span class="input-group-addon" id="sizing-addon1">Titulo del contenido </span>                                        
-                                                  <input type="text"  id="titulo-contenido-tmpl" name="titulo_contenido_tmpl" class="form-control" placeholder="" aria-describedby="sizing-addon1" required>                                          
+                                                  <input type="text"  id="titulo-contenido-tmpl" name="nuevo_contenido_name" class="form-control" placeholder="" aria-describedby="sizing-addon1" required>                                          
                                                 </div>
 
 
-                                                <textarea rows="6" class="form-control" name="descripcion_contenid_templ" id="descripcion-contenid-templ" required></textarea>
+                                                <textarea rows="6" class="form-control" name="contenido_text" id="descripcion-contenid-templ" required></textarea>
                                                 <button class='btn  btn-template' id='registro-template-descripcion-evento' >
                                                     <i class="fa fa-file-text"></i>
                                                     Registrar plantilla
@@ -151,10 +152,12 @@
                             <div class='restricciones-user' id='restricciones-user'></div>
                             <div class="row">
                                 <div class="col-md-12">
-                                    <form role="form" class="form-inline" id="new-restriccion-form">
-                                        <div class="form-group todo-entry">
 
-                                            <textarea placeholder="Registra la descripción de la restricción" id='restriccion_text' class='restriccion_text' name='restriccion_text' class="form-control" style="width: 100%" ></textarea>
+                                    <form role="form" class="form-inline" id="new-contenido-form">
+                                        <div class="form-group todo-entry">
+                                            <input placeholder="Nuevo articulo" class="form-control" name='nuevo_contenido_name' id='nuevo-contenido-name' style="width: 100%" type="text">
+                                            <textarea placeholder="Registra la descripción de la restricción" id='contenido_text'  class='contenido_text' name='contenido_text' class="form-control" style="width: 100%"  required></textarea>
+                                            <input type='hidden' name="type" value="3">
 
                                         </div>
                                         <button class="btn btn-primary pull-right" type="submit">+</button>
@@ -187,12 +190,74 @@
 
                         
                         <?=$plantilla_obj_permitidos;?>
+                        <div class="row">
+                                <div class="col-md-12">
+                                    <form role="form" class="form-inline" id="form-articulo-permitido">
+                                        <div class="form-group todo-entry">
+                                            <input placeholder="Nuevo articulo" class="form-control" name='nuevo_articulo' id='nuevo-articulo' style="width: 100%" type="text">
+                                                                                            
+                                            <textarea rows="4"  class="form-control" style="width: 100%"  name="nueva_descripcion" id="nueva_descripcion" ></textarea>
 
+
+                                        </div>
+                                        <button class="btn btn-primary pull-right" type="submit">+</button>
+                                    </form>
+                                </div>
+                            </div>
 
                     </div>
                     <div class="tab-pane" role="tabpanel" id="complete">
-                        <h3>Complete</h3>
-                        <p>You have successfully completed all steps.</p>
+                        <h1>Mis plantillas<small> politicas</small></h1>
+                        
+
+
+<div class='list-politicas' id="list-politicas">
+
+</div>
+
+
+
+                    <form action="" class="form-horizontal nueva-politica-template" id="nueva-politica-template">
+                                <div class="form-group">
+                                    <div class="col-md-12">
+
+                                        
+
+                                                <div class="input-group">                                                                                              
+                                                  <input type="hidden" name="type" value="4">
+                                                </div>
+
+                                                <div class="input-group">
+                                                <span class="input-group-addon" id="sizing-addon1">Titulo del contenido </span>                                        
+                                                  <input type="text"  id="titulo-contenido-tmpl" name="nuevo_contenido_name" class="form-control" placeholder="" aria-describedby="sizing-addon1" required>                                          
+                                                </div>
+
+
+                                                <textarea rows="6" class="form-control" name="contenido_text" id="contenido_descripcion" required></textarea>
+                                                <button class='btn  btn-template' id='registro-template-descripcion-evento' >
+                                                    <i class="fa fa-file-text"></i>
+                                                    Registrar plantilla
+                                                </button>
+                                               
+                                        
+
+
+                                    </div>
+                                </div>
+                            </form>
+
+
+
+
+
+
+
+
+
+
+
+
+
                     </div>
                     <div class="clearfix"></div>
                 </div>
