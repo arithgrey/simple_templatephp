@@ -1,20 +1,14 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
-
-class eventmodel extends CI_Model {
-
+class eventmodel extends CI_Model{
 function __construct(){
 
         parent::__construct();        
         $this->load->database();
 }
-
-
-
+/**/
 function getTematicaByid($idevento , $idempresa )
 {
-	
-
-	
+		
 	$query_get_byid ="SELECT t.idtematica , t.tematica_evento, t.status , t.descripcion, 
 	et.idevento , et.idtematica as idtem 	
 	FROM tematica as t
@@ -25,10 +19,8 @@ function getTematicaByid($idevento , $idempresa )
 	return $result->result_array();
 
 }
-
+/**/
 function update_tematicaby_id( $idevento , $idtematica, $idempresa ){
-
-	
 	
 	$delete_query ="DELETE FROM evento_tematica WHERE idevento ='".$idevento."' ";
 	$resultado_count = $this->db->query($delete_query);
@@ -39,10 +31,8 @@ function update_tematicaby_id( $idevento , $idtematica, $idempresa ){
 /*Actualiza los objetos permitidos dentro del evento*/
 function update_obj_permitidobyId($idevento, $idobjeto){
 
-
 	$query_exist ="SELECT * FROM evento_objetopermitido WHERE  idevento ='".$idevento."' AND  
 	idobjetopermitido='". $idobjeto ."' ";
-
 
 	$result_eventoobjto = $this->db->query($query_exist);
 	$exist = $result_eventoobjto ->num_rows();
@@ -59,12 +49,10 @@ function update_obj_permitidobyId($idevento, $idobjeto){
 		VALUES('".$idevento."' , '". $idobjeto ."' )";		
 
 	}
-
-
 	return $this->db->query($dinamic_query);
 
 }
-
+/**/
 function create( $nombre , $edicion , $inicio , $termino , $idusuario , $idempresa , $perfiles  ) {
 
 	$portada ="application/img/example.jpg";
@@ -105,11 +93,10 @@ function get_last_events_experience($idempresa , $num , $less ){
 	return $result ->result_array();      
 	
 }
-
+/**/
 function get_last_events($idempresa , $num ){
-
 	
-	$query_select ="SELECT  e.idevento , e.nombre_evento, e.descripcion_evento, e.fecha_inicio , 
+	$query_select ="SELECT e.idevento , e.nombre_evento, e.descripcion_evento, e.fecha_inicio , 
 	e.fecha_termino ,
 	e.url_social, e.url_social_youtube, e.portada , e.status  as estadoevento , e.edicion ,
 	count(es.idescenario) as totalescenarios 
@@ -121,13 +108,8 @@ function get_last_events($idempresa , $num ){
 	$result = $this->db->query($query_select);
 	return $result ->result_array();      
 }
-
-
-
 /*check if exist*/
 function checkifexist($idevento){
-
-
 
 	$query_exist ="SELECT * FROM evento where  idevento ='". $idevento ."' ";
 	$result = $this->db->query($query_exist);
@@ -140,14 +122,7 @@ function checkifexist($idevento){
 		}else{
 			return 0;
 		}
-
-
 }/*Termina la función*/
-
-
-
-
-
 function getEventbyid($idevento){
 
 	$query_get_byid ="SELECT * FROM evento where idevento ='". $idevento ."' ";
@@ -155,27 +130,18 @@ function getEventbyid($idevento){
 	return $result ->result_array();      
 }
 
-
-
-
 function updateNombre($nuevo_nombre , $idevento ){
 
 	$update_nombre = "UPDATE evento SET nombre_evento = '". $nuevo_nombre."' WHERE idevento ='".$idevento."'  ";		
 	return  $this->db->query($update_nombre);
 	
 }
-
-
 function updateEdicion($nuevo_edicion , $idevento ){
-
 
 	$update_nombre = "UPDATE evento SET edicion = '". $nuevo_edicion."' WHERE idevento ='".$idevento."'  ";		
 	return  $this->db->query($update_nombre);
 	
 }
-
-
-
 function updateDescripcion($nueva_descripcion , $idevento ) {
 	
 	$update_nombre = "UPDATE evento SET descripcion_evento='". $nueva_descripcion."' WHERE idevento ='".$idevento."'  ";		
@@ -187,55 +153,33 @@ function update_descripcion_by_content($id_contenido , $id_evento ){
 	$update_query ="UPDATE evento SET descripcion_evento = (SELECT descripcion_contenido FROM contenido WHERE  idcontenido='". $id_contenido ."' ) WHERE idevento='".$id_evento."' ";
 	return $this->db->query($update_query);	
 }
-
-
-
-
-
-
 function updatePoliticas($nueva_politica , $idevento ){
 	
 	$update_nombre = "UPDATE evento SET  politicas='". $nueva_politica ."' WHERE idevento ='".$idevento."'  ";		
 	return  $this->db->query($update_nombre);
 
 }
-
-
 function updatePermitido($nuevo_permitido , $idevento ){
 
 	$update_nombre = "UPDATE evento SET  permitido='". $nuevo_permitido ."' WHERE idevento ='".$idevento."'  ";		
 	return  $this->db->query($update_nombre);
 }
-
-
-
-
-
 function updateRestricciones($nuevo_restriccion , $idevento ){
 
 	$update_nombre = "UPDATE evento SET  restricciones ='". $nuevo_restriccion ."' WHERE idevento ='".$idevento."'  ";		
 	return  $this->db->query($update_nombre);
 }
-
-
-
-
-
-
 function updateUbicacion($nueva_ubicacion , $idevento ) {
 	
 	$update_ubicacion = "UPDATE evento SET ubicacion='". $nueva_ubicacion ."' WHERE idevento ='".$idevento."'  ";		
 	return  $this->db->query($update_ubicacion);
 
 }
-
-
 function updategeneros($nuevos_generos , $idevento ){
 
 	$update_genero = "UPDATE evento SET genero_tupla='". $nuevos_generos ."' WHERE idevento ='".$idevento."'  ";		
 	return  $this->db->query($update_genero);
 }
-
 function updateurl($nueva_url , $url_social_evento_youtube , $idevento ) {
 	
 	$update_url = "UPDATE evento SET url_social='". $nueva_url ."' , url_social_youtube='". $url_social_evento_youtube ."'   WHERE idevento ='".$idevento."'  ";		
@@ -247,10 +191,6 @@ function updateurlyout($nueva_url , $idevento ){
 	return  $this->db->query($update_url);
 
 }
-
-
-
-
 function getObjetosPermitidos($id_evento , $id_empresa){
 
 	$query_select = "select  o.idobjetopermitido  , o. nombre , o.descripcion , eo.idempresa , evo.idevento 	
@@ -265,11 +205,7 @@ function getObjetosPermitidos($id_evento , $id_empresa){
 	return $result ->result_array();      
 	
 }
-
-
-
 /*Pasados **Pasados **Pasados **Pasados **Pasados **Pasados **Pasados */
-
 function get_time_events_byid($idempresa ){
 
 
@@ -285,8 +221,6 @@ function get_time_events_byid($idempresa ){
 	$result = $this->db->query($query_select);
 	return $result ->result_array();   
 }
-
-
 /**End Pasados **End Pasados **End Pasados **End Pasados **End Pasados **/
 function get_servicios_evento_by_id($id_evento){
 
@@ -295,23 +229,13 @@ function get_servicios_evento_by_id($id_evento){
 	$result = $this->db->query($query_servicios_list);
 	return $result->result_array();
 }
-
-
-
-
 /*********************        **************************               *****************/
-
 function delete_byid($id_evento , $id_usuario , $id_empresa ){
 
 	$query_delete_event="call delete_evento_all_data('". $id_evento ."'  , '". $id_usuario ."' )";
 	return $this->db->query($query_delete_event);
-	
-
-
 }
-
-
-
+/**/
 function get_list_generos_musicales_byidev($id_evento){
 
 	$generos_list ="select g.idgenero_musical, g.nombre  from genero_musical as g 
@@ -321,21 +245,14 @@ function get_list_generos_musicales_byidev($id_evento){
 
 	$result = $this->db->query($generos_list);				
 	return $result->result_array();
-	
-
 }
 /****************** ****************** ****************** ****************** ****************** */
-
 function update_eslogan($id_evento , $eslogan){
 	$query_update_eslogan ="UPDATE evento SET eslogan= '$eslogan' WHERE idevento = '".$id_evento."' ";
 	return $this->db->query($query_update_eslogan);
 
 }
-
-
 /* get listobjetos permitidos del evento */
-
-
 function get_objetos_permitidosin_event($id_evento){
 	$query_get_objeto = "SELECT op.idobjetopermitido ,  op.nombre FROM  objetopermitido AS op 
 	INNER JOIN  evento_objetopermitido eop 
@@ -346,7 +263,7 @@ function get_objetos_permitidosin_event($id_evento){
 	return $result_obj->result_array();
 
 }
-
+/**/
 function update_all_in_event_obj_inter($id_evento , $id_empresa ){
 
 	$query_procedimiento_update_all ="call update_all_obj_in_event( $id_evento , $id_empresa )";		
@@ -360,7 +277,7 @@ function update_status_by_id( $id_evento , $nuevo_status ,  $id_usuario ){
 	$r = $this->db->query($query_procedure);
 	return $r->result_array();
 }
-
+/**/
 function get_event_text_by_id( $id_evento , $campo ){
 	
 
@@ -374,8 +291,6 @@ function update_date($id_evento , $nuevo_inicio , $nuevo_termino ){
 	return $this->db->query($query_update);
 
 }
-/**/
-
 /*Termina modelo */
 }
 

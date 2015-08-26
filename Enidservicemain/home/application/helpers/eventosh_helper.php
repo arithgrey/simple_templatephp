@@ -1,11 +1,5 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
- 
-//si no existe la función invierte_date_time la creamos
 if(!function_exists('invierte_date_time')){
-
-/*******************************************************************************************************/
-
-
 function listobjetosp( $arreglo ){ 
 	
 	$list ="";
@@ -33,8 +27,6 @@ function listobjetosp( $arreglo ){
 	return $list;
 
 }
-    
-
 /*********************************************************************************+*/
 function get_list_objpermitidos( $array_objpermitidos ){
 
@@ -108,9 +100,6 @@ function get_paginarion_principal($limit_display){
 }
 
 /***********************************END PAGINATION ****************************/
-
-
-
 function get_experiencia_last_events_by_empresa($data_eventos){
 $elements ="";
 
@@ -145,13 +134,8 @@ $elements ="";
                                     </div>";
         }                            
 		return $elements;                                    	
-
-
-
-
-
 }	
-
+/**/
 function get_date_event_format($inicio , $termino){
 
 	$date="";
@@ -162,8 +146,7 @@ function get_date_event_format($inicio , $termino){
 	}
 	return $date;
 }
-
-
+/**/
 }/*Termina el helper*/
  
 

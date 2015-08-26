@@ -29,8 +29,6 @@ $config['sess_flash_key']  = 'flash';
 
 
 */
-
-
 class MY_Session
 {
 	function __construct()

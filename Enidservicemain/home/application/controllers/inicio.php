@@ -10,11 +10,11 @@ class Inicio extends CI_Controller {
     }     
 	function eventos($limit_events=3){
 
+
 			$data = $this->validate_user_sesssion("Eventos");											
 			$idempresa =  $this->sessionclass->getidempresa();	
 			$data["pagination_event"] = get_paginarion_principal($limit_events);
-			$data["ultimos_eventos"] =$this->eventmodel->get_last_events($idempresa , $limit_events );					
-		
+			$data["ultimos_eventos"] =$this->eventmodel->get_last_events($idempresa , $limit_events );							
 			$this->dinamic_view_event('principal/bienvenidaestratega' , $data);
 	}
 	/*Termina la función*/

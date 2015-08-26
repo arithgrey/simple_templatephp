@@ -10,8 +10,6 @@ $(document).on("ready", function(){
 	$(".edith-fecha-evento").click(update_fecha_evento_evento);
 
 });
-
-
 function trynewevent(){
 	
 	url = now + "index.php/api/event/nuevo_evento/format/json";		
@@ -64,7 +62,6 @@ function delete_evento(e){
 }
 /***            ***************************************                  ***************** **/
 function update_fecha_evento_evento(e){
-
 	
 	id_evento = e.target.id;	 
 	$("#update-susses").hide();	
@@ -83,8 +80,6 @@ function update_fecha_evento_evento(e){
 	 return false;
 
 	});
-
-	
 
 }/*Termina la función update */
 

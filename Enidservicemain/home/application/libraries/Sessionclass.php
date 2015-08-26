@@ -1,10 +1,8 @@
 <?php if (!defined('BASEPATH')) exit('No permitir el acceso directo al script');
 class Sessionclass extends CI_Controller{
 
-
 	function __construct(){
 		parent::__construct();
-		date_default_timezone_set('America/Mexico_City');
 		$this->load->model("perfilrecursomodel");
 		
 	}
@@ -138,12 +136,7 @@ class Sessionclass extends CI_Controller{
         return $banderaso;
 
 
-	}
-
-
-
-
-	
+	}	
 }
 
 /* End of file Someclass.php */ 

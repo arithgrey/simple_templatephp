@@ -41,6 +41,7 @@
                     </li>
 
 
+
                 </ul>
             </div>
 
@@ -178,10 +179,7 @@
                         
                         
 
-                        <ul class="list-inline pull-right">
-                            <li><button type="button" class="btn btn-default prev-step">Previous</button></li>
-                            <li><button type="button" class="btn btn-primary next-step">Save and continue</button></li>
-                        </ul>
+                        
                     </div>
                     <div class="tab-pane" role="tabpanel" id="step3">
                         
@@ -267,6 +265,7 @@
    </div>
 </div>
 
+<a class='btn btn-block btn-info' href="<?=base_url('index.php/inicio/eventos')?>" ><button class="btn btn-block btn-info">Ir a la sección de eventos </button></a>
 
 
 <style type="text/css">

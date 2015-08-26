@@ -6,7 +6,7 @@ class Event extends REST_Controller{
             parent::__construct();
                              
             $this->load->model("eventmodel");                
-            $this->load->helper("eventosh");   
+            $this->load->helper("eventosh");               
             $this->load->library('sessionclass');                    
     }     
     /**/
@@ -168,7 +168,7 @@ class Event extends REST_Controller{
         $idevento = $this->get("evento");
         $this->response($this->eventmodel->getEventbyid($idevento));
     }
-    /**/    
+    /**/        
     function nuevo_evento_POST(){                        
         /*Capturamos datos*/
         $this->validate_user_sesssion();            
@@ -241,15 +241,13 @@ class Event extends REST_Controller{
     }
     /*Validar session para modificar datos*/
     function validate_user_sesssion(){
-                if( $this->sessionclass->is_logged_in() == 1) {                        
+        if( $this->sessionclass->is_logged_in() == 1) {                        
 
-                    }else{
-                    /*Terminamos la session*/
-                    $this->sessionclass->logout();
-                }   
+            }else{
+                        /*Terminamos la session*/
+                $this->sessionclass->logout();
+            }   
     }/*termina validar session */
-
 
 }/*Termina el controlador rest */
 ?>
-
