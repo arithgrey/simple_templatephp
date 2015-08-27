@@ -64,17 +64,16 @@ if(!function_exists('invierte_date_time')){
 
         foreach ($ultimos_eventos as $row){
 			
-			$urlnext = base_url('index.php/eventos/nuevo/'.$row["idevento"]."?start=".$row["fecha_inicio"] ."&end=".$row["fecha_termino"]."&status=".$row["estadoevento"] );
+			$urlnext = base_url('index.php/eventos/nuevo/'.$row["idevento"]."?start=".$row["fecha_inicio"] ."&end=".$row["fecha_termino"]."&status=".$row["status"] );
 			$id_evento = $row["idevento"];
 			if (strlen(getimg_event($id_evento)) > 0){
-
 				$portada = base_url()."application/uploads/uploads/".$id_evento."/" . getimg_event($id_evento);
 			}else{
 				$portada = base_url("application/img/example.jpg");					
 			}
 
 			
-			$estadoevento = get_statusevent($row["estadoevento"]);			 
+			$estadoevento = get_statusevent($row["status"]);			 
 			$elements .="<div class='panel'>
                                     <div class='panel-body ' style='' >
 
@@ -94,9 +93,26 @@ if(!function_exists('invierte_date_time')){
                                                     
                                                 </div>
                                             </div>
-                                            <ul class='revenue-nav'>
-		                                        <li><a href='#'><i class='fa fa-play'></i> Escenarios ". $row["totalescenarios"]."</a></li>		                                        
-		                                        <li >
+
+
+                                            <ul class='revenue-nav'>		                                        
+		                                        <li>
+												<div class='btn-group-vertical' aria-label='Vertical button group'>
+											      <div class='escenarios_evento btn-group'    role='group'>
+											        <button id='". $id_evento ."' type='button' class='btn btn-default dropdown-toggle' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>
+											          <li><a href='#'><i class='fa fa-play'></i> </a></li> Escenarios ". $row["totalescenarios"]."
+											          <span class='caret'></span>
+											        </button>
+											        <ul class='dropdown-menu' aria-labelledby='btnGroupVerticalDrop1'>											          
+											          <div class='escenarios_in_event_".$id_evento."'  id='escenarios_in_event_".$id_evento." '></div>
+											          
+
+											        </ul>
+											      </div>
+											      
+											    </div>
+
+
 
 		                                        <a class='edith-fecha-evento'  data-toggle='modal' data-target='#modal-update-evento'   id='". $row["idevento"]  ."'>
 		                                        		<i class='fa fa-calendar-o'></i>

@@ -137,6 +137,14 @@ function get_escenarios_byidevent_menosuno($id_evento, $id_escenario){
 	$result= $this->db->query($query_select);
 	return $result-> result_array();
 }
+/*retorna la data de los escenarios dentro de un evento */
+function get_escenarios_evento($id_evento){
+
+	$query_get ="SELECT *  FROM escenario WHERE idevento = '".$id_evento ."' ";
+	$result= $this->db->query($query_get);
+	return $result->result_array();
+}
+
 /*Termina modelo */
 }
 

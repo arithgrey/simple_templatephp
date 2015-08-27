@@ -12,8 +12,11 @@
     <!--Inicia el row donde se cargan imagens y se edita el nombre y demás detalles -->
     <div class="row">            
         <div class="panel" >
-          <header class="panel-heading blue-col-enid" >
-            Fecha del evento <?=$fecha_evento; ?> 
+          
+
+        
+          <header class="panel-heading blue-col-enid"   href="" data-toggle="modal" data-target="#edith_fecha_modal" >
+            <div class='text-fecha-evento'>Fecha del evento <?=$fecha_evento; ?> </div>
             <span class="tools pull-right">
               <a class="fa  fa-caret-down" href="javascript:;"></a>
             </span>
@@ -420,7 +423,7 @@
   <div class="form-group">
     <textarea class='descripcion-in-modal-escenario col-xs-12  col-sm-12 col-md-12 col-lg-12 ' ></textarea>
   </div> 
-  <button class='btn  btn-template'><i class='fa fa-sticky-note'></i>Plantilla</button>
+  
 </div>  
 
 </div><!--Termina el boby de modal -->
@@ -485,8 +488,8 @@
 
   
   <div class="modal-body"><!-- dialog body -->           
-        <h4>          
-          Fecha del evento <?=$fecha_evento;?>
+        <h4 class='fecha_edit' id='fecha_edit'>                    
+          <i class="fa fa-calendar"></i> Fecha del evento  <?=$fecha_evento;?>
         </h4>
     <!--************INICIA LA LISTA DE PRECIOS DEL EVENTO ****************-->
 
@@ -730,6 +733,45 @@
 
 
 
+<!--************************* Modal update fecha del evento    ************************* -->
+<div class="modal fade" id="edith_fecha_modal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            
+        <h4 class="modal-title" id="myModalLabel"><i class="fa fa-calendar-o"></i> Fecha del evento </h4>
+            </div>
+            <div class="modal-body">
+                
+                <h4>Actualizar la fecha del evento </h4>
+
+                <!---->
+                <form method="POST" class='update-fecha-evento-form' id="update-fecha-evento-form">
+                    <input type="hidden" name='update_evento' id='update_evento'>
+                    <div class="input-group">
+                        <input class="form-control dpd1" id="update_inicio" name="update_inicio" type="text" required>
+                        <span class="input-group-addon"> al día </span>
+                        <input class="form-control dpd2" id="update_termino" name="update_termino" type="text" required>
+                    </div>
+                    <span class="help-block" >Fecha del evento </span>
+                    <button class="btn btn-info">Guardar</button>
+                    
+                    <div class="alert alert-success" id="update-susses" role="alert">Cambios registrados </div>
+                </form>                    
+                <!---->
+
+
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>                                
+            </div>
+        </div>
+    </div>
+</div>
+
+
 
 
 
@@ -786,6 +828,8 @@
 <script src="//connect.soundcloud.com/sdk-2.0.0.js"></script>
 <script type="text/javascript" src="<?=base_url('application/js/evento/gmap.js')?>"></script>
 <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true&libraries=places"></script>
+
+
 
 
 <script type="text/javascript">     

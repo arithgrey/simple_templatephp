@@ -10,7 +10,6 @@ class Inicio extends CI_Controller {
     }     
 	function eventos($limit_events=3){
 
-
 			$data = $this->validate_user_sesssion("Eventos");											
 			$idempresa =  $this->sessionclass->getidempresa();	
 			$data["pagination_event"] = get_paginarion_principal($limit_events);

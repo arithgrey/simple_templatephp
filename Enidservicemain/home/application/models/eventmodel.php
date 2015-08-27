@@ -93,18 +93,15 @@ function get_last_events_experience($idempresa , $num , $less ){
 	return $result ->result_array();      
 	
 }
-/**/
+/*Los últimos eventos registrados de la empresa*/
 function get_last_events($idempresa , $num ){
 	
-	$query_select ="SELECT e.idevento , e.nombre_evento, e.descripcion_evento, e.fecha_inicio , 
-	e.fecha_termino ,
-	e.url_social, e.url_social_youtube, e.portada , e.status  as estadoevento , e.edicion ,
-	count(es.idescenario) as totalescenarios 
-	FROM evento as e
-	left outer join escenario as es 
-	on e.idevento = es.idevento 
-	where e.idempresa ='". $idempresa."' 
-	group by e.idevento ORDER BY e.fecha_registro DESC LIMIT $num ";
+	$query_select ="SELECT e.*,  count(es.idescenario) as totalescenarios 
+FROM evento as e
+left outer join escenario as es 
+on e.idevento = es.idevento 
+where e.idempresa ='". $idempresa."' 
+group by e.idevento ORDER BY e.fecha_registro DESC LIMIT $num";
 	$result = $this->db->query($query_select);
 	return $result ->result_array();      
 }

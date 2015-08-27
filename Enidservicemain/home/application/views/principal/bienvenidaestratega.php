@@ -1,4 +1,3 @@
-
 <!--pickers plugins-->
 <script type="text/javascript" src="<?=base_url('application/js/js/bootstrap-datepicker/js/bootstrap-datepicker.js')?>"></script>
 <script type="text/javascript" src="<?=base_url('application/js/js/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js')?>"></script>
@@ -12,6 +11,7 @@
 
 <link rel="stylesheet" type="text/css" href="<?=base_url('application/js/js/bootstrap-datepicker/css/datepicker-custom.css')?>" />
 <script type="text/javascript" src="<?=base_url('application/js/estratega/evento/principal.js')?>"></script>
+<script type="text/javascript" src="<?=base_url('application/js/escenarios/principal.js')?>"></script>
 
 
 
@@ -19,7 +19,7 @@
 
 
 
-
+    
 
 <style type="text/css">
 #dinamic-field , #success-alert{

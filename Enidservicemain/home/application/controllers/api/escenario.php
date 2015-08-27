@@ -132,6 +132,14 @@ class Escenario extends REST_Controller{
         $responsedb = $this->escenarioartistamodel->updateinicioterminoartistabyid($idartista , $idescenario  , $hiartista  , $htartista , $idempresa);
         $this->response($responsedb);                 
     }/*Termina*/
+    /**/
+    function escenario_evento_get(){
+
+        $this->validate_user_sesssion();
+        $id_evento = $this->get("evento");
+        $db_response = $this->escenariomodel->get_escenarios_evento($id_evento);
+        $this->response($db_response);
+    }
 
 
     function validate_user_sesssion(){

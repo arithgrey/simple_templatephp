@@ -19,7 +19,7 @@ $(document).on("ready", function (){
 	/*Elimina contenido del evento */
 
 	
-
+	$(".update-fecha-evento-form").submit(update_fecha_evento);
 	
 	$(".permitidonow").click(load_objetospermitidos_evento);	
 	$(".genero_musical_input").click(update_genero_evento);
@@ -62,8 +62,8 @@ $(document).on("ready", function (){
 	$(".new_restricciones_templ").click(record_contenido_evento_template);
 	
 
-	$(".templ-restriccion-up").click(new_restriction);
-	$(".delete_restriccion").click(delete_restriccion_evento);
+	
+	
 	/*Eslogan del evento */
 	$(".eslogan-p").click(update_eslogan_evento);
 
@@ -394,6 +394,19 @@ function delete_contenido_evento_temp(e){
 	get_contenido_evento_temp(4,  "#list_politicas_evento");
 	get_contenido_evento_temp(3 , "#list_restricciones_evento");	
 }
+/*Actualiza la fecha del evento */
+function update_fecha_evento(){	
+	 	
+	update_inicio = $("#update_inicio").val();
+	update_termino = $("#update_termino").val();
+	url = now + "index.php/api/event/date_by_id/format/json/";	 		 	
+	actualiza_data(url , { "evento" : id_evento , "nuevo_inicio" : update_inicio , "nuevo_termino" : update_termino } );
+	id_new_tag = "#"+ id_evento;
+	new_date = "<i class='fa fa-calendar-o'></i> " + update_inicio + "-" + update_termino; 	
+	llenaelementoHTML( ".text-fecha-evento", "FECHA DEL EVENTO " +new_date);	 
+	
+	
+	 return false;
 
 
-
+}
