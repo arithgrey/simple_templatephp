@@ -67,48 +67,22 @@
 
 
                             <div class="panel" >
-
                                 <header class="panel-heading blue-col-enid" > 
-                                    Últimos eventos anunciados 
-
-
-                                    
-                                    <span class="tools pull-right">
-                                        
-                                        <button class="btn btn-block btn-info ver-todos" type="button">
-                                           
+                                    Últimos eventos anunciados                                     
+                                    <span class="tools pull-right">                                        
+                                        <button class="btn btn-block btn-info ver-todos" type="button">                                           
                                             <span class="pull-left"> 
                                              <span class="">+ Ver todos </span> 
-                                            </span> 
-                                               
-                                        </button>    
-                                        
-
-                                        <a class="fa fa-chevron-down" href="javascript:;"></a>
-                                        
+                                            </span>                                                
+                                        </button>                                        
+                                        <a class="fa fa-chevron-down" href="javascript:;"></a>                                        
                                      </span>
-
-                                </header>
-                                
-                                <div class="panel-body" style="background:  none repeat scroll 0% 0% #124048">                    
-                                    
-                                    
-
-                                
+                                </header>                                
+                                <div class="panel-body" style="background:  none repeat scroll 0% 0% #124048">                                                        
                                     <!--last 5 -->
-
-                                    <?=getLastEventsEstratega($ultimos_eventos);?>
-
-
-
-
+                                    <?=get_last_events_empresa($ultimos_eventos, 270 , 1 , 1);?>
                                     <!--Termina-->
                                 </div>
-
-
-
-
-
 
                             </div>
                             <!---->

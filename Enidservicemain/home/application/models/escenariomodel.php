@@ -122,7 +122,6 @@ function get_escenariobyId($id_escenario){
 	$get_escenario ="SELECT * FROM escenario WHERE idescenario ='".$id_escenario."' ";
 	$result = $this->db->query($get_escenario);
 	return $result->result_array();	
-
 }
 /*Todos los escenarios menos uno*/
 function get_escenarios_byidevent_menosuno($id_evento, $id_escenario){

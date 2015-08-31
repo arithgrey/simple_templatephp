@@ -1,42 +1,94 @@
-
 <link href="<?=base_url('application/tema/plugins/rs-plugin/css/settings.css')?>" rel="stylesheet">
 <link href="<?=base_url('application/tema/plugins/owl-carousel/owl.transitions.css')?>" rel="stylesheet">
 <link href="<?=base_url('application/tema/css/style.css')?>" rel="stylesheet" >
+<script type="text/javascript" src="<?=base_url('application/tema/plugins/SmoothScroll.js')?>"></script>
+<script type="text/javascript" src="<?=base_url('application/tema/js/template.js')?>"></script>
 
+<style type="text/css">
+.title_main{
+  display: none;
+}
+</style>
 <?php 
-
   $img_f = $base_img. $img_event[0]["name"];
   $img_s = $base_img. $img_event[1]["name"];
   
    $img_t = '<span class="icon large circle"><i class="fa fa-play-circle"></i></span>';
    $img_c = '<span class="icon large circle"><i class="fa fa-heart"></i></span>';
    $img_cc = '<span class="icon large circle"><i class="fa fa-chevron-right"></i></span>';
-
-  /*if (count($img_event)>4) {
-
-      $img_t = "<img class='icon large circle' src='". $base_img. $img_event[2]["name"] . "'>"; 
-      $img_c = "<img class='icon large circle' src='".  $base_img. $img_event[3]["name"] . "'>"; 
-      $img_cc = "<img class='icon large circle' src='".  $base_img. $img_event[4]["name"] . "'>"; 
-  }*/
-
 ?>
 
 
 
 
 
-   <div class="banner clearfix">
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class='row' class='evento_principal'>
+<div class="banner clearfix">
       <div class="slideshow">          
           <div class="slider-banner-container">
             <div class="slider-banner-fullscreen">
               <ul class="slides">
                 <!-- slide 1 start -->
                 <!-- ================ -->
-
-
-
-
-
 <li data-transition="random" data-slotamount="7" data-masterspeed="500" data-saveperformance="on"
  data-title="La experiencia">                
 <img src="<?=$img_f?>" alt="slidebg1" data-bgposition="center top"  data-bgrepeat="no-repeat" data-bgfit="cover">
@@ -90,7 +142,7 @@
                   data-elementdelay="0.1"
                   data-endelementdelay="0.1"
                   data-splitout="chars"
-                  data-endspeed="400"> <?$evento["fecha_inicio"]?> - <?=$evento["fecha_termino"]?>
+                  data-endspeed="400"> <?=$evento["fecha_inicio"]?> - <?=$evento["fecha_termino"]?>
                 </div> 
                 <!-- LAYER NR. 4 -->
                 <div class="tp-caption sft fadeout text-center large_white"
@@ -266,9 +318,6 @@
         </div>
       </div>
 
-
-
-
 <!--*************************************************** *************************************+-->
 
 
@@ -340,7 +389,7 @@
 
 
 
-<section class="section default-bg clearfix">
+      <section class="section default-bg clearfix">
         <div class="container">
           <div class="row">
             <div class="col-md-12">
@@ -363,22 +412,6 @@
           </div>
         </div>
       </section>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -451,35 +484,7 @@
             
           </div>
         </div>
-      </section>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+</section>
 
 
       <div style='background: #0A142D !important;' class="dark-bg  default-hovered footer-top animated-text">
@@ -506,112 +511,65 @@
       </div>
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
  
 
   <div class="row mb-20">
-            <div class="col-md-4">
+
+            <div class="col-md-12">              
+              <table class='table text-center' >
+                <tr class='text-center'>
+                    <td class='blue-col-enid' rowspan="2">El día del evento</td>
+                    <td>
+                      <a href="<?=base_url('index.php/eventos/diaevento/' ).'/'.$evento["idevento"]?>">                        
+                        <span class="icon circle small default-bg"><i class="fa fa-check"></i></span>                        
+                      </a>Lo permitido
+                    </td>
+                    <td>
+                      <a href="<?=base_url('index.php/eventos/diaevento/').'/'.$evento["idevento"]?>">                        
+                          <span class="icon circle small default-bg"><i class="fa fa-circle"></i> 
+                          </span>                          
+                        </a> Politicas
+                    </td>
+                    <td>
+                      <a href="<?=base_url('index.php/eventos/diaevento/').'/'.$evento["idevento"]?>">                        
+                          <span class="icon circle small default-bg"><i class="fa fa-exclamation-triangle"></i> 
+                          </span> 
+                      </a> Lo prohibido                      
+                       
+                    </td>
+                </tr>
+                
+                
+                <tr>
+                  
+                    <td>
+                      <a style='text-decoration:none;' href="<?=base_url('index.php/eventos/diaevento/').'/'.$evento["idevento"]?>">                        
+                      <span style='font-size: .8em'><?=substr($evento["permitido"], 0 , 300); ?> ....</span>                      
+                      </a>
+                      <a href="<?=base_url('index.php/eventos/diaevento/'.$evento["idevento"]."#articulos-permitidos")?>"><button class='btn btn-lg btn-default btn-animated'>Artículos permitidos </button></a>
+                    </td>
+                    <td>
+                      <a style='text-decoration:none;' href="<?=base_url('index.php/eventos/diaevento/').'/'.$evento["idevento"]?>">                        
+                      <span style='font-size: .8em'><?=substr($evento["politicas"],  0 , 300); ?>...</span>
+                      </a>
+                    </td>
+                    <td>
+                      <a style='text-decoration:none;'href="<?=base_url('index.php/eventos/diaevento/').'/'.$evento["idevento"]?>">                        
+                      <span style='font-size: .8em'><?=substr($evento["politicas"],  0 , 300); ?></span>
+                      </a>
+                    </td>
+                </tr>
               
-                
-                
-                
+             </table>
+            </div>
 
 
+
+            <div class="col-md-8">            
                 
                   <h2><i class="fa fa-map-marker"></i> Locación</h2>
-                  <p><?=$evento["ubicacion"]?></p>                  
-                
-
-
-
-
-              
+                  <p><?=$evento["ubicacion"]?></p>                                  
             </div>
-            <div class="col-md-4">
-              
-                
-                   
-                
-
-
-
-
-
-                  <h2>El día del evento </h2>                  
-                  
-
-
-
-                  <div class="media">                    
-                    <div class="media-left">
-                        <h4 class="">Lo permitido </h4>
-                        <a href="<?=base_url('index.php/eventos/diaevento/'.$evento["idevento"]."#permitido")?>">                        
-                          <span class="icon circle small default-bg"><i class="fa fa-check"></i> 
-                          </span>
-                          <?=substr($evento["permitido"], 0 , 130); ?> ....
-                        </a>
-                        <a href="<?=base_url('index.php/eventos/diaevento/'.$evento["idevento"]."#articulos-permitidos")?>"><button class='btn btn-lg btn-default btn-animated'>Artículos permitidos </button></a>
-                    </div>                                    
-                  </div>
-
-              
-
-
-
-                  <div class="media">                    
-                    <div class="media-right">
-                        <h4 class="">Politicas del evento</h4>
-                        <a href="<?=base_url('index.php/eventos/diaevento/'.$evento["idevento"]."#politicas")?>">                        
-                          <span class="icon circle small default-bg"><i class="fa fa-circle"></i> 
-                          </span>
-                          <?=substr($evento["politicas"],  0 , 140); ?>...
-                        </a>
-                       
-                    </div>                                    
-                  </div>
-
-
-
-                  
-
-                  <div class="media">                    
-                    <div class="media-right">
-                        <h4 class="media-heading">Lo prohibido</h4>
-                        <a href="<?=base_url('index.php/eventos/diaevento/'.$evento["idevento"]."#lo-prohibido")?>">                        
-                          <span class="icon circle small default-bg"><i class="fa fa-exclamation-triangle"></i> 
-                          </span>
-                          <?=substr($evento["restricciones"] , 0 ,  140 ); ?>... 
-                        </a>
-                       
-                    </div>                                    
-                  </div>
-
-
-                  <ul class="social-links dark circle">
-                      <li><a target="_blank" href="<?=$evento["url_social"]?>"><i class="fa fa-facebook"></i></a></li>                      
-                      <li><a target="_blank" href="<?=$evento["url_social_youtube"]?>"><i class="fa fa-google-plus"></i></a></li>
-                
-                  </ul>
-
-
-            </div>
-
-
-
 
             <div class="col-md-4">
               
@@ -631,11 +589,14 @@
 
               
             </div>
+
+            
+
           </div>
 
-
+</div><!--Termina el row principal-->
 <!--***********************************INICIA SERVICIOS MODAL  *************************-->
-  <?php $this->load->view("eventos/modal_config_event_template");?>
+<?php $this->load->view("eventos/modal_config_event_template");?>
 <!--***********************************TERMINA SERVICIOS MODAL  *************************-->
 
 
@@ -644,4 +605,4 @@
 <script type="text/javascript" src="<?=base_url('application/tema/plugins/rs-plugin/js/jquery.themepunch.revolution.min.js')?>"></script>
 <script type="text/javascript" src="<?=base_url('application/tema/plugins/owl-carousel/owl.carousel.js')?>"></script>
 <script type="text/javascript" src="<?=base_url('application/tema/js/template.js')?>"></script>
-<script type="text/javascript" src="<?=base_url('application/js/evento/client/principal.js')?>"></script>
+

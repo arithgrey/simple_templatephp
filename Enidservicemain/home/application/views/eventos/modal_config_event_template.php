@@ -1,3 +1,4 @@
+<script type="text/javascript" src="<?=base_url('application/js/evento/client/principal.js')?>"></script>
 <div id="update-status-ev-modal" class="modal fade">  
 <div class="modal-dialog modal-lg">
   <div class="modal-content">      

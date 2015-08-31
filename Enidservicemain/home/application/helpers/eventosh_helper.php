@@ -147,6 +147,122 @@ function get_date_event_format($inicio , $termino){
 	return $date;
 }
 /**/
+
+
+
+function get_last_events_empresa($ultimos_eventos, $limit_text= 270 ,  $show_edit=0 , $show_delete = 0 ){
+		$elements ="";
+		
+		if (count($ultimos_eventos) == 0 ) {
+
+			$elements.= default_template_eventos();
+		}
+
+        foreach ($ultimos_eventos as $row){
+			
+			$urlnext = base_url('index.php/eventos/nuevo/'.$row["idevento"]."?start=".$row["fecha_inicio"] ."&end=".$row["fecha_termino"]."&status=".$row["status"] );
+			$id_evento = $row["idevento"];
+			if (strlen(getimg_event($id_evento)) > 0){
+				$portada = base_url()."application/uploads/uploads/".$id_evento."/" . getimg_event($id_evento);
+			}else{
+				$portada = base_url("application/img/example.jpg");					
+			}
+
+			
+			$estadoevento = get_statusevent($row["status"]);			 
+			$elements .="<div class='panel'>
+                                    <div class='panel-body ' style='' >
+
+                                        <div class='media blog-cmnt'>
+                                                <a href='$urlnext' class='pull-left'>
+                                                    <img src='$portada' class='media-object'>
+                                                </a>
+                                                <div class='media-body'>
+                                                    <h4 class='media-heading' >
+                                                        <a  href='$urlnext'> <label>".$row["nombre_evento"] ."</label>
+                                                        ".  $row["edicion"] ." </a>
+
+                                                    </h4>
+                                                    <span style='font-size: 1em;' class='mp-less'>
+                                                        ". substr ($row["descripcion_evento"] , 0, $limit_text) ."...
+                                                    </span>
+                                                    
+                                                </div>
+                                            </div>
+
+
+                                            <ul class='revenue-nav'>		                                        
+		                                        <li>
+												<div class='btn-group-vertical' aria-label='Vertical button group'>
+											      <div class='escenarios_evento btn-group'    role='group'>
+											        <button id='". $id_evento ."' type='button' class='btn btn-default dropdown-toggle' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>
+											          <li><a href='#'><i class='fa fa-play'></i> </a></li> Escenarios ". $row["totalescenarios"]."
+											          <span class='caret'></span>
+											        </button>
+											        <ul class='dropdown-menu' aria-labelledby='btnGroupVerticalDrop1'>											          
+											          <div class='escenarios_in_event_".$id_evento."'  id='escenarios_in_event_".$id_evento." '></div>
+											          
+
+											        </ul>
+											      </div>
+											      
+											    </div>
+
+
+
+		                                        <a class='edith-fecha-evento'  data-toggle='modal' data-target='#modal-update-evento'   id='". $row["idevento"]  ."'>
+		                                        		<i class='fa fa-calendar-o'></i>
+	                                                     ".  $row["fecha_inicio"]." -
+	                                                     ".$row["fecha_termino"] ."
+	                                            </a>
+                                                </li>";
+
+                                                if ($show_edit == 1 ){
+                                                	$elements .="<li class='active' ><a href='#'>". $estadoevento ."</a></li>";
+                                                }if ($show_delete == 1) {
+                                               		$elements .=" <li class=''> <a class='delete_evento' id='".$id_evento. "'  ><i class='delete_evento fa fa-trash-o' id='".$id_evento."'></i></a></li>";		 	
+                                                }
+                                                
+                                                $elements.="
+		                                    </ul>
+                                        </div>
+                                    </div>";
+        }                            
+		return $elements;                                    	
+	}
+
+
+/*****************************************************************************************/
+/*RETORNA LA PLANTILLA EN CASO DE QUE EL CLIENTE AÚN NO HAYA REGISTRADO EVENTOS */
+	function default_template_eventos(){
+					$elements = "
+								<div class='panel'>
+                                    <div class='panel-body ' style='' >
+                                        <div class='media blog-cmnt'>
+                                                <a href='javascript:;' class='pull-left'>
+                                                    <img alt='' src='". base_url('application/img/example.jpg') ."' class='media-object'>
+                                                </a>
+                                                <div class='media-body'>
+                                                    <h4 class='media-heading' >
+                                                        <a  href='#'>Fantastic event (ejemplo)</a>
+                                                    </h4>
+                                                    <p class='mp-less'>
+                                                        Celebrando un exitoso año y cumpliendo ya 15 años haciendo historia de la música electrónica en México, nos enorgullecemos en presentar nuestra tercera edición del Festival I love this generation ...
+                                                    </p>
+                                                   <i class='fa fa-calendar-o'></i> 07/02/2015 - 07/04/2015 
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>";
+		return $elements;
+
+	}
+	
+	
+
+
+
+
 }/*Termina el helper*/
  
 

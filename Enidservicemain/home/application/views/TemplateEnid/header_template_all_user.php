@@ -99,8 +99,8 @@
                 <div class="media logged-user">
                     <img alt="" src="" class="media-object">
                     <div class="media-body">
-                        <h4><a href="#"><?=$nombre;?></a></h4> 
-                        <span><?=$perfilactual;?></span>
+                        <!--<h4><a href="#"><?=$nombre;?></a></h4> -->
+                        <!--<span><?=$perfilactual;?></span>-->
                     </div>
                 </div>
 
@@ -124,7 +124,7 @@
                 
              
 
-                <?php echo $menu;  ?>
+                <!--<?php echo $menu;  ?>-->
             </ul>
             <!--sidebar nav end-->
 
@@ -419,12 +419,14 @@
                         </ul>
                     </div>
                 </li>
+                 <!--
                 <li>
                     <a href="#" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
                         <img src="" alt="" />
                         <?=$nombre;?>
                         
                     </a>
+                   
                     <ul class="dropdown-menu dropdown-menu-usermenu pull-right">
                         
                         <li><a class='config-my-data'  href="<?=base_url('index.php/recursocontroller/informacioncuenta')?>"><i class="fa fa-cog"></i>  Configuración</a></li>
@@ -434,7 +436,9 @@
 
 
                     </ul>
+                
                 </li>
+                -->
 
             </ul>
 

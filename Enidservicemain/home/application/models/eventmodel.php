@@ -77,18 +77,12 @@ function create( $nombre , $edicion , $inicio , $termino , $idusuario , $idempre
 
 
 /*Los ultimos eventos vividos */
-function get_last_events_experience($idempresa , $num , $less ){
+function get_last_events_experience( $num , $less ){
 
-	$query_select ="SELECT  e.idevento , e.nombre_evento, e.descripcion_evento, e.fecha_inicio , 
-	e.fecha_termino ,
-	e.url_social, e.url_social_youtube, e.portada , e.status  as estadoevento , e.edicion ,
-	count(es.idescenario) as totalescenarios 
-	FROM evento as e
-	left outer join escenario as es 
-	on e.idevento = es.idevento 
-	where e.idempresa ='". $idempresa."' 
-	and e.idevento != '".$less."'
-	group by e.idevento ORDER BY e.fecha_registro DESC LIMIT $num ";
+	$query_select ="SELECT  e.* , count(es.idescenario) as totalescenarios  FROM evento as e
+	left outer join escenario as es on e.idevento = es.idevento 
+    where e.idevento != '".$less."' and  e.idempresa = (SELECT idempresa FROM evento WHERE idevento = 1 limit 1) 
+    group by e.idevento ORDER BY e.fecha_registro DESC LIMIT $num";
 	$result = $this->db->query($query_select);
 	return $result ->result_array();      
 	
@@ -190,7 +184,7 @@ function updateurlyout($nueva_url , $idevento ){
 }
 function getObjetosPermitidos($id_evento , $id_empresa){
 
-	$query_select = "select  o.idobjetopermitido  , o. nombre , o.descripcion , eo.idempresa , evo.idevento 	
+	$query_select = "select  o.* , eo.idempresa , evo.idevento 	
 	from objetopermitido as o 
 	inner join empresa_objetopermitido as eo 
 	on o.idobjetopermitido = eo.idobjetopermitido

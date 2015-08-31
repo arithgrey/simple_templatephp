@@ -113,14 +113,11 @@ class Eventos extends CI_Controller{
 
 
 function diaevento($id_evento){
-
-
                                             
         if ($this->checkifexist($id_evento ) == 1 ) {
 
             $dataevent = $this->eventmodel->getEventbyid($id_evento);
-            $data = $this->validate_user_session_event("El día del evento " , $dataevent[0]["status"] );
-            
+            $data = $this->validate_user_session_event("El día del evento " , $dataevent[0]["status"] );            
 
             $data["evento"] =  $dataevent[0];
 
@@ -128,13 +125,24 @@ function diaevento($id_evento){
             $array_servicios_incluidos = $this->servicioseventmodel->get_servicios_by_evento($id_evento);
 
             $data["list_obj_permitidos"] = get_list_objpermitidos( $list_obj );
-            $data["list_servicios_incluidos"] = get_servicios_inclidos_event($array_servicios_incluidos);
-            
+            $data["list_servicios_incluidos"] = get_servicios_inclidos_event($array_servicios_incluidos);        
+
+
+            $response_db_politicas   = $this->templmodel->get_contenido_evento($id_evento , 4 );
+            $politicas_list = display_contenido_templ($response_db_politicas ) ;        
+            $data["politicas_list"]= $politicas_list;
+            /*restricciones list*/
+            $response_db_restricciones  = $this->templmodel->get_contenido_evento($id_evento , 3 );
+            $restricciones_list = display_contenido_templ($response_db_restricciones) ;        
+            $data["restricciones_list"]= $restricciones_list;
             /* Vistas */
+    
+
+
             
+            $this->show_data_event($data, 'eventos/dia_evento' );
+
             
-            
-            $this->dinamic_view_event('eventos/dia_evento' , $data);
 
         }else{
             header('Location:' . base_url('index.php/inicio/eventos'));
@@ -145,30 +153,21 @@ function diaevento($id_evento){
 
 /****************************** Accesos al evento ************************************/
 function accesosalevento($id_evento , $status){
+        
+        if ($this->checkifexist($id_evento) == 1 ) {    
+            
+            
 
-    
-        if ($this->checkifexist($id_evento) == 1 ) {
-    
-             
-            $data = $this->validate_user_session_event("Accesos al evento " , $status);    
-            $idempresa =  $this->sessionclass->getidempresa();                                                                                                                    
+            $data = $this->validate_user_session_event("Accesos al evento " , $status);                
             $data_accesos_evento= $this->accesosmodel->get_acceso_by_event($id_evento);
-            $data["accesos_evento"] = accesos_view_default($data_accesos_evento);
+            $data["accesos_evento"] = accesos_view_default($data_accesos_evento);            
+            $data_eventos_experiencia = $this->eventmodel->get_last_events_experience(4 , $id_evento);                  
 
-
-            $datestring = '%d/%m/%Y - %h:%i %a';
-            $time = time();
-            $fecha_hora_actual =  mdate($datestring, $time);
-            $data["fecha_hora_actual"] = $fecha_hora_actual;
-
-            $data_eventos_experiencia = $this->eventmodel->get_last_events_experience($idempresa , 5 , $id_evento);                  
-
-            $data["ultimos_eventos_experiencia"] = get_experiencia_last_events_by_empresa($data_eventos_experiencia );
-
+            $data["ultimos_eventos_experiencia"] = $data_eventos_experiencia;
             /* Vistas */
-            $this->load->view('TemplateEnid/header_template', $data);
-            $this->load->view('eventos/accesos_evento', $data);  
-            $this->load->view('TemplateEnid/footer_template', $data);    
+            $this->show_data_event($data, 'eventos/accesos_evento');            
+            
+            
 
         }else{
             header('Location:' . base_url('index.php/inicio/eventos'));
@@ -184,8 +183,7 @@ function accesosalevento($id_evento , $status){
 
                 $dataevent = $this->eventmodel->getEventbyid($id_evento);
 
-                $data =  $this->validate_user_session_event($dataevent[0]["nombre_evento"] , $dataevent[0]["status"]);                                
-                                        
+                $data =  $this->validate_user_session_event($dataevent[0]["nombre_evento"] , $dataevent[0]["status"]);                                                                        
                 $data["img_event"]=  get_img_by_event_in_directory($id_evento);                                    
                 $data["base_img"]= base_url()."application/uploads/uploads/". $id_evento."/";                                    
                 
@@ -198,9 +196,11 @@ function accesosalevento($id_evento , $status){
                 $array_servicios_includos = $this->eventmodel->get_servicios_evento_by_id($id_evento);
                 $data["servicios_evento"] = list_services_default_view($array_servicios_includos); 
                 $data["idevento"] = $id_evento;
-
                     
-                $this->dinamic_view_event('eventos/previsualizarevent' , $data);
+                
+                $this->show_data_event($data, 'eventos/previsualizarevent'  );   
+                
+
 
             }else{
                 header('Location:' . base_url('index.php/inicio/eventos'));
@@ -211,6 +211,26 @@ function accesosalevento($id_evento , $status){
         return $this->eventmodel->checkifexist((int)$idevento );        
     }/*Termina la función*/
 
+
+    /*Determina que vistas mostrar para los eventos*/
+    function show_data_event($data, $center_page ){
+        
+        if ($data["in_session"] == 1) {
+        
+            
+            $this->dinamic_view_event($center_page, $data);
+
+
+        }else{  
+
+            
+            $this->load->view('TemplateEnid/header_template_all_user', $data);
+            $this->load->view($center_page , $data);            
+            $this->load->view('TemplateEnid/footer_template', $data);
+
+        }                
+      
+    }
 
 
     function validate_user_session_event($titulo_dinamico_page , $status_event ){
@@ -241,6 +261,7 @@ function accesosalevento($id_evento , $status){
                                         
                     $menu = $this->sessionclass->generadinamymenu();
                     $nombre = $this->sessionclass->getnombre();                                         
+
                     $data['titulo']=$titulo_dinamico_page;              
                     $data["menu"] = $menu;              
                     $data["nombre"]= $nombre;                                               
@@ -255,6 +276,7 @@ function accesosalevento($id_evento , $status){
     }
     /**/
     function dinamic_view_event($center_view , $data){
+
             $this->load->view('TemplateEnid/header_template', $data);
             $this->load->view($center_view, $data);                                      
             $this->load->view('TemplateEnid/footer_template', $data);    

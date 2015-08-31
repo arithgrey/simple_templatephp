@@ -11,7 +11,21 @@
 <script type="text/javascript" src="<?=base_url('application/tema/js/template.js')?>"></script>
 
 
-	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -19,7 +33,7 @@
 
 
 <div class="wrapper">
-	<div class='pull-right'><?=$fecha_hora_actual;?></div>
+	
         <div class="row blog">
         <div class="col-md-4">
             
@@ -27,37 +41,31 @@
 
 
 
+
+
+
 <!--*********************************** Lo que se vivió en eventos pasados   ***************************************-->
-            <div class="panel">
-                <div class="panel-body">
-                    <div class="blog-post">
-                        <h3> La experiencia en eventos pasados</h3>
-                        <ul>	
-                        	<?=$ultimos_eventos_experiencia?>                            
-                        </ul>
-                    </div>
-                </div>
-            </div>
+<div class="panel">
+    <header class="panel-heading blue-col-enid" > 
+         La experiencia en eventos pasados
+    <span class="tools pull-right">                                
+    
+                                        
+    <a class="fa fa-chevron-down" href="javascript:;"></a>                                    
+    </span>
+    </header>
+                                
+    <div class="panel-body" style="background:  none repeat scroll 0% 0% #124048">                                                                                    
+    <!--last 5 -->
+        <?=get_last_events_empresa($ultimos_eventos_experiencia, 100);?>
+    <!--Termina-->
+    </div>
+</div>
+
+
 
 <!--***********************************  Lo que se vivió en eventos pasados   ***************************************-->
            
-<!--*********************************** Puntos de venta   ***************************************-->
-            <div class="panel">
-                <div class="panel-body">
-                    <div class="blog-post">
-                        <h3>Puntos de venta </h3>
-                        <ul>
-                            <li><a href="javascript:;"><i class="  fa fa-map-marker"></i> Locacion 1</a></li>
-                            <li><a href="javascript:;"><i class="  fa fa-map-marker"></i> April 2013</a></li>
-                            <li><a href="javascript:;"><i class="  fa fa-map-marker"></i> March 2013</a></li>
-                            <li><a href="javascript:;"><i class="  fa fa-map-marker"></i> February 2013</a></li>
-                            <li><a href="javascript:;"><i class="  fa fa-map-marker"></i> January 2013</a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-<!--*********************************** Termina Puntos de venta   ***************************************-->
 
 
 
