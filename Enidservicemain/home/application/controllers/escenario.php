@@ -17,10 +17,12 @@ class Escenario  extends CI_Controller {
     /**************************Configuracion del escenario avanzado **************++*/
 
     function configuracionavanzada($id_escenario){
-        
+
         $data = $this->validate_user_sesssion("Escenario");       
         $data_escenario = $this->escenariomodel->get_escenariobyId($id_escenario); 
         $data["data_escenario"]=$data_escenario[0];
+        $artitastas_data = $this->escenarioartistamodel->get_artistas_inevent($id_escenario);
+        $data['artistas'] = list_artistas_escenario($artitastas_data, 'Artistas que se presentarán en este escenario' , 1 , $id_escenario);
 
         $this->dinamic_view_event( 'escenarios/configuracion_avanzado' , $data);            
     }

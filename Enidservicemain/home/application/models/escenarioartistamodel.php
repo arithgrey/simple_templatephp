@@ -52,9 +52,6 @@ function nuevoescenarioartista($idescenario , $idartista){
 
 }
 
-
-
-
 /******************************************************************/
 function deleteescenarioartosta($idescenario , $artista_quitar , $idempresa){
 
@@ -76,7 +73,6 @@ function updateinicioterminoartistabyid($idartista , $idescenario  , $hiartista 
 }
 
 /*Artistas en escenario */
-
 function get_artistas_inevent($id_escenario){
 
 	$query_get_artistas ="SELECT * FROM artista as a, escenario_artista ea 

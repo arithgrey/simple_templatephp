@@ -101,8 +101,8 @@ function updateescenariotipobyid($idescenario , $tipoescenario , $idempresa){
 	return $result;	
 
 }
-function updateescenarionombrebyid($idescenario , $nuevonombre, $idempresa){
-	$query_update ="UPDATE  escenario set nombre = '$nuevonombre' WHERE   idescenario ='$idescenario' ";
+function update_campo($idescenario , $nuevonombre, $campo ,  $idempresa){ 
+	$query_update ="UPDATE  escenario set ". $campo ." = '$nuevonombre' WHERE   idescenario ='$idescenario' ";
 	$result = $this->db->query($query_update);
 	return $result;	
 
@@ -144,6 +144,15 @@ function get_escenarios_evento($id_evento){
 	return $result->result_array();
 }
 
+function get_campo_escenario($campo , $id_escenario){
+
+	$query_get ='select '.$campo .'  from escenario  where idescenario = "'.$id_escenario.'" ' ;
+	$result = $this->db->query($query_get);
+	return $result->result_array();
+	
+
+
+}
 /*Termina modelo */
 }
 

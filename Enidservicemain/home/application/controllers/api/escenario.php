@@ -4,14 +4,25 @@ class Escenario extends REST_Controller{
       
     function __construct(){
             parent::__construct();
-                
+    
+            $this->load->helper("artistas");                    
             $this->load->helper("escenario");      
             $this->load->model("escenariomodel");
             $this->load->model("escenarioartistamodel");                
             $this->load->library('sessionclass');            
     }     
+    /*retorna el valor de un  campo del escenario*/
+    function evento_escenario_campo_get(){
+        $campo = $this->get("campo");
+        $id_escenario = $this->get("escenario");
+        $db_response = $this->escenariomodel->get_campo_escenario($campo , $id_escenario);
+
+        $this->response($db_response[0][$campo]);
+
+
+    }
     /**/
-    function nuevo_POST(){
+    function escenario_evento_POST(){
 
         $this->validate_user_sesssion();
         $evento =  $this->post("evento_escenario");
@@ -70,7 +81,7 @@ class Escenario extends REST_Controller{
             
     }
     /**/
-    function registraartistaescenario_post(){
+    function escenario_artista_post(){
         
         $this->validate_user_sesssion();
         $idescenario =  $this->post("idescenario");
@@ -79,43 +90,56 @@ class Escenario extends REST_Controller{
         $responsedb = $this->escenarioartistamodel->registraartistaescenario($idescenario , validate_text($nuevoartista)  , $idempresa);
         $this->response($responsedb);                 
     }
+    /**/
+    function escenario_artista_get(){
+
+        $id_escenario= $this->get("escenario");
+        $db_response= $this->escenarioartistamodel->get_artistas_inevent($id_escenario);
+        $response = list_artistas_escenario($db_response, 'Artistas que se presentarán en este escenario' , 1 , $id_escenario);
+        $this->response($response);
+    }
+
     /*****************************************************************************************/
-    function deleteartistaescenario_post(){    
+    function escenario_artista_delete(){    
 
         $this->validate_user_sesssion();
-        $idescenario =  $this->post("idescenario");
-        $artista_quitar =  $this->post("artista_quitar");
+        $idescenario =  $this->delete("idescenario");
+        $artista_quitar =  $this->delete("idartista");
         $idempresa =  $this->sessionclass->getidempresa();                                        
         $responsedb = $this->escenarioartistamodel->deleteescenarioartosta($idescenario , $artista_quitar , $idempresa);
         $this->response($responsedb);         
     }/*Termina la función*/
-    /**/
-    function updatenombreescenariobyid_post(){
+
+    /*actualiza el nombre del escenario */    
+    function escenario_campo_put(){
 
         $this->validate_user_sesssion();
-        $idescenario =  $this->post("idescenario");
-        $nuevonombre =  $this->post("nuevonombre");
+        $campo = $this->put("campo");
+        $idescenario =  $this->put("escenario");
+        $nuevonombre =  $this->put("nuevonombre");        
         $idempresa =  $this->sessionclass->getidempresa();                                
-        $responsedb = $this->escenariomodel->updateescenarionombrebyid($idescenario , validate_text($nuevonombre), $idempresa);
+        $responsedb = $this->escenariomodel->update_campo($idescenario , validate_text($nuevonombre), $campo ,  $idempresa);
         $this->response($responsedb);                 
     }
-    /*************************************************************************************/
-    function updateinicioterminobyid_post(){
+
+
+    /***********************inicio y termino fecha para el escenario*************************************************************/
+    function inicio_termino_put(){
         
         $this->validate_user_sesssion();    
-        $idescenario =  $this->post("idescenario");
-        $nuevoinicio =  $this->post("nuevoinicio");
-        $nuevotermino = $this->post("nuevotermino");                
-        $idempresa =  $this->sessionclass->getidempresa();                                            
-        $responsedb = $this->escenariomodel->updateescenarioinicioterminobyid($idescenario , $idempresa , $nuevoinicio , $nuevotermino);
+        $id_escenario =  $this->put("escenario");
+        $nuevo_inicio =  $this->put("nuevoinicio");
+        $nuevo_termino = $this->put("nuevotermino");                
+        $id_empresa =  $this->sessionclass->getidempresa();                                            
+        $responsedb = $this->escenariomodel->updateescenarioinicioterminobyid($id_escenario , $id_empresa , $nuevo_inicio , $nuevo_termino);
         $this->response($responsedb);         
     }
-    /*********************************************************/
-    function updateescenariotipo_post(){
+    /**************************Actualiza el tipo de escenario *******************************/
+    function escenario_tipo_put(){
         
         $this->validate_user_sesssion();
-        $idescenario =  $this->post("idescenario");
-        $tipoescenario =  $this->post("tipoescenario");
+        $idescenario =  $this->put("idescenario");
+        $tipoescenario =  $this->put("tipoescenario");
         $idempresa =  $this->sessionclass->getidempresa();                                            
         $responsedb = $this->escenariomodel->updateescenariotipobyid($idescenario , $tipoescenario , $idempresa);
         $this->response($responsedb);                     

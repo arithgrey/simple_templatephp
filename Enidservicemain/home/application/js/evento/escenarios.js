@@ -1,5 +1,5 @@
 function  nuevo_escenario(){
-	url =  now  + "index.php/api/escenario/nuevo/format/json/";		
+	url =  now  + "index.php/api/escenario/escenario_evento/format/json/";		
 	
 	$.post(url , $("#form-escenario").serialize() ).done(function(data){
 
@@ -141,7 +141,7 @@ function nuevo_artista_escenario(){
 	artistainput = $("#artistainput").val();
 	idescenario = $("#idescenariomodalartistas").val();
 	if (artistainput.length > 0 ) {
-			url = now + "index.php/api/escenario/registraartistaescenario/format/json/";
+			url = now + "index.php/api/escenario/escenario_artista/format/json/";
 			$.post( url , $("#form-artistas").serialize() )
 			  .done(function( data ) {			    			  
 			  		load_data_escenario(idescenario);
@@ -228,28 +228,28 @@ function update_description_in_modal(){
 
 function remove_artista_in_escenario(e){	
 	
-	artista_quitar = e.target.id;
-	idescenario = $("#idescenariomodalartistas").val();
-	url = now + "index.php/api/escenario/deleteartistaescenario/format/json/"; 		
-			$.post(url , {artista_quitar  : artista_quitar  ,  idescenario :  idescenario  } )
-			.done(function(data){
+	artista = e.target.id;
+	escenario = $("#idescenariomodalartistas").val();
+	
+	
 
-					load_data_escenario(idescenario);	
-					load_data_escenarios();					
+		
+	url =now + "index.php/api/escenario/escenario_artista/format/json";
+	eliminar_data(url , {"idescenario" : escenario , "idartista": artista });		
+	load_data_escenario(idescenario);	
+	load_data_escenarios();					
 
-			}).fail(function(){
-				
-				alert("ERR");
-			});
+
+
 }
 
 /**********************************************************************/
 function update_tipo_escenario(e){
 
 	nuevovalotipoescenario  = e.target.id;	
-	url = now + "index.php/api/escenario/updateescenariotipo/format/json/"; 	
+	url = now + "index.php/api/escenario/escenario_tipo/format/json/"; 	
 	data_send = {idescenario : $("#idescenariomodalartistas").val() , tipoescenario : nuevovalotipoescenario}
-	updates_send(url , data_send);
+	actualiza_data(url , data_send);
 	load_data_escenario($("#idescenariomodalartistas").val());
 	load_data_escenarios();
 
@@ -262,9 +262,10 @@ function update_nombre_escenario(){
 	showonehideone(".nombre-escenario-input-modal" , ".nombre-escenario-modal" );
 	$(".nombre-escenario-input-modal").blur(function(){
 
-				url = now + "index.php/api/escenario/updatenombreescenariobyid/format/json/";			 	
-			 	data_send = {nuevonombre : $(this).val() , idescenario : $("#idescenariomodalartistas").val() }			 	
-			 	updates_send(url , data_send);
+				url = now + "index.php/api/escenario/escenario_campo/format/json/";			 		
+
+			 	data_send = {  "campo" : "nombre" ,  nuevonombre : $(this).val() , escenario : $("#idescenariomodalartistas").val() }			 	
+			 	actualiza_data(url , data_send);
 			 	load_data_escenario($("#idescenariomodalartistas").val());
 			 	load_data_escenarios();
 			 	showonehideone(  ".nombre-escenario-modal" , ".nombre-escenario-input-modal");			 	
