@@ -9,6 +9,7 @@
 <div class="col-md-8 section-enid-events-r">
     
 
+
     <!--Inicia el row donde se cargan imagens y se edita el nombre y demás detalles -->
     <div class="row">            
         <div class="panel" >
@@ -243,15 +244,16 @@
             
             <div class='social-media-event col-xs-12  col-sm-12 col-md-12 col-lg-12'>
               <div class='row'>
-                <form class="form-horizontal" id='form-social' role="form">                                     
+                <form class="form-horizontal" id='form-social' method='' action="<?=base_url('index.php/api/event/urlbyid/format/json/');?>" role="form">                                     
                   <input type="hidden" name="evento_social" id="evento_social" value="<?=$evento;?>">
                   <div class="input-group margin-bottom-sm">
-                    <span class="input-group-addon"><i class="fa fa-facebook "></i> </span>
+                    <span class="input-group-addon"><i class="fa fa-facebook "></i> </span>                    
                     <input class="form-control" name='url_social_evento' type="text" id="url_social" placeholder="La url de tu evento en Facebook"  value="<?=$data_evento['url_social']?>" required>
                   </div>                                                                                       
                   <div class="input-group">
                   <span class="input-group-addon"><i class="fa fa-youtube-play"></i></span>
-                  <input class="form-control" name='url_social_evento_youtube' type="text" id="url_social_evento_youtube" placeholder="La url de tu canal en youtube"  value="<?=$data_evento['url_social_youtube']?>" required>
+
+                    <input class="form-control" name='url_social_evento_youtube' type="text" id="url_social_evento_youtube" placeholder="La url de tu canal en youtube"  value="<?=$data_evento['url_social_youtube']?>" required>
                   </div>         
                 </form>           
               </div>  
@@ -328,22 +330,37 @@
 
 
 
+
+
 <div id="modalesenariosedit"  class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">    
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <!--Inicia header modal -->
+      
+
+
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>        
-          <h3 class='nombre-escenario-modal'></h3>
-          <input type="text" data-trigger="click" class="form-control popovers nombre-escenario-input-modal" id='nombre-escenario-input-modal' placeholder="Escenario">
+          <div class='row'>
+            <div class='col-sm-12'>
+              <h3 class='nombre-escenario-modal'></h3>
+              <input type="text" data-trigger="click" class="form-control popovers nombre-escenario-input-modal" id='nombre-escenario-input-modal' placeholder="Escenario">
+            </div>   
+          </div>
+          <div class='row'>
+          <button id="avanzado-config-escenario" class='btn btn-info pull-right' style='background:rgba(2, 16, 20, 0.64);'><i class='fa fa-angle-double-right'></i>Avandado </button>          
+          </div>
+          
           <form id="updateescenariomodal-form">
              <input type='hidden' id="idescenarioupdatemodal" name="idescenarioupdatemodal"  class="idescenarioupdatemodal" >
           </form>
       </div>
+
+
       <!--Termina header modal -->
      <div class="modal-body">        
-        
-
+      
+    
          
 
 <!--*****************  La fecha del escenario  + el tipo  **************** -->
@@ -368,7 +385,7 @@
         <div class="col-xs-12  col-sm-6 col-md-6 col-lg-6 ">
           <div class="input-group">
             <div class="input-group-btn">                                            
-              <button tabindex="-1" data-toggle="dropdown" class="btn btn-default dropdown-toggle" type="button">Tipo<span class="caret"></span></button>
+              <button tabindex="-1" data-toggle="dropdown" class="btn btn-default dropdown-toggle" type="button">Tipo de escenario<span class="caret"></span></button>
                 <ul role="menu" class="dropdown-menu">
                   <li><a class='tipo-evento-modal' id='General' href="#">General</a></li>
                   <li><a class='tipo-evento-modal' id='Principal' href="#">Principal</a></li>
@@ -432,7 +449,7 @@
     
 
 
-    <button id="avanzado-config-escenario" class='btn btn-info'><i class='fa fa-angle-double-right'></i> Avandado </button>
+    
     <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
 </div>
       </div><!--Termina el contect --> 
@@ -457,21 +474,67 @@
 <!--************************************TERMINA CONFIRMAR  **********************************-->
  
 <!--********************************HORARIO DE LOS ARTISTAS ********************************-->
-<div id="horarioartista" class="modal fade">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Establecer horario en que se presentará el artista</h4>
-      </div>      
-      <div class="modal-body">    
-          <?=generatehorarioartista("hiartista" , "htartista" );?>
-          <button type="button" class="btn btn-default" id="tregistrohorario" data-dismiss="modal">Guardar</button>                            
+
+<div class="modal fade" id="horarioartista" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h4 class="modal-title" id="myModalLabel">Horario de presentación</h4>
+            </div>
+            <div class="modal-body">
+  
+<div class='row'>
+  <div class="form-group">
+  <label class="control-label col-md-3">Hora de inicio</label>
+    <div class="col-md-4">
+      <div class="input-group bootstrap-timepicker">
+        <input class="form-control timepicker-default" id="hiartista" name="hiartista" type="text">
+          <span class="input-group-btn">
+          <button class="btn btn-default" type="button"><i class="fa fa-clock-o"></i></button>
+          </span>
       </div>
-      <div class="modal-footer"></div>
     </div>
   </div>
 </div>
+<div class='row'>
+  <div class="form-group">
+  <label class="control-label col-md-3">Hora de término</label>
+    <div class="col-md-4">
+      <div class="input-group bootstrap-timepicker">
+        <input class="form-control timepicker-default" id="htartista"  name="htartista" type="text">
+          <span class="input-group-btn">
+          <button class="btn btn-default" type="button"><i class="fa fa-clock-o"></i></button>
+          </span>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+
+
+
+            </div>
+            
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" id="tregistrohorario" data-dismiss="modal">Guardar</button>                              
+                
+                
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
 <!--********************************TERMINA HORARIO DE LOS ARTISTAS ********************************-->
 
 
@@ -648,8 +711,15 @@
         <div class='panel'>
           <?=$plantilla_restricciones;?>                        
         </div>
-                
-                
+        <!--Link para registrar plantillas-->        
+        <div class='row'>
+          <a href="<?=base_url('index.php/templates/eventos')?>">
+            <p>Registrar una lista de restricciones, esta herramienta 
+              te permitirá cargar una y ser ocupada en diferentes eventos.            
+            </p>
+          </a>
+        </div>        
+        <!--Termina  Link para registrar plantillas-->        
       </div>
 
       <div class="modal-footer">
@@ -678,7 +748,17 @@
 
           <?=$plantilla_politicas;?>                        
         </div>
-                
+        
+        <!--Link para registrar plantillas-->        
+        <div class='row'>
+          <a href="<?=base_url('index.php/templates/eventos')?>">
+            <p>Registrar una lista de políticas, esta herramienta 
+              te permitirá cargar una y ser ocupada en diferentes eventos.            
+            </p>
+          </a>
+        </div>        
+        <!--Termina  Link para registrar plantillas-->        
+
                 
       </div>
 
@@ -792,16 +872,9 @@
 
 
 
+<!--pickers css-->
 
-
-
-
-
-
-
-
-
-
+<link rel="stylesheet" type="text/css" href="<?=base_url('application/js/js/bootstrap-timepicker/css/timepicker.css')?>" />
 
 
 

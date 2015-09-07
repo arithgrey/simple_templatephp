@@ -149,10 +149,30 @@ function get_campo_escenario($campo , $id_escenario){
 	$query_get ='select '.$campo .'  from escenario  where idescenario = "'.$id_escenario.'" ' ;
 	$result = $this->db->query($query_get);
 	return $result->result_array();
-	
-
-
 }
+/*retorna los generos del evento y si así se decea solo los del escenario */
+
+function get_generos($id_escenario, $id_evento){
+	$query_get = 'select g.*, gm.* from genero_musical g  inner join evento_genero_musical  gm on g.idgenero_musical = gm.idgenero_musical where gm.idevento ="'.$id_evento.'" ';
+	$result = $this->db->query($query_get);
+	return $result ->result_array();
+}
+
+
+function record_url_artista($id_escenario , $id_artista , $url , $social ){
+	
+	$query_update ="";	
+	if ($social == "youtube") {
+
+		$query_update ="update escenario_artista set url_social_youtube  = '".$url."' WHERE idescenario = '".$id_escenario."'  AND idartista = '".$id_artista."'  ";	
+	}else{
+		$query_update ="update escenario_artista set url_sound_cloud = '".$url."' WHERE idescenario = '".$id_escenario."'  AND idartista = '".$id_artista."'  ";	
+	}
+
+	
+	return  $this->db->query($query_update);
+}
+
 /*Termina modelo */
 }
 

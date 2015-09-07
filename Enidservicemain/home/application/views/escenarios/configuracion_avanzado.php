@@ -1,26 +1,3 @@
-<!--pickers css-->
-<link rel="stylesheet" type="text/css" href="<?=base_url('application/js/js/bootstrap-datepicker/css/datepicker-custom.css')?>" />
-<link rel="stylesheet" type="text/css" href="<?=base_url('application/js/js/bootstrap-timepicker/css/timepicker.css')?>" />
-<link rel="stylesheet" type="text/css" href="<?=base_url('application/js/js/bootstrap-colorpicker/css/colorpicker.css')?>" />
-<link rel="stylesheet" type="text/css" href="<?=base_url('application/js/js/bootstrap-daterangepicker/daterangepicker-bs3.css')?>" />
-<link rel="stylesheet" type="text/css" href="<?=base_url('application/js/js/bootstrap-datetimepicker/css/datetimepicker-custom.css')?>" />
-
-<!--pickers plugins-->
-<script type="text/javascript" src="<?=base_url('application/js/js/bootstrap-datepicker/js/bootstrap-datepicker.js')?>"></script>
-<script type="text/javascript" src="<?=base_url('application/js/js/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js')?>"></script>
-<script type="text/javascript" src="<?=base_url('application/js/js/bootstrap-daterangepicker/moment.min.js')?>"></script>
-<script type="text/javascript" src="<?=base_url('application/js/js/bootstrap-daterangepicker/daterangepicker.js')?>"></script>
-<script type="text/javascript" src="<?=base_url('application/js/js/bootstrap-colorpicker/js/bootstrap-colorpicker.js')?>"></script>
-<script type="text/javascript" src="<?=base_url('application/js/js/bootstrap-timepicker/js/bootstrap-timepicker.js')?>"></script>
-
-<!--pickers initialization-->
-<script src="<?=base_url('application/js/js/pickers-init.js')?>"></script>
-
-
-
-
-<script type="text/javascript" src="<?=base_url('application/js/escenarios/escenario_artista.js')?>"></script>
-<script type="text/javascript" src="<?=base_url('application/js/escenarios/config.js')?>"></script>
 <style type="text/css">
 .nombre-escenario-text:hover, .descripcion-escenario-text:hover {
 	cursor: pointer;
@@ -112,12 +89,11 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-            <h4 class="modal-title" id="myModalLabel">Presentación del escenario</h4>
-            </div>
-            <div class="modal-body">
-    	
+            	<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            	<h4 class="modal-title" id="myModalLabel">Presentación del escenario</h4>
 
+            </div>
+            <div class="modal-body">    	
 
    
 	<div class="col-md-12">
@@ -161,6 +137,89 @@
 
 
 
+<!---->
+<div class="modal fade" id="modal_link_sound" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h4 class="modal-title" id="myModalLabel">track de sound cloud</h4>
+            </div>
+            <div class="modal-body">    						
+								<div class="col-md-12">
+                                    <form role="form" id="form-arista-social-sound" class="form-inline" action="<?=base_url('index.php/api/escenario/escenario_artista_social/format/json/')?>">
+                                        <div class="input-group input-group-sm m-bot15">
+			                                <span class="input-group-addon">URL de algún track de sound cloud</span>
+			                                <input name="url_sound"  id="url_sound" class="form-control" placeholder="" type="url" required>
+			                            </div>
+
+                                        <button class="btn btn-primary pull-right" type="submit">registrar</button>
+                                    </form>
+                                </div>
+
+            </div>
+            <div class="modal-footer">            	
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>                
+            </div>
+        </div>
+    </div>
+</div>
+
+<!---->
+
+
+
+
+
+
+
+
+
+
+<!--link youtube inicia -->
+<div class="modal fade" id="modal_link_youtube" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h4 class="modal-title" id="myModalLabel">Video publicitario de youtube </h4>
+            </div>
+            <div class="modal-body">
+    	
+
+
+
+
+							
+								<div class="col-md-12">
+                                    <form role="form" id="form-arista-social-youtube" class="form-inline" action="<?=base_url('index.php/api/escenario/escenario_artista_social/format/json/')?>">
+                                        <div class="input-group input-group-sm m-bot15">
+			                                <span class="input-group-addon">URL video de youtube</span>
+			                                <input name="url_youtube"  id="url_youtube" class="form-control" placeholder="" type="url" required>
+			                            </div>
+
+                                        <button class="btn btn-primary pull-right" type="submit">registrar</button>
+                                    </form>
+                                </div>
+
+
+
+
+            </div>
+            <div class="modal-footer">
+            	
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                
+            </div>
+        </div>
+    </div>
+</div>
+<!--link youtube termina -->
+
+
+
+
+
 
 
 
@@ -179,42 +238,47 @@
     	
 
 
-   
+
+<div class="row">
+  <div class="form-group">
+  <label class="control-label col-md-3">Hora de inicio</label>
+    <div class="col-md-4">
+      <div class="input-group bootstrap-timepicker">
+        <input class="form-control timepicker-default" id="hiartista" name="hiartista" type="text">
+          <span class="input-group-btn">
+          <button class="btn btn-default" type="button"><i class="fa fa-clock-o"></i></button>
+          </span>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="form-group">
+  <label class="control-label col-md-3">Hora de término</label>
+    <div class="col-md-4">
+      <div class="input-group bootstrap-timepicker">
+        <input class="form-control timepicker-default" id="htartista" name="htartista" type="text">
+          <span class="input-group-btn">
+          <button class="btn btn-default" type="button"><i class="fa fa-clock-o"></i></button>
+          </span>
+      </div>
+    </div>
+  </div>
+</div>
 
 
-   <form class="form-horizontal  " action="#">
 
 
 
 
-	<div class="form-group">
-	<label class="control-label col-md-3">Default Timepicker</label>
-		<div class="col-md-4">
-			<div class="input-group bootstrap-timepicker">
-				<input class="form-control timepicker-default" type="text">
-					<span class="input-group-btn">
-					<button class="btn btn-default" type="button"><i class="fa fa-clock-o"></i></button>
-					</span>
-			</div>
-		</div>
-	</div>
-	<div class="form-group">
-		<label class="control-label col-md-3">24hr Timepicker</label>
-			<div class="col-md-4">
-				<div class="input-group bootstrap-timepicker">
-					<input class="form-control timepicker-24" type="text">
-					<span class="input-group-btn">
-					<button class="btn btn-default" type="button"><i class="fa fa-clock-o"></i></button>
-					</span>
-				</div>
-			</div>
-	</div>
-</form>
+
+
 
 
 
             </div>
             <div class="modal-footer">
+            	<button type="button" class="guardar_horario btn btn-default" data-dismiss="modal">Guardar</button>
                 <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
                 
             </div>
@@ -229,5 +293,24 @@
 
 
 
+<link href="<?=base_url('application/views/principal/dropzone.css')?>" rel="stylesheet"/>
+<link rel="stylesheet" type="text/css" href="<?=base_url('application/css/eventos/edicion.css')?>">
+<link rel="stylesheet" type="text/css" href="<?=base_url('application/js/js/bootstrap-datepicker/css/datepicker-custom.css')?>" />
 
 
+<!--pickers css-->
+<link rel="stylesheet" type="text/css" href="<?=base_url('application/js/js/bootstrap-timepicker/css/timepicker.css')?>" />
+<script type="text/javascript" src="<?=base_url('application/js/js/bootstrap-datepicker/js/bootstrap-datepicker.js')?>"></script>
+<script type="text/javascript" src="<?=base_url('application/js/js/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js')?>"></script>
+<script type="text/javascript" src="<?=base_url('application/js/js/bootstrap-daterangepicker/moment.min.js')?>"></script>
+<script type="text/javascript" src="<?=base_url('application/js/js/bootstrap-daterangepicker/daterangepicker.js')?>"></script>
+<script type="text/javascript" src="<?=base_url('application/js/js/bootstrap-colorpicker/js/bootstrap-colorpicker.js')?>"></script>
+<script type="text/javascript" src="<?=base_url('application/js/js/bootstrap-timepicker/js/bootstrap-timepicker.js')?>"></script>
+<script src="<?=base_url('application/js/js/pickers-init.js')?>"></script>
+<!--Escenarios modal-->
+<script src="//connect.soundcloud.com/sdk-2.0.0.js"></script>
+<script type="text/javascript" src="<?=base_url('application/js/evento/gmap.js')?>"></script>
+<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true&libraries=places"></script>
+
+<script type="text/javascript" src="<?=base_url('application/js/escenarios/escenario_artista.js')?>"></script>
+<script type="text/javascript" src="<?=base_url('application/js/escenarios/config.js')?>"></script>

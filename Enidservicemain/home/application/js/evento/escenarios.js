@@ -287,11 +287,11 @@ function update_nombre_escenario(){
 
 		 		nuevo_inicio =  $("#nuevo_inicio_escenario").val();
 		 		nuevo_termino = $("#nuevo_termino_escenario").val();
-		 		idescenario  =  $("#idescenariomodalartistas").val();	
+		 		escenario  =  $("#idescenariomodalartistas").val();	
 
- 				url = now + "index.php/api/escenario/updateinicioterminobyid/format/json/";
- 				data_send = {nuevoinicio : nuevo_inicio , nuevotermino : nuevo_termino , idescenario : idescenario  }
- 				updates_send(url, data_send);
+ 				url = now + "index.php/api/escenario/inicio_termino/format/json/";
+ 				data_send = {"nuevoinicio" : nuevo_inicio , "nuevotermino" : nuevo_termino , "escenario" : escenario  }
+ 				actualiza_data(url, data_send);
  				showonehideone(".day_escenario_button" , ".day_escenario_inputs" );
 			 	load_data_escenario(idescenario);	
 				load_data_escenarios();
@@ -306,9 +306,9 @@ function update_nombre_escenario(){
  
  			hiartista = $("#hiartista").val();
  			htartista = $("#htartista").val();
-	 		url = now + "index.php/api/escenario/updateinicioterminoartistabyid/format/json/";
-			data_send = { idartista : idartista , idescenario : idescenario , hiartista : hiartista , htartista : htartista }
-			updates_send(url , data_send);
+	 		url = now + "index.php/api/escenario/inicioterminoartista/format/json/";
+			data_send = { artista : idartista , escenario : idescenario , hiartista : hiartista , htartista : htartista }
+			actualiza_data(url , data_send);
 			load_data_escenario(idescenario);	
 			load_data_escenarios();
 

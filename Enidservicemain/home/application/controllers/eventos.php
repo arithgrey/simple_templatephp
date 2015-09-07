@@ -188,7 +188,7 @@ function accesosalevento($id_evento , $status){
                 $data["base_img"]= base_url()."application/uploads/uploads/". $id_evento."/";                                    
                 
                 $list_escenarios = $this->escenariomodel->get_escenarios_byidevent($id_evento);
-                $data["escenarios"] = list_resum_escenarios($list_escenarios, $id_evento);
+                $data["escenarios"] = list_resum_escenarios($list_escenarios, $id_evento , 200 , "blue-col-enid-more");
                 $list_generosdb = $this->eventmodel->get_list_generos_musicales_byidev($id_evento);
                 $data["generos_musicales_tags"] = get_tags_generos($list_generosdb);
                 $data["evento"] =  $dataevent[0];

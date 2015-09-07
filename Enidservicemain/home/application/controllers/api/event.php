@@ -54,7 +54,6 @@ class Event extends REST_Controller{
         $idevento = $this->put("evento_social");
         $nueva_url_fb  = $this->put("url_social_evento");            
         $url_social_evento_youtube =  $this->put("url_social_evento_youtube");
-
         $this->response($this->eventmodel->updateurl($nueva_url_fb , $url_social_evento_youtube , $idevento ) );
 
     }/*Termina la función*/    

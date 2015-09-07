@@ -80,7 +80,7 @@
                                 </header>                                
                                 <div class="panel-body" style="background:  none repeat scroll 0% 0% #124048">                                                        
                                     <!--last 5 -->
-                                    <?=get_last_events_empresa($ultimos_eventos, 270 , 1 , 1);?>
+                                    <?=get_last_events_empresa($ultimos_eventos, 270 , 1 , 1 , 200);?>
                                     <!--Termina-->
                                 </div>
 

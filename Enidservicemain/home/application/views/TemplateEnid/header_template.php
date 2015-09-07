@@ -243,8 +243,12 @@
             background: #1A6174 !important;
             color: white !important;
         }
+        .blue-col-enid-more{
+            background: rgba(10, 62, 66, 0.9) none repeat scroll 0% 0% !important;
+        }
         </style>
        
+
         
 
         <div class="menu-right">
@@ -474,6 +478,7 @@
 
         <!--body wrapper start-->
         <div class="wrapper">
+            
             <h1 class='title_main'>
                  &raquo; <?=$titulo;?>
             </h1>

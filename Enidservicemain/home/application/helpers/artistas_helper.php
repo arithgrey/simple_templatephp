@@ -30,11 +30,11 @@ if(!function_exists('invierte_date_time')){
 	
 
 
+
+
+
 	/*lista los artistas, template simple para edición*/
-	function list_artistas_escenario($data , $title_panel, $record=0 , $id_escenario ){
-
-
-		            
+	function list_artistas_escenario($data , $title_panel, $record=0 , $id_escenario ){		            
 
 		$artistas_in_evento = '
 					<div class="panel">
@@ -79,12 +79,15 @@ if(!function_exists('invierte_date_time')){
                                     </div>
                                     <div class="details">
                                         <div class="title">
-                                        <i id="'.$idartista.'" class="remove-artista fa fa-minus-circle"></i>
-                                            <a href="" data-toggle="modal" data-target="#modal_record_horario"> <i class="fa fa-clock-o horario_artista">
+                                        	<i id="'.$idartista.'" class="remove-artista fa fa-minus-circle"></i>                                        	
+                                        	<a href="" data-toggle="modal" data-target="#modal_link_youtube" class="artista_yt" id="'.$idartista.'"> <i class="artista_yt fa fa-youtube-play" id="'.$idartista.'" ></i></a>
+                                        	<a href="" data-toggle="modal" data-target="#modal_link_sound" class="artista_sound" id="'.$idartista.'">  <i class="artista_sound fa fa-play-circle" id="'.$idartista.'" ></i></a>
+                                            
+                                            <a href="" data-toggle="modal" data-target="#modal_record_horario">                                            
+                                            <i class="fa fa-clock-o horario_artista" id="'.$idartista.'">
                                             </i></a> Horario '.$horario.' 
                                             <a  class="pull-right" href="#">'.  $nombre_artista .'</a>
                                         </div>                                        
-
                                     </div>
                                 </li>';				                                	
 	}                                
@@ -106,7 +109,7 @@ if(!function_exists('invierte_date_time')){
 									</h3>
 		                            	<div class="row">
 											<div class="col-md-12">
-												<form role="form" class="form-inline" id="form-escenario-artista">
+												<form role="form" class="form-inline" id="form-escenario-artista" >
 													<div class="form-group todo-entry">
 														<input placeholder="nombre del artista" class="form-control" id="artista" name="nuevoartista" style="width: 100%" type="text">
 														<input type="hidden" name="idescenario" value="'.$id_escenario.'">

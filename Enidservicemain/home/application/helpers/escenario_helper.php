@@ -4,9 +4,7 @@
 if(!function_exists('invierte_date_time')){
 
 /*******************************************************************************************************/
-
-
-function list_resum_escenarios($array_escenario, $id_evento){
+function list_resum_escenarios($array_escenario, $id_evento , $limit_text, $background='blue-col-enid'){
 
     $list ='';
     foreach ($array_escenario as $row){
@@ -18,22 +16,24 @@ function list_resum_escenarios($array_escenario, $id_evento){
          }else{
               $tipo_escenario ='<li ><a style="text-decoration: none;" href="#"> <i class="fa fa-star"></i>'.$row["tipoescenario"] .'</a></li>';
          }
-       
+        
+
 
         $url_escenario = base_url("index.php/escenario/inevento"). "/".$row["idescenario"]. "/".$id_evento; 
-         $list .=' <div class="media bloc_escenario_desc">                   
-                    <div class="media-body">
-                      <a style="text-decoration:none;" href="'. $url_escenario .'"> <h4 class="media-heading">'. $nombre. '</h4></a>
-                      <div class="descripcion-esc">'. $descripcion   .'...</div>
-                    </div>
-                                    <ul class="revenue-nav">
-                                        
+        $list .='<div class="media bloc_escenario_desc">                   
+                <div class="media-body">
+                <a style="text-decoration:none;"  href="'. $url_escenario .'"> <h4  class="media-heading  '.$background.' " style="padding:10px;">'. $nombre. '</h4></a>
+                <div class="descripcion-esc">'.   substr( $descripcion , 0 , $limit_text )   .'</div>';
 
-                                        '.$tipo_escenario.'
-                                        <li class="active"><a style="text-decoration: none;" href="#"><i class="fa fa-play-circle-o"></i>
- '.$row["num_artistas"] .' Artistas </a></li>                                        
-                                    </ul>
-                  </div>';       
+
+        
+        $list.='</div> <ul class="revenue-nav">'.$tipo_escenario.'
+                       <li class="active">
+                       <a style="text-decoration: none;" href="#">
+                       <i class="fa fa-play-circle-o"></i>
+                       '.$row["num_artistas"] .' Artistas </a></li>                                        
+                        </ul>
+                </div>';       
     }
     
     return $list;
@@ -98,9 +98,15 @@ function list_escenarios_on_loadevent($responsedbescenario){
                                 substr( validate_text($descripcion)  , 0 , 200 )   ."..</span>                                       
                         <textarea  name='newdescripesenario' class='newdescripesenario form-control'  rows='3' id=". $inpu_escenario  .">".$row["descripcion"]."</textarea>
                         </h5>
-                        <p class='text-muted text-center'>Artistas #".$numero_artistas."|".$tipoescenario." | ".$fecha_escenario ." </p>
+
+                        <span class='text-muted text-center'>
+                            Artistas #".$numero_artistas."|".$tipoescenario." | ".$fecha_escenario ." 
+
+                        </span>
+
 
                     <i data-toggle='modal' data-target='#confirmationdeleteescenario' class='fa fa-times deleteescenario' id='". $row["idescenario"] ."' ></i>
+
                     
                     </div>
                     </li>                                        
@@ -205,7 +211,31 @@ function list_escenarios_on_loadevent($responsedbescenario){
     }
 
 /*****************+******_es**********+****************+****************+****************+*/
+/*generos musicales del evento */
+function get_generos($data){
 
+
+$generos = '<div class="block clearfix">
+                <h3 style ="background:#116986;  color:white; padding:10px;"  class="title">Géneros musicales</h3>
+                <div class="separator-2"></div>
+                <div class="tags-cloud">';
+
+                foreach ($data as $row){
+                        $idgenero_musical = $row["idgenero_musical"];
+                        $nombre   =    $row["nombre"];
+                        $status = $row["status"];
+                        $descripcion = $row["descripcion"];
+                        
+                        $generos .= '<div class="tag">
+                                        <a href="#">'.$nombre.'</a>
+                                    </div>';
+                        
+                    }    
+                                        
+$generos .= '</div>
+            </div>'; 
+ return $generos;                               
+}
  
    
 

@@ -18,8 +18,12 @@ class Escenario  extends CI_Controller {
 
     function configuracionavanzada($id_escenario){
 
-        $data = $this->validate_user_sesssion("Escenario");       
-        $data_escenario = $this->escenariomodel->get_escenariobyId($id_escenario); 
+
+        $evento =  $this->eventmodel->get_by_escenario($id_escenario);
+        $nombre_evento = $evento[0]["nombre_evento"];
+        $data = $this->validate_user_sesssion("Escenario del evento " . $nombre_evento);      
+
+        $data_escenario = $this->escenariomodel->get_escenariobyId($id_escenario);         
         $data["data_escenario"]=$data_escenario[0];
         $artitastas_data = $this->escenarioartistamodel->get_artistas_inevent($id_escenario);
         $data['artistas'] = list_artistas_escenario($artitastas_data, 'Artistas que se presentarán en este escenario' , 1 , $id_escenario);
@@ -37,7 +41,8 @@ class Escenario  extends CI_Controller {
         $escenariodb= $this->escenariomodel->get_escenariobyId($id_escenario);
         $data["escenario"] =$escenariodb[0]; 
         $list_escenarios = $this->escenariomodel->get_escenarios_byidevent_menosuno($id_evento , $id_escenario);
-        $data["otros_escenarios"]= list_resum_escenarios($list_escenarios, $id_evento);
+        $data["otros_escenarios"]= list_resum_escenarios($list_escenarios, $id_evento, 200);
+        $data["generos_tags"] = get_generos( $this->escenariomodel->get_generos($id_escenario, $id_evento) );
 
         $data["artitas"]= get_artistas_default_template($artistas_array);
         $this->dinamic_view_event('escenarios/principal_escenario' , $data);

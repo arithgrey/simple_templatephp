@@ -316,9 +316,10 @@ function tryrecordgeneros(e){
 /***************************************************************************+++*/
 function update_social(){
 			
-		url =  now + "index.php/api/event/urlbyid/format/json/";    								
-		data_send= updates_send(url , $("#form-social").serialize());		
-		actualiza_data(url , data_send);
+
+	url = $("#form-social").attr("action");
+	
+	actualiza_data(url , $("#form-social").serialize() );
 			
 }
 

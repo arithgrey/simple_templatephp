@@ -196,7 +196,10 @@ function get_last_events_empresa($ultimos_eventos, $limit_text= 270 ,  $show_edi
 												<div class='btn-group-vertical' aria-label='Vertical button group'>
 											      <div class='escenarios_evento btn-group'    role='group'>
 											        <button id='". $id_evento ."' type='button' class='btn btn-default dropdown-toggle' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>
-											          <li><a href='#'><i class='fa fa-play'></i> </a></li> Escenarios ". $row["totalescenarios"]."
+											          
+
+											          <li>
+											          <a href='#'><i class='fa fa-play'></i> </a></li> Escenarios ". $row["totalescenarios"]."
 											          <span class='caret'></span>
 											        </button>
 											        <ul class='dropdown-menu' aria-labelledby='btnGroupVerticalDrop1'>											          

@@ -49,9 +49,7 @@
                 <div class="tab-content">
                     <div class="tab-pane active" role="tabpanel" id="plantillas_descripciones">
                         
-                        <div class="page-header">
-                          <h1>Mis plantillas<small> descripción de eventos</small></h1>
-                        </div>
+                        
                          <div class="row">
                             <!--******************* Editor Editor **********************************-->
 
@@ -60,7 +58,8 @@
                 <div class="col-md-12">
                     <section class="panel">
                         <header class="panel-heading blue-col-enid">
-                            Nueva plantilla, dedicada a la descripción de los eventos
+                            <i class="fa fa-list"></i>
+ Nueva plantilla, descripción de eventos
                              <span class="tools pull-right">
                                 <a class="fa fa-chevron-down" href="javascript:;"></a>                                
                              </span>
@@ -80,7 +79,6 @@
 
                                         
 
-                                        <br>
                                         
 
                                         
@@ -100,8 +98,8 @@
 
                                                 <textarea rows="6" class="form-control" name="contenido_text" id="descripcion-contenid-templ" required></textarea>
                                                 <button class='btn  btn-template' id='registro-template-descripcion-evento' >
-                                                    <i class="fa fa-file-text"></i>
-                                                    Registrar plantilla
+                                                    
+                                                    Registrar
                                                 </button>
                                                
                                         
@@ -125,35 +123,20 @@
                             <!--********************Editor Editor **********************************-->
                          </div>                    
                     </div>
-                    <div class="tab-pane" role="tabpanel" id="step2">
-                        
-
-                        
-                                <div class="form-group">
-                                    <div class="col-md-12">
-
-
-                                        
-                                        <div class="page-header">
-                                          <h1>Mis plantillas<small> restricciones</small></h1>
-                                        </div>
-
-                                        
-                                        
-
-                                        <br>
-                                        
-
-                                        
-
-                                            <div class="panel">
-                        
+<div class="tab-pane" role="tabpanel" id="step2">                                            
+            <div class="form-group">
+                <div class="col-md-12">
+                    <section class="panel">
+                        <header class="panel-heading blue-col-enid">
+                            <i class="fa fa-star"></i>
+ Nueva plantilla de restricción 
+                             <span class="tools pull-right">
+                                <a class="fa fa-chevron-down" href="javascript:;"></a>                                
+                             </span>
+                        </header>
                         <div class="panel-body">
-                            
-                            <div class='restricciones-user' id='restricciones-user'></div>
-                            <div class="row">
-                                <div class="col-md-12">
-
+                
+                                    <div class='restricciones-user' id='restricciones-user'></div>
                                     <form role="form" class="form-inline" id="new-contenido-form">
                                         <div class="form-group todo-entry">
                                             <input placeholder="Nuevo articulo" class="form-control" name='nuevo_contenido_name' id='nuevo-contenido-name' style="width: 100%" type="text">
@@ -161,32 +144,32 @@
                                             <input type='hidden' name="type" value="3">
 
                                         </div>
-                                        <button class="btn btn-primary pull-right" type="submit">+</button>
+                                        <button class="btn btn-primary pull-right" type="submit">
+                                            Registrar
+                                        </button>
                                     </form>
-                                </div>
-                            </div>
+
+
+
+
                         </div>
-                    </div>
+                    </section>
+                </div>
+            </div>
+</div>
 
-
-                                               
-                                        
-
-                                    </div>
-                                </div>
-                            
-
-                        
-                        
-
-                        
-                    </div>
-                    <div class="tab-pane" role="tabpanel" id="step3">
-                        
-
-                        <h1>Mis plantillas<small> articulos permitidos</small></h1>
-
-                        
+<div class="tab-pane" role="tabpanel" id="step3">    
+            <div class="form-group">
+                <div class="col-md-12">
+                    <section class="panel">
+                        <header class="panel-heading blue-col-enid">
+                            <i class="fa fa-heart"></i>
+ Nueva plantilla Artículos permitidos
+                             <span class="tools pull-right">
+                                <a class="fa fa-chevron-down" href="javascript:;"></a>                                
+                             </span>
+                        </header>
+                        <div class="panel-body">                        
                         <?=$plantilla_obj_permitidos;?>
                         <div class="row">
                                 <div class="col-md-12">
@@ -195,32 +178,37 @@
                                             <input placeholder="Nuevo articulo" class="form-control" name='nuevo_articulo' id='nuevo-articulo' style="width: 100%" type="text">
                                                                                             
                                             <textarea rows="4"  class="form-control" style="width: 100%"  name="nueva_descripcion" id="nueva_descripcion" ></textarea>
-
-
                                         </div>
-                                        <button class="btn btn-primary pull-right" type="submit">+</button>
+                                        <button class="btn btn-primary pull-right" type="submit">Registrar</button>
                                     </form>
                                 </div>
                             </div>
 
-                    </div>
-                    <div class="tab-pane" role="tabpanel" id="complete">
-                        <h1>Mis plantillas<small> politicas</small></h1>
-                        
 
-
-<div class='list-politicas' id="list-politicas">
-
+                        </div>
+                    </section>
+        </div>        
+</div>
 </div>
 
 
+<div class="tab-pane" role="tabpanel" id="complete">
+    <div class="form-group">
+                <div class="col-md-12">
+                    <section class="panel">
+                        <header class="panel-heading blue-col-enid">
+                            <i class="fa fa-flag"></i>
 
+                            Nueva plantilla Políticas
+                             <span class="tools pull-right">
+                                <a class="fa fa-chevron-down" href="javascript:;"></a>                                
+                             </span>
+                        </header>       
+                    <div class="panel-body">                                     
+                    <div class='list-politicas' id="list-politicas"></div>
                     <form action="" class="form-horizontal nueva-politica-template" id="nueva-politica-template">
                                 <div class="form-group">
                                     <div class="col-md-12">
-
-                                        
-
                                                 <div class="input-group">                                                                                              
                                                   <input type="hidden" name="type" value="4">
                                                 </div>
@@ -232,18 +220,19 @@
 
 
                                                 <textarea rows="6" class="form-control" name="contenido_text" id="contenido_descripcion" required></textarea>
-                                                <button class='btn  btn-template' id='registro-template-descripcion-evento' >
-                                                    <i class="fa fa-file-text"></i>
-                                                    Registrar plantilla
+                                                <button class='btn  btn-template' id='registro-template-descripcion-evento' >                                                    
+                                                    Registrar
                                                 </button>
-                                               
-                                        
-
-
+                                                                                    
                                     </div>
                                 </div>
                             </form>
-
+                        </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>        
 
 
 

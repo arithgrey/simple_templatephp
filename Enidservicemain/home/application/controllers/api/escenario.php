@@ -81,6 +81,17 @@ class Escenario extends REST_Controller{
             
     }
     /**/
+    function escenario_artista_social_post(){
+      
+        $this->validate_user_sesssion();
+        $id_escenario =  $this->post("escenario");
+        $id_artista =  $this->post("artista");
+        $url = $this->post("url");
+        $social = $this->post("social");
+        $this->response($this->escenariomodel->record_url_artista($id_escenario , $id_artista , $url , $social ));
+
+    }
+    /**/
     function escenario_artista_post(){
         
         $this->validate_user_sesssion();
@@ -90,6 +101,8 @@ class Escenario extends REST_Controller{
         $responsedb = $this->escenarioartistamodel->registraartistaescenario($idescenario , validate_text($nuevoartista)  , $idempresa);
         $this->response($responsedb);                 
     }
+
+
     /**/
     function escenario_artista_get(){
 
@@ -98,7 +111,13 @@ class Escenario extends REST_Controller{
         $response = list_artistas_escenario($db_response, 'Artistas que se presentarán en este escenario' , 1 , $id_escenario);
         $this->response($response);
     }
+    function escenario_artistas_get(){
 
+        $id_escenario= $this->get("escenario");
+        $db_response= $this->escenarioartistamodel->get_artistas_inevent($id_escenario);
+        $response = list_artistas_escenario($db_response, 'Artistas que se presentarán en este escenario' , 1 , $id_escenario);
+        $this->response($response);
+    }
     /*****************************************************************************************/
     function escenario_artista_delete(){    
 
@@ -145,13 +164,13 @@ class Escenario extends REST_Controller{
         $this->response($responsedb);                     
     }
     /**************************************************************************/
-    function updateinicioterminoartistabyid_post(){
+    function inicioterminoartista_put(){
 
         $this->validate_user_sesssion();
-        $idartista = $this->post("idartista");
-        $idescenario =  $this->post("idescenario");
-        $hiartista = $this->post("hiartista");
-        $htartista = $this->post("htartista");
+        $idartista = $this->put("artista");
+        $idescenario =  $this->put("escenario");
+        $hiartista = $this->put("hiartista");
+        $htartista = $this->put("htartista");
         $idempresa =  $this->sessionclass->getidempresa();                                            
         $responsedb = $this->escenarioartistamodel->updateinicioterminoartistabyid($idartista , $idescenario  , $hiartista  , $htartista , $idempresa);
         $this->response($responsedb);                 

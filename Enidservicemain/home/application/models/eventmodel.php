@@ -9,11 +9,9 @@ function __construct(){
 function getTematicaByid($idevento , $idempresa )
 {
 		
-	$query_get_byid ="SELECT t.idtematica , t.tematica_evento, t.status , t.descripcion, 
-	et.idevento , et.idtematica as idtem 	
-	FROM tematica as t
-	LEFT OUTER JOIN  evento_tematica as et
-	ON t.idtematica = et.idtematica and et.idevento = '".$idevento."' ";
+	$query_get_byid ="SELECT t.* , et.idevento , et.idtematica as idtem 	
+	FROM tematica as t LEFT OUTER JOIN  evento_tematica as et 
+	ON t.idtematica = et.idtematica and et.idevento = '".$idevento."' ORDER BY  t.tematica_evento asc";
 
 	$result = $this->db->query($query_get_byid);
 	return $result->result_array();
@@ -282,6 +280,14 @@ function update_date($id_evento , $nuevo_inicio , $nuevo_termino ){
 	return $this->db->query($query_update);
 
 }
+/*retorna el escenairo por el id del escenario*/
+function get_by_escenario($id_escenario){
+	$query_get ="select *  from evento e  inner join escenario esc on e.idevento = esc.idevento  where esc.idescenario = '".$id_escenario."' ";	
+	$result =  	$this->db->query($query_get);
+	return $result->result_array();
+}
+
+
 /*Termina modelo */
 }
 
