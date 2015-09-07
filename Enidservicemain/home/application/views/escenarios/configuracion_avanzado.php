@@ -9,21 +9,46 @@
 </style>
 
 <button id="avanzado-config-escenario" class='btn btn-info pull-right'><i class="fa fa-eye"></i> Ver</button>
+
+
+
+
+
+
+
+
+
+
+
+
+
+                  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <div class="container"> 
     <div class="jumbotron">
     	<div class='row'>
 	    <h1 class='nombre-escenario-text'><?=$data_escenario["nombre"];?></h1>	    
 	    <div class="form-group todo-entry">
-			<input  class="form-control in-nombre-escenario " id='in-nombre-escenario' value="<?=$data_escenario["nombre"];?>" name='nuevo_nombre' style="width: 100%" type="text">
-			
+			<input  class="form-control in-nombre-escenario " id='in-nombre-escenario' value="<?=$data_escenario["nombre"];?>" name='nuevo_nombre' style="width: 100%" type="text">			
 		</div>
-	    </div>
-	    
-
+	    </div>	   
 	    <div class='row'>
 		    <p class='descripcion-escenario-text'>
 		    	<?=$data_escenario["descripcion"]?>
-
 		    </p>
 		   	<textarea id="in-descripcion-escenario"  class='form-group todo-entry' name="descripcion_escenario" >
 				<?=$data_escenario["descripcion"]?>
@@ -43,8 +68,7 @@
 	        </ul>
 	      </div>     
 	    </div>
-	    <!--*********************************************************************-->
-	    
+	    <!--*********************************************************************-->	    
 	    <a href="" data-toggle="modal" data-target="#modal-date-escenario">
 		    <div class='pull-right'>
 		    	<i class="fa fa-calendar"></i>
@@ -53,21 +77,56 @@
 			</div>
 		</a>
 		<!--*********************************************************************-->
-
-
-	  
    	</div>
 
 
 
-   	
-   	<!--Artistas en el escenario -->
-<div class='artistas-escenario-section' id='artistas-escenario-section'>
-	<?=$artistas;?>					
-</div>	
-	
+
+
+
+
+
+
+
+
+
+
+
+
+    <section class="panel">
+                        <header class="blue-col-enid panel-heading custom-tab turquoise-tab">
+                            <ul class="nav nav-tabs">
+                                <li class="active">
+                                    <a data-toggle="tab" href="#home3">
+                                        <i class="fa fa-play"></i>
+                                        Artistas que se presentarán en est escenario 
+                                    </a>
+                                </li>
+                                
+                                
+                            </ul>
+                        </header>
+                        
+                        <div class="blue-col-enid-complement panel-body">
+                            <div class="tab-content">
+                                <div id="home3" class="tab-pane active">
+                                    <!--Artistas en el escenario -->
+                                    <div class='artistas-escenario-section' id='artistas-escenario-section'>
+                                      <?=$artistas;?>         
+                                    </div>  
+
+
+                                </div>
+                                <div id="about3" class="tab-pane">Puntos de venta</div>
+                                
+                            </div>
+                        </div>
+                    </section>
+
+
 
 </div>
+
 
 
 
@@ -287,6 +346,35 @@
 </div>
 
 <input type='hidden' name='escenario' id="escenario" value="<?=$data_escenario['idescenario']?>">
+
+
+
+
+
+
+
+
+
+
+
+
+
+                    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

@@ -59,33 +59,20 @@
                     <section class="panel">
                         <header class="panel-heading blue-col-enid">
                             <i class="fa fa-list"></i>
- Nueva plantilla, descripción de eventos
+                            Nueva plantilla, descripción de eventos
                              <span class="tools pull-right">
                                 <a class="fa fa-chevron-down" href="javascript:;"></a>                                
                              </span>
                         </header>
-                        <div class="panel-body">
+                        <div class="blue-col-enid-complement panel-body">
                             
                             <form action="" class="form-horizontal nueva-descripcion-template" id="nueva-descripcion-template">
                                 <div class="form-group">
-                                    <div class="col-md-12">
+                                    <div class="col-md-12">                                        
+                                        <div class='list-templ-descripcion' id='list-templ-descripcion'></div>
+                                                                                                                    
 
-
-                                        
-
-                                        <div class='list-templ-descripcion' id='list-templ-descripcion'>
-                                            
-                                        </div>
-
-                                        
-
-                                        
-
-                                        
-
-                                                <div class="input-group">
-                                                
-
+                                                <div class="input-group">                                                
                                                   
                                                   <input type="hidden" name="type" value="1">
                                                 </div>
@@ -134,7 +121,7 @@
                                 <a class="fa fa-chevron-down" href="javascript:;"></a>                                
                              </span>
                         </header>
-                        <div class="panel-body">
+                        <div class="blue-col-enid-complement panel-body">
                 
                                     <div class='restricciones-user' id='restricciones-user'></div>
                                     <form role="form" class="form-inline" id="new-contenido-form">
@@ -169,7 +156,7 @@
                                 <a class="fa fa-chevron-down" href="javascript:;"></a>                                
                              </span>
                         </header>
-                        <div class="panel-body">                        
+                        <div class="blue-col-enid-complement panel-body">                        
                         <?=$plantilla_obj_permitidos;?>
                         <div class="row">
                                 <div class="col-md-12">
@@ -204,7 +191,7 @@
                                 <a class="fa fa-chevron-down" href="javascript:;"></a>                                
                              </span>
                         </header>       
-                    <div class="panel-body">                                     
+                    <div class="blue-col-enid-complement panel-body">                                     
                     <div class='list-politicas' id="list-politicas"></div>
                     <form action="" class="form-horizontal nueva-politica-template" id="nueva-politica-template">
                                 <div class="form-group">

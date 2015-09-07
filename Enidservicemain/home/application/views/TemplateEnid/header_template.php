@@ -246,6 +246,11 @@
         .blue-col-enid-more{
             background: rgba(10, 62, 66, 0.9) none repeat scroll 0% 0% !important;
         }
+
+        .blue-col-enid-complement{
+            background:  none repeat scroll 0% 0% #124048    
+        }
+        
         </style>
        
 

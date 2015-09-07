@@ -4,6 +4,7 @@ class Accesos extends CI_Controller {
 	function __construct(){
 		parent::__construct();
 
+        $this->load->model("eventmodel");
         $this->load->model("accesosmodel");
         $this->load->helper("accesos");
 		$this->load->library('sessionclass');    
@@ -14,9 +15,10 @@ class Accesos extends CI_Controller {
     /**************************Configuracion de Acceso  avanzado **************++*/
     function configuracionavanzada($id_acceso, $id_evento){
 
-        $data = $this->validate_user_sesssion("Acceso más configuraciones");        
-        
 
+        $data_evento  = $this->eventmodel->getEventbyid($id_evento);
+        $nombre_evento = $data_evento[0]["nombre_evento"];
+        $data = $this->validate_user_sesssion("Acceso al evento ". $nombre_evento );        
         $data_accesos = $this->accesosmodel->get_acceso_by_event($id_evento);                                                                                                                      
         $data["evento"] = $id_evento;                
         $data["accesos_in_event"] = display_complete_info($data_accesos);

@@ -14,7 +14,29 @@
 
 
 
-<a href="<?=base_url('index.php/eventos/nuevo/'. $evento)?>"><button class="btn btn-info"><i class="fa fa-angle-double-left fa-2x"></i></button></a>
+
+
+				<section class="panel">
+                        <header class="blue-col-enid panel-heading custom-tab turquoise-tab">
+                            <ul class="nav nav-tabs blue-col-enid">
+                                <li class="active">
+                                    <a data-toggle="tab" href="#home3">
+                                        <i class="fa fa-money"></i>
+                                        Accesesos y promociones
+                                    </a>
+                                </li>
+                                <li class="">
+                                    <a data-toggle="tab" href="#about3">
+                                        <i class="fa fa-map-marker"></i> puntos de venta
+                                    </a>
+                                </li>
+                                
+                            </ul>
+                        </header>
+                        <div class="panel-body blue-col-enid-complement" style="">
+                            <div class="tab-content">
+                                <div id="home3" class="tab-pane active">
+                                    
 <!--************Tabla general ********************-->
 	<table class="display table table-bordered table-striped dataTable" id="dynamic-table">
 		<thead class="blue-col-enid">
@@ -29,7 +51,7 @@
 			</tr>
 		</thead>
 		        
-		<tfoot>
+		<tfoot class="blue-col-enid">
 			<tr>
 				<th>#</th>
 				<th></th>
@@ -48,17 +70,21 @@
 		
 	</table><!--************Termina la tabla general ********************-->
 
+                                </div>
+                                <div id="about3" class="tab-pane">About</div>
+                                <div id="contact3" class="tab-pane">Contact</div>
+                            </div>
+                        </div>
+                    </section>
+
+
+
+
+
+
+
 
 <!--************Contenido de la tabla general ********************-->
-	<div class="alert alert-icon alert-info" role="alert">
-		<i class="fa fa-info-circle"></i> 	
-	</div>
-
-
-
-
-
-
 <div id="editar-acceso" class="modal fade">
   
   <div class="modal-dialog modal-lg">
