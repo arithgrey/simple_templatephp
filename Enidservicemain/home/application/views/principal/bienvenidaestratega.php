@@ -12,6 +12,8 @@
 <link rel="stylesheet" type="text/css" href="<?=base_url('application/js/js/bootstrap-datepicker/css/datepicker-custom.css')?>" />
 <script type="text/javascript" src="<?=base_url('application/js/estratega/evento/principal.js')?>"></script>
 <script type="text/javascript" src="<?=base_url('application/js/escenarios/principal.js')?>"></script>
+<script type="text/javascript" src="<?=base_url('application/js/accesos/principal.js')?>"></script>
+
 
 
 

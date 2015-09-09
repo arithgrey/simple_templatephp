@@ -7,22 +7,22 @@ if(!function_exists('invierte_date_time')){
     function list_generos_musicales($value){
 
     $table_list ='<table class="table" id="dynamic-table">
-        <thead class="blue-col-enid">
-        <tr role="row">
-            <th>#</th>
-            <th>Género</th>
-            <th></th>
-        </tr>
-        </thead>
-        
-        <tfoot>
-        <tr>
-            <th>#</th>
-            <th>Género</th>
-            <th></th>
-        </tr>
-        </tfoot>
-        <tbody>';
+                    <thead class="blue-col-enid">
+                    <tr>
+                        <th>#</th>
+                        <th>Género</th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    
+                    <tfoot>
+                    <tr>
+                        <th>#</th>
+                        <th>Género</th>
+                        <th></th>
+                    </tr>
+                    </tfoot>
+                    <tbody>';
 
         $b =1;
         foreach ($value as $row ) {
@@ -42,8 +42,7 @@ if(!function_exists('invierte_date_time')){
                 $table_list .='<tr class="genero_musical_input" id="'. $idgenero_musical.'">
                 <td class="text-center">'. $b .'</td>
                 <td class="genero_musical_input" id="'. $idgenero_musical.'">'. $nombre.'</td>
-                <td class="genero_musical_input" id="'. $idgenero_musical.'">'.$input_check.'</td>
-                ';
+                <td class="genero_musical_input" id="'. $idgenero_musical.'">'.$input_check.'</td>';
 
                 $b++;
         }

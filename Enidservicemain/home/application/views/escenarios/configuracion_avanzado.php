@@ -22,6 +22,8 @@
 
 
 
+
+
                   
 
 
@@ -112,7 +114,10 @@
                                 <div id="home3" class="tab-pane active">
                                     <!--Artistas en el escenario -->
                                     <div class='artistas-escenario-section' id='artistas-escenario-section'>
-                                      <?=$artistas;?>         
+                                      <?=$artistas;?>     
+
+
+
                                     </div>  
 
 
@@ -402,3 +407,57 @@
 
 <script type="text/javascript" src="<?=base_url('application/js/escenarios/escenario_artista.js')?>"></script>
 <script type="text/javascript" src="<?=base_url('application/js/escenarios/config.js')?>"></script>
+
+
+
+
+
+
+
+
+<script src="//connect.soundcloud.com/sdk-2.0.0.js"></script>
+<script type="text/javascript" src="<?=base_url('application/js/evento/gmap.js')?>"></script>
+<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true&libraries=places"></script>
+
+
+
+
+<script type="text/javascript">     
+    
+    $('#artista').keyup(function (e){ 
+
+        Stringentrante = $(this).val(); 
+        
+            buscarartista(Stringentrante);
+    });
+
+    function buscarartista(Stringentrante){        
+        SC.initialize({
+            lient_id: '1ce2bf4dcd83ee01f111219905b4f943'
+        });
+         
+        SC.get('/tracks', { q: Stringentrante }, function(tracks) {                        
+                newcontenidodatalist ="";                
+                   for(var x in tracks ) {
+                    /*Genero del artista*/
+                    genre =  tracks[x]["genre"];
+                    username = tracks[x]["user"].username;
+                    avatar_url =  tracks[x]["user"].avatar_url;
+                    uri =   tracks[x]["user"].uri;
+                    id = tracks[x]["id"].id;
+
+                        newcontenidodatalist += "<option value='"+ username  +"'>" ;
+
+                        
+                   }
+                   
+                   document.getElementById('dinamic-artistas').innerHTML= newcontenidodatalist;                
+        });
+
+        
+    }
+
+</script>
+
+     
+

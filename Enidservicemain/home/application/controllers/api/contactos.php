@@ -4,38 +4,47 @@ class Contactos extends REST_Controller{
 
   function __construct(){
         parent::__construct();
-           
+       
+        $this->load->helper("contacto");    
         $this->load->model("contactmodel");
         $this->load->library('sessionclass');
             
   }         
   /**/
-  function registra_nuevo_post(){
-    
-      $this->validate_user_sesssion();
-      $idempresa =  $this->sessionclass->getidempresa();
-      $empresa_contacto =  $this->input->post("empresa_contacto");
-      $persona_contacto =  $this->input->post("persona_contacto");
-      $tel_contacto =  $this->input->post("tel_contacto");
-      $movil_contact = $this->input->post("movil_contact");
-      $email_contact =  $this->input->post("email_contact");
-      $tipo_proveedor = $this->input->post("tipo_proveedor");
-      $nota_contact = $this->input->post("nota_contact");
+  function contacto_post(){
       
-      $responsedb = $this->contactmodel->record_contact($idempresa , $empresa_contacto , $persona_contacto,   $tel_contacto , $movil_contact , $email_contact , $tipo_proveedor,
-               $nota_contact);  
+      //ini_set('display_errors', '1');    
 
-      if($responsedb != false) {
+      $this->validate_user_sesssion();
+      $nombre  =  $this->post("nombre");
+      $organizacion  =  $this->post("organizacion");
+      $telefono =  $this->post("telefono");
+      $movil  = $this->post("movil");
+      $correo =  $this->post("correo");
+      $direccion = $this->post("direccion");
+      $tipo =  $this->post("tipo");      
+      $nota = $this->post("nota");
+      $idusuario =  $this->sessionclass->getidusuario();
+  
+      $response_db =$this->contactmodel->record( $nombre , $organizacion , $telefono, $movil          
+                    , $correo , $direccion, $tipo , $idusuario, $nota );      
 
-          $next_url = base_url("index.php/directorio/proveedoresadv?p=". $responsedb ); 
+      $this->response($response_db);
 
-              $this->response($next_url);          
-        }else{
+  }
+  /*Retorna mis contactos*/
+  function contacto_get(){
+      $this->validate_user_sesssion();
+      $idusuario =  $this->sessionclass->getidusuario();
+      $response_db =  $this->contactmodel->get_contactos_user($idusuario);
 
-          $this->response(false);
-        }
-        
-    }
+      $this->response( table_contac($response_db));
+
+  }
+
+
+
+
     /**/
     function validate_user_sesssion(){
                   if( $this->sessionclass->is_logged_in() == 1) {                        

@@ -17,20 +17,18 @@ class Directorio  extends CI_Controller {
                         $this->load->view('directorio/proveedores_directorio_avanzado', $data);
                         $this->load->view('TemplateEnid/footer_template', $data);
 	}
+    /*página principal , contactos */    
 
-
-
-	function proveedores(){
-    		
-        $data = $this->validate_user_sesssion("Proveedores");
-        $this->load->view('TemplateEnid/header_template', $data);
-        $this->load->view('directorio/proveedores_directorio', $data);
-        $this->load->view('TemplateEnid/footer_template', $data);
+	function contactos(){    		
+        
+        $data = $this->validate_user_sesssion("Mis contactos");        
+        $this->dinamic_view_event('directorio/principal_directorio', $data);    
 
 	}/*Termina la función*/
 
 
-     function validate_user_sesssion($titulo_dinamico_page){
+    /*Validamos la session del usuario*/
+    function validate_user_sesssion($titulo_dinamico_page){
 
             if ( $this->sessionclass->is_logged_in() == 1) {                        
                     
@@ -49,6 +47,15 @@ class Directorio  extends CI_Controller {
                 $this->sessionclass->logout();
             }   
     }
+ 
+
+    /*Desplegar views */  
+    function dinamic_view_event($center_view , $data){
+            $this->load->view('TemplateEnid/header_template', $data);
+            $this->load->view($center_view, $data);                                      
+            $this->load->view('TemplateEnid/footer_template', $data);    
+    }
+ 
 
 
 

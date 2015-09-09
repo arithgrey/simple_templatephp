@@ -3,6 +3,7 @@ $(document).on("ready", function(){
 	
 	$(".delete-acceso").click(remove_acceso);
 	$(".editar-acceso").click(editar_acceso);
+	$("#form-new-acceso").submit(record_acceso);
 
 });
 
@@ -30,9 +31,11 @@ function load_data_accesos(){
 	url = now + "index.php/api/accesos/get_accesos_with_format_by_id_event/format/json/";		
 	$.get(url , { evento : evento  } ).done(function(data){
 		
+		
 		llenaelementoHTML(".list-accesos" , data);				 
 		$(".delete-acceso").click(remove_acceso);
 		$(".editar-acceso").click(editar_acceso);
+
 	}).fail(function(){
 		alert(genericresponse[0]);
 	});
@@ -73,10 +76,19 @@ function editar_acceso(e){
 
 }
 /*actualiza los datos del acceso*/
-function update_info_acceso(){	
+function update_info_acceso(e){	
 	
 	url = now + "index.php/api/accesos/udpate_acceso_id/format/json/";					
 	updates_send(url , $("#dinamic-form").serialize() );	
 	load_data_accesos();	
+	return false;
+}/**/
+
+function record_acceso(){
+
+	url = $("#form-new-acceso").attr("action");
+
+	registra_data(url , $("#form-new-acceso").serialize());
+	load_data_accesos()
 	return false;
 }

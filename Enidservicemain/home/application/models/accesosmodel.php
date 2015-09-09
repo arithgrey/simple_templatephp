@@ -38,9 +38,9 @@ function getTipoEscenario(){
 	$result = $this->db->query($get_tipo);       
 	return $result ->result_array();
 }
-function insert( $precio , $inicio_acceso , $termino_acceso , $idevento , $idtipo_acceso){
+function insert( $precio , $inicio_acceso , $termino_acceso , $idevento , $idtipo_acceso, $descripcion=''){
 
-	$query_inser="INSERT INTO acceso (precio , inicio_acceso , termino_acceso , idevento , idtipo_acceso) VALUES ( '$precio' , '$inicio_acceso' , '$termino_acceso' , '$idevento' , '$idtipo_acceso' )";
+	$query_inser="INSERT INTO acceso(precio , inicio_acceso , termino_acceso , idevento , idtipo_acceso , descripcion  ) VALUES ( '$precio' , '$inicio_acceso' , '$termino_acceso' , '$idevento' , '$idtipo_acceso'  , '$descripcion')";
 	return $this->db->query($query_inser);
 
 }
@@ -77,6 +77,13 @@ function update_all_by_id($id_acceso , $nuevo_precio , $nuevo_inicio_acceso , $n
 	WHERE idacceso = '". $id_acceso ."'   ";
 	return $this->db->query($query_update);
 	
+}
+/**/
+
+function get_accesos_tipo_evento($id_evento){
+	$query_get = "select tipo,  idacceso  from tipo_acceso  inner join acceso on tipo_acceso.idtipo_acceso= acceso.idtipo_acceso and idevento='".$id_evento."'   ";
+	$result = $this->db->query($query_get);	
+	return $result ->result_array();	
 }
 /*Termina modelo */
 }

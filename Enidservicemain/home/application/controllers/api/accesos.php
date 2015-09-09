@@ -11,6 +11,12 @@ class Accesos extends REST_Controller{
             
         }     
 
+    function tipoacceso_get(){
+     //
+        $evento= $this->get("evento");
+        $responsedb= $this->accesosmodel->get_accesos_tipo_evento($evento);
+        $this->response($responsedb);
+    }    
     /*update info acceso */    
     function udpate_acceso_id_post(){
         $this->validate_user_sesssion();
@@ -53,6 +59,32 @@ class Accesos extends REST_Controller{
         $termino = $this->post("nuevo_termino_acceso");                                
         $dbrespose = $this->accesosmodel->insert( $precio , $inicio , $termino , $evento , $acceso_tipo);
         $this->response($dbrespose);             
+    }
+
+    /**/
+    function acceso_post(){
+        $this->validate_user_sesssion();
+        
+        
+        
+
+        $tipo = $this->post("tipo");
+        $precio = $this->post("precio");
+        $inicio = $this->post("inicio");
+        
+
+        $termino =  $this->post("termino");
+        $evento = $this->post("evento");
+        
+
+
+        $descripcion  = $this->post("descripcion");
+
+        $dbrespose = $this->accesosmodel->insert($precio  ,  $inicio  , $termino , $evento , $tipo , $descripcion);
+        
+
+
+        $this->response($dbrespose);
     }
     /*****************Elimina el acceso del evento **************/
     function deletebyid_post(){

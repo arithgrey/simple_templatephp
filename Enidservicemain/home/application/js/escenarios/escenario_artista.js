@@ -32,6 +32,17 @@ function load_data_escenario_artista(){
 		$(".artista_yt").click(update_youtube_url);
 		$(".artista_sound").click(update_sounda_url);
 
+
+	    $('#artista').keyup(function (e){ 
+
+	        	Stringentrante = $(this).val(); 	        
+	            buscarartista(Stringentrante);
+	    });
+
+	   
+
+
+
 	}).fail(function(){
 		alert(genericresponse[0]);
 	});

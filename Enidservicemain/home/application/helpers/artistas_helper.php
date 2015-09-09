@@ -111,7 +111,9 @@ if(!function_exists('invierte_date_time')){
 											<div class="col-md-12">
 												<form role="form" class="form-inline" id="form-escenario-artista" >
 													<div class="form-group todo-entry">
-														<input placeholder="nombre del artista" class="form-control" id="artista" name="nuevoartista" style="width: 100%" type="text">
+
+														<datalist id="dinamic-artistas"></datalist>
+														<input list="dinamic-artistas" placeholder="nombre del artista" class="form-control" id="artista" name="nuevoartista" style="width: 100%" type="text">														
 														<input type="hidden" name="idescenario" value="'.$id_escenario.'">
 													</div>
 													<button class="btn btn-primary pull-right" type="submit">+</button>

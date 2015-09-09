@@ -1,32 +1,40 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
  class contactmodel extends CI_Model {
-    function __construct()
-    {
-        parent::__construct();        
-        $this->load->database();
-    }
-   
+  
+  function __construct(){
+      parent::__construct();        
+      $this->load->database();
+  }
+  /*recorc contacto */
+  function record( $nombre , $organizacion , $telefono, $movil, $correo , $direccion, $tipo , $idusuario, $nota ){
 
-
-function record_contact($idempresa , $empresa_contacto , $persona_contacto,   $tel_contacto , 
-  $movil_contact , $email_contact , $tipo_proveedor ,  $nota_contact){
-
-
-    $query_insert ="INSERT INTO proveedor (empresa_contacto , persona_contacto, tel_contacto , movil_contact , email_contact ,  nota_contact , idempresa , tipo_proveedor) VALUES( '".$empresa_contacto."' , '".$persona_contacto."'  , '".$tel_contacto ."' , '".$movil_contact."' , '".$email_contact."' , '".$nota_contact."'  , '".$idempresa ."' , '".$tipo_proveedor."' )";
-
-    $result  = $this->db->query($query_insert);
-
-
-    if ($result == true ){
-
-      return  $this->db->insert_id();              
-      
-    }else{
-
-      return false;
-    }
     
-}/*Termina la función */
+ 
+    $query_insert="INSERT INTO contacto( nombre         
+                    , organizacion   
+                    , tel            
+                    , movil          
+                    , correo         
+                    , direccion                                            
+                    , tipo           
+                    , idusuario
+                    , nota  ) 
+                  VALUES( '".$nombre ."' , '".$organizacion."' , '".$telefono."', '".$movil."', '".$correo."' , '".$direccion ."', '".$tipo."' ,  '".$idusuario ."', '".$nota ."') ";
+
+
+
+
+   return $this->db->query($query_insert);                 
+  }
+  /*Termina la función*/
+   
+  function get_contactos_user($idusuario){
+
+    $query_get ="SELECT * FROM contacto where idusuario = '".$idusuario."'  ";
+    $result = $this->db->query($query_get);
+    return $result ->result_array();
+
+  }
 
 
 /*Termina modelo */

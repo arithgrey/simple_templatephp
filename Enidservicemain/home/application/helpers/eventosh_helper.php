@@ -147,6 +147,7 @@ function get_date_event_format($inicio , $termino){
 	return $date;
 }
 /*Últimos eventos */
+
 function get_last_events_empresa($ultimos_eventos, $limit_text= 270 ,  $show_edit=0 , $show_delete = 0 ){
 		$elements ="";
 		
@@ -188,7 +189,10 @@ function get_last_events_empresa($ultimos_eventos, $limit_text= 270 ,  $show_edi
                                             </div>
                                             <ul class='revenue-nav'>		                                        
 		                                        <li>
-												<div class='btn-group-vertical' aria-label='Vertical button group'>
+
+		                                        <div class='btn-group-vertical' aria-label='Vertical button group'>
+											      
+
 											      <div class='escenarios_evento btn-group'    role='group'>
 											        <button id='". $id_evento ."' type='button' class='btn btn-default dropdown-toggle' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>											          
 											          <li>
@@ -200,9 +204,34 @@ function get_last_events_empresa($ultimos_eventos, $limit_text= 270 ,  $show_edi
 											          <div class='escenarios_in_event_".$id_evento."'  id='escenarios_in_event_".$id_evento." '></div>											          
 											        </ul>
 
-											      </div>
-											      
+											      </div>											      
 											    </div>
+
+
+
+
+
+												<div class='btn-group-vertical' aria-label='Vertical button group'>											      
+											      <div class='acceso_evento btn-group'    role='group'>
+											        <button id='". $id_evento ."' type='button' class='btn btn-default dropdown-toggle' 
+											        data-toggle='dropdown' aria-haspopup='true' aria-expanded='false' style='background:#0D6B8A !important;' >											          
+											          <li>
+											          <a style='background: #10382E !important' href='#'>
+											          <i class='fa fa-money'></i>
+ 													  </a></li> Accesos
+											          <span class='caret'></span>
+											        </button>
+											        <ul class='dropdown-menu' aria-labelledby='btnGroupVerticalDrop1'>											          
+											         
+											          <div class='acceso_in_event_".$id_evento."'  id='acceso_in_event_".$id_evento." '></div>											          
+
+											        </ul>
+											      </div>											      
+											    </div>
+
+
+
+
 		                                        <a class='edith-fecha-evento'  data-toggle='modal' data-target='#modal-update-evento'   id='". $row["idevento"]  ."'>
 		                                        		<i class='fa fa-calendar-o'></i>
 	                                                     ".  $row["fecha_inicio"]." -

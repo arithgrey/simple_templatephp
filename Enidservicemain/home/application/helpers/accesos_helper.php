@@ -4,6 +4,8 @@ if(!function_exists('invierte_date_time')){
 
 	function getData($arreglo){
 
+		
+
 		$accesos = "";
 		$in = 1;
 		foreach ($arreglo["listaccesos"] as $rowccesos) {
@@ -97,8 +99,35 @@ if(!function_exists('invierte_date_time')){
 
 	function display_complete_info($data_accesos){
 
-		$l='';
+		$l='<table class="display table table-bordered table-striped dataTable" id="dynamic-table">
+					<thead class="blue-col-enid">
+						<tr role="row">
+							<th>#</th>
+							<th></th>
+							<th></th>	
+							<th></th>
+							<th></th>	
+							<th></th>
+							<th></th>
+						</tr>
+					</thead>
+					<tfoot class="blue-col-enid">
+						<tr>
+							<th>#</th>
+							<th></th>
+							<th></th>	
+							<th></th>
+							<th></th>	
+							<th></th>
+							<th></th>
+						</tr>
+					</tfoot>		              
+					<tbody>';
 		$flag =1;
+
+
+
+
 		foreach ($data_accesos as $row){
 			
 			/*datos tabla general */
@@ -138,6 +167,9 @@ if(!function_exists('invierte_date_time')){
 				
 		}
 
+		$l .='</tbody>
+					
+				</table>';
 		return $l;
 
 	}
