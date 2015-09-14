@@ -3,6 +3,9 @@
     background: #10B9D5 none repeat scroll 0% 0%;
     text-align: center !important;
 }
+.status-registro{
+    display: none;
+}
 </style>
 <script type="text/javascript" src="<?=base_url('application/js/directorio/principal.js')?>"></script>
 

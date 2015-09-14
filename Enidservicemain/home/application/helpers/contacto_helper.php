@@ -20,8 +20,7 @@ if(!function_exists('invierte_date_time')){
 					  	</td>
 					  </tr>
 					  
-
-					  <tr style="" class="header-table">
+					  <tr style="" class="text-center header-table">
 					  	<th>#</th>
 					  	<th>Contacto</th>
 					  	<th>organización</th>
@@ -31,6 +30,8 @@ if(!function_exists('invierte_date_time')){
 					  	<th>Dirección</th>
 					  	<th>Tipo</th>
 					  	<th>Nota</th>
+					  	<th>Estado</th>
+					  	<th>Fecha registro</th>
 					  </tr>
 					  ';
 		
@@ -63,6 +64,8 @@ if(!function_exists('invierte_date_time')){
 						<td>'.$direccion.'</td>
 						<td>'.$tipo.'</td>
 						<td>'.$nota.'</td>
+						<td>'.$status .'</td>
+						<td>'.$fecha_registro.'</td>
 						
 
 						</tr>';			
@@ -70,7 +73,21 @@ if(!function_exists('invierte_date_time')){
 		}
 
 
-		$contacto .="</table>
+		$contacto .="
+		 <tr style='' class='text-center header-table'>
+					  	<th>#</th>
+					  	<th>Contacto</th>
+					  	<th>organización</th>
+					  	<th>Teléfono</th>
+					  	<th>Movil</th>
+					  	<th>Correo</th>
+					  	<th>Dirección</th>
+					  	<th>Tipo</th>
+					  	<th>Nota</th>
+					  	<th>Estado</th>
+					  	<th>Fecha registro</th>
+					  </tr>
+		</table>
 		<span class=''>Contactos ". ($b -1)."<span>
 					</div>";
 		return $contacto;	

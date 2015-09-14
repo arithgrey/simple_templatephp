@@ -44,7 +44,7 @@
 		</li>
 		<li class="">
 			<a data-toggle="tab" href="#about3">
-			<i class="fa fa-map-marker"></i> puntos de venta
+			<i class="fa fa-map-marker"></i> Puntos donde el cliente podrá adquirir sus accesos
 			</a>
 		</li>
                                 

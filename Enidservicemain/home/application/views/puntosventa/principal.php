@@ -1,0 +1,312 @@
+<script type="text/javascript" src="<?=base_url('application/js/puntosventa/principal.js')?>"></script>
+<button id="nuevo-contacto-button" type="button" class="btn btn-info" data-toggle="modal" data-target="#contact-modal">
+    <i class="fa fa-check"></i>Agregar contacto
+</button>
+<table  class="display table table-bordered table-striped dataTable" id="dynamic-table">
+        <thead>
+
+        <tr role="row" class='text-center blue-col-enid' style="font-size:.8em;">             
+            <th role="columnheader"   class="sorting text-center">Razón Social</th>
+            <th role="columnheader" class="sorting text-center">Tel.</th>
+            <th role="columnheader" class="sorting text-center">Página web </th>
+            <th role="columnheader" class="sorting text-center">Estado</th>
+            <th role="columnheader" class="sorting text-center">Locación</th>
+            <th role="columnheader" class="sorting text-center">Nota para el público</th>
+            <th role="columnheader" class="sorting text-center">Usuario Registrante</th>
+            <th role="columnheader" class="sorting text-center">Estado del Registrante</th>
+            <th role="columnheader" class="sorting text-center">Fecha registro</th>
+            <td >Contactos Asociados</td>
+            <th role="columnheader" class="sorting"></th>
+            
+        </tr>
+        </thead>        
+        <tfoot>
+        <tr class='blue-col-enid' style="font-size:.8em;">
+            <th colspan="1"  class='text-center' rowspan="1">Razón Social</th>
+            <th colspan="1"  class='text-center' rowspan="1">Tel</th>
+            <th colspan="1"  class='text-center' rowspan="1">Página web</th>
+            <th colspan="1"  class='text-center' rowspan="1">Estado</th>
+            <th colspan="1"  class='text-center' rowspan="1">Locación</th>
+            <th colspan="1"  class='text-center' rowspan="1">Nota para el público</th>
+            <th colspan="1"  class='text-center' rowspan="1">Usuario Registrante</th>
+            <th colspan="1"  class='text-center' rowspan="1">Estado del Registrante</th>
+            <th colspan="1"  class='text-center' rowspan="1">Fecha registro</th>
+            <th colspan="1"  class='text-center' rowspan="1">Contactos Asociados</th>
+            <th colspan="1"  class='text-center' rowspan="1"></th>
+            
+        </tr>
+        </tfoot>
+        <tbody aria-relevant="all" aria-live="polite" role="alert">        
+            <?=$puntos_venta;?>
+    </tbody>
+    </table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--Inicia modal registro del punto de venta -->
+<div class="modal fade in" id="contactos-modal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="false">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <h4 class="modal-title" id="myModalLabel">
+                Asociar contactos al punto de venta
+            </h4>
+            </div>
+            <div class="modal-body">            
+                <!--Nuevo contacto form -->
+
+
+
+
+                <div id="contactos-punto-venta"></div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                <!--Termina nuevo contacto -->
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                
+            </div>
+        </div>
+    </div>
+</div>
+<!--termina modal registro del punto de venta-->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--Inicia modal registro del punto de venta -->
+<div class="modal fade in" id="contact-modal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="false">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <h4 class="modal-title" id="myModalLabel">Cargar punto de venta </h4>
+            </div>
+            <div class="modal-body">            
+                <!--Nuevo contacto form -->
+<form class='form-puntos-venta' id="form-puntos-venta" method="post" action="<?=base_url('index.php/api/puntosventa/punto/format/json/')?>">    
+    <div class='status-registro'>
+
+        <div class="alert alert-success" role="alert">
+            <i class="fa fa-check"></i>
+            Contacto registrado
+        </div>
+    </div>
+     <div class="form-group">
+         <label for="inputEmail">Razón social del punto de venta</label>
+         <input type="text" class="form-control" name="razon_social" placeholder="Nombre de la organización" required>
+     </div>    
+     <div class="form-group">            
+         <div class="input-group m-bot15">
+            <span class="input-group-addon">
+                Tel. de contacto 
+            </span>
+            <input class="form-control" name="telefono"   placeholder="Teléfono" type="text">
+         </div>
+     </div>
+     <div class="form-group">            
+         <div class="input-group m-bot15">
+            <span class="input-group-addon">
+                Dirección
+            </span>
+            <input class="form-control" name="direccion"   placeholder="Av. sur 89 col...  " type="text">
+         </div>
+     </div>
+    <div class="form-group">            
+        <div class="input-group m-bot15">
+            <span class="input-group-addon">
+                Página web del proveedor 
+            </span>
+            <input class="form-control" name="url_pagina_web"   placeholder="https://enidservice.com/" type="url">
+        </div>
+     </div>
+    <div class="form-group" >        
+        <select class="form-control col-sm-12" name="status">            
+            <option value="Disponible">Disponible</option>
+            <option value="Temporalmente no disponible">Temporalmente no disponible</option>
+            <option value="Disponible para todos los colaboradores de la empresa">Disponible para todos los colaboradores de la empresa</option>
+            <option value="No disponible">No disponible </option>
+        </select> 
+    </div>    
+    <div class="form-group">                
+        <textarea rows="12" name="descripcion" class="col-sm-10 form-control" placeholder="Nota para el público"></textarea>                
+    </div>
+    <button type="submit" class="btn btn-primary">Registrar</button>
+</form>
+                <!--Termina nuevo contacto -->
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                
+            </div>
+        </div>
+    </div>
+</div>
+<!--termina modal registro del punto de venta-->
+<style type="text/css">
+.header-table{
+    background: #10B9D5 none repeat scroll 0% 0%;
+    text-align: center !important;
+}
+.status-registro{
+    display: none;
+}
+</style>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="modal fade in" id="delete-punto-venta-modal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <h4 class="modal-title" id="myModalLabel">
+                Eliminar punto de venta
+            </h4>
+            </div>
+            <div class="modal-body">            
+                <!--Nuevo contacto form -->
+
+                
+                <label> Realmente decea elimiar el punto de venta </label>
+                <button type="button" class="btn btn-default" id="aceptar-delete" >Aceptar</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+
+
+
+
+    
+
+                <!--Termina nuevo contacto -->
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                
+            </div>
+        </div>
+    </div>
+</div>
+<!--termina modal registro del punto de venta-->
+
