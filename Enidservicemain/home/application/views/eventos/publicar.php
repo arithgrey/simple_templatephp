@@ -290,12 +290,9 @@
                                 </header>                              
                                 <div class="panel-body" style="background: #F3F8FB">                                    
                                     <div id="list_escenarios"></div>
-                                </div>
-                                <div class="panel-body">                                    
-                                        
+                                </div>                                                                        
                                       <form id="form-escenario" method="POST">
-                                        <h2> <i class="fa fa-plus"></i>
- Escenario</h2>  
+                                        <h2> <i class="fa fa-plus"></i> Cargar Escenario</h2>  
                                         <div class="form-group todo-entry">
                                             <input type="hidden" name="evento_escenario" id="evento_escenario" value="<?=$evento;?>">
 
@@ -305,7 +302,7 @@
                                           <i class="fa fa-plus"></i>
                                         </button>
                                       </form>
-                                </div>                                
+                                
                         </div>
                     </div>
 <!--Termina  section tres -->

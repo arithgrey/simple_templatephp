@@ -2,7 +2,57 @@
 if(!function_exists('invierte_date_time')){
 
 
+	/*regresa los puntos de venta asociados al evento*/
+	function list_puntos_venta_evento($data){
+	
+		$table ="<table class='table' border='1'>";		
+		$table .="<form action ='". base_url('index.php/api/puntosventa/punto_venta_evento_all/format/json') ."' id='form-punto-in-evento' ><tr style='background:#0EA3AE;' class='text-center'>";		
+		$table .="<th>Punto de venta</th> <th>info </th><th>Logo</th>  <th>Asociado al evento</th>";		
+		$table .="</tr>";		
+		
+		$ingresos =0;
+		$flag =0;
+		foreach ($data as $row) {
 
+			$razon_social = $row["razon_social"];
+			$descripcion = $row["descripcion"];
+			$punto_venta  = $row["idpunto_venta"];
+			$telefono  =  $row["telefono"];
+			$url_pagina_web =  $row["url_pagina_web"];
+			$puntoventa= $row["punto_v"];
+			$status = $row["status"];
+			$idpunto_venta =  $row["idpunto_venta"];
+			
+
+
+			$table.="<tr class='text-center'>";
+
+				$table.="<td  style='font-size: .8em;'>".$razon_social."</td>";	
+				$table.="<td  style='font-size: .8em;'><a href='".$url_pagina_web."'> <span>".$telefono ."</span> | ".$url_pagina_web." |  ".$descripcion." |</a></td>";	
+				$table.="<td  style='font-size: .8em;'></td>";	
+
+		
+				if ($puntoventa != null  ){
+
+					$table.="<td style='font-size: .8em;'  ><input type='checkbox' class='punto_venta' id='". $idpunto_venta ."' name='punto_venta_in_evento' value='".$punto_venta."' checked></td>";		
+					$ingresos ++;
+				}else{
+					$table.="<td  style='font-size: .8em;'><input type='checkbox' class='punto_venta' id='". $idpunto_venta ."'  name='punto_venta_in_evento' value='".$punto_venta."' ></td>";		
+				}
+				
+
+
+			$table.="</tr></form>";		
+			$flag ++;
+		}
+		
+		$table .="<tr style='background:#0EA3AE;'>";		
+		$table .="<th>Punto de venta</th> <th>info </th><th>Logo</th> <th>Asociado al evento</th>";		
+		$table .="</tr>";		
+		$table .="</table>
+		<span class='info-table'> Puntos de venta dónde el público podrá adquirir sus accesos ".$flag.",  asociados al evento ".$ingresos .".</span>";		
+		return $table;
+	}
 
 	/*regresal la lista de contactos activa en el punto de venta */
 	function list_contactos_punto_venta($data){
@@ -61,7 +111,7 @@ if(!function_exists('invierte_date_time')){
 			$list.="<tr style='font-size:.8em;' class='text-center'>					
 					<td class='razon-social-text'>".$razon_social."</td>
 					<td>".$telefono ."</td>
-					<td><a href='". $url_pagina_web ."'>".$url_pagina_web ."</a></td>
+					<td><a href='". $url_pagina_web ."'>". $url_pagina_web ."</a></td>
 					<td>".$status  ."</td>
 					<td>".$direccion  ."</td>
 					<td>".$descripcion  ."</td>

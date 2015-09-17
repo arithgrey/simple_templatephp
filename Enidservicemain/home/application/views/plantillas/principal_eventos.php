@@ -126,7 +126,7 @@
                                     <div class='restricciones-user' id='restricciones-user'></div>
                                     <form role="form" class="form-inline" id="new-contenido-form">
                                         <div class="form-group todo-entry">
-                                            <input placeholder="Nuevo articulo" class="form-control" name='nuevo_contenido_name' id='nuevo-contenido-name' style="width: 100%" type="text">
+                                            <input placeholder="Nueva restricción" class="form-control" name='nuevo_contenido_name' id='nuevo-contenido-name' style="width: 100%" type="text">
                                             <textarea placeholder="Registra la descripción de la restricción" id='contenido_text'  class='contenido_text' name='contenido_text' class="form-control" style="width: 100%"  required></textarea>
                                             <input type='hidden' name="type" value="3">
 

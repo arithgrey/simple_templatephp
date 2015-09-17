@@ -6,6 +6,30 @@
 	}
 
 
+	/*Actualiza todo los puntos de venta asociados al evento */
+    function update_all_in_event($id_evento, $id_empresa){
+
+
+    	$query_exist ="select * from evento_punto_venta where idevento =  '". $id_evento."' ";
+		$result = $this->db->query($query_exist);					
+		$exist = $result->num_rows();
+
+		$dinamic_query ="";
+		if ($exist> 0 ){
+			
+			$dinamic_query ="DELETE  FROM evento_punto_venta WHERE idevento = '". $id_evento . "' ";
+
+		}else{
+						
+			$dinamic_query ="INSERT INTO evento_punto_venta SELECT  ". $id_evento." ,  p.idpunto_venta   from punto_venta p   where p.status =  'Disponible para todos los colaboradores de la empresa' and p.idempresa = '".$id_empresa."' ";
+		}
+
+
+    	/**/
+
+        return $this->db->query($dinamic_query);
+    }
+    /**/
 	function delete($punto_venta){
 
 		$query_delete ="DELETE FROM punto_venta WHERE idpunto_venta = '". $punto_venta."' ";		
@@ -37,7 +61,7 @@
 	/**/
 	function get_contactos_in_punto_venta($id_usuario , $id_punto_venta ){
 
-		$query_get="select  c.* ,  pvc.idpunto_venta   puntoventacontacto  from contacto  c
+		$query_get="select  c.* ,  pvc.idpunto_venta   puntoventacontacto   from contacto  c
 					left outer join punto_venta_contacto pvc 
 					on c.idcontacto  = pvc.idcontacto and  pvc.idpunto_venta = '".$id_punto_venta."'
 					where idusuario ='". $id_usuario ."'  ";
@@ -62,6 +86,38 @@
 		
 	}
 	/*termina la función*/
+	function get_puntos_venta_evento( $id_evento , $id_user , $id_empresa){
+
+		$query_get ="select  epv.idpunto_venta  punto_v , p.*   from punto_venta p  
+			left outer join evento_punto_venta epv  
+			on  p.idpunto_venta =  epv.idpunto_venta 
+			where p.status =  'Disponible para todos los colaboradores de la empresa'
+			and p.idempresa = '". $id_empresa ."'  ";
+		
+		$result = $this->db->query($query_get);				
+		return $result->result_array();
+	}
+	/**/
+	function update_punto_venta_evento($id_evento, $id_punto_venta ){
+
+		$query_exist ="select * from evento_punto_venta where idevento =  '". $id_evento."' and idpunto_venta = '". $id_punto_venta."'  ";
+		$result = $this->db->query($query_exist);					
+
+		$exist = $result->num_rows(); 
+		
+		$dinamic_query ="";
+		if($exist >0 ) {
+			 
+			$dinamic_query ="DELETE FROM evento_punto_venta WHERE  idevento =  '". $id_evento."' and idpunto_venta = '". $id_punto_venta."' ";
+		}else{
+
+			$dinamic_query ="INSERT INTO evento_punto_venta VALUES('". $id_evento."'  , '". $id_punto_venta ."') ";
+		}
+
+
+		return $this->db->query($dinamic_query);
+
+	}/**/
 
 /*Termina modelo */
 }

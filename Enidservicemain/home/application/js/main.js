@@ -205,6 +205,21 @@ function updates_send_test(url , data_send ){
 	});
 }
 /**/
+
+function actualiza_data_test(url , data_send ){
+	$.ajax({
+	   url: url,
+	   type: 'PUT',
+	   data : data_send  }).done(function(data){
+	   		alert(data);
+	}).fail(function(){
+	   		alert("falla al intentar actualizar");
+	});
+}
+
+
+
+
 function actualiza_data(url , data_send ){
 	$.ajax({
 	   url: url,

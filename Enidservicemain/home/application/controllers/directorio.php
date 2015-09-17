@@ -3,6 +3,10 @@ class Directorio  extends CI_Controller {
 
 	function __construct(){
 		parent::__construct();
+
+
+        $this->load->helper("contacto");    
+        $this->load->model("contactmodel");
 		$this->load->library('sessionclass');    
 	}
 	
@@ -21,7 +25,13 @@ class Directorio  extends CI_Controller {
 
 	function contactos(){    		
         
+
         $data = $this->validate_user_sesssion("Mis contactos");        
+        $id_usuario =  $this->sessionclass->getidusuario();
+        $data_contactos = $this->contactmodel->get_list_contactos($id_usuario);
+        $data_tipos = $this->contactmodel->get_tipos_contactos($id_usuario);
+        $data["list_contactos_name"] = list_contactos_names($data_contactos);
+        $data["lista_tipo"] = filtro_tipo_contacto($data_tipos);
         $this->dinamic_view_event('directorio/principal_directorio', $data);    
 
 	}/*Termina la función*/

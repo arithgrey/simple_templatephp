@@ -9,14 +9,47 @@ class Puntosventa extends REST_Controller{
         $this->load->model("puntoventamodel");
         $this->load->library('sessionclass');
             
-  }   
+  }  
 
-  function puntoventacontactoooo_GET(){
-    $arrayName = array('ta' =>  1 , 'asldk' => 2  );
-    $this->response($arrayName);
+  /*Actualiza todos los puntos de venta asociados ak evento */
+  function punto_venta_evento_all_PUT(){
+    
+    $this->validate_user_sesssion();
+    $id_empresa =  $this->sessionclass->getidempresa();  
+    $id_evento= $this->put("evento");    
+
+    $db_response= $this->puntoventamodel->update_all_in_event($id_evento, $id_empresa);
+    $this->response($db_response);
+    
   }
+
+  /**/
+  function punto_venta_evento_get(){
+
+      $this->validate_user_sesssion();
+      $id_user = $this->sessionclass->getidusuario();        
+      $id_evento= $this->get("evento");
+      $id_empresa =  $this->sessionclass->getidempresa();  
+      $puntos_venta = $this->puntoventamodel->get_puntos_venta_evento( $id_evento , $id_user , $id_empresa);
+      $this->response( list_puntos_venta_evento($puntos_venta) );  
+
+
+  }
+
+  /*update evento punto venta */
+  function punto_venta_evento_put(){
+
+    $this->validate_user_sesssion();
+    $id_evento = $this->put("evento");
+    $id_punto_venta =  $this->put("punto_venta");
+
+    $db_response = $this->puntoventamodel->update_punto_venta_evento($id_evento, $id_punto_venta );
+    $this->response($db_response);
+  }
+  /**/
   function puntoventacontacto_POST(){
 
+    $this->validate_user_sesssion();
     $contacto = $this->post("contacto");
     $punto_venta  =  $this->post("punto_venta");
     $response_db =  $this->puntoventamodel->update_punto_venta_contacto($contacto , $punto_venta);

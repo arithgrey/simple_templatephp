@@ -1,12 +1,13 @@
 $(document).on("ready", function(){
 
-	
 	$(".delete-acceso").click(remove_acceso);
 	$(".editar-acceso").click(editar_acceso);
 	$("#form-new-acceso").submit(record_acceso);
+	$(".punto_venta").click(update_status_punto_venta_evento );
+	$("#marcar-puntos-venta-todos").click(select_all);
+
 
 });
-
 /*Eliminar al conformar */
 function remove_acceso(e){
 
@@ -91,4 +92,37 @@ function record_acceso(){
 	registra_data(url , $("#form-new-acceso").serialize());
 	load_data_accesos()
 	return false;
+}/**/
+function update_status_punto_venta_evento (e){
+
+	evento = $("#evento").val(); 
+	punto_venta = e.target.id;
+	url = now + "index.php/api/puntosventa/punto_venta_evento/format/json";
+	actualiza_data(url , {"evento" :  evento , "punto_venta" : punto_venta} );
+	list_puntos_venta_evento();
+
 }
+/**/
+function list_puntos_venta_evento(){
+	
+	evento = $("#evento").val();
+	url = now + "index.php/api/puntosventa/punto_venta_evento/format/json";
+	$.get(url , {"evento" :  evento} ).done(function(data){
+
+		llenaelementoHTML(".puntos-venta-evento", data);
+		$(".punto_venta").click(update_status_punto_venta_evento );
+	}).fail(function(){
+		alert("Error al cargar data ");
+	});
+
+}
+/**/
+function select_all(){
+		
+	url  = $("#form-punto-in-evento").attr("action");	
+	evento = $("#evento").val();	
+	actualiza_data( url ,   {"evento" : evento});
+	list_puntos_venta_evento();
+
+}
+

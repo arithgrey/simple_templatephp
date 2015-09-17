@@ -2,6 +2,8 @@
 <button id="nuevo-contacto-button" type="button" class="btn btn-info" data-toggle="modal" data-target="#contact-modal">
     <i class="fa fa-check"></i>Agregar contacto
 </button>
+
+
 <table  class="display table table-bordered table-striped dataTable" id="dynamic-table">
         <thead>
 
@@ -217,10 +219,8 @@
      </div>
     <div class="form-group" >        
         <select class="form-control col-sm-12" name="status">            
-            <option value="Disponible">Disponible</option>
-            <option value="Temporalmente no disponible">Temporalmente no disponible</option>
-            <option value="Disponible para todos los colaboradores de la empresa">Disponible para todos los colaboradores de la empresa</option>
-            <option value="No disponible">No disponible </option>
+            <option value="Disponible para todos los colaboradores de la empresa">Disponible para todos los colaboradores de la empresa</option>           
+            <option value="Temporalmente no disponible">Registrado pero no disponible</option>                        
         </select> 
     </div>    
     <div class="form-group">                

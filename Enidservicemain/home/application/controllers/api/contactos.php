@@ -12,9 +12,7 @@ class Contactos extends REST_Controller{
   }         
   /**/
   function contacto_post(){
-      
-      //ini_set('display_errors', '1');    
-
+  
       $this->validate_user_sesssion();
       $nombre  =  $this->post("nombre");
       $organizacion  =  $this->post("organizacion");
@@ -24,23 +22,50 @@ class Contactos extends REST_Controller{
       $direccion = $this->post("direccion");
       $tipo =  $this->post("tipo");      
       $nota = $this->post("nota");
+      $pagina_web = $this->post("pagina_web");
       $idusuario =  $this->sessionclass->getidusuario();
   
       $response_db =$this->contactmodel->record( $nombre , $organizacion , $telefono, $movil          
-                    , $correo , $direccion, $tipo , $idusuario, $nota );      
+                    , $correo , $direccion, $tipo , $idusuario, $nota , $pagina_web );      
 
       $this->response($response_db);
 
   }
   /*Retorna mis contactos*/
   function contacto_get(){
+
       $this->validate_user_sesssion();
       $idusuario =  $this->sessionclass->getidusuario();
-      $response_db =  $this->contactmodel->get_contactos_user($idusuario);
-
+      $contacto =  $this->get("contacto");
+      $tipo = $this->get("tipo");
+      $response_db =  $this->contactmodel->get_contactos_user($idusuario,  $contacto , $tipo);
       $this->response( table_contac($response_db));
+  }
+  /**/
+  function contacto_put(){
+
+      $this->validate_user_sesssion();
+      $id_contacto= $this->put("idcontacto");
+      $nombre  =  $this->put("nnombre");
+      $organizacion  =  $this->put("norganizacion");
+      $telefono =  $this->put("ntelefono");
+      $movil  = $this->put("nmovil");
+      $correo =  $this->put("ncorreo");
+      $direccion = $this->put("ndireccion");
+      $tipo =  $this->put("ntipo");      
+      $nota = $this->put("nnota");
+      $pagina_web = $this->put("npagina_web");
+      $idusuario =  $this->sessionclass->getidusuario();
+
+      $response_db = $this->contactmodel->update( $nombre , $organizacion , $telefono, $movil          
+                    , $correo , $direccion, $tipo , $idusuario, $nota , $pagina_web , $id_contacto);      
+
+      $this->response($response_db);
+
+  
 
   }
+  /*Terminal la función*/
 
 
 

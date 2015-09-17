@@ -4,6 +4,9 @@ class Accesos extends CI_Controller {
 	function __construct(){
 		parent::__construct();
 
+        $this->load->model("puntoventamodel");
+        $this->load->helper("puntoventa");
+        
         $this->load->model("eventmodel");
         $this->load->model("accesosmodel");
         $this->load->helper("accesos");
@@ -16,15 +19,23 @@ class Accesos extends CI_Controller {
     function configuracionavanzada($id_acceso, $id_evento){
 
 
-        $data_evento  = $this->eventmodel->getEventbyid($id_evento);
+        $data_evento  = $this->eventmodel->getEventbyid($id_evento);        
         $nombre_evento = $data_evento[0]["nombre_evento"];
         $data = $this->validate_user_sesssion("Acceso al evento ". $nombre_evento );        
-        $data_accesos = $this->accesosmodel->get_acceso_by_event($id_evento);                                                                                                                      
+        $data_accesos = $this->accesosmodel->get_acceso_by_event($id_evento);  
+
+        $id_user = $this->sessionclass->getidusuario();        
+        $id_empresa =  $this->sessionclass->getidempresa();  
+        $puntos_venta = $this->puntoventamodel->get_puntos_venta_evento( $id_evento , $id_user , $id_empresa);
+
+
         $data["evento"] = $id_evento;                
         $data["accesos_in_event"] = display_complete_info($data_accesos);
         $data["tipos_accesos"] =list_tipos_accesos( $this->accesosmodel->get_tipos_accesos());
-        
-        $this->dinamic_view_event('accesos/avanzado', $data);        
+        $data["puntos_venta"]= list_puntos_venta_evento($puntos_venta);
+        $this->dinamic_view_event('accesos/avanzado', $data);     
+
+           
 
     }/**************************Termina Configuracion del acceso avanzado **************++*/
 
