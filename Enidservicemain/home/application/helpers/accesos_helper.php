@@ -99,8 +99,9 @@ if(!function_exists('invierte_date_time')){
 
 	function display_complete_info($data_accesos){
 
-		$l='<table class="display table table-bordered table-striped dataTable" id="dynamic-table">
-					<thead class="blue-col-enid">
+
+		$l='<table class="display table table-bordered dataTable" id="dynamic-table">
+					<thead class="enid-header-table">
 						<tr role="row">
 							<th>#</th>
 							<th></th>
@@ -111,7 +112,7 @@ if(!function_exists('invierte_date_time')){
 							<th></th>
 						</tr>
 					</thead>
-					<tfoot class="blue-col-enid">
+					<tfoot class="enid-header-table">
 						<tr>
 							<th>#</th>
 							<th></th>
@@ -153,7 +154,7 @@ if(!function_exists('invierte_date_time')){
 
 
 				$l.= '<tr class="acceso_event" id="' . $idacceso. '">
-						<td>'. $flag .'	</td>
+						<td class="franja-vertical">'. $flag .'	</td>
 						<td>'. $tipo  .'	</td>
 						<td>$'. $precio  .'	</td>
 						<td>'. $vigencia .'	</td>

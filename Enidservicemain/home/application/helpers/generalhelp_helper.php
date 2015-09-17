@@ -49,7 +49,7 @@ if(!function_exists('invierte_date_time')){
 
 	function generatehorarioartista($namestart , $nameend){
 
-		$generado ="<table class='table col-lg-12'> 
+		$generado ="<table class='display table table-bordered dataTable'> 
 				<tr>
 					<td><select class='form-control'class=". $namestart." id=". $namestart." name=". $namestart." >";
 							

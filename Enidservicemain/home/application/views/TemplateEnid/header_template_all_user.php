@@ -211,7 +211,8 @@
             //background: none repeat scroll 0% 0% #12ADA2 !important;
             //background: none repeat scroll 0% 0% #09AFDF !important;
             background: #1C84A7 !important;
-            color: white;
+            color: white !important;
+            text-align: center !important;
         }
         .header-section , .notification-menu ,  .dropdown-toggle{
 

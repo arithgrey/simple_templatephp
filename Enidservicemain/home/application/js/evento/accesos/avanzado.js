@@ -116,7 +116,7 @@ function list_puntos_venta_evento(){
 	});
 
 }
-/**/
+/*Actualizo todos los puntos de venta  asociados al evento */
 function select_all(){
 		
 	url  = $("#form-punto-in-evento").attr("action");	

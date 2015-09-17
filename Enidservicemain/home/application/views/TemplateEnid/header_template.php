@@ -210,8 +210,17 @@
             
             //background: none repeat scroll 0% 0% #12ADA2 !important;
             //background: none repeat scroll 0% 0% #09AFDF !important;
-            background: #1C84A7 !important;
-            color: white;
+            //background: #1C84A7 !important;
+            background:  rgba(27, 66, 71, 0.91) none repeat scroll 0% 0% !important;
+            color: white !important;
+            text-align: center !important;
+            font-size: .9em;
+        }
+        .franja-vertical{
+            //background: #19D4D4 !important;
+            //background: rgba(25, 198, 198, 0.87)!important;
+            background: none repeat scroll 0% 0% #12ADA2 !important;
+            color: white !important;
         }
         .header-section , .notification-menu ,  .dropdown-toggle{
 

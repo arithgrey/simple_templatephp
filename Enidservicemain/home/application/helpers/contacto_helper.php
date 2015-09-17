@@ -12,9 +12,9 @@ if(!function_exists('invierte_date_time')){
 					  <table class="table display table table-bordered dataTable">
 					
 					  
-					  <tr class="text-center header-table">
-					  	<th class="text-center">#</th>
-					  	<th class="text-center" >Contacto</th>
+					  <tr class="text-center enid-header-table">
+					  	<th class="text-center ">#</th>
+					  	<th class="text-center " >Contacto</th>
 					  	<th class="text-center">organización</th>
 					  	<th class="text-center">Teléfono</th>
 					  	<th class="text-center">Movil</th>
@@ -50,8 +50,8 @@ if(!function_exists('invierte_date_time')){
 
 
 			$contacto .='<tr class="text-center" style="font-size:.8em;" >
-						<td>'.$b.'</td>
-						<td>'.$nombre.'</td>
+						<td class="franja-vertical">'.$b.'</td>
+						<td class="franja-vertical">'.$nombre.'</td>
 						<td>'.$organizacion.'</td>
 						<td>'.$tel.'</td>
 						<td>'.$movil.'</td>
@@ -68,9 +68,9 @@ if(!function_exists('invierte_date_time')){
 			$b++;
 		}
 
-		$contacto .="<tr style='' class='text-center header-table'>
-					  	<th class='text-center' >#</th>
-					  	<th class='text-center' >Contacto</th>
+		$contacto .="<tr style='' class='text-center enid-header-table'>
+					  	<th class='text-center ' >#</th>
+					  	<th class='text-center ' >Contacto</th>
 					  	<th class='text-center' >organización</th>
 					  	<th class='text-center' >Teléfono</th>
 					  	<th class='text-center' >Movil</th>

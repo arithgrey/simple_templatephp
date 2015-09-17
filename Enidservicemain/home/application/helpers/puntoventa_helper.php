@@ -5,9 +5,9 @@ if(!function_exists('invierte_date_time')){
 	/*regresa los puntos de venta asociados al evento*/
 	function list_puntos_venta_evento($data){
 	
-		$table ="<table class='table' border='1'>";		
-		$table .="<form action ='". base_url('index.php/api/puntosventa/punto_venta_evento_all/format/json') ."' id='form-punto-in-evento' ><tr style='background:#0EA3AE;' class='text-center'>";		
-		$table .="<th>Punto de venta</th> <th>info </th><th>Logo</th>  <th>Asociado al evento</th>";		
+		$table ="<table class='table display table table-bordered dataTable' >";		
+		$table .="<form action ='". base_url('index.php/api/puntosventa/punto_venta_evento_all/format/json') ."' id='form-punto-in-evento' ><tr  class='enid-header-table text-center'>";		
+		$table .="<th style='text-align: center;'  >Punto de venta</th> <th style='text-align: center;'>Resumen-info</th><th style='text-align: center;'>Logo</th></th> <th style='text-align: center;'>Medios de contacto</th>  <th style='text-align: center;'>Asociado al evento</th>";		
 		$table .="</tr>";		
 		
 		$ingresos =0;
@@ -27,9 +27,10 @@ if(!function_exists('invierte_date_time')){
 
 			$table.="<tr class='text-center'>";
 
-				$table.="<td  style='font-size: .8em;'>".$razon_social."</td>";	
+				$table.="<td class='franja-vertical'  style='font-size: .8em;'>".$razon_social."</td>";	
 				$table.="<td  style='font-size: .8em;'><a href='".$url_pagina_web."'> <span>".$telefono ."</span> | ".$url_pagina_web." |  ".$descripcion." |</a></td>";	
 				$table.="<td  style='font-size: .8em;'></td>";	
+				$table.="<td  style='font-size: .8em;'><i class='fa fa-book'></i></td>";	
 
 		
 				if ($puntoventa != null  ){
@@ -46,8 +47,8 @@ if(!function_exists('invierte_date_time')){
 			$flag ++;
 		}
 		
-		$table .="<tr style='background:#0EA3AE;'>";		
-		$table .="<th>Punto de venta</th> <th>info </th><th>Logo</th> <th>Asociado al evento</th>";		
+		$table .="<tr class='enid-header-table' >";		
+		$table .="<th style='text-align: center;'>Punto de venta</th> <th style='text-align: center;'>Resumen-info</th><th style='text-align: center;'>Logo</th> <th style='text-align: center;'>Medios de contacto</th> <th style='text-align: center;'>Asociado al evento</th>";		
 		$table .="</tr>";		
 		$table .="</table>
 		<span class='info-table'> Puntos de venta dónde el público podrá adquirir sus accesos ".$flag.",  asociados al evento ".$ingresos .".</span>";		
@@ -91,6 +92,7 @@ if(!function_exists('invierte_date_time')){
 	/*return puntos de venta empresa */
 	function list_puntos_venta_administracion_empresa($data){
 		
+
 		$list="";			
 		foreach ($data as $row) {
 			
@@ -109,7 +111,7 @@ if(!function_exists('invierte_date_time')){
 
 
 			$list.="<tr style='font-size:.8em;' class='text-center'>					
-					<td class='razon-social-text'>".$razon_social."</td>
+					<td class='franja-vertical'>".$razon_social."</td>
 					<td>".$telefono ."</td>
 					<td><a href='". $url_pagina_web ."'>". $url_pagina_web ."</a></td>
 					<td>".$status  ."</td>

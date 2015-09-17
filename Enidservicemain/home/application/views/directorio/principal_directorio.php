@@ -1,8 +1,4 @@
 <style type="text/css">
-.header-table{
-    background: #10B9D5 none repeat scroll 0% 0%;
-    text-align: center !important;
-}
 .status-registro{
     display: none;
 }

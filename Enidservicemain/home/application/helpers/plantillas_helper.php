@@ -54,25 +54,24 @@ function display_contenido_templ($data_contenido, $del=0 , $check=0 , $identific
 
 function list_objetos_permitidos_empresa( $arreglo ){ 
 
-    $list ='<table id="obj-permitidos" class="table table-bordered table-striped dataTable" >
-        <thead>
-        <tr>
-            <th class="sorting">#</th>
+    $list ='<table id="obj-permitidos" class="table display table table-bordered dataTable" >
+        <thead class="enid-header-table">
+            <tr>
+            <th>#</th>
             <th><i class="fa fa-trash"></i></th>
-            <th class="sorting">Articulo</th>
-            <th class="sorting">Nota</th></tr>
-        </thead>
-        
+            <th>Articulo</th>
+            <th>Nota</th>
+            </tr>
+        </thead>        
         <tfoot>
-        <tr>
+        <tr class="enid-header-table">
             <th>#</th>
             <th><i class="fa fa-trash"></i></th>
             <th>Articulo</th>
             <th>Nota</th>
         </tr>
-        </tfoot><tbody>';
-
-    
+        </tfoot>
+        <tbody>';    
     $b =0;
     foreach ( $arreglo as $row) {
                   
@@ -80,7 +79,8 @@ function list_objetos_permitidos_empresa( $arreglo ){
         $nombre = $row["nombre"];        
         $descripcion = $row["descripcion"];
 
-        $list .= "<tr><td>".$b."</td><td class='del_obj_permitido' id='". $idobjetopermitido."'><i class='del_obj_permitido fa fa-times'  id='". $idobjetopermitido."' ></i></td><td>  ". $nombre."</td><td>".$descripcion."</td><tr>";
+        $list .= "<tr><td>".$b."</td><td class='del_obj_permitido' id='". $idobjetopermitido."'>
+        <i class='del_obj_permitido fa fa-times'  id='". $idobjetopermitido."' ></i></td><td class='franja-vertical'>  ". $nombre."</td><td>".$descripcion."</td><tr>";
         $b++;
     }
     $list .="</tbody></table>";

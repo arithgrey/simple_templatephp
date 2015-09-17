@@ -2,46 +2,44 @@
 <button id="nuevo-contacto-button" type="button" class="btn btn-info" data-toggle="modal" data-target="#contact-modal">
     <i class="fa fa-check"></i>Agregar contacto
 </button>
-
-
-<table  class="display table table-bordered table-striped dataTable" id="dynamic-table">
+<table  class="table display table table-bordered dataTable" border="1">
         <thead>
 
-        <tr role="row" class='text-center blue-col-enid' style="font-size:.8em;">             
-            <th role="columnheader"   class="sorting text-center">Razón Social</th>
-            <th role="columnheader" class="sorting text-center">Tel.</th>
-            <th role="columnheader" class="sorting text-center">Página web </th>
-            <th role="columnheader" class="sorting text-center">Estado</th>
-            <th role="columnheader" class="sorting text-center">Locación</th>
-            <th role="columnheader" class="sorting text-center">Nota para el público</th>
-            <th role="columnheader" class="sorting text-center">Usuario Registrante</th>
-            <th role="columnheader" class="sorting text-center">Estado del Registrante</th>
-            <th role="columnheader" class="sorting text-center">Fecha registro</th>
-            <td >Contactos Asociados</td>
-            <th role="columnheader" class="sorting"></th>
-            
+        <tr role="row" class='enid-header-table' >             
+            <th >Razón Social</th>
+            <th >Tel.</th>
+            <th >Página web </th>
+            <th >Estado</th>
+            <th >Locación</th>
+            <th >Nota para el público</th>
+            <th >Usuario Registrante</th>
+            <th >Estado del Registrante</th>
+            <th >Fecha registro</th>
+            <th >Contactos Asociados</th>
+            <th ></th>            
         </tr>
         </thead>        
         <tfoot>
-        <tr class='blue-col-enid' style="font-size:.8em;">
-            <th colspan="1"  class='text-center' rowspan="1">Razón Social</th>
-            <th colspan="1"  class='text-center' rowspan="1">Tel</th>
-            <th colspan="1"  class='text-center' rowspan="1">Página web</th>
-            <th colspan="1"  class='text-center' rowspan="1">Estado</th>
-            <th colspan="1"  class='text-center' rowspan="1">Locación</th>
-            <th colspan="1"  class='text-center' rowspan="1">Nota para el público</th>
-            <th colspan="1"  class='text-center' rowspan="1">Usuario Registrante</th>
-            <th colspan="1"  class='text-center' rowspan="1">Estado del Registrante</th>
-            <th colspan="1"  class='text-center' rowspan="1">Fecha registro</th>
-            <th colspan="1"  class='text-center' rowspan="1">Contactos Asociados</th>
-            <th colspan="1"  class='text-center' rowspan="1"></th>
+        <tr class='enid-header-table'>
+            <th >Razón Social</th>
+            <th >Tel</th>
+            <th >Página web</th>
+            <th >Estado</th>
+            <th >Locación</th>
+            <th >Nota para el público</th>
+            <th >Usuario Registrante</th>
+            <th >Estado del Registrante</th>
+            <th >Fecha registro</th>
+            <th >Contactos Asociados</th>
+            <th ></th>
             
         </tr>
         </tfoot>
-        <tbody aria-relevant="all" aria-live="polite" role="alert">        
+        <tbody>        
             <?=$puntos_venta;?>
-    </tbody>
+        </tbody>
     </table>
+
 
 
 

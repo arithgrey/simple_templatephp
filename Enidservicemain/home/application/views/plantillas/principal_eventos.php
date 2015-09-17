@@ -156,7 +156,7 @@
                                 <a class="fa fa-chevron-down" href="javascript:;"></a>                                
                              </span>
                         </header>
-                        <div class="blue-col-enid-complement panel-body">                        
+                        <div class="panel-body">                        
                         <?=$plantilla_obj_permitidos;?>
                         <div class="row">
                                 <div class="col-md-12">
