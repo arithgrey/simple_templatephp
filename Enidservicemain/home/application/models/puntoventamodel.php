@@ -46,16 +46,32 @@
 	 	return $result_db->result_array();
 		
 	}
-	/*selecciona todos los puntos de venta por empresa y usuario*/
-	function get_puntos_venta_empresa_usuario($id_empresa){
+	
 
-		$query_get ="select pv.* ,  u.nombre, u.puesto , u.status estado_usuario    from punto_venta pv 
+	/*selecciona todos los puntos de venta por empresa y usuario*/	
+	function get_puntos_venta_empresa_usuario($id_empresa, $filtro ){
+
+		$query_get="";
+
+		if ( $filtro == null){
+			
+			$query_get ="select pv.* ,  u.nombre, u.puesto , u.status estado_usuario    from punto_venta pv 
 					inner join punto_venta_usuario pvu on pv.idpunto_venta =  pvu.idpunto_venta
 					inner join usuario u  
 					on pvu.idusuario = u.idusuario
-					where  pv.idempresa='". $id_empresa ."' ";
+					where  pv.idempresa='". $id_empresa ."' ";	
 
-		$result_db  = $this->db->query($query_get);								
+		}else{
+
+			$query_get ="select pv.* ,  u.nombre, u.puesto , u.status estado_usuario    from punto_venta pv 
+					inner join punto_venta_usuario pvu on pv.idpunto_venta =  pvu.idpunto_venta
+					inner join usuario u  
+					on pvu.idusuario = u.idusuario
+					where  pv.idempresa='". $id_empresa ."'and  pv.razon_social like '". $filtro ."%' ";	
+
+		}
+		
+		$result_db = $this->db->query($query_get);								
 		return $result_db->result_array();
 	}
 	/**/

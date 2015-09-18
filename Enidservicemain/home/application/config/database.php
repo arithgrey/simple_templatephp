@@ -7,6 +7,7 @@ $active_record = TRUE;
 
 
 
+
 $db['default']['hostname'] = 'localhost';
 $db['default']['username'] = 'root';
 $db['default']['password'] = 'puntoExeJar';
@@ -22,8 +23,8 @@ $db['default']['dbcollat'] = 'utf8_general_ci';
 $db['default']['swap_pre'] = '';
 $db['default']['autoinit'] = TRUE;
 $db['default']['stricton'] = FALSE;	
-/*
 
+/*
 
 $db['default']['hostname'] = '';
 $db['default']['username'] = 'enidserv_eniddbd';
@@ -42,6 +43,7 @@ $db['default']['autoinit'] = TRUE;
 $db['default']['stricton'] = FALSE;	
 
 */
+
 
 /* End of file database.php */
 /* Location: ./application/config/database.php */

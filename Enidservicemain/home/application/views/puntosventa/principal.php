@@ -1,77 +1,17 @@
 <script type="text/javascript" src="<?=base_url('application/js/puntosventa/principal.js')?>"></script>
 <button id="nuevo-contacto-button" type="button" class="btn btn-info" data-toggle="modal" data-target="#contact-modal">
-    <i class="fa fa-check"></i>Agregar contacto
+<i class="fa fa-check"></i>Agregar contacto
 </button>
-<table  class="table display table table-bordered dataTable" border="1">
-        <thead>
-
-        <tr role="row" class='enid-header-table' >             
-            <th >Razón Social</th>
-            <th >Tel.</th>
-            <th >Página web </th>
-            <th >Estado</th>
-            <th >Locación</th>
-            <th >Nota para el público</th>
-            <th >Usuario Registrante</th>
-            <th >Estado del Registrante</th>
-            <th >Fecha registro</th>
-            <th >Contactos Asociados</th>
-            <th ></th>            
-        </tr>
-        </thead>        
-        <tfoot>
-        <tr class='enid-header-table'>
-            <th >Razón Social</th>
-            <th >Tel</th>
-            <th >Página web</th>
-            <th >Estado</th>
-            <th >Locación</th>
-            <th >Nota para el público</th>
-            <th >Usuario Registrante</th>
-            <th >Estado del Registrante</th>
-            <th >Fecha registro</th>
-            <th >Contactos Asociados</th>
-            <th ></th>
-            
-        </tr>
-        </tfoot>
-        <tbody>        
-            <?=$puntos_venta;?>
-        </tbody>
-    </table>
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+<div class='pull-right'>
+    <input list='razon_social' name='puntos_venta_filtro' id='puntos-venta-filtro' class='puntos-venta-filtro' >
+    <?=$puntos_venta_nombres;?>
+</div>
+<div id="puntos-venta-list">
+    <?=$puntos_venta;?>
+</div>
 
 <!--Inicia modal registro del punto de venta -->
 <div class="modal fade in" id="contactos-modal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="false">
@@ -85,26 +25,7 @@
             </div>
             <div class="modal-body">            
                 <!--Nuevo contacto form -->
-
-
-
-
                 <div id="contactos-punto-venta"></div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
                 <!--Termina nuevo contacto -->
             </div>
             <div class="modal-footer">
@@ -115,56 +36,6 @@
     </div>
 </div>
 <!--termina modal registro del punto de venta-->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -248,33 +119,6 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 <div class="modal fade in" id="delete-punto-venta-modal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="false">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -292,10 +136,6 @@
                 <button type="button" class="btn btn-default" id="aceptar-delete" >Aceptar</button>
                 <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
 
-
-
-
-    
 
                 <!--Termina nuevo contacto -->
             </div>

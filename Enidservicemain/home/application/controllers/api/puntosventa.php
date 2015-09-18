@@ -23,6 +23,19 @@ class Puntosventa extends REST_Controller{
     
   }
 
+
+  /*Regresa los puntos de venta */
+  function punto_get(){
+
+    $this->validate_user_sesssion();
+    $id_empresa =  $this->sessionclass->getidempresa();  
+    $filtro = $this->get("filtro");
+    $puntos_venta = $this->puntoventamodel->get_puntos_venta_empresa_usuario($id_empresa,  $filtro);
+    $this->response(list_puntos_venta_administracion_empresa($puntos_venta));
+
+
+
+  }
   /**/
   function punto_venta_evento_get(){
 

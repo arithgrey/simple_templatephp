@@ -2,6 +2,20 @@
 if(!function_exists('invierte_date_time')){
 
 
+
+	/*regresa data list con los nombres de los puntos de venta*/
+	function lista_nombres_punto_venta($data){
+
+		$data_list ="<datalist id='razon_social'>";		
+		foreach ($data as $row) {
+
+			$razon_social = $row["razon_social"];
+			$data_list .="<option value='". $razon_social ."' >";
+		}	
+		$data_list .="</datalist>";
+		return $data_list;
+	}
+
 	/*regresa los puntos de venta asociados al evento*/
 	function list_puntos_venta_evento($data){
 	
@@ -92,8 +106,39 @@ if(!function_exists('invierte_date_time')){
 	/*return puntos de venta empresa */
 	function list_puntos_venta_administracion_empresa($data){
 		
+		$list="<table class='table display table table-bordered dataTable' border='1'>
+        <thead>
+        <tr role='row' class='enid-header-table' >             
+            <th >Razón Social</th>
+            <th >Tel.</th>
+            <th >Página web </th>
+            <th >Estado</th>
+            <th >Locación</th>
+            <th >Nota para el público</th>
+            <th >Usuario Registrante</th>
+            <th >Estado del Registrante</th>
+            <th >Fecha registro</th>
+            <th >Contactos Asociados</th>
+            <th ></th>            
+        </tr>
+        </thead>        
+        <tfoot>
+        <tr class='enid-header-table'>
+            <th >Razón Social</th>
+            <th >Tel</th>
+            <th >Página web</th>
+            <th >Estado</th>
+            <th >Locación</th>
+            <th >Nota para el público</th>
+            <th >Usuario Registrante</th>
+            <th >Estado del Registrante</th>
+            <th >Fecha registro</th>
+            <th >Contactos Asociados</th>
+            <th ></th>           
+        </tr>
+        </tfoot>
+        <tbody>";			
 
-		$list="";			
 		foreach ($data as $row) {
 			
 			$idpunto_venta = $row["idpunto_venta"];
@@ -105,7 +150,6 @@ if(!function_exists('invierte_date_time')){
 			$fecha_registro =  $row["fecha_registro"];
 			$idempresa     = $row["idempresa"];
 			$descripcion  =  $row["descripcion"];
-
 			$nombre =  $row["nombre"];
 			$estado_usuario  =  $row["estado_usuario"];
 
@@ -120,15 +164,14 @@ if(!function_exists('invierte_date_time')){
 					<td>".$nombre  ."</td>
 					<td>".$estado_usuario."</td>
 					<td>".$fecha_registro."</td>					
-
 					<td  class='contactos' id='". $idpunto_venta  ."' > 
 						<i class='btn btn-info fa fa-book contactos' id='". $idpunto_venta  ."' 
 						data-toggle='modal' data-target='#contactos-modal' ></i>
 					</td>			
 					<td><button class='delete-punto-venta btn btn-danger' id='". $idpunto_venta  ."'  style='width:4px;' data-toggle='modal' data-target='#delete-punto-venta-modal' ><i class='fa fa-trash'></i></button></td>					
-
 					</tr>";			
-		}		
+		}	
+		$list .="</tbody></table>";	
 		return $list;	
 	}
 

@@ -8,14 +8,18 @@ class Puntosventa extends CI_Controller{
         $this->load->model("puntoventamodel");
         $this->load->library('sessionclass');      
     }
+
+
+
     /*vista administrar puntos de venta*/
     function administrar(){
 
         $data= $this->validate_user_sesssion("Puntos de venta frecuentemente utilizados por el empresa");    
         $id_empresa =  $this->sessionclass->getidempresa();              
-        $puntos_venta = $this->puntoventamodel->get_puntos_venta_empresa_usuario($id_empresa);
+        $puntos_venta = $this->puntoventamodel->get_puntos_venta_empresa_usuario($id_empresa, 0);
                                        
         $data["puntos_venta"]= list_puntos_venta_administracion_empresa($puntos_venta);
+        $data["puntos_venta_nombres"] =  lista_nombres_punto_venta($puntos_venta);
         $this->dinamic_view_event("puntosventa/principal" , $data);        
     }
     /**/
