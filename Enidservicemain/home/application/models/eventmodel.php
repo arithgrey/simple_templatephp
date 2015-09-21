@@ -241,6 +241,15 @@ function update_eslogan($id_evento , $eslogan){
 	return $this->db->query($query_update_eslogan);
 
 }
+/**/
+function update_tipo_evento($id_evento , $tipo_evento ){
+
+	$query_update ="UPDATE evento SET tipo= '$tipo_evento' WHERE idevento = '".$id_evento."' ";
+	return $this->db->query($query_update);
+}
+
+
+
 /* get listobjetos permitidos del evento */
 function get_objetos_permitidosin_event($id_evento){
 	$query_get_objeto = "SELECT op.idobjetopermitido ,  op.nombre FROM  objetopermitido AS op 

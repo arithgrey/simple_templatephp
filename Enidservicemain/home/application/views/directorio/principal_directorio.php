@@ -148,10 +148,13 @@
         
         <select class="form-control col-sm-12" name="tipo">
             <option value="Proveedor">Proveedor</option>
+            <option value="Artista">Artista </option>
             <option value="Colaborador">Colaborador</option>
             <option value="Contacto Comercial">Contacto comercial</option>
             <option value="Cliente">Cliente</option>
             <option value="Contacto personal">Contacto personal </option>
+            <option value="Institución">Institución</option>
+            <option value="Productora">Productora</option>
         </select> 
     </div>    
 

@@ -5,9 +5,24 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
 <div class='pull-right'>
-    <input list='razon_social' name='puntos_venta_filtro' id='puntos-venta-filtro' class='puntos-venta-filtro' >
-    <?=$puntos_venta_nombres;?>
+    <div class="input-group">
+        <div class="input-group-addon">Punto de venta </div>
+        <input list='razon_social' name='puntos_venta_filtro' id='puntos-venta-filtro' class='puntos-venta-filtro form-control' >
+        <?=$puntos_venta_nombres;?>
+    </div>
 </div>
 <div id="puntos-venta-list">
     <?=$puntos_venta;?>

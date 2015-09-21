@@ -72,9 +72,11 @@ if(!function_exists('invierte_date_time')){
 	/*regresal la lista de contactos activa en el punto de venta */
 	function list_contactos_punto_venta($data){
 
-		$list ="<table class='table' border='1'>";
-		$list .="<tr class='text-center'><th class='text-center'>Contacto </th><th class='text-center' >Organización  </th> <th class='text-center' >Tel </th> <th class='text-center'>Móvil </th>
+		$list ="<table class='table display table table-bordered dataTable' border='1'>";
+		$list .="<tr class='text-center enid-header-table'><th class='text-center'>Contacto </th><th class='text-center' >Organización  </th> <th class='text-center' >Tel </th> <th class='text-center'>Móvil </th>
 		<th class='text-center'> +agregar </th>  </tr>";
+		$flag=0;
+		$contacos_asociados =0;
 		foreach ($data as $row) {
 			
 			$nombre  = $row["nombre"];
@@ -87,18 +89,27 @@ if(!function_exists('invierte_date_time')){
 			if ($puntoventacontacto != null ){
 				
 				$input ="<input type='checkbox' id='". $id_contacto ."' class='contacto-punto-venta' checked>";
+				$contacos_asociados ++;
 			}else{
 				$input ="<input type='checkbox' id='".$id_contacto."' class='contacto-punto-venta'>";
+				
 			}
 
-			$list.="<tr class='text-center' ><td>".$nombre."</td><td>".$organizacion ."</td>
+			$list.="<tr class='text-center' ><td class='franja-vertical'>".$nombre."</td><td>".$organizacion ."</td>
 						<td>".$tel."</td> <td>".$movil ."</td>
 						<td>". $input ."</td>
 						</tr>";
 
+			$flag++;				
 		}
 
-		$list .="</table>";
+		$list .="</table>
+		<div><span>Contactos disponibles: ". $flag.", asociados al punto de venta: ". $contacos_asociados  ."</span></div>
+
+
+		<div>
+			<span><a href='". base_url('index.php/directorio/contactos') ."'><button class='btn btn-block btn-info'>+ir  a la sección de contactos</button></a></span>
+		</div>";
 		return $list;
 	}
 
@@ -139,6 +150,7 @@ if(!function_exists('invierte_date_time')){
         </tfoot>
         <tbody>";			
 
+        $num_puntos_venta =0;
 		foreach ($data as $row) {
 			
 			$idpunto_venta = $row["idpunto_venta"];
@@ -170,8 +182,10 @@ if(!function_exists('invierte_date_time')){
 					</td>			
 					<td><button class='delete-punto-venta btn btn-danger' id='". $idpunto_venta  ."'  style='width:4px;' data-toggle='modal' data-target='#delete-punto-venta-modal' ><i class='fa fa-trash'></i></button></td>					
 					</tr>";			
+					$num_puntos_venta ++;
 		}	
-		$list .="</tbody></table>";	
+		$list .="</tbody></table>
+		<div><span>Puntos de venta encontrados : ". $num_puntos_venta ."</span></div>";	
 		return $list;	
 	}
 

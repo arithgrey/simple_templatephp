@@ -1,5 +1,7 @@
 $(document).on("ready", function (){
 
+
+	$("#tipo-evento-select").change(update_tipificacion_evento);	
 	//$("footer").ready(load_data_evento);	
 	$("#url_social").blur(update_social);
 	$("#url_social_evento_youtube").blur(update_social);
@@ -408,6 +410,15 @@ function update_fecha_evento(){
 	
 	
 	 return false;
+}
+/*Actualiza la tipificación del evento */
+function update_tipificacion_evento(){
 
+	evento = $("#evento").val();
+	tipificacion_evento  = $(this).val();
+	url =  now + "index.php/api/event/tipificacion/format/json/";    
+	actualiza_data(url , {"tipificacion_evento" : tipificacion_evento , "evento" : evento});
+
+	$("#tipificacion-evento").html(tipificacion_evento);		
 
 }

@@ -221,7 +221,16 @@ class Event extends REST_Controller{
         $this->response($this->eventmodel->update_eslogan($id_evento , validate_text($eslogan)) );
              
 
-    }/*Termina rest*/
+    }/*Termina*/
+    function tipificacion_put(){
+        $this->validate_user_sesssion();                    
+        $id_evento= $this->put("evento");
+        $tipo_evento =  $this->put("tipificacion_evento");
+        $this->response($this->eventmodel->update_tipo_evento($id_evento , $tipo_evento ));
+        
+    }
+
+
     /*Actualiza la fecha del evento */
     function date_by_id_put(){
         $this->validate_user_sesssion();          

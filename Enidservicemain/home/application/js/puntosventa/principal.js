@@ -16,7 +16,7 @@ function record_punto_venta(){
 	url  = $("#form-puntos-venta").attr("action");		
 	$.post(url , $("#form-puntos-venta").serialize() ).done(function(data){
 
-		load_data_puntos_venta(0);
+		load_data_puntos_venta(null);
 
 
 	}).fail(function(){

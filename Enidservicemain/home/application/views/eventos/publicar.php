@@ -9,15 +9,17 @@
 <div class="col-md-8 section-enid-events-r">
     
 
-
     <!--Inicia el row donde se cargan imagens y se edita el nombre y demás detalles -->
     <div class="row">            
         <div class="panel" >
           
 
         
-          <header class="panel-heading blue-col-enid"   href="" data-toggle="modal" data-target="#edith_fecha_modal" >
-            <div class='text-fecha-evento'>Fecha del evento <?=$fecha_evento; ?> </div>
+          <header class="panel-heading blue-col-enid" >
+          
+
+            <div class='text-fecha-evento'  href="" data-toggle="modal" data-target="#edith_fecha_modal"  >Fecha del evento <?=$fecha_evento; ?> </div>
+              <button id='tipificacion-evento' class='btn  btn-template' data-toggle="modal" data-target="#tipo-evento" ><?=$data_evento['tipo']?></button>
             <span class="tools pull-right">
               <a class="fa  fa-caret-down" href="javascript:;"></a>
             </span>
@@ -869,6 +871,63 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!---->
+<div class="modal fade" id="tipo-evento" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>            
+              <h4 class="modal-title" id="myModalLabel">Tipo de evento</h4>
+            </div>
+            <div class="modal-body">
+                
+                
+                      <div class="input-group">
+                          <div class="input-group-addon">Tipificación del evento</div>          
+                          <select name="tipo-evento" id='tipo-evento-select' class='form-control'>
+                            <option value='Evento público'>Evento público</option>
+                            <option value='Evento privado'>Evento privado</option>                            
+                            <option value='Evento por lista de invitados'>Evento por lista de invitados</option>                          
+                          </select>
+                      </div>
+                
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>                                
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<!---->
+
+
+
+
+
+
+
+
+
+
+
+
 <!--pickers css-->
 
 <link rel="stylesheet" type="text/css" href="<?=base_url('application/js/js/bootstrap-timepicker/css/timepicker.css')?>" />
@@ -939,3 +998,10 @@
 
      
 
+<style type="text/css">
+.text-fecha-evento:hover{
+  padding: 6px;
+  cursor: pointer;
+
+}
+</style>
