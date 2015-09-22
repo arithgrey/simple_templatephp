@@ -19,13 +19,41 @@ function getintegrantesbyidusuario($iduser){
     return $registrados;
 }/*Termina la función */
 /**/
-function getintegrantesinforme($iduser){
-    $idempresa =  $this->getidempresabyidusuario($iduser);
-    $querygetinfointegrantes ="SELECT u.idusuario , u.nombre , u.email ,u.fecha_registro , p.nombreperfil 
-    FROM usuario as u , perfil as p , usuario_perfil as up WHERE  u.idusuario = up.idusuario AND
-       p.idperfil = up.idperfil AND u.idempresa = $idempresa ";
+
+
+
+function getintegrantesinforme($iduser, $integrante , $idempresa){
+    
+    $querygetinfointegrantes="";
+    
+    if ($integrante == "0" ){
+        
+        $querygetinfointegrantes ="select u.*, p.nombreperfil  from  usuario u inner join usuario_perfil up 
+                                  on u.idusuario = up.idusuario inner join perfil p 
+                                  on up.idperfil = p.idperfil 
+                                  where idempresa = '".$idempresa."' ";
+          
+    }else{
+
+
+    $querygetinfointegrantes ="select u.*, p.nombreperfil  from  usuario u inner join usuario_perfil up 
+                                  on u.idusuario = up.idusuario inner join perfil p 
+                                  on up.idperfil = p.idperfil 
+                                  where idempresa = '".$idempresa."' and 
+                                  u.nombre like '". $integrante."%' ";  
+        
+    }
+
+  
+    
+    
     $resultquery = $this->db->query($querygetinfointegrantes);
     return  $resultquery->result_array();
+    
+     
+  
+    
+
 }
 /*regresa el id de la empresa a la cual pertenece un usuario */
 function getidempresabyidusuario($iduser){

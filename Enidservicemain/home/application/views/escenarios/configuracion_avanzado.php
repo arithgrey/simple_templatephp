@@ -207,7 +207,7 @@
         <div class="modal-content">
             <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-            <h4 class="modal-title" id="myModalLabel">track de sound cloud</h4>
+            <h4 class="modal-title" id="myModalLabel">Track de sound cloud</h4>
             </div>
             <div class="modal-body">    						
 								<div class="col-md-12">
@@ -217,7 +217,7 @@
 			                                <input name="url_sound"  id="url_sound" class="form-control" placeholder="" type="url" required>
 			                            </div>
 
-                                        <button class="btn btn-primary pull-right" type="submit">registrar</button>
+                                        <button class="btn btn-primary pull-left" type="submit">registrar</button>
                                     </form>
                                 </div>
 
@@ -250,11 +250,6 @@
             </div>
             <div class="modal-body">
     	
-
-
-
-
-							
 								<div class="col-md-12">
                                     <form role="form" id="form-arista-social-youtube" class="form-inline" action="<?=base_url('index.php/api/escenario/escenario_artista_social/format/json/')?>">
                                         <div class="input-group input-group-sm m-bot15">
@@ -262,12 +257,9 @@
 			                                <input name="url_youtube"  id="url_youtube" class="form-control" placeholder="" type="url" required>
 			                            </div>
 
-                                        <button class="btn btn-primary pull-right" type="submit">registrar</button>
+                                        <button class="btn btn-primary pull-left" type="submit">registrar</button>
                                     </form>
                                 </div>
-
-
-
 
             </div>
             <div class="modal-footer">
@@ -341,8 +333,9 @@
 
 
             </div>
+            <button type="button" class="pull-left guardar_horario btn btn-default" data-dismiss="modal">Guardar</button>
             <div class="modal-footer">
-            	<button type="button" class="guardar_horario btn btn-default" data-dismiss="modal">Guardar</button>
+            	
                 <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
                 
             </div>

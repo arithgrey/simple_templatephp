@@ -4,12 +4,13 @@ class Recursocontroller extends CI_Controller {
 	function __construct(){
 		parent::__construct();
 
+		$this->load->helper("recursos");
 		$this->load->model("cuentageneralmodel");
 		$this->load->library('sessionclass');  			
 	}
 	/**/
 	function perfiles(){
-		
+
 			$data = $this->validate_user_sesssion("Perfiles");											
 			$this->dinamic_view_event('perfiles/principal', $data);							
 			
@@ -17,11 +18,16 @@ class Recursocontroller extends CI_Controller {
 	function usuarios(){
 
 			$perfil = $this->sessionclass->getperfiles();
-			$data= $this->validate_user_sesssion("Miembros de la cuenta ");				
+			$data= $this->validate_user_sesssion("Miembros de la cuenta");						
 			$iduser  = $this->sessionclass->getidusuario();
-		    $integrantes  = $this->cuentageneralmodel->getintegrantesinforme($iduser);								
-		    $data["integrantes"]= $integrantes;			
+			$id_empresa =  $this->sessionclass->getidempresa();                                            
+		    $integrantes  = $this->cuentageneralmodel->getintegrantesinforme($iduser, 0 , $id_empresa);								
+		    $data["integrantes"]= lista_usuarios_cuenta($integrantes);			
+			$data["integrantes_filtro"] = list_filtro_integrantes($integrantes);
+				   
 			$this->dinamic_view_event(displayviewusuario( $perfil ), $data);	
+
+
 			
 	}		
 	function informacioncuenta(){

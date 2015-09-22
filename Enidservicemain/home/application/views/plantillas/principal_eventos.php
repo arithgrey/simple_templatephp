@@ -1,5 +1,15 @@
 <script type="text/javascript" src="<?=base_url('application/js/plantillas/principal.js')?>"></script>
 
+
+<a class='pull-right' href="<?=base_url('index.php/inicio/eventos')?>">
+<button type="button" class="btn btn-default" >
+    Ir a la sección de eventos
+</button>
+</a>
+
+
+
+
 <div class="container">
 	<div class="row">
 		<section>
@@ -44,6 +54,8 @@
 
                 </ul>
             </div>
+
+
 
             
                 <div class="tab-content">
@@ -116,7 +128,7 @@
                     <section class="panel">
                         <header class="panel-heading blue-col-enid">
                             <i class="fa fa-star"></i>
- Nueva plantilla de restricción 
+ Nueva plantilla de restricción  
                              <span class="tools pull-right">
                                 <a class="fa fa-chevron-down" href="javascript:;"></a>                                
                              </span>
@@ -127,13 +139,14 @@
                                     <form role="form" class="form-inline" id="new-contenido-form">
                                         <div class="form-group todo-entry">
                                             <input placeholder="Nueva restricción" class="form-control" name='nuevo_contenido_name' id='nuevo-contenido-name' style="width: 100%" type="text">
-                                            <textarea placeholder="Registra la descripción de la restricción" id='contenido_text'  class='contenido_text' name='contenido_text' class="form-control" style="width: 100%"  required></textarea>
+                                            <textarea placeholder="Registra la descripción de la restricción" id='contenido_text'  class='contenido_text form-control' name='contenido_text' class="form-control" style="width: 100%"  required></textarea>
                                             <input type='hidden' name="type" value="3">
 
                                         </div>
                                         <button class="btn btn-primary pull-right" type="submit">
                                             Registrar
                                         </button>
+
                                     </form>
 
 
@@ -241,7 +254,7 @@
    </div>
 </div>
 
-<a class='btn btn-block btn-info' href="<?=base_url('index.php/inicio/eventos')?>" ><button class="btn btn-block btn-info">Ir a la sección de eventos </button></a>
+
 
 
 <style type="text/css">

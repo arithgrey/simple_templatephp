@@ -51,6 +51,7 @@ function registra_contenido( formulario , type_conten ){
         break; 
 	} 
 	
+	
 }
 /***/
 function load_contenidos_templ_data(type , tag ){
@@ -62,6 +63,11 @@ function load_contenidos_templ_data(type , tag ){
 		idtag ="#"+ tag;
 		llenaelementoHTML(idtag , data);
 		$(".delete_contenido_templ").click(delete_contenido);
+		limpia_inputs();
+
+
+
+
 
 	}).fail(function(){
 		alert("Error");
@@ -73,6 +79,7 @@ function delete_contenido(e){
 	idcontenido = e.target.id;
 	url =now  + "index.php/api/templ/templates_content/format/json/";
 	eliminar_data(url , {"contenido" : idcontenido} );
+
 
 
 }
@@ -93,6 +100,7 @@ function load_articulos_empresa(){
 
 		llenaelementoHTML("#obj-permitidos" , data);
 		$(".del_obj_permitido").click(delete_articulo_empresa);
+		limpia_inputs();
 
 	}).fail(function(){
 
@@ -106,8 +114,12 @@ function delete_articulo_empresa(e){
 	url = now + "index.php/api/templ/plantillaarticulos/format/json/";
 	id_objeto_permitido = e.target.id;
 	eliminar_data( url , { "objeto_permitido" : id_objeto_permitido } );
-	load_articulos_empresa();	
+	
 
 }
 /**/
 
+function limpia_inputs(){
+
+	$(".form-control").val("");
+}

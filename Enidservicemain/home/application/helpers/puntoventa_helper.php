@@ -133,22 +133,7 @@ if(!function_exists('invierte_date_time')){
             <th ></th>            
         </tr>
         </thead>        
-        <tfoot>
-        <tr class='enid-header-table'>
-            <th >Razón Social</th>
-            <th >Tel</th>
-            <th >Página web</th>
-            <th >Estado</th>
-            <th >Locación</th>
-            <th >Nota para el público</th>
-            <th >Usuario Registrante</th>
-            <th >Estado del Registrante</th>
-            <th >Fecha registro</th>
-            <th >Contactos Asociados</th>
-            <th ></th>           
-        </tr>
-        </tfoot>
-        <tbody>";			
+   <tbody>";			
 
         $num_puntos_venta =0;
 		foreach ($data as $row) {
@@ -184,6 +169,27 @@ if(!function_exists('invierte_date_time')){
 					</tr>";			
 					$num_puntos_venta ++;
 		}	
+
+		if ($num_puntos_venta>9) {
+			
+			$list.="<tfoot>
+        <tr class='enid-header-table'>
+            <th >Razón Social</th>
+            <th >Tel</th>
+            <th >Página web</th>
+            <th >Estado</th>
+            <th >Locación</th>
+            <th >Nota para el público</th>
+            <th >Usuario Registrante</th>
+            <th >Estado del Registrante</th>
+            <th >Fecha registro</th>
+            <th >Contactos Asociados</th>
+            <th ></th>           
+        </tr>
+        </tfoot>";
+		}
+
+
 		$list .="</tbody></table>
 		<div><span>Puntos de venta encontrados : ". $num_puntos_venta ."</span></div>";	
 		return $list;	

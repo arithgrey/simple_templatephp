@@ -4,6 +4,7 @@ class Cuentageneralrest extends REST_Controller{
       
     function __construct(){
         parent::__construct();        
+        $this->load->helper("recursos");
         $this->load->model('cuentageneralmodel');         
         $this->load->library('sessionclass');
             
@@ -23,18 +24,16 @@ class Cuentageneralrest extends REST_Controller{
        return $numerointegrantes;       
     }
     /*************************************************************************************************************/    
-    function getintegrantesinfocuenta_GET(){
+    function integrantescuenta_GET(){
         
         $this->validate_user_sesssion();    
-        $this->response($this->getintegrantesinformacion());            
-    }
-    /**/
-    function getintegrantesinformacion(){
-        
-        $this->validate_user_sesssion();
+        $integrantes = $this->input->get("filtro");        
         $iduser  = $this->sessionclass->getidusuario();
-        $integrantes  = $this->cuentageneralmodel->getintegrantesinforme($iduser);
-        return $integrantes;
+        $id_empresa =  $this->sessionclass->getidempresa(); 
+        $integrantes_data  = $this->cuentageneralmodel->getintegrantesinforme($iduser, $integrantes, $id_empresa );
+        $this->response(lista_usuarios_cuenta($integrantes_data));
+
+
     }
     /**/    
     function getlistperfilesfisponiblesbycuenta_get(){

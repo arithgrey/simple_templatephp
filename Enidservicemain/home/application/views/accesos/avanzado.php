@@ -91,19 +91,18 @@
                 <!--Termina el nuevo -->
             </div>
         <div id="about3" class="tab-pane">
-
             <!--Puntos de venta se asocian -->
-
-
             <div class="col-sm-12">
                 <section class="panel">                    
                 <div class="container">
                     <div class="btn-group pull-right">
                         <button type="button" id="marcar-puntos-venta-todos" class="btn btn-primary btn-sm"><i class="fa fa-check-square-o"></i> Marcar todos</button>                                
+
                     </div>   
                     <div class='puntos-venta-evento'>
                         <?=$puntos_venta;?>
                     </div>
+                    <a href="<?=base_url('index.php/puntosventa/administrar/')?>"><button type="button"class="btn btn-primary btn-sm">+ Cargar puntos de venta</button></a>                                
                 </div>
                 </section>
             </div>

@@ -68,7 +68,10 @@ if(!function_exists('invierte_date_time')){
 			$b++;
 		}
 
-		$contacto .="<tr style='' class='text-center enid-header-table'>
+
+		if ($b>9 ) {
+			
+			$contacto .="<tr style='' class='text-center enid-header-table'>
 					  	<th class='text-center ' >#</th>
 					  	<th class='text-center ' >Contacto</th>
 					  	<th class='text-center' >organización</th>
@@ -82,7 +85,11 @@ if(!function_exists('invierte_date_time')){
 					  	<th class='text-center' >Estado</th>
 					  	<th class='text-center' >Fecha registro</th>
 					  	<th class='text-center' ></th>					  	
-					  </tr>
+					  </tr>";	
+		}
+
+		$contacto .="
+		
 		</table>
 		<span class=''>Resultados encontrados:  ". ($b -1)."<span>
 		</div>";

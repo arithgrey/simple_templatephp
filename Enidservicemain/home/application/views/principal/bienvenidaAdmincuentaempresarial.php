@@ -6,7 +6,7 @@
           <div class="timeline-badge"><i class="fa fa-headphones"></i></div>
           <div class="timeline-panel">
             <div class="timeline-heading">
-              <h4 class="timeline-title"><i class="fa fa-play-circle"></i> Eventos</h4>
+              <a href="<?=base_url('index.php/inicio/eventos')?>"><h4 class="timeline-title"><i class="fa fa-play-circle"></i> Eventos</h4></a>
               <p><small class="text-muted"> 
                  Con esta herramienta tu y los calaborades de la organización 
                 podrán registrar y publicar eventos, incluyendo artistas, sus horarios, puntos de venta, accesos y más.
@@ -25,7 +25,7 @@
           <div class="timeline-badge"><i class="fa fa-line-chart"></i></div>
           <div class="timeline-panel">
             <div class="timeline-heading">
-              <h4 class="timeline-title"><i class='fa fa-pie-chart'></i>Tendencias</h4>
+              <a href="<?=base_url('index.php/tendencias/')?>"><h4 class="timeline-title"><i class='fa fa-pie-chart'></i>Tendencias</h4></a>
             </div>
             <div class="timeline-body">
 
@@ -51,7 +51,7 @@
           <div class="timeline-panel">
             <div class="timeline-heading">
               <h4 class="timeline-title"><i class="fa fa-user"></i>
-                Miembros de la cuenta
+                <a href="<?=base_url('index.php/recursocontroller/usuarios')?>">Miembros de la cuenta</a>
               </h4>
               <p><small class="text-muted">
                 Gestiona que personas pertenecen a la cuenta así como sus permiso y restricciones dentro de la misma.
@@ -70,9 +70,11 @@
           <div class="timeline-badge"><i class="fa fa-credit-card"></i></div>
           <div class="timeline-panel">
             <div class="timeline-heading">
+               <a href="<?=base_url('index.php/puntosventa/administrar')?>">
+                
               <h4 class="timeline-title">
                 <i class="fa fa-globe"></i>
-Tus puntos de venta</h4>
+Tus puntos de venta</h4></a>
             </div>
             <div class="timeline-body">
                 <p>
@@ -93,7 +95,7 @@ Tus puntos de venta</h4>
           <div class="timeline-panel">
             <div class="timeline-heading">
               <h4 class="timeline-title"><i class="fa fa-spinner"></i>
-                Tus contactos
+                <a href="<?=base_url('index.php/directorio/contactos')?>">Tus contactos</a>
               </h4>
               <p><small class="text-muted"> Manten al día tu lista de contactos, desde proveedores hasta las productoras de los artistas.</small></p>
             </div>
@@ -106,7 +108,7 @@ Tus puntos de venta</h4>
           <div class="timeline-badge"><i class="fa fa-calendar"></i></div>
           <div class="timeline-panel">
             <div class="timeline-heading">
-              <h4 class="timeline-title">Las actividades asignadas a los colaboradores</h4>
+             <a href="<?=base_url('index.php/actividades/')?>"> <h4 class="timeline-title">Las actividades asignadas a los colaboradores</h4></a>
             </div>
             <div class="timeline-body">
                <small class="text-muted">
@@ -122,8 +124,9 @@ Tus puntos de venta</h4>
           <div class="timeline-badge"><i class="fa fa-file-text-o"></i></div>
           <div class="timeline-panel">
             <div class="timeline-heading">
-              <h4 class="timeline-title"><i class="fa fa-file"></i>
-Mis plantillas</h4>
+                <a href="<?=base_url('index.php/templates/eventos')?>">
+                    <h4 class="timeline-title"><i class="fa fa-file"></i>Mis plantillas</h4>
+                </a>
               <p><small class="text-muted"> Las plantillas son textos ágiles que te permitirá escribir continuamente las politicas de los eventas, reglas,  restricciones y demás 
               información común en los encuentros musicales.
                 </small>

@@ -1,52 +1,61 @@
 $(document).on("ready" , function(){
 
-    $("#listausuariosempresa").ready(loaduserscuenta);
-    $("#listausuariosempresa").ready(listperfilesdisponibles);
     
+    
+    $("#integrantes-l").keyup(function(){
+        
+        filtro =  $(this).val();
+        
+        loaduserscuenta(filtro);        
+    });    
+
 });
 
 
 
 
 
-function loaduserscuenta(){
+function loaduserscuenta(filtro){
 
-    url = now + "index.php/api/cuentageneralrest/getintegrantesinfocuenta/format/json";
-
-    var clientresponse = ["Error al cargar los colaboradores, reporte al administrador"]
-
-    $.get(url ).done(function( data ){
-
-        list="";
-        b = 1;
-        for(var x in data){
+    url = now + "index.php/api/cuentageneralrest/integrantescuenta/format/json";
+    var clientresponse = ["Error al cargar los colaboradores, reporte al administrador"];
 
 
-            nombre = data[x].nombre;
-            email = data[x].email;
-            fecha_registro  = data[x].fecha_registro;
-            nombreperfil = data[x].nombreperfil;
+    $.get(url, {"filtro": filtro } ).done(function( data ){
 
-            list +="<tr>";
-            list +="<td>"+ b +"</td>";
-            list +="<td>"+nombre +"</td>";
-            list +="<td>"+fecha_registro +"</td>";
-            list +="<td>"+nombreperfil +"</td>";
-            list +="<td>"+email +"</td>";
-            list+="</tr>";
-             
-                                
-                               
-        }
-
-        llenaelementoHTML( "#listausuariosempresa", list );
+        
+        llenaelementoHTML("#integrantes-table-info" , data);
 
     }).fail(function(){
-
+        alert("Falla");
         llenaelementoHTML( "#listausuariosempresa", clientresponse[0]);
     });
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

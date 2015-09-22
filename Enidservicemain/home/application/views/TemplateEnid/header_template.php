@@ -75,7 +75,7 @@
 
 
         <div class="logo-icon text-center">
-            <a href="<?=base_url()?>"><img style="width: 30%" src="<?=base_url('application/img/Enid2.png')?>" alt="Enid Service"></a>
+            <a href="<?=base_url()?>"><img style="width: 70%" src="<?=base_url('application/img/Enid2.png')?>" alt="Enid Service"></a>
 
         </div>
 

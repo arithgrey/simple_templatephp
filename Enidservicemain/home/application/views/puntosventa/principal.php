@@ -1,6 +1,6 @@
 <script type="text/javascript" src="<?=base_url('application/js/puntosventa/principal.js')?>"></script>
 <button id="nuevo-contacto-button" type="button" class="btn btn-info" data-toggle="modal" data-target="#contact-modal">
-<i class="fa fa-check"></i>Agregar contacto
+<i class="fa fa-check"></i>Agregar punto de venta
 </button>
 
 
@@ -121,6 +121,11 @@
         </div>
     </div>
 </div>
+
+
+
+
+<a href="<?=base_url('index.php/inicio/eventos/')?>"><button type="button"class="btn btn-primary btn-sm">Ir a la sección de eventos</button></a>                                
 <!--termina modal registro del punto de venta-->
 <style type="text/css">
 .header-table{

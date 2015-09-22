@@ -1,66 +1,29 @@
 <script type="text/javascript" src="<?=base_url('application/js/usuarios/principal.js')?>"></script>
 
-<?php 
-$listusuarios ="";    
-$now = 1;
-    foreach ($integrantes as $row) {
-        //
-        $listusuarios .="<tr>";      
-        $listusuarios .="<td class='blue-col-enid text-center'>". $now."</td>
-                        <td class=''>".$row["nombre"]."</td>
-                        <td class=''>".$row["email"]."</td>
-                        <td class='text-center'>". getTimeFormat3( $row["fecha_registro"] )  ."</td>
-                        <td class='text-center'>".$row["nombreperfil"]."</td>      
-                        <td class='text-center'><a> <i class='editar_permisos_miembro fa fa-pencil-square fa-lg' id='". $row["idusuario"] . "'></i> </a></td>";      
-
-        $listusuarios .="</tr>";      
-        $now++;
-    }
-
-
-
-    
-
-?>
-
-
 <div class='row'>
-
-<div class="col-xs-12  col-sm-12 col-md-12 col-lg-12 centered">
-                <section class="panel">
-                    <header class="panel-heading">
-                        
-                            
-
-                                <a href="#myModal" data-toggle="modal">
-                                    <i class="fa fa-user-plus fa-1x"></i>
-                                    Nuevo integrante
-                                </a>
-                            
+    <div class="col-xs-12  col-sm-12 col-md-12 col-lg-12 centered">
+        <section class="panel">
+            <header class="panel-heading">                     
+                <button id="nuevo-contacto-button" type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal">
+                    <i class="fa fa-check"></i>nuevo integrante de la cuenta
+                </button>        
+            </header>    
 
 
+            <div class='row'>
+                <div class="input-group pull-right col-md-3">
+                    <div class="input-group-addon">Contacto </div>
+                    <input list="integrantes-list" id="integrantes-l" class='integrantes-l form-control' >    
+                    <?=$integrantes_filtro;?>        
+                </div>        
+            </div>
 
-                    </header>
-                        <table aria-describedby="dynamic-table_info" class="display table table-bordered table-striped dataTable dynamic-table-enid" id="dynamic-table">
 
-                                    <thead class='enid-header-table'>
 
-                                        <tr role="row">
-                                            <th class="sorting">ID</th>
-                                            <th class="sorting ">Miembro</th>
-                                            <th class="sorting">Usuario</th>
-                                            <th class="sorting">Registro</th>
-                                            <th class="sorting">Perfil</th>
-                                            <th >Edición</th>
-
-                                        </tr>
-                                    </thead>
-                                    <tbody aria-relevant="all" aria-live="polite" role="alert">
-                                        <?=$listusuarios;?>
-                                    </tbody>    
-                        </table>
-</div>
-
+            <div class='integrantes-table-info' id="integrantes-table-info">
+                <?=$integrantes;?>                             
+            </div>
+    </div>
 </div><!--Termina row-->
 
 
@@ -101,7 +64,7 @@ $now = 1;
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                        <h4 class="modal-title">Invita a un amigo a tu organización</h4>
+                        <h4 class="modal-title">Registrar nuevo integrante</h4>
                     </div>
                     <div class="modal-body">
                         <p>Ingresa su mail y la información de su 
@@ -124,10 +87,17 @@ $now = 1;
  
                   
 
-                      
-
-                        <div  id='listperfiles'>
+                        <div class="input-group">
+                            <span class="input-group-addon" id="basic-addon1">Perfil</span>
+                            <select id="newperfil" class='form-control m-bot15' name="newperfil">
+                                <option value='4'>Administrador de cuenta</option>
+                                <option value='5' >Estratega digital</option>
+                                <option value='6'>Director de la empresa</option>
+                                
+                            </select>
                         </div>
+                        
+
 
                         <br>
                         <div class='well' id="clientresponse"></div>
