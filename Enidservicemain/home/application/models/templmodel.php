@@ -224,7 +224,27 @@
       return $this->db->query($query_delete);
       
     }
+    /**/
+    function get_resumen_template($id_usuario ){
+
+      $query_get ='select count(*) plantillas  ,
+
+                        sum(case when t.tipo_plantilla  ="Contenido descriptivo evento" then 1 else 0 end )descriptivas_evento,  
+                  sum(case when t.tipo_plantilla  ="Contenido descriptivo evento" then 1 else 0 end )descriptivas_evento,
+                  sum(case when t.tipo_plantilla  ="Restricciones" then 1 else 0 end )restricciones,
+                  sum(case when t.tipo_plantilla  ="politicas" then 1 else 0 end )politicas, 
+                  sum(case when p.status  ="1" then 1 else 0 end )plantillas_disponibles ,
+                  sum(case when p.status  ="0" then 1 else 0 end )plantillas_no_disponibles 
+                  from  plantilla p inner join tipo_plantilla t 
+                  on p.idtipo_plantilla = t.idtipo_plantilla
+                  where idusuario = "'. $id_usuario .'"
+                  group by p.idusuario';
+      
+      $db_response  = $this->db->query($query_get);                  
+      return $db_response->result_array();  
+    }
 
         
 }
+
 

@@ -179,6 +179,15 @@
                   <div>
                   <button class='btn  btn-template' data-toggle="modal" data-target="#templa-descripcion-contenido" ><i class='fa fa-file-text-o'></i> Plantilla de descripciones</button>
                   <button class='btn btn-info' id='generos_musicales_button'><i class='fa fa-caret-down'></i> Géneros musicales</button>
+                    
+                   
+
+
+                   <div class="input-group">
+                    <div class="input-group-addon">Contacto </div>
+                    <input   placeholder="Genero musical"  id="genero-busqueda" class="genero-busqueda form-control" type="text">
+                    
+                  </div>
                     <div class='generos_musicales_div'>
                       <?=$list_generos;?>
                     </div>

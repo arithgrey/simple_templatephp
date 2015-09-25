@@ -6,7 +6,9 @@ if(!function_exists('invierte_date_time')){
 
     function list_generos_musicales($value){
 
-    $table_list ='<table class="table" id="dynamic-table">
+    $table_list ='
+   
+    <table class="table" >
                     <thead class="blue-col-enid">
                     <tr>
                         <th>#</th>

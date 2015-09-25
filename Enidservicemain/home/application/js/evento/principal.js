@@ -1,6 +1,11 @@
 $(document).on("ready", function (){
 
 
+	$("#genero-busqueda").keyup(function(){
+
+		busqueda_geros_musicales($(this).val());
+	});
+
 	$("#tipo-evento-select").change(update_tipificacion_evento);	
 	//$("footer").ready(load_data_evento);	
 	$("#url_social").blur(update_social);
@@ -421,4 +426,23 @@ function update_tipificacion_evento(){
 
 	$("#tipificacion-evento").html(tipificacion_evento);		
 
+}/**/
+
+/*Búsqeda de generos musicales */
+function busqueda_geros_musicales(e){
+	genero_filtro = e;
+	evento = $("#evento").val();
+	url =  now + "index.php/api/event/genero/format/json/";
+	$.get(url, {"filtro": genero_filtro , "evento" : evento } ).done(function(data){
+				
+		llenaelementoHTML(".generos_musicales_div", data);
+		$(".genero_musical_input").click(update_genero_evento);
+
+
+	}).fail(function(){
+
+		alert("Falla en la búsqueda");
+	});
+
 }
+

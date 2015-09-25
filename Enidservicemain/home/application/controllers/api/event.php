@@ -7,6 +7,7 @@ class Event extends REST_Controller{
                              
             $this->load->model("eventmodel");                
             $this->load->helper("eventosh");               
+            $this->load->helper("generoshelp");
             $this->load->library('sessionclass');                    
     }     
     /**/
@@ -71,6 +72,18 @@ class Event extends REST_Controller{
         $idevento = $this->put("evento");
         $this->response($this->eventmodel->updategeneros($nuevos_generos , $idevento ) );
 
+    }
+    /**/
+    function genero_get(){
+
+
+        $this->validate_user_sesssion(); 
+
+        $id_empresa =  $this->sessionclass->getidempresa();
+        $id_evento =  $this->get("evento");               
+        $genero_filtro = $this->get("filtro");        
+        $response_db = $this->eventmodel->get_generos($id_empresa , $id_evento , $genero_filtro);                                            
+        $this->response(list_generos_musicales($response_db));
     }
     /**/
     function ubicacion_put(){

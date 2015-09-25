@@ -28,6 +28,7 @@ function getintegrantesinforme($iduser, $integrante , $idempresa){
     
     if ($integrante == "0" ){
         
+
         $querygetinfointegrantes ="select u.*, p.nombreperfil  from  usuario u inner join usuario_perfil up 
                                   on u.idusuario = up.idusuario inner join perfil p 
                                   on up.idperfil = p.idperfil 
@@ -108,6 +109,34 @@ function getnumeroclientesquehesolicitado($idempresa, $iduser){
   return   $result->num_rows();
 }
 
+/**/
+
+function update_perfil_user($usuario , $perfil ){
+
+  
+  $query_update ="update usuario_perfil set  idperfil= '".$perfil ."' where idusuario = '".$usuario."'  ";
+  return $this->db->query($query_update);
+
+}
+/**/
+function get_resumen_usuarios_cuenta($id_empresa){
+
+  $query_get ='select  count(0) usuarios, 
+              sum(case when u.status = "Usuario Activo" then 1 else 0 end) usuarios_activos, 
+              sum(case when u.status = "Usuario dado de baja" then 1 else 0 end) usuarios_baja, 
+              sum(case when p.nombreperfil = "Administrador de cuenta" then 1 else 0 end) administradores_cuenta, 
+              sum(case when p.nombreperfil = "Estratega digital" then 1 else 0 end) estrategas_digitales
+              from  usuario u inner join usuario_perfil up 
+              on u.idusuario = up.idusuario inner join perfil p 
+              on up.idperfil = p.idperfil 
+              where idempresa = "'. $id_empresa .'"  ';
+
+  $result = $this->db->query($query_get);   
+  return $result ->result_array();
+
+
+
+}
 
 /*Termina modelo */
 }

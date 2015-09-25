@@ -55,7 +55,7 @@ class Mailrest extends REST_Controller{
 /**************************************************************************************/
 
 
-	function setmailgmailnewinvitaticon_post(){
+	function send_mail_gmail_invitaticon_post(){
 
 		$this->validate_user_sesssion();
 

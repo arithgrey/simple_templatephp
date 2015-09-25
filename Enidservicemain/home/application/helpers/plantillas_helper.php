@@ -3,6 +3,42 @@
 if(!function_exists('invierte_date_time')){
 
 
+
+
+
+
+function resumen_templ_eventos($data){
+
+
+    $table ='<table class="table display table table-bordered dataTable">                                          
+                    <tr class="text-center" style="background:rgba(202, 234, 231, 0.9);">
+                        <th class="text-center">Plantillas</th>
+                        <th class="text-center">Disponibles</th>
+                        <th class="text-center">No disponibles </th>
+
+                        <th class="text-center">Que describen los eventos </th>
+                        <th class="text-center">Que son restriciones </th>                        
+                        <th class="text-center">Que son políticas </th>                        
+                        </tr>';
+
+
+    foreach ($data as $row) {
+
+        $table .="<tr class='text-center'>
+                    <td>". $row["plantillas"] ."</td>
+                    <td>". $row["plantillas_disponibles"]."</td> 
+                    <td>". $row["plantillas_no_disponibles"]."</td>
+                    <td>". $row["descriptivas_evento"]."</td>
+                    <td>". $row["restricciones"]."</td>
+                    <td>". $row["politicas"]."</td>
+                                       
+                </tr>";
+                         
+    }                 
+    $table .="</table>";
+    return $table;
+
+}
 /*Desplegamos las listas de restricciones*/ 
     
     

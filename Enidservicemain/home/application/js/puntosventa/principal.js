@@ -1,5 +1,6 @@
 $(document).on("ready", function(){
 
+	$(".editar-punto-venta").click(edit_punto_venta);
 	$("#form-puntos-venta").submit(record_punto_venta);
 	$(".contactos").click(update_contactos_in_punto_venta);
 	$(".delete-punto-venta").click(delete_punto_venta);
@@ -61,12 +62,18 @@ function delete_punto_venta(e){
 		   url: url,
 		   type: 'DELETE',
 		   data : {"punto_venta" :  punto_venta}  }).done(function(data){
+		   	load_data_puntos_venta(null);
 		   	
 		}).fail(function(){
 		   		
 		});
-		redirect("");	
-	});		
+		
+	});	
+
+
+
+
+
 }
 /**/
 function load_data_puntos_venta(filtro ){
@@ -78,9 +85,29 @@ function load_data_puntos_venta(filtro ){
 		llenaelementoHTML( "#puntos-venta-list" , data);
 		$(".contactos").click(update_contactos_in_punto_venta);
 		$(".delete-punto-venta").click(delete_punto_venta);
+		$(".editar-punto-venta").click(edit_punto_venta);
 
 	}).fail(function(){
 		alert("Falla al cargar ....");
 	});
 }
 /**/
+
+
+function edit_punto_venta(e){	
+
+	punto_venta = e.target.id;
+
+	$(".form-puntos-venta-edit").submit(function(){
+		
+		url = $(".form-puntos-venta-edit").attr("action");
+
+		actualiza_data(url , $(".form-puntos-venta-edit").serialize()+'&'+$.param({ 'punto_venta': punto_venta }) );
+		load_data_puntos_venta(null);
+
+
+		return false;
+
+	});
+
+}

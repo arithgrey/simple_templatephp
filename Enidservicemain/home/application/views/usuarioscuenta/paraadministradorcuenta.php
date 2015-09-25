@@ -1,28 +1,59 @@
 <script type="text/javascript" src="<?=base_url('application/js/usuarios/principal.js')?>"></script>
 
+
+
+
+
+
+<div class="container">
+    <div class="row">
+        <div class="center-block">
+        <?=$resumen_usuarios;?>
+        </div>
+    </div>
+</div>    
+
 <div class='row'>
     <div class="col-xs-12  col-sm-12 col-md-12 col-lg-12 centered">
-        <section class="panel">
-            <header class="panel-heading">                     
-                <button id="nuevo-contacto-button" type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal">
-                    <i class="fa fa-check"></i>nuevo integrante de la cuenta
-                </button>        
-            </header>    
 
 
-            <div class='row'>
-                <div class="input-group pull-right col-md-3">
-                    <div class="input-group-addon">Contacto </div>
-                    <input list="integrantes-list" id="integrantes-l" class='integrantes-l form-control' >    
-                    <?=$integrantes_filtro;?>        
-                </div>        
-            </div>
 
+        <div class="container">
+        <div class="row">
+        <div class="center-block">    
+            <button id="nuevo-contacto-button" type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal">
+                + nuevo integrante
+            </button>  
+            <div class="input-group pull-right col-md-3">
+                <div class="input-group-addon">Contacto </div>
+                <input list="integrantes-list" id="integrantes-l" class='integrantes-l form-control' >    
+                <?=$integrantes_filtro;?>        
+            </div>                
 
 
             <div class='integrantes-table-info' id="integrantes-table-info">
+                <br>
                 <?=$integrantes;?>                             
             </div>
+
+
+
+        </div>
+        </div>            
+        </div>         
+
+
+        
+        
+
+        
+
+
+
+
+
+
+
     </div>
 </div><!--Termina row-->
 
@@ -115,3 +146,89 @@
         <!-- modal -->
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--*****************************Perfiles por usuario **************************-->
+
+
+
+
+<div aria-hidden="true" aria-labelledby="edit-usuario-perfil" role="dialog" tabindex="-1" 
+        id="edit-usuario-perfil" class="modal fade">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title">Editar perfil del integrante</h4>
+                        
+                    </div>
+                    <div class="modal-body">
+                        
+                    <form method="post">   
+                        <div class="input-group">
+                            <span class="input-group-addon" id="basic-addon1">Nuevo perfil</span>
+                            <select id="edit-perfil-select" class='form-control m-bot15' name="edit-perfil-user">
+                                <option value='4'>Administrador de cuenta</option>
+                                <option value='5' >Estratega digital</option>
+                                <option value='6'>Director de la empresa</option>
+                                
+                            </select>
+                        </div>                    
+
+
+                    
+                        <button class="btn btn-info ">
+                                Perfiles del sistema
+                        </button>        
+
+
+
+                        <br>
+                        <br>
+                        <div class='alert alert-info fade in repo-edith'>
+
+                            <small>Perfil del usuario modificado</small>
+                        </div>
+
+
+                    
+                    </div>
+
+
+                    
+                    <div class="modal-footer">
+                            <button data-dismiss="modal" class="btn btn-default" type="button">Cancelar</button>                        
+                    </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+
+
+
+        <style type="text/css">
+        .repo-edith{
+            display: none;
+        }
+        </style>

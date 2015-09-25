@@ -24,15 +24,18 @@ class Directorio  extends CI_Controller {
     /*página principal , contactos */    
 
 	function contactos(){    		
-        
 
+        
         $data = $this->validate_user_sesssion("Mis contactos");        
         $id_usuario =  $this->sessionclass->getidusuario();
         $data_contactos = $this->contactmodel->get_list_contactos($id_usuario);
         $data_tipos = $this->contactmodel->get_tipos_contactos($id_usuario);
+        $data_repo_contactos = $this->contactmodel->get_repo_contactos($id_usuario);        
+        $data["resumen"]=resumen_contactos( $data_repo_contactos);
         $data["list_contactos_name"] = list_contactos_names($data_contactos);
         $data["lista_tipo"] = filtro_tipo_contacto($data_tipos);
         $this->dinamic_view_event('directorio/principal_directorio', $data);    
+
 
 	}/*Termina la función*/
 

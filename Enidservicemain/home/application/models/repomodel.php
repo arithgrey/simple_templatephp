@@ -8,8 +8,6 @@ function __construct(){
         $this->load->database();
 }
 
-
-
  function getalertasempresapersonasfisicas($idempresa)
 {
 

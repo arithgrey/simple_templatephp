@@ -26,6 +26,7 @@ if(!function_exists('invierte_date_time')){
 		
 		$ingresos =0;
 		$flag =0;
+
 		foreach ($data as $row) {
 
 			$razon_social = $row["razon_social"];
@@ -105,8 +106,6 @@ if(!function_exists('invierte_date_time')){
 
 		$list .="</table>
 		<div><span>Contactos disponibles: ". $flag.", asociados al punto de venta: ". $contacos_asociados  ."</span></div>
-
-
 		<div>
 			<span><a href='". base_url('index.php/directorio/contactos') ."'><button class='btn btn-block btn-info'>+ir  a la sección de contactos</button></a></span>
 		</div>";
@@ -117,25 +116,25 @@ if(!function_exists('invierte_date_time')){
 	/*return puntos de venta empresa */
 	function list_puntos_venta_administracion_empresa($data){
 		
-		$list="<table class='table display table table-bordered dataTable' border='1'>
-        <thead>
-        <tr role='row' class='enid-header-table' >             
-            <th >Razón Social</th>
-            <th >Tel.</th>
-            <th >Página web </th>
-            <th >Estado</th>
-            <th >Locación</th>
-            <th >Nota para el público</th>
-            <th >Usuario Registrante</th>
-            <th >Estado del Registrante</th>
-            <th >Fecha registro</th>
-            <th >Contactos Asociados</th>
-            <th ></th>            
-        </tr>
-        </thead>        
-   <tbody>";			
+		$list="<table class='table display table table-bordered dataTable' >        
+		        <tr class='enid-header-table ' >  
+		        	         
+		            <th class='text-center' >Razón Social</th>
+		            <th class='text-center'>Tel.</th>
+		            <th class='text-center'>Página web </th>
+		            <th class='text-center'>Estado</th>
+		            <th class='text-center' >Locación</th>
+		            <th class='text-center'>Nota para el público</th>
+		            <th class='text-center'>Usuario Registrante</th>
+		            <th class='text-center'>Estado del Registrante</th>
+		            <th class='text-center'>Fecha registro</th>
+		            <th class='text-center'>Contactos Asociados</th>
+		            <th class='text-center'>Editar</th>            
+		            <th class='text-center'>Remover</th>            
+		        </tr>";			
 
         $num_puntos_venta =0;
+        $b =1;
 		foreach ($data as $row) {
 			
 			$idpunto_venta = $row["idpunto_venta"];
@@ -151,7 +150,8 @@ if(!function_exists('invierte_date_time')){
 			$estado_usuario  =  $row["estado_usuario"];
 
 
-			$list.="<tr style='font-size:.8em;' class='text-center'>					
+			$list.="<tr style='font-size:.8em;' class='text-center'>
+										
 					<td class='franja-vertical'>".$razon_social."</td>
 					<td>".$telefono ."</td>
 					<td><a href='". $url_pagina_web ."'>". $url_pagina_web ."</a></td>
@@ -162,17 +162,21 @@ if(!function_exists('invierte_date_time')){
 					<td>".$estado_usuario."</td>
 					<td>".$fecha_registro."</td>					
 					<td  class='contactos' id='". $idpunto_venta  ."' > 
-						<i class='btn btn-info fa fa-book contactos' id='". $idpunto_venta  ."' 
+						<i class='fa fa-book contactos' id='". $idpunto_venta  ."' 
 						data-toggle='modal' data-target='#contactos-modal' ></i>
 					</td>			
-					<td><button class='delete-punto-venta btn btn-danger' id='". $idpunto_venta  ."'  style='width:4px;' data-toggle='modal' data-target='#delete-punto-venta-modal' ><i class='fa fa-trash'></i></button></td>					
+					<td><i  data-toggle='modal' data-target='#edith-punto-venta-modal'    class='editar-punto-venta fa fa-pencil-square fa-lg'  id='". $idpunto_venta  ."'  ></i></td>					
+					<td> <i class='delete-punto-venta fa fa-trash'  id='". $idpunto_venta  ."'   data-toggle='modal' data-target='#delete-punto-venta-modal'  ></i></td>					
+					
+
 					</tr>";			
 					$num_puntos_venta ++;
+					$b++;
 		}	
 
 		if ($num_puntos_venta>9) {
 			
-			$list.="<tfoot>
+			$list.="
         <tr class='enid-header-table'>
             <th >Razón Social</th>
             <th >Tel</th>
@@ -184,15 +188,53 @@ if(!function_exists('invierte_date_time')){
             <th >Estado del Registrante</th>
             <th >Fecha registro</th>
             <th >Contactos Asociados</th>
-            <th ></th>           
+            <th >Editar</th>           
+            <th >Remover</th>           
         </tr>
-        </tfoot>";
+        ";
 		}
 
 
-		$list .="</tbody></table>
+		$list .="</table>
 		<div><span>Puntos de venta encontrados : ". $num_puntos_venta ."</span></div>";	
 		return $list;	
+	}
+
+	/**/
+	function resumen_puntos_venta($data ){
+		
+		 
+
+
+
+
+		$table='<table class="table display table table-bordered dataTable">										  
+					  <tbody>
+					  	<tr class="text-center" style="background:rgba(202, 234, 231, 0.9);">
+					  	<th class="text-center">Puntos de venta</th>
+					  	<th class="text-center">No disponibles</th>
+					  	<th class="text-center">Disponibles para todos los colaboradores</th>
+					  	<th class="text-center">Con página web</th>
+					  	<th class="text-center">Con locación</th>					  	
+					  	<th class="text-center">Con notas para el cliente</th>					  	
+					  </tr>';
+
+
+	
+		foreach ($data as $row) {
+			$table .="<tr class='text-center'>
+						<td>".$row["puntosventatotal"] ."</td>
+						<td>".$row["temporal_no_disponible"]  ."</td>
+						<td>".$row["para_colaboradores"] ."</td>
+						<td>".$row["con_url"] ."</td>
+						<td>".$row["con_direccion"] ."</td>
+						<td>".$row["con_descripcion"] ."</td>
+					 </tr>";		
+		}			  
+
+
+		$table .="</table><br>";
+		return  $table;
 	}
 
 }/*Termina el helper*/

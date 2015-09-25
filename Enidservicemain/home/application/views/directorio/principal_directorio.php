@@ -3,38 +3,47 @@
     display: none;
 }
 </style>
+
 <script type="text/javascript" src="<?=base_url('application/js/directorio/principal.js')?>"></script>
 
-    <tr>
-    <td  style="background:rgba(15, 108, 105, 0.92); color:white;" colspan="5">
-        <button id="nuevo-contacto-button" type="button" class="btn btn-info" data-toggle="modal" data-target="#contact-modal">
-        <i class="fa fa-check"></i>
-        Agregar contacto
-        </button>
-    </td>
-    </tr>
-<div class="form-group pull-right" >
-<div class="input-group">
-    <?=$lista_tipo;?>
-</div>
-</div>
-    
-<div class="form-group pull-right" >
-    <label class="sr-only" for="exampleInputAmount">Contacto</label>
-    <div class="input-group">
-      <div class="input-group-addon">Contacto </div>
-      <input type="text" list="contactos-lista" class="form-control" id="contacto-name" placeholder="Nombre del contacto">
-      
+
+
+
+<div class="container">
+    <div class="row">
+        <div class="center-block">
+        <div ><?=$resumen;?></div>
+        </div>
     </div>
 </div>    
-<?=$list_contactos_name;?>
-<div class="section-contact" id="section-contact">
 
+<div class="container">
+    <div class="row">
+        <div class="center-block">
+
+                <button id="nuevo-contacto-button" type="button" class="btn btn-info" data-toggle="modal" data-target="#contact-modal">
+                <i class="fa fa-check"></i>
+                Agregar contacto
+                </button>    
+        <div class="form-group pull-right" >
+        <div class="input-group">
+            <?=$lista_tipo;?>
+        </div>
+        </div>    
+        <div class="form-group pull-right" >
+            <label class="sr-only" for="exampleInputAmount">Contacto</label>
+            <div class="input-group">
+              <div class="input-group-addon">Contacto </div>
+              <input type="text" list="contactos-lista" class="form-control" id="contacto-name" placeholder="Nombre del contacto">
+              
+            </div>
+        </div>    
+        <?=$list_contactos_name;?>
+        <div class="section-contact" id="section-contact"></div>
+
+        </div>
+    </div>
 </div>
-
-
-
-
 
 
 

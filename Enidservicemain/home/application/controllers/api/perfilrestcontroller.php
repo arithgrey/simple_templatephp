@@ -44,6 +44,14 @@ class Perfilrestcontroller extends REST_Controller{
         $idrecurso= $this->get("recursoid");
         $this->response($this->listperfilesmodulopermisos($idrecurso));        
     }   
+
+    /**/
+    function list_perfiles_permisos_in_systemgeneral_get(){
+
+        $this->validate_user_sesssion();
+        $idrecurso= $this->get("recursoid");
+        $this->response($this->perfilmodel->list_perfiles_modulo_permisos_general($idrecurso)    );        
+    }   
     /**/
     function listperfilesmodulopermisos($idrecurso){
         $data = $this->perfilmodel->listperfilesmodulopermisos($idrecurso);  

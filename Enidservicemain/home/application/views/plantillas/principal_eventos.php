@@ -10,6 +10,8 @@
 
 
 
+
+
 <div class="container">
 	<div class="row">
 		<section>
@@ -57,13 +59,22 @@
 
 
 
-            
+                
+                <div class="container">
+                    <div class="row">
+                        
+                        <?=$resumen_teplates;?>
+                    </div>
+                </div>
+                
                 <div class="tab-content">
                     <div class="tab-pane active" role="tabpanel" id="plantillas_descripciones">
                         
                         
                          <div class="row">
                             <!--******************* Editor Editor **********************************-->
+
+
 
 
 

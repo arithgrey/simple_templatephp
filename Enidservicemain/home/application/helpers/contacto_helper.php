@@ -119,6 +119,40 @@ if(!function_exists('invierte_date_time')){
 		return $select;
 	}/**/
 
+	/*Resumen de los contactos */
+	function resumen_contactos($data){
+
+
+		$table ='<table class="table display table table-bordered dataTable">										  
+					  <tr class="text-center" style="background:rgba(202, 234, 231, 0.9);">
+					  	<th class="text-center">Contactos</th>
+					  	<th class="text-center">Proveedores</th>
+					  	<th class="text-center">Artistas</th>
+					  	<th class="text-center">Colaboradores</th>
+					  	<th class="text-center">Contactos comerciales</th>
+					  	<th class="text-center">Clientes</th>
+					  	<th class="text-center">Instituciones</th>					  	
+					  </tr>';
+		
+
+
+		foreach ($data as $row) {
+			    
+			$table.="<tr   class='text-center'>
+						<td>".$row["contactos"] ."</td>
+						<td>".$row["proveedores"]."</td>
+						<td>".$row["artistas"] ."</td>
+						<td>".$row["Colaboradores"] ."</td>
+						<td>".$row["Contacto_comercial"] ."</td>
+						<td>".$row["Clientes"] ."</td>
+						<td>".$row["instituciones"] ."</td>
+
+					</tr>";	  	
+		}	  
+		$table .="</table><br>";					
+		return $table;
+
+	}
 
 
 }/*Termina el helper*/

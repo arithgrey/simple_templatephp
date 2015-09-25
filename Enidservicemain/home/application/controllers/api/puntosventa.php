@@ -118,6 +118,46 @@ class Puntosventa extends REST_Controller{
     
   
   }
+
+
+
+  function punto_put(){
+
+
+
+    $this->validate_user_sesssion();
+
+        $razon_social = $this->put("nrazon_social");
+        $direccion      = $this->put("ndireccion");
+        $status         = $this->put("nstatus");
+        $telefono       = $this->put("ntelefono");
+        $url_pagina_web = $this->put("nurl_pagina_web");     
+        $descripcion    = $this->put("ndescripcion");
+
+        $id_punto_venta =  $this->put("punto_venta");
+        $id_usuario = $this->sessionclass->getidusuario();    
+        $id_empresa =  $this->sessionclass->getidempresa();            
+
+
+
+        $response_db =  $this->puntoventamodel->update($razon_social, 
+                                                       $direccion,
+                                                        $status ,
+                                                         $telefono ,
+                                                         $url_pagina_web,
+                                                         $descripcion, 
+                                                         $id_usuario, 
+                                                         $id_empresa , $id_punto_venta);
+
+        $this->response($response_db);
+
+        
+
+
+  }
+
+
+
     /**/
     function validate_user_sesssion(){
                   if( $this->sessionclass->is_logged_in() == 1) {                        

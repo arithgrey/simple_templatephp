@@ -10,6 +10,71 @@
 
 
     
+    function get_recursos_perfiles_config_general(){
+    
+
+        $query_list ="SELECT * FROM recurso where status != 'No Disponible' ";
+        $result = $this->db->query($query_list);  
+        $dataconfig;
+        $b=0;
+
+        /*Listamos recursos*/
+        foreach ($result ->result_array() as $row){
+                
+            $dataconfig["recursos"][$b] = array(
+                        
+                        'idrecurso' => $row["idrecurso"],
+                        'nombre' => $row["nombre"],
+                        'urlpaginaweb' => $row["urlpaginaweb"],
+                        'descripcionrecurso' => $row["descripcionrecurso"],                            
+                        'iconorecurso'=> $row["iconorecurso"]
+                                              
+            
+                     );                                    
+                
+                   $b++;
+
+        }/*Termina Listamos recursos*/
+        
+        /*Listamos perfiles */
+        $query_lista_perfiles = "SELECT * FROM perfil WHERE status != 'No Disponible' ";
+        $result_perfil  = $this->db->query($query_lista_perfiles);  
+        $xx = 0;    
+        foreach ($result_perfil->result_array() as $row){   
+
+            $dataconfig["perfiles"][$xx] = array(
+            
+                'idperfil' => $row["idperfil"] ,
+                'nombreperfil' => $row["nombreperfil"],
+                'descripcion' => $row["descripcion"]   
+            );
+
+            $xx++;
+        }
+        /*Termina Listamos perfiles */
+
+        /*Listamos perfiles recursos */
+        $query_lista_perfil_recurso = "SELECT * FROM perfil_recurso";
+        $result_perfil_r  = $this->db->query($query_lista_perfil_recurso);  
+        $yy= 0;    
+        
+
+        foreach ($result_perfil_r->result_array() as $row){   
+
+            $dataconfig["perfiles_recursos"][$yy] = array(
+            
+                'idperfil' => $row["idperfil"] ,
+                'idrecurso' => $row["idrecurso"]
+                
+            );
+
+            $yy++;
+        }
+
+
+        return $dataconfig;              
+    }
+
     /*Listamos todos los perfiles del sistema */
     public function listarrecursos(){       
 
@@ -113,14 +178,8 @@ function listarrecursosperfilesconfig(){
         $dataconfig;
         $b=0;
 
-
-
-
         /*Listamos recursos*/
         foreach ($result ->result_array() as $row){
-
-            
-            
                 
             $dataconfig["recursos"][$b] = array(
                         
@@ -139,7 +198,7 @@ function listarrecursosperfilesconfig(){
 
         
         /*Listamos perfiles */
-        $query_lista_perfiles = "SELECT * FROM perfil";
+        $query_lista_perfiles = "SELECT * FROM perfil ";
         $result_perfil  = $this->db->query($query_lista_perfiles);  
         $xx = 0;    
         foreach ($result_perfil->result_array() as $row){   
@@ -154,7 +213,6 @@ function listarrecursosperfilesconfig(){
             $xx++;
         }
         /*Termina Listamos perfiles */
-
 
         /*Listamos perfiles recursos */
         $query_lista_perfil_recurso = "SELECT * FROM perfil_recurso";

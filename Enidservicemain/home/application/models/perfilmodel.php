@@ -236,6 +236,102 @@ function updateperfilpermisopermisodb($idperfil , $idrecurso ){
 /*******************************************************************************/ 
 
 
+function list_perfiles_modulo_permisos_general($idrecurso){
+
+        
+    /*Los perfiles disponibles */
+
+    $queryperfiles = "SELECT DISTINCT(idperfil) FROM perfil_recurso WHERE idrecurso = $idrecurso"; 
+    $resultperfilesdescarte  = $this->db->query($queryperfiles);  
+     $b = 0;
+    foreach ($resultperfilesdescarte ->result_array() as $row){    
+
+        $idperfildisponible = $row["idperfil"];
+        
+    /*inicia */
+        $query_list ="SELECT * FROM perfil WHERE idperfil = $idperfildisponible and status!='No Disponible'";
+        $result = $this->db->query($query_list);  
+          
+
+           
+
+                foreach ($result ->result_array() as $row){
+                    /**/
+                           $dataconfig["perfil"][$b] = array(
+
+                                'idperfil' => $row["idperfil"],
+                                'nombreperfil' => $row["nombreperfil"], 
+                                'fecha_registro' => $row["fecha_registro"], 
+                                'descripcion'=> $row["descripcion"]
+                                
+                                      
+                            );                                    
+                    $b++;
+                }    
+    /*Termina  */                
+
+
+
+
+
+
+    }/*Termina ciclo */    
+
+
+
+
+/*************************************************************************/         
+        $query_list_permiso ="SELECT * FROM permiso WHERE idrecurso = '".$idrecurso."' ";
+        $result_permiso = $this->db->query($query_list_permiso);  
+          
+
+            $x = 0;
+
+                foreach ($result_permiso ->result_array() as $row){
+                    /**/
+                           $dataconfig["permiso"][$x] = array(
+
+                                'idpermiso' => $row["idpermiso"],
+                                'nombrepermiso' => $row["nombrepermiso"],                                 
+                                'descripcionpermiso'=> $row["descripcionpermiso"],
+
+                            );                                    
+                    $x++;
+                }    
+
+       
+
+
+
+/******************************Perfil Permiso *************************************************/
+        
+
+        $query_perfil_permiso ="SELECT * FROM perfil_permiso";
+        $result_pp = $this->db->query($query_perfil_permiso);  
+          
+
+            $t = 0;
+
+                foreach ($result_pp ->result_array() as $row){
+                    /**/
+                           $dataconfig["perfil_permiso"][$t] = array(
+
+                                'idpermiso' => $row["idpermiso"],
+                                'idperfil' => $row["idperfil"],
+                                
+
+                            );                                    
+                    $t++;
+                }    
+
+
+        return $dataconfig;      
+
+
+}
+
+
+
 
 
 function listperfilesmodulopermisos($idrecurso){

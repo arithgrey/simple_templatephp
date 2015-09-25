@@ -66,6 +66,16 @@ class Recursosrestcontroller extends REST_Controller{
         $data = $this->getrecursosperfilesconfig();
         $this->response($data);
     }
+    /**/
+
+    function recursosperfilesgeneral_get(){
+
+        $this->validate_user_sesssion();            
+        /*Despliega tabla recursos */
+        $data = $this->recursosmodel->get_recursos_perfiles_config_general();
+        $this->response($data);
+    }
+
     /*Listar recursos */
     function getrecursosperfilesconfig(){
         return  $this->recursosmodel->listarrecursosperfilesconfig();

@@ -9,7 +9,22 @@ class Cuentageneralrest extends REST_Controller{
         $this->load->library('sessionclass');
             
     }     
-    /*******************************Regresa el número de integrantes de la cuenta ***********************/
+
+    /******************************Actualiza el perfil del usuario*******************************************/
+    function integrantescuentaperfil_PUT(){
+
+
+        $this->validate_user_sesssion();       
+        $usuario = $this->put("usuario");
+        $perfil = $this->put("perfil");
+
+        $db_response =  $this->cuentageneralmodel->update_perfil_user($usuario , $perfil );
+
+        $this->response($db_response);
+    }
+
+    /*******************************Regresa el número de integrantes de la
+     cuenta ***********************/
     function getnumintegrantescuenta_GET(){
         
         $this->validate_user_sesssion();   

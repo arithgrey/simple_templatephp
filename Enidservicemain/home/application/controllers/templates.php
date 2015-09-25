@@ -13,6 +13,10 @@ class Templates extends CI_Controller {
         $data = $this->validate_user_sesssion("Mis plantillas");
         $id_user = $this->sessionclass->getidusuario();        
         $id_empresa =  $this->sessionclass->getidempresa();   
+
+
+        $data_resumen_templates =  $this->templmodel->get_resumen_template($id_user);
+        $data["resumen_teplates"] =  resumen_templ_eventos($data_resumen_templates);
         
         $plantilla_obj_permitidos = $this->templmodel->get_templ_obj_permitidos($id_empresa);
         $data["plantilla_obj_permitidos"] = list_objetos_permitidos_empresa($plantilla_obj_permitidos);
