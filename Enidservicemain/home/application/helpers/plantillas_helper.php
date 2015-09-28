@@ -11,38 +11,58 @@ function resumen_templ_eventos($data){
 
 
     $table ='<table class="table display table table-bordered dataTable">                                          
-                    <tr class="text-center" style="background:rgba(202, 234, 231, 0.9);">
-                        <th class="text-center">Plantillas</th>
-                        <th class="text-center">Disponibles</th>
-                        <th class="text-center">No disponibles </th>
-
+                    <tr class="text-center header-table-info" >
+                        <th class="text-center">Plantillas</th>                        
+                        <th class="text-center">Que son políticas</th>         
+                        <th class="text-center">Que son restriciones </th>                                                               
                         <th class="text-center">Que describen los eventos </th>
-                        <th class="text-center">Que son restriciones </th>                        
-                        <th class="text-center">Que son políticas </th>                        
-                        </tr>';
+                    </tr>';
 
 
     foreach ($data as $row) {
 
         $table .="<tr class='text-center'>
-                    <td>". $row["plantillas"] ."</td>
-                    <td>". $row["plantillas_disponibles"]."</td> 
-                    <td>". $row["plantillas_no_disponibles"]."</td>
-                    <td>". $row["descriptivas_evento"]."</td>
-                    <td>". $row["restricciones"]."</td>
+                    
+                    <td>". $row["total"]."</td>
+                    <td>". $row["restricciones"]."</td>       
                     <td>". $row["politicas"]."</td>
-                                       
+                    <td>". $row["descripcion_evento"]."</td>                                                                        
                 </tr>";
+
+
+         $table .="<tr class='text-center'>                    
+                    <td>". get_porcentaje_templates_eventos($row["total"] , $row["total"])  ."</td>
+                    <td>". get_porcentaje_templates_eventos($row["total"] , $row["restricciones"])."</td>       
+                    <td>". get_porcentaje_templates_eventos($row["total"] , $row["politicas"])."</td>
+                    <td>". get_porcentaje_templates_eventos($row["total"] , $row["descripcion_evento"])."</td>                                                                        
+                </tr>";                
                          
+                
+
+
     }                 
     $table .="</table>";
     return $table;
 
 }
-/*Desplegamos las listas de restricciones*/ 
-    
-    
 
+
+/**/
+
+function get_porcentaje_templates_eventos($contenidos , $val ){
+
+
+        $result =0;
+        if ($val>0 ) {
+
+            $result =  ($val/ $contenidos )* (100);
+            $result =   number_format( $result , 2, '.', ' ')."%";              
+        }
+
+        return $result;
+
+}
+/*Desplegamos las listas de restricciones*/ 
 function display_contenido_templ($data_contenido, $del=0 , $check=0 , $identificador = 'identificador' ){
 
         

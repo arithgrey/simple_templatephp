@@ -1,6 +1,82 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 if(!function_exists('invierte_date_time')){
 
+
+	function resumen_artistas_table($data){
+
+
+ 
+ 
+		$table='<table class="table display table table-bordered dataTable">										  					  
+					  	<tr class="text-center header-table-info" >
+					  	<th class="text-center">Escenario que pertenece al evento </th>
+					  	<th class="text-center">Escenario con información para el público</th>
+					  	<th class="text-center">Artistas</th>
+					  	<th class="text-center">Artistas con enlace a youtube</th>
+					  	<th class="text-center">Con enlace a pistas musicales</th>
+					  	<th class="text-center">Con horario de presentación</th>
+					  	<th class="text-center">Pendientes por confirmar</th>
+					  	<th class="text-center">Artistas que ya han conformado su asistencia</th>					  	
+					  	<th class="text-center">Artistas que promenten asistir</th>					  						  						  	
+					  </tr>';
+
+		
+		$table.="<tr></tr>";
+
+		foreach ($data as $row) {
+
+			$table.='<tr >			
+
+					  	<tr class="text-center" >
+					  	<td class="text-center">'. $row["evento"].'</td>
+					  	<td class="text-center">'.$row["con_descripcion"] .'</td>
+					  	<td class="text-center">'.$row["artistas"] .'</td>
+					  	<td class="text-center">'. $row["artistas_videos_youtube"].'</td>
+					  	<td class="text-center">'. $row["artistas_pistas_sound"] .'</td>
+					  	<td class="text-center">'. $row["artistas_con_horario"].'</td>
+					  	<td class="text-center">'.$row["artistas_pendientes"].'</td>
+					  	<td class="text-center">'. $row["artistas_conformado"].'</td>					  	
+					  	<td class="text-center">'.$row["artistas_prometen_asistencia"].'</td>					  						  						  	
+
+					  </tr>';
+
+
+
+
+			$table.='<tr >										  					  
+						  	<tr class="text-center" >
+						  	<td class="text-center" colspan="2"></td>
+						  	<td class="text-center">'. get_porcentaje_artistas($row["artistas"] , $row["artistas"] )  .'</td>
+						  	<td class="text-center">'. get_porcentaje_artistas($row["artistas"] , $row["artistas_videos_youtube"]).'</td>
+						  	<td class="text-center">'. get_porcentaje_artistas($row["artistas"] ,  $row["artistas_pistas_sound"] ).'</td>
+						  	<td class="text-center">'. get_porcentaje_artistas($row["artistas"] , $row["artistas_con_horario"]).'</td>
+						  	<td class="text-center">'. get_porcentaje_artistas($row["artistas"] , $row["artistas_pendientes"]).'</td>
+						  	<td class="text-center">'. get_porcentaje_artistas($row["artistas"] , $row["artistas_conformado"]).'</td>					  	
+						  	<td class="text-center">'. get_porcentaje_artistas($row["artistas"] , $row["artistas_prometen_asistencia"]).'</td>					  						  						  	
+
+						  </tr>';			  
+		}
+
+
+
+		$table.="</table>";
+		return $table;
+
+	}
+
+
+	function get_porcentaje_artistas($artistas , $val ){
+
+		
+		$result =0;
+		if ($val>0 ) {
+
+			$result =  ($val/ $artistas )* (100);
+			$result =   number_format( $result , 2, '.', ' ')."%";				
+		}
+		return $result;
+
+	}
 	/**/
 	function get_artistas_default_template($artistas_array){
 

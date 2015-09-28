@@ -10,8 +10,7 @@ if(!function_exists('invierte_date_time')){
 					  
 					  
 					  <table class="table display table table-bordered dataTable">
-					
-					  
+										  
 					  <tr class="text-center enid-header-table">
 					  	<th class="text-center ">#</th>
 					  	<th class="text-center " >Contacto</th>
@@ -124,14 +123,18 @@ if(!function_exists('invierte_date_time')){
 
 
 		$table ='<table class="table display table table-bordered dataTable">										  
-					  <tr class="text-center" style="background:rgba(202, 234, 231, 0.9);">
+					  <tr class="text-center header-table-info" >
 					  	<th class="text-center">Contactos</th>
 					  	<th class="text-center">Proveedores</th>
 					  	<th class="text-center">Artistas</th>
 					  	<th class="text-center">Colaboradores</th>
 					  	<th class="text-center">Contactos comerciales</th>
 					  	<th class="text-center">Clientes</th>
-					  	<th class="text-center">Instituciones</th>					  	
+					  	<th class="text-center">Instituciones</th>					  
+					  	<th class="text-center">Con correo electrónico</th>					  		
+					  	<th class="text-center">Con página web</th>					  		
+					  	<th class="text-center">Con tel </th>
+
 					  </tr>';
 		
 
@@ -146,14 +149,44 @@ if(!function_exists('invierte_date_time')){
 						<td>".$row["Contacto_comercial"] ."</td>
 						<td>".$row["Clientes"] ."</td>
 						<td>".$row["instituciones"] ."</td>
+						<td>".$row["con_correo"] ."</td>
+						<td>".$row["con_pagina_web"] ."</td>
+						<td>".$row["con_tel"] ."</td>
+						
 
 					</tr>";	  	
+			$table .="<tr class='text-center'>
+						<td>". get_porcentajes_contactos( $row["contactos"] , $row["contactos"]  )."</td>
+						<td>". get_porcentajes_contactos( $row["contactos"], $row["proveedores"] )."</td>
+						<td>". get_porcentajes_contactos( $row["contactos"], $row["artistas"]   )."</td>
+						<td>". get_porcentajes_contactos( $row["contactos"],  $row["Colaboradores"])  ."</td>
+						<td>". get_porcentajes_contactos( $row["contactos"],  $row["Contacto_comercial"]  )."</td>
+						<td>". get_porcentajes_contactos( $row["contactos"], $row["Clientes"] )."</td>
+						<td>". get_porcentajes_contactos( $row["contactos"], $row["instituciones"])."</td>
+						<td>". get_porcentajes_contactos( $row["contactos"], $row["con_correo"])."</td>
+						<td>". get_porcentajes_contactos( $row["contactos"], $row["con_pagina_web"])."</td>
+						<td>". get_porcentajes_contactos( $row["contactos"], $row["con_tel"])."</td>
+						
+
+		 			</tr>";  					 
 		}	  
 		$table .="</table><br>";					
 		return $table;
 
 	}
 
+	/**/
+	function get_porcentajes_contactos($contactos , $val ){
+
+		$result =0;
+		if ($val>0 ) {
+
+			$result =  ($val/ $contactos )* (100);
+			$result =   number_format( $result , 2, '.', ' ')."%";				
+		}
+
+		return $result;
+	}
 
 }/*Termina el helper*/
  

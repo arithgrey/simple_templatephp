@@ -8,7 +8,7 @@ function resumen_usuarios_cuenta($data){
 
 
     $table ='<table class="table display table table-bordered dataTable">                                          
-                      <tr class="text-center" style="background:rgba(202, 234, 231, 0.9);">
+                      <tr class="text-center header-table-info" >
                         <th class="text-center">Miembros</th>
                         <th class="text-center">Activos en el sistema</th>
                         <th class="text-center">Bajas</th>
@@ -18,13 +18,39 @@ function resumen_usuarios_cuenta($data){
                     
  
     foreach ($data as $row) {
+
+        $porcentaje_usuarios   = 0; 
+        $porcentaje_activos = 0;
+        $porcentaje_baja =0;
+        $porcentaje_administradores  =0;
+        $porcentaje_estrategas =  0;
+
+        
+
+        $porcentaje_usuarios =  get_promedio_users($row["usuarios"] , $row["usuarios"]  ); 
+        $porcentaje_activos =  get_promedio_users(  $row["usuarios"] , $row["usuarios_activos"] );
+        $porcentaje_baja =  get_promedio_users( $row["usuarios"], $row["usuarios_baja"]  );
+        $porcentaje_administradores =  get_promedio_users($row["usuarios"],  $row["administradores_cuenta"]);
+        $porcentaje_estrategas =  get_promedio_users( $row["usuarios"]  , $row["estrategas_digitales"]  );    
+
+        
+
+
         $table.="<tr class='text-center' >   
                     <td>".$row["usuarios"]."</td>
                     <td>".$row["usuarios_activos"] ."</td>
                     <td>".$row["usuarios_baja"]."</td>
                     <td>".$row["administradores_cuenta"]."</td>
                     <td>".$row["estrategas_digitales"]."</td>
-                 </tr>";
+                 </tr>
+                 <tr class='text-center'>
+                    <td>". $porcentaje_usuarios  ."%</td>
+                    <td>". $porcentaje_activos."%</td>
+                    <td>". $porcentaje_baja ."%</td>
+                    <td>". $porcentaje_administradores."%</td>
+                    <td>". $porcentaje_estrategas."%</td>
+                 </tr>
+                 ";
     }
 
     $table.="</table><br>";
@@ -32,8 +58,22 @@ function resumen_usuarios_cuenta($data){
 
 }    
 
-/**/
 
+
+function get_promedio_users($usuarios , $val){
+
+    $result =0;
+
+    if ($val >0 ){            
+        
+        $result = ($val / $usuarios) *  (100);
+        $result =   number_format($result , 2, '.', ' ');
+    }
+    return $result;
+
+}
+
+/**/
 function list_filtro_integrantes($integrantes){
 
 	$list_filter ="<datalist id='integrantes-list' >";

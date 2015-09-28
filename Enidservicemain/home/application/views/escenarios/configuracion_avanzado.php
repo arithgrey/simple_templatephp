@@ -8,37 +8,6 @@
 }
 </style>
 
-<button id="avanzado-config-escenario" class='btn btn-info pull-right'><i class="fa fa-eye"></i> Ver</button>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 <div class="container"> 
     <div class="jumbotron">
@@ -84,32 +53,23 @@
 
 
 
+    <div> 
+        <?=$resumen_artistas;?>
+    </div>
 
 
-
-
-
-
-
-
-
-
-
-    <section class="panel">
-                        <header class="blue-col-enid panel-heading custom-tab turquoise-tab">
+    <section class="panel">        
+                    <header class="blue-col-enid panel-heading custom-tab turquoise-tab">
                             <ul class="nav nav-tabs">
                                 <li class="active">
                                     <a data-toggle="tab" href="#home3">
                                         <i class="fa fa-play"></i>
-                                        Artistas que se presentarán en est escenario 
+                                        Artistas que se presentarán en este escenario 
                                     </a>
-                                </li>
-                                
-                                
+                                </li>                                                                
                             </ul>
-                        </header>
-                        
-                        <div class="blue-col-enid-complement panel-body">
+                    </header>                        
+                        <div class="blue-col-enid-complement panel-body">                                                        
                             <div class="tab-content">
                                 <div id="home3" class="tab-pane active">
                                     <!--Artistas en el escenario -->

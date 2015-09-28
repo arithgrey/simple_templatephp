@@ -23,10 +23,13 @@ class Escenario  extends CI_Controller {
         $nombre_evento = $evento[0]["nombre_evento"];
         $data = $this->validate_user_sesssion("Escenario del evento " . $nombre_evento);      
 
-        $data_escenario = $this->escenariomodel->get_escenariobyId($id_escenario);         
+        $data_escenario = $this->escenariomodel->get_escenariobyId($id_escenario);                 
         $data["data_escenario"]=$data_escenario[0];
+
         $artitastas_data = $this->escenarioartistamodel->get_artistas_inevent($id_escenario);
         $data['artistas'] = list_artistas_escenario($artitastas_data, 'Artistas que se presentarán en este escenario' , 1 , $id_escenario);
+    
+        $data['resumen_artistas'] = resumen_artistas_table($this->escenarioartistamodel->get_artistas_resumen($id_escenario, $data_escenario[0], $nombre_evento ));         
 
         $this->dinamic_view_event( 'escenarios/configuracion_avanzado' , $data);            
     }

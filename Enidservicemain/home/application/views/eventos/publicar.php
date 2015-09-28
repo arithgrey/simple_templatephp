@@ -340,10 +340,13 @@
 
 
 
+
+
+<!--
 <div id="modalesenariosedit"  class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">    
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
-      <!--Inicia header modal -->
+      
       
 
 
@@ -365,15 +368,12 @@
       </div>
 
 
-      <!--Termina header modal -->
-     <div class="modal-body">        
       
-    
-         
+     <div class="modal-body">        
+  
 
-<!--*****************  La fecha del escenario  + el tipo  **************** -->
 <div class='row'>
-        <!--**************** **********************  ******************* -->
+        
 
         <div class='col-xs-12  col-sm-6 col-md-6 col-lg-6'>
 
@@ -389,7 +389,7 @@
             </div>
           </div>
         </div> 
-        <!--**************** **********************  ******************* -->
+        
         <div class="col-xs-12  col-sm-6 col-md-6 col-lg-6 ">
           <div class="input-group">
             <div class="input-group-btn">                                            
@@ -403,10 +403,9 @@
             <input type="text"  class="form-control input_tipo" >
           </div>
         </div>  
-      <!--**************** **********************  ******************* -->
+
 </div> 
-<!--***************** Termina  la fecha del escenario  + el tipo  **************** -->       
-<!--**************** Los artistas y sus horarios ****************** -->         
+
 <div class='row'>        
   <div class="panel">
     <header class="panel-heading">
@@ -430,7 +429,7 @@
     </div>
   </div>          
 </div>          
-<!--**************** *************Termina los artistas y sus horarios *********  ******************* -->
+
 
 <div class='row'>       
 
@@ -451,7 +450,7 @@
   
 </div>  
 
-</div><!--Termina el boby de modal -->
+</div>
 
 <div class="modal-footer">
     
@@ -460,9 +459,10 @@
     
     <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
 </div>
-      </div><!--Termina el contect --> 
-    </div><!--Termina dialog-->
-</div> <!--Termina modal-->
+      </div>
+    </div>
+</div> 
+-->
 <!--Termina Escenarios modal-->
 
 <!--************************************CONFIRMAR  **********************************-->

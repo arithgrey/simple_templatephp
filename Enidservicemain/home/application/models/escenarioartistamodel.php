@@ -84,7 +84,32 @@ function get_artistas_inevent($id_escenario){
 	 
 }
 /**/
+function get_artistas_resumen($id_escenario , $data_escenario, $nombre_evento){
 
+	if ( strlen($data_escenario["descripcion"]) > 10 ) {
+		
+			$query_get ="select '".$nombre_evento."' evento  , 'Si' con_descripcion ,  count(0) artistas,  sum(case when url_social_youtube  is not null then 1 else 0 end) artistas_videos_youtube, 
+							 sum(case when  url_sound_cloud    is not null then 1 else 0 end) artistas_pistas_sound,
+							 sum(case when   hora_inicio is not null and   hora_termino  is not null  then 1 else 0 end) artistas_con_horario,
+							 sum(case when  ea.status_confirmacion  = 'pendiente por confirmar' then 1 else 0 end) artistas_pendientes, 
+							 sum(case when  ea.status_confirmacion  = 'Artista confirmado' then 1 else 0 end) artistas_conformado, 
+							 sum(case when  ea.status_confirmacion  = 'Promesa de asistencia' then 1 else 0 end) artistas_prometen_asistencia
+							 from artista a inner join escenario_artista ea  on a.idartista = ea.idartista where ea.idescenario = '". $id_escenario."' ";		
+	 	
+	 }else{
+	 	$query_get ="select  '".$nombre_evento."' evento  , 'No' con_descripcion ,  count(0) artistas,  sum(case when url_social_youtube  is not null then 1 else 0 end) artistas_videos_youtube, 
+							 sum(case when  url_sound_cloud    is not null then 1 else 0 end) artistas_pistas_sound,
+							 sum(case when   hora_inicio is not null and   hora_termino  is not null  then 1 else 0 end) artistas_con_horario,
+							 sum(case when  ea.status_confirmacion  = 'pendiente por confirmar' then 1 else 0 end) artistas_pendientes, 
+							 sum(case when  ea.status_confirmacion  = 'Artista confirmado' then 1 else 0 end) artistas_conformado, 
+							 sum(case when  ea.status_confirmacion  = 'Promesa de asistencia' then 1 else 0 end) artistas_prometen_asistencia
+							 from artista a inner join escenario_artista ea  on a.idartista = ea.idartista where ea.idescenario = '". $id_escenario."' ";		
+	 } 	
+
+	$result_artistas =  $this->db->query($query_get);		
+	return $result_artistas ->result_array();
+
+}
 
 /*Termina modelo */
 }

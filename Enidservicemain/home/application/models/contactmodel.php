@@ -74,14 +74,21 @@
   /*reporte general de los contactos que tengo hasta el momento */
   function get_repo_contactos($id_usuario){
 
+
     $query_get ='select count(*)contactos ,
-                sum(case when tipo = "Proveedor" then 1 else 0 end )proveedores,
-                sum(case when  tipo = "Artista" then 1 else 0 end )artistas,
-                sum(case when  tipo = "Colaborador" then 1 else 0 end )Colaboradores,
-                sum(case when  tipo = "Contacto Comercia" then 1 else 0 end )Contacto_comercial,
-                sum(case when  tipo = "Cliente" then 1 else 0 end )Clientes,
-                sum(case when  tipo = "Institución" then 1 else 0 end )instituciones
-                from contacto where idusuario="'.$id_usuario.'" ';
+sum(case when tipo = "Proveedor" then 1 else 0 end )proveedores,      
+sum(case when  tipo = "Artista" then 1 else 0 end )artistas,  
+sum(case when  tipo = "Colaborador" then 1 else 0 end )Colaboradores,
+sum(case when  tipo = "Contacto Comercia" then 1 else 0 end )Contacto_comercial,
+sum(case when  tipo = "Cliente" then 1 else 0 end )Clientes,
+sum(case when  tipo = "Institución" then 1 else 0 end )instituciones,
+sum(case  when length(correo) > 0 then  1 else  0 end ) con_correo,
+sum(case  when length(pagina_web) > 0 then  1 else  0 end ) con_pagina_web,
+sum(case  when length(tel) > 0 then  1 else  0 end ) con_tel
+
+from contacto where idusuario= "'. $id_usuario.'"
+';
+
 
     $result = $this->db->query($query_get);
     return $result->result_array();

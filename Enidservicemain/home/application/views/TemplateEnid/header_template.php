@@ -182,6 +182,13 @@
 
         <style type="text/css">
 
+
+        .header-table-info{
+            background:  #12ADA2  !important;
+            color: white;
+            
+        }
+
         .left-side,  .sticky-left-side , .sticky-header , .logo{
             //background: #09AFDF !important;
             //background: none repeat scroll 0% 0% #12ADA2 !important;

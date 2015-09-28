@@ -6,6 +6,7 @@ if(!function_exists('invierte_date_time')){
 /*******************************************************************************************************/
 function list_resum_escenarios($array_escenario, $id_evento , $limit_text, $background='blue-col-enid'){
 
+
     $list ='';
     foreach ($array_escenario as $row){
          $nombre = $row["nombre"];
@@ -88,10 +89,10 @@ function list_escenarios_on_loadevent($responsedbescenario){
             $list .="       
                     <li>                                          
                         <div class='avatar text-center'>
-                            <img data-toggle='modal' data-target='#modalesenariosedit' class='edita-modal-escenario' id='". $row["idescenario"] ."'  src=". base_url('application/img/blue.png'). " >
+                            <img src=". base_url('application/img/blue.png'). " >
                         </div>
                         <div class='activity-desk'>
-                            <h5><a data-toggle='modal' data-target='#modalesenariosedit' class='edita-modal-escenario ' id='". $row["idescenario"] ."'  >". $row["nombre"] ."</a> 
+                            <h5><a  href='". base_url('index.php/escenario/configuracionavanzada/'.$row["idescenario"])."'   >". $row["nombre"] ."</a> 
                     <br>
                      <span class='descripcion_escenario_update text-center' id='".
                         $row["idescenario"] . "'    >". 
@@ -99,10 +100,12 @@ function list_escenarios_on_loadevent($responsedbescenario){
                         <textarea  name='newdescripesenario' class='newdescripesenario form-control'  rows='3' id=". $inpu_escenario  .">".$row["descripcion"]."</textarea>
                         </h5>
 
+                        <a href='". base_url('index.php/escenario/configuracionavanzada/'.$row["idescenario"])."'>
                         <span class='text-muted text-center'>
                             Artistas #".$numero_artistas."|".$tipoescenario." | ".$fecha_escenario ." 
 
                         </span>
+                        </a>
 
 
                     <i data-toggle='modal' data-target='#confirmationdeleteescenario' class='fa fa-times deleteescenario' id='". $row["idescenario"] ."' ></i>

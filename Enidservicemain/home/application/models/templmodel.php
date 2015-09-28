@@ -14,6 +14,7 @@
     /*Lista los contenidos por tipo dentro del evento */
     function get_contenido_evento($id_evento , $type ){
 
+
       $query_get ="SELECT * FROM contenido AS c INNER JOIN evento_contenido  as ev
       ON c.idcontenido =  ev.idcontenido AND ev.idevento = '".$id_evento."'
       WHERE c.type ='".$type."' ";
@@ -227,18 +228,15 @@
     /**/
     function get_resumen_template($id_usuario ){
 
-      $query_get ='select count(*) plantillas  ,
-
-                        sum(case when t.tipo_plantilla  ="Contenido descriptivo evento" then 1 else 0 end )descriptivas_evento,  
-                  sum(case when t.tipo_plantilla  ="Contenido descriptivo evento" then 1 else 0 end )descriptivas_evento,
-                  sum(case when t.tipo_plantilla  ="Restricciones" then 1 else 0 end )restricciones,
-                  sum(case when t.tipo_plantilla  ="politicas" then 1 else 0 end )politicas, 
-                  sum(case when p.status  ="1" then 1 else 0 end )plantillas_disponibles ,
-                  sum(case when p.status  ="0" then 1 else 0 end )plantillas_no_disponibles 
-                  from  plantilla p inner join tipo_plantilla t 
-                  on p.idtipo_plantilla = t.idtipo_plantilla
-                  where idusuario = "'. $id_usuario .'"
-                  group by p.idusuario';
+      $query_get ='select 
+sum(case when c.type in ("1" ,  "3", "4" )  then 1 else 0 end ) total,
+sum(case when c.type = 1 then 1 else 0 end ) descripcion_evento ,
+sum(case when c.type = 4 then 1 else 0 end ) politicas, 
+sum(case when c.type = 3 then 1 else 0 end ) restricciones  
+from plantilla p  
+inner join  plantilla_contenido pc on  p.idplantilla = pc.idplantilla
+inner join contenido c on  pc.idcontenido = c.idcontenido
+where idusuario="'.$id_usuario.'" ';
       
       $db_response  = $this->db->query($query_get);                  
       return $db_response->result_array();  

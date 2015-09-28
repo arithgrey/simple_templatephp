@@ -159,18 +159,25 @@
 	/**/
 
 	function get_resumen_punto_venta($id_empresa){
-		$query_get ='select count( 0 )puntosventatotal , 
-					sum(case when CHAR_LENGTH(pv.direccion)>0 then 1 else 0  end  ) con_direccion,
-					sum(case when CHAR_LENGTH(pv.url_pagina_web)>0 then 1 else 0  end  ) con_url,
-					sum(case when CHAR_LENGTH(pv.descripcion) > 0 then 1 else 0  end  )con_descripcion ,
-					sum(case when pv.status  = "Temporalmente no disponible" then  1 else 0  end) temporal_no_disponible,
-					sum(case when pv.status  = "Disponible para todos los colaboradores de la empresa" then  1 else 0  end) para_colaboradores
-					from punto_venta pv 
-					inner join punto_venta_usuario pvu on pv.idpunto_venta =  pvu.idpunto_venta
-					inner join usuario u  
-					on pvu.idusuario = u.idusuario
-					where  pv.idempresa= "'.$id_empresa.'"
-					group by  pv.idempresa';
+		$query_get ='
+select count( 0 )puntosventatotal , 
+sum(case when CHAR_LENGTH(pv.direccion)>0 then 1 else 0  end  ) con_direccion,
+sum(case when CHAR_LENGTH(pv.url_pagina_web)>0 then 1 else 0  end  ) con_url,
+sum(case when CHAR_LENGTH(pv.descripcion) > 0 then 1 else 0  end  )con_descripcion ,
+sum(case when pv.status  = "Temporalmente no disponible" then  1 else 0  end) temporal_no_disponible,
+sum(case when pv.status  = "Disponible para todos los colaboradores de la empresa" then  1 else 0  end) para_colaboradores,
+sum(case when pv.idpunto_venta in(select idpunto_venta from punto_venta_contacto group by idpunto_venta ) then 1 else 0  end ) asociados
+from punto_venta pv 
+inner join punto_venta_usuario pvu on pv.idpunto_venta =  pvu.idpunto_venta
+inner join usuario u  
+on pvu.idusuario = u.idusuario
+where  pv.idempresa= "'. $id_empresa.'"
+group by  pv.idempresa
+
+
+
+
+';
 
 		$result = $this->db->query($query_get);	
 		return $result->result_array();								
@@ -178,6 +185,7 @@
 
 /*Termina modelo */
 }
+
 
 
 

@@ -204,19 +204,18 @@ if(!function_exists('invierte_date_time')){
 	function resumen_puntos_venta($data ){
 		
 		 
-
-
-
-
 		$table='<table class="table display table table-bordered dataTable">										  
 					  <tbody>
-					  	<tr class="text-center" style="background:rgba(202, 234, 231, 0.9);">
+
+					  	<tr class="text-center header-table-info" >
 					  	<th class="text-center">Puntos de venta</th>
+					  	<th class="text-center">Asociados a contactos</th>
 					  	<th class="text-center">No disponibles</th>
 					  	<th class="text-center">Disponibles para todos los colaboradores</th>
 					  	<th class="text-center">Con página web</th>
 					  	<th class="text-center">Con locación</th>					  	
-					  	<th class="text-center">Con notas para el cliente</th>					  	
+					  	<th class="text-center">Con notas para el cliente</th>					  						  	
+					  	
 					  </tr>';
 
 
@@ -224,17 +223,44 @@ if(!function_exists('invierte_date_time')){
 		foreach ($data as $row) {
 			$table .="<tr class='text-center'>
 						<td>".$row["puntosventatotal"] ."</td>
+						<td>".$row["asociados"] ."</td>					
 						<td>".$row["temporal_no_disponible"]  ."</td>
 						<td>".$row["para_colaboradores"] ."</td>
 						<td>".$row["con_url"] ."</td>
 						<td>".$row["con_direccion"] ."</td>
 						<td>".$row["con_descripcion"] ."</td>
 					 </tr>";		
+
+
+
+			$table .="<tr class='text-center'>
+						<td>".get_porcentaje_punto_venta($row["puntosventatotal"]  , $row["puntosventatotal"]  ) ."</td>
+						<td>".get_porcentaje_punto_venta($row["puntosventatotal"]  , $row["asociados"]  ) ."</td>
+						
+						<td>".get_porcentaje_punto_venta($row["puntosventatotal"]  , $row["temporal_no_disponible"]  ) ."</td>
+						<td>".get_porcentaje_punto_venta($row["puntosventatotal"]  , $row["para_colaboradores"] ) ."</td>
+						<td>".get_porcentaje_punto_venta($row["puntosventatotal"]  , $row["con_url"]  ) ."</td>
+						<td>".get_porcentaje_punto_venta($row["puntosventatotal"]  , $row["con_direccion"]  ) ."</td>
+						<td>".get_porcentaje_punto_venta($row["puntosventatotal"]  , $row["con_descripcion"]  ) ."</td>
+					 </tr>";		
+					 		 
 		}			  
 
 
 		$table .="</table><br>";
 		return  $table;
 	}
+	/**/
+	function get_porcentaje_punto_venta($puntos_venta , $val ){
 
+		
+		$result =0;
+		if ($val>0 ) {
+
+			$result =  ($val/ $puntos_venta )* (100);
+			$result =   number_format( $result , 2, '.', ' ')."%";				
+		}
+		return $result;
+
+	}
 }/*Termina el helper*/

@@ -7,12 +7,7 @@
 </button>
 </a>
 
-
-
-
-
-
-<div class="container">
+<div class="container" id='content-section'>
 	<div class="row">
 		<section>
         <div class="wizard">
@@ -408,5 +403,6 @@ span.round-tab:hover {
         position: absolute;
         left: 35%;
     }
+
 }
 </style>
