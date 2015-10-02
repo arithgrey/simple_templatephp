@@ -4,6 +4,18 @@ if(!function_exists('invierte_date_time')){
 
 
 
+    /**/
+    function create_dinamic_dic($path){
+
+        if(file_exists($path) == false ) {
+        
+            mkdir( $path  , 0775, true); 
+        }
+
+        return file_exists($path);
+
+    }
+    /**/
     function get_img_by_event_in_directory($id_event){
 
 

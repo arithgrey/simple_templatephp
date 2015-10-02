@@ -6,10 +6,13 @@ class Directorio  extends CI_Controller {
 
 
         $this->load->helper("contacto");    
+        $this->load->helper("img_eventsh");
         $this->load->model("contactmodel");
 		$this->load->library('sessionclass');    
+
 	}
 	
+
 
 	function proveedoresadv(){
 				
@@ -26,8 +29,24 @@ class Directorio  extends CI_Controller {
 	function contactos(){    		
 
         
-        $data = $this->validate_user_sesssion("Mis contactos");        
+        $data = $this->validate_user_sesssion("Mis contactos");  
+
+
         $id_usuario =  $this->sessionclass->getidusuario();
+
+
+        $base_path = substr($_SERVER["SCRIPT_FILENAME"], 0 , (strlen($_SERVER["SCRIPT_FILENAME"]) -9)  )."application/uploads/uploads/empresa/".$this->sessionclass->getidempresa()."/cu/".$id_usuario."/";    
+        if ( create_dinamic_dic($base_path) ==  1 ) {
+            $data["base_path"] = $base_path;
+        }
+        else{
+            $data["base_path"] = "1";
+        }
+
+
+
+        $data["base_path"]=  $base_path;
+
         $data_contactos = $this->contactmodel->get_list_contactos($id_usuario);
         $data_tipos = $this->contactmodel->get_tipos_contactos($id_usuario);
         $data_repo_contactos = $this->contactmodel->get_repo_contactos($id_usuario);        

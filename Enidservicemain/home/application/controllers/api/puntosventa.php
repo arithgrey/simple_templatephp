@@ -5,6 +5,7 @@ class Puntosventa extends REST_Controller{
   function __construct(){
         parent::__construct();              
         
+
         $this->load->helper("puntoventa"); 
         $this->load->model("puntoventamodel");
         $this->load->library('sessionclass');
@@ -92,24 +93,18 @@ class Puntosventa extends REST_Controller{
       
     $this->validate_user_sesssion();
 
-        $razon_social = $this->post("razon_social");
-        $direccion      = $this->post("direccion");
-        $status         = $this->post("status");
-        $telefono       = $this->post("telefono");
-        $url_pagina_web = $this->post("url_pagina_web");     
+        $razon_social = $this->post("razon_social");        
+        $status         = $this->post("status");              
         $descripcion    = $this->post("descripcion");
 
         $id_usuario = $this->sessionclass->getidusuario();    
         $id_empresa =  $this->sessionclass->getidempresa();            
 
-        $response_db =  $this->puntoventamodel->insert($razon_social, 
-                                                       $direccion,
-                                                        $status ,
-                                                         $telefono ,
-                                                         $url_pagina_web,
-                                                         $descripcion, 
-                                                         $id_usuario, 
-                                                         $id_empresa );
+        $response_db =  $this->puntoventamodel->insert($razon_social,                                                     
+                                                        $status ,                                                                                                      
+                                                        $descripcion, 
+                                                        $id_usuario, 
+                                                        $id_empresa );
 
 
         $this->response($response_db);
@@ -127,11 +122,8 @@ class Puntosventa extends REST_Controller{
 
     $this->validate_user_sesssion();
 
-        $razon_social = $this->put("nrazon_social");
-        $direccion      = $this->put("ndireccion");
-        $status         = $this->put("nstatus");
-        $telefono       = $this->put("ntelefono");
-        $url_pagina_web = $this->put("nurl_pagina_web");     
+        $razon_social = $this->put("nrazon_social");        
+        $status         = $this->put("nstatus");        
         $descripcion    = $this->put("ndescripcion");
 
         $id_punto_venta =  $this->put("punto_venta");
@@ -140,14 +132,11 @@ class Puntosventa extends REST_Controller{
 
 
 
-        $response_db =  $this->puntoventamodel->update($razon_social, 
-                                                       $direccion,
+        $response_db =  $this->puntoventamodel->update($razon_social,                                                        
                                                         $status ,
-                                                         $telefono ,
-                                                         $url_pagina_web,
-                                                         $descripcion, 
-                                                         $id_usuario, 
-                                                         $id_empresa , $id_punto_venta);
+                                                        $descripcion, 
+                                                        $id_usuario, 
+                                                        $id_empresa , $id_punto_venta);
 
         $this->response($response_db);
 

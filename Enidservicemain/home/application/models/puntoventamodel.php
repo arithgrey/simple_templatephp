@@ -36,11 +36,10 @@
 		return $this->db->query($query_delete);
 	}
 	/**/
-	function insert($razon_social, $direccion, $status, $telefono, $url_pagina_web, $descripcion,
+	function insert($razon_social,  $status, $descripcion,
 				    $id_usuario, $id_empresa ){
 
-		$query_insert = "call insert_punto_venta_empresa_usuario('".$razon_social."' , '".$direccion."', '". $status ."'  , '". $telefono."' , '". $url_pagina_web ."' ,  '".  
-			$id_empresa ."' ,  '".$descripcion ."' , '".$id_usuario."'   )"; 		
+		$query_insert = "call insert_punto_venta_empresa_usuario('".$razon_social."' , '". $status ."'   ,  '". $id_empresa ."' ,  '".$descripcion ."' , '".$id_usuario."'   )"; 		
 	 	
 	 	$result_db=  $this->db->query($query_insert);	 	 
 	 	return $result_db->result_array();
@@ -141,13 +140,10 @@
 
 
 
-	function update($razon_social, $direccion, $status , $telefono , $url_pagina_web, $descripcion, $id_usuario,  $id_empresa , $id_punto_venta){
+	function update($razon_social,$status ,  $descripcion, $id_usuario,  $id_empresa , $id_punto_venta){
 
-		$query_update ="update punto_venta set razon_social = '". $razon_social ."' ,
-						 direccion   = '".$direccion ."'  ,
-						 status   ='".$status ."'     ,
-						 telefono   = '".$telefono."'  , 
-						 url_pagina_web = '".$url_pagina_web."', 
+		$query_update ="update punto_venta set razon_social = '". $razon_social ."' ,						 
+						 status   ='".$status ."'     ,						 
 						 descripcion   = '".$descripcion."'
 						 where idempresa  = '".$id_empresa . "' 
 						 and idpunto_venta = '".$id_punto_venta ."' ";
@@ -161,28 +157,69 @@
 	function get_resumen_punto_venta($id_empresa){
 		$query_get ='
 select count( 0 )puntosventatotal , 
-sum(case when CHAR_LENGTH(pv.direccion)>0 then 1 else 0  end  ) con_direccion,
-sum(case when CHAR_LENGTH(pv.url_pagina_web)>0 then 1 else 0  end  ) con_url,
 sum(case when CHAR_LENGTH(pv.descripcion) > 0 then 1 else 0  end  )con_descripcion ,
 sum(case when pv.status  = "Temporalmente no disponible" then  1 else 0  end) temporal_no_disponible,
 sum(case when pv.status  = "Disponible para todos los colaboradores de la empresa" then  1 else 0  end) para_colaboradores,
-sum(case when pv.idpunto_venta in(select idpunto_venta from punto_venta_contacto group by idpunto_venta ) then 1 else 0  end ) asociados
+sum(case when pv.idpunto_venta in(select idpunto_venta from punto_venta_contacto group by idpunto_venta ) then 1 else 0  end ) asociados,
+sum(case when c.tel is not null and  CHAR_LENGTH(c.tel)> 3  then 1 else 0 end )con_tel ,
+sum(case when c.correo  is not null  and   CHAR_LENGTH(c.correo)> 3  then 1 else 0 end )con_mail ,
+sum(case when c.pagina_web    is not null  and  CHAR_LENGTH(c.pagina_web)> 3  then 1 else 0 end )con_paginaweb 
 from punto_venta pv 
 inner join punto_venta_usuario pvu on pv.idpunto_venta =  pvu.idpunto_venta
 inner join usuario u  
 on pvu.idusuario = u.idusuario
-where  pv.idempresa= "'. $id_empresa.'"
+left outer join  punto_venta_contacto pvc 
+on pv.idpunto_venta  =  pvc.idpunto_venta
+left outer join contacto c 
+on pvc.idcontacto =  c.idcontacto
+where  pv.idempresa= "'.$id_empresa.'"
 group by  pv.idempresa
-
-
-
-
 ';
 
 		$result = $this->db->query($query_get);	
 		return $result->result_array();								
 	}
 
+	/**/
+
+	function get_resumen_accesos($id_evento){
+
+		$query_get ="select sum(case when tipo  in ('Día del evento'  , 'General M' , 'General H & M'  )then 1 else 0 end )ventas_unicas,
+						sum(case when tipo in ('Preventa 1' , 'Preventa 2',  'Preventa 3' , 'Preventa 4' , 'Preventa 5' , 'Preventa 6'  )  then 1 else 0 end )preveentas,
+						sum(case when tipo in ('Único día', 'Promoción' , 'Promoción mujeres' , 'Promoción hombres')  then 1 else 0 end )promociones
+						from acceso a inner join  tipo_acceso ta on a.idtipo_acceso =  ta.idtipo_acceso
+						where a.idevento  =  '". $id_evento."' ";
+
+		$result =  $this->db->query($query_get);				
+		return $result->result_array();
+	}
+	/**/	
+	function get_puntos_venta_asociadas($id_evento){
+
+
+		$query_get ="select  
+					(select count(*) from evento_punto_venta where idevento= '".$id_evento."' ) asociados,					
+					count(0) contactos_asociados,
+					sum(case when c.tel is not null and  CHAR_LENGTH(c.tel)>3 then 1 else 0  end ) con_tel,
+					sum(case when c.movil is not null and  CHAR_LENGTH(c.movil)>3 then 1 else 0  end ) con_tel_movil,
+					sum(case when c.correo is not null and  CHAR_LENGTH(c.correo)>3 then 1 else 0  end ) con_tel_movil,
+					sum(case when c.direccion is not null and  CHAR_LENGTH(c.direccion)>3 then 1 else 0  end ) con_locacion,
+					sum(case when c.pagina_web  is not null and  CHAR_LENGTH(c.pagina_web)>3 then 1 else 0  end ) con_web 
+					from  punto_venta p 
+					inner join evento_punto_venta
+					evp 
+					on p.idpunto_venta =  evp.idpunto_venta
+					left outer join 
+					punto_venta_contacto pvc on 
+					p.idpunto_venta = pvc.idpunto_venta
+					left outer join contacto c 
+					on pvc.idcontacto =  c.idcontacto
+					where evp.idevento = '".$id_evento."'
+					group  by p.idempresa";
+
+		$result =  $this->db->query($query_get);				
+		return $result->result_array();
+	}
 /*Termina modelo */
 }
 

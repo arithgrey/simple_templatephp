@@ -4,10 +4,12 @@ $(document).on("ready" , function(){
 	/*update campos del escenario */
 	$(".nombre-escenario-text").click(updaye_nombre_escenario);
 	$(".descripcion-escenario-text").click(update_descripcion_escenario);
-	escenario = $("#escenario").val();
+	escenario = $("#id_escenario").val();
 	$("#btn-guardar-fecha").click(update_fecha_escenario);
 
+	//$("#imgs-escenario").change(upload_main_imgs_escenario);
 });
+
 /**/
 function update_type(e){
 
@@ -28,7 +30,7 @@ function  updaye_nombre_escenario(){
 			
 			url =  now + "index.php/api/escenario/escenario_campo/format/json/";
 			actualiza_data(url , { "campo": "nombre" ,    "escenario" : escenario , "nuevonombre" : nuevo_nombre } );
-			update_campo( "nombre" ,  ".nombre-escenario-text" , "#in-nombre-escenario" );
+			update_campo( "nombre" ,  ".nombre-escenario-text" , "#in-nombre-escenario" , "nombre del escenario");
 			
 		
 		}else{
@@ -49,11 +51,12 @@ function  update_descripcion_escenario(){
 	$("#in-descripcion-escenario").blur(function(){
 				
 		nuevo_nombre = $("#in-descripcion-escenario").val(); 					
-		if(nuevo_nombre != null || nuevo_nombre != "") {	
+		if(nuevo_nombre != null || nuevo_nombre != "" ) {	
 			
 			url =  now + "index.php/api/escenario/escenario_campo/format/json/";
 			actualiza_data(url , { "campo": "descripcion" ,    "escenario" : escenario , "nuevonombre" : nuevo_nombre } );
-			update_campo( "descripcion" ,  ".descripcion-escenario-text" , "#in-descripcion-escenario" );
+			
+			update_campo( "descripcion" ,  ".descripcion-escenario-text" , "#in-descripcion-escenario" , "Describe la experiencia del escenario");
 			
 		
 		}else{
@@ -69,13 +72,23 @@ function  update_descripcion_escenario(){
 }
 
 /*Actualiza solo un campo */
-function update_campo(campo, place, input ){ 
+function update_campo(campo, place, input , msj ){ 
 
 	url = now + "index.php/api/escenario/evento_escenario_campo/format/json";	
 	$.get(url , {"campo" : campo , "escenario" : escenario } ).done(function(data){
+			
 
+		data = data.trim(); 
+
+		if (data.length === 0 ) {
+
+			llenaelementoHTML( place,  msj);
+		}else{
+			llenaelementoHTML( place,  data);
+		}
 		
-		llenaelementoHTML( place,  data);
+
+
 		$(input).val(data);
 
 	}).fail(function(){
@@ -102,6 +115,7 @@ function update_fecha_escenario(){
 	return false;	
 	
 }
+
 
 
 

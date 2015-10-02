@@ -42,7 +42,13 @@ function load_contactos(contacto,  tipo ){
 
 		llenaelementoHTML( "#section-contact" , data);
 		$(".editar-contacto").click(try_update_contacto);
+		$(".img_contacto").click(function(e){
 
+
+			contacto = e.target.id
+			$("#dinamic_contacto").val(contacto);
+
+		});
 
 	}).fail(function(){
 		alert("Error al cargar tus contactos, informar al administrador si  el problema persiste");

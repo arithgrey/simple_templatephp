@@ -5,8 +5,7 @@ class Accesos extends CI_Controller {
 		parent::__construct();
 
         $this->load->model("puntoventamodel");
-        $this->load->helper("puntoventa");
-        
+        $this->load->helper("puntoventa");        
         $this->load->model("eventmodel");
         $this->load->model("accesosmodel");
         $this->load->helper("accesos");
@@ -28,6 +27,9 @@ class Accesos extends CI_Controller {
         $id_empresa =  $this->sessionclass->getidempresa();  
         $puntos_venta = $this->puntoventamodel->get_puntos_venta_evento( $id_evento , $id_user , $id_empresa);
 
+        
+        $data["resumen_accesos"] = resumen_puntos_venta_f($this->puntoventamodel->get_resumen_accesos($id_evento) );
+        $data["resumen_puntos_venta_asociados"] = get_resumen_puntos_venta_asociados($this->puntoventamodel->get_puntos_venta_asociadas($id_evento));
 
         $data["evento"] = $id_evento;                
         $data["accesos_in_event"] = display_complete_info($data_accesos);

@@ -9,30 +9,58 @@ class Escenario  extends CI_Controller {
         $this->load->model("escenariomodel");
         $this->load->helper("artistas");
         $this->load->helper("escenario");
+        $this->load->helper("img_eventsh");
 		$this->load->library('sessionclass');    
 	}
 	
 
 
-    /**************************Configuracion del escenario avanzado **************++*/
 
+
+    /**************************Configuracion del escenario avanzado **************++*/
     function configuracionavanzada($id_escenario){
 
 
         $evento =  $this->eventmodel->get_by_escenario($id_escenario);
-        $nombre_evento = $evento[0]["nombre_evento"];
-        $data = $this->validate_user_sesssion("Escenario del evento " . $nombre_evento);      
+        $nombre_evento = $evento[0]["nombre_evento"];        
+        $data = $this->validate_user_sesssion("Escenario del evento " . $nombre_evento);                                                         
+        $base_path = substr($_SERVER["SCRIPT_FILENAME"], 0 , (strlen($_SERVER["SCRIPT_FILENAME"]) -9)  )."application/uploads/uploads/empresa/".$this->sessionclass->getidempresa()."/evento/".$evento[0]["idevento"]."/escenario/".$id_escenario."/";
+       
 
+        if ( create_dinamic_dic($base_path) ==  1 ) {
+            $data["base_path"] = $base_path;
+        }
+        else{
+            $data["base_path"] = "1";
+        }
+        /*creamos las carpetas pertinentes para la sección de imagenes*/                
+
+        
         $data_escenario = $this->escenariomodel->get_escenariobyId($id_escenario);                 
         $data["data_escenario"]=$data_escenario[0];
 
+        $descripcion_escenario =trim($data_escenario[0]["descripcion"]);        
+        if (empty( $descripcion_escenario)  || is_null($descripcion_escenario ) ||  strlen($descripcion_escenario) == 0   ){
+
+            $data["descripcion_escenario"] =  "Describe la experiencia del escenario";
+
+        }else{
+            
+            $data["descripcion_escenario"] =  $data_escenario[0]["descripcion"];        
+        }
+        
+
+        $data["base_path_img"] =  $path_img_base = "application/uploads/uploads/empresa/".$this->sessionclass->getidempresa()."/evento/".$evento[0]["idevento"]."/escenario/".$id_escenario."/";
         $artitastas_data = $this->escenarioartistamodel->get_artistas_inevent($id_escenario);
         $data['artistas'] = list_artistas_escenario($artitastas_data, 'Artistas que se presentarán en este escenario' , 1 , $id_escenario);
-    
+        $data['id_escenario'] =  $id_escenario;
         $data['resumen_artistas'] = resumen_artistas_table($this->escenarioartistamodel->get_artistas_resumen($id_escenario, $data_escenario[0], $nombre_evento ));         
 
         $this->dinamic_view_event( 'escenarios/configuracion_avanzado' , $data);            
     }
+
+
+
     /**************************Termina Configuracion del escenario avanzado **************++*/
 	function inevento($id_escenario , $id_evento){
 
@@ -40,6 +68,9 @@ class Escenario  extends CI_Controller {
         
         $data = $this->validate_user_session_event("Escenarios" , $dataevent[0]["status"]);
         $data["evento"] =  $dataevent[0];
+        
+        
+
         $artistas_array = $this->escenarioartistamodel->get_artistas_inevent($id_escenario);
         $escenariodb= $this->escenariomodel->get_escenariobyId($id_escenario);
         $data["escenario"] =$escenariodb[0]; 

@@ -8,6 +8,26 @@
 }
 </style>
 
+<?=ini_set('display_errors', '1');?>
+
+<div class='respuesta-img-upload'></div>
+<div class="container">
+    <div class="row">
+        <div class="center-block">
+            <div class='col-md-3'>
+                <div class='lista-imagenes' id="lista-imagenes"></div>
+                <input type='hidden' name='action' value="carga-imgenes-escenario">
+            </div>
+        </div>
+    </div>
+</div>
+   
+
+
+
+<div class='response' id='response'></div>   
+
+
 
 <div class="container"> 
     <div class="jumbotron">
@@ -18,11 +38,11 @@
 		</div>
 	    </div>	   
 	    <div class='row'>
-		    <p class='descripcion-escenario-text'>
-		    	<?=$data_escenario["descripcion"]?>
+		    <p class='descripcion-escenario-text'>                        
+		    	<?=$descripcion_escenario;?> 
 		    </p>
 		   	<textarea id="in-descripcion-escenario"  class='form-group todo-entry' name="descripcion_escenario" >
-				<?=$data_escenario["descripcion"]?>
+				<?=$descripcion_escenario;?> 
 		   	</textarea>	    	
 		</div>	        	    
 		<!--********************************Tipos de escenarios *************************************-->
@@ -47,6 +67,17 @@
 				<div id='fecha-presentacion'><?= $data_escenario["fecha_presentacion_inicio"] . " - ". $data_escenario["fecha_presentacion_termino"]; ?></div>
 			</div>
 		</a>
+
+
+
+
+        <form action ='<?=base_url("application/controllers/api/imgs_controller.php")?>'  method="post" id="form_imgs_escenario" enctype="multipart/form-data" id='formulario-principal-img' class='pull-right'>
+         <div class="form-group">
+            Imagen:<input type="file" name="images[]"  id="imgs-escenario">
+                   <input type='hidden' name="e" value='1'>
+         </div>                      
+         </form>
+
 		<!--*********************************************************************-->
    	</div>
 
@@ -303,7 +334,13 @@
     </div>
 </div>
 
-<input type='hidden' name='escenario' id="escenario" value="<?=$data_escenario['idescenario']?>">
+
+<input type='hidden' name='base_path_img' id="base_path_img" class='base_path_img' value='<?=$base_path_img;?>'>
+<input type='hidden' name='base_path' id='base_path' class='base_path' value='<?=$base_path;?>'>
+<input type='hidden' name='id_escenario' id='id_escenario' class='id_escenario' value="<?=$id_escenario;?>">
+
+
+
 
 
 
@@ -354,18 +391,16 @@
 <script type="text/javascript" src="<?=base_url('application/js/js/bootstrap-timepicker/js/bootstrap-timepicker.js')?>"></script>
 <script src="<?=base_url('application/js/js/pickers-init.js')?>"></script>
 <!--Escenarios modal-->
+
+
+
 <script src="//connect.soundcloud.com/sdk-2.0.0.js"></script>
 <script type="text/javascript" src="<?=base_url('application/js/evento/gmap.js')?>"></script>
 <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true&libraries=places"></script>
 
 <script type="text/javascript" src="<?=base_url('application/js/escenarios/escenario_artista.js')?>"></script>
 <script type="text/javascript" src="<?=base_url('application/js/escenarios/config.js')?>"></script>
-
-
-
-
-
-
+<script type="text/javascript" src="<?=base_url('application/js/escenarios/img.js')?>"></script>
 
 
 <script src="//connect.soundcloud.com/sdk-2.0.0.js"></script>
@@ -379,9 +414,8 @@
     
     $('#artista').keyup(function (e){ 
 
-        Stringentrante = $(this).val(); 
-        
-            buscarartista(Stringentrante);
+        Stringentrante = $(this).val();         
+        buscarartista(Stringentrante);
     });
 
     function buscarartista(Stringentrante){        
@@ -398,19 +432,9 @@
                     avatar_url =  tracks[x]["user"].avatar_url;
                     uri =   tracks[x]["user"].uri;
                     id = tracks[x]["id"].id;
-
-                        newcontenidodatalist += "<option value='"+ username  +"'>" ;
-
-                        
-                   }
-                   
+                        newcontenidodatalist += "<option value='"+ username  +"'>" ;                        
+                   }                   
                    document.getElementById('dinamic-artistas').innerHTML= newcontenidodatalist;                
-        });
-
-        
+        });    
     }
-
-</script>
-
-     
-
+</script>    

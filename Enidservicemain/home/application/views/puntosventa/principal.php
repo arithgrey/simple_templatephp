@@ -80,10 +80,6 @@
     </div>
 </div>
 <!--termina modal registro del punto de venta-->
-
-
-
-
 <!--Inicia modal registro del punto de venta -->
 <div class="modal fade in" id="contact-modal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="false">
     <div class="modal-dialog modal-lg">
@@ -106,30 +102,8 @@
          <label for="inputEmail">Razón social del punto de venta</label>
          <input type="text" class="form-control" name="razon_social" placeholder="Nombre de la organización" required>
      </div>    
-     <div class="form-group">            
-         <div class="input-group m-bot15">
-            <span class="input-group-addon">
-                Tel. de contacto 
-            </span>
-            <input class="form-control" name="telefono"   placeholder="Teléfono" type="text">
-         </div>
-     </div>
-     <div class="form-group">            
-         <div class="input-group m-bot15">
-            <span class="input-group-addon">
-                Dirección
-            </span>
-            <input class="form-control" name="direccion"   placeholder="Av. sur 89 col...  " type="text">
-         </div>
-     </div>
-    <div class="form-group">            
-        <div class="input-group m-bot15">
-            <span class="input-group-addon">
-                Página web del proveedor 
-            </span>
-            <input class="form-control" name="url_pagina_web"   placeholder="https://enidservice.com/" type="url">
-        </div>
-     </div>
+     
+    
     <div class="form-group" >        
         <select class="form-control col-sm-12" name="status">            
             <option value="Disponible para todos los colaboradores de la empresa">Disponible para todos los colaboradores de la empresa</option>           
@@ -259,30 +233,8 @@
          <label for="inputEmail">Nueva Razón social</label>
          <input type="text" class="form-control" name="nrazon_social" placeholder="Nombre de la organización" required>
      </div>    
-     <div class="form-group">            
-         <div class="input-group m-bot15">
-            <span class="input-group-addon">
-                Nuevo Tel. de contacto 
-            </span>
-            <input class="form-control" name="ntelefono"   placeholder="Teléfono" type="text">
-         </div>
-     </div>
-     <div class="form-group">            
-         <div class="input-group m-bot15">
-            <span class="input-group-addon">
-                Nueva Dirección
-            </span>
-            <input class="form-control" name="ndireccion"   placeholder="Av. sur 89 col...  " type="text">
-         </div>
-     </div>
-    <div class="form-group">            
-        <div class="input-group m-bot15">
-            <span class="input-group-addon">
-                Nueva página web
-            </span>
-            <input class="form-control" name="nurl_pagina_web"   placeholder="https://enidservice.com/" type="url">
-        </div>
-     </div>
+    
+    
     <div class="form-group" >        
         <select class="form-control col-sm-12" name="nstatus">            
             <option value="Disponible para todos los colaboradores de la empresa">Disponible para todos los colaboradores de la empresa</option>           
@@ -303,6 +255,7 @@
         </div>
     </div>
 </div>
+
 
 
 

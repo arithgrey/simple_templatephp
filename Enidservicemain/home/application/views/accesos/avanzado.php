@@ -12,7 +12,8 @@
 
 <section class="panel">
     <header class="blue-col-enid panel-heading custom-tab turquoise-tab">
-    <ul class="nav nav-tabs blue-col-enid">
+
+    <ul class="nav nav-tabs blue-col-enid">     
         <li class="active">
             <a data-toggle="tab" href="#home3">
             <i class="fa fa-money"></i>
@@ -23,9 +24,9 @@
             <a data-toggle="tab" href="#about3">
             <i class="fa fa-map-marker"></i> Puntos donde el cliente podrá adquirir sus accesos
             </a>
-        </li>
-                                
+        </li>                            
     </ul>
+
     </header>
     <div class="panel-body " style="">
         <div class="tab-content">
@@ -33,14 +34,21 @@
                                     
             <!--************Tabla general ********************-->
                 
+            <div class='row'>
                 
-            
-            <div style='background:#EAF4F8;'>
+                
+                        <?=$resumen_accesos;?>            
+                
+                
+            </div>                
+
+            <div style=''>
                 <div class='list-accesos' id='list-accesos'>
                     <?=$accesos_in_event;?> 
-                </div>      
+
+                </div>                      
             </div>      
-                    
+
                         
                 
 
@@ -95,10 +103,14 @@
             <div class="col-sm-12">
                 <section class="panel">                    
                 <div class="container">
+                    
+                              
+                        <?=$resumen_puntos_venta_asociados;?>                    
                     <div class="btn-group pull-right">
                         <button type="button" id="marcar-puntos-venta-todos" class="btn btn-primary btn-sm"><i class="fa fa-check-square-o"></i> Marcar todos</button>                                
-
                     </div>   
+                    <br>    
+                    <br>    
                     <div class='puntos-venta-evento'>
                         <?=$puntos_venta;?>
                     </div>

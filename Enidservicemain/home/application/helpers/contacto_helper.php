@@ -21,9 +21,11 @@ if(!function_exists('invierte_date_time')){
 					  	<th class="text-center">Página web</th>
 					  	<th class="text-center">Dirección</th>
 					  	<th class="text-center">Tipo</th>
-					  	<th class="text-center">Nota</th>
+					  	
 					  	<th class="text-center">Estado</th>
-					  	<th class="text-center">Fecha registro</th>
+					  	<th class="text-center">Registro</th>
+					  	<th class="text-center">IMG</th>
+
 					  	<th class="text-center"></th>
 					  </tr>
 					  ';
@@ -57,10 +59,15 @@ if(!function_exists('invierte_date_time')){
 						<td>'.$correo.'</td>
 						<td>'.$pagina_web.'</td>
 						<td>'.$direccion.'</td>
-						<td>'.$tipo.'</td>
-						<td>'.$nota.'</td>
+						<td>'.$tipo.'</td>						
 						<td>'.$status .'</td>
 						<td>'.$fecha_registro.'</td>
+
+						<td  data-toggle="modal" data-target="#contact-imagen-modal"    class="prog-avatar"> 
+						
+                               	<img  class="img_contacto" id="'.$idcontacto.'" src="images/photos/user1.png" alt="">
+						
+						</td>
 						<td data-toggle="modal" data-target="#contact-modal-edit" ><i id="'. $idcontacto.'" class="editar-contacto fa fa-pencil-square fa-lg" ></i></td>
 
 						</tr>';			
@@ -80,9 +87,10 @@ if(!function_exists('invierte_date_time')){
 					  	<th class='text-center'>Página web</th>
 					  	<th class='text-center' >Dirección</th>
 					  	<th class='text-center' >Tipo</th>
-					  	<th class='text-center' >Nota</th>
+					  	
 					  	<th class='text-center' >Estado</th>
 					  	<th class='text-center' >Fecha registro</th>
+					  	<th class='text-center' ></th>
 					  	<th class='text-center' ></th>					  	
 					  </tr>";	
 		}
