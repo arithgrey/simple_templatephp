@@ -6,6 +6,15 @@ $(document).on("ready", function(){
 	$(".punto_venta").click(update_status_punto_venta_evento );
 	$("#marcar-puntos-venta-todos").click(select_all);
 
+	$(".img_acceso").click(function(e){
+		acceso =e.target.id;
+		$("#dinamic_acceso").val(acceso);
+		$("#imgs-acceso").attr("value" , "");
+		$("#lista-imagenes").html("");
+	});
+
+	$("#imgs-acceso").change(upload_main_imgs);
+
 
 });
 /*Eliminar al conformar */

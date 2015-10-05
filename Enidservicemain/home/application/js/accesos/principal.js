@@ -1,6 +1,8 @@
 $(document).on("ready", function(){
 		
 		$(".acceso_evento").click(reporte_accesos);
+		
+		
 
 });
 

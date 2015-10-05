@@ -10,18 +10,8 @@
 
 <?=ini_set('display_errors', '1');?>
 
-<div class='respuesta-img-upload'></div>
-<div class="container">
-    <div class="row">
-        <div class="center-block">
-            <div class='col-md-3'>
-                <div class='lista-imagenes' id="lista-imagenes"></div>
-                <input type='hidden' name='action' value="carga-imgenes-escenario">
-            </div>
-        </div>
-    </div>
-</div>
-   
+
+
 
 
 
@@ -32,7 +22,29 @@
 <div class="container"> 
     <div class="jumbotron">
     	<div class='row'>
-	    <h1 class='nombre-escenario-text'><?=$data_escenario["nombre"];?></h1>	    
+
+        <div class='row'>            
+	       <h1 class='nombre-escenario-text'><?=$data_escenario["nombre"];?></h1>	    
+        </div>
+
+        <div class='row'>
+        <div class='respuesta-img-upload'></div>
+        <div class="container">
+            <div class="row">
+                <div class="center-block">
+                    
+                    <div class='col-md-12'>
+                        <div class='lista-imagenes' id="lista-imagenes"></div>
+                        <input type='hidden' name='action' value="carga-imgenes-escenario">
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        </div>   
+
+
+
 	    <div class="form-group todo-entry">
 			<input  class="form-control in-nombre-escenario " id='in-nombre-escenario' value="<?=$data_escenario["nombre"];?>" name='nuevo_nombre' style="width: 100%" type="text">			
 		</div>
@@ -338,6 +350,7 @@
 <input type='hidden' name='base_path_img' id="base_path_img" class='base_path_img' value='<?=$base_path_img;?>'>
 <input type='hidden' name='base_path' id='base_path' class='base_path' value='<?=$base_path;?>'>
 <input type='hidden' name='id_escenario' id='id_escenario' class='id_escenario' value="<?=$id_escenario;?>">
+
 
 
 

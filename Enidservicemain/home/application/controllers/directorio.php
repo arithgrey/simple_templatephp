@@ -41,11 +41,10 @@ class Directorio  extends CI_Controller {
         }
         else{
             $data["base_path"] = "1";
-        }
-
-
+        }        
 
         $data["base_path"]=  $base_path;
+        $data["base_path_img"] =  "application/uploads/uploads/empresa/".$this->sessionclass->getidempresa()."/cu/".$id_usuario."/";    
 
         $data_contactos = $this->contactmodel->get_list_contactos($id_usuario);
         $data_tipos = $this->contactmodel->get_tipos_contactos($id_usuario);

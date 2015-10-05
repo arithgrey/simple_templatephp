@@ -34,11 +34,18 @@
     
 
     if ($contacto ==  "all"){
-        $query_get ="SELECT * FROM contacto where idusuario = '".$idusuario."'  ";  
+        $query_get ="SELECT c.* , i.*  FROM contacto c  left outer  join  imagen_contacto ic on 
+                    c.idcontacto =  ic.id_contacto left outer  join imagen  i  on  ic.id_imagen =  i.idimagen 
+                    where idusuario ='".$idusuario."' ";  
+
     }else if($contacto ==  "tipo"){
-        $query_get ="SELECT * FROM contacto where idusuario = '". $idusuario."' and tipo = '".$tipo."' OR nombre like '%".$contacto ."%'   ";  
+        $query_get ="SELECT c.* , i.*  FROM contacto c  left outer  join  imagen_contacto ic on 
+                    c.idcontacto =  ic.id_contacto left outer  join imagen  i  on  ic.id_imagen =  i.idimagen 
+                    where idusuario= '". $idusuario."' and tipo = '".$tipo."' OR nombre like '%".$contacto ."%'   ";  
     }else{
-        $query_get ="SELECT * FROM contacto where idusuario = '". $idusuario."' and nombre like '%".$contacto ."%'";  
+        $query_get ="SELECT c.* , i.*  FROM contacto c  left outer  join  imagen_contacto ic on 
+                    c.idcontacto =  ic.id_contacto left outer  join imagen  i  on  ic.id_imagen =  i.idimagen 
+                    where idusuario = '". $idusuario."' and nombre like '%".$contacto ."%'";  
     }
 
 
@@ -46,6 +53,7 @@
     return $result ->result_array();
 
   }
+
   /*Lista de contactos*/
   function get_list_contactos($id_usuario){
 

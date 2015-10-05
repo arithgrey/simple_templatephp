@@ -13,6 +13,8 @@
 
 
 
+
+
 <div class="container">
     <div class="row">
         <div class="center-block">
@@ -79,7 +81,6 @@
             <div class="modal-body">
                 
                 <!--Nuevo contacto form -->
-
 <form class='form-contactos' id="form-contactos" method="post" action="<?=base_url('index.php/api/contactos/contacto/format/json/')?>">
     
 <div class='status-registro'>
@@ -402,6 +403,7 @@
 
 <input class='base_path' id='base_path' type='hidden' value='<?=$base_path;?>'>
 <input class='dinamic_contacto' id='dinamic_contacto' type='hidden'>
+<input class='base_path_img' id='base_path_img' type='hidden' value="<?=$base_path_img;?>">
 
 
 
@@ -453,9 +455,8 @@
 
 
 
-
-
-
-
-
 <script type="text/javascript" src="<?=base_url('application/js/directorio/img.js')?>"></script>
+
+
+
+

@@ -21,6 +21,41 @@ class Img_controller extends REST_Controller{
       $this->response($db_response);  
 
   }
+
+  function contacto_post(){
+  
+      $this->validate_user_sesssion();            
+      $id_usuario = $this->sessionclass->getidusuario();    
+      $id_empresa =  $this->sessionclass->getidempresa();            
+      $db_response = $this->img_model->insert_contacto($this->post() , $id_usuario , $id_empresa );
+      $this->response($db_response);  
+
+  }
+
+  /**/
+
+  function acceso_post(){
+  
+      $this->validate_user_sesssion();            
+      $id_usuario = $this->sessionclass->getidusuario();    
+      $id_empresa =  $this->sessionclass->getidempresa();            
+      $db_response = $this->img_model->insert_acceso($this->post() , $id_usuario , $id_empresa );
+      $this->response($db_response);  
+
+  }
+
+
+
+  /**/
+
+  function punto_venta_post(){
+
+     $this->validate_user_sesssion();            
+      $id_usuario = $this->sessionclass->getidusuario();    
+      $id_empresa =  $this->sessionclass->getidempresa();            
+      $db_response = $this->img_model->insert_punto_venta($this->post() , $id_usuario , $id_empresa );
+      $this->response($db_response);  
+  }
   
     /**/
   function validate_user_sesssion(){

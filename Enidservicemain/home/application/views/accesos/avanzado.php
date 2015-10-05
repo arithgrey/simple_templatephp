@@ -1,4 +1,5 @@
 <script type="text/javascript" src="<?=base_url('application/js/evento/accesos/avanzado.js')?>"></script>
+
 <link rel="stylesheet" type="text/css" href="<?=base_url('application/css/eventos/edicion.css')?>">
 <link rel="stylesheet" type="text/css" href="<?=base_url('application/js/js/bootstrap-datepicker/css/datepicker-custom.css')?>" />
 <script type="text/javascript" src="<?=base_url('application/js/js/bootstrap-datepicker/js/bootstrap-datepicker.js')?>"></script>
@@ -285,3 +286,107 @@
 <!--Termina la edición -->
 
     
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<input class='base_path' id='base_path' type='hidden' value='<?=$base_path;?>'>
+<input class='dinamic_acceso' id='dinamic_acceso' type='hidden'>
+<input class='base_path_img' id='base_path_img' type='hidden' value="<?=$base_path_img;?>">
+
+
+
+<!--******************************* Cargar del acceso *********************************************-->
+<div class="modal fade in" id="acceso-imagen-modal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            
+                <h4 class="modal-title" id="myModalLabel" class='title-modal-contacto'>Cargar portada del acceso, venta, promoción, preventa...  </h4>
+            </div>
+            <div class="modal-body">            
+                <div class='row'>
+                    <form action ='<?=base_url("application/controllers/api/imgs_controller.php")?>'  method="post" id="form_imgs_accesos" enctype="multipart/form-data" >
+                             <div class="form-group">
+                                <span>Imagen:</span>
+                                <input type="file" name="images[]"  id="imgs-acceso" class='imgs-acceso'>                                       
+                             </div>                      
+
+                             <div class='askmks'></div>
+                             <div class='row'>
+                                <div class='col-sm-1'></div>    
+                                <div class='col-sm-10'>
+                                    <div class='response_img_contacto' id='response_img_contacto'></div>
+                                    <div class='lista-imagenes' id='lista-imagenes'></div>
+                                </div>
+                                <div class='col-sm-1'></div>    
+                             </div>
+
+                    </form>
+                </div>
+
+                <!--Termina nuevo contacto -->
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+<script type="text/javascript" src="<?=base_url('application/js/evento/accesos/img.js')?>"></script>

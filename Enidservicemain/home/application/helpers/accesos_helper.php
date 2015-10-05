@@ -6,6 +6,7 @@ if(!function_exists('invierte_date_time')){
 
 		
 
+
 		$accesos = "";
 		$in = 1;
 		foreach ($arreglo["listaccesos"] as $rowccesos) {
@@ -102,25 +103,27 @@ if(!function_exists('invierte_date_time')){
 
 		$l='<table class="display table table-bordered dataTable" id="dynamic-table">
 					<thead class="enid-header-table">
-						<tr role="row">
-							<th>#</th>
-							<th></th>
-							<th></th>	
-							<th></th>
-							<th></th>	
-							<th></th>
-							<th></th>
+						<tr >
+							<td>#</td>
+							<td>Tipo acceso</td>
+							<td>Precio al público</td>	
+							<td>Vigencia</td>
+							<td>Portada</td>	
+							<td>Mensaje para el público</td>
+							<td></td>
+							<td></td>
 						</tr>
-					</thead>
+					</tdead>
 					<tfoot class="enid-header-table">
 						<tr>
-							<th>#</th>
-							<th></th>
-							<th></th>	
-							<th></th>
-							<th></th>	
-							<th></th>
-							<th></th>
+							<td>#</td>
+							<td></td>
+							<td></td>	
+							<td></td>
+							<td></td>	
+							<td></td>
+							<td></td>
+							<td></td>
 						</tr>
 					</tfoot>		              
 					<tbody>';
@@ -132,6 +135,7 @@ if(!function_exists('invierte_date_time')){
 		foreach ($data_accesos as $row){
 			
 			/*datos tabla general */
+
 			$idacceso  =  $row["idacceso"];  
 			$nota  =  $row["nota"];    
 			$precio  = $row["precio"];              
@@ -153,14 +157,33 @@ if(!function_exists('invierte_date_time')){
 			}
 
 
-				$l.= '<tr class="acceso_event" id="' . $idacceso. '">
+				$l.= '<tr class="acceso_event media usr-info" id="' . $idacceso. '">
 						<td class="franja-vertical">'. $flag .'	</td>
-						<td>'. $tipo  .'	</td>
-						<td>$'. $precio  .'	</td>
-						<td>'. $vigencia .'	</td>
-						<td data-toggle="modal" data-target="#editar-acceso" class="editar-acceso" id="'.$idacceso.'" >'. $nota  .'	</td>						
-						<td>'. $delete .'	</td>
-						<td>'. $edit .'	</td>
+						<td class="text-center">'. $tipo  .'	</td>
+						<td class="text-center"> $'. $precio  .'	</td>
+						<td class="text-center">'. $vigencia .'	</td>';
+						
+
+
+						if ($row["nombre_imagen"]!= null ) {
+							$img = base_url( $row["base_path_img"].$row["nombre_imagen"]);							
+							$l.='<td   data-toggle="modal" data-target="#acceso-imagen-modal"    class="prog-avatar text-center"> 						
+		                            <img style="width:30px !important; height: 30px !important;"  class="img_acceso thumb" id="'.$idacceso.'" src="'.$img.'" alt="">						
+								</td>';
+
+						}else{
+							$l.='<td  data-toggle="modal" data-target="#acceso-imagen-modal"    class="prog-avatar text-center"> 						
+		            				<i  class="img_acceso fa fa-picture-o" id="'.$idacceso.'" ></i>                
+								</td>';
+
+						}
+
+
+						
+						
+						$l.='<td data-toggle="modal" data-target="#editar-acceso" class="editar-acceso text-center" id="'.$idacceso.'" >'. $nota  .'	</td>						
+						<td class="text-center">'. $delete .'	</td>
+						<td class="text-center">'. $edit .'	</td>
 					  </tr>';	
 
 			$flag ++;
@@ -174,7 +197,6 @@ if(!function_exists('invierte_date_time')){
 		return $l;
 
 	}
-
 
 	/*lista loa tipos de accesos*/
 	function list_tipos_accesos($data_tipos_accesos){

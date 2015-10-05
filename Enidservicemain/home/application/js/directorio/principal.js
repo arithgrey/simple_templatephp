@@ -19,6 +19,7 @@ $(document).on("ready", function(){
 
 	$("#filtro-tipo-contacto").change(filtrar_tipo);
 
+
 });
 function record_contacto(e){
 
@@ -42,11 +43,15 @@ function load_contactos(contacto,  tipo ){
 
 		llenaelementoHTML( "#section-contact" , data);
 		$(".editar-contacto").click(try_update_contacto);
+		
+
 		$(".img_contacto").click(function(e){
-
-
-			contacto = e.target.id
+				
+			contacto = e.target.id;
 			$("#dinamic_contacto").val(contacto);
+			$("#lista-imagenes").html("");
+			$("#imgs-contacto").attr("value" , "");		
+			$("#imgs-contacto").change(upload_main_imgs);
 
 		});
 

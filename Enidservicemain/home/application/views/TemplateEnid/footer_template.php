@@ -147,6 +147,10 @@
         .blue-col-enid-complement{
             background:  none repeat scroll 0% 0% #124048    
         }
+        .usr-info .thumb{
+            width: 60px !important;
+            height: 60px !important;
+        }
         
         </style>
        

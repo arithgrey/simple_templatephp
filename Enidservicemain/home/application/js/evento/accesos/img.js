@@ -1,18 +1,14 @@
-function upload_main_imgs_escenario(){
-    var formdata = false;
+function upload_main_imgs(){
+var formdata = false;
+var i = 0, len = this.files.length, img, reader, file;
+
     if(window.FormData){
 
         formdata = new FormData();        
-    }    
-    
-    var i = 0, len = this.files.length, img, reader, file;                
-    $("#response").html("Subiendo...");
-            
-            
-            for( ; i < len; i++){
-                file = this.files[i];
-                
-                //Una validación para subir imágenes
+    }            
+    $('#response_img_contacto').html('Subiendo...');
+        for( ; i < len; i++){
+                file = this.files[i];            
                 if(!!file.type.match(/image.*/)){
                     //Si el navegador soporta el objeto FileReader
                     if(window.FileReader){
@@ -25,19 +21,16 @@ function upload_main_imgs_escenario(){
                         //Comienza a leer el archivo
                         //Cuando termina el evento onloadend es llamado
                         reader.readAsDataURL(file);
-                    }
+                    }                
                     
-                    //Si existe una instancia de FormData
                     if(formdata)
-                        //Usamos el método append, cuyos parámetros son:
-                            //name : El nombre del campo
-                            //value: El valor del campo (puede ser de tipo Blob, File e incluso string)
                         formdata.append('images[]', file);
                 }
-            }
-            
-            base_path =  $("#base_path").val();            
-            url =  $("#form_imgs_escenario").attr("action")+ "?base_path="+base_path+"&action=upload_principal_img_escenario";  
+            }                        
+
+            base_path =  $("#base_path").val();
+            dinamic_contacto =  $("#dinamic_contacto").val();
+            url =  $("#form_imgs_accesos").attr("action")+ "?base_path="+base_path+"&contacto="+ dinamic_contacto  +"&action=upload_img_contacto";  
             if(formdata){
                 $.ajax({
                    url : url,
@@ -45,56 +38,63 @@ function upload_main_imgs_escenario(){
                    data : formdata,
                    processData : false, 
                    contentType : false,                
-                   success : function(res){                                                    
-                        update_status_in_db(res, base_path);                        
+                   success : function(res){                            
+                        
+
+                    
+                        update_status_in_db(res, base_path);
+                        
+
+
                    }                
                 });
             }
 
-
-
-
-
-}
-    
-
-
-
-
+}            
 /*record in db*/
 function update_status_in_db(res , base_path ){
     
-    
     respuesta = res["respuesta"]; 
     if (respuesta ==  1 ){
+    
+
+        dinamic_acceso = $("#dinamic_acceso").val();
+
+
+        base_path_img = $("#base_path_img").val();
+        url = now + "index.php/api/img_controller/acceso/format/json/";
+        
+        $.post(url , { "acceso" : dinamic_acceso , "name_img" : res["name_img"] , "type" : res["type"] , "size" : res["size"] , "base_path_img" : base_path_img , "base_path" : base_path } ).done(function(data){
+
 
         
-        id_escenario  = $("#id_escenario").val();        
-        /*********insertamos en la base de datos el registro y la referencia**************/
-        base_path_img = $("#base_path_img").val();
-        url = now + "index.php/api/img_controller/principal_escenario/format/json/";
-        $.post(url , {"id_escenario" :  id_escenario ,    "name_img" : res["name_img"] , "type" : res["type"] , "size" : res["size"] , "base_path_img" : base_path_img , "base_path" : base_path } ).done(function(data){
-
-
-
-            if (data ==  true) {
                 
-                llenaelementoHTML("#response" , "Imagen cargada.");
+                if (data ==  true) {
+                    
+                    llenaelementoHTML("#response_img_contacto" , "Imagen cargada.");
+                    load_data_accesos();
 
-            }
+                }
             
+
         }).fail(function(){
             
         });
         
-        /*****************************************************************/                
+        
 
     }else{
         
         llenaelementoHTML(".respuesta-img-upload", "Error al subir imagen intente de nuevo si el error persiste, comunicar al adinistrador");
     }
+    
+
 
 }/*Termina la función*/
+
+
+
+
 
 function mostrarImagenSubida(source){
         var list = document.getElementById('lista-imagenes'),
@@ -103,10 +103,9 @@ function mostrarImagenSubida(source){
             img.setAttribute('width', '100%');
             img.setAttribute('height', '100%');
 
-
+        
         img.src = source;
         li.appendChild(img);
         list.appendChild(li);
 }
-/*Termina mostrar imagenes */
-    
+

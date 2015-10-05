@@ -21,12 +21,17 @@ function getDataByidEvent($idempresa, $evento){
 
 function get_acceso_by_event($id_evento){
 
-	$select_byid ="SELECT a.idacceso ,   a.descripcion as nota , FORMAT(a.precio , 2) as precio, a.inicio_acceso, 
-	a.termino_acceso, a.status,  a.idevento , DATE_FORMAT(a.fecha_registro , '%d/%m/%Y' ) as fecha_registro , t.idtipo_acceso , 
-	t.tipo ,  t.descripcion ,  t.status  
-	FROM acceso as a , tipo_acceso  as t WHERE 	
-	t.idtipo_acceso= a.idtipo_acceso AND
-	a.idevento='". $id_evento . "' order by termino_acceso desc";
+
+	$select_byid ="SELECT i.* , a.idacceso ,   a.descripcion as nota , FORMAT(a.precio , 2) as precio, a.inicio_acceso, 
+a.termino_acceso, a.status,  a.idevento , DATE_FORMAT(a.fecha_registro , '%d/%m/%Y' ) as fecha_registro , t.idtipo_acceso , 
+t.tipo ,  t.descripcion ,  t.status  FROM acceso a inner join  tipo_acceso  t
+on a.idtipo_acceso = t.idtipo_acceso
+left outer join imagen_acceso ia on 
+a.idacceso = ia.id_acceso
+left outer join imagen i 
+on  ia.id_imagen  = i.idimagen
+WHERE 	
+a.idevento='". $id_evento ."' order by a.termino_acceso desc";
 
 	$result_acceso = $this->db->query($select_byid); 
 	return $result_acceso ->result_array();

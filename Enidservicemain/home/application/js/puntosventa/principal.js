@@ -4,6 +4,16 @@ $(document).on("ready", function(){
 	$("#form-puntos-venta").submit(record_punto_venta);
 	$(".contactos").click(update_contactos_in_punto_venta);
 	$(".delete-punto-venta").click(delete_punto_venta);
+
+	
+		$(".img_punto_venta").click(function(e){
+
+								
+			$(".dinamic_punto_venta").val(e.target.id);
+			$('#lista-imagenes').html("");
+			$("#imgs-punto-venta").change(upload_main_imgs);
+		});
+
 	$(".puntos-venta-filtro").keyup(function(){
 
 		load_data_puntos_venta($(this).val());
@@ -86,6 +96,15 @@ function load_data_puntos_venta(filtro ){
 		$(".contactos").click(update_contactos_in_punto_venta);
 		$(".delete-punto-venta").click(delete_punto_venta);
 		$(".editar-punto-venta").click(edit_punto_venta);
+
+		$(".img_punto_venta").click(function(e){
+
+			
+			$("#imgs-punto-venta").attr("value" , "");			
+			$(".dinamic_punto_venta").val(e.target.id);
+			$('#lista-imagenes').html("");
+			$("#imgs-punto-venta").change(upload_main_imgs);
+		});
 
 	}).fail(function(){
 		alert("Falla al cargar ....");

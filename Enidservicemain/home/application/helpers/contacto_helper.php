@@ -13,6 +13,7 @@ if(!function_exists('invierte_date_time')){
 										  
 					  <tr class="text-center enid-header-table">
 					  	<th class="text-center ">#</th>
+					  	<th class="text-center">IMG</th>
 					  	<th class="text-center " >Contacto</th>
 					  	<th class="text-center">organización</th>
 					  	<th class="text-center">Teléfono</th>
@@ -24,8 +25,7 @@ if(!function_exists('invierte_date_time')){
 					  	
 					  	<th class="text-center">Estado</th>
 					  	<th class="text-center">Registro</th>
-					  	<th class="text-center">IMG</th>
-
+					  	
 					  	<th class="text-center"></th>
 					  </tr>
 					  ';
@@ -48,11 +48,30 @@ if(!function_exists('invierte_date_time')){
 			$idusuario     = $row["idusuario"];
 			$nota          = $row["nota"];
 
+			/**/
 
 
-			$contacto .='<tr class="text-center" style="font-size:.8em;" >
-						<td class="franja-vertical">'.$b.'</td>
-						<td class="franja-vertical">'.$nombre.'</td>
+
+			$img = base_url( $row["base_path_img"].$row["nombre_imagen"]);
+
+
+			$contacto .='<tr class="text-center media usr-info" style="font-size:.8em;" >
+						<td class="franja-vertical">'.$b.'</td>';
+
+			if ($row["nombre_imagen"] != null ) {
+											
+			
+				$contacto .='<td  data-toggle="modal" data-target="#contact-imagen-modal"    class="prog-avatar"> 
+	                             <img  class="img_contacto thumb" id="'.$idcontacto.'" src="'.$img.'" alt="">
+							</td>';
+			}else{
+				$contacto .='<td  data-toggle="modal" data-target="#contact-imagen-modal"    class="prog-avatar"> 
+                             <i  class="img_contacto fa fa-cloud-upload fa-3x" id="'.$idcontacto.'" ></i>
+						</td>';
+			}					
+
+
+			$contacto .='<td class="franja-vertical">'.$nombre.'</td>
 						<td>'.$organizacion.'</td>
 						<td>'.$tel.'</td>
 						<td>'.$movil.'</td>
@@ -63,11 +82,6 @@ if(!function_exists('invierte_date_time')){
 						<td>'.$status .'</td>
 						<td>'.$fecha_registro.'</td>
 
-						<td  data-toggle="modal" data-target="#contact-imagen-modal"    class="prog-avatar"> 
-						
-                               	<img  class="img_contacto" id="'.$idcontacto.'" src="images/photos/user1.png" alt="">
-						
-						</td>
 						<td data-toggle="modal" data-target="#contact-modal-edit" ><i id="'. $idcontacto.'" class="editar-contacto fa fa-pencil-square fa-lg" ></i></td>
 
 						</tr>';			
@@ -79,6 +93,7 @@ if(!function_exists('invierte_date_time')){
 			
 			$contacto .="<tr style='' class='text-center enid-header-table'>
 					  	<th class='text-center ' >#</th>
+					  	<th class='text-center' >IMG</th>
 					  	<th class='text-center ' >Contacto</th>
 					  	<th class='text-center' >organización</th>
 					  	<th class='text-center' >Teléfono</th>
@@ -86,11 +101,9 @@ if(!function_exists('invierte_date_time')){
 					  	<th class='text-center' >Correo</th>
 					  	<th class='text-center'>Página web</th>
 					  	<th class='text-center' >Dirección</th>
-					  	<th class='text-center' >Tipo</th>
-					  	
+					  	<th class='text-center' >Tipo</th>					  	
 					  	<th class='text-center' >Estado</th>
-					  	<th class='text-center' >Fecha registro</th>
-					  	<th class='text-center' ></th>
+					  	<th class='text-center' >Fecha registro</th>					  	
 					  	<th class='text-center' ></th>					  	
 					  </tr>";	
 		}

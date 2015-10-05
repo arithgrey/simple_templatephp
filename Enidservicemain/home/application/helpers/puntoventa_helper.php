@@ -180,11 +180,16 @@ if(!function_exists('invierte_date_time')){
 	function list_contactos_punto_venta($data){
 
 		$list ="<table class='table display table table-bordered dataTable' border='1'>";
-		$list .="<tr class='text-center enid-header-table'><td class='text-center'>Contacto </td><td class='text-center' >Organización  </td> <td class='text-center' >Tel </td> <td class='text-center'>Móvil </td><td class='text-center'>Página web </td>
+		$list .="<tr class='text-center enid-header-table'><td>IMG</td> <td class='text-center'>Contacto</td><td class='text-center' >Organización  </td> <td class='text-center' >Tel </td> <td class='text-center'>Móvil </td><td class='text-center'>Página web </td>
 		<td class='text-center'> +agregar </td>  </tr>";
 		$flag=0;
 		$contacos_asociados =0;
+
 		foreach ($data as $row) {
+			
+
+
+
 			
 			$nombre  = $row["nombre"];
 			$organizacion  =  $row["organizacion"];			
@@ -207,8 +212,30 @@ if(!function_exists('invierte_date_time')){
 
 
 
-			$list.="<tr class='text-center' ><td class='franja-vertical'>".$nombre."</td><td>".$organizacion ."</td>
-						<td>".$tel."</td> 
+			$list.="<tr class='text-center media usr-info' >";
+					if ($row["nombre_imagen"] != null ){
+
+						$img = base_url( $row["base_path_img"].$row["nombre_imagen"]);
+
+						$list.="<td class='prog-avatar'> 					
+		                        	<img style='width:35px !important; height:35px !important;'  class='thumb'  src='".$img ."'>						
+								</td>";				
+					}else{
+						$list.="<td class='prog-avatar'> 
+									<i class='fa fa-picture-o fa-2x'   ></i>
+								</td>";
+
+					}
+
+
+			$list.="<td class='franja-vertical'>".$nombre."</td><td>".$organizacion ."</td>";
+						
+
+
+			
+
+
+			$list.="<td>".$tel."</td> 
 						<td>".$movil ."</td>
 						<td>".$pagina_web ."</td>
 						<td>". $input ."</td>
@@ -227,24 +254,29 @@ if(!function_exists('invierte_date_time')){
 
 
 	/*return puntos de venta empresa */
+
 	function list_puntos_venta_administracion_empresa($data){
 		
 		$list="<table class='table display table table-bordered dataTable' >        
-		        <tr class='enid-header-table ' >  
-		        	         
+		        <tr class='enid-header-table' >  
+		        	<td >#</td>	         
+		        	<td >IMG</td>	         
 		            <td class='text-center' >Razón Social</td>		            		            
 		            <td class='text-center'>Estado</td>		            
 		            <td class='text-center'>Nota para el público</td>
 		            <td class='text-center'>Usuario Registrante</td>
 		            <td class='text-center'>Estado del Registrante</td>
 		            <td class='text-center'>Fecha registro</td>
+		            
 		            <td class='text-center'>Contactos Asociados</td>
+
 		            <td class='text-center'>Editar</td>            
 		            <td class='text-center'>Remover</td>            
 		        </tr>";			
 
         $num_puntos_venta =0;
         $b =1;
+
 		foreach ($data as $row) {
 			
 			$idpunto_venta = $row["idpunto_venta"];
@@ -257,9 +289,25 @@ if(!function_exists('invierte_date_time')){
 			$estado_usuario  =  $row["estado_usuario"];
 
 
-			$list.="<tr style='font-size:.8em;' class='text-center'>
-										
-					<td class='franja-vertical'>".$razon_social."</td>
+			$list.="<tr style='font-size:.8em;' class='text-center  media usr-info'>
+					<td>".$b."</td>";
+					
+
+					if ($row["nombre_imagen"] != null ){
+
+						$img = base_url( $row["base_path_img"].$row["nombre_imagen"]);
+
+						$list.="<td  data-toggle='modal' data-target='#punto-venta-imagen-modal'    class='prog-avatar'> 					
+		                        	<img  class='img_punto_venta thumb' id='". $idpunto_venta."' src='".$img ."' alt=''>						
+								</td>";				
+					}else{
+						$list.="<td  data-toggle='modal' data-target='#punto-venta-imagen-modal'    class='prog-avatar'> 
+									<i  class='img_punto_venta fa fa-cloud-upload'  id='". $idpunto_venta."'  ></i>
+								</td>";
+
+					}
+
+					$list.="<td class='franja-vertical'>".$razon_social."</td>
 					
 					
 					<td>".$status  ."</td>
@@ -267,15 +315,20 @@ if(!function_exists('invierte_date_time')){
 					<td>".$descripcion  ."</td>
 					<td>".$nombre  ."</td>
 					<td>".$estado_usuario."</td>
-					<td>".$fecha_registro."</td>					
-					<td  class='contactos' id='". $idpunto_venta  ."' > 
+					<td>".$fecha_registro."</td>";
+
+						
+
+			
+
+
+
+			$list.="<td  class='contactos' id='". $idpunto_venta  ."' > 
 						<i class='fa fa-book contactos' id='". $idpunto_venta  ."' 
 						data-toggle='modal' data-target='#contactos-modal' ></i>
 					</td>			
 					<td><i  data-toggle='modal' data-target='#editd-punto-venta-modal'    class='editar-punto-venta fa fa-pencil-square fa-lg'  id='". $idpunto_venta  ."'  ></i></td>					
-					<td> <i class='delete-punto-venta fa fa-trash'  id='". $idpunto_venta  ."'   data-toggle='modal' data-target='#delete-punto-venta-modal'  ></i></td>					
-					
-
+					<td> <i class='delete-punto-venta fa fa-trash'  id='". $idpunto_venta  ."'   data-toggle='modal' data-target='#delete-punto-venta-modal'  ></i></td>										
 					</tr>";			
 					$num_puntos_venta ++;
 					$b++;
@@ -284,12 +337,15 @@ if(!function_exists('invierte_date_time')){
 		if ($num_puntos_venta>9) {
 			
 			$list.="<tr class='enid-header-table'>
+						<td >#</td>	        
+						<td >IMG</td>
 			            <td >Razón Social</td>                        
 			            <td >Estado</td>            
 			            <td >Nota para el público</td>
 			            <td >Usuario Registrante</td>
 			            <td >Estado del Registrante</td>
 			            <td >Fecha registro</td>
+			            
 			            <td >Contactos Asociados</td>
 			            <td >Editar</td>           
 			            <td >Remover</td>           

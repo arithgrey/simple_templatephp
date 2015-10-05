@@ -24,7 +24,7 @@ class Escenario  extends CI_Controller {
         $evento =  $this->eventmodel->get_by_escenario($id_escenario);
         $nombre_evento = $evento[0]["nombre_evento"];        
         $data = $this->validate_user_sesssion("Escenario del evento " . $nombre_evento);                                                         
-        $base_path = substr($_SERVER["SCRIPT_FILENAME"], 0 , (strlen($_SERVER["SCRIPT_FILENAME"]) -9)  )."application/uploads/uploads/empresa/".$this->sessionclass->getidempresa()."/evento/".$evento[0]["idevento"]."/escenario/".$id_escenario."/";
+        $base_path = substr($_SERVER["SCRIPT_FILENAME"], 0 , (strlen($_SERVER["SCRIPT_FILENAME"]) -9)  )."application/uploads/uploads/empresa/".$this->sessionclass->getidempresa()."/ee/";
        
 
         if ( create_dinamic_dic($base_path) ==  1 ) {
@@ -50,7 +50,9 @@ class Escenario  extends CI_Controller {
         }
         
 
-        $data["base_path_img"] =  $path_img_base = "application/uploads/uploads/empresa/".$this->sessionclass->getidempresa()."/evento/".$evento[0]["idevento"]."/escenario/".$id_escenario."/";
+                                                   
+        $data["base_path_img"] =  $path_img_base = "application/uploads/uploads/empresa/".$this->sessionclass->getidempresa()."/ee/";
+
         $artitastas_data = $this->escenarioartistamodel->get_artistas_inevent($id_escenario);
         $data['artistas'] = list_artistas_escenario($artitastas_data, 'Artistas que se presentarán en este escenario' , 1 , $id_escenario);
         $data['id_escenario'] =  $id_escenario;

@@ -4,6 +4,7 @@ class Puntosventa extends CI_Controller{
     function __construct(){
         parent::__construct();
 
+        $this->load->helper("img_eventsh");
         $this->load->helper("puntoventa");
         $this->load->model("puntoventamodel");
         $this->load->library('sessionclass');      
@@ -13,10 +14,26 @@ class Puntosventa extends CI_Controller{
     /*vista administrar puntos de venta*/
     function administrar(){
 
+
         $data= $this->validate_user_sesssion("Puntos de venta frecuentemente utilizados por el empresa");    
         $id_empresa =  $this->sessionclass->getidempresa(); 
         $puntos_venta_resumen_data = $this->puntoventamodel->get_resumen_punto_venta($id_empresa);             
         $puntos_venta = $this->puntoventamodel->get_puntos_venta_empresa_usuario($id_empresa, 0);
+        
+
+        $base_path = substr($_SERVER["SCRIPT_FILENAME"], 0 , (strlen($_SERVER["SCRIPT_FILENAME"]) -9)  )."application/uploads/uploads/empresa/".$this->sessionclass->getidempresa()."/pv/";    
+        if ( create_dinamic_dic($base_path) ==  1 ) {
+            $data["base_path"] = $base_path;
+        }
+        else{
+            $data["base_path"] = "1";
+        }        
+
+        $data["base_path"]=  $base_path;
+        $data["base_path_img"] = "application/uploads/uploads/empresa/".$this->sessionclass->getidempresa()."/pv/";    
+
+
+
         
         $data["resumen_puntos_venta"] =  resumen_puntos_venta($puntos_venta_resumen_data);              
         $data["puntos_venta"]= list_puntos_venta_administracion_empresa($puntos_venta);

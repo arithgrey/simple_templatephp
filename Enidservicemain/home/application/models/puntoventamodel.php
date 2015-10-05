@@ -9,7 +9,6 @@
 	/*Actualiza todo los puntos de venta asociados al evento */
     function update_all_in_event($id_evento, $id_empresa){
 
-
     	$query_exist ="select * from evento_punto_venta where idevento =  '". $id_evento."' ";
 		$result = $this->db->query($query_exist);					
 		$exist = $result->num_rows();
@@ -55,20 +54,28 @@
 
 		if ( $filtro == null){
 			
-			$query_get ="select pv.* ,  u.nombre, u.puesto , u.status estado_usuario    from punto_venta pv 
-					inner join punto_venta_usuario pvu on pv.idpunto_venta =  pvu.idpunto_venta
-					inner join usuario u  
-					on pvu.idusuario = u.idusuario
-					where  pv.idempresa='". $id_empresa ."' ";	
+			$query_get ="select pv.*, i.* ,  u.nombre, u.puesto , u.status estado_usuario    from punto_venta pv 
+inner join punto_venta_usuario pvu on pv.idpunto_venta =  pvu.idpunto_venta
+inner join usuario u  
+on pvu.idusuario = u.idusuario
+left outer join imagen_punto_venta ipv 
+on  pv.idpunto_venta =  ipv.idpunto_venta
+left outer join   imagen  i 
+on  ipv.id_imagen = i.idimagen
+where  pv.idempresa='". $id_empresa ."' ";	
 
 
 		}else{
 
-			$query_get ="select pv.* ,  u.nombre, u.puesto , u.status estado_usuario    from punto_venta pv 
-					inner join punto_venta_usuario pvu on pv.idpunto_venta =  pvu.idpunto_venta
-					inner join usuario u  
-					on pvu.idusuario = u.idusuario
-					where  pv.idempresa='". $id_empresa ."'and  pv.razon_social like '". $filtro ."%' ";	
+			$query_get ="select pv.*, i.* ,  u.nombre, u.puesto , u.status estado_usuario    from punto_venta pv 
+inner join punto_venta_usuario pvu on pv.idpunto_venta =  pvu.idpunto_venta
+inner join usuario u  
+on pvu.idusuario = u.idusuario
+left outer join imagen_punto_venta ipv 
+on  pv.idpunto_venta =  ipv.idpunto_venta
+left outer join   imagen  i 
+on  ipv.id_imagen = i.idimagen
+where  pv.idempresa='". $id_empresa ."'and  pv.razon_social like '". $filtro ."%' ";	
 
 		}
 		
@@ -78,10 +85,15 @@
 	/**/
 	function get_contactos_in_punto_venta($id_usuario , $id_punto_venta ){
 
-		$query_get="select  c.* ,  pvc.idpunto_venta   puntoventacontacto   from contacto  c
-					left outer join punto_venta_contacto pvc 
-					on c.idcontacto  = pvc.idcontacto and  pvc.idpunto_venta = '".$id_punto_venta."'
-					where idusuario ='". $id_usuario ."'  ";
+
+		$query_get="select  c.* , i.*,  pvc.idpunto_venta   puntoventacontacto   from contacto  c
+left outer join punto_venta_contacto pvc 
+on c.idcontacto  = pvc.idcontacto and  pvc.idpunto_venta = '".$id_punto_venta."'
+left outer join imagen_contacto ic  
+on c.idcontacto = ic.id_contacto 
+left outer join imagen i 
+on ic.id_imagen = i.idimagen
+where idusuario ='". $id_usuario ."'  ";
 		$result_db  = $this->db->query($query_get);								
 		return $result_db->result_array();					
 	}

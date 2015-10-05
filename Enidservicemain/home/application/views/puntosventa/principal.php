@@ -259,3 +259,100 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<input class='base_path' id='base_path' type='hidden' value='<?=$base_path;?>'>
+<input class='dinamic_punto_venta' id='dinamic_punto_venta' type='hidden'>
+<input class='base_path_img' id='base_path_img' type='hidden' value="<?=$base_path_img;?>">
+
+
+
+<!--******************************* Cargar imagen a contacto *********************************************-->
+<div class="modal fade in" id="punto-venta-imagen-modal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            
+                <h4 class="modal-title" id="myModalLabel" class='title-modal-contacto'>Cargar imagen al punto de venta </h4>
+            </div>
+            <div class="modal-body">
+                
+
+
+
+    
+
+                <div class='row'>
+                    <form action ='<?=base_url("application/controllers/api/imgs_controller.php")?>'  method="post" id="form_imgs_contacto" enctype="multipart/form-data" id='formulario-principal-img' >
+                             <div class="form-group">
+                                <span>Imagen:</span>
+                                <input type="file" name="images[]"  id="imgs-punto-venta" class='imgs-punto-venta'>                                       
+                             </div>                      
+
+                             
+                             <div class='row'>
+                                <div class='col-sm-1'></div>    
+                                <div class='col-sm-10'>
+                                    <div class='response_img_punto_venta' id='response_img_punto_venta'></div>
+                                    <div class='lista-imagenes' id='lista-imagenes'></div>
+                                </div>
+                                <div class='col-sm-1'></div>    
+                             </div>
+
+                    </form>
+                </div>
+
+                <!--Termina nuevo contacto -->
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="<?=base_url('application/js/puntosventa/img.js')?>"></script>

@@ -5,22 +5,21 @@ class Accesos extends CI_Controller {
 		parent::__construct();
 
         $this->load->model("puntoventamodel");
+        $this->load->helper("img_eventsh");
         $this->load->helper("puntoventa");        
         $this->load->model("eventmodel");
         $this->load->model("accesosmodel");
         $this->load->helper("accesos");
 		$this->load->library('sessionclass');    
 	}
-	
-    /*****************************************************************************/
-
+	    
     /**************************Configuracion de Acceso  avanzado **************++*/
     function configuracionavanzada($id_acceso, $id_evento){
 
 
         $data_evento  = $this->eventmodel->getEventbyid($id_evento);        
         $nombre_evento = $data_evento[0]["nombre_evento"];
-        $data = $this->validate_user_sesssion("Acceso al evento ". $nombre_evento );        
+        $data = $this->validate_user_sesssion("Accesos al evento ". $nombre_evento );        
         $data_accesos = $this->accesosmodel->get_acceso_by_event($id_evento);  
 
         $id_user = $this->sessionclass->getidusuario();        
@@ -35,6 +34,25 @@ class Accesos extends CI_Controller {
         $data["accesos_in_event"] = display_complete_info($data_accesos);
         $data["tipos_accesos"] =list_tipos_accesos( $this->accesosmodel->get_tipos_accesos());
         $data["puntos_venta"]= list_puntos_venta_evento($puntos_venta);
+
+
+
+        /**/
+
+        $base_path = substr($_SERVER["SCRIPT_FILENAME"], 0 , (strlen($_SERVER["SCRIPT_FILENAME"]) -9)  )."application/uploads/uploads/empresa/".$this->sessionclass->getidempresa()."/a/".$id_user."/";    
+        if ( create_dinamic_dic($base_path) ==  1 ) {
+            $data["base_path"] = $base_path;
+        }
+        else{
+            $data["base_path"] = "1";
+        }        
+
+        $data["base_path"]=  $base_path;
+        $data["base_path_img"] =  "application/uploads/uploads/empresa/".$this->sessionclass->getidempresa()."/a/".$id_user."/";    
+
+
+
+
         $this->dinamic_view_event('accesos/avanzado', $data);     
 
            

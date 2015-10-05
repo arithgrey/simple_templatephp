@@ -7,8 +7,9 @@ $(document).on("ready" , function(){
 	escenario = $("#id_escenario").val();
 	$("#btn-guardar-fecha").click(update_fecha_escenario);
 
-	//$("#imgs-escenario").change(upload_main_imgs_escenario);
+	$("#imgs-escenario").change(upload_main_imgs_escenario);
 });
+
 
 /**/
 function update_type(e){
