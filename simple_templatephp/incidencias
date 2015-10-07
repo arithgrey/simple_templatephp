@@ -1,0 +1,75 @@
+<h3>Bienvenido al modulo de  <span class="label label-default">incidencias</span></h3>
+
+	<div class="container-fluid">
+
+	<div class='col-sm-2'></div>	
+	<div class='col-sm-8'>
+	  <div class="row">
+	  	<!--**************************-->
+		  <form class="" id="" action="" method="">
+		  	<div class="jumbotron">	
+
+		  			
+								  		  		
+			  		<div class="input-group">			  			
+						<span class="input-group-addon">Usuario que reporta</span>
+						<input type="text" class="form-control"  readonly="readonly" value="<?=$_SESSION["usuario"]?>" placeholder="Nombre de usuario"
+						id='usuario-reporte' class='usuario-reporte' name='usuario-reporte' >
+					</div>
+
+					<div class='input-group'>
+						<span class="input-group-addon" >Tipo de incidencia</span>
+						<select class="form-control" name='tipo-incidencia' class='tipo-incidencia' id="tipo-incidencia"></select>
+					</div>
+					
+					<div class='input-group'>
+						<span class="input-group-addon" >Sub tipo</span>
+						<select class="form-control sub-tipo" id='sub-tipo' name='sub-tipo' >
+						</select>
+					</div>
+					
+					<!--***********************************************-->
+
+					<div class='input-group'>
+						<span class="input-group-addon" >Reportado a: </span>
+						<select class="form-control" class='reportado-a' id="reportado-a" name='reportado-a'></select>
+					</div>
+
+
+					<div class='input-group'>
+						<span class="input-group-addon">Forma del reporte: </span>
+						<select class="form-control" name='forma-reporte' id="forma-reporte" class='forma-reporte'></select>
+					</div>
+
+
+
+					<div class='input-group'>
+						<span class="input-group-addon">Afectación </span>
+						<select class="form-control" name='afectacion' id="afectacion" 
+						class='afectacion'></select>
+					</div>
+
+
+
+					<div class='input-group'>
+						<span class="input-group-addon">Fecha que fué solicitado </span>
+						<td><input type="text" class="form-control"  id="inicio" name="inicio" /></td>
+					</div>
+					<!--***************************************************-->
+					<div class="form-group">
+					    <span class="input-group-addon">Descripción de los hechos</span>
+					    <textarea class="form-control"  class='descripcion' id='descripcion' 
+					    name='descripcion' rows="3"></textarea>
+					</div>
+					
+			  <p><a class="btn btn-primary btn-lg" href="#" role="button">Guardar</a></p>
+			</div>
+		  </form>
+	  	<!--**************************-->	 	
+	  </div>
+	  </div>
+	  <div class='col-sm-2'></div>	
+
+
+
+	</div>
