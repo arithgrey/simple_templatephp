@@ -1,0 +1,452 @@
+$(document).on("ready", function(){
+
+$("#nombre-empresa-text").click(try_update_nombre);
+$("#description-empresa-text").click(try_update_descripcion);
+$("#mision-empresa-text").click(try_update_mision);
+$("#vision-empresa-text").click(try_update_vision);
+$(".años-empresa-text").click(try_update_años);
+$("#masinfo-empresa-text").click(try_update_mas_info);
+
+
+});
+
+
+
+/**/
+function try_update_mas_info(){
+
+	showonehideone( "#section-masinformacion-empresa" , "#masinfo-empresa-text" );
+
+	$("#masinfo-empresa-input").blur(function(){
+
+		
+		update_data_emp("mas-info", $(this).val(),  "#masinfo-empresa-text" , "#section-masinformacion-empresa"  );		
+
+	});
+
+}
+/**/
+function try_update_años(){
+
+	showonehideone( "#section-años-empresa" , "#años-empresa-text" );
+
+	$("#naños_empresa").blur(function(){
+
+		
+		update_data_emp("años-experiencia", $(this).val(),  "#años-empresa-text" , "#section-años-empresa"  );		
+
+	});
+
+
+}
+
+/**/
+
+function try_update_vision(){
+
+	showonehideone( "#section-vision-empresa" , "#vision-empresa-text" );
+
+	$("#descripcion-vision-input").blur(function(){
+
+
+		
+		update_data_emp("descripcion_vision", $(this).val(),  "#vision-empresa-text" , "#section-vision-empresa"  );		
+
+	});
+
+
+}
+
+function try_update_mision(){
+
+
+	showonehideone( "#section-mision-empresa" , "#mision-empresa-text" );
+
+	$("#mision-empresa-input").blur(function(){
+
+
+		
+		update_data_emp("descripcion_mision", $(this).val(),  "#mision-empresa-text" , "#section-mision-empresa"  );		
+
+	});
+
+
+}
+/**/
+
+function try_update_descripcion(){
+
+	
+	showonehideone( "#section-description-empresa" , "#description-empresa-text" );
+
+	$("#descripcion-empresa-input").blur(function(){
+
+
+		
+		update_data_emp("descripcion_empresa", $(this).val(), "#description-empresa-text" , "#section-description-empresa" );		
+
+	});
+
+}
+
+
+/**/
+function try_update_nombre(){
+
+
+	showonehideone("#nombre-empresa-section" , "#nombre-empresa-text" );
+	$("#nombre-empresa-input").blur(function(){
+
+		update_data_emp("nombre_empresa", $(this).val(), "#nombre-empresa-text" , "#nombre-empresa-section" );		
+
+	});
+
+}
+
+/**/
+
+/**/
+function update_data_emp(q ,val, muestra, oculta ){	
+
+
+	now ="some";
+	url = now + "index.php/controlers/api/OrganizacionControlador/q/format/json/";
+
+	/*El actualizar */
+	actilizar_data(url , {"q" : q } );
+
+
+	/*Cuando la respuesta es true */
+	$(muestra).html(validate_text(val));		
+	$(oculta).val(validate_text(val));
+	$(muestra).show();
+	$(oculta).hide();
+}
+/**/
+function load_data(){
+
+	$.get(url).done(function(data){
+
+		llena_data(data);
+	}).fail(function(){
+
+		alert("Error al cargar");
+	});
+
+}
+/**/
+function llena_data(data){
+
+	/*visual*/
+	llenaelemenetoHTML("", data[0].parametro);
+	llenaelemenetoHTML("", data[0].parametro);
+	llenaelemenetoHTML("", data[0].parametro);
+	llenaelemenetoHTML("", data[0].parametro);
+	llenaelemenetoHTML("", data[0].parametro);
+	/*Valores*/		
+
+	llenaelemenetoVAL("",  data[0].parametro);
+	llenaelemenetoVAL("",  data[0].parametro);
+	llenaelemenetoVAL("",  data[0].parametro);
+	llenaelemenetoVAL("",  data[0].parametro);
+	llenaelemenetoVAL("",  data[0].parametro);
+
+}
+
+
+
+
+/*validate texto*/
+function validate_text(text){
+    return text.replace(/^\s+|\s+$/gm,'');
+}
+
+
+
+
+
+
+
+
+
+
+
+/**********************************************/
+
+
+<script type="text/javascript" src="<?=base_url('application/js/Organizacion/principal.js')?>"></script>
+    
+<div class="jumbotron">
+
+    <div class="bs-callout bs-callout-info" id="callout-labels-inline-block">
+   
+    <div class='row'>
+        <h1 class='nombre-empresa-text' id='nombre-empresa-text'>
+
+            <span class="label label-default"> Empresa  <?=$data_empresa["nombreempresa"];?></span>
+        </h1>
+        
+    </div>
+    <!--Editar nombre empresa -->
+    <div class='nombre-empresa-section' id="nombre-empresa-section">
+        <div class="input-group">          
+            <span class="input-group-btn">
+                <button class="btn btn-default" type="button">Nombre </button>
+            </span>
+            <input type="text" name='nnombre_empresa' class="form-control"   id='nombre-empresa-input'placeholder="Nuevo nombre de la empresa" class='nombre-empresa-input'>
+        </div>
+    </div>
+    <!--Termina la edición  nombre empresa -->
+
+
+    <div class='row'>
+
+        <h3 class='description-empresa-text' id='description-empresa-text'>             
+            <span class="label label-default">Quiénes somos </span>
+        </h3>       
+        <div id="section-description-empresa" class='section-description-empresa'>
+            <span class="input-group-addon" id="sizing-addon1">Quiénes somos</span>
+            <textarea class="form-control" id='descripcion-empresa-input' class='descripcion-empresa-input' rows="3"></textarea>
+        </div>        
+    </div>
+
+
+    <div class='row'>
+        
+
+        <h3 class='misions-empresa-text' id='mision-empresa-text'>
+            
+            <span class="label label-default">Misión </span>
+        </h3> 
+
+        <div id="section-mision-empresa" class='section-mision-empresa'>
+            <span class="input-group-addon" id="sizing-addon1">Misión</span>
+            <textarea class="form-control" id='mision-empresa-input' class='mision-empresa-input' rows="3"></textarea>
+        </div>        
+    </div>
+
+
+    
+
+    <div class='row'>
+        
+        <h3 class='vision-empresa-text' id='vision-empresa-text'>            
+            <span class="label label-default">Visión </span>
+        </h3>
+
+        <div id="section-vision-empresa" class='section-vision-empresa'>
+            <span class="input-group-addon" id="sizing-addon1">Visión</span>
+            <textarea class="form-control" id='descripcion-vision-input'
+             class='descripcion-vision-input' rows="3"></textarea>
+        </div>        
+    </div>
+
+
+    
+
+    <div>
+
+<!--*************************************************************-->
+    <div class='row'>        
+        <h3 class='años-empresa-text' id='años-empresa-text'>
+            <span class="label label-default">Años haciendo historia </span>
+        </h3>         
+        <div id="section-años-empresa" class='section-años-empresa'>
+            <div class="input-group">          
+                <span class="input-group-btn">
+                    <button class="btn btn-default" type="button">Años haciendo historía </button>
+                </span>
+                <input type="text" name='naños_empresa' class="form-control"   id='naños_empresa' placeholder="5" class='años-empresa-input'>
+            </div>
+        </div>    
+    </div>    
+<!--*************************************************************-->   
+    
+ 
+
+
+<!--******************************************************************-->
+    <div class='row'>
+        <h3 class='masinformacion-empresa-text' id='masinfo-empresa-text'>
+                <span class="label label-default">Más información </span>
+        </h3>
+        <div id="section-masinformacion-empresa" class='section-masinformacion-empresa'>        
+            <div class="input-group">          
+                <span class="input-group-btn">
+                    <button class="btn btn-default" type="button">Más información </button>
+                </span>
+                
+                <textarea name='masinfo' class="form-control" id='masinfo-empresa-input' class='masinfo-empresa-input' rows="3"></textarea>
+            </div>
+        </div>
+    </div>
+<!--******************************************************************-->    
+ 
+
+     
+
+
+
+
+<p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a></p>
+
+    </div>
+</div>
+
+
+<style type="text/css">
+.section-description-empresa, #nombre-empresa-section, .section-mision-empresa,.section-vision-empresa, .section-años-empresa, .section-masinformacion-empresa, .masinfo-empresa-text {
+    display: none;
+}
+</style>
+
+
+<div class="input-group input-group-lg">  
+  <input type="text" class="form-control" placeholder="Username" aria-describedby="sizing-addon1">
+</div>
+
+
+
+
+/**********************************************************************************/
+<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+class Emp  extends CI_Controller {
+	function __construct(){
+		parent::__construct();
+        $this->load->model("empresamodel");
+     	$this->load->library('sessionclass');    
+	}
+	
+    /************************** **************++*/
+    function lahistoria(){
+        
+        $data = $this->validate_user_sesssion("Nuestra historia");        
+        $id_empresa =  $this->sessionclass->getidempresa();  
+        $data["data_empresa"]= $this->empresamodel->get_empresa_by_id($id_empresa)[0];
+        $this->load->view('TemplateEnid/header_template', $data);
+        $this->load->view('empresa/historia');
+        $this->load->view('TemplateEnid/footer_template', $data);
+        
+    }/**************************  **************++*/
+    function solicitatusartistaspreferidos($id_evento , $status){
+        $data = $this->validate_user_session_event("Tus artistas preferidos a tu alcance" , $status ); 
+        $this->load->view('TemplateEnid/header_template', $data);
+        $this->load->view('empresa/solicita_artistas');
+        $this->load->view('TemplateEnid/footer_template', $data);
+    }
+    
+    function entuciudad($id_evento , $status){
+        $data = $this->validate_user_session_event("Nosotros en tu ciudad" , $status );         
+        $this->load->view('TemplateEnid/header_template', $data);
+        $this->load->view('empresa/en_tu_ciudad');
+        $this->load->view('TemplateEnid/footer_template', $data);
+    }
+    
+    function validate_user_sesssion($titulo_dinamico_page){
+            if ( $this->sessionclass->is_logged_in() == 1) {                        
+                    
+                    
+                    $menu = $this->sessionclass->generadinamymenu();
+                    $nombre = $this->sessionclass->getnombre();                                         
+                    $data['titulo']=$titulo_dinamico_page;              
+                    $data["menu"] = $menu;              
+                    $data["nombre"]= $nombre;                                               
+                    $data["perfilactual"] =  $this->sessionclass->getnameperfilactual();                
+                    return $data;
+                }else{
+                /*Terminamos la session*/
+                $this->sessionclass->logout();
+            }   
+    }
+    function validate_user_session_event($titulo_dinamico_page , $status_event ){
+        if ( $this->sessionclass->is_logged_in() == 1) {                                        
+                    
+                    $menu = $this->sessionclass->generadinamymenu();
+                    $nombre = $this->sessionclass->getnombre();                                         
+                    $data['titulo']= $titulo_dinamico_page ." <span class='btn btn-info'>". get_statusevent($status_event . "</span>");              
+                    $data["menu"] = $menu;              
+                    $data["nombre"]= $nombre;                                               
+                    $data["perfilactual"] =  $this->sessionclass->getnameperfilactual();                
+                    return $data;
+        }else{
+            
+            $data['titulo']=$titulo_dinamico_page;              
+            return $data;
+        }   
+    }
+	
+		
+}/*Termina el controlador */
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ /*************************************************/
+ <?php defined('BASEPATH') OR exit('No direct script access allowed');
+require APPPATH.'/libraries/REST_Controller.php';
+class OrganizacionControlador extends REST_Controller{
+    
+    function __construct(){
+        parent::__construct();
+        $this->load->model("organizacionmodel");            
+        $this->load->library('sessionclass');        
+    }
+    /**/
+    function mostrarCiudades_get(){
+        $this->validate_user_sesssion();
+        $idEmpresa= $this->sessionclass->getidempresa();
+        $respuestaDB = $this->organizacionmodel->mostrarCiudades($idEmpresa);
+        $this->response($respuestaDB);        
+    }
+    /**/ 
+    function actualizarCiudades_post(){
+        $this->validate_user_sesssion();
+        $nuevoIdCiudad = $this->post('nuevo');
+        $idEmpresa= $this->sessionclass->getidempresa();
+        $respuestaDB2 = $this->organizacionmodel->actualizarCiudades($idEmpresa,$nuevoIdCiudad);
+        $this->response($respuestaDB2);
+    }
+
+
+    /**/
+    function q_PUT(){
+        
+        $this->validate_user_sesssion();
+       
+        $idEmpresa= $this->sessionclass->getidempresa();
+        $db_response = $this->organizacionmodel->actualizar_q($id_empresa, $_PUT);
+        $this->response($db_response);   
+    }
+    /**/
+    function actualizar_q($id_empresa , $param){
+        
+        $query_update ="UPDATE em SET  ". $param["q"] ." WHERE idempresa ='". $param["q"] ."'";
+        return  $this->db->query($query_update);
+    }
+
+    /**/
+    function validate_user_sesssion(){
+                if( $this->sessionclass->is_logged_in() == 1) {                        
+                    }else{
+                    /*Terminamos la session*/
+                    $this->sessionclass->logout();
+                }   
+    }/*termina validar session */
+       
+}
