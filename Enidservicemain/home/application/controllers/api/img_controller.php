@@ -11,6 +11,16 @@ class Img_controller extends REST_Controller{
   }     
 
   /**/
+  function escenario_artista_post(){  
+
+      $this->validate_user_sesssion();            
+      $id_usuario = $this->sessionclass->getidusuario();    
+      $id_empresa =  $this->sessionclass->getidempresa();            
+      $db_response = $this->img_model->insert_principal_escenario_artista($this->post() , $id_usuario , $id_empresa );
+      $this->response($db_response);  
+
+  }
+  /**/
   function principal_escenario_post(){
 
 

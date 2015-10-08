@@ -26,7 +26,6 @@ $db['default']['stricton'] = FALSE;
 
 /*
 
-
 $db['default']['hostname'] = '';
 $db['default']['username'] = 'enidserv_eniddbd';
 $db['default']['password'] = 'ubuntuJavaJava.1enid';
@@ -44,7 +43,6 @@ $db['default']['autoinit'] = TRUE;
 $db['default']['stricton'] = FALSE;	
 
 */
-
 
 
 /* End of file database.php */

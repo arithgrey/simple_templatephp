@@ -75,8 +75,14 @@ function updateinicioterminoartistabyid($idartista , $idescenario  , $hiartista 
 /*Artistas en escenario */
 function get_artistas_inevent($id_escenario){
 
-	$query_get_artistas ="SELECT * FROM artista as a, escenario_artista ea 
-	WHERE a.idartista = ea.idartista AND  ea.idescenario= '". $id_escenario ."' ";
+
+	$query_get_artistas ="SELECT * FROM artista  a inner join escenario_artista ea 
+						ON a.idartista =  ea.idartista 
+						left outer join imagen_artista ia  
+						on a.idartista =  ia.id_artista 
+						left outer join imagen i 
+						on ia.id_imagen = i.idimagen
+						WHERE ea.idescenario= '". $id_escenario ."' ";
 
 	$result_artistas = $this->db->query($query_get_artistas);
 	return $result_artistas ->result_array();

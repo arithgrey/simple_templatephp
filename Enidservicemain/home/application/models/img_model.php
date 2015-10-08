@@ -14,7 +14,30 @@
     $query_insert ="INSERT INTO  imagen_escenario(id_imagen , id_escenario,  seccion ) VALUES('". $id_imagen."' , '". $id_escenario ."' , 'principal' )";    
     return $this->db->query($query_insert);
   }
-  
+
+  /**/
+  function insert_principal_escenario_artista($data , $id_usuario , $id_empresa ){    
+
+    $id_imagen = $this->insert_img($data , $id_usuario , $id_empresa  );    
+    $id_artista = $data["artista"];  
+
+    $query_exist = "select * from imagen_artista where id_artista= '". $id_artista . "'";
+    $result_exist =  $this->db->query($query_exist);   
+    
+    
+    if ($result_exist->num_rows() > 0 ) {
+     $dinamic_query ="UPDATE imagen_artista SET id_imagen='".$id_imagen."' WHERE id_artista ='". $id_artista ."' ";    
+        
+    }else{
+      $dinamic_query ="INSERT INTO  imagen_artista(id_imagen , id_artista  ) VALUES('". $id_imagen."' , '". $id_artista ."' )";    
+    }
+
+
+    return   $this->db->query($dinamic_query);
+
+  }
+
+
 
   /**/
   function insert_contacto($data , $id_usuario , $id_empresa ){
@@ -28,6 +51,15 @@
     
     if ($result_exist->num_rows() > 0 ){
 
+
+        /*Eliminamos  la imagen pasada */
+        /*
+         $data_img_cotacto = $result_exist->result_array();
+         $this->delete_img_server($data_img_cotacto[0]["id_imagen"]);
+         */
+         
+
+        /*Actualizamos información en la base de datos */
         $dinamic_query ="update imagen_contacto set  id_imagen= '". $id_imagen."'  WHERE  id_contacto= '". $id_contacto ."' ";    
 
     }else{
@@ -46,7 +78,7 @@
   }
 
   /**/
-  
+  /**/
   function insert_acceso($data , $id_usuario , $id_empresa ){
 
     $id_imagen = $this->insert_img($data , $id_usuario , $id_empresa  );        
@@ -98,6 +130,15 @@
 
   }
 
+
+  /**/
+  function delete_img_server($data_img_cotacto){
+
+    $query_get ="select * from imagen where idimagen = '". $data_img_cotacto ."' ";
+    $result = $this->db->query($query_get);
+    $path_delelet =  $result->result_array()[0]["base_path"]. $result->result_array()[0]["nombre_imagen"];
+    unlink($path_delelet);
+  }
 
   
   function insert_img($data , $id_usuario , $id_empresa  ){

@@ -6,7 +6,6 @@ if(!function_exists('invierte_date_time')){
 
 
  
- 
 		$table='<table class="table display table table-bordered dataTable">										  					  
 					  	<tr class="text-center header-table-info" >
 					  	<th class="text-center">Escenario que pertenece al evento </th>
@@ -108,7 +107,6 @@ if(!function_exists('invierte_date_time')){
 
 
 
-
 	/*lista los artistas, template simple para edición*/
 	function list_artistas_escenario($data , $title_panel, $record=0 , $id_escenario ){		            
 
@@ -140,6 +138,9 @@ if(!function_exists('invierte_date_time')){
 	$hora_inicio = $row["hora_inicio"];
 	$hora_termino = $row["hora_termino"];
 	$nombre_artista= $row["nombre_artista"];
+
+
+
 	
 	if ($hora_inicio!= null OR strlen($hora_inicio)>3  ){
 		$horario = "de ". $hora_inicio ." a ".  $hora_termino;	
@@ -149,11 +150,32 @@ if(!function_exists('invierte_date_time')){
 	
 
 
-					$artistas_in_evento .= '<li>
-                                    <div class="prog-avatar">
-                                        <img src="images/photos/user1.png" alt="">
-                                    </div>
-                                    <div class="details">
+				$artistas_in_evento .= '<li class="media usr-info">';
+
+
+				if ($row["nombre_imagen"]!= null ) {
+
+						$img = base_url( $row["base_path_img"].$row["nombre_imagen"]);													
+
+
+
+
+
+		               	$artistas_in_evento .='<div data-toggle="modal" data-target="#modal-img-artista-evento" class="prog-avatar"> 						
+						                            
+						                            <img  class="img-artista-evento thumb" id="'.$idartista.'" src="'.$img .'" alt="">
+												</div>';
+
+
+				}else{
+						$artistas_in_evento .='<div  data-toggle="modal" data-target="#modal-img-artista-evento" class="prog-avatar"> 												                            						                            
+						                            <i class="img-artista-evento thumb fa fa-cloud-upload fa-3x" id="'.$idartista.'"  ></i>
+												</div>';
+				}
+
+
+
+                $artistas_in_evento.='<div class="details">
                                         <div class="title">
                                         	<i id="'.$idartista.'" class="remove-artista fa fa-minus-circle"></i>                                        	
                                         	<a href="" data-toggle="modal" data-target="#modal_link_youtube" class="artista_yt" id="'.$idartista.'"> <i class="artista_yt fa fa-youtube-play" id="'.$idartista.'" ></i></a>

@@ -4,6 +4,7 @@ class Emp  extends CI_Controller {
 	function __construct(){
 		parent::__construct();
 
+        $this->load->model("empresamodel");
      	$this->load->library('sessionclass');    
 	}
 	
@@ -14,13 +15,13 @@ class Emp  extends CI_Controller {
 
         
         $data = $this->validate_user_sesssion("Nuestra historia");        
+        $id_empresa =  $this->sessionclass->getidempresa();  
+
+        $data["data_empresa"]= $this->empresamodel->get_empresa_by_id($id_empresa)[0];
         $this->load->view('TemplateEnid/header_template', $data);
         $this->load->view('empresa/historia');
         $this->load->view('TemplateEnid/footer_template', $data);
-
-                
         
-
     }/**************************La historia de la empresa  **************++*/
 
 

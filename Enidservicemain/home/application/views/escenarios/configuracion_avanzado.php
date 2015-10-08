@@ -347,9 +347,99 @@
 </div>
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!---->
+<!--modal para definir la hora de inicio y termino en la presentación de un artista-->
+<div class="modal fade" id="modal-img-artista-evento" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="myModalLabel">Cargar foto del artista</h4>
+            </div>
+            <div class="modal-body">
+        
+
+                <div class='response-img-artista' id='response-img-artista'></div>
+                <div class='row'>
+                    <div class='lista-imagenes-artista' id='lista-imagenes-artista'></div>
+                </div>
+                <form action ='<?=base_url("application/controllers/api/imgs_controller.php")?>'  method="post"  enctype="multipart/form-data" id='formulario-artista' >
+                     <div class="form-group">
+                        Foto del artista:<input type="file" name="imagesartista[]"  id="imgs-arista">
+                               <input type='hidden' name="e" value='1'>
+                     </div>                      
+                 </form>
+
+
+
+
+
+
+
+
+
+            </div>
+            
+            <div class="modal-footer">                
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>                
+            </div>
+        </div>
+    </div>
+</div>
+
+<!---->
+
+
+
+
+
+
+
+
+
 <input type='hidden' name='base_path_img' id="base_path_img" class='base_path_img' value='<?=$base_path_img;?>'>
 <input type='hidden' name='base_path' id='base_path' class='base_path' value='<?=$base_path;?>'>
 <input type='hidden' name='id_escenario' id='id_escenario' class='id_escenario' value="<?=$id_escenario;?>">
+
+
+<!---->
+<input type='hidden' name='dinamic_artista' id='dinamic_artista' class='dinamic_artista'>
+<input type='hidden' name='base_path_img_artista' id="base_path_img_artista" class='base_path_img_artista' value='<?=$base_path_img_artista;?>'>
+<input type='hidden' name='base_path_artista' id='base_path_artista' class='base_path_artista' value='<?=$base_path_artista;?>'>
+
+<!---->
 
 
 
@@ -451,3 +541,4 @@
         });    
     }
 </script>    
+

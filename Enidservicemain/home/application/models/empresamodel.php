@@ -8,6 +8,20 @@ function __construct(){
         $this->load->database();
 }
 
+  
+/**/
+function get_empresa_by_id($id_empresa){
+
+  $query_get =" select * from empresa where idempresa ='". $id_empresa ."' ";
+
+  $result=  $this->db->query($query_get);
+  return $result->result_array();
+
+
+}
+
+
+/**/
 
 function exist_company_byname( $nombreempresa ){
 

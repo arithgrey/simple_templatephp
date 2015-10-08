@@ -2,13 +2,16 @@ $(document).on("ready", function(){
 
 	$("#form-escenario-artista").submit(nuevo_artista);
 	$(".remove-artista").click(delete_escenario_artista);
+	$(".img-artista-evento").click(try_upload_img_artistas);
 	$(".horario_artista").click(update_horario_artista);
 	$(".artista_yt").click(update_youtube_url);
 	$(".artista_sound").click(update_sounda_url);
 	escenario =  $("#escenario").val();
 
 
+
 });
+
 function nuevo_artista(){
 
 	url = now + "index.php/api/escenario/escenario_artista/format/json";	
@@ -20,6 +23,24 @@ function nuevo_artista(){
 	});
 	return false;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /*cargamos la lista de artistas*/
 function load_data_escenario_artista(){
 	url =now + "index.php/api/escenario/escenario_artista/format/json";			
@@ -40,8 +61,7 @@ function load_data_escenario_artista(){
 	    });
 
 	   
-
-
+		$(".img-artista-evento").click(try_upload_img_artistas);
 
 	}).fail(function(){
 		alert(genericresponse[0]);
@@ -102,3 +122,18 @@ function update_sounda_url(e){
 
 	});
 }
+
+/**/
+function  try_upload_img_artistas(e){
+	
+	artista = e.target.id;
+
+	$("#lista-imagenes-artista").html("");
+	$("#imgs-arista").attr("value" , "");	
+
+	$("#dinamic_artista").val(artista);
+	$("#imgs-arista").change(upload_main_imgs_artista);
+
+
+}
+
