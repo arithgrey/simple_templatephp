@@ -8,13 +8,15 @@ function resumen_usuarios_cuenta($data){
 
 
     $table ='<table class="table display table table-bordered dataTable">                                          
-                      <tr class="text-center header-table-info" >
-                        <th class="text-center">Miembros</th>
-                        <th class="text-center">Activos en el sistema</th>
-                        <th class="text-center">Bajas</th>
-                        <th class="text-center">Administradores de la cuenta</th>
-                        <th class="text-center">Estrategas dígitales</th>                        
-                        </tr>';                                            
+                      <tr class="text-center header-table-info" >';
+
+
+                        $table.= get_td("Miembros", "" );
+                        $table.= get_td("Activos en el sistema", "" );
+                        $table.= get_td("Bajas", "" );
+                        $table.= get_td("Administradores de la cuenta", "" );
+                        $table.= get_td("Estrategas dígitales", "" );                        
+    $table.='</tr>';                                            
                     
  
     foreach ($data as $row) {
@@ -36,20 +38,21 @@ function resumen_usuarios_cuenta($data){
         
 
 
-        $table.="<tr class='text-center' >   
-                    <td>".$row["usuarios"]."</td>
-                    <td>".$row["usuarios_activos"] ."</td>
-                    <td>".$row["usuarios_baja"]."</td>
-                    <td>".$row["administradores_cuenta"]."</td>
-                    <td>".$row["estrategas_digitales"]."</td>
-                 </tr>
-                 <tr class='text-center'>
-                    <td>". $porcentaje_usuarios  ."%</td>
-                    <td>". $porcentaje_activos."%</td>
-                    <td>". $porcentaje_baja ."%</td>
-                    <td>". $porcentaje_administradores."%</td>
-                    <td>". $porcentaje_estrategas."%</td>
-                 </tr>
+        $table.="<tr class='text-center' >";   
+                    $table.= get_td($row["usuarios"], "");
+                    $table.= get_td($row["usuarios_activos"] , "");
+                    $table.= get_td($row["usuarios_baja"], "");
+                    $table.= get_td($row["administradores_cuenta"], "");
+                    $table.= get_td($row["estrategas_digitales"], "");
+                 $table .="</tr>
+
+                 <tr class='text-center'>";
+                    $table.=get_td( $porcentaje_usuarios . "%"  , "");
+                    $table.=get_td( $porcentaje_activos  . "%", "");
+                    $table.=get_td( $porcentaje_baja   . "%" , "");
+                    $table.=get_td( $porcentaje_administradores  . "%" , "");
+                    $table.=get_td( $porcentaje_estrategas  . "%" , "");
+                 $table .="</tr>
                  ";
     }
 
@@ -93,35 +96,32 @@ function lista_usuarios_cuenta($integrantes)
 {
 	
 	$listusuarios ='<table class="table display table table-bordered dataTable">
-
+                                
+                                        <tr  class="text-center enid-header-table" >';
+                                            $listusuarios .= get_td("ID" , "" );
+                                            $listusuarios .= get_td("Miembro" , "" );
+                                            $listusuarios .= get_td("Usuario" , "" );
+                                            $listusuarios .= get_td("Registro" , "" );
+                                            $listusuarios .= get_td("Perfil" , "" );
+                                            $listusuarios .= get_td("Estado" , "" );
+                                            $listusuarios .= get_td("Edición" , "" );
+                                        $listusuarios .='</tr>';
                                     
-
-                                        <tr  class="text-center enid-header-table" >
-                                            <th style="text-align:center;">ID</th>
-                                            <th style="text-align:center;">Miembro</th>
-                                            <th style="text-align:center;">Usuario</th>
-                                            <th style="text-align:center;">Registro</th>
-                                            <th style="text-align:center;">Perfil</th>
-                                            <th style="text-align:center;">Estado</th>
-                                            <th style="text-align:center;">Edición</th>
-
-
-                                        </tr>
                                     
-                                    ';    
 	$now = 1;
 	$b =0;
     foreach ($integrantes as $row) {
         
         $id_user = $row["idusuario"];
         $listusuarios .="<tr class='text-center'>";      
-        $listusuarios .="<td class='blue-col-enid text-center'>". $now."</td>
-                        <td class='text-center'>".$row["nombre"]."</td>
-                        <td class='text-center'>".$row["email"]."</td>
-                        <td class='text-center'>". getTimeFormat3( $row["fecha_registro"] )  ."</td>
-                        <td class='text-center'>".$row["nombreperfil"]."</td>";
+        $listusuarios .="<td class='blue-col-enid text-center'>". $now."</td>";
 
-        $listusuarios.="<td class='text-center'>".$row["status"]."</td>";
+                        $listusuarios .= get_td($row["nombre"] , "" );
+                        $listusuarios .= get_td($row["email"] , "" );
+                        $listusuarios .= get_td( getTimeFormat3( $row["fecha_registro"] )   , "" );
+                        $listusuarios .= get_td($row["nombreperfil"] , "" );
+
+        $listusuarios .= get_td($row["status"] , "");
                     
 
 
@@ -143,15 +143,14 @@ function lista_usuarios_cuenta($integrantes)
 
     if ($b > 9) {
 
-
-    	$listusuarios .='<tr class="text-center enid-header-table" >
-                                            <th style="text-align:center;">ID</th>
-                                            <th style="text-align:center;">Miembro</th>
-                                            <th style="text-align:center;">Usuario</th>
-                                            <th style="text-align:center;">Registro</th>
-                                            <th style="text-align:center;">Perfil</th>
-                                            <th style="text-align:center;">Edición</th>
-                                        </tr>';
+    	$listusuarios .='<tr class="text-center enid-header-table" >';
+                                            $listusuarios .= get_td(  "ID" , "" ); 
+                                            $listusuarios .= get_td(  "Miembro" , "" ); 
+                                            $listusuarios .= get_td(  "Usuario" , "" ); 
+                                            $listusuarios .= get_td(  "Registro" , "" ); 
+                                            $listusuarios .= get_td(  "Perfil" , "" ); 
+                                            $listusuarios .= get_td(  "Edición" , "" ); 
+        $listusuarios .='</tr>';
 	
     }
     

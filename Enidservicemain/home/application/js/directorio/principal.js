@@ -55,6 +55,9 @@ function load_contactos(contacto,  tipo ){
 
 		});
 
+
+		load_resumen_contactos();
+
 	}).fail(function(){
 		alert("Error al cargar tus contactos, informar al administrador si  el problema persiste");
 	});
@@ -85,5 +88,21 @@ function filtrar_tipo(){
 
  	tipo = $(this).val();
  	load_contactos(  "tipo",  tipo );	
+
+}/**/
+
+function load_resumen_contactos(){
+
+	url = now + "index.php/api/contactos/contactos_resumen/format/json/";
+
+	$.get(url).done(function(data){
+		
+		llenaelementoHTML("#resumen-contactos" , data);
+
+	}).fail(function(){
+
+		alert("Error");
+	}); 
+
 
 }

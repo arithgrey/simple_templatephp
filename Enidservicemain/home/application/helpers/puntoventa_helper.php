@@ -6,25 +6,25 @@ if(!function_exists('invierte_date_time')){
 	
 		$table ="<table class='table display table table-bordered dataTable'>";
 
-		$table.="<tr class='header-table-info text-center'>
-					<td>Puntosde venta asociados </td>
-					<td>Contactos Asociados</td>
-					<td> Teléfonos de contactato </td>
-					<td> Ubicaciones  </td>
-					<td> Sitio web  </td>
+		$table.="<tr class='header-table-info text-center'>";
+			$table .=get_td("Puntosde venta asociados" ,"");
+			$table .=get_td("Contactos Asociados" ,"");
+			$table .=get_td( "Teléfonos de contactato" ,"");
+			$table .=get_td( "Ubicaciones"  ,"");
+			$table .=get_td( "Sitio web"  ,"");
 					
-				</tr>";
+		$table.="</tr>";
 
   
 		foreach ($data as $row) {
-			$table.="<tr class='text-center'>						
-					<td> ". $row["asociados"] ." </td>
-					<td> ". $row["contactos_asociados"] ." </td>
-					<td> ". ($row["con_tel"] + $row["con_tel_movil"])." </td>
-					<td> ". $row["con_locacion"] ." </td>
-					<td> ".$row["con_web"]."  </td>
-					
-				</tr>";		
+				$table.="<tr class='text-center'>";						
+					$table .=get_td( $row["asociados"] ,"");
+					$table .=get_td( $row["contactos_asociados"] ,"");
+					$table .=get_td( ($row["con_tel"] + $row["con_tel_movil"]),"");
+					$table .=get_td( $row["con_locacion"] ,"");
+					$table .=get_td($row["con_web"],"");
+						
+				$table.="</tr>";		
 
 			$table.="<tr class='text-center'>						
 					<td style='border-color:white;'> </td>
@@ -164,11 +164,12 @@ if(!function_exists('invierte_date_time')){
 		}
 		
 		$table .="<tr class='enid-header-table' >";		
-		$table .="<td></td>
-				  <td style='text-align: center;'>Punto de venta</td> 
+		$table .=get_td("","");
+		$table .=get_td("Punto de venta" , "");
 				  
-				  <td style='text-align: center;'>Logo</td>
-				  <td style='text-align: center;'>Medios de contacto</td> <td style='text-align: center;'>Asociado al evento</td>";		
+		$table .=get_td("Logo", "");
+		$table .=get_td("Medios de contacto" , "");
+		$table .=get_td("Asociado al evento", "");
 		$table .="</tr>";		
 		$table .="</table>
 		<span class='info-table'> Puntos de venta dónde el público podrá adquirir sus accesos ".$flag.",  asociados al evento ".$ingresos .".</span>";		
@@ -336,20 +337,20 @@ if(!function_exists('invierte_date_time')){
 
 		if ($num_puntos_venta>9) {
 			
-			$list.="<tr class='enid-header-table'>
-						<td >#</td>	        
-						<td >IMG</td>
-			            <td >Razón Social</td>                        
-			            <td >Estado</td>            
-			            <td >Nota para el público</td>
-			            <td >Usuario Registrante</td>
-			            <td >Estado del Registrante</td>
-			            <td >Fecha registro</td>
+			$list.="<tr class='enid-header-table'>";
+						$list .=get_td("#", "");	        
+						$list .=get_td("IMG", "");
+			            $list .=get_td("Razón Social", "");                        
+			            $list .=get_td("Estado", "");            
+			            $list .=get_td("Nota para el público", "");
+			            $list .=get_td("Usuario Registrante", "");
+			            $list .=get_td("Estado del Registrante", "");
+			            $list .=get_td("Fecha registro" , "");
 			            
-			            <td >Contactos Asociados</td>
-			            <td >Editar</td>           
-			            <td >Remover</td>           
-			        </tr>";
+			            $list .=get_td("Contactos Asociados" , "");
+			            $list .=get_td("Editar", "");           
+			            $list .=get_td("Remover", "");           
+			$list.="</tr>";
 		}
 
 
@@ -362,59 +363,54 @@ if(!function_exists('invierte_date_time')){
 	function resumen_puntos_venta($data ){
 		
 		 
-		$table='<table class="table display table table-bordered dataTable">										  
-					  
+		$table='<table class="table display table table-bordered dataTable">										  					  
+					  	<tr class="text-center header-table-info" >';
 
-					  	<tr class="text-center header-table-info" >
+		$table .=get_td("Puntos de venta", 'class="text-center"' );			  	
+		$table .=get_td("Asociados a contactos", 'class="text-center"' );			  	
+		$table .=get_td("No disponibles", 'class="text-center"' );			  	
+		$table .=get_td("Disponibles para todos los colaboradores", 'class="text-center"' );			  	
+		$table .=get_td("Con notas para el cliente", 'class="text-center"' );			  	
+		$table .=get_td("Con ṕagina web", 'class="text-center"' );			  	
+		$table .=get_td("Con tel de contacto", 'class="text-center"' );			  	
+		$table .=get_td("Con Correo electónico", 'class="text-center"' );			  	
+					  						  	
 					  	
-					  	<td class="text-center">Puntos de venta</td>
-					  	<td class="text-center">Asociados a contactos</td>
-					  	<td class="text-center">No disponibles</td>
-					  	<td class="text-center">Disponibles para todos los colaboradores</td>
-					  	<td class="text-center">Con notas para el cliente</td>					  						  	
-					  	<td class="text-center">Con ṕagina web</td>
-					  	<td class="text-center">Con tel de contacto</td>
-					  	<td class="text-center">Con Correo electónico</td>
-
-					  	
-					  	
-					  	
-					  	
-					  </tr>';
+		$table .='</tr>';
 
 
 		
 		
 		foreach ($data as $row) {
 
-			$table .="<tr class='text-center'>
-				
-						
-						<td>".$row["puntosventatotal"] ."</td>
-						<td>".$row["asociados"] ."</td>					
-						<td>".$row["temporal_no_disponible"]  ."</td>
-						<td>".$row["para_colaboradores"] ."</td>												
-						<td>".$row["con_descripcion"] ."</td>
+			$table .="<tr class='text-center'>";										
+			$table .=get_td($row["puntosventatotal"]  , "");
+			$table .=get_td($row["asociados"] ,  "");
+			$table .=get_td($row["temporal_no_disponible"] , "" );
+			$table .=get_td($row["para_colaboradores"] , "");
+			$table .=get_td($row["con_descripcion"] , "");
 
-						<td>".$row["con_paginaweb"] ."</td>
-						<td>".$row["con_tel"] ."</td>
-						<td>".$row["con_mail"] ."</td>
-					 </tr>";		
+			$table .=get_td($row["con_paginaweb"] , "" );
+			$table .=get_td($row["con_tel"] , "" );
+			$table .=get_td($row["con_mail"] , "" );
+			$table .="</tr>";		
 
-			$table .="<tr class='text-center'>
-						<td>".get_porcentaje_punto_venta($row["puntosventatotal"]  , $row["puntosventatotal"]  ) ."</td>
-						<td>".get_porcentaje_punto_venta($row["puntosventatotal"]  , $row["asociados"]  ) ."</td>
-						
-						<td>".get_porcentaje_punto_venta($row["puntosventatotal"]  , $row["temporal_no_disponible"]  ) ."</td>
-						<td>".get_porcentaje_punto_venta($row["puntosventatotal"]  , $row["para_colaboradores"] ) ."</td>
-						<td>".get_porcentaje_punto_venta($row["puntosventatotal"]  , $row["con_descripcion"]  ) ."</td>
 
-						<td>".get_porcentaje_punto_venta($row["puntosventatotal"]  , $row["con_paginaweb"]  ) ."</td>
-						<td>".get_porcentaje_punto_venta($row["puntosventatotal"]  , $row["con_tel"]  ) ."</td>
-						<td>".get_porcentaje_punto_venta($row["puntosventatotal"]  , $row["con_mail"]  ) ."</td>							
-						
+
+			$table .="<tr class='text-center'>";
+						$table .=get_td(get_porcentaje_punto_venta($row["puntosventatotal"]  , $row["puntosventatotal"]  ) ,"");
+						$table .=get_td(get_porcentaje_punto_venta($row["puntosventatotal"]  , $row["asociados"]  ) ,"");
+								
+						$table .=get_td(get_porcentaje_punto_venta($row["puntosventatotal"]  , $row["temporal_no_disponible"]  ) ,"");
+						$table .=get_td(get_porcentaje_punto_venta($row["puntosventatotal"]  , $row["para_colaboradores"] ) ,"");
+						$table .=get_td(get_porcentaje_punto_venta($row["puntosventatotal"]  , $row["con_descripcion"]  ) ,"");
+
+						$table .=get_td(get_porcentaje_punto_venta($row["puntosventatotal"]  , $row["con_paginaweb"]  ) ,"");
+						$table .=get_td(get_porcentaje_punto_venta($row["puntosventatotal"]  , $row["con_tel"]  ) ,"");
+						$table .=get_td(get_porcentaje_punto_venta($row["puntosventatotal"]  , $row["con_mail"]  ) ,"");							
+								
 												
-					 </tr>";		
+			$table .= "</tr>";		
 					 		 
 		}			  
 

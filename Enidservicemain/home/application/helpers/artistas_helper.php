@@ -5,7 +5,6 @@ if(!function_exists('invierte_date_time')){
 	function resumen_artistas_table($data){
 
 
- 
 		$table='<table class="table display table table-bordered dataTable">										  					  
 					  	<tr class="text-center header-table-info" >
 					  	<th class="text-center">Escenario que pertenece al evento </th>

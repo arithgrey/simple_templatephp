@@ -21,7 +21,6 @@
 
 
 
-    
 
 <style type="text/css">
 #dinamic-field , #success-alert{
@@ -254,9 +253,9 @@
                 <form method="POST" class='update-fecha-evento-form' id="update-fecha-evento-form">
                     <input type="hidden" name='update_evento' id='update_evento'>
                     <div class="input-group">
-                        <input class="form-control dpd1" id="update_inicio" name="update_inicio" type="text" required>
+                        <input class="form-control dpd1" id="fecha_reporte" name="fecha_reporte" type="text" required>
                         <span class="input-group-addon"> al día </span>
-                        <input class="form-control dpd2" id="update_termino" name="update_termino" type="text" required>
+                        <input class="form-control dpd2" id="reporte" name="reporte" type="text" required>
                     </div>
                     <span class="help-block" >Fecha del evento </span>
                     <button class="btn btn-info">Guardar</button>

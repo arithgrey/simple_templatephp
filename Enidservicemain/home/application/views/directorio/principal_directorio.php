@@ -17,7 +17,7 @@
 
 <div class="container">
     <div class="row">
-        <div class="center-block">
+        <div class="center-block" id='resumen-contactos'>
         <div ><?=$resumen;?></div>
         </div>
     </div>

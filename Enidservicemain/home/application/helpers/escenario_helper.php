@@ -93,19 +93,18 @@ function list_escenarios_on_loadevent($responsedbescenario){
                         </div>
                         <div class='activity-desk'>
                             <h5><a  href='". base_url('index.php/escenario/configuracionavanzada/'.$row["idescenario"])."'   >". $row["nombre"] ."</a> 
-                    <br>
-                     <span class='descripcion_escenario_update text-center' id='".
-                        $row["idescenario"] . "'    >". 
-                                substr( validate_text($descripcion)  , 0 , 200 )   ."..</span>                                       
-                        <textarea  name='newdescripesenario' class='newdescripesenario form-control'  rows='3' id=". $inpu_escenario  .">".$row["descripcion"]."</textarea>
-                        </h5>
+                            </h5>
+                    
+
+                        
+                        
 
                         <a href='". base_url('index.php/escenario/configuracionavanzada/'.$row["idescenario"])."'>
-                        <span class='text-muted text-center'>
-                            Artistas #".$numero_artistas."|".$tipoescenario." | ".$fecha_escenario ." 
-
-                        </span>
+                            <span class='text-muted text-center'>
+                                Artistas #".$numero_artistas."|".$tipoescenario." | ".$fecha_escenario ." 
+                            </span>
                         </a>
+                        
 
 
                     <i data-toggle='modal' data-target='#confirmationdeleteescenario' class='fa fa-times deleteescenario' id='". $row["idescenario"] ."' ></i>

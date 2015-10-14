@@ -37,9 +37,9 @@
                 
             <div class='row'>
                 
-                
+                <div class='resumen-acceso-evento' id="resumen-acceso-evento">
                         <?=$resumen_accesos;?>            
-                
+                </div>
                 
             </div>                
 
@@ -105,8 +105,12 @@
                 <section class="panel">                    
                 <div class="container">
                     
-                              
+                        <div class='puntos-venta-accesos-evento' id="puntos-venta-accesos-evento">
                         <?=$resumen_puntos_venta_asociados;?>                    
+                        </div>          
+
+
+
                     <div class="btn-group pull-right">
                         <button type="button" id="marcar-puntos-venta-todos" class="btn btn-primary btn-sm"><i class="fa fa-check-square-o"></i> Marcar todos</button>                                
                     </div>   

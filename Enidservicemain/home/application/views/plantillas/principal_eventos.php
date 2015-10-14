@@ -7,6 +7,7 @@
 </button>
 </a>
 
+
 <div class="container" id='content-section'>
 	<div class="row">
 		<section>
@@ -56,9 +57,10 @@
 
                 
                 <div class="container">
-                    <div class="row">
-                        
-                        <?=$resumen_teplates;?>
+                    <div class="row" >
+                        <div id='resumen-plantilla'>
+                            <?=$resumen_teplates;?>
+                        </div>
                     </div>
                 </div>
                 
@@ -406,3 +408,5 @@ span.round-tab:hover {
 
 }
 </style>
+
+

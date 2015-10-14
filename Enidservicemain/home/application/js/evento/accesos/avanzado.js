@@ -46,6 +46,7 @@ function load_data_accesos(){
 		$(".delete-acceso").click(remove_acceso);
 		$(".editar-acceso").click(editar_acceso);
 
+		load_resumen_accesos();
 	}).fail(function(){
 		alert(genericresponse[0]);
 	});
@@ -110,6 +111,8 @@ function update_status_punto_venta_evento (e){
 	actualiza_data(url , {"evento" :  evento , "punto_venta" : punto_venta} );
 	list_puntos_venta_evento();
 
+	load_data_puntos_venta_asociados_accesos();
+
 }
 /**/
 function list_puntos_venta_evento(){
@@ -135,3 +138,34 @@ function select_all(){
 
 }
 
+/*Carga el resumen de los accesos con ajax*/
+function load_resumen_accesos(){
+
+		
+	evento = $("#evento").val();		
+	url = now + "index.php/api/accesos/resumen_accesos_evento/format/json/";					
+	$.get(url, {"evento" : evento} ).done(function(data){
+
+		llenaelementoHTML("#resumen-acceso-evento" , data);
+
+	}).fail(function(){
+
+		alert("Error al cargar el resumen de los accesos en ele evento ");		
+	});
+}
+/**/
+function load_data_puntos_venta_asociados_accesos(){
+
+	evento = $("#evento").val();		
+	url = now + "index.php/api/accesos/resumen_accesos_punto_venta_evento/format/json/";					
+	$.get(url, {"evento" : evento} ).done(function(data){
+
+		
+		llenaelementoHTML("#puntos-venta-accesos-evento", data);
+
+	}).fail(function(){
+
+		alert("Error al cargar el resumen de los accesos en ele evento ");		
+	});
+
+}

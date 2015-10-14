@@ -6,7 +6,7 @@
 
 <div class="container">
     <div class="row">
-        <div class="center-block">
+        <div class="center-block" id='punto-venta-resumen'>
             <?=$resumen_puntos_venta;?>
         </div>
     </div>

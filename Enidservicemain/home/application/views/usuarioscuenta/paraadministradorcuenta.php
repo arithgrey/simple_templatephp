@@ -1,13 +1,8 @@
 <script type="text/javascript" src="<?=base_url('application/js/usuarios/principal.js')?>"></script>
 
-
-
-
-
-
 <div class="container">
     <div class="row">
-        <div class="center-block">
+        <div class="center-block" id='resumen-section'>
         <?=$resumen_usuarios;?>
         </div>
     </div>

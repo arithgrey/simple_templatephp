@@ -12,6 +12,17 @@ class Puntosventa extends REST_Controller{
             
   }  
 
+
+  function puntoventaresumen_GET(){
+
+    $this->validate_user_sesssion();
+    $id_empresa =  $this->sessionclass->getidempresa();   
+    $puntos_venta_resumen_data = $this->puntoventamodel->get_resumen_punto_venta($id_empresa);             
+    $resumen_puntos_venta =  resumen_puntos_venta($puntos_venta_resumen_data);              
+    $this->response($resumen_puntos_venta);
+
+
+  }
   /*Actualiza todos los puntos de venta asociados ak evento */
   function punto_venta_evento_all_PUT(){
     

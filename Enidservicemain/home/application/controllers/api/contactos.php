@@ -9,7 +9,17 @@ class Contactos extends REST_Controller{
         $this->load->model("contactmodel");
         $this->load->library('sessionclass');
             
-  }         
+  }   
+  
+  function contactos_resumen_GET(){
+    
+      $this->validate_user_sesssion();
+      $id_usuario =  $this->sessionclass->getidusuario();
+      $data_repo_contactos = $this->contactmodel->get_repo_contactos($id_usuario);        
+      $this->response(resumen_contactos( $data_repo_contactos));
+      
+          
+  }      
   /**/
   function contacto_post(){
   

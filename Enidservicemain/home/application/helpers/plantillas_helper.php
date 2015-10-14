@@ -3,54 +3,42 @@
 if(!function_exists('invierte_date_time')){
 
 
-
-
-
-
 function resumen_templ_eventos($data){
 
-
     $table ='<table class="table display table table-bordered dataTable">                                          
-                    <tr class="text-center header-table-info" >
-                        <th class="text-center">Plantillas</th>                        
-                        <th class="text-center">Que son políticas</th>         
-                        <th class="text-center">Que son restriciones </th>                                                               
-                        <th class="text-center">Que describen los eventos </th>
-                    </tr>';
-
+                    <tr class="text-center header-table-info" >';
+                        $table .= get_td("Plantillas" , "");
+                        $table .= get_td("Que son restricciones" , "");
+                        $table .= get_td("Que son políticas" , "");
+                        $table .= get_td("Que describen los eventos" , "");                
+                    $table .='</tr>';
 
     foreach ($data as $row) {
 
-        $table .="<tr class='text-center'>
+        $table .="<tr class='text-center'>";
                     
-                    <td>". $row["total"]."</td>
-                    <td>". $row["restricciones"]."</td>       
-                    <td>". $row["politicas"]."</td>
-                    <td>". $row["descripcion_evento"]."</td>                                                                        
-                </tr>";
+                    $table .= get_td( $row["total"] , "");
+                    $table .= get_td( $row["restricciones"] , "");
+                    $table .= get_td( $row["politicas"], "");
+                    $table .= get_td( $row["descripcion_evento"], "");
+                $table.="</tr>";
 
 
-         $table .="<tr class='text-center'>                    
-                    <td>". get_porcentaje_templates_eventos($row["total"] , $row["total"])  ."</td>
-                    <td>". get_porcentaje_templates_eventos($row["total"] , $row["restricciones"])."</td>       
-                    <td>". get_porcentaje_templates_eventos($row["total"] , $row["politicas"])."</td>
-                    <td>". get_porcentaje_templates_eventos($row["total"] , $row["descripcion_evento"])."</td>                                                                        
-                </tr>";                
+         $table .="<tr class='text-center'>";                    
+                    $table .= get_td( get_porcentaje_templates_eventos($row["total"] , $row["total"])  , "");
+                    $table .= get_td( get_porcentaje_templates_eventos($row["total"] , $row["restricciones"]) , "");       
+                    $table .= get_td( get_porcentaje_templates_eventos($row["total"] , $row["politicas"]) , "");
+                    $table .= get_td( get_porcentaje_templates_eventos($row["total"] , $row["descripcion_evento"]) ,  "");                                                                        
+                $table .="</tr>";                
                          
-                
-
 
     }                 
     $table .="</table>";
     return $table;
 
 }
-
-
 /**/
-
 function get_porcentaje_templates_eventos($contenidos , $val ){
-
 
         $result =0;
         if ($val>0 ) {
@@ -65,11 +53,9 @@ function get_porcentaje_templates_eventos($contenidos , $val ){
 /*Desplegamos las listas de restricciones*/ 
 function display_contenido_templ($data_contenido, $del=0 , $check=0 , $identificador = 'identificador' ){
 
-        
     $list_templa_contenido='<div class="panel">
                                 <div class="panel-body">
                                     <ul class="to-do-list ui-sortable" id="sortable-todo">';
-
     $flag = 1;                                       
     foreach ($data_contenido as $row) {
        
@@ -112,20 +98,23 @@ function list_objetos_permitidos_empresa( $arreglo ){
 
     $list ='<table id="obj-permitidos" class="table display table table-bordered dataTable" >
         <thead class="enid-header-table">
-            <tr>
-            <th>#</th>
-            <th><i class="fa fa-trash"></i></th>
-            <th>Articulo</th>
-            <th>Nota</th>
-            </tr>
+            <tr>';
+
+            $list .=get_td( "#", "");
+            $list .=get_td( "<i class='fa fa-trash'></i>", "");
+            $list .=get_td( "Articulo" , "");
+            $list .=get_td( "Nota", "" );            
+            $list.='</tr>
         </thead>        
         <tfoot>
-        <tr class="enid-header-table">
-            <th>#</th>
-            <th><i class="fa fa-trash"></i></th>
-            <th>Articulo</th>
-            <th>Nota</th>
-        </tr>
+        <tr class="enid-header-table">';
+            
+            $list .=get_td( "#", "");
+            $list .=get_td( "<i class='fa fa-trash'></i>", "");
+            $list .=get_td( "Articulo" , "");
+            $list .=get_td( "Nota", "" );
+
+        $list .='</tr>
         </tfoot>
         <tbody>';    
     $b =0;

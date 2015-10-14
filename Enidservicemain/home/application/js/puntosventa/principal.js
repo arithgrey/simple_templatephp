@@ -105,6 +105,7 @@ function load_data_puntos_venta(filtro ){
 			$('#lista-imagenes').html("");
 			$("#imgs-punto-venta").change(upload_main_imgs);
 		});
+		load_resumen_punto_venta();
 
 	}).fail(function(){
 		alert("Falla al cargar ....");
@@ -129,4 +130,17 @@ function edit_punto_venta(e){
 
 	});
 
+}
+/**/
+function load_resumen_punto_venta(){
+
+	url = now + "index.php/api/puntosventa/puntoventaresumen/format/json/";
+	$.get(url).done(function(data){
+
+		
+		llenaelementoHTML("#punto-venta-resumen" , data);
+
+	}).fail(function(){
+		alert("Error al cargar el resumen");
+	});
 }

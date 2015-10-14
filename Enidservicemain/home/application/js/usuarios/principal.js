@@ -28,6 +28,7 @@ function load_users_cuenta(filtro){
         llenaelementoHTML( "#listausuariosempresa", clientresponse[0]);
     });
 
+    load_resumen_usuarios();
 }
 /*Termina la función*/
 /*Invitación al nuevo usuario*/
@@ -76,6 +77,22 @@ function try_update_perfil_usuario(e){
     }
 
     ); 
+}
+/**/
+
+function load_resumen_usuarios(){
+
+    
+    url = now + "index.php/api/cuentageneralrest/integranteescuentaresumen/format/json";    
+    $.get(url).done(function(data){
+        
+
+        llenaelementoHTML("#resumen-section" , data);
+    }).fail(function(){
+    
+        alert("Error");
+    });
+
 
 
 }

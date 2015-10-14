@@ -4,6 +4,34 @@
 if(!function_exists('invierte_date_time')){
 
 
+
+  function get_td($val , $extra){
+
+    return "<td ". $extra .">". $val ."</td>";
+  }
+
+/**/
+  function get_count_select($inicio, $fin , $text_intermedio , $selected){
+
+
+      $options ="";
+
+      while ($inicio <= $fin) {
+        
+        if ($selected ==  $inicio ) {
+          $options .="<option  selected value='". $inicio ."'>". $inicio ."</option>";
+        }else{
+          $options .="<option value='". $inicio ."'>". $inicio ."</option>";  
+        }
+        
+
+        $inicio ++;    
+      }
+
+      
+      return  $options;
+
+  }
 	/*Mes en letras*/
   
 	function getTimeFormat3($time){

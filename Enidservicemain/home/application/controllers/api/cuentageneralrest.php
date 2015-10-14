@@ -10,6 +10,18 @@ class Cuentageneralrest extends REST_Controller{
             
     }     
 
+
+    /**/
+
+    function integranteescuentaresumen_GET(){
+
+        $this->validate_user_sesssion();
+        $id_empresa = $this->sessionclass->getidempresa();           
+        $data_resumen_usuarios = $this->cuentageneralmodel->get_resumen_usuarios_cuenta($id_empresa);
+        $this->response(resumen_usuarios_cuenta($data_resumen_usuarios));
+
+    }
+
     /******************************Actualiza el perfil del usuario*******************************************/
     function integrantescuentaperfil_PUT(){
 

@@ -1,20 +1,19 @@
 function upload_main_imgs(){
-    
+
+
     var formdata = false;
-    var i = 0, len = this.files.length, img, reader, file;            
+    var i = 0, len = this.files.length, img, reader, file;
 
     if(window.FormData){
 
         formdata = new FormData();        
-    }    
+    }            
+
+
     
-    $('#response_img_contacto').html('Subiendo...');
-            
-            //Si hay varias imágenes, las obtenemos una a una
-            for( ; i < len; i++){
-                file = this.files[i];
-                
-                //Una pequeña validación para subir imágenes
+    $('#response_img').html('Subiendo...');
+        for( ; i < len; i++){
+                file = this.files[i];            
                 if(!!file.type.match(/image.*/)){
                     //Si el navegador soporta el objeto FileReader
                     if(window.FileReader){
@@ -28,19 +27,18 @@ function upload_main_imgs(){
                         //Cuando termina el evento onloadend es llamado
                         reader.readAsDataURL(file);
                     }                
-                    //Si existe una instancia de FormData
+                    
                     if(formdata)
-                        //Usamos el método append, cuyos parámetros son:
-                            //name : El nombre del campo
-                            //value: El valor del campo (puede ser de tipo Blob, File e incluso string)
                         formdata.append('images[]', file);
                 }
-            }                       
+            }                        
+
+            
+            
             base_path =  $("#base_path").val();
-            dinamic_contacto =  $("#dinamic_contacto").val();
-
-            url =  $("#form_imgs_contacto").attr("action")+ "?base_path="+base_path+"&contacto="+ dinamic_contacto  +"&action=upload_img_contacto";              
-
+            
+            url =   $("#formulario-logo").attr("action")+ "?base_path="+base_path+"&action=upload_img_contacto";  
+            
             if(formdata){
                 $.ajax({
                    url : url,
@@ -51,7 +49,8 @@ function upload_main_imgs(){
                    success : function(res){                            
                         
 
-                    
+                        /*eliminamos la imagen existente*/
+                        //delete_in_server_img();
                         update_status_in_db(res, base_path);
                         
 
@@ -59,68 +58,69 @@ function upload_main_imgs(){
                    }                
                 });
             }
+            
 
-
-}/*Termina la función*/
-
-
-
+}            
 /*record in db*/
 function update_status_in_db(res , base_path ){
-    
-    
+
     respuesta = res["respuesta"]; 
     if (respuesta ==  1 ){
 
-        
-        
-        
-
-        dinamic_contacto = $("#dinamic_contacto").val();
-
-
-        /*********insertamos en la base de datos el registro y la referencia**************/
         base_path_img = $("#base_path_img").val();
-        url = now + "index.php/api/img_controller/contacto/format/json/";
-
-        $.post(url , { "contacto" : dinamic_contacto , "name_img" : res["name_img"] , "type" : res["type"] , "size" : res["size"] , "base_path_img" : base_path_img , "base_path" : base_path } ).done(function(data){
+        url = now + "index.php/api/img_controller/logo_empresa/format/json/";
+        
+        $.post(url , {  "name_img" : res["name_img"] , "type" : res["type"] , "size" : res["size"] , "base_path_img" : base_path_img , "base_path" : base_path } ).done(function(data){
 
 
             
-            
+                
                 if (data ==  true) {
                     
-                    llenaelementoHTML("#response_img_contacto" , "Imagen cargada.");
-                    load_contactos("all", "all" );
+                    llenaelementoHTML("#response_img" , "Imagen cargada.");
+                    load_data_empresa();
 
                 }
+            
             
 
         }).fail(function(){
             
         });
         
-        /*****************************************************************/        
         
 
     }else{
         
-        llenaelementoHTML(".respuesta-img-upload", "Error al subir imagen intente de nuevo si el error persiste, comunicar al adinistrador");
+        llenaelementoHTML(".respuesta-img", "Error al subir imagen intente de nuevo si el error persiste, comunicar al adinistrador");
     }
+    
 
 
 }/*Termina la función*/
 
 
 /**/
+function delete_in_server_img(){
+
+    url = now + "index.php/api/img_controller/logo_empresa/format/json/";    
+    eliminar_data_test(url , {"deleteimg" :  "deleteimg"});
+}
+/**/
+
+
 function mostrarImagenSubida(source){
-        var list = document.getElementById('lista-imagenes'),
+
+
+
+        var list = document.getElementById('lista-imagene'),
             li   = document.createElement('li'),
             img  = document.createElement('img');
             img.setAttribute('width', '100%');
             img.setAttribute('height', '100%');
-
+        
         img.src = source;
         li.appendChild(img);
         list.appendChild(li);
 }
+

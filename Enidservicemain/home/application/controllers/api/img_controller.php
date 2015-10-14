@@ -6,10 +6,29 @@ class Img_controller extends REST_Controller{
         parent::__construct();
         
         $this->load->model("img_model");
+        $this->load->helper("img_eventsh");
         $this->load->library('sessionclass');
             
   }     
 
+  function logo_empresa_DELETE(){
+
+      $this->validate_user_sesssion();                
+      $id_usuario = $this->sessionclass->getidusuario();   
+      $id_empresa =  $this->sessionclass->getidempresa();            
+      $db_response = $this->img_model->delete_logo_empresa($id_usuario , $id_empresa );
+      $this->response($db_response);  
+
+  }
+  function logo_empresa_POST(){
+      
+      $this->validate_user_sesssion();                
+      $id_usuario = $this->sessionclass->getidusuario();   
+      $id_empresa =  $this->sessionclass->getidempresa();            
+      $db_response = $this->img_model->insert_logo_empresa($this->post() , $id_usuario , $id_empresa );
+      $this->response($db_response);  
+
+  }
   /**/
   function escenario_artista_post(){  
 

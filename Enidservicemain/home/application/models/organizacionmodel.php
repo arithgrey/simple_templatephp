@@ -1,12 +1,17 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
+class organizacionmodel extends CI_Model {
+    function __construct(){
+            parent::__construct();        
+            $this->load->database();
+    }
 
- class organizacionmodel extends CI_Model {
+function update_q($id_empresa, $param){
 
-function __construct(){
+    $query_update ="update empresa set ". $param["q"] ." = '".$param["value"]."' WHERE idempresa='".$id_empresa."' ";
 
-        parent::__construct();        
-        $this->load->database();
+    return $this->db->query($query_update);
 }
+
 
 function mostrarCiudades($idEmpresa)
 {

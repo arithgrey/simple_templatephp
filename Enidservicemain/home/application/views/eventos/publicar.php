@@ -1,6 +1,31 @@
+
+<style type="text/css">
+.text-fecha-evento:hover{
+  padding: 6px;
+  cursor: pointer;
+
+}
+.newdescripesenario , #newdescripesenario{
+  display: none;
+}
+</style>
+
 <link href="<?=base_url('application/views/principal/dropzone.css')?>" rel="stylesheet"/>
 <link rel="stylesheet" type="text/css" href="<?=base_url('application/css/eventos/edicion.css')?>">
 <link rel="stylesheet" type="text/css" href="<?=base_url('application/js/js/bootstrap-datepicker/css/datepicker-custom.css')?>" />
+
+
+
+
+<script type="text/javascript" src="<?=base_url('application/js/evento/principal.js')?>"> </script>
+<script type="text/javascript" src="<?=base_url('application/js/evento/generosmusicales.js')?>"></script>
+<script type="text/javascript" src="<?=base_url('application/js/evento/escenarios.js')?>"> </script>
+<script type="text/javascript" src="<?=base_url('application/js/evento/accesos.js')?>"> </script>
+<script type="text/javascript" src="<?=base_url('application/js/evento/servicios.js')?>"> </script>
+<script type="text/javascript" src="<?=base_url('application/js/evento/objetospermitidos.js')?>"></script>
+<script type="text/javascript" src="<?=base_url('application/js/evento/tematica.js')?>"></script>
+
+
 
 <form id='form-general-ev'>        
     <input type="hidden" value="<?=$evento;?>" id="evento" name='evento'>
@@ -184,7 +209,7 @@
 
 
                    <div class="input-group">
-                    <div class="input-group-addon">Contacto </div>
+                    <div class="input-group-addon">Género musical </div>
                     <input   placeholder="Genero musical"  id="genero-busqueda" class="genero-busqueda form-control" type="text">
                     
                   </div>
@@ -563,33 +588,25 @@
           <i class="fa fa-calendar"></i> Fecha del evento  <?=$fecha_evento;?>
         </h4>
     <!--************INICIA LA LISTA DE PRECIOS DEL EVENTO ****************-->
+          
+          <div class='list-accesos-modal'></div>
 
-        <table class="table">
-          <thead class='enid-header-table'>
-            <tr>
-            <th>#</th>
-            <th><i class="fa fa-star"></i> Acceso</th>
-            <th class="text-center"><i class="fa fa-credit-card"></i> Precio</th>
-            <th class="text-center"><i class="fa fa-calendar-o"></i> Periodo</th>
-            <th class="text-center"><i class="fa fa-angle-double-right"></i>Avanzado</th>
 
-            <th class="text-center"></th>
-            </tr>
-          </thead>
-          <tbody class='list-accesos-modal'></tbody>
-        </table>
+
+        
     <!--************TERMINA  LA LISTA DE PRECIOS DEL EVENTO ****************-->
 
       
     <!--************FORMULARIO DE REGISTRO   ****************-->  
         <table class="table">
           <form class='form-accesos-modal' id="form-accesos-modal">
-
-            <input type="hidden" value="<?=$evento;?>" id="evaccesos"  class='evaccesos' name='evaccesos'>                                          
-            <tr>                        
+            <input type="hidden" value="<?=$evento;?>" id="evaccesos"  class='evaccesos' name='evaccesos'>                                                      
+            <tr>
               <td>                           
                 <select class='form-control data-option-accesos' name='acceso-tipo-modal'></select>
               </td>  
+            </tr>  
+            <tr>                          
               <td>
                 <div class="input-group">
                   <span class="input-group-addon">$</span>
@@ -944,14 +961,6 @@
 
 
 
-<script type="text/javascript" src="<?=base_url('application/js/evento/generosmusicales.js')?>"></script>
-<script type="text/javascript" src="<?=base_url('application/js/evento/principal.js')?>"> </script>
-<script type="text/javascript" src="<?=base_url('application/js/evento/escenarios.js')?>"> </script>
-<script type="text/javascript" src="<?=base_url('application/js/evento/accesos.js')?>"> </script>
-<script type="text/javascript" src="<?=base_url('application/js/evento/servicios.js')?>"> </script>
-<script type="text/javascript" src="<?=base_url('application/js/evento/objetospermitidos.js')?>"></script>
-<script type="text/javascript" src="<?=base_url('application/js/evento/tematica.js')?>"></script>
-
 
 <script src="<?=base_url('application/views/principal/dropzone.js')?>"></script>
 <script type="text/javascript" src="<?=base_url('application/js/evento/img_events.js')?>"></script>
@@ -963,54 +972,12 @@
 <script type="text/javascript" src="<?=base_url('application/js/js/bootstrap-timepicker/js/bootstrap-timepicker.js')?>"></script>
 <script src="<?=base_url('application/js/js/pickers-init.js')?>"></script>
 <!--Escenarios modal-->
-<script src="//connect.soundcloud.com/sdk-2.0.0.js"></script>
+
 <script type="text/javascript" src="<?=base_url('application/js/evento/gmap.js')?>"></script>
 <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true&libraries=places"></script>
 
 
 
 
-<script type="text/javascript">     
-    
-    $('#artistainput').keyup(function (e){ 
-
-        Stringentrante = $(this).val(); 
-        
-            buscarartista(Stringentrante);
-    });
-
-    function buscarartista(Stringentrante){        
-        SC.initialize({
-            lient_id: '1ce2bf4dcd83ee01f111219905b4f943'
-        });
-         
-        SC.get('/tracks', { q: Stringentrante }, function(tracks) {                        
-                newcontenidodatalist ="";                
-                   for(var x in tracks ) {
-                    /*Genero del artista*/
-                    genre =  tracks[x]["genre"];
-                    username = tracks[x]["user"].username;
-                    avatar_url =  tracks[x]["user"].avatar_url;
-                    uri =   tracks[x]["user"].uri;
-                    id = tracks[x]["id"].id;
-
-                        newcontenidodatalist += "<option value='"+ username  +"'>" ;
-                   }
-                   
-                   document.getElementById('dinamic-artistas').innerHTML= newcontenidodatalist;                
-        });
-
-        
-    }
-
-</script>
 
      
-
-<style type="text/css">
-.text-fecha-evento:hover{
-  padding: 6px;
-  cursor: pointer;
-
-}
-</style>

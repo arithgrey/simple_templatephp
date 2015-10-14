@@ -6,11 +6,33 @@ class Accesos extends REST_Controller{
             parent::__construct();
 
             $this->load->helper("accesos");
+            $this->load->helper("puntoventa");
+
             $this->load->model("accesosmodel");
+            $this->load->model("puntoventamodel");
             $this->load->library('sessionclass');
             
         }     
 
+    function resumen_accesos_punto_venta_evento_GET(){
+        $this->validate_user_sesssion();
+        $id_evento = $this->get("evento");
+        $resumen_puntos_venta_asociados =   get_resumen_puntos_venta_asociados($this->puntoventamodel->get_puntos_venta_asociadas($id_evento));
+        $this->response($resumen_puntos_venta_asociados);
+
+    }    
+
+    /**/
+    
+    function resumen_accesos_evento_GET(){
+        
+        $this->validate_user_sesssion();
+        $id_evento = $this->get("evento");
+        $resumen_accesos =  resumen_puntos_venta_f($this->puntoventamodel->get_resumen_accesos($id_evento) );
+        $this->response($resumen_accesos);
+
+    }
+    /**/
     function tipoacceso_get(){
      //
         $evento= $this->get("evento");

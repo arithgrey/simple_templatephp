@@ -5,7 +5,49 @@
       parent::__construct();        
       $this->load->database();
   }
-  
+
+  function delete_logo_empresa($id_usuario , $id_empresa ){
+
+    $query_exist=  "select id_imagen from imagen_empresa where id_empresa = '". $id_empresa ."' ";  
+    $result_exist =  $this->db->query($query_exist);    
+    $id_imagen =  $result_exist->result_array()[0]["id_imagen"];
+    $this->delete_imagen_server_db($id_imagen);
+    return "1";
+    
+
+
+  }
+  function insert_logo_empresa($data, $id_usuario , $id_empresa ){
+
+    /*consulta si existe*/
+    $dinamic_query =  "";
+    $query_exist=  "select * from imagen_empresa where id_empresa = '".$id_empresa."' ";  
+    $result_exist =  $this->db->query($query_exist);    
+    $id_imagen = $this->insert_img($data , $id_usuario , $id_empresa );  
+
+    if ($result_exist->num_rows() > 0 ) {
+            
+      $dinamic_query ="update imagen_empresa set id_imagen  = '". $id_imagen. "' where id_empresa = '". $id_empresa."' ";    
+
+    }else{
+
+      
+      $dinamic_query ="insert into imagen_empresa(id_imagen , id_empresa) values('". $id_imagen. "' ,  '". $id_empresa."' )";    
+
+    }
+    return  $this->db->query($dinamic_query);
+  }
+
+  function delete_imagen_server_db($id_imagen){
+   
+    $query_get = "select * from  imagen where idimagen =  '". $id_imagen ."' "; 
+    $result_imagen =  $this->db->query($query_get);    
+    $data =  $result_imagen->result_array()[0];
+    $img =  $data["base_path"] . $data["nombre_imagen"]; 
+    unlink($img);
+    
+  }
+  /**/
   function insert_principal_escenario($data , $id_usuario , $id_empresa  ){
 
    
@@ -52,11 +94,6 @@
     if ($result_exist->num_rows() > 0 ){
 
 
-        /*Eliminamos  la imagen pasada */
-        /*
-         $data_img_cotacto = $result_exist->result_array();
-         $this->delete_img_server($data_img_cotacto[0]["id_imagen"]);
-         */
          
 
         /*Actualizamos información en la base de datos */
@@ -131,15 +168,7 @@
   }
 
 
-  /**/
-  function delete_img_server($data_img_cotacto){
-
-    $query_get ="select * from imagen where idimagen = '". $data_img_cotacto ."' ";
-    $result = $this->db->query($query_get);
-    $path_delelet =  $result->result_array()[0]["base_path"]. $result->result_array()[0]["nombre_imagen"];
-    unlink($path_delelet);
-  }
-
+  
   
   function insert_img($data , $id_usuario , $id_empresa  ){
     

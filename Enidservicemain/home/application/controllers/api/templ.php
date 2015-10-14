@@ -8,6 +8,14 @@ class Templ extends REST_Controller{
             $this->load->model("templmodel");
             $this->load->library('sessionclass');        
     }   
+    function  plantillasresumen_get(){
+
+        $this->validate_user_sesssion();
+        $id_usuario  = $this->sessionclass->getidusuario();            
+        $data_response_db =  $this->templmodel->get_resumen_template($id_usuario);
+        $this->response(resumen_templ_eventos($data_response_db));
+
+    }
     /**/
     function templates_contenido_post(){
         $this->validate_user_sesssion();

@@ -49,6 +49,11 @@ CREATE TABLE IF NOT EXISTS `enidserv_eniddbbbb3`.`empresa` (
   `fecha_registro` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
   `status` VARCHAR(45) NOT NULL DEFAULT '1',
   `idplan` INT NOT NULL DEFAULT 1,
+  `quienes_somos` TEXT NULL,
+  `mision` TEXT NULL,
+  `vision` TEXT NULL,
+  `años` INT NULL,
+  `mas_info` TEXT NULL,
   PRIMARY KEY (`idempresa`),
   INDEX `fk_empresa_countries1_idx` (`idCountry` ASC),
   INDEX `fk_empresa_plan1_idx` (`idplan` ASC),
@@ -948,7 +953,7 @@ DROP TABLE IF EXISTS `enidserv_eniddbbbb3`.`imagen` ;
 
 CREATE TABLE IF NOT EXISTS `enidserv_eniddbbbb3`.`imagen` (
   `idimagen` INT NOT NULL AUTO_INCREMENT,
-  `nombre` TEXT NOT NULL,
+  `nombre_imagen` TEXT NOT NULL,
   `type` VARCHAR(45) NOT NULL,
   `size` INT NOT NULL,
   `base_path` TEXT NULL,
@@ -1007,6 +1012,255 @@ CREATE TABLE IF NOT EXISTS `enidserv_eniddbbbb3`.`imagen_contacto` (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
+
+-- -----------------------------------------------------
+-- Table `enidserv_eniddbbbb3`.`imagen_punto_venta`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `enidserv_eniddbbbb3`.`imagen_punto_venta` ;
+
+CREATE TABLE IF NOT EXISTS `enidserv_eniddbbbb3`.`imagen_punto_venta` (
+  `idpunto_venta` INT NOT NULL,
+  `id_imagen` INT NOT NULL,
+  INDEX `fk_punto_venta_has_imagen_imagen1_idx` (`id_imagen` ASC),
+  INDEX `fk_punto_venta_has_imagen_punto_venta1_idx` (`idpunto_venta` ASC),
+  CONSTRAINT `fk_punto_venta_has_imagen_punto_venta1`
+    FOREIGN KEY (`idpunto_venta`)
+    REFERENCES `enidserv_eniddbbbb3`.`punto_venta` (`idpunto_venta`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_punto_venta_has_imagen_imagen1`
+    FOREIGN KEY (`id_imagen`)
+    REFERENCES `enidserv_eniddbbbb3`.`imagen` (`idimagen`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `enidserv_eniddbbbb3`.`imagen_acceso`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `enidserv_eniddbbbb3`.`imagen_acceso` ;
+
+CREATE TABLE IF NOT EXISTS `enidserv_eniddbbbb3`.`imagen_acceso` (
+  `id_imagen` INT NOT NULL,
+  `id_acceso` INT NOT NULL,
+  INDEX `fk_imagen_has_acceso_acceso1_idx` (`id_acceso` ASC),
+  INDEX `fk_imagen_has_acceso_imagen1_idx` (`id_imagen` ASC),
+  CONSTRAINT `fk_imagen_has_acceso_imagen1`
+    FOREIGN KEY (`id_imagen`)
+    REFERENCES `enidserv_eniddbbbb3`.`imagen` (`idimagen`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_imagen_has_acceso_acceso1`
+    FOREIGN KEY (`id_acceso`)
+    REFERENCES `enidserv_eniddbbbb3`.`acceso` (`idacceso`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `enidserv_eniddbbbb3`.`imagen_artista`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `enidserv_eniddbbbb3`.`imagen_artista` ;
+
+CREATE TABLE IF NOT EXISTS `enidserv_eniddbbbb3`.`imagen_artista` (
+  `id_imagen` INT NOT NULL,
+  `id_artista` INT NOT NULL,
+  INDEX `fk_imagen_has_artista_artista1_idx` (`id_artista` ASC),
+  INDEX `fk_imagen_has_artista_imagen1_idx` (`id_imagen` ASC),
+  CONSTRAINT `fk_imagen_has_artista_imagen1`
+    FOREIGN KEY (`id_imagen`)
+    REFERENCES `enidserv_eniddbbbb3`.`imagen` (`idimagen`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_imagen_has_artista_artista1`
+    FOREIGN KEY (`id_artista`)
+    REFERENCES `enidserv_eniddbbbb3`.`artista` (`idartista`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `enidserv_eniddbbbb3`.`empresa_contacto`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `enidserv_eniddbbbb3`.`empresa_contacto` ;
+
+CREATE TABLE IF NOT EXISTS `enidserv_eniddbbbb3`.`empresa_contacto` (
+  `id_empresa` INT NOT NULL,
+  `id_contacto` INT NOT NULL,
+  INDEX `fk_empresa_has_contacto_contacto1_idx` (`id_contacto` ASC),
+  INDEX `fk_empresa_has_contacto_empresa1_idx` (`id_empresa` ASC),
+  CONSTRAINT `fk_empresa_has_contacto_empresa1`
+    FOREIGN KEY (`id_empresa`)
+    REFERENCES `enidserv_eniddbbbb3`.`empresa` (`idempresa`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_empresa_has_contacto_contacto1`
+    FOREIGN KEY (`id_contacto`)
+    REFERENCES `enidserv_eniddbbbb3`.`contacto` (`idcontacto`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `enidserv_eniddbbbb3`.`empresa_genero_musical`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `enidserv_eniddbbbb3`.`empresa_genero_musical` ;
+
+CREATE TABLE IF NOT EXISTS `enidserv_eniddbbbb3`.`empresa_genero_musical` (
+  `id_empresa` INT NOT NULL,
+  `idgenero_musical` INT NOT NULL,
+  INDEX `fk_empresa_has_genero_musical_genero_musical1_idx` (`idgenero_musical` ASC),
+  INDEX `fk_empresa_has_genero_musical_empresa1_idx` (`id_empresa` ASC),
+  CONSTRAINT `fk_empresa_has_genero_musical_empresa1`
+    FOREIGN KEY (`id_empresa`)
+    REFERENCES `enidserv_eniddbbbb3`.`empresa` (`idempresa`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_empresa_has_genero_musical_genero_musical1`
+    FOREIGN KEY (`idgenero_musical`)
+    REFERENCES `enidserv_eniddbbbb3`.`genero_musical` (`idgenero_musical`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `enidserv_eniddbbbb3`.`imagen_empresa`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `enidserv_eniddbbbb3`.`imagen_empresa` ;
+
+CREATE TABLE IF NOT EXISTS `enidserv_eniddbbbb3`.`imagen_empresa` (
+  `id_imagen` INT NOT NULL,
+  `id_empresa` INT NOT NULL,
+  INDEX `fk_imagen_has_empresa_empresa1_idx` (`id_empresa` ASC),
+  INDEX `fk_imagen_has_empresa_imagen1_idx` (`id_imagen` ASC),
+  CONSTRAINT `fk_imagen_has_empresa_imagen1`
+    FOREIGN KEY (`id_imagen`)
+    REFERENCES `enidserv_eniddbbbb3`.`imagen` (`idimagen`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_imagen_has_empresa_empresa1`
+    FOREIGN KEY (`id_empresa`)
+    REFERENCES `enidserv_eniddbbbb3`.`empresa` (`idempresa`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `enidserv_eniddbbbb3`.`tipo_incidencia`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `enidserv_eniddbbbb3`.`tipo_incidencia` ;
+
+CREATE TABLE IF NOT EXISTS `enidserv_eniddbbbb3`.`tipo_incidencia` (
+  `idtipo_incidencia` INT NOT NULL AUTO_INCREMENT,
+  `tipo_incidencia` TEXT NOT NULL,
+  `fecha_registro` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`idtipo_incidencia`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `enidserv_eniddbbbb3`.`sub_tipo_incidencia`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `enidserv_eniddbbbb3`.`sub_tipo_incidencia` ;
+
+CREATE TABLE IF NOT EXISTS `enidserv_eniddbbbb3`.`sub_tipo_incidencia` (
+  `idsub_tipo_incidencia` INT NOT NULL AUTO_INCREMENT,
+  `subtipo` TEXT NULL,
+  `status` VARCHAR(45) NULL,
+  `idtipo_incidencia` INT NOT NULL,
+  PRIMARY KEY (`idsub_tipo_incidencia`),
+  INDEX `fk_sub_tipo_incidencia_tipo_incidencia1_idx` (`idtipo_incidencia` ASC),
+  CONSTRAINT `fk_sub_tipo_incidencia_tipo_incidencia1`
+    FOREIGN KEY (`idtipo_incidencia`)
+    REFERENCES `enidserv_eniddbbbb3`.`tipo_incidencia` (`idtipo_incidencia`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `enidserv_eniddbbbb3`.`incidencia`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `enidserv_eniddbbbb3`.`incidencia` ;
+
+CREATE TABLE IF NOT EXISTS `enidserv_eniddbbbb3`.`incidencia` (
+  `idincidencia` INT NOT NULL AUTO_INCREMENT,
+  `descripcion_incidencia` TEXT NULL,
+  `status` VARCHAR(45) NULL,
+  `fecha_registro` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `usuario_notificado` INT NULL,
+  `afectacion` VARCHAR(30) NULL,
+  `fecha_solicitud` TIMESTAMP NULL,
+  `idtipo_incidencia` INT NOT NULL,
+  `idsub_tipo_incidencia` INT NULL,
+  `medio_reporte` VARCHAR(255) NULL,
+  PRIMARY KEY (`idincidencia`),
+  INDEX `fk_incidencia_tipo_incidencia1_idx` (`idtipo_incidencia` ASC),
+  INDEX `fk_incidencia_sub_tipo_incidencia1_idx` (`idsub_tipo_incidencia` ASC),
+  CONSTRAINT `fk_incidencia_tipo_incidencia1`
+    FOREIGN KEY (`idtipo_incidencia`)
+    REFERENCES `enidserv_eniddbbbb3`.`tipo_incidencia` (`idtipo_incidencia`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_incidencia_sub_tipo_incidencia1`
+    FOREIGN KEY (`idsub_tipo_incidencia`)
+    REFERENCES `enidserv_eniddbbbb3`.`sub_tipo_incidencia` (`idsub_tipo_incidencia`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `enidserv_eniddbbbb3`.`usuario_incidencia`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `enidserv_eniddbbbb3`.`usuario_incidencia` ;
+
+CREATE TABLE IF NOT EXISTS `enidserv_eniddbbbb3`.`usuario_incidencia` (
+  `idusuario` INT NOT NULL,
+  `idincidencia` INT NOT NULL,
+  INDEX `fk_usuario_has_incidencia_incidencia1_idx` (`idincidencia` ASC),
+  INDEX `fk_usuario_has_incidencia_usuario1_idx` (`idusuario` ASC),
+  CONSTRAINT `fk_usuario_has_incidencia_usuario1`
+    FOREIGN KEY (`idusuario`)
+    REFERENCES `enidserv_eniddbbbb3`.`usuario` (`idusuario`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_usuario_has_incidencia_incidencia1`
+    FOREIGN KEY (`idincidencia`)
+    REFERENCES `enidserv_eniddbbbb3`.`incidencia` (`idincidencia`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `enidserv_eniddbbbb3`.`empresa_tipo_incidencia`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `enidserv_eniddbbbb3`.`empresa_tipo_incidencia` ;
+
+CREATE TABLE IF NOT EXISTS `enidserv_eniddbbbb3`.`empresa_tipo_incidencia` (
+  `id_empresa` INT NOT NULL,
+  `idtipo_incidencia` INT NOT NULL,
+  INDEX `fk_empresa_has_tipo_incidencia_tipo_incidencia1_idx` (`idtipo_incidencia` ASC),
+  INDEX `fk_empresa_has_tipo_incidencia_empresa1_idx` (`id_empresa` ASC),
+  CONSTRAINT `fk_empresa_has_tipo_incidencia_empresa1`
+    FOREIGN KEY (`id_empresa`)
+    REFERENCES `enidserv_eniddbbbb3`.`empresa` (`idempresa`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_empresa_has_tipo_incidencia_tipo_incidencia1`
+    FOREIGN KEY (`idtipo_incidencia`)
+    REFERENCES `enidserv_eniddbbbb3`.`tipo_incidencia` (`idtipo_incidencia`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
 USE `enidserv_eniddbbbb3` ;
 
 -- -----------------------------------------------------
@@ -1021,7 +1275,7 @@ USE `enidserv_eniddbbbb3`$$
 CREATE PROCEDURE delere_all_artistas ()
 
 BEGIN
-	DELETE  FROM artista;
+  DELETE  FROM artista;
 END$$
 
 DELIMITER ;
@@ -1152,12 +1406,12 @@ USE `enidserv_eniddbbbb3`$$
 create procedure update_all_obj_in_event(id_event int , idemp int )
 BEGIN
 IF NOT EXISTS(SELECT  * FROM  evento_objetopermitido where idevento= id_event limit 1) THEN
-	INSERT INTO evento_objetopermitido 
-	SELECT  id_event , o.idobjetopermitido FROM objetopermitido  as o  
-	inner join empresa_objetopermitido as eo 
-	on o.idobjetopermitido = eo.idobjetopermitido and eo.idempresa = idemp;	
+  INSERT INTO evento_objetopermitido 
+  SELECT  id_event , o.idobjetopermitido FROM objetopermitido  as o  
+  inner join empresa_objetopermitido as eo 
+  on o.idobjetopermitido = eo.idobjetopermitido and eo.idempresa = idemp; 
 ELSE
-	DELETE FROM evento_objetopermitido WHERE idevento = id_event;
+  DELETE FROM evento_objetopermitido WHERE idevento = id_event;
 END IF;
 END
 $$
@@ -1176,9 +1430,9 @@ USE `enidserv_eniddbbbb3`$$
 CREATE PROCEDURE  update_all_servicios_in_event(id_event INT)
 BEGIN 
 IF NOT EXISTS(SELECT * FROM evento_servicio WHERE idevento= id_event) THEN 
-	INSERT INTO evento_servicio (SELECT id_event , idservicio FROM servicio );
+  INSERT INTO evento_servicio (SELECT id_event , idservicio FROM servicio );
 ELSE 
-	DELETE FROM evento_servicio WHERE idevento = id_event;
+  DELETE FROM evento_servicio WHERE idevento = id_event;
 END IF;
 END
 $$
@@ -1274,7 +1528,7 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `enidserv_eniddbbbb3`;
-INSERT INTO `enidserv_eniddbbbb3`.`empresa` (`idempresa`, `nombreempresa`, `idCountry`, `fecha_registro`, `status`, `idplan`) VALUES (1, 'Enid service', 1, NULL, '\'1\'', 2);
+INSERT INTO `enidserv_eniddbbbb3`.`empresa` (`idempresa`, `nombreempresa`, `idCountry`, `fecha_registro`, `status`, `idplan`, `quienes_somos`, `mision`, `vision`, `años`, `mas_info`) VALUES (1, 'Enid service', 1, NULL, '\'1\'', 2, NULL, NULL, NULL, NULL, NULL);
 
 COMMIT;
 
@@ -1322,6 +1576,7 @@ INSERT INTO `enidserv_eniddbbbb3`.`recurso` (`idrecurso`, `nombre`, `fecha_regis
 INSERT INTO `enidserv_eniddbbbb3`.`recurso` (`idrecurso`, `nombre`, `fecha_registro`, `descripcionrecurso`, `urlpaginaweb`, `iconorecurso`, `status`) VALUES (14, 'Plantillas', NULL, 'Plantillas comunes en el sistema y su uso', 'index.php/template', 'fa fa-file-text-o', 'Disponible');
 INSERT INTO `enidserv_eniddbbbb3`.`recurso` (`idrecurso`, `nombre`, `fecha_registro`, `descripcionrecurso`, `urlpaginaweb`, `iconorecurso`, `status`) VALUES (16, 'Puntos de venta', NULL, NULL, 'index.php/puntosventa', 'fa fa-credit-card', 'Disponible');
 INSERT INTO `enidserv_eniddbbbb3`.`recurso` (`idrecurso`, `nombre`, `fecha_registro`, `descripcionrecurso`, `urlpaginaweb`, `iconorecurso`, `status`) VALUES (17, 'Actividades', NULL, '', 'index.php/actividades', 'fa fa-calendar', 'Disponible');
+INSERT INTO `enidserv_eniddbbbb3`.`recurso` (`idrecurso`, `nombre`, `fecha_registro`, `descripcionrecurso`, `urlpaginaweb`, `iconorecurso`, `status`) VALUES (18, 'Organización', NULL, '', 'index.php/emp/lahistoria', 'fa fa-building', 'Disponible');
 
 COMMIT;
 
@@ -1366,6 +1621,9 @@ INSERT INTO `enidserv_eniddbbbb3`.`perfil_recurso` (`idperfil`, `idrecurso`) VAL
 INSERT INTO `enidserv_eniddbbbb3`.`perfil_recurso` (`idperfil`, `idrecurso`) VALUES (5, 13);
 INSERT INTO `enidserv_eniddbbbb3`.`perfil_recurso` (`idperfil`, `idrecurso`) VALUES (5, 7);
 INSERT INTO `enidserv_eniddbbbb3`.`perfil_recurso` (`idperfil`, `idrecurso`) VALUES (5, 17);
+INSERT INTO `enidserv_eniddbbbb3`.`perfil_recurso` (`idperfil`, `idrecurso`) VALUES (3, 18);
+INSERT INTO `enidserv_eniddbbbb3`.`perfil_recurso` (`idperfil`, `idrecurso`) VALUES (4, 18);
+INSERT INTO `enidserv_eniddbbbb3`.`perfil_recurso` (`idperfil`, `idrecurso`) VALUES (6, 18);
 
 COMMIT;
 
@@ -1392,6 +1650,7 @@ INSERT INTO `enidserv_eniddbbbb3`.`permiso` (`idpermiso`, `nombrepermiso`, `desc
 INSERT INTO `enidserv_eniddbbbb3`.`permiso` (`idpermiso`, `nombrepermiso`, `descripcionpermiso`, `idrecurso`, `urlpaginaweb`, `iconpermiso`) VALUES (21, 'Próximamente', NULL, 17, 'index.php/actividades/proximamente', NULL);
 INSERT INTO `enidserv_eniddbbbb3`.`permiso` (`idpermiso`, `nombrepermiso`, `descripcionpermiso`, `idrecurso`, `urlpaginaweb`, `iconpermiso`) VALUES (22, 'Administrar', NULL, 16, 'index.php/puntosventa/administrar', NULL);
 INSERT INTO `enidserv_eniddbbbb3`.`permiso` (`idpermiso`, `nombrepermiso`, `descripcionpermiso`, `idrecurso`, `urlpaginaweb`, `iconpermiso`) VALUES (23, 'Mis eventos administrados', NULL, 7, 'index.php/tendencias/miseventos', NULL);
+INSERT INTO `enidserv_eniddbbbb3`.`permiso` (`idpermiso`, `nombrepermiso`, `descripcionpermiso`, `idrecurso`, `urlpaginaweb`, `iconpermiso`) VALUES (24, 'Configuración', NULL, 18, 'index.php/emp/lahistoria', NULL);
 
 COMMIT;
 
@@ -1431,6 +1690,8 @@ INSERT INTO `enidserv_eniddbbbb3`.`perfil_permiso` (`idperfil`, `idpermiso`) VAL
 INSERT INTO `enidserv_eniddbbbb3`.`perfil_permiso` (`idperfil`, `idpermiso`) VALUES (5, 23);
 INSERT INTO `enidserv_eniddbbbb3`.`perfil_permiso` (`idperfil`, `idpermiso`) VALUES (4, 23);
 INSERT INTO `enidserv_eniddbbbb3`.`perfil_permiso` (`idperfil`, `idpermiso`) VALUES (5, 21);
+INSERT INTO `enidserv_eniddbbbb3`.`perfil_permiso` (`idperfil`, `idpermiso`) VALUES (5, 24);
+INSERT INTO `enidserv_eniddbbbb3`.`perfil_permiso` (`idperfil`, `idpermiso`) VALUES (4, 24);
 
 COMMIT;
 
@@ -1663,6 +1924,39 @@ INSERT INTO `enidserv_eniddbbbb3`.`empresa_objetopermitido` (`idempresa`, `idobj
 INSERT INTO `enidserv_eniddbbbb3`.`empresa_objetopermitido` (`idempresa`, `idobjetopermitido`) VALUES (1, 15);
 INSERT INTO `enidserv_eniddbbbb3`.`empresa_objetopermitido` (`idempresa`, `idobjetopermitido`) VALUES (1, 16);
 INSERT INTO `enidserv_eniddbbbb3`.`empresa_objetopermitido` (`idempresa`, `idobjetopermitido`) VALUES (1, 17);
+
+COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `enidserv_eniddbbbb3`.`tipo_incidencia`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `enidserv_eniddbbbb3`;
+INSERT INTO `enidserv_eniddbbbb3`.`tipo_incidencia` (`idtipo_incidencia`, `tipo_incidencia`, `fecha_registro`) VALUES (1, 'Mala actitud de los invitados', NULL);
+INSERT INTO `enidserv_eniddbbbb3`.`tipo_incidencia` (`idtipo_incidencia`, `tipo_incidencia`, `fecha_registro`) VALUES (2, 'Falla de equipo dentro del evento', NULL);
+
+COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `enidserv_eniddbbbb3`.`sub_tipo_incidencia`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `enidserv_eniddbbbb3`;
+INSERT INTO `enidserv_eniddbbbb3`.`sub_tipo_incidencia` (`idsub_tipo_incidencia`, `subtipo`, `status`, `idtipo_incidencia`) VALUES (1, 'Las instalaciones de luz no funcionan', NULL, 2);
+INSERT INTO `enidserv_eniddbbbb3`.`sub_tipo_incidencia` (`idsub_tipo_incidencia`, `subtipo`, `status`, `idtipo_incidencia`) VALUES (2, 'El equipo de audio dejó de funcionar', NULL, 2);
+
+COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `enidserv_eniddbbbb3`.`empresa_tipo_incidencia`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `enidserv_eniddbbbb3`;
+INSERT INTO `enidserv_eniddbbbb3`.`empresa_tipo_incidencia` (`id_empresa`, `idtipo_incidencia`) VALUES (1, 1);
+INSERT INTO `enidserv_eniddbbbb3`.`empresa_tipo_incidencia` (`id_empresa`, `idtipo_incidencia`) VALUES (1, 2);
 
 COMMIT;
 

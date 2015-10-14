@@ -1,4 +1,5 @@
 $(document).on("ready", function(){
+
 	$("#new-contenido-form").submit(function(){
 		registra_contenido("#new-contenido-form" , "restricciones");
 		return false;
@@ -29,6 +30,7 @@ $(document).on("ready", function(){
 	});
 
 	
+	$("#boton_uno").click(load_data_resument_plantillas);	
 });
 /*Registramos la restriccion*/
 function registra_contenido( formulario , type_conten ){
@@ -56,8 +58,8 @@ function registra_contenido( formulario , type_conten ){
 /***/
 function load_contenidos_templ_data(type , tag ){
 	
-	url = now + "index.php/api/templ/templates_content/format/json/";	
-	
+
+	url = now + "index.php/api/templ/templates_content/format/json/";		
 	$.get(url , {"type" : type } ).done(function(data){		
 		document.getElementById(tag).innerHTML="";	
 		idtag ="#"+ tag;
@@ -65,7 +67,7 @@ function load_contenidos_templ_data(type , tag ){
 		$(".delete_contenido_templ").click(delete_contenido);
 		limpia_inputs();
 
-
+		load_data_resument_plantillas();
 
 
 
@@ -118,8 +120,28 @@ function delete_articulo_empresa(e){
 
 }
 /**/
-
 function limpia_inputs(){
 
 	$(".form-control").val("");
 }
+
+/**/
+function load_data_resument_plantillas(){
+
+	url = now+ "index.php/api/templ/plantillasresumen/format/json/"; 
+
+	$.get(url).done(function(data){
+
+		$("#resumen-plantilla").html(data);
+
+	}).fail(function(){
+		alert("hay errro");
+	});	
+}
+
+
+
+
+
+
+
