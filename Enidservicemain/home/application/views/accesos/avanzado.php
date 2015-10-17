@@ -75,11 +75,48 @@
             </div>
             </div>
             <div class='col-xs-12  col-sm-12 col-md-12 col-lg-4 centered' >
+
+
+
+                <div  class='col-md-6'>
+                    <div data-date-viewmode="years" data-date-format="yyyy-mm-dd" data-date="2012-02-12" class="input-append date dpYears"  >
+                            <input readonly="" value="2012-02-12" size="16" class="form-control" name="inicio" id="inicio-acceso-record" type="text"  >
+                    <span class="input-group-btn add-on">
+                        <button class="btn btn-primary" type="button"><i class="fa fa-calendar"></i></button>
+                    </span>
+                    </div>
+                </div>
+
+
+                
+                <div  class='col-md-6'>
+                    <div data-date-viewmode="years" data-date-format="yyyy-mm-dd" data-date="2012-02-12" class="input-append date dpYears"  >
+                            <input readonly="" value="2012-02-12" size="16" class="form-control" name="termino" id="termino-acceso-record"  type="text"  >
+                    <span class="input-group-btn add-on">
+                        <button class="btn btn-primary" type="button"><i class="fa fa-calendar"></i></button>
+                    </span>
+                    </div>
+                </div>
+                
+
+
+
+                <!--
                 <div class="input-group" >
                     <input class="form-control dpd1" name="inicio" id="inicio-acceso-record" type="text" required>
                     <span class="input-group-addon"></span>
                     <input class="form-control dpd2" name="termino" id="termino-acceso-record" type="text" required>
                 </div> 
+
+
+    -->
+
+
+
+
+
+
+
             </div>
             <input type="hidden" name="evento" id="evento" value="<?=$evento;?>">
             
@@ -247,11 +284,40 @@
             </div>
             </div>
             <div class='col-xs-12  col-sm-12 col-md-12 col-lg-4 centered' >
+             
+
+                <div  class='col-md-6'>
+                    <div data-date-viewmode="years" data-date-format="yyyy-mm-dd" data-date="2012-02-12" class="input-append date dpYears"  >
+                            <input readonly="" value="2012-02-12" size="16" class="form-control" name="nuevo_inicio_acceso" id="nuevo-inicio-acceso"  type="text"  >
+                    <span class="input-group-btn add-on">
+                        <button class="btn btn-primary" type="button"><i class="fa fa-calendar"></i></button>
+                    </span>
+                    </div>
+                </div>
+
+
+
+
+                <div  class='col-md-6'>
+                    <div data-date-viewmode="years" data-date-format="yyyy-mm-dd" data-date="2012-02-12" class="input-append date dpYears"  >
+                            <input readonly="" value="2012-02-12" size="16" class="form-control" name="nuevo_termino_acceso" id="nuevo-termino-acceso"  type="text"  >
+                    <span class="input-group-btn add-on">
+                        <button class="btn btn-primary" type="button"><i class="fa fa-calendar"></i></button>
+                    </span>
+                    </div>
+                </div>
+                                                
+    <!--
+
                 <div class="input-group" >
                     <input class="form-control dpd1" name="nuevo_inicio_acceso" id="nuevo-inicio-acceso" type="text" required>
                     <span class="input-group-addon"></span>
                     <input class="form-control dpd2" name="nuevo_termino_acceso" id="nuevo-termino-acceso" type="text" required>
                 </div> 
+    -->
+
+
+
             </div>
             
             <div class='col-xs-12  col-sm-12 col-md-12 col-lg-12 centered'>

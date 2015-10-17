@@ -1,16 +1,10 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
-
- class servicioseventmodel extends CI_Model {
-
+class servicioseventmodel extends CI_Model {
 function __construct(){
 
         parent::__construct();        
         $this->load->database();
 }
-
-
-
-
 function get_servicios_by_evento($id_evento){
 
 	$get_servicios = "SELECT s.servicio  FROM servicio  as s , evento_servicio as es , evento as e

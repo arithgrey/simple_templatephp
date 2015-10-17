@@ -1,12 +1,10 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
- class puntoventamodel extends CI_Model {
+class puntoventamodel extends CI_Model {
 	function __construct(){
 	        parent::__construct();        
 	        $this->load->database();
 	}
-
-
-	/*Actualiza todo los puntos de venta asociados al evento */
+/*Actualiza todo los puntos de venta asociados al evento */
     function update_all_in_event($id_evento, $id_empresa){
 
     	$query_exist ="select * from evento_punto_venta where idevento =  '". $id_evento."' ";

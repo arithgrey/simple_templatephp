@@ -8,8 +8,6 @@ class OrganizacionControlador extends REST_Controller{
         $this->load->library('sessionclass');        
     }
 
-
-    
     /**/
     function mostrarCiudades_get(){
         $this->validate_user_sesssion();

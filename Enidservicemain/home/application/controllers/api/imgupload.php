@@ -2,7 +2,6 @@
 require APPPATH.'/libraries/REST_Controller.php';
 class Imgupload extends REST_Controller{
       
-
     function __construct() {
         parent::__construct();
         

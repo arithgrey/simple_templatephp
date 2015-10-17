@@ -20,18 +20,17 @@ function try_update_medios_contacto(e){
 	
 	contacto = e.target.id;
 	url = now  + "index.php/api/emp/empresa_contacto/format/json/";
-	actualiza_data(url, {"contacto" : contacto});
-	load_contactos_empresa();
+	actualiza_data(url, {"contacto" : contacto});	
 	load_contactos_empresa_resumen();
+	
 }
 /**/
 function load_contactos_empresa(){
 	
 	url = now  + "index.php/api/emp/empresa_contacto/format/json/";
-
 	$.get(url).done(function(data){
 
-
+		
 		llenaelementoHTML("#list-contactos",  data);
 		$(".contactos_asociados").click(try_update_medios_contacto);
 

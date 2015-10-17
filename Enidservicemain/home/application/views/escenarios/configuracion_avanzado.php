@@ -164,17 +164,56 @@
 
    
 	<div class="col-md-12">
-	<form id="form-nueva-fecha">
+	
+
+
+
+
+    <form id="form-nueva-fecha">
+
+        <div  class='col-md-12'>
+            <div  class='col-md-6'>
+                    <div data-date-viewmode="years" data-date-format="yyyy-mm-dd" data-date="2012-02-12" class="input-append date dpYears"  >
+                            <input readonly="" value="2012-02-12" size="16" class="form-control"   id='inicio' name="from"   type="text"  >
+                    <span class="input-group-btn add-on">
+                        <button class="btn btn-primary" type="button"><i class="fa fa-calendar"></i></button>
+                    </span>
+                    </div>
+            </div>
+
+            <div  class='col-md-6'>
+                    <div data-date-viewmode="years" data-date-format="yyyy-mm-dd" data-date="2012-02-12" class="input-append date dpYears"  >
+                            <input readonly="" value="2012-02-12" size="16" class="form-control" id='termino' name="to"   type="text"  >
+                    <span class="input-group-btn add-on">
+                        <button class="btn btn-primary" type="button"><i class="fa fa-calendar"></i></button>
+                    </span>
+                    </div>
+            </div>
+
+
+        </div>        
+
+
+<!--
 		<div class="input-group input-large custom-date-range" data-date="13/07/2013" data-date-format="mm/dd/yyyy">
 		<input class="form-control dpd1"  id='inicio' name="from" type="text" required>
 		<span class="input-group-addon"> al día </span>
 			<input class="form-control dpd2"  id='termino' name="to" type="text" required>
 		</div>
+-->
 		<span class="help-block">Seleccione la fecha para este escenario</span>
 	</div>
 
 	<button class='btn btn-primary' id='btn-guardar-fecha'>Guardar</button>
 	<div id='repo-update-fecha'></div>
+
+
+
+
+
+
+
+
 	</form>
 
             </div>

@@ -1,6 +1,5 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
-
- class escenarioartistamodel extends CI_Model {
+class escenarioartistamodel extends CI_Model {
 
 function __construct(){
 

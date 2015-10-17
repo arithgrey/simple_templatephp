@@ -105,21 +105,29 @@ function update_contacto_empresa($id_empresa , $param ){
 }
 
 
-/**/
-function get_contactos_empresa($id_empresa, $id_usuario ){
 
-  $query_get ="select c.*, empresa_contacto.id_contacto contactoemp , ic.*, i.*    from contacto c left outer 
+/**/
+function get_contactos_empresa($id_empresa , $id_usuario ){
+
+$query_get ="select c.* , 
+empresa_contacto.id_contacto contactoemp , 
+ic.* ,
+i.* from contacto c left outer 
 join  empresa_contacto 
 on c.idcontacto =  empresa_contacto.id_contacto  and 
-empresa_contacto.id_empresa = '". $id_empresa ."'
+empresa_contacto.id_empresa = '". $id_empresa."'
 left outer join imagen_contacto ic 
 on ic.id_contacto = c.idcontacto
 left outer join imagen i on
 ic.id_imagen  =  i.idimagen
-where idusuario= '". $id_usuario ."'  ";
+where idusuario=". $id_usuario;
+    
+$result = $this->db->query($query_get);
+return $result->result_array();      
 
-  $result =  $this->db->query($query_get);
-  return $result->result_array();
+
+
+  
 }  
 /**/
 function get_empresa_by_id($id_empresa){

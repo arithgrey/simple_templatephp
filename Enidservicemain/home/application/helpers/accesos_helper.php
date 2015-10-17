@@ -1,18 +1,17 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-
 if(!function_exists('invierte_date_time')){
 
 	function getData($arreglo){
 
 		$accesos = "";
-		$accesos .= '<table class="table"><tr class="text-center">';
+		$accesos .= '<table class="table display table table-bordered dataTable">
+					<tr class="text-center enid-header-table">';
         $accesos .= get_td("#" , "");  
         $accesos .= '<td><i class="fa fa-star"></i> Acceso</td>';  
         $accesos .= '<td class="text-center"><i class="fa fa-credit-card"></i> Precio</td>';  
         $accesos .= '<td class="text-center"><i class="fa fa-calendar-o"></i> Periodo</td>';    
-        $accesos .= '<td class="text-center"><i class="fa fa-calendar-o"></i> Periodo</td>';    
-       	$accesos .=  '<td class="text-center"><i class="fa fa-angle-double-right"></i>Avanzado</td>';
-        $accesos .= '<td class="text-center"></td>';    
+        $accesos .= '<td class="text-center"><i class="fa fa-angle-double-right"></i> Avanzado</td>';    
+       	$accesos .=  '<td class="text-center"><i class="fa fa-minus-circle"></i> Eliminar</td>';        
         $accesos .= '</tr>';    
             
 

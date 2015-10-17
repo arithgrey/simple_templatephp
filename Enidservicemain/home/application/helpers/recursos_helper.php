@@ -1,8 +1,5 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 if(!function_exists('invierte_date_time')){
-
-	
-
 /**/
 function resumen_usuarios_cuenta($data){   
 
@@ -118,7 +115,7 @@ function lista_usuarios_cuenta($integrantes)
 
                         $listusuarios .= get_td($row["nombre"] , "" );
                         $listusuarios .= get_td($row["email"] , "" );
-                        $listusuarios .= get_td( getTimeFormat3( $row["fecha_registro"] )   , "" );
+                        $listusuarios .= get_td(  $row["fecha_registro"]    , "" );
                         $listusuarios .= get_td($row["nombreperfil"] , "" );
 
         $listusuarios .= get_td($row["status"] , "");
@@ -166,8 +163,4 @@ function lista_usuarios_cuenta($integrantes)
     return $listusuarios;
 }
 /*Terminal la función*/
-
-	
-
-	/**/
 }/*Termina el helper*/

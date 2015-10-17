@@ -1,6 +1,5 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
-
- class perfilrecursomodel extends CI_Model {
+class perfilrecursomodel extends CI_Model {
 
     function __construct()
     {
@@ -8,17 +7,7 @@
         $this->load->database();
     }
 
-
-
-
- 
-
-
-
-
-
-
-    function displayrecursobyperfiles($perfiles){
+function displayrecursobyperfiles($perfiles){
 
         $b = 0;
         $datainfo = array();

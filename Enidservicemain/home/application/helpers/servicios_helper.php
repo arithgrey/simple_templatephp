@@ -1,13 +1,7 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
- 
-//si no existe la función invierte_date_time la creamos
 if(!function_exists('invierte_date_time')){
-
-/*******************************************************************************************************/
-/*Retornamos la vista que desplegará  en principal*/
-
 	function serviciosevent($arreglo){
-
+    
     $fila = "";        
     $pos =1;  
 		$servicios = "
@@ -63,15 +57,7 @@ function list_services_default_view($arreglo){
 
   return $list_servicios;
 }
-
-
 /******************** in view main visualization  end *********************   */
-
-
-
-
-
-
 function get_servicios_inclidos_event($data_servicios_array){
 
   $list_servicios ='';
@@ -82,12 +68,4 @@ function get_servicios_inclidos_event($data_servicios_array){
 
   return $list_servicios;
 }
-
-
-
 }/*Termina el helper*/
- 
-
-
-
-

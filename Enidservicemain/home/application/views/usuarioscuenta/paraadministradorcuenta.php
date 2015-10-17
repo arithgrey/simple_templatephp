@@ -20,7 +20,7 @@
                 + nuevo integrante
             </button>  
             <div class="input-group pull-right col-md-3">
-                <div class="input-group-addon">Contacto </div>
+                <div class="input-group-addon">Miembro de la cuenta </div>
                 <input list="integrantes-list" id="integrantes-l" class='integrantes-l form-control' >    
                 <?=$integrantes_filtro;?>        
             </div>                

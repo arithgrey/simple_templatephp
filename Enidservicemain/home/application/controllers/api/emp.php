@@ -44,15 +44,14 @@ class Emp extends REST_Controller{
     function empresa_contacto_GET(){
 
     	$this->validate_user_sesssion();
-        $id_empresa= $this->sessionclass->getidempresa();
+        $id_empresa = $this->sessionclass->getidempresa();
         $id_user = $this->sessionclass->getidusuario();        
-    	$contactos_empresa = $this->empresamodel->get_contactos_empresa($id_empresa, $id_user );
-    	$this->response(data_contactos_empresa($contactos_empresa));
+    	$contactos_empresa_data  = data_contactos_empresa($this->empresamodel->get_contactos_empresa($id_empresa, $id_user));   
+    	$this->response($contactos_empresa_data );        
     }  
     /**/
    	function empresa_contacto_PUT(){
 
-	
         $this->validate_user_sesssion();
         $id_empresa= $this->sessionclass->getidempresa();
         $response_db = $this->empresamodel->update_contacto_empresa($id_empresa , $this->put() );

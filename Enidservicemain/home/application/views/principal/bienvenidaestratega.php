@@ -1,27 +1,3 @@
-<!--pickers plugins-->
-<script type="text/javascript" src="<?=base_url('application/js/js/bootstrap-datepicker/js/bootstrap-datepicker.js')?>"></script>
-<script type="text/javascript" src="<?=base_url('application/js/js/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js')?>"></script>
-<script type="text/javascript" src="<?=base_url('application/js/js/bootstrap-daterangepicker/moment.min.js')?>"></script>
-<script type="text/javascript" src="<?=base_url('application/js/js/bootstrap-daterangepicker/daterangepicker.js')?>"></script>
-<script type="text/javascript" src="<?=base_url('application/js/js/bootstrap-colorpicker/js/bootstrap-colorpicker.js')?>"></script>
-<script type="text/javascript" src="<?=base_url('application/js/js/bootstrap-timepicker/js/bootstrap-timepicker.js')?>"></script>
-
-<!--pickers initialization-->
-<script type="text/javascript" src="<?=base_url('application/js/js/pickers-init.js')?>"></script>
-
-<link rel="stylesheet" type="text/css" href="<?=base_url('application/js/js/bootstrap-datepicker/css/datepicker-custom.css')?>" />
-<script type="text/javascript" src="<?=base_url('application/js/estratega/evento/principal.js')?>"></script>
-<script type="text/javascript" src="<?=base_url('application/js/escenarios/principal.js')?>"></script>
-<script type="text/javascript" src="<?=base_url('application/js/accesos/principal.js')?>"></script>
-
-
-
-
-
-
-
-
-
 <style type="text/css">
 #dinamic-field , #success-alert{
     display: none;
@@ -34,6 +10,91 @@
 </style>
 
 
+<button class='btn btn-info' data-toggle="modal" data-target="#modal-nuevo-evento">+  Nuevo Evento <i class='fa fa-headphones'></i></button>
+<div class="modal fade" id="modal-nuevo-evento" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h4 class="modal-title" id="myModalLabel">Cargar evento </h4>
+            </div>
+            <div class="modal-body">
+                <h3>Del evento</h3>
+
+
+
+
+
+                 <div class="row">
+                                <div class="col-md-12">
+                                    <form role="form" class="form-inline" method="POST" id="nuevo-evento-form"  action=""> 
+                                        <div class="form-group todo-entry">
+                                            <input name='nuevo_evento' placeholder="Evento ejemplo Gala Festival " class="form-control" style="width: 100%" type="text">
+
+
+                                            <!--Campos ocultos-->
+                                            <div id='dinamic-field'>
+                                                <input name='nueva_edicion' placeholder="Edición México 2015 " class="form-control" style="width: 100%" type="text">
+
+                                            </div>
+                                            
+                                            <br>
+                                            <div class="input-group">                                                
+                                                <div data-date-viewmode="years" data-date-format="yyyy-mm-dd" data-date="2012-02-12" class="input-append date dpYears"  >
+                                                        <input readonly="" value="2012-02-12" size="16" class="form-control" name="nuevo_inicio"  type="text"  >
+                                                <span class="input-group-btn add-on">
+                                                <button class="btn btn-primary" type="button"><i class="fa fa-calendar"></i></button>
+                                                </span>
+                                                </div>
+                                                
+                                                    <div data-date-viewmode="years" data-date-format="yyyy-mm-dd" data-date="2012-02-12" class="input-append date dpYears">
+                                                        <input readonly="" value="2012-02-12" size="16" class="form-control" name="nuevo_termino"  type="text"  >
+                                                        <span class="input-group-btn add-on">
+                                                            <button class="btn btn-primary" type="button"><i class="fa fa-calendar"></i></button>
+                                                        </span>
+                                                    </div>
+                                                <span class="help-block">Periodo del evento</span>
+                                                    
+                                            </div> 
+                                            
+
+
+                                        
+                                        
+                                            <!--Termina campos ocultos-->
+
+                                        </div>
+
+
+
+                                        <button class="btn btn-primary pull-right" type="submit">
+                                            <i class="fa fa-check"></i>
+                                        </button>                                        
+                                    </form>
+                                </div>
+
+
+
+
+
+                                        
+                                    
+
+
+
+
+
+                                <div class='alert alert-warning' id='response-event'></div>
+
+                                <div class="alert alert-info" id='success-alert'>
+                                    <h2>Registro correcto</h2>
+                                </div>    
+                                
+                            </div>
+
+                            
+
+                            <!--Crear evento -->
 
 
 
@@ -47,6 +108,54 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!---->
+                           
 
 
 
@@ -86,74 +195,7 @@
                                 </div>
 
                             </div>
-                            <!---->
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <form role="form" class="form-inline" method="POST" id="nuevo-evento-form"  action=""> 
-                                        <div class="form-group todo-entry">
-                                            <input name='nuevo_evento' placeholder="Evento ejemplo Gala Festival " class="form-control" style="width: 100%" type="text">
-
-
-                                            <!--Campos ocultos-->
-                                            <div id='dinamic-field'>
-                                                        <input name='nueva_edicion' placeholder="Edición México 2015 " class="form-control" style="width: 100%" type="text">
-
-
-                                                        <div class="input-group">
-                                                            <input class="form-control dpd1" name="nuevo_inicio" type="text" required>
-                                                            <span class="input-group-addon">hasta</span>
-                                                            <input class="form-control dpd2" name="nuevo_termino" type="text" required>
-                                                        </div>
-                                                        <span class="help-block">Periodo del evento</span>
-                                            </div>
-                                            <!--Termina campos ocultos-->
-
-                                        </div>
-
-
-
-                                        <button class="btn btn-primary pull-right" type="submit">
-                                            <i class="fa fa-check"></i>
-
-
-                                        </button>
-   
-
-
-
-                                        
-                                        
-
-
-
-
-                                        
-                                    </form>
-                                </div>
-
-
-
-
-
-                                        
-                                    
-
-
-
-
-
-                                <div class='alert alert-warning' id='response-event'></div>
-
-                                <div class="alert alert-info" id='success-alert'>
-                                    <h2>Registro correcto</h2>
-                                </div>    
-                                
-                            </div>
-
                             
-
-                            <!--Crear evento -->
-
                         
                         </div>
 
@@ -273,3 +315,19 @@
         </div>
     </div>
 </div>
+<!--pickers plugins-->
+<script type="text/javascript" src="<?=base_url('application/js/js/bootstrap-datepicker/js/bootstrap-datepicker.js')?>"></script>
+<script type="text/javascript" src="<?=base_url('application/js/js/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js')?>"></script>
+<script type="text/javascript" src="<?=base_url('application/js/js/bootstrap-daterangepicker/moment.min.js')?>"></script>
+<script type="text/javascript" src="<?=base_url('application/js/js/bootstrap-daterangepicker/daterangepicker.js')?>"></script>
+<script type="text/javascript" src="<?=base_url('application/js/js/bootstrap-colorpicker/js/bootstrap-colorpicker.js')?>"></script>
+<script type="text/javascript" src="<?=base_url('application/js/js/bootstrap-timepicker/js/bootstrap-timepicker.js')?>"></script>
+<!--pickers initialization-->
+<script type="text/javascript" src="<?=base_url('application/js/js/pickers-init.js')?>"></script>
+<link rel="stylesheet" type="text/css" href="<?=base_url('application/js/js/bootstrap-datepicker/css/datepicker-custom.css')?>" />
+<script type="text/javascript" src="<?=base_url('application/js/estratega/evento/principal.js')?>"></script>
+<script type="text/javascript" src="<?=base_url('application/js/escenarios/principal.js')?>"></script>
+<script type="text/javascript" src="<?=base_url('application/js/accesos/principal.js')?>"></script>
+
+
+

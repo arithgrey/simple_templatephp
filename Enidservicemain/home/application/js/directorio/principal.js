@@ -71,10 +71,9 @@ function try_update_contacto(e){
 	url = $("#form-contactos-edit").attr("action");	
 	
 
-
 	$(".form-contactos-edit").submit(function(){
 		
-		actualiza_data(url , $("#form-contactos-edit").serialize()+"&" + $.param({"idcontacto" : contacto })  );		
+		actualiza_data(url , $("#form-contactos-edit").serialize()+"&"+$.param({"idcontacto" : contacto })  );		
 		$(".status-registro").show();
 		load_contactos("all" , "all");
 		return false;

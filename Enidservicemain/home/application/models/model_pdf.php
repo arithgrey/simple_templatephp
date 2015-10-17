@@ -1,5 +1,4 @@
 <?php
-
 class Model_pdf extends CI_Model {
 
     public function __construct() {

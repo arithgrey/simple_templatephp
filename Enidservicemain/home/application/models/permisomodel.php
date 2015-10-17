@@ -1,6 +1,5 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
-
- class permisomodel extends CI_Model {
+class permisomodel extends CI_Model {
 
     function __construct()
     {
@@ -8,9 +7,6 @@
         $this->load->database();
     }
     /*Asigna el perfil del usuario */
-
-
-
 function updatepermiso($idperfil , $idpermiso){
 
     $queryexist ="SELECT * FROM perfil_permiso WHERE idperfil = $idperfil AND idpermiso = $idpermiso";

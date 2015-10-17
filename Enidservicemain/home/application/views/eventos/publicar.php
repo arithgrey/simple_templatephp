@@ -1,4 +1,3 @@
-
 <style type="text/css">
 .text-fecha-evento:hover{
   padding: 6px;
@@ -13,9 +12,6 @@
 <link href="<?=base_url('application/views/principal/dropzone.css')?>" rel="stylesheet"/>
 <link rel="stylesheet" type="text/css" href="<?=base_url('application/css/eventos/edicion.css')?>">
 <link rel="stylesheet" type="text/css" href="<?=base_url('application/js/js/bootstrap-datepicker/css/datepicker-custom.css')?>" />
-
-
-
 
 <script type="text/javascript" src="<?=base_url('application/js/evento/principal.js')?>"> </script>
 <script type="text/javascript" src="<?=base_url('application/js/evento/generosmusicales.js')?>"></script>
@@ -579,14 +575,87 @@
       <div class="modal-header"><!--Inicia el header -->
         <button type="button" class="close" data-dismiss="modal">&times;</button>
         <h4 class="modal-title"><i class="fa fa-money"></i> Ventas, promociones, preventas ... </h4>
-
+          <a href="<?=base_url('index.php/accesos/configuracionavanzada/1/')?>/<?=$evento;?>">">
+            <button class='btn btn-primary pull-right'>Avanzado </button>
+          </a>
       </div><!--Termina el header -->
-
-  
   <div class="modal-body"><!-- dialog body -->           
+
         <h4 class='fecha_edit' id='fecha_edit'>                    
           <i class="fa fa-calendar"></i> Fecha del evento  <?=$fecha_evento;?>
         </h4>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+         <!--************FORMULARIO DE REGISTRO   ****************-->  
+        <table class="table" >
+          <form class='form-accesos-modal' id="form-accesos-modal">
+
+            <input type="hidden" value="<?=$evento;?>" id="evaccesos"  class='evaccesos' name='evaccesos'>                                                      
+            <tr>
+
+
+              <td colspan='2'>   
+                <div class="input-group">                        
+                  <span class="input-group-addon">Acceso </span>
+                  <select class='form-control data-option-accesos' name='acceso-tipo-modal'></select>
+                </div>
+              </td>
+              <td>
+                <div class="input-group">
+                  <span class="input-group-addon">$ Precio </span>
+                  <input type="number" name='precio-acceso-modal' class="form-control">
+                  <span class="input-group-addon ">.00</span>
+                </div>
+              </td>
+            </tr>  
+            <tr>                                      
+              <td>
+                <div class="input-group" >
+                            <div data-date-viewmode="years" data-date-format="yyyy-mm-dd" data-date="2012-02-12" class="input-append date dpYears"  >
+                                  <input readonly="" value="2012-02-12" size="16" class="form-control"  name="nuevo_inicio_acceso" id="nuevo_inicio_acceso"  type="text"  >
+                                  <span class="input-group-btn add-on">
+                                   <button class="btn btn-primary" type="button"><i class="fa fa-calendar"></i></button>
+                                  </span>
+                            </div>                                          
+                </div>  
+              </td>
+              <td>
+                <div class="input-group" >
+                  <div data-date-viewmode="years" data-date-format="yyyy-mm-dd" data-date="2012-02-12" class="input-append date dpYears"  >
+                                    <input readonly="" value="2012-02-12" size="16" class="form-control"  name="nuevo_termino_acceso" id="nuevo_termino_acceso" type="text"  >
+                                    <span class="input-group-btn add-on">
+                                     <button class="btn btn-primary" type="button"><i class="fa fa-calendar"></i></button>
+                                    </span>
+                  </div>
+                </div>
+              </td>    
+
+               <td>
+                <button style="background:black !important" class="btn btn-primary pull-right" type="submit" id="nuevo-acceso">
+                  <i class="fa fa-plus"></i>
+                </button>
+              </td>                        
+            </tr>
+            </form>
+        </table>  
+    <!--************TERMINA FORMULARIO DE REGISTRO   ****************-->    
+
     <!--************INICIA LA LISTA DE PRECIOS DEL EVENTO ****************-->
           
           <div class='list-accesos-modal'></div>
@@ -597,41 +666,7 @@
     <!--************TERMINA  LA LISTA DE PRECIOS DEL EVENTO ****************-->
 
       
-    <!--************FORMULARIO DE REGISTRO   ****************-->  
-        <table class="table">
-          <form class='form-accesos-modal' id="form-accesos-modal">
-            <input type="hidden" value="<?=$evento;?>" id="evaccesos"  class='evaccesos' name='evaccesos'>                                                      
-            <tr>
-              <td>                           
-                <select class='form-control data-option-accesos' name='acceso-tipo-modal'></select>
-              </td>  
-            </tr>  
-            <tr>                          
-              <td>
-                <div class="input-group">
-                  <span class="input-group-addon">$</span>
-                  <input type="number" name='precio-acceso-modal' class="form-control">
-                  <span class="input-group-addon ">.00</span>
-                </div>
-              </td>
-              <td>
-                <div class="input-group" >
-                    <input class="form-control dpd1" name="nuevo_inicio_acceso" id="nuevo_inicio_acceso" type="text" required>
-                    <span class="input-group-addon"></span>
-                    <input class="form-control dpd2" name="nuevo_termino_acceso" id="nuevo_termino_acceso" type="text" required>
-                </div>  
-              </td>
-              <td>
-                <button style="background:black !important" class="btn btn-primary pull-right" type="submit" id="nuevo-acceso">
-                  <i class="fa fa-plus"></i>
-                </button>
-              </td>
-                        
-            </tr>
-            </form>
-        </table>  
-    <!--************TERMINA FORMULARIO DE REGISTRO   ****************-->    
-
+   
     <!--Termina modal body-->       
   </div>
   <div class="modal-footer">
@@ -855,9 +890,47 @@
                 <form method="POST" class='update-fecha-evento-form' id="update-fecha-evento-form">
                     <input type="hidden" name='update_evento' id='update_evento'>
                     <div class="input-group">
-                        <input class="form-control dpd1" id="update_inicio" name="update_inicio" type="text" required>
-                        <span class="input-group-addon"> al día </span>
-                        <input class="form-control dpd2" id="update_termino" name="update_termino" type="text" required>
+
+                      <table>
+                        <tr>
+                          <td>
+
+
+                            <div data-date-viewmode="years" data-date-format="yyyy-mm-dd" data-date="2012-02-12" class="input-append date dpYears"  >
+                                  <input readonly="" value="2012-02-12" size="16" class="form-control"  id="update_inicio" name="update_inicio"   type="text"  >
+                                  <span class="input-group-btn add-on">
+                                   <button class="btn btn-primary" type="button"><i class="fa fa-calendar"></i></button>
+                                  </span>
+                            </div>
+                                                
+
+
+
+
+                          </td>
+
+                          <td>
+                            <span class="input-group-addon"> al </span>
+                          </td>
+
+
+                          <td>
+
+                            <div data-date-viewmode="years" data-date-format="yyyy-mm-dd" data-date="2012-02-12" class="input-append date dpYears"  >
+                                  <input readonly="" value="2012-02-12" size="16" class="form-control" id="update_termino" name="update_termino"  type="text"  >
+                                  <span class="input-group-btn add-on">
+                                   <button class="btn btn-primary" type="button"><i class="fa fa-calendar"></i></button>
+                                  </span>
+                            </div>
+                              
+                          </td>
+
+                        </tr>
+                      </table>                          
+                        
+                        
+                        
+
                     </div>
                     <span class="help-block" >Fecha del evento </span>
                     <button class="btn btn-info">Guardar</button>

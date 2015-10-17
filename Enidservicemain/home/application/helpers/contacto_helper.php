@@ -1,34 +1,28 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
- //si no existe la función invierte_date_time la creamos
 if(!function_exists('invierte_date_time')){
-
-
-
 	function table_contac($data){
 
-		$contacto ='<div class="panel panel-default">					  
-					  
-					  
-					  <table class="table display table table-bordered dataTable">
-										  
-					  <tr class="text-center enid-header-table">
-					  	<th class="text-center ">#</th>
-					  	<th class="text-center">IMG</th>
-					  	<th class="text-center " >Contacto</th>
-					  	<th class="text-center">organización</th>
-					  	<th class="text-center">Teléfono</th>
-					  	<th class="text-center">Movil</th>
-					  	<th class="text-center">Correo</th>
-					  	<th class="text-center">Página web</th>
-					  	<th class="text-center">Dirección</th>
-					  	<th class="text-center">Tipo</th>
+		$contacto ='<table class="table display table table-bordered dataTable">';										 
+		$contacto .="<tr class='enid-header-table'>";					  
+		$contacto .= get_td("#" , "");				  
+		$contacto .= get_td("IMG" , "");				  
+		$contacto .= get_td("Contacto" , "class='franja-vertical'");				  
+		$contacto .= get_td("Contacto" , "");				  					  	
+		$contacto .= get_td("organización" , "");
+		$contacto .= get_td("Teléfono" , "");	 					  	
+		$contacto .= get_td("Movil" , "");
 					  	
-					  	<th class="text-center">Estado</th>
-					  	<th class="text-center">Registro</th>
+					  			  	
+		$contacto .= get_td ("Correo" , "" );
+		$contacto .= get_td ("Página web" , "" );
+		$contacto .= get_td ("Dirección" , "" );
+		$contacto .= get_td ("Tipo" , "" );
 					  	
-					  	<th class="text-center"></th>
-					  </tr>
-					  ';
+		$contacto .= get_td ("Estado" , "" );
+		$contacto .= get_td ("Registro" , "" );
+					  	
+		
+		$contacto .="</tr>";
 		
 		$b =1;						  
 		foreach ($data as $row) {
@@ -54,65 +48,62 @@ if(!function_exists('invierte_date_time')){
 
 			$img = base_url( $row["base_path_img"].$row["nombre_imagen"]);
 
+			$contacto .='<tr class="text-center media usr-info" >';
+			$contacto .= get_td( $b , "franja-vertical");	
 
-			$contacto .='<tr class="text-center media usr-info" style="font-size:.8em;" >
-						<td class="franja-vertical">'.$b.'</td>';
-
-			if ($row["nombre_imagen"] != null ) {
-											
+			if ($row["nombre_imagen"] != null ) {											
 			
 				$contacto .='<td  data-toggle="modal" data-target="#contact-imagen-modal"    class="prog-avatar"> 
 	                             <img  class="img_contacto thumb" id="'.$idcontacto.'" src="'.$img.'" alt="">
 							</td>';
 			}else{
 				$contacto .='<td  data-toggle="modal" data-target="#contact-imagen-modal"    class="prog-avatar"> 
-                             <i  class="img_contacto fa fa-cloud-upload fa-3x" id="'.$idcontacto.'" ></i>
+                             <i  class="img_contacto fa fa-cloud-upload" id="'.$idcontacto.'" ></i>
 						</td>';
 			}					
 
 
-			$contacto .='<td class="franja-vertical">'.$nombre.'</td>
-						<td>'.$organizacion.'</td>
-						<td>'.$tel.'</td>
-						<td>'.$movil.'</td>
-						<td>'.$correo.'</td>
-						<td>'.$pagina_web.'</td>
-						<td>'.$direccion.'</td>
-						<td>'.$tipo.'</td>						
-						<td>'.$status .'</td>
-						<td>'.$fecha_registro.'</td>
+			$contacto .=get_td($nombre , "class='franja-vertical'" );
 
-						<td data-toggle="modal" data-target="#contact-modal-edit" ><i id="'. $idcontacto.'" class="editar-contacto fa fa-pencil-square fa-lg" ></i></td>
+						$contacto .= get_td($organizacion, ""); 
+						$contacto .= get_td($tel, ""); 
+						$contacto .= get_td($movil, ""); 
+						$contacto .= get_td($correo, ""); 
+						$contacto .= get_td($pagina_web, ""); 
+						$contacto .= get_td($direccion, ""); 
+						$contacto .= get_td($tipo, ""); 						
+						$contacto .= get_td($status , ""); 
+						$contacto .= get_td($fecha_registro, ""); 
 
-						</tr>';			
+			$contacto .='<td data-toggle="modal" data-target="#contact-modal-edit" ><i id="'. $idcontacto.'" class="editar-contacto fa fa-pencil-square fa-lg" ></i></td>
+			</tr>';			
 			$b++;
 		}
 
 
 		if ($b>9 ) {
 			
-			$contacto .="<tr style='' class='text-center enid-header-table'>
-					  	<th class='text-center ' >#</th>
-					  	<th class='text-center' >IMG</th>
-					  	<th class='text-center ' >Contacto</th>
-					  	<th class='text-center' >organización</th>
-					  	<th class='text-center' >Teléfono</th>
-					  	<th class='text-center' >Movil</th>
-					  	<th class='text-center' >Correo</th>
-					  	<th class='text-center'>Página web</th>
-					  	<th class='text-center' >Dirección</th>
-					  	<th class='text-center' >Tipo</th>					  	
-					  	<th class='text-center' >Estado</th>
-					  	<th class='text-center' >Fecha registro</th>					  	
-					  	<th class='text-center' ></th>					  	
-					  </tr>";	
+			$contacto .="<tr class='text-center enid-header-table'>";
+				$contacto .= get_td( "#", "");
+				$contacto .= get_td("IMG" , "" );
+				$contacto .= get_td( "Contacto" , "");
+				$contacto .= get_td("organización" , "" );
+				$contacto .= get_td("Teléfono" , "" );
+				$contacto .= get_td("Movil" , "" );
+				$contacto .= get_td("Correo" , "" );
+				$contacto .= get_td("Página web" , "" );
+				$contacto .= get_td("Dirección" , "" );
+				$contacto .= get_td("Tipo" , "" );					  	
+				$contacto .= get_td("Estado" , "" );
+				$contacto .= get_td("Fecha registro" , "" );					  	
+				$contacto .= get_td("" , "" );					  	
+			$contacto.= "</tr>";	
 		}
 
-		$contacto .="
-		
+		$contacto .="		
 		</table>
 		<span class=''>Resultados encontrados:  ". ($b -1)."<span>
-		</div>";
+		";
 		return $contacto;	
 	}
 
@@ -144,52 +135,52 @@ if(!function_exists('invierte_date_time')){
 
 
 		$table ='<table class="table display table table-bordered dataTable">										  
-					  <tr class="text-center header-table-info" >
-					  	<th class="text-center">Contactos</th>
-					  	<th class="text-center">Proveedores</th>
-					  	<th class="text-center">Artistas</th>
-					  	<th class="text-center">Colaboradores</th>
-					  	<th class="text-center">Contactos comerciales</th>
-					  	<th class="text-center">Clientes</th>
-					  	<th class="text-center">Instituciones</th>					  
-					  	<th class="text-center">Con correo electrónico</th>					  		
-					  	<th class="text-center">Con página web</th>					  		
-					  	<th class="text-center">Con tel </th>
+					  <tr class="text-center header-table-info" >';
+					  	$table .= get_td( "Contactos", "" );
+					  	$table .= get_td( "Proveedores", "" );
+					  	$table .= get_td( "Artistas", "" );
+					  	$table .= get_td( "Colaboradores", "" );
+					  	$table .= get_td( "Contactos comerciales", "" );
+					  	$table .= get_td( "Clientes", "" );
+					  	$table .= get_td( "Instituciones", "" );					  
+					  	$table .= get_td( "Con correo electrónico", "" );					  		
+					  	$table .= get_td( "Con página web", "" );					  		
+					  	$table .= get_td( "Con tel ", "" );
 
-					  </tr>';
+		$table .='</tr>';
 		
 
 
 		foreach ($data as $row) {
 			    
-			$table.="<tr   class='text-center'>
-						<td>".$row["contactos"] ."</td>
-						<td>".$row["proveedores"]."</td>
-						<td>".$row["artistas"] ."</td>
-						<td>".$row["Colaboradores"] ."</td>
-						<td>".$row["Contacto_comercial"] ."</td>
-						<td>".$row["Clientes"] ."</td>
-						<td>".$row["instituciones"] ."</td>
-						<td>".$row["con_correo"] ."</td>
-						<td>".$row["con_pagina_web"] ."</td>
-						<td>".$row["con_tel"] ."</td>
+			$table.="<tr   class='text-center'>";
+						$table .=get_td($row["contactos"] , "" );
+						$table .=get_td($row["proveedores"], "" );
+						$table .=get_td($row["artistas"] , "" );
+						$table .=get_td($row["Colaboradores"] , "" );
+						$table .=get_td($row["Contacto_comercial"] , "" );
+						$table .=get_td($row["Clientes"] , "" );
+						$table .=get_td($row["instituciones"] , "" );
+						$table .=get_td($row["con_correo"] , "" );
+						$table .=get_td($row["con_pagina_web"] , "" );
+						$table .=get_td($row["con_tel"] , "" );
 						
 
-					</tr>";	  	
-			$table .="<tr class='text-center'>
-						<td>". get_porcentajes_contactos( $row["contactos"] , $row["contactos"]  )."</td>
-						<td>". get_porcentajes_contactos( $row["contactos"], $row["proveedores"] )."</td>
-						<td>". get_porcentajes_contactos( $row["contactos"], $row["artistas"]   )."</td>
-						<td>". get_porcentajes_contactos( $row["contactos"],  $row["Colaboradores"])  ."</td>
-						<td>". get_porcentajes_contactos( $row["contactos"],  $row["Contacto_comercial"]  )."</td>
-						<td>". get_porcentajes_contactos( $row["contactos"], $row["Clientes"] )."</td>
-						<td>". get_porcentajes_contactos( $row["contactos"], $row["instituciones"])."</td>
-						<td>". get_porcentajes_contactos( $row["contactos"], $row["con_correo"])."</td>
-						<td>". get_porcentajes_contactos( $row["contactos"], $row["con_pagina_web"])."</td>
-						<td>". get_porcentajes_contactos( $row["contactos"], $row["con_tel"])."</td>
+			$table .="</tr>";	  	
+			$table .="<tr class='text-center'>";
+						$table .= get_td( get_porcentajes_contactos( $row["contactos"] , $row["contactos"]  ) , "");
+						$table .= get_td( get_porcentajes_contactos( $row["contactos"], $row["proveedores"] ) , "");
+						$table .= get_td( get_porcentajes_contactos( $row["contactos"], $row["artistas"]   ) , "");
+						$table .= get_td( get_porcentajes_contactos( $row["contactos"],  $row["Colaboradores"])   , "");
+						$table .= get_td( get_porcentajes_contactos( $row["contactos"],  $row["Contacto_comercial"]  ) , "");
+						$table .= get_td( get_porcentajes_contactos( $row["contactos"], $row["Clientes"] ) , "");
+						$table .= get_td( get_porcentajes_contactos( $row["contactos"], $row["instituciones"]) , "");
+						$table .= get_td( get_porcentajes_contactos( $row["contactos"], $row["con_correo"]) , "");
+						$table .= get_td( get_porcentajes_contactos( $row["contactos"], $row["con_pagina_web"]) , "");
+						$table .= get_td( get_porcentajes_contactos( $row["contactos"], $row["con_tel"]) , "");
 						
 
-		 			</tr>";  					 
+		 			$table  .="</tr>";  					 
 		}	  
 		$table .="</table><br>";					
 		return $table;

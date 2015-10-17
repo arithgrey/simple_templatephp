@@ -1,6 +1,5 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 require_once( 'application/libraries/api_github/github-php-client-master/client/GitHubClient.php');
-
 require_once( 'application/config/github.php');
 class Soportesocialintelligence extends CI_Controller {
 

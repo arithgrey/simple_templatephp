@@ -1,6 +1,5 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
-
- class comentariosmodel extends CI_Model {
+class comentariosmodel extends CI_Model {
 
 function __construct(){
 

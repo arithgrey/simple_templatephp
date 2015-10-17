@@ -5,54 +5,54 @@ if(!function_exists('invierte_date_time')){
 	function resumen_artistas_table($data){
 
 
-		$table='<table class="table display table table-bordered dataTable">										  					  
-					  	<tr class="text-center header-table-info" >
-					  	<th class="text-center">Escenario que pertenece al evento </th>
-					  	<th class="text-center">Escenario con información para el público</th>
-					  	<th class="text-center">Artistas</th>
-					  	<th class="text-center">Artistas con enlace a youtube</th>
-					  	<th class="text-center">Con enlace a pistas musicales</th>
-					  	<th class="text-center">Con horario de presentación</th>
-					  	<th class="text-center">Pendientes por confirmar</th>
-					  	<th class="text-center">Artistas que ya han conformado su asistencia</th>					  	
-					  	<th class="text-center">Artistas que promenten asistir</th>					  						  						  	
-					  </tr>';
+		$table='<table class="table display table table-bordered dataTable">
+				<tr class="text-center header-table-info" >';
+		$table .= get_td("Escenario que pertenece al evento " , "");										  					  
+		$table .= get_td("Escenario con información para el público" , "");
+					  	
+					  	
+					  	
+		$table .= get_td("Artistas" , "");
+		$table .= get_td("Artistas con enlace a youtube" , "");
+		$table .= get_td("Con enlace a pistas musicales" , "");
+		$table .= get_td("Con horario de presentación" , "");
+		$table .= get_td("Pendientes por confirmar" , "");
+		$table .= get_td("Artistas que ya han conformado su asistencia" , "");					  	
+		$table .= get_td("Artistas que promenten asistir" , "");					  						  						  	
+					  
 
 		
-		$table.="<tr></tr>";
+		$table.="</tr>";
 
 		foreach ($data as $row) {
 
-			$table.='<tr >			
+			$table.='<tr class="text-center" >';								  	
+				$table .= get_td( $row["evento"] , "" );
+				$table .= get_td($row["con_descripcion"]  , "" );
+				$table .= get_td($row["artistas"]  , "" );
+				$table .= get_td( $row["artistas_videos_youtube"] , "" );
+				$table .= get_td( $row["artistas_pistas_sound"]  , "" );
+				$table .= get_td( $row["artistas_con_horario"] , "" );
+				$table .= get_td($row["artistas_pendientes"] , "" );
+				$table .= get_td( $row["artistas_conformado"] , "" );					  	
+				$table .= get_td($row["artistas_prometen_asistencia"] , "" );					  						  						  	
 
-					  	<tr class="text-center" >
-					  	<td class="text-center">'. $row["evento"].'</td>
-					  	<td class="text-center">'.$row["con_descripcion"] .'</td>
-					  	<td class="text-center">'.$row["artistas"] .'</td>
-					  	<td class="text-center">'. $row["artistas_videos_youtube"].'</td>
-					  	<td class="text-center">'. $row["artistas_pistas_sound"] .'</td>
-					  	<td class="text-center">'. $row["artistas_con_horario"].'</td>
-					  	<td class="text-center">'.$row["artistas_pendientes"].'</td>
-					  	<td class="text-center">'. $row["artistas_conformado"].'</td>					  	
-					  	<td class="text-center">'.$row["artistas_prometen_asistencia"].'</td>					  						  						  	
-
-					  </tr>';
+			$table .='</tr>';
 
 
 
 
-			$table.='<tr >										  					  
-						  	<tr class="text-center" >
-						  	<td class="text-center" colspan="2"></td>
-						  	<td class="text-center">'. get_porcentaje_artistas($row["artistas"] , $row["artistas"] )  .'</td>
-						  	<td class="text-center">'. get_porcentaje_artistas($row["artistas"] , $row["artistas_videos_youtube"]).'</td>
-						  	<td class="text-center">'. get_porcentaje_artistas($row["artistas"] ,  $row["artistas_pistas_sound"] ).'</td>
-						  	<td class="text-center">'. get_porcentaje_artistas($row["artistas"] , $row["artistas_con_horario"]).'</td>
-						  	<td class="text-center">'. get_porcentaje_artistas($row["artistas"] , $row["artistas_pendientes"]).'</td>
-						  	<td class="text-center">'. get_porcentaje_artistas($row["artistas"] , $row["artistas_conformado"]).'</td>					  	
-						  	<td class="text-center">'. get_porcentaje_artistas($row["artistas"] , $row["artistas_prometen_asistencia"]).'</td>					  						  						  	
+			$table.='<tr class="text-center" >';										  					  						  	
+			$table .='<td class="text-center" colspan="2"></td>';
+				$table .= get_td( get_porcentaje_artistas($row["artistas"] , $row["artistas"] )  , "");
+				$table .= get_td( get_porcentaje_artistas($row["artistas"] , $row["artistas_videos_youtube"]), "");
+				$table .= get_td( get_porcentaje_artistas($row["artistas"] ,  $row["artistas_pistas_sound"] ), "");
+				$table .= get_td( get_porcentaje_artistas($row["artistas"] , $row["artistas_con_horario"]), "");
+				$table .= get_td( get_porcentaje_artistas($row["artistas"] , $row["artistas_pendientes"]), "");
+				$table .= get_td( get_porcentaje_artistas($row["artistas"] , $row["artistas_conformado"]), "");					  	
+				$table .= get_td( get_porcentaje_artistas($row["artistas"] , $row["artistas_prometen_asistencia"]), "");					  						  						  	
 
-						  </tr>';			  
+			$table .='</tr>';			  
 		}
 
 
@@ -90,12 +90,12 @@ if(!function_exists('invierte_date_time')){
 				$hora_termino ="Próximamente";	
 			}
 
-			$artistas_block .='<tr>
-								<td>'.$flag .'</td>
-								<td>'.$row["nombre_artista"].'</td>
-								<td>'.$hora_inicio.'</td>
-								<td>'.$hora_termino.'</td>
-							</tr>';		
+			$artistas_block .='<tr>';
+			$artistas_block .= get_td( $flag , "");
+			$artistas_block .= get_td( $row["nombre_artista"], "");
+			$artistas_block .= get_td( $hora_inicio, "");
+			$artistas_block .= get_td( $hora_termino, "");
+			$artistas_block .='</tr>';		
 							$flag++;
 		}
 		return $artistas_block;

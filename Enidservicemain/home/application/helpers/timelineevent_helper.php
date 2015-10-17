@@ -1,10 +1,5 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
- 
-//si no existe la función invierte_date_time la creamos
 if(!function_exists('invierte_date_time')){
-
-
-
 function get_time_line_event($arreglo_time_line , $longitud_descripcion_text){
 
   $time_list ="";
@@ -15,7 +10,6 @@ function get_time_line_event($arreglo_time_line , $longitud_descripcion_text){
   if (count($arreglo_time_line) ==  0 ) {
     $time_list = get_time_def();
   }
-
 
   foreach ($arreglo_time_line as $row) {
       
