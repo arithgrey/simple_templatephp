@@ -11,35 +11,27 @@
 <?=ini_set('display_errors', '1');?>
 
 
-
-
-
-
-<div class='response' id='response'></div>   
-
-
-
 <div class="container"> 
     <div class="jumbotron">
-    	<div class='row'>
+    	
 
-        <div class='row'>            
-	       <h1 class='nombre-escenario-text'><?=$data_escenario["nombre"];?></h1>	    
-        </div>
-
-        <div class='row'>
-        <div class='respuesta-img-upload'></div>
+        
+        <div class='row'>        
         <div class="container">
             <div class="row">
-                <div class="center-block">
-                    
+                <div class="center-block">                    
                     <div class='col-md-12'>
-                        <div class='lista-imagenes' id="lista-imagenes"></div>
+                        <div class='slider-principal-escenario' id='slider-principal-escenario'>
+                            <?=$slider_principal_escenario;?>    
+                        </div>
                         <input type='hidden' name='action' value="carga-imgenes-escenario">
                     </div>
 
                 </div>
             </div>
+        </div>
+        <div class='row'>            
+           <h1 class='nombre-escenario-text'><?=$data_escenario["nombre"];?></h1>       
         </div>
         </div>   
 
@@ -134,7 +126,7 @@
 
 
 </div>
-
+</div>
 
 
 
@@ -223,7 +215,7 @@
             </div>
         </div>
     </div>
-</div>
+
 
 
 
@@ -384,23 +376,6 @@
         </div>
     </div>
 </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -580,4 +555,8 @@
         });    
     }
 </script>    
+
+
+
+
 

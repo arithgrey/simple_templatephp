@@ -6,11 +6,6 @@ function __construct(){
         parent::__construct();        
         $this->load->database();
 }
-
-
-
-
-
 function registraartistaescenario($idescenario , $nuevoartista , $idempresa){
 
 	$registroartista = $this->nuevoartista($nuevoartista);
@@ -118,6 +113,3 @@ function get_artistas_resumen($id_escenario , $data_escenario, $nombre_evento){
 
 /*Termina modelo */
 }
-
-
-

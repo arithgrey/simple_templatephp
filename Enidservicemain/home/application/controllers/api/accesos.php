@@ -1,7 +1,6 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
 require APPPATH.'/libraries/REST_Controller.php';
 class Accesos extends REST_Controller{
-
     function __construct(){
             parent::__construct();
 
@@ -13,7 +12,6 @@ class Accesos extends REST_Controller{
             $this->load->library('sessionclass');
             
         }     
-
     function resumen_accesos_punto_venta_evento_GET(){
         $this->validate_user_sesssion();
         $id_evento = $this->get("evento");

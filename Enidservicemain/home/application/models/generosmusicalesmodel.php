@@ -1,13 +1,9 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
 class generosmusicalesmodel extends CI_Model {
 function __construct(){
-
         parent::__construct();        
         $this->load->database();
-}
-
-
-	
+}	
 function getDataByidEvent($idempresa, $idevento){
 	
 	
@@ -46,6 +42,3 @@ function update_genero_evento($idempresa, $idevento , $idgenero ){
 }
 /*Termina modelo */
 }
-
-
-

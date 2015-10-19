@@ -1,12 +1,10 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
 class misdatosmodel extends CI_Model {
-
 function __construct(){
 
         parent::__construct();        
         $this->load->database();
 }
-
 function actualizarNombre($nombre, $idPersona)
 {
     $queryUpdate = "UPDATE usuario SET nombre = '".$nombre."' WHERE idusuario = '".$idPersona."' ";  
@@ -49,10 +47,3 @@ function mostrarDescripcion($idPersona)
 }
     
 }/*Termina la función */
-
-
-
-
-
-
-

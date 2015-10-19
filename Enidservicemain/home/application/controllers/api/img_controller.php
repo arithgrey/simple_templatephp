@@ -1,11 +1,11 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
 require APPPATH.'/libraries/REST_Controller.php';
 class Img_controller extends REST_Controller{
-
   function __construct(){
         parent::__construct();
         
         $this->load->model("img_model");
+        $this->load->helper("escenario");
         $this->load->helper("img_eventsh");
         $this->load->library('sessionclass');
             
@@ -29,6 +29,7 @@ class Img_controller extends REST_Controller{
       $this->response($db_response);  
 
   }
+
   /**/
   function escenario_artista_post(){  
 
@@ -36,6 +37,7 @@ class Img_controller extends REST_Controller{
       $id_usuario = $this->sessionclass->getidusuario();    
       $id_empresa =  $this->sessionclass->getidempresa();            
       $db_response = $this->img_model->insert_principal_escenario_artista($this->post() , $id_usuario , $id_empresa );
+      
       $this->response($db_response);  
 
   }
@@ -47,7 +49,16 @@ class Img_controller extends REST_Controller{
       $id_usuario = $this->sessionclass->getidusuario();    
       $id_empresa =  $this->sessionclass->getidempresa();            
       $db_response = $this->img_model->insert_principal_escenario($this->post() , $id_usuario , $id_empresa );
-      $this->response($db_response);  
+      
+      $id_escenario= $this->post("id_escenario");
+      $img_data = $this->img_model->get_imgs_escenario($id_escenario);
+      $slider_principal_escenario =  get_slider_img_escenario($img_data);
+
+
+
+      $data["stus_response"] = $db_response;
+      $data["slider_principal_escenario"] =  $slider_principal_escenario;
+      $this->response($data);  
 
   }
 
@@ -99,4 +110,3 @@ class Img_controller extends REST_Controller{
 
 
 }
-

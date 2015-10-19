@@ -1,7 +1,6 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
 require APPPATH.'/libraries/REST_Controller.php';
 class Contactos extends REST_Controller{
-
   function __construct(){
         parent::__construct();
        
@@ -9,16 +8,13 @@ class Contactos extends REST_Controller{
         $this->load->model("contactmodel");
         $this->load->library('sessionclass');
             
-  }   
-  
+  }     
   function contactos_resumen_GET(){
     
       $this->validate_user_sesssion();
       $id_usuario =  $this->sessionclass->getidusuario();
       $data_repo_contactos = $this->contactmodel->get_repo_contactos($id_usuario);        
-      $this->response(resumen_contactos( $data_repo_contactos));
-      
-          
+      $this->response(resumen_contactos( $data_repo_contactos));              
   }      
   /**/
   function contacto_post(){
@@ -76,10 +72,6 @@ class Contactos extends REST_Controller{
 
   }
   /*Terminal la función*/
-
-
-
-
     /**/
     function validate_user_sesssion(){
                   if( $this->sessionclass->is_logged_in() == 1) {                        
@@ -90,4 +82,3 @@ class Contactos extends REST_Controller{
                   }   
       }/*termina validar session */
 }
-

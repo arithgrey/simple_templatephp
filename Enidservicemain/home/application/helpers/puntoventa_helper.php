@@ -1,6 +1,6 @@
 <?php if( ! defined('BASEPATH')) exit('No direct script access allowed');
 if(!function_exists('invierte_date_time')){
-
+	
 	function get_resumen_puntos_venta_asociados($data){
 	
 		$table ="<table class='table display table table-bordered dataTable'>";
@@ -44,26 +44,26 @@ if(!function_exists('invierte_date_time')){
 
 		return $table;
 	}
-	/**/
+	/**/	
 	function resumen_puntos_venta_f($data){
 
 		$table ="<table class='table display table table-bordered dataTable'>";
 
-		$table.="<tr class='header-table-info text-center'>
-					<td> Ventas </td>
-					<td> Ventas de una sóla exhibición </td>
-					<td> Preveentas </td>
-					<td> Promociones </td>
-				</tr>";
+		$table.="<tr class='header-table-info text-center'>";
+					$table .=get_td("Ventas", "");
+					$table .=get_td("Ventas de una sóla exhibición", "");
+					$table .=get_td("Preveentas", "");
+					$table .=get_td("Promociones", "");
+		$table .="</tr>";
 		foreach ($data as $row){
 				
 			$total = ($row["ventas_unicas"] +  $row["preveentas"] + $row["promociones"]);	
-			$table .="<tr class='text-center' style='font-size:.8em;'>
-						<td>". $total ."</td>
-						<td>". $row["ventas_unicas"] ."</td>
-						<td>". $row["preveentas"] ."</td>
-						<td>". $row["promociones"] ."</td>
-					 </tr>";	
+			$table .="<tr class='text-center' style='font-size:.8em;'>";
+						$table .= get_td($total , "");
+						$table .= get_td($row["ventas_unicas"] , "");
+						$table .= get_td($row["preveentas"] , "");
+						$table .= get_td($row["promociones"] , "");
+			$table .="</tr>";	
 
 
 			$table .="<tr class='text-center' style='font-size:.8em;'>
@@ -72,8 +72,7 @@ if(!function_exists('invierte_date_time')){
 						<td>". porcentaje_puntos_venta($total , $row["preveentas"]) ."</td>
 						<td>". porcentaje_puntos_venta($total , $row["promociones"]) ."</td>
 					  </tr>";	
-			 
-					 
+			 					
 		}
 
 		$table .="</table>";	
@@ -106,18 +105,16 @@ if(!function_exists('invierte_date_time')){
 		$data_list .="</datalist>";
 		return $data_list;
 	}
-
 	/*regresa los puntos de venta asociados al evento*/
 	function list_puntos_venta_evento($data){
 	
 		$table ="<table class='table display table table-bordered dataTable' >";		
 		$table .="<form action ='". base_url('index.php/api/puntosventa/punto_venta_evento_all/format/json') ."' id='form-punto-in-evento' ><tr  class='enid-header-table text-center'>";		
-		$table .="<td style='text-align: center;' ># </td> 
-				  <td style='text-align: center;'  >Punto de venta </td>
-				  
-				  <td style='text-align: center;'>Logo</td></td>
-				  <td style='text-align: center;'>Medios de contacto</td>  
-				  <td style='text-align: center;'>Asociado al evento</td>";		
+		$table .= get_td("#" , "" ); 
+				  $table .= get_td("Punto de venta" , "" );				 
+				  $table .= get_td("Log" , "" );
+				  $table .= get_td("Medios de contacto" , "" );  
+				  $table .= get_td("Asociado al event" , "" );		
 		$table .="</tr>";		
 		
 		$ingresos =0;
@@ -139,20 +136,23 @@ if(!function_exists('invierte_date_time')){
 
 			$table.="<tr class='text-center'>";
 
-				$table.="<td   style='font-size: .8em;'>".$b."</td>";	
-				$table.="<td class='franja-vertical'  style='font-size: .8em;'>".$razon_social."</td>";	
+				$table.="<td>".$b."</td>";	
+				$table.="<td class='franja-vertical' >".$razon_social."</td>";	
 
-				$table.="<td  style='font-size: .8em;'></td>";	
+				$table.="<td></td>";	
 				
-				$table.="<td  style='font-size: .8em;'><i class='fa fa-book'></i></td>";	
+
+
+
+				$table.="<td><i data-toggle='modal' data-target='#contactos-relacionados-punto-venta' class='puntos_venta_contacto fa fa-book' id='". $idpunto_venta ."'></i></td>";	
 
 		
 				if ($puntoventa != null  ){
 
-					$table.="<td style='font-size: .8em;'  ><input type='checkbox' class='punto_venta' id='". $idpunto_venta ."' name='punto_venta_in_evento' value='".$punto_venta."' checked></td>";		
+					$table.="<td><input type='checkbox' class='punto_venta' id='". $idpunto_venta ."' name='punto_venta_in_evento' value='".$punto_venta."' checked></td>";		
 					$ingresos ++;
 				}else{
-					$table.="<td  style='font-size: .8em;'><input type='checkbox' class='punto_venta' id='". $idpunto_venta ."'  name='punto_venta_in_evento' value='".$punto_venta."' ></td>";		
+					$table.="<td><input type='checkbox' class='punto_venta' id='". $idpunto_venta ."'  name='punto_venta_in_evento' value='".$punto_venta."' ></td>";		
 				}
 				
 
@@ -257,22 +257,22 @@ if(!function_exists('invierte_date_time')){
 
 	function list_puntos_venta_administracion_empresa($data){
 		
-		$list="<table class='table display table table-bordered dataTable' >        
-		        <tr class='enid-header-table' >  
-		        	<td >#</td>	         
-		        	<td >IMG</td>	         
-		            <td class='text-center' >Razón Social</td>		            		            
-		            <td class='text-center'>Estado</td>		            
-		            <td class='text-center'>Nota para el público</td>
-		            <td class='text-center'>Usuario Registrante</td>
-		            <td class='text-center'>Estado del Registrante</td>
-		            <td class='text-center'>Fecha registro</td>
+		$list="<br><table class='table display table table-bordered dataTable' >        
+		        <tr class='enid-header-table' > "; 
+		        	$list .= get_td("#", "" );	         
+		        	$list .= get_td("IMG", "" );	         
+		            $list.= get_td("Razón Social", "" );		            		            
+		            $list.= get_td("Estado", "" );		            
+		            $list.= get_td("Nota para el público", "" );
+		            $list.= get_td("Usuario Registrante", "" );
+		            $list.= get_td("Estado del Registrante", "" );
+		            $list.= get_td("Fecha registro", "" );
 		            
-		            <td class='text-center'>Contactos Asociados</td>
+		            $list.= get_td("Contactos Asociados", "" );
 
-		            <td class='text-center'>Editar</td>            
-		            <td class='text-center'>Remover</td>            
-		        </tr>";			
+		            $list.= get_td("Editar", "" );            
+		            $list.= get_td("Remover", "" );            
+		$list .="</tr>";			
 
         $num_puntos_venta =0;
         $b =1;
@@ -289,9 +289,8 @@ if(!function_exists('invierte_date_time')){
 			$estado_usuario  =  $row["estado_usuario"];
 
 
-			$list.="<tr style='font-size:.8em;' class='text-center  media usr-info'>
-					<td>".$b."</td>";
-					
+			$list.="<tr style='font-size:.8em;' class='text-center  media usr-info'>";
+					$list .= get_td( $b , "" );					
 
 					if ($row["nombre_imagen"] != null ){
 
@@ -307,21 +306,15 @@ if(!function_exists('invierte_date_time')){
 
 					}
 
-					$list.="<td class='franja-vertical'>".$razon_social."</td>
+					$list.=get_td($razon_social, "class='franja-vertical' ");
+					$list.= get_td($status  , "" );
 					
-					
-					<td>".$status  ."</td>
-					
-					<td>".$descripcion  ."</td>
-					<td>".$nombre  ."</td>
-					<td>".$estado_usuario."</td>
-					<td>".$fecha_registro."</td>";
+					$list.= get_td($descripcion  , "" );
+					$list.= get_td($nombre  , "" );
+					$list.= get_td($estado_usuario, "" );
+					$list.= get_td($fecha_registro, "" );
 
-						
-
-			
-
-
+				
 
 			$list.="<td  class='contactos' id='". $idpunto_venta  ."' > 
 						<i class='fa fa-book contactos' id='". $idpunto_venta  ."' 

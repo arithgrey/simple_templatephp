@@ -1,5 +1,5 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
- class cuentageneralmodel extends CI_Model {
+class cuentageneralmodel extends CI_Model {
     function __construct()
     {
         parent::__construct();        
@@ -137,6 +137,5 @@ function get_resumen_usuarios_cuenta($id_empresa){
 
 
 }
-
 /*Termina modelo */
 }

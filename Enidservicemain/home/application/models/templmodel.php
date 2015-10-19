@@ -1,5 +1,5 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
- class templmodel extends CI_Model {
+class templmodel extends CI_Model {
     function __construct()
     {
         parent::__construct();        
@@ -244,5 +244,3 @@ where idusuario="'.$id_usuario.'" ';
 
         
 }
-
-

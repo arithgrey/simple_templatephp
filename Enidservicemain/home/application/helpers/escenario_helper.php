@@ -1,6 +1,5 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 if(!function_exists('invierte_date_time')){
-
 /*******************************************************************************************************/
 function list_resum_escenarios($array_escenario, $id_evento , $limit_text, $background='blue-col-enid'){
 
@@ -213,8 +212,6 @@ function list_escenarios_on_loadevent($responsedbescenario){
 /*****************+******_es**********+****************+****************+****************+*/
 /*generos musicales del evento */
 function get_generos($data){
-
-
 $generos = '<div class="block clearfix">
                 <h3 style ="background:#116986;  color:white; padding:10px;"  class="title">Géneros musicales</h3>
                 <div class="separator-2"></div>
@@ -236,10 +233,119 @@ $generos .= '</div>
             </div>'; 
  return $generos;                               
 }
- 
+
+
+/******************************************************************/
+function get_slider_img_escenario($data){
+
+    if (count($data)>0 ) {
+
+      return get_slider_img($data); 
+    }else{
+
+      return  get_call_slider_img();
+        
+    }
+    
+}
+/**/
+function get_slider_img($data){
+
+    $slider = '<div class="row" style="padding:5%; background: #069F89;" ><div id="Carousel-escenario" class="carousel slide" data-ride="carousel">';
+    $slider .= '<div class="row"><ol class="carousel-indicators">';
+
+    for ($a=0; $a <count($data); $a++) {                 
+        if($a < 1 ){
+            $slider .= '<li data-target="#Carousel-escenario" data-slide-to="'.$a.'" class="active"></li>';                
+        }else{
+            $slider .= '<li data-target="#Carousel-escenario" data-slide-to="'.$a.'" ></li>';        
+
+        }        
+    }
+    $slider .= '</ol><div>';    
+    $slider .='<div class="row"><div class="carousel-inner" role="listbox">';
+    $flag =0;
+    foreach ($data as $row) {   
+
+        $path_img = $row["base_path_img"]. $row["nombre_imagen"]; 
+        if ($flag < 1 ) {
+            
+            $slider .= '<div class="item active">
+                      <img src="'. base_url($path_img) .'" alt="Chania">
+                    </div>';            
+        }else{
+            $slider .= '<div class="item">
+                      <img src="'. base_url($path_img) .'" alt="ok">
+                    </div>';        
+        }        
+        $flag ++;
+    }
+    $slider .= '</div></div>';
+
+    $slider .= '<div class="row">  <a class="left carousel-control" href="#Carousel-escenario" role="button" data-slide="prev">
+                <span class="fa fa-chevron-left  fa-3x" aria-hidden="true"></span>
+                <span class="sr-only">Anterior</span>
+              </a>
+              <a class="right carousel-control" href="#Carousel-escenario" role="button" data-slide="next">
+                <span class="fa fa-chevron-right  fa-3x" aria-hidden="true"></span>
+                <span class="sr-only">Siguiente</span>
+              </a></div>';
+    $slider .= '</div></div>';
+    
+/*
+
+    $slider .= '<div id="Carousel-escenario" class="carousel slide" data-ride="carousel">
+  
+  <ol class="carousel-indicators">
+    <li data-target="#Carousel-escenario" data-slide-to="0" class="active"></li>
+    <li data-target="#Carousel-escenario" data-slide-to="1"></li>
+    <li data-target="#Carousel-escenario" data-slide-to="2"></li>
+    <li data-target="#Carousel-escenario" data-slide-to="3"></li>
+  </ol>
+
+  <div class="carousel-inner" role="listbox">
    
+                            <div class="item active">
+                              <img src="" alt="Chania">
+                            </div>
+
+                            <div class="item">
+                              <img src="img_chania2.jpg" alt="Chania">
+                            </div>
+
+                            <div class="item">
+                              <img src="img_flower.jpg" alt="Flower">
+                            </div>
+
+                            <div class="item">
+                              <img src="img_flower2.jpg" alt="Flower">
+                            </div>
+  </div>
+
+  <a class="left carousel-control" href="#Carousel-escenario" role="button" data-slide="prev">
+    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+    <span class="sr-only">Previous</span>
+  </a>
+  <a class="right carousel-control" href="#Carousel-escenario" role="button" data-slide="next">
+    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+    <span class="sr-only">Next</span>
+  </a>
+</div>';
+
+*/
+return $slider; 
 
 
 
+
+}
+
+
+
+/**/
+function get_call_slider_img(){
+    return "ok"; 
+}
+
+/*******************************************************************/
 }/*Termina el helper*/
- 

@@ -232,8 +232,3 @@ group by  pv.idempresa
 	}
 /*Termina modelo */
 }
-
-
-
-
-

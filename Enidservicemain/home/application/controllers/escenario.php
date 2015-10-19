@@ -1,9 +1,9 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 class Escenario  extends CI_Controller {
-
 	function __construct(){
 		parent::__construct();
 
+        $this->load->model("img_model");
         $this->load->model("eventmodel");
         $this->load->model("escenarioartistamodel");
         $this->load->model("escenariomodel");
@@ -26,7 +26,8 @@ class Escenario  extends CI_Controller {
         $data = $this->validate_user_sesssion("Escenario del evento " . $nombre_evento);                                                         
         $base_path = substr($_SERVER["SCRIPT_FILENAME"], 0 , (strlen($_SERVER["SCRIPT_FILENAME"]) -9)  )."application/uploads/uploads/empresa/".$this->sessionclass->getidempresa()."/ee/";
         $base_path_artista = substr($_SERVER["SCRIPT_FILENAME"], 0 , (strlen($_SERVER["SCRIPT_FILENAME"]) -9)  )."application/uploads/uploads/empresa/".$this->sessionclass->getidempresa()."/ar/";
-       
+        
+
 
         if ( create_dinamic_dic($base_path) ==  1 ) {
             $data["base_path"] = $base_path;
@@ -44,6 +45,11 @@ class Escenario  extends CI_Controller {
 
         }
 
+
+
+        /*imagenes del escenario  sección principal*/
+        $img_data = $this->img_model->get_imgs_escenario($id_escenario);
+        $data["slider_principal_escenario"] =  get_slider_img_escenario($img_data);
 
 
 
@@ -155,4 +161,3 @@ class Escenario  extends CI_Controller {
 	
 		
 }/*Termina el controlador */
- 

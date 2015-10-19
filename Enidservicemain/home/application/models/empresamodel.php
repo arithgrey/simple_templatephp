@@ -25,9 +25,6 @@ function insert_incidencia_empresa($id_empresa , $id_usuario ,  $data ){
                   '". $data["tipo-incidencia"] ."', 
                   '". $data["otro"] ."'
                 )";
-
-
-  
     }else{
 
   $query_insert ="INSERT INTO  incidencia(          
@@ -197,6 +194,3 @@ function recordempresawhitname( $nombreempresa ){
 }/*Termina la función */
 /*Termina modelo */
 }
-
-
-

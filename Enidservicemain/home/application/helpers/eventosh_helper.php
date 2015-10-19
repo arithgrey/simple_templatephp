@@ -1,7 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 if(!function_exists('invierte_date_time')){
-function listobjetosp( $arreglo ){ 
-	
+function listobjetosp( $arreglo ){ 	
 	$list ="";
 	$b =1;
 
@@ -286,11 +285,3 @@ function get_last_events_empresa($ultimos_eventos, $limit_text= 270 ,  $show_edi
 
 
 }/*Termina el helper*/
- 
-
-
-
-
-
-
-

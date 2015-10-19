@@ -1,7 +1,6 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
 require APPPATH.'/libraries/REST_Controller.php';
 class CambioPasswordControlador extends REST_Controller{
-
     function __construct(){
             parent::__construct();
             $this->load->model("passwordmodel");            
@@ -35,7 +34,4 @@ class CambioPasswordControlador extends REST_Controller{
                     $this->sessionclass->logout();
                 }   
     }/*termina validar session */
-
-
-
 }/*Termina rest*/

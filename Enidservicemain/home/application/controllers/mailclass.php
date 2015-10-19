@@ -6,7 +6,6 @@ public function __construct(){
 	parent::__construct();
 	$this->load->library("email");
 }
-
 public function sendMailGmail()
 	{
 		//cargamos la libreria email de ci
@@ -77,31 +76,3 @@ public function sendMailGmail()
 	 
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -1,7 +1,6 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
 require APPPATH.'/libraries/REST_Controller.php';
-class Serviciosevento extends REST_Controller{
-      
+class Serviciosevento extends REST_Controller{      
     function __construct(){
         parent::__construct();
         $this->load->helper("servicios");    
@@ -44,10 +43,5 @@ class Serviciosevento extends REST_Controller{
                     $this->sessionclass->logout();
                 }   
     }/*termina validar session */
-
-
-
-
-
 }
 ?>

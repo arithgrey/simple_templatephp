@@ -43,32 +43,5 @@ class Imgevento extends REST_Controller{
         
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 }
 ?>
-
-
-
-
-
-

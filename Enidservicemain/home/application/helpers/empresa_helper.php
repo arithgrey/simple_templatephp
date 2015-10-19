@@ -12,8 +12,6 @@ function usuarios_reportados($data){
   $options .=  "</select>";  
   return $options;
 }
-
-
 function sub_tipos_inicidencia_options($data){
 
   $options ="";
@@ -106,6 +104,5 @@ function data_contactos_empresa($data){
       <span><a href='". base_url('index.php/directorio/contactos') ."'><button class='btn btn-block btn-info'>+ir  a la sección de contactos</button></a></span>
     </div>";
     return $list;
-
-}
+  }
 }/*Termina el helper*/

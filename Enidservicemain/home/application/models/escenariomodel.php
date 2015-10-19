@@ -1,6 +1,5 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
 class escenariomodel extends CI_Model {
-
 function __construct(){
 
         parent::__construct();        
@@ -174,6 +173,3 @@ function record_url_artista($id_escenario , $id_artista , $url , $social ){
 
 /*Termina modelo */
 }
-
-
-

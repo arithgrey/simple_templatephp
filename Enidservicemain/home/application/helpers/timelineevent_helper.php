@@ -139,8 +139,3 @@ function get_time_def(){
 
 
 }/*Termina el helper*/
- 
-
-
-
-

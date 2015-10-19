@@ -1,13 +1,11 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
 require APPPATH.'/libraries/REST_Controller.php';
-class OrganizacionControlador extends REST_Controller{
-    
+class OrganizacionControlador extends REST_Controller{    
     function __construct(){
         parent::__construct();
         $this->load->model("organizacionmodel");            
         $this->load->library('sessionclass');        
     }
-
     /**/
     function mostrarCiudades_get(){
         $this->validate_user_sesssion();
@@ -33,6 +31,4 @@ class OrganizacionControlador extends REST_Controller{
                     $this->sessionclass->logout();
                 }   
     }/*termina validar session */
-
-
 }

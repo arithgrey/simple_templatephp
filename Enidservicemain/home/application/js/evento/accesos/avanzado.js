@@ -14,7 +14,7 @@ $(document).on("ready", function(){
 	});
 
 	$("#imgs-acceso").change(upload_main_imgs);
-
+	$(".puntos_venta_contacto").click(load_data_puntos_venta_accesos_info);
 
 });
 /*Eliminar al conformar */
@@ -123,6 +123,9 @@ function list_puntos_venta_evento(){
 
 		llenaelementoHTML(".puntos-venta-evento", data);
 		$(".punto_venta").click(update_status_punto_venta_evento );
+
+		$(".puntos_venta_contacto").click(load_data_puntos_venta_accesos_info);
+
 	}).fail(function(){
 		alert("Error al cargar data ");
 	});
@@ -135,6 +138,7 @@ function select_all(){
 	evento = $("#evento").val();	
 	actualiza_data( url ,   {"evento" : evento});
 	list_puntos_venta_evento();
+	load_data_puntos_venta_asociados_accesos();
 
 }
 
@@ -167,5 +171,55 @@ function load_data_puntos_venta_asociados_accesos(){
 
 		alert("Error al cargar el resumen de los accesos en ele evento ");		
 	});
+
+}
+/**/
+function load_data_puntos_venta_accesos_info(e){
+
+	punto_venta =  e.target.id;
+	url = now + "index.php/api/puntosventa/puntoventacontacto/format/json/";
+	$.get(url, {"punto_venta" :  punto_venta}).done(function(data){
+
+		
+		llenaelementoHTML("#contactos-punto-venta" , data);
+
+		$(".contacto-punto-venta").click(function(){
+
+			contacto   = this.id;
+			update_contacto_punto_venta( contacto , punto_venta);
+		});
+		
+		
+	}).fail(function(){
+		alert("error al cargar ");
+	});	
+
+}
+function update_contacto_punto_venta( contacto , punto_venta ){
+
+	url = now + "index.php/api/puntosventa/puntoventacontacto/format/json/";
+	registra_data(url , {"contacto" :  contacto , "punto_venta": punto_venta } );
+	load_data_puntos_venta_accesos_informacion(punto_venta);
+}
+
+function load_data_puntos_venta_accesos_informacion(e){
+
+	punto_venta =  e;
+	url = now + "index.php/api/puntosventa/puntoventacontacto/format/json/";
+	$.get(url, {"punto_venta" :  punto_venta}).done(function(data){
+
+		
+		llenaelementoHTML("#contactos-punto-venta" , data);
+
+		$(".contacto-punto-venta").click(function(){
+
+			contacto   = this.id;
+			update_contacto_punto_venta( contacto , punto_venta);
+		});
+		
+		
+	}).fail(function(){
+		alert("error al cargar ");
+	});	
 
 }

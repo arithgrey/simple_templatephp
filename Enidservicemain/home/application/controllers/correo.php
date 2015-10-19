@@ -5,7 +5,6 @@ class Correo extends CI_Controller
 	{
 		parent::__construct();
 	}
-
 	public function sendMailGmail()
 	{
 		   date_default_timezone_set('America/Mexico_City');
@@ -98,6 +97,5 @@ class Correo extends CI_Controller
 		$this->email->send();
 		//con esto podemos ver el resultado
 		var_dump($this->email->print_debugger());
-
 	}
 }

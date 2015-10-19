@@ -70,6 +70,3 @@ function update_all_in_event($id_evento){
 
 /*Termina modelo */
 }
-
-
-

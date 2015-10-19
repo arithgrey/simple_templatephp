@@ -2,7 +2,6 @@
 class Emp  extends CI_Controller{
 	function __construct(){
 		parent::__construct();
-
         $this->load->helper("empresa");
         $this->load->helper("img_eventsh");
         $this->load->model("empresamodel");
@@ -127,4 +126,3 @@ class Emp  extends CI_Controller{
 
     }		
 }/*Termina el controlador */
- 

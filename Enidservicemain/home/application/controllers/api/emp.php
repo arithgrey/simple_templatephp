@@ -75,5 +75,4 @@ class Emp extends REST_Controller{
                 $this->sessionclass->logout();
             }   
     }/*termina validar session */
-}/*Termina el controlador rest */
-?>    
+}?>

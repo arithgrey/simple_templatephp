@@ -1,11 +1,24 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
-class img_model extends CI_Model {
-  
+class img_model extends CI_Model {  
   function __construct(){
       parent::__construct();        
       $this->load->database();
   }
 
+
+
+
+/********************************sección de escenarios******************************************/ 
+
+function get_imgs_escenario($id_escenario){
+
+  $query_get = "select i.* , ie.*  from imagen_escenario  ie inner join  imagen  i  on  ie.id_imagen  =  i.idimagen   where ie.id_escenario =  '". $id_escenario."' "; 
+  $result = $this->db->query($query_get);   
+  return  $result->result_array();
+
+}
+
+/*************************************************************************************/  
   function delete_logo_empresa($id_usuario , $id_empresa ){
 
     $query_exist=  "select id_imagen from imagen_empresa where id_empresa = '". $id_empresa ."' ";  

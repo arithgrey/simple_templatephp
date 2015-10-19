@@ -1,6 +1,5 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 class Templates extends CI_Controller {
-
 	function __construct(){
 		parent::__construct();
         
@@ -48,13 +47,6 @@ class Templates extends CI_Controller {
             $this->load->view('TemplateEnid/header_template', $data);
             $this->load->view($center_view, $data);                                      
             $this->load->view('TemplateEnid/footer_template', $data);    
-    }
-
-
-
-
-
-	
-		
+    }		
 }/*Termina el controlador */
  

@@ -19,11 +19,5 @@ function setComentdb($user, $comentario){
     return $result;
 
 }/*Termina la función */
-
-
-
 /*Termina modelo */
 }
-
-
-

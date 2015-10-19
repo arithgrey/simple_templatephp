@@ -1,6 +1,5 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
 class repomodel extends CI_Model {
-
 function __construct(){
 
         parent::__construct();        
@@ -103,10 +102,3 @@ function getdatamoral($numerocredito, $idempresa){
 
 
 }/*Termina la función */
-
-
-
-
-
-
-

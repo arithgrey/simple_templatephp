@@ -459,4 +459,77 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+<!--******************************* Cargar del acceso *********************************************-->
+<div class="modal fade in" id="contactos-relacionados-punto-venta" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="false">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            
+                <h4 class="modal-title" id="myModalLabel" class='title-modal-contacto'>Contactos que han sido vinculados a  este punto de venta</h4>
+            </div>
+            <div class="modal-body">            
+                <div class='row'>
+                  
+                  <div class='col-sm-2'></div>
+                  <div class='col-sm-8'>
+                    <div class='contactos-punto-venta' id="contactos-punto-venta"></div>
+                  </div>  
+                  <div class='col-sm-2'></div>
+                </div>
+
+
+                
+                
+                
+
+                <!--Termina nuevo contacto -->
+            </div>
+
+            <div class="modal-footer">
+
+                    <p class="lead">
+                        <a href="<?=base_url('index.php/puntosventa/administrar')?>">
+                            Administrador mis puntos de venta 
+                        </a>
+                    </p>
+                
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>                
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <script type="text/javascript" src="<?=base_url('application/js/evento/accesos/img.js')?>"></script>

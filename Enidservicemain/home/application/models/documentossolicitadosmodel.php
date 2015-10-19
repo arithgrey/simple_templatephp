@@ -6,10 +6,6 @@ function __construct(){
         parent::__construct();        
         $this->load->database();
 }
-
-
-
-
 function redord($documento_solicitado , $especificacionesdocumento , $idarchivo){
   	
   	
@@ -186,6 +182,3 @@ function calificacionhistorialmoral( $historialcrediticio){
 
 /*Termina modelo */
 }
-
-
-

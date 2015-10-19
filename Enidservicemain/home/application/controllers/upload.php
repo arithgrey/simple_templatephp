@@ -28,22 +28,5 @@ class Upload extends CI_Controller {
                 
     }/*termina la funcion*/
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 }
 ?>

@@ -1,7 +1,6 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
 require APPPATH.'/libraries/REST_Controller.php';
-class Imgupload extends REST_Controller{
-      
+class Imgupload extends REST_Controller{      
     function __construct() {
         parent::__construct();
         
@@ -39,9 +38,3 @@ class Imgupload extends REST_Controller{
 
 }
 ?>
-
-
-
-
-
-

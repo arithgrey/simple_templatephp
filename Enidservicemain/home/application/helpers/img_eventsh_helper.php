@@ -1,19 +1,16 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 if(!function_exists('invierte_date_time')){
-    /**/
-    function create_dinamic_dic($path){
-
+    function create_dinamic_dic($path){    
         if(file_exists($path) == false ) {
     
-            mkdir( $path  , 7777, true); 
+            //mkdir( $path  , 7777, true); 
             //mkdir( $path  , 0775, true); 
-            //mkdir( $path  , 0700, true); 
+            //mkdir( $path  , 755 , true); 
+            //mkdir( $path  , 7777 , true); 
+            mkdir( $path  , 0775, true); 
 
         }
-
         return file_exists($path);
-
-
     }
     /**/
     function get_img_by_event_in_directory($id_event){
@@ -37,8 +34,5 @@ if(!function_exists('invierte_date_time')){
 
         return $result;
     }
-
-
 /*****************+****************+****************+****************+****************+*/
 }/*Termina el helper*/
- 

@@ -315,6 +315,3 @@ function get_generos($id_empresa , $id_evento , $genero_filtro){
 
 /*Termina modelo */
 }
-
-
-

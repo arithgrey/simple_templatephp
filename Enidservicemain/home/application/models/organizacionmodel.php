@@ -34,5 +34,4 @@ function actualizarCiudades($idEmpresa,$nuevoIdCiudad)
     $dbresponse = $this->db->query( $queryUpdate );     
     return $dbresponse;
 }
-
 }/*Termina la función */

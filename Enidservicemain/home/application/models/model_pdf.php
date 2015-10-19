@@ -13,5 +13,4 @@ class Model_pdf extends CI_Model {
     }
 
 }
-
 ?>

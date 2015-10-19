@@ -1,6 +1,5 @@
 <?php		     
 if (isset($_FILES["images"])){
-
 	$base_path = $_GET["base_path"];			
 
 	$b =0;
@@ -84,12 +83,4 @@ if (isset($_FILES["imagesartista"])){
     echo json_encode($data);
     exit();
 }
-
-
-
-
-
-
-
-
 ?>

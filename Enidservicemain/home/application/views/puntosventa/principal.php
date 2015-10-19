@@ -1,9 +1,4 @@
 <script type="text/javascript" src="<?=base_url('application/js/puntosventa/principal.js')?>"></script>
-
-
-
-
-
 <div class="container">
     <div class="row">
         <div class="center-block" id='punto-venta-resumen'>
@@ -23,7 +18,7 @@
         </button>
         <div class='pull-right'>
             <div class="input-group">
-                <div class="input-group-addon">Punto de venta </div>
+                <div class="input-group-addon">Razón social </div>
                 <input list='razon_social' name='puntos_venta_filtro' id='puntos-venta-filtro' class='puntos-venta-filtro form-control' >
                 <?=$puntos_venta_nombres;?>
             </div>
@@ -31,7 +26,7 @@
         
 
         <div id="puntos-venta-list">
-            <br>
+            
             <?=$puntos_venta;?>
         </div>
 

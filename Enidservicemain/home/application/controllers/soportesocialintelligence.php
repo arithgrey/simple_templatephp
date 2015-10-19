@@ -2,13 +2,10 @@
 require_once( 'application/libraries/api_github/github-php-client-master/client/GitHubClient.php');
 require_once( 'application/config/github.php');
 class Soportesocialintelligence extends CI_Controller {
-
 	function __construct()
 	{
 		parent::__construct();
 	}
-
-
 	function documentacion(){
 
 		$data['titulo']='Documentación';
@@ -115,6 +112,3 @@ class Soportesocialintelligence extends CI_Controller {
 
 	
 }
-
-/* End of file welcome.php */
-/* Location: ./system/application/controllers/welcome.php */

@@ -1,7 +1,6 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
 require APPPATH.'/libraries/REST_Controller.php';
-class Cuentageneralrest extends REST_Controller{
-      
+class Cuentageneralrest extends REST_Controller{      
     function __construct(){
         parent::__construct();        
         $this->load->helper("recursos");
@@ -9,10 +8,7 @@ class Cuentageneralrest extends REST_Controller{
         $this->load->library('sessionclass');
             
     }     
-
-
     /**/
-
     function integranteescuentaresumen_GET(){
 
         $this->validate_user_sesssion();

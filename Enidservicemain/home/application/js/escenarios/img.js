@@ -57,43 +57,6 @@ function upload_main_imgs_escenario(){
 
 }
     
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /******************************** *Para los artistas ***********************/
 function upload_main_imgs_artista(){
     var formdata = false;
@@ -224,10 +187,8 @@ function update_status_in_db_artista(res , base_path ){
 /*record in db*/
 function update_status_in_db(res , base_path ){
     
-    
     respuesta = res["respuesta"]; 
     if (respuesta ==  1 ){
-
         
         id_escenario  = $("#id_escenario").val();        
         /*********insertamos en la base de datos el registro y la referencia**************/
@@ -235,20 +196,19 @@ function update_status_in_db(res , base_path ){
         url = now + "index.php/api/img_controller/principal_escenario/format/json/";
         $.post(url , {"id_escenario" :  id_escenario ,    "name_img" : res["name_img"] , "type" : res["type"] , "size" : res["size"] , "base_path_img" : base_path_img , "base_path" : base_path } ).done(function(data){
 
-
-
-            if (data ==  true) {
+            
+            if (data["stus_response"] ==  true) {
                 
-                llenaelementoHTML("#response" , "Imagen cargada.");
+                llenaelementoHTML("#slider-principal-escenario" , data["slider_principal_escenario"]);
 
             }
+            
             
         }).fail(function(){
             
         });
         
         /*****************************************************************/                
-
     }else{
         
         llenaelementoHTML(".respuesta-img-upload", "Error al subir imagen intente de nuevo si el error persiste, comunicar al adinistrador");

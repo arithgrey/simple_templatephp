@@ -1,18 +1,13 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
 require APPPATH.'/libraries/REST_Controller.php';
 class Puntosventa extends REST_Controller{
-
   function __construct(){
         parent::__construct();              
-        
-
         $this->load->helper("puntoventa"); 
         $this->load->model("puntoventamodel");
         $this->load->library('sessionclass');
             
   }  
-
-
   function puntoventaresumen_GET(){
 
     $this->validate_user_sesssion();
@@ -168,6 +163,4 @@ class Puntosventa extends REST_Controller{
                   }   
       }/*termina validar session */
 }
-
-
 ?>

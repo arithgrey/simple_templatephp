@@ -55,4 +55,3 @@ if(!function_exists('invierte_date_time')){
   		return $img_name;
 	}
 }/*Termina el helper*/
- 

@@ -1,6 +1,5 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 if(!function_exists('invierte_date_time')){
-
 	function getData($arreglo){
 
 		$accesos = "";
@@ -12,14 +11,7 @@ if(!function_exists('invierte_date_time')){
         $accesos .= '<td class="text-center"><i class="fa fa-calendar-o"></i> Periodo</td>';    
         $accesos .= '<td class="text-center"><i class="fa fa-angle-double-right"></i> Avanzado</td>';    
        	$accesos .=  '<td class="text-center"><i class="fa fa-minus-circle"></i> Eliminar</td>';        
-        $accesos .= '</tr>';    
-            
-
-            
-            
-        
-
-		
+        $accesos .= '</tr>';            
 		$in = 1;
 		foreach ($arreglo["listaccesos"] as $rowccesos) {
 
@@ -192,7 +184,6 @@ if(!function_exists('invierte_date_time')){
 		return $l;
 
 	}
-
 	/*lista loa tipos de accesos*/
 	function list_tipos_accesos($data_tipos_accesos){
 		$option_acceso ='';

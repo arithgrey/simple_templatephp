@@ -6,11 +6,5 @@ class modulomodel extends CI_Model {
         parent::__construct();        
         $this->load->database();
     }
-
-    
-
 /*Termina modelo */
 }
-
-
-

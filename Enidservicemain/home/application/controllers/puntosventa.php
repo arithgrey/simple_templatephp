@@ -1,6 +1,5 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 class Puntosventa extends CI_Controller{
-
     function __construct(){
         parent::__construct();
 
@@ -9,8 +8,6 @@ class Puntosventa extends CI_Controller{
         $this->load->model("puntoventamodel");
         $this->load->library('sessionclass');      
     }
-
-
     /*vista administrar puntos de venta*/
     function administrar(){
 
@@ -68,7 +65,4 @@ class Puntosventa extends CI_Controller{
             $this->load->view($center_view, $data);                                      
             $this->load->view('TemplateEnid/footer_template', $data);    
     }
-
-
-
 }/*Termina en controlador*/
