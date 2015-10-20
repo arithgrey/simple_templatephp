@@ -23,7 +23,7 @@ function update_type(e){
 
 function  updaye_nombre_escenario(){
 
-	showonehideone( "#in-nombre-escenario" , ".nombre-escenario-text" );	
+	showonehideone( ".section-nombre-evento-in" , ".nombre-escenario-text" );	
 	$("#in-nombre-escenario").blur(function(){
 				
 		nuevo_nombre = $("#in-nombre-escenario").val(); 					
@@ -36,9 +36,9 @@ function  updaye_nombre_escenario(){
 		
 		}else{
 
-			showonehideone(".nombre-escenario-text" , "#in-nombre-escenario");	
+			showonehideone(".nombre-escenario-text" , ".section-nombre-evento-in");	
 		}
-		showonehideone(".nombre-escenario-text" , "#in-nombre-escenario");	
+		showonehideone(".nombre-escenario-text" , ".section-nombre-evento-in");	
 		
 		
 	});
@@ -48,7 +48,7 @@ function  updaye_nombre_escenario(){
 /*Actualiza la descripción del escenario */
 function  update_descripcion_escenario(){
 
-	showonehideone( "#in-descripcion-escenario" , ".descripcion-escenario-text" );	
+	showonehideone( ".section-descripcion-escenario-in" , ".descripcion-escenario-text" );	
 	$("#in-descripcion-escenario").blur(function(){
 				
 		nuevo_nombre = $("#in-descripcion-escenario").val(); 					
@@ -62,9 +62,9 @@ function  update_descripcion_escenario(){
 		
 		}else{
 
-			showonehideone( ".descripcion-escenario-text"  , "#in-descripcion-escenario");	
+			showonehideone( ".descripcion-escenario-text"  , ".section-descripcion-escenario-in");	
 		}
-		showonehideone( ".descripcion-escenario-text"  , "#in-descripcion-escenario");	
+		showonehideone( ".descripcion-escenario-text"  , ".section-descripcion-escenario-in");	
 		
 		
 	});

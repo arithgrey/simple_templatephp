@@ -251,7 +251,8 @@ function get_slider_img_escenario($data){
 /**/
 function get_slider_img($data){
 
-    $slider = '<div class="row" style="padding:5%; background: #069F89;" ><div id="Carousel-escenario" class="carousel slide" data-ride="carousel">';
+
+    $slider = '<div class="row" style="padding:5%; background: #069F89; border-radius: 10px;" ><div id="Carousel-escenario" class="carousel slide" data-ride="carousel">';
     $slider .= '<div class="row"><ol class="carousel-indicators">';
 
     for ($a=0; $a <count($data); $a++) {                 
@@ -271,11 +272,11 @@ function get_slider_img($data){
         if ($flag < 1 ) {
             
             $slider .= '<div class="item active">
-                      <img src="'. base_url($path_img) .'" alt="Chania">
+                      <img src="'. base_url($path_img) .'" alt="">
                     </div>';            
         }else{
             $slider .= '<div class="item">
-                      <img src="'. base_url($path_img) .'" alt="ok">
+                      <img src="'. base_url($path_img) .'" alt="">
                     </div>';        
         }        
         $flag ++;
@@ -344,7 +345,7 @@ return $slider;
 
 /**/
 function get_call_slider_img(){
-    return "ok"; 
+    
 }
 
 /*******************************************************************/

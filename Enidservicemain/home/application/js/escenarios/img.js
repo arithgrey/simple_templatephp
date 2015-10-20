@@ -238,6 +238,7 @@ function mostrarImagenSubida(source){
 
 function mostrarImagenSubidaArtista(source){
         var list = document.getElementById('lista-imagenes-artista'),
+        
             li   = document.createElement('li'),
             img  = document.createElement('img');
             img.setAttribute('width', '100%');

@@ -1,56 +1,68 @@
-<style type="text/css">
-.nombre-escenario-text:hover, .descripcion-escenario-text:hover {
-	cursor: pointer;
-	padding: 2px;
-}
-#in-nombre-escenario, #in-descripcion-escenario {
-	display: none;
-}
-</style>
-
 <?=ini_set('display_errors', '1');?>
+<div class='col-lg-1'></div>
+<div class='col-lg-10'>
+<div class="center-block">                                
+    <div class='row'>
+        <div class='slider-principal-escenario' id='slider-principal-escenario'>
+            <?=$slider_principal_escenario;?>                                
+        </div>
+    </div>
+    <div class='row'>
+        <strong id='img-button-more-imgs' data-toggle="modal" data-target="#modal-img-escenario-principal"  >
+        <i class="fa fa-plus-circle fa-5x"></i>                            
+        <span style='color:white;'>Cargar Imagenes</span>
+        </strong>
+    </div>
+    <input type='hidden' name='action' value="carga-imgenes-escenario">                    
+</div>    
 
-
-<div class="container"> 
-    <div class="jumbotron">
-    	
-
-        
-        <div class='row'>        
-        <div class="container">
-            <div class="row">
-                <div class="center-block">                    
-                    <div class='col-md-12'>
-                        <div class='slider-principal-escenario' id='slider-principal-escenario'>
-                            <?=$slider_principal_escenario;?>    
-                        </div>
-                        <input type='hidden' name='action' value="carga-imgenes-escenario">
-                    </div>
-
-                </div>
+<div class='row'>
+    <h1 class='nombre-escenario-text'><?=$data_escenario["nombre"];?></h1>       
+</div>        
+<div>
+    <div class="form-group">
+        <div class='section-nombre-evento-in'>
+            <div class='input-group'>                    
+                    <span class="input-group-addon">Nombre del escenario </span>
+                    <input  class="form-control in-nombre-escenario" id='in-nombre-escenario' value="<?=$data_escenario["nombre"];?>" name='nuevo_nombre' style="width: 100%" type="text">			            
             </div>
         </div>
-        <div class='row'>            
-           <h1 class='nombre-escenario-text'><?=$data_escenario["nombre"];?></h1>       
+    </div>	   
+</div>
+<div class='row'>
+
+    <div class="jumbotron">
+        <h3><span class="label label-default">La experiencia </span></h3>
+    <p class='descripcion-escenario-text'>                        
+        <?=$descripcion_escenario;?> 
+    </p>
+
+
+        <div class='section-descripcion-escenario-in'>
+        <div class='input-group'> 
+            <span class="input-group-addon">Nombre del escenario </span>
+            <textarea id="in-descripcion-escenario"  class='form-group col-lg-12 ' name="descripcion_escenario" rows="7" >
+                <?=$descripcion_escenario;?> 
+            </textarea>         
         </div>
-        </div>   
+    </div>
+
+
+    
+    </div>
+
+
+</div>
 
 
 
-	    <div class="form-group todo-entry">
-			<input  class="form-control in-nombre-escenario " id='in-nombre-escenario' value="<?=$data_escenario["nombre"];?>" name='nuevo_nombre' style="width: 100%" type="text">			
-		</div>
-	    </div>	   
-	    <div class='row'>
-		    <p class='descripcion-escenario-text'>                        
-		    	<?=$descripcion_escenario;?> 
-		    </p>
-		   	<textarea id="in-descripcion-escenario"  class='form-group todo-entry' name="descripcion_escenario" >
-				<?=$descripcion_escenario;?> 
-		   	</textarea>	    	
-		</div>	        	    
-		<!--********************************Tipos de escenarios *************************************-->
-		<div class="btn-group-vertical" role="group" aria-label="Vertical button group">    
+
+
+
+
+<!--********************************Tipos de escenarios *************************************-->
+	<div class='row section-fecha-type'>
+    	<div class="btn-group-vertical" role="group" aria-label="Vertical button group">    
 	      <div class="btn-group btn-lg" role="group">
 	        <button id="btnGroupVerticalDrop1" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 	          <?=$data_escenario["tipoescenario"];?>
@@ -63,70 +75,111 @@
 	        </ul>
 	      </div>     
 	    </div>
-	    <!--*********************************************************************-->	    
-	    <a href="" data-toggle="modal" data-target="#modal-date-escenario">
-		    <div class='pull-right'>
-		    	<i class="fa fa-calendar"></i>
-		    	Presentación 
-				<div id='fecha-presentacion'><?= $data_escenario["fecha_presentacion_inicio"] . " - ". $data_escenario["fecha_presentacion_termino"]; ?></div>
-			</div>
-		</a>
+<!--*********************************************************************-->	    
+        <a href="" data-toggle="modal" data-target="#modal-date-escenario">
+            <div class='pull-right'>
+            <i class="fa fa-calendar"></i>
+            Presentación 
+            <div id='fecha-presentacion'><?= $data_escenario["fecha_presentacion_inicio"] . " - ". $data_escenario["fecha_presentacion_termino"]; ?></div>
+            </div>
+        </a>
+    </div>       
 
 
 
 
-        <form action ='<?=base_url("application/controllers/api/imgs_controller.php")?>'  method="post" id="form_imgs_escenario" enctype="multipart/form-data" id='formulario-principal-img' class='pull-right'>
-         <div class="form-group">
-            Imagen:<input type="file" name="images[]"  id="imgs-escenario">
-                   <input type='hidden' name="e" value='1'>
-         </div>                      
-         </form>
-
-		<!--*********************************************************************-->
-   	</div>
-
-
-
-
-    <div> 
-        <?=$resumen_artistas;?>
-    </div>
-
-
-    <section class="panel">        
-                    <header class="blue-col-enid panel-heading custom-tab turquoise-tab">
-                            <ul class="nav nav-tabs">
-                                <li class="active">
-                                    <a data-toggle="tab" href="#home3">
-                                        <i class="fa fa-play"></i>
-                                        Artistas que se presentarán en este escenario 
-                                    </a>
-                                </li>                                                                
-                            </ul>
-                    </header>                        
-                        <div class="blue-col-enid-complement panel-body">                                                        
-                            <div class="tab-content">
-                                <div id="home3" class="tab-pane active">
+<!--*********************************************************************-->
+<div> 
+    <?=$resumen_artistas;?>
+</div>
+<section class="panel">        
+<header class="blue-col-enid panel-heading custom-tab turquoise-tab">
+    <ul class="nav nav-tabs">
+        <li class="active">
+            <a data-toggle="tab" href="#home3">
+            <i class="fa fa-play"></i>
+                Artistas que se presentarán en este escenario 
+            </a>
+        </li>                                                                
+    </ul>
+</header>                        
+<div class="blue-col-enid-complement panel-body">                                                        
+    <div class="tab-content">
+        <div id="home3" class="tab-pane active">
                                     <!--Artistas en el escenario -->
-                                    <div class='artistas-escenario-section' id='artistas-escenario-section'>
-                                      <?=$artistas;?>     
-
-
-
-                                    </div>  
-
-
-                                </div>
-                                <div id="about3" class="tab-pane">Puntos de venta</div>
-                                
-                            </div>
-                        </div>
-                    </section>
-
-
-
+        <div class='artistas-escenario-section' id='artistas-escenario-section'>
+        <?=$artistas;?>     
+        </div>  
+        </div>
+        <div id="about3" class="tab-pane">Puntos de venta</div>                                
+    </div>
 </div>
+</section>
 </div>
+<div class='col-lg-1'></div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -137,13 +190,6 @@
 
 
 <!---->
-
-
-
-
-
-
-
 <div class="modal fade" id="modal-date-escenario" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -153,14 +199,7 @@
 
             </div>
             <div class="modal-body">    	
-
-   
 	<div class="col-md-12">
-	
-
-
-
-
     <form id="form-nueva-fecha">
 
         <div  class='col-md-12'>
@@ -172,7 +211,6 @@
                     </span>
                     </div>
             </div>
-
             <div  class='col-md-6'>
                     <div data-date-viewmode="years" data-date-format="yyyy-mm-dd" data-date="2012-02-12" class="input-append date dpYears"  >
                             <input readonly="" value="2012-02-12" size="16" class="form-control" id='termino' name="to"   type="text"  >
@@ -181,42 +219,21 @@
                     </span>
                     </div>
             </div>
-
-
         </div>        
-
-
-<!--
-		<div class="input-group input-large custom-date-range" data-date="13/07/2013" data-date-format="mm/dd/yyyy">
-		<input class="form-control dpd1"  id='inicio' name="from" type="text" required>
-		<span class="input-group-addon"> al día </span>
-			<input class="form-control dpd2"  id='termino' name="to" type="text" required>
-		</div>
--->
 		<span class="help-block">Seleccione la fecha para este escenario</span>
 	</div>
-
 	<button class='btn btn-primary' id='btn-guardar-fecha'>Guardar</button>
 	<div id='repo-update-fecha'></div>
-
-
-
-
-
-
-
-
 	</form>
 
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-                
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>            
+            </div>
             </div>
         </div>
     </div>
-
-
+</div>
 
 
 
@@ -393,6 +410,110 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="modal fade" id="modal-img-escenario-principal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="myModalLabel">Cargar imagenes al escenario</h4>
+            </div>
+            <div class="modal-body">
+            
+
+
+            <form action ='<?=base_url("application/controllers/api/imgs_controller.php")?>'  method="post" id="form_imgs_escenario" enctype="multipart/form-data" id='formulario-principal-img' class='pull-right'>
+                <div class="form-group">
+                Imagen:<input type="file" name="images[]"  id="imgs-escenario">
+                        <input type='hidden' name="e" value='1'>
+                </div>                      
+            </form>
+
+
+            </div>            
+            <div class="modal-footer">                
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>               
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <!---->
 <!--modal para definir la hora de inicio y termino en la presentación de un artista-->
 <div class="modal fade" id="modal-img-artista-evento" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
@@ -432,8 +553,53 @@
         </div>
     </div>
 </div>
-
 <!---->
+
+
+
+
+
+
+
+
+
+
+
+<!--modal para definir la hora de inicio y termino en la presentación de un artista-->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -557,6 +723,25 @@
 </script>    
 
 
+
+
+
+<style type="text/css">
+.nombre-escenario-text:hover, .descripcion-escenario-text:hover {
+    cursor: pointer;
+    padding: 2px;
+}
+ .section-descripcion-escenario-in, .section-nombre-evento-in {
+    display: none;
+}
+#img-button-more-imgs:hover{
+    cursor: pointer;
+    font-size: 1.1em;
+}
+.section-fecha-type{
+    background: #062735;
+}
+</style>
 
 
 
