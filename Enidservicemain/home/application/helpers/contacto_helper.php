@@ -7,7 +7,7 @@ if(!function_exists('invierte_date_time')){
 		$contacto .= get_td("#" , "");				  
 		$contacto .= get_td("IMG" , "");				  
 		$contacto .= get_td("Contacto" , "class='franja-vertical'");				  
-		$contacto .= get_td("Contacto" , "");				  					  	
+					  					  	
 		$contacto .= get_td("organización" , "");
 		$contacto .= get_td("Teléfono" , "");	 					  	
 		$contacto .= get_td("Movil" , "");
@@ -20,6 +20,7 @@ if(!function_exists('invierte_date_time')){
 					  	
 		$contacto .= get_td ("Estado" , "" );
 		$contacto .= get_td ("Registro" , "" );
+		$contacto .= get_td ("Editar" , "" );
 					  	
 		
 		$contacto .="</tr>";
@@ -122,6 +123,9 @@ if(!function_exists('invierte_date_time')){
 	function filtro_tipo_contacto($data){
 
 		$select ="<select class='form-control' id='filtro-tipo-contacto' name='filtro-tipo-contacto'>";
+		$select .="<option>Seleccione</option>";
+		$select .="<option value='Todos'>Mostrar todos</option>";
+
 		foreach ($data as $row) {
 
 			$select .="<option value= '".$row["tipo"]."' >". $row["tipo"]."</option>";

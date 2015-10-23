@@ -19,6 +19,11 @@ $(document).on("ready", function(){
 
 	});
 
+
+	$("#estado_punto_venta").change(function(){
+		load_data_puntos_venta(null);
+	});
+
 });
 /*nuevo punto de venta*/
 function record_punto_venta(){
@@ -89,7 +94,10 @@ function load_data_puntos_venta(filtro ){
 
 
 	url = $("#form-puntos-venta").attr("action");
-	$.get(url, {"filtro" : filtro } ).done(function(data){
+
+	estado_punto_venta = $("#estado_punto_venta").val();
+	
+	$.get(url, {"filtro" : filtro , "estado" :  estado_punto_venta } ).done(function(data){
 
 		llenaelementoHTML( "#puntos-venta-list" , data);
 		$(".contactos").click(update_contactos_in_punto_venta);

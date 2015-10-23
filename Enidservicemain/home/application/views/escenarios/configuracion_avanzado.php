@@ -1,7 +1,8 @@
 <?=ini_set('display_errors', '1');?>
 <div class='col-lg-1'></div>
 <div class='col-lg-10'>
-<div class="center-block">                                
+<div class="center-block">
+
     <div class='row'>
         <div class='slider-principal-escenario' id='slider-principal-escenario'>
             <?=$slider_principal_escenario;?>                                
@@ -48,7 +49,7 @@
     </div>
 
 
-    
+
     </div>
 
 
@@ -268,6 +269,7 @@
 			                                <input name="url_sound"  id="url_sound" class="form-control" placeholder="" type="url" required>
 			                            </div>
 
+                                        <div class='response-sound' id='response-sound' ></div>
                                         <button class="btn btn-primary pull-left" type="submit">registrar</button>
                                     </form>
                                 </div>
@@ -308,6 +310,7 @@
 			                                <input name="url_youtube"  id="url_youtube" class="form-control" placeholder="" type="url" required>
 			                            </div>
 
+                                        <div class='response_youtube' id='response_youtube'></div>
                                         <button class="btn btn-primary pull-left" type="submit">registrar</button>
                                     </form>
                                 </div>
@@ -565,6 +568,129 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--************************configura el status del artista en este escenario ***********************************-->
+<!--modal para definir la hora de inicio y termino en la presentación de un artista-->
+<div class="modal fade" id="edit-status-confirmacion" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="myModalLabel">Cargar foto del artista</h4>
+            </div>
+            <div class="modal-body">
+        
+
+            <div class='input-group'>
+              <span class="input-group-addon">Estado de confirmación del artista</span>
+              <select class='form-control' name='status-artista-evento' id='status-artista-evento'>                     
+                    <option>Seleccione</option>
+
+                    <option value='pendiente por confirmar'> Pendiente por confirmar</option> 
+                    <option value='Artista confirmado'>Artista confirmado</option> 
+                    <option value='Cancela su asistencia' >Cancela su asistencia </option> 
+                    <option value='Promesa de asistencia'>Promesa de asistencia</option>
+                    
+              </select>
+              <span id="response-update-status" class='response-update-status'> </span>
+              <input type='hidden' id='dinamic-artista'>
+            </div>    
+
+
+
+
+
+            </div>
+            
+            <div class="modal-footer">                
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>                
+            </div>
+        </div>
+    </div>
+</div>
+<!--************************termina de  configura el status del artista en este escenario ***********************************-->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--modal para definir la hora de inicio y termino en la presentación de un artista-->
+<div class="modal fade" id="edit-nombre-artista" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="myModalLabel">Cargar foto del artista</h4>
+            </div>
+            <div class="modal-body">
+        
+
+                <div class='row'>
+                    <div class="section-input input-group" >
+                        <span class="input-group-addon">Artista</span>
+                        <input type="text" class="form-control" id='nuevo-nombre-artista'>
+                    <div>
+                </div>
+                <span id="response-update-nombre" class='response-update-nombre'> </span>
+
+
+
+            </div>
+        </div class='pull-rigth'>
+            <div class='row'>
+                    <button type="button" id='modifica-nombre-artista' class="btn btn-default" >Modificar</button>                
+            </div>
+                
+            <div class="modal-footer">                
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>                
+            </div>
+        </div>
+    </div>
+</div>
+                                       
+
+
+
+
+
+
+
+
+
+
+
+
+
 <!--modal para definir la hora de inicio y termino en la presentación de un artista-->
 
 
@@ -653,12 +779,6 @@
 
 
 
-
-
-
-
-
-
 <link href="<?=base_url('application/views/principal/dropzone.css')?>" rel="stylesheet"/>
 <link rel="stylesheet" type="text/css" href="<?=base_url('application/css/eventos/edicion.css')?>">
 <link rel="stylesheet" type="text/css" href="<?=base_url('application/js/js/bootstrap-datepicker/css/datepicker-custom.css')?>" />
@@ -677,18 +797,16 @@
 
 
 
-<script src="//connect.soundcloud.com/sdk-2.0.0.js"></script>
-<script type="text/javascript" src="<?=base_url('application/js/evento/gmap.js')?>"></script>
-<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true&libraries=places"></script>
-
 <script type="text/javascript" src="<?=base_url('application/js/escenarios/escenario_artista.js')?>"></script>
 <script type="text/javascript" src="<?=base_url('application/js/escenarios/config.js')?>"></script>
 <script type="text/javascript" src="<?=base_url('application/js/escenarios/img.js')?>"></script>
-
-
 <script src="//connect.soundcloud.com/sdk-2.0.0.js"></script>
-<script type="text/javascript" src="<?=base_url('application/js/evento/gmap.js')?>"></script>
-<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true&libraries=places"></script>
+
+
+
+
+
+
 
 
 
@@ -698,6 +816,7 @@
     $('#artista').keyup(function (e){ 
 
         Stringentrante = $(this).val();         
+        
         buscarartista(Stringentrante);
     });
 
@@ -725,7 +844,6 @@
 
 
 
-
 <style type="text/css">
 .nombre-escenario-text:hover, .descripcion-escenario-text:hover {
     cursor: pointer;
@@ -741,7 +859,12 @@
 .section-fecha-type{
     background: #062735;
 }
+.section-input{
+    display: none;
+}
 </style>
+
+
 
 
 

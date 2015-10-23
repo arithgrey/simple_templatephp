@@ -10,6 +10,31 @@ class Escenario extends REST_Controller{
             $this->load->model("escenarioartistamodel");                
             $this->load->library('sessionclass');            
     }     
+
+    function artista_nombre_PUT(){
+
+        $this->validate_user_sesssion();
+        $responsedb   = $this->escenarioartistamodel->update_nombre_artista($this->put());
+        $this->response($responsedb);
+    
+    }
+    function escenario_artista_status_PUT(){
+    
+        $this->validate_user_sesssion();
+        $responsedb   = $this->escenarioartistamodel->update_status($this->put());
+        $this->response($responsedb);
+
+
+    }
+
+
+    function artista_escenario_GET(){
+
+        $this->validate_user_sesssion();
+        $responsedb   = $this->escenariomodel->get_artista_in_escenario($this->get() );
+        $this->response($responsedb);
+
+    }
     /*retorna el valor de un  campo del escenario*/
     function evento_escenario_campo_get(){
         $campo = $this->get("campo");

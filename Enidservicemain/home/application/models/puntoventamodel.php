@@ -4,6 +4,16 @@ class puntoventamodel extends CI_Model {
 	        parent::__construct();        
 	        $this->load->database();
 	}
+
+
+
+	function get_estados_punto_venta(){
+
+		$query_get ="select distinct(status) estado_punto_venta  from punto_venta";
+		$result = $this->db->query($query_get);
+		return $result->result_array();
+	}
+
 /*Actualiza todo los puntos de venta asociados al evento */
     function update_all_in_event($id_evento, $id_empresa){
 
@@ -46,40 +56,46 @@ class puntoventamodel extends CI_Model {
 
 
 	/*selecciona todos los puntos de venta por empresa y usuario*/	
-	function get_puntos_venta_empresa_usuario($id_empresa, $filtro ){
+	function get_puntos_venta_empresa_usuario($id_empresa, $param){
+		$filtro ="";
+		if (strlen($param["filtro"]) > 0  ) {
 
-		$query_get="";
-
-		if ( $filtro == null){
-			
-			$query_get ="select pv.*, i.* ,  u.nombre, u.puesto , u.status estado_usuario    from punto_venta pv 
-inner join punto_venta_usuario pvu on pv.idpunto_venta =  pvu.idpunto_venta
-inner join usuario u  
-on pvu.idusuario = u.idusuario
-left outer join imagen_punto_venta ipv 
-on  pv.idpunto_venta =  ipv.idpunto_venta
-left outer join   imagen  i 
-on  ipv.id_imagen = i.idimagen
-where  pv.idempresa='". $id_empresa ."' ";	
-
-
+			$filtro=" and  pv.razon_social like '". $param["filtro"] ."%'   ";	
+		}else if( strlen($param["estado"]) > 0  ){
+			$filtro=" and  pv.status  like '". $param["estado"] ."%'   ";	
+		
+		}else if( strlen($param["estado"]) > 0  ){
+			$filtro=" and  pv.status = '". $param["estado"] ."%'  and  pv.razon_social like '". $param["filtro"] ."%'  ";	
 		}else{
 
-			$query_get ="select pv.*, i.* ,  u.nombre, u.puesto , u.status estado_usuario    from punto_venta pv 
-inner join punto_venta_usuario pvu on pv.idpunto_venta =  pvu.idpunto_venta
-inner join usuario u  
-on pvu.idusuario = u.idusuario
-left outer join imagen_punto_venta ipv 
-on  pv.idpunto_venta =  ipv.idpunto_venta
-left outer join   imagen  i 
-on  ipv.id_imagen = i.idimagen
-where  pv.idempresa='". $id_empresa ."'and  pv.razon_social like '". $filtro ."%' ";	
+			$filtro = "limit 10";
+		}		
 
-		}
+		$query_get ="select pv.*, pv.status estado_punto_venta , i.* ,  u.nombre, u.puesto , u.status estado_usuario    from punto_venta pv 
+						inner join punto_venta_usuario pvu on pv.idpunto_venta =  pvu.idpunto_venta
+						inner join usuario u  
+						on pvu.idusuario = u.idusuario
+						left outer join imagen_punto_venta ipv 
+						on  pv.idpunto_venta =  ipv.idpunto_venta
+						left outer join   imagen  i 
+						on  ipv.id_imagen = i.idimagen
+						where  pv.idempresa='". $id_empresa ."'  ". $filtro ." ";	
+
+
+
+		
 		
 		$result_db = $this->db->query($query_get);								
 		return $result_db->result_array();
+		
+		
 	}
+
+
+
+
+
+
 	/**/
 	function get_contactos_in_punto_venta($id_usuario , $id_punto_venta ){
 

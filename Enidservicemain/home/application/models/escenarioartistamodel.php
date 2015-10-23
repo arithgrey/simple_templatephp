@@ -111,5 +111,23 @@ function get_artistas_resumen($id_escenario , $data_escenario, $nombre_evento){
 
 }
 
+
+
+/**/
+function update_status($data){
+	
+	$query_update = "update escenario_artista set   status_confirmacion = '". $data["nuevo_status"]  ."' where idartista  = '". $data["artista"]."'  and  idescenario = '".$data["escenario"]."' ";
+	return $this->db->query($query_update);
+
+
+}
+
+
+
+function update_nombre_artista($data){
+	$query_update = "update artista set   nombre_artista = '". $data["nuevo_nombre"]  ."' where idartista  = '". $data["artista"]."'  ";
+	return $this->db->query($query_update);
+
+}
 /*Termina modelo */
 }

@@ -31,25 +31,53 @@
                 <i class="fa fa-check"></i>
                 Agregar contacto
                 </button>    
-        <div class="form-group pull-right" >
-        <div class="input-group">
-            <?=$lista_tipo;?>
-        </div>
-        </div>    
-        <div class="form-group pull-right" >
-            <label class="sr-only" for="exampleInputAmount">Contacto</label>
-            <div class="input-group">
-              <div class="input-group-addon">Contacto </div>
-              <input type="text" list="contactos-lista" class="form-control" id="contacto-name" placeholder="Nombre del contacto">
-              
+       
+
+
+
+
+            <form method='POST' action="<?=base_url('index.php/directorio/contactos')?>" id='form-filtro'>
+            <div class="form-group pull-right" >        
+                <button class='btn' type='submit'>Buscar</button>
             </div>
-        </div>    
+            <div class="form-group pull-right" >
+                <div class="input-group">
+                    <?=$lista_tipo;?>
+                </div>
+            </div>      
+            <div class="form-group pull-right" >
+                <div class="input-group">
+                      <div class="input-group-addon">Tel de contacto </div>
+                      <input type="text" class="form-control" id="contacto-tel-filtro" name='contacto-tel-filtro' placeholder="51153433..">                      
+                </div>
+            </div>             
+            <div class="form-group pull-right" >        
+                <div class="input-group">
+                  <div class="input-group-addon">Contacto </div>
+                  <input type="text" list="contactos-lista" class="form-control" id="contacto-name"  name='contacto-name' placeholder="Nombre del contacto">
+                  
+                </div>
+
+            </div>
+
+            </form>    
+
+        
         <?=$list_contactos_name;?>
+
+
         <div class="section-contact" id="section-contact"></div>
 
         </div>
+
+
+
+
+        <a href="http://localhost/Enidservicemain/home/index.php/inicio/eventos"><button type="button" class="btn btn-primary btn-sm">Ir a puntos de venta</button></a> 
     </div>
+
 </div>
+
 
 
 
@@ -117,7 +145,7 @@
             <span class="input-group-addon">
                 Tel.
             </span>
-            <input class="form-control" name="telefono"   placeholder="Teléfono" type="text">
+            <input class="form-control" name="telefono"   placeholder="Teléfono" type="text" required>
          </div>
      </div>
      <div class="form-group">            
@@ -134,7 +162,7 @@
             <span class="input-group-addon">
                 Página web  www
             </span>
-            <input class="form-control" name="pagina_web"   placeholder="Teléfono celular" type="url">
+            <input class="form-control" name="pagina_web"   placeholder="http://enidservice.com/home/" type="url">
          </div>
      </div>
 
@@ -161,6 +189,7 @@
     <div class="form-group" >
         
         <select class="form-control col-sm-12" name="tipo">
+            <option >Seleccione</option>
             <option value="Proveedor">Proveedor</option>
             <option value="Artista">Artista </option>
             <option value="Colaborador">Colaborador</option>
@@ -169,6 +198,7 @@
             <option value="Contacto personal">Contacto personal </option>
             <option value="Institución">Institución</option>
             <option value="Productora">Productora</option>
+            <option value="Productora">Otro</option>
         </select> 
     </div>    
 
@@ -262,7 +292,7 @@
                 Nuevo nombre 
             </span>
             
-            <input type="text" class="form-control" name="nnombre" placeholder="Nombre" required>
+            <input type="text" class="form-control" name="nnombre" id='nnombre' placeholder="Nombre" required>
          </div>
      </div>
      <div class="form-group">            
@@ -271,7 +301,7 @@
                 Nueva organización
             </span>
             
-            <input type="text" class="form-control" name="norganizacion" placeholder="Añadir nombre de la organización">
+            <input type="text" class="form-control" id="norganizacion" name="norganizacion" placeholder="Añadir nombre de la organización">
          </div>
      </div>
      <div class="form-group">            
@@ -279,7 +309,7 @@
             <span class="input-group-addon">
                 Nuevo Tel.
             </span>
-            <input class="form-control" name="ntelefono"   placeholder="Teléfono" type="text">
+            <input class="form-control" name="ntelefono"  id="ntelefono"   placeholder="Teléfono" type="text" required>
          </div>
 
      </div>
@@ -288,7 +318,7 @@
             <span class="input-group-addon">
                 Nuevo Móvil 
             </span>
-            <input class="form-control" name="nmovil"   placeholder="Teléfono celular" type="text">
+            <input class="form-control" name="nmovil" id="nmovil"   placeholder="Teléfono celular" type="text">
          </div>
 
      </div>
@@ -298,7 +328,7 @@
             <span class="input-group-addon">
                 Página web  www
             </span>
-            <input class="form-control" name="npagina_web"   placeholder="Teléfono celular" type="url">
+            <input class="form-control" name="npagina_web" id="npagina_web"   placeholder="Teléfono celular" type="url">
          </div>
      </div>
 
@@ -307,7 +337,7 @@
             <span class="input-group-addon">
                 Nuevo correo electrónico @
             </span>
-            <input class="form-control" name="ncorreo"   placeholder="arithgrey@gmail.com" type="text">
+            <input class="form-control" name="ncorreo"  id="ncorreo"  placeholder="arithgrey@gmail.com" type="text">
          </div>
 
      </div>
@@ -316,22 +346,25 @@
             <span class="input-group-addon">
                 Nueva dirección
             </span>
-            <input class="form-control" name="ndireccion"   placeholder="Av. sur 89 col...  " type="text">
+            <input class="form-control" name="ndireccion" id="ndireccion"   placeholder="Av. sur 89 col...  " type="text">
          </div>
 
      </div>
     <div class="form-group" >        
-        <select class="form-control col-sm-12" name="ntipo">
+        <select class="form-control col-sm-12" id="ntipo" name="ntipo">
+            <option >Seleccione</option>
             <option value="Proveedor">Proveedor</option>
             <option value="Colaborador">Colaborador</option>
             <option value="Contacto Comercial">Contacto comercial</option>
             <option value="Cliente">Cliente</option>
             <option value="Contacto personal">Contacto personal </option>
+            <option value="Contacto personal">Otro </option>
+
         </select> 
     </div>    
     <div class="form-group">
         <label class="col-sm-12 control-label">Nueva nota</label>        
-        <textarea rows="12" name="nnota" class="col-sm-12 form-control"></textarea>        
+        <textarea rows="12" name="nnota" id="nnota" class="col-sm-12 form-control"></textarea>        
     </div>    
     <button id="button-update" class="btn btn-primary">Actualizar información del  contacto</button>   
 </form>

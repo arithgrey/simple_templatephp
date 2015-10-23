@@ -5,6 +5,17 @@ function __construct(){
         parent::__construct();        
         $this->load->database();
 }
+
+
+
+function get_artista_in_escenario($data){
+	
+	$query_get ="select * from escenario_artista where idescenario = '". $data["escenario"] ."' and idartista = '". $data["artista"]  ."'  ";
+	$result = $this->db->query($query_get);
+	return $result->result_array();
+}
+
+/**/
 function nuevo( $nombre , $evento ,  $idempresa  ){
 
 	$query_insert ="INSERT INTO escenario (nombre , idevento  ) 

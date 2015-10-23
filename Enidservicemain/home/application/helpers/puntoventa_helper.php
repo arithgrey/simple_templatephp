@@ -261,7 +261,7 @@ if(!function_exists('invierte_date_time')){
 		        <tr class='enid-header-table' > "; 
 		        	$list .= get_td("#", "" );	         
 		        	$list .= get_td("IMG", "" );	         
-		            $list.= get_td("Razón Social", "" );		            		            
+		            $list.= get_td("Punto  venta", "" );		            		            
 		            $list.= get_td("Estado", "" );		            
 		            $list.= get_td("Nota para el público", "" );
 		            $list.= get_td("Usuario Registrante", "" );
@@ -281,7 +281,7 @@ if(!function_exists('invierte_date_time')){
 			
 			$idpunto_venta = $row["idpunto_venta"];
 			$razon_social  =  $row["razon_social"];			
-			$status        = $row["status"];						
+			$status        = $row["estado_punto_venta"];						
 			$fecha_registro =  $row["fecha_registro"];
 			$idempresa     = $row["idempresa"];
 			$descripcion  =  $row["descripcion"];
@@ -332,7 +332,7 @@ if(!function_exists('invierte_date_time')){
 			$list.="<tr class='enid-header-table'>";
 						$list .=get_td("#", "");	        
 						$list .=get_td("IMG", "");
-			            $list .=get_td("Razón Social", "");                        
+			            $list .=get_td("Punto de venta", "");                        
 			            $list .=get_td("Estado", "");            
 			            $list .=get_td("Nota para el público", "");
 			            $list .=get_td("Usuario Registrante", "");
@@ -409,6 +409,16 @@ if(!function_exists('invierte_date_time')){
 
 		$table .="</table><br>";
 		return  $table;
+	}	
+	/**/
+	function list_estados_puntos_venta($data){
+
+		$options ="";
+		foreach ($data as $row){
+
+			$options .="<option value='". $row["estado_punto_venta"] ."'>". $row["estado_punto_venta"] ."</option>";		
+		}
+		return $options;
 	}
 	/**/
 	function get_porcentaje_punto_venta($puntos_venta , $val ){

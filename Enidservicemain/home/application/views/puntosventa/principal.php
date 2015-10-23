@@ -16,14 +16,28 @@
         <button id="nuevo-contacto-button" type="button" class="btn btn-info" data-toggle="modal" data-target="#contact-modal">
         <i class="fa fa-check"></i>Agregar punto de venta
         </button>
+        
+
         <div class='pull-right'>
+            
             <div class="input-group">
-                <div class="input-group-addon">Razón social </div>
+                <div class="input-group-addon">Estado</div>                
+                <select name='estado_punto_venta' id='estado_punto_venta' class='estado_punto_venta form-control'>
+                    <?=$estados_puntos_venta?>
+                </select>                
+            </div>
+        </div>
+
+        <div class='pull-right'>
+
+            <div class="input-group">
+                <div class="input-group-addon">Punto de venta </div>
                 <input list='razon_social' name='puntos_venta_filtro' id='puntos-venta-filtro' class='puntos-venta-filtro form-control' >
                 <?=$puntos_venta_nombres;?>
             </div>
         </div>
         
+
 
         <div id="puntos-venta-list">
             
@@ -94,7 +108,7 @@
         </div>
     </div>
      <div class="form-group">
-         <label for="inputEmail">Razón social del punto de venta</label>
+         <label for="inputEmail">Punto de venta</label>
          <input type="text" class="form-control" name="razon_social" placeholder="Nombre de la organización" required>
      </div>    
      

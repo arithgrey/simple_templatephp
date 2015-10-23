@@ -4,6 +4,15 @@
       parent::__construct();        
       $this->load->database();
   }
+
+
+
+  function get_contactos_id($param){
+    
+    $query_get ="select * from  contacto where idcontacto   = '". $param["contacto"] ."' ";
+    $result= $this->db->query($query_get);
+    return $result->result_array();
+  }
   /*recorc contacto */
   function record( $nombre , $organizacion , $telefono, $movil, $correo , $direccion, $tipo , $idusuario, $nota , $pagina_web ){
 
@@ -28,6 +37,43 @@
   }
   /*Termina la función*/
    
+
+  function get_contactos_user($idusuario , $param){
+
+    $filtro ="";
+    if ( strlen($param["contacto-name"]) > 0) {
+
+      $filtro= " and  nombre  like '". $param["contacto-name"] ."%'  or   tipo like '". $param["filtro-tipo-contacto"] ."%'  " ;  
+
+    }else if(strlen($param["contacto-tel-filtro"]) > 0  ){
+
+      $filtro= " and  tel like '". $param["contacto-tel-filtro"] ."%'   or tipo like '". $param["filtro-tipo-contacto"] ."%' " ;    
+
+    }else if(strlen($param["contacto-tel-filtro"] ) > 0  && strlen($param["contacto-name"]) > 0  ){
+      $filtro= " and  nombre  like '". $param["contacto-name"] ."%'  and    tipo like '". $param["filtro-tipo-contacto"] ."%' and   tel like '". $param["contacto-tel-filtro"] ."%'   " ;  
+    
+    }else if( $param["filtro-tipo-contacto"] ==  "Todos"){
+        
+        $filtro = ""; 
+        
+    }else{
+      $filtro=" limit 10";
+    }
+    
+    $query_get ="SELECT c.* , i.*  FROM contacto c  left outer  join  imagen_contacto ic on 
+                    c.idcontacto =  ic.id_contacto left outer  join imagen  i  on  ic.id_imagen =  i.idimagen 
+                    where idusuario ='".$idusuario."'  ".$filtro."";  
+
+    
+    $result = $this->db->query($query_get);
+
+    return $result ->result_array();
+    
+    
+  }
+/*
+
+
   function get_contactos_user($idusuario, $contacto, $tipo){
 
     
@@ -53,6 +99,8 @@
 
   }
 
+
+*/
   /*Lista de contactos*/
   function get_list_contactos($id_usuario){
 

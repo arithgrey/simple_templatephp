@@ -42,10 +42,19 @@ class Contactos extends REST_Controller{
 
       $this->validate_user_sesssion();
       $idusuario =  $this->sessionclass->getidusuario();
-      $contacto =  $this->get("contacto");
-      $tipo = $this->get("tipo");
-      $response_db =  $this->contactmodel->get_contactos_user($idusuario,  $contacto , $tipo);
-      $this->response( table_contac($response_db));
+      
+      $response_db =  $this->contactmodel->get_contactos_user($idusuario, $this->get());
+      $this->response( table_contac($response_db));  
+  }
+
+  /**/
+  function contacto_id_GET(){
+
+      $this->validate_user_sesssion();
+      $idusuario =  $this->sessionclass->getidusuario();      
+      $response_db =  $this->contactmodel->get_contactos_id($this->get());
+      $this->response($response_db);   
+      
   }
   /**/
   function contacto_put(){

@@ -1,23 +1,20 @@
 $(document).on("ready", function(){
 
-
 	$("#form-contactos").submit(record_contacto);
-
 	$("#nuevo-contacto-button").click(function(){
-		$(".status-registro").hide();
 		
-	});
-	$('#contacto-name').keyup(function (e){ 
+	$(".status-registro").hide();
 
-	    tecleado = $(this).val(); 	        
-	   	load_contactos(tecleado , "all"); 		   
+		document.getElementById("form-contactos").reset();	
 	});
 
 	$("footer").ready(function (){
-		load_contactos("all", "all" );
+		
+		load_contactos_dinamic();
 	});
 
-	$("#filtro-tipo-contacto").change(filtrar_tipo);
+	$("#form-filtro").submit(load_contactos_dinamic);
+
 
 
 });
@@ -26,7 +23,9 @@ function record_contacto(e){
 	url = $("#form-contactos").attr("action");	
 	$.post(url, $("#form-contactos").serialize()).done(function(data){
 			$(".status-registro").show();
-			load_contactos("all", "all");
+			load_contactos_dinamic();
+			load_resumen_contactos();
+			document.getElementById("form-contactos").reset();
 
 						
 	}).fail(function(){
@@ -35,39 +34,47 @@ function record_contacto(e){
 
 	e.preventDefault();
 }	
+
 /**/
-function load_contactos(contacto,  tipo ){
 
-	url = $("#form-contactos").attr("action");	
-	$.get(url ,{ "contacto" : contacto , "tipo" : tipo }).done(function(data){
 
-		llenaelementoHTML( "#section-contact" , data);
-		$(".editar-contacto").click(try_update_contacto);
+
+
+
+
+
+
+/**/
+function get_data_contacto_in_modal(contacto){
+
+	url = now + "index.php/api/contactos/contacto_id/format/json/";	
+
+	$.get(url , {contacto : contacto}).done(function(data){
 		
-
-		$(".img_contacto").click(function(e){
-				
-			contacto = e.target.id;
-			$("#dinamic_contacto").val(contacto);
-			$("#lista-imagenes").html("");
-			$("#imgs-contacto").attr("value" , "");		
-			$("#imgs-contacto").change(upload_main_imgs);
-
-		});
-
-
-		load_resumen_contactos();
+		
+		//document.getElementById("#form-contactos-edit").reset();
+		valorHTML("#nnombre" , data[0].nombre);
+		valorHTML("#norganizacion" , data[0].organizacion);
+		valorHTML("#ntelefono" , data[0].tel);
+		valorHTML("#nmovil" , data[0].movil);
+		valorHTML("#ncorreo" , data[0].correo);
+		valorHTML("#ndireccion" , data[0].direccion);
+		valorHTML("#npagina_web" , data[0].pagina_web);		
+		$('#ntipo > option[value="'+ data[0].tipo +'"]').attr('selected', 'selected');
+		valorHTML("#nmovil" , data[0].nota);
+			
 
 	}).fail(function(){
-		alert("Error al cargar tus contactos, informar al administrador si  el problema persiste");
+		alert("Error al cargar los datos del contacto, informar al administrador");
 	});
 
 }
 /**/
 function try_update_contacto(e){
-
+	//document.getElementById("#form-contactos-edit").reset();
 	$(".status-registro").hide();
 	contacto =  e.target.id;
+	get_data_contacto_in_modal(contacto);
 	url = $("#form-contactos-edit").attr("action");	
 	
 
@@ -75,7 +82,9 @@ function try_update_contacto(e){
 		
 		actualiza_data(url , $("#form-contactos-edit").serialize()+"&"+$.param({"idcontacto" : contacto })  );		
 		$(".status-registro").show();
-		load_contactos("all" , "all");
+
+		load_contactos_dinamic();
+
 		return false;
 	});
 	
@@ -83,12 +92,6 @@ function try_update_contacto(e){
 /**/
 
 
-function filtrar_tipo(){
-
- 	tipo = $(this).val();
- 	load_contactos(  "tipo",  tipo );	
-
-}/**/
 
 function load_resumen_contactos(){
 
@@ -103,5 +106,35 @@ function load_resumen_contactos(){
 		alert("Error");
 	}); 
 
+
+}
+/**/
+function load_contactos_dinamic(){
+	
+
+	url = $("#form-contactos").attr("action");		
+	$.get(url , $("#form-filtro").serialize()).done(function(data){
+	
+		llenaelementoHTML( "#section-contact" , data);
+		$(".editar-contacto").click(try_update_contacto);
+		
+		$(".img_contacto").click(function(e){
+				
+			contacto = e.target.id;
+			$("#dinamic_contacto").val(contacto);
+			$("#lista-imagenes").html("");
+			$("#imgs-contacto").attr("value" , "");		
+			$("#imgs-contacto").change(upload_main_imgs);
+
+		});
+
+		
+		
+		
+	}).fail(function(){
+		alert("Error al cargar tus contactos, informar al administrador si  el problema persiste");
+	});
+
+	return false;
 
 }

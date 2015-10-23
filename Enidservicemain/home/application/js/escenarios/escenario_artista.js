@@ -7,6 +7,10 @@ $(document).on("ready", function(){
 	$(".artista_yt").click(update_youtube_url);
 	$(".artista_sound").click(update_sounda_url);
 	escenario =  $("#escenario").val();
+	$(".status-confirmacion").click(try_update_status_artista);
+	
+	$(".artistas-inputs").click(try_update_nombre_artista);	
+
 
 
 
@@ -59,9 +63,10 @@ function load_data_escenario_artista(){
 	        	Stringentrante = $(this).val(); 	        
 	            buscarartista(Stringentrante);
 	    });
-
-	   
+	  
 		$(".img-artista-evento").click(try_upload_img_artistas);
+		$(".status-confirmacion").click(try_update_status_artista);
+		$(".artistas-inputs").click(try_update_nombre_artista);	
 
 	}).fail(function(){
 		alert(genericresponse[0]);
@@ -100,27 +105,70 @@ function update_youtube_url(e){
 	url = $("#form-arista-social-youtube").attr('action');	
 	social = "youtube";
 
-	$("#form-arista-social-youtube").submit(function(){			
-			url_youtube = $("#url_youtube").val();						
-			registra_data(url , { artista : artista   , escenario : escenario ,  url : url_youtube , social : social } );			
-			return false;
+	load_data_escenario_artista_dinamic(artista, "y" , social );
+	
+}
 
+/**/
+function load_data_escenario_artista_dinamic(artista, campo , social ){
+
+	llenaelementoHTML(".response_youtube", "");
+	llenaelementoHTML(".response-sound", "");
+
+	url =  now + "index.php/api/escenario/artista_escenario/format/json/";
+	$.get(url , {artista: artista ,  escenario : escenario }).done(function(data){
+
+		if (campo == 'y') {
+			$("#url_youtube").val(data[0].url_social_youtube);	
+		}else{
+
+			$("#url_sound").val(data[0].url_sound_cloud);	
+			
+		}
+
+	}).fail(function(){
+		alert("Error al cargar información del artista en el escenario");
 	});
 
+
+	if ( social ==  "youtube") {
+		url = $("#form-arista-social-youtube").attr('action');	
+			$("#form-arista-social-youtube").submit(function(){			
+					url_youtube = $("#url_youtube").val();						
+					registra_data(url , { artista : artista   , escenario : escenario ,  url : url_youtube , social : social } );			
+					llenaelementoHTML(".response_youtube" , "Datos actualizados");
+					return false;
+
+			});
+			return false;
+	}else{
+
+		url = $("#form-arista-social-sound").attr('action');	
+			$("#form-arista-social-sound").submit(function(){			
+					url_sound = $("#url_sound").val();						
+					registra_data(url , { artista : artista   , escenario : escenario ,  url : url_sound , social : social } );			
+					llenaelementoHTML(".response-sound" , "Datos actualizados");
+					return false;
+
+			});
+			return false;
+
+	}
+	
+
+
 }
+
+
+
 /**/
 function update_sounda_url(e){
 
-	artista = e.target.id;
-	url = $("#form-arista-social-sound").attr('action');	
+	artista = e.target.id;	
 	social = "Sound Cloud";
-
-	$("#form-arista-social-sound").submit(function(){			
-			url_sound = $("#url_sound").val();						
-			registra_data(url , { artista : artista   , escenario : escenario ,  url : url_sound , social : social } );			
-			return false;
-
-	});
+	
+	load_data_escenario_artista_dinamic(artista, "s" , social );
+	
 }
 
 /**/
@@ -137,3 +185,59 @@ function  try_upload_img_artistas(e){
 
 }
 
+function try_update_status_artista(e){
+
+	url =  now +"index.php/api/escenario/escenario_artista_status/format/json/";
+	artista = e.target.id;
+	$("#status-artista-evento").change(function(){
+
+			nuevo_status = $("#status-artista-evento").val();
+
+			data_send =  { artista :  artista , escenario :  escenario , nuevo_status :  nuevo_status  }
+			$.ajax(  {url :  url , type : 'PUT' , data : data_send }    ).done(function(data){
+				load_data_escenario_artista();
+				llenaelementoHTML("#response-update-status" , "Estado de confirmación del artista modificado");
+				
+
+			}).fail(function(){
+				///alert("error  al actualizar el estatus del artista");
+			});
+			
+
+	});
+
+	
+
+}
+/**/
+
+function try_update_nombre_artista(e){
+
+	artista =  e.target.id;
+	$("#nuevo-nombre-artista").val(e.target.text);
+	url =  now +"index.php/api/escenario/artista_nombre/format/json/";
+
+
+	$("#modifica-nombre-artista").click(function(){
+
+
+			nuevo_nombre =  $("#nuevo-nombre-artista").val();
+			data_send =  { artista :  artista , nuevo_nombre  : nuevo_nombre  }
+			$.ajax(  {url :  url , type : 'PUT' , data : data_send }    ).done(function(data){
+				llenaelementoHTML("#response-update-nombre" , "nombre del artista modificado");
+
+				load_data_escenario_artista();				
+			}).fail(function(){
+				///alert("error  al actualizar el estatus del artista");
+			});
+	
+
+
+
+
+	});
+
+
+
+
+}

@@ -9,7 +9,6 @@ if(!function_exists('invierte_date_time')){
 		$table .= get_td("Escenario con información para el público" , "");
 					  	
 					  	
-					  	
 		$table .= get_td("Artistas" , "");
 		$table .= get_td("Artistas con enlace a youtube" , "");
 		$table .= get_td("Con enlace a pistas musicales" , "");
@@ -128,14 +127,14 @@ if(!function_exists('invierte_date_time')){
 
 	foreach ($data as $row) {
 	
-	$idartista = $row["idartista"];	
+	$id_artista = $row["idartista"];	
 	$status = $row["status"];
 	$idescenario = $row["idescenario"];
 	$fecha_registro = $row["fecha_registro"];
 	$hora_inicio = $row["hora_inicio"];
 	$hora_termino = $row["hora_termino"];
 	$nombre_artista= $row["nombre_artista"];
-
+	$status_confirmacion = $row["status_confirmacion"];
 
 
 	
@@ -160,13 +159,13 @@ if(!function_exists('invierte_date_time')){
 
 		               	$artistas_in_evento .='<div data-toggle="modal" data-target="#modal-img-artista-evento" class="prog-avatar"> 						
 						                            
-						                            <img  class="img-artista-evento thumb" id="'.$idartista.'" src="'.$img .'" alt="">
+						                            <img  class="img-artista-evento thumb" id="'.$id_artista.'" src="'.$img .'" alt="">
 												</div>';
 
 
 				}else{
 						$artistas_in_evento .='<div  data-toggle="modal" data-target="#modal-img-artista-evento" class="prog-avatar"> 												                            						                            
-						                            <i class="img-artista-evento thumb fa fa-cloud-upload fa-3x" id="'.$idartista.'"  ></i>
+						                            <i class="img-artista-evento thumb fa fa-cloud-upload fa-3x" id="'.$id_artista.'"  ></i>
 												</div>';
 				}
 
@@ -174,15 +173,40 @@ if(!function_exists('invierte_date_time')){
 
                 $artistas_in_evento.='<div class="details">
                                         <div class="title">
-                                        	<i id="'.$idartista.'" class="remove-artista fa fa-minus-circle"></i>                                        	
-                                        	<a href="" data-toggle="modal" data-target="#modal_link_youtube" class="artista_yt" id="'.$idartista.'"> <i class="artista_yt fa fa-youtube-play" id="'.$idartista.'" ></i></a>
-                                        	<a href="" data-toggle="modal" data-target="#modal_link_sound" class="artista_sound" id="'.$idartista.'">  <i class="artista_sound fa fa-play-circle" id="'.$idartista.'" ></i></a>
+                                        	<i id="'.$id_artista.'" class="remove-artista fa fa-minus-circle"></i>                                        	
+                                        	<a href="" data-toggle="modal" data-target="#modal_link_youtube" class="artista_yt" id="'.$id_artista.'"> <i class="artista_yt fa fa-youtube-play" id="'.$id_artista.'" ></i></a>
+                                        	<a href="" data-toggle="modal" data-target="#modal_link_sound" class="artista_sound" id="'.$id_artista.'">  <i class="artista_sound fa fa-play-circle" id="'.$id_artista.'" ></i></a>
+                                            	
+                                        		
+
+                                        		
+                                            	<div class="pull-right">
+	                                            	<ul class="revenue-nav">
+
+	                                            				                                        			                                        
+				                                        <li class=""><a class="artistas-inputs"  data-toggle="modal" data-target="#edit-nombre-artista"   id="'. $id_artista.'" >'. $nombre_artista .'</a>
+				                                        
+				                                        </li>
+				                                        <li class="active"  data-toggle="modal" data-target="#edit-status-confirmacion" ><a class="status-confirmacion" id="'. $id_artista.'" >'. $status_confirmacion.'</a></li>
+				                                    </ul>
+			                                    </div>
+			                                    
                                             
+
+
+
+
+
+
+
+
+
                                             <a href="" data-toggle="modal" data-target="#modal_record_horario">                                            
-                                            <i class="fa fa-clock-o horario_artista" id="'.$idartista.'">
+                                            <i class="fa fa-clock-o horario_artista" id="'.$id_artista.'">
                                             </i></a> Horario '.$horario.' 
-                                            <a  class="pull-right" href="#">'.  $nombre_artista .'</a>
-                                        </div>                                        
+                                            
+                                        </div> 
+                                        	
                                     </div>
                                 </li>';				                                	
 	}                                
