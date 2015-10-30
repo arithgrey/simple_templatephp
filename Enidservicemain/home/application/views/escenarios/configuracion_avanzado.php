@@ -1,6 +1,8 @@
 <?=ini_set('display_errors', '1');?>
-<div class='col-lg-1'></div>
-<div class='col-lg-10'>
+<div class='col-lg-1'>
+
+</div>
+<div class='col-lg-9'>
 <div class="center-block">
 
     <div class='row'>
@@ -117,9 +119,26 @@
 </div>
 </section>
 </div>
-<div class='col-lg-1'></div>
+
+</div></div>
+<div class='col-lg-1'>
+    
 
 
+    <div class="row">
+                <div class="col-md-12">
+                    <!--statistics start-->
+                    <div class="row state-overview">
+
+                        <?=$otros_escenarios?>
+
+                        
+                        
+                    <!--statistics end-->
+                    </div>
+              
+                </div>
+    </div>
 
 
 

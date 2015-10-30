@@ -9,7 +9,7 @@
 }
 </style>
 
-<link href="<?=base_url('application/views/principal/dropzone.css')?>" rel="stylesheet"/>
+
 <link rel="stylesheet" type="text/css" href="<?=base_url('application/css/eventos/edicion.css')?>">
 <link rel="stylesheet" type="text/css" href="<?=base_url('application/js/js/bootstrap-datepicker/css/datepicker-custom.css')?>" />
 
@@ -20,6 +20,8 @@
 <script type="text/javascript" src="<?=base_url('application/js/evento/servicios.js')?>"> </script>
 <script type="text/javascript" src="<?=base_url('application/js/evento/objetospermitidos.js')?>"></script>
 <script type="text/javascript" src="<?=base_url('application/js/evento/tematica.js')?>"></script>
+<script type="text/javascript" src="<?=base_url('application/js/evento/img.js')?>"></script>
+
 
 
 
@@ -57,7 +59,43 @@
                     <input placeholder="Registra qué edición tiene el evento" class="form-control"  type="text" id="edicion-input" name='edicion-input' value="<?=$data_evento['edicion'];?>">
                 </div>
 
-                <form action="<?=$carpeta_evento_img?>" class="dropzone" id="event-img"></form>            
+
+
+
+
+                <div class="center-block">
+
+                    
+                        <div class='section-ev'>
+                            <?=$slider_principal_evento;?>                                
+                        </div>
+                    
+                    <div class='row'>
+                        <strong id='img-button-more-imgs' data-toggle="modal" data-target="#modal-img-evento-section"  >
+                        <i class="fa fa-plus-circle fa-5x"></i>                            
+                        <span style='color:white;'>Cargar Imagenes</span>
+                        </strong>
+                    </div>
+                    <input type='hidden' name='action' value="carga-imgenes-escenario">                    
+                </div>    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                
           </div>
 
 
@@ -328,7 +366,7 @@
                                         <div class="form-group todo-entry">
                                             <input type="hidden" name="evento_escenario" id="evento_escenario" value="<?=$evento;?>">
 
-                                            <input placeholder="Añadir escenario" class="form-control nuevo-escenario-input" style="width: 100%" type="text" id='nuevo-escenario-input' name='nuevoescenario' >
+                                            <input placeholder="Añadir escenario" class="form-control nuevo-escenario-input" style="width: 100%" type="text" id='nuevo-escenario-input' name='nuevoescenario'  required>
                                         </div>
                                         <button style="background:black !important" class="btn btn-primary pull-right" type="submit" id="nuevo-escenario">
                                           <i class="fa fa-plus"></i>
@@ -360,131 +398,6 @@
 
 
 
-
-
-
-<!--
-<div id="modalesenariosedit"  class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">    
-  <div class="modal-dialog modal-lg">
-    <div class="modal-content">
-      
-      
-
-
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>        
-          <div class='row'>
-            <div class='col-sm-12'>
-              <h3 class='nombre-escenario-modal'></h3>
-              <input type="text" data-trigger="click" class="form-control popovers nombre-escenario-input-modal" id='nombre-escenario-input-modal' placeholder="Escenario">
-            </div>   
-          </div>
-          <div class='row'>
-          <button id="avanzado-config-escenario" class='btn btn-info pull-right' style='background:rgba(2, 16, 20, 0.64);'><i class='fa fa-angle-double-right'></i>Avandado </button>          
-          </div>
-          
-          <form id="updateescenariomodal-form">
-             <input type='hidden' id="idescenarioupdatemodal" name="idescenarioupdatemodal"  class="idescenarioupdatemodal" >
-          </form>
-      </div>
-
-
-      
-     <div class="modal-body">        
-  
-
-<div class='row'>
-        
-
-        <div class='col-xs-12  col-sm-6 col-md-6 col-lg-6'>
-
-          <button class="btn btn-info  col-xs-12 day_escenario_button" type="button" >            
-            <span class='day_escenario'></span>            
-          </button>                
-
-          <div class='day_escenario_inputs' id='day_escenario_inputs'>
-            <div class="input-group">
-                <input class="form-control dpd1" name="nuevo_inicio_escenario" id="nuevo_inicio_escenario" type="text">
-                <span class="input-group-addon">hasta</span>
-                <input class="form-control dpd2" name="nuevo_termino_escenario" id="nuevo_termino_escenario" type="text">
-            </div>
-          </div>
-        </div> 
-        
-        <div class="col-xs-12  col-sm-6 col-md-6 col-lg-6 ">
-          <div class="input-group">
-            <div class="input-group-btn">                                            
-              <button tabindex="-1" data-toggle="dropdown" class="btn btn-default dropdown-toggle" type="button">Tipo de escenario<span class="caret"></span></button>
-                <ul role="menu" class="dropdown-menu">
-                  <li><a class='tipo-evento-modal' id='General' href="#">General</a></li>
-                  <li><a class='tipo-evento-modal' id='Principal' href="#">Principal</a></li>
-                  <li><a class='tipo-evento-modal' id='Especial' href="#">Especial</a></li>                                                                              
-                </ul>
-            </div>
-            <input type="text"  class="form-control input_tipo" >
-          </div>
-        </div>  
-
-</div> 
-
-<div class='row'>        
-  <div class="panel">
-    <header class="panel-heading">
-      <span style='color:black '><i class="fa fa-play"></i> Horarios y  Artistas</span>
-      <span class="tools pull-right">
-        <a class="fa  fa-caret-down" href="javascript:;"></a>
-      </span>
-    </header>
-    <div class="panel-body">                          
-      <ul class="to-do-list ui-sortable" id="sortable-todo">                                   
-        <div class="general-artistas"></div>
-      </ul>
-      <form role="form" class="form-inline" id="form-artistas" >
-        <div class="form-group todo-entry">
-          <datalist id="dinamic-artistas"></datalist>
-          <input id='idescenariomodalartistas' name="idescenario" type='hidden'>
-          <input  name="nuevoartista" type="text" list="dinamic-artistas" id='artistainput' placeholder="Artista que se presentará en el escenario" class="form-control" style="width: 100%">
-        </div>
-        <button class="btn btn-primary pull-right" type="submit">+</button>
-      </form>                          
-    </div>
-  </div>          
-</div>          
-
-
-<div class='row'>       
-
-  <header class="panel-heading">
-      <span style='color:black '><i class="fa fa-file-text"></i> Descripción del escenario </span>
-      <span class="tools pull-right">
-        <a class="fa  fa-caret-down" href="javascript:;"></a>
-      </span>
-    </header>
-
-
-  <div class='descripcion-modal-text col-xs-12  col-sm-12 col-md-12 col-lg-12' >
-    + agregar descripción del escenario
-  </div>                          
-  <div class="form-group">
-    <textarea class='descripcion-in-modal-escenario col-xs-12  col-sm-12 col-md-12 col-lg-12 ' ></textarea>
-  </div> 
-  
-</div>  
-
-</div>
-
-<div class="modal-footer">
-    
-
-
-    
-    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-</div>
-      </div>
-    </div>
-</div> 
--->
-<!--Termina Escenarios modal-->
 
 <!--************************************CONFIRMAR  **********************************-->
 <div id="confirmationdeleteescenario" class="modal fade">
@@ -1027,6 +940,72 @@
 
 
 
+
+
+
+
+
+
+
+
+<input type='hidden' name='base_path_img' id="base_path_img" class='base_path_img' value='<?=$base_path_img;?>'>
+<input type='hidden' name='base_path' id='base_path' class='base_path' value='<?=$base_path;?>'>
+<?=$base_path?>
+
+
+
+
+<div class="modal fade" id="modal-img-evento-section" tabindex="-1" 
+role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="myModalLabel">Cargar imagenes al evento</h4>
+            </div>
+            <div class="modal-body">  
+            <div class='response-img-upload' id="response-img-upload"></div>        
+                  <div class='lista-imagenes' id="lista-imagenes"></div> 
+                  <form action ='<?=base_url("application/controllers/api/imgs_controller.php")?>'  method="post" id="form_imgs_evento" enctype="multipart/form-data" >
+
+                      <div class="form-group">
+                      Imagen:<input type="file" name="images[]"  id="imgs-evento-input">                            
+                      
+                  </form>
+            </div>            
+            <div class="modal-footer">                
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>               
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <!--pickers css-->
 
 <link rel="stylesheet" type="text/css" href="<?=base_url('application/js/js/bootstrap-timepicker/css/timepicker.css')?>" />
@@ -1035,8 +1014,8 @@
 
 
 
-<script src="<?=base_url('application/views/principal/dropzone.js')?>"></script>
-<script type="text/javascript" src="<?=base_url('application/js/evento/img_events.js')?>"></script>
+
+
 <script type="text/javascript" src="<?=base_url('application/js/js/bootstrap-datepicker/js/bootstrap-datepicker.js')?>"></script>
 <script type="text/javascript" src="<?=base_url('application/js/js/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js')?>"></script>
 <script type="text/javascript" src="<?=base_url('application/js/js/bootstrap-daterangepicker/moment.min.js')?>"></script>

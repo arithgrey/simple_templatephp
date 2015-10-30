@@ -1,5 +1,5 @@
 
-<div class="container">
+<div class="container" id='contenedor-time'>
     
     <ul class="timeline">
         <li id='panel-eventos'>
@@ -361,5 +361,9 @@ Tus puntos de venta</h4></a>
 }
 .text-muted{
     color: #000A17;
+}
+#contenedor-time{
+    //background: #DEF2FB;
+    padding: 5%;
 }
 </style>

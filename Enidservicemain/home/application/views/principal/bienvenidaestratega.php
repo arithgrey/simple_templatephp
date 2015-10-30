@@ -1,15 +1,3 @@
-<style type="text/css">
-#dinamic-field , #success-alert{
-    display: none;
-}
-#scroll{
-        border:1px solid;            
-        overflow-y:scroll;
-        overflow-x:hidden;
-}
-</style>
-
-
 <button class='btn btn-info' data-toggle="modal" data-target="#modal-nuevo-evento">+  Nuevo Evento <i class='fa fa-headphones'></i></button>
 <div class="modal fade" id="modal-nuevo-evento" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
     <div class="modal-dialog">
@@ -155,21 +143,18 @@
 
 
 <!---->
-                           
-
-
-
-
-
-
-            <?=$pagination_event;?>
+                        
+            
     
             <div class="row">
 
                 <div class="col-md-8" style="">
 
+
                     <div class="row">
+
                         <div class="col-md-12">
+
 
 
 
@@ -179,6 +164,7 @@
                             <div class="panel" >
                                 <header class="panel-heading blue-col-enid" > 
                                     Últimos eventos anunciados                                     
+                                    <?=$pagination_event;?>
                                     <span class="tools pull-right">                                        
                                         <button class="btn btn-block btn-info ver-todos" type="button">                                           
                                             <span class="pull-left"> 
@@ -190,7 +176,7 @@
                                 </header>                                
                                 <div class="panel-body" style="background:  none repeat scroll 0% 0% #124048">                                                        
                                     <!--last 5 -->
-                                    <?=get_last_events_empresa($ultimos_eventos, 270 , 1 , 1 , 200);?>
+                                    <?=$ultimos_eventos;?>
                                     <!--Termina-->
                                 </div>
 
@@ -278,6 +264,9 @@
 
 
 
+
+
+
 <!--*************************        Modal update fecha del evento    ************************* -->
 <div class="modal fade" id="modal-update-evento" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
     <div class="modal-dialog">
@@ -292,12 +281,24 @@
                 <h4>Actualizar la fecha del evento </h4>
 
                 <!---->
+
                 <form method="POST" class='update-fecha-evento-form' id="update-fecha-evento-form">
                     <input type="hidden" name='update_evento' id='update_evento'>
-                    <div class="input-group">
-                        <input class="form-control dpd1" id="fecha_reporte" name="fecha_reporte" type="text" required>
-                        <span class="input-group-addon"> al día </span>
-                        <input class="form-control dpd2" id="reporte" name="reporte" type="text" required>
+                    <div class="input-group">                        
+                                                <div data-date-viewmode="years" data-date-format="yyyy-mm-dd" data-date="2012-02-12" class="input-append date dpYears"  >
+                                                        <input readonly="" value="2012-02-12" size="16" class="form-control" id="update_inicio" name="update_inicio" type="text"  >
+                                                        <span class="input-group-btn add-on">
+                                                            <button class="btn btn-primary" type="button"><i class="fa fa-calendar"></i></button>
+                                                        </span>
+                                                </div>
+
+                                                <div data-date-viewmode="years" data-date-format="yyyy-mm-dd" data-date="2012-02-12" class="input-append date dpYears">
+                                                        <input readonly="" value="2012-02-12" size="16" class="form-control" name="update_termino"  type="text" id="update_termino"  >
+                                                        <span class="input-group-btn add-on">
+                                                            <button class="btn btn-primary" type="button"><i class="fa fa-calendar"></i></button>
+                                                        </span>
+                                                </div>
+
                     </div>
                     <span class="help-block" >Fecha del evento </span>
                     <button class="btn btn-info">Guardar</button>
@@ -305,6 +306,30 @@
                     <div class="alert alert-success" id="update-susses" role="alert">Cambios registrados </div>
                 </form>                    
                 <!---->
+
+
+
+
+
+
+
+                                            
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -316,6 +341,109 @@
     </div>
 </div>
 <!--pickers plugins-->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="modal fade" id="modal-nuevo-escenario-evento" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            
+        <h4 class="modal-title" id="myModalLabel"><i class="fa fa-calendar-o"></i>Agregar escenario al evento </h4>
+            </div>
+            <div class="modal-body">                
+                <h4>Nuevo escenario</h4>
+                <!--***********************************  *****************************-->
+                <form method="POST" class='registra-nuevo-escenario-form' id="registra-nuevo-escenario-form">                    
+                    <div class="form-group">  
+                        <input type="text" class="form-control" id="nuevo-escenario" name='nuevoescenario' placeholder='Nombre del escenario' required >
+                    </div>
+                </form>                    
+                <!--***********************************  ***************************-->
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>                                
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <script type="text/javascript" src="<?=base_url('application/js/js/bootstrap-datepicker/js/bootstrap-datepicker.js')?>"></script>
 <script type="text/javascript" src="<?=base_url('application/js/js/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js')?>"></script>
 <script type="text/javascript" src="<?=base_url('application/js/js/bootstrap-daterangepicker/moment.min.js')?>"></script>
@@ -325,9 +453,23 @@
 <!--pickers initialization-->
 <script type="text/javascript" src="<?=base_url('application/js/js/pickers-init.js')?>"></script>
 <link rel="stylesheet" type="text/css" href="<?=base_url('application/js/js/bootstrap-datepicker/css/datepicker-custom.css')?>" />
+
+
+
 <script type="text/javascript" src="<?=base_url('application/js/estratega/evento/principal.js')?>"></script>
 <script type="text/javascript" src="<?=base_url('application/js/escenarios/principal.js')?>"></script>
 <script type="text/javascript" src="<?=base_url('application/js/accesos/principal.js')?>"></script>
 
 
+
+<style type="text/css">
+#dinamic-field , #success-alert{
+    display: none;
+}
+#scroll{
+        border:1px solid;            
+        overflow-y:scroll;
+        overflow-x:hidden;
+}
+</style>
 

@@ -12,7 +12,7 @@
 
 
 
-
+<?=$base_path;?>
 
 
 <div class="container">

@@ -54,7 +54,7 @@ $(document).on("ready", function (){
 	
 	$("footer").ready(load_data_escenarios);	
 	$("#form-escenario").submit(nuevo_escenario);
-	$("#form-artistas").submit(nuevo_artista_escenario);
+	
 
 
 	$("#tematica-button").click( function (){
@@ -74,11 +74,9 @@ $(document).on("ready", function (){
 	/*Eslogan del evento */
 	$(".eslogan-p").click(update_eslogan_evento);
 
+	$("#imgs-evento-input").change(upload_main_imgs_evento);
 	initialize();
-	
 
-	//generate_img();
-	
 });
 /**/
 function load_data_evento( text_visible , val , text_evento , place , null_msj , sin_text_msj  ){
@@ -408,13 +406,14 @@ function update_fecha_evento(){
 	update_inicio = $("#update_inicio").val();
 	update_termino = $("#update_termino").val();
 	url = now + "index.php/api/event/date_by_id/format/json/";	 		 	
+	id_evento =  $("#evento").val();
 	actualiza_data(url , { "evento" : id_evento , "nuevo_inicio" : update_inicio , "nuevo_termino" : update_termino } );
 	id_new_tag = "#"+ id_evento;
 	new_date = "<i class='fa fa-calendar-o'></i> " + update_inicio + "-" + update_termino; 	
 	llenaelementoHTML( ".text-fecha-evento", "FECHA DEL EVENTO " +new_date);	 
 	
 	
-	 return false;
+	return false;
 }
 /*Actualiza la tipificación del evento */
 function update_tipificacion_evento(){

@@ -5,6 +5,16 @@ function __construct(){
         parent::__construct();        
         $this->load->database();
 }
+
+/**/
+function get_img_evento($id_evento){
+
+	$query_get ="select i.* from imagen i inner join imagen_evento ie on  i.idimagen =  ie.id_imagen inner join evento e on ie.id_evento= e.idevento where e.idevento = '". $id_evento."'  ";
+	$result = $this->db->query($query_get);
+	return $result->result_array();
+
+
+}
 /**/
 function getTematicaByid($idevento , $idempresa )
 {
@@ -88,12 +98,29 @@ function get_last_events_experience( $num , $less ){
 /*Los últimos eventos registrados de la empresa*/
 function get_last_events($idempresa , $num ){
 	
-	$query_select ="SELECT e.*,  count(es.idescenario) as totalescenarios 
-FROM evento as e
-left outer join escenario as es 
-on e.idevento = es.idevento 
-where e.idempresa ='". $idempresa."' 
-group by e.idevento ORDER BY e.fecha_registro DESC LIMIT $num";
+	$query_temporal_tables =  "call repo_eventos_admin($idempresa);"; 
+	$this->db->query($query_temporal_tables);	
+
+$query_select ="select e.*  , ea.artistas , epv.evento_punto_venta , es.servicios , ra.accesos 
+, CONCAT(i.base_path_img , i.nombre_imagen)portada      from repo_eventos_escenarios e
+left outer join  repo_escenarios_artistas ea 
+on e.idevento = ea.idevento 
+left outer join repo_evento_puntos_venta epv 
+on  e.idevento =  epv.idevento
+left outer join repo_evento_servicios  es 
+on e.idevento =  es.idevento
+left outer join reporte_evento_accesos ra 
+on e.idevento =  ra.idevento
+left outer join imagen_evento ie 
+on ie.id_evento =  e.idevento
+left outer join imagen  i 
+on ie.id_imagen =  i.idimagen
+group by e.idevento
+ORDER by e.idevento desc
+LIMIT $num
+";
+
+
 	$result = $this->db->query($query_select);
 	return $result ->result_array();      
 }

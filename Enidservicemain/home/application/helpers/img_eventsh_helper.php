@@ -1,14 +1,9 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 if(!function_exists('invierte_date_time')){
     function create_dinamic_dic($path){    
-        if(file_exists($path) == false ) {
-    
-            //mkdir( $path  , 7777, true); 
-            //mkdir( $path  , 0775, true); 
-            //mkdir( $path  , 755 , true); 
-            //mkdir( $path  , 7777 , true); 
-            mkdir( $path  , 0775, true); 
-
+        if(file_exists($path) == false ) {        
+            mkdir( $path  , 0755, true); 
+            
         }
         return file_exists($path);
     }

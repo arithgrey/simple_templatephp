@@ -8,8 +8,16 @@ class Event extends REST_Controller{
             $this->load->helper("eventosh");               
             $this->load->helper("generoshelp");
             $this->load->library('sessionclass');                    
-    }     
-    /**/
+    }   
+
+    function imagenes_GET(){
+        $this->validate_user_sesssion();           
+        $id_evento = $this->get("id_evento"); 
+        $data_img  = $this->eventmodel->get_img_evento($id_evento);
+        $this->response( get_slider_img_evento($data_img)  );
+         
+    }  
+    /**/    
     function update_status_put(){
        
         $this->validate_user_sesssion();            

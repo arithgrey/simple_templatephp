@@ -16,9 +16,7 @@ DROP TABLE IF EXISTS `enidserv_eniddbbbb3`.`countries` ;
 
 CREATE TABLE IF NOT EXISTS `enidserv_eniddbbbb3`.`countries` (
   `idCountry` INT(5) NOT NULL AUTO_INCREMENT,
-  `countryCode` CHAR(2) NOT NULL,
   `countryName` VARCHAR(45) NOT NULL,
-  `status` VARCHAR(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`idCountry`))
 ENGINE = InnoDB;
 
@@ -367,8 +365,8 @@ CREATE TABLE IF NOT EXISTS `enidserv_eniddbbbb3`.`evento` (
   `edicion` VARCHAR(100) NULL,
   `idempresa` INT NOT NULL,
   `idusuario` INT NOT NULL,
-  `fecha_inicio` VARCHAR(10) NULL,
-  `fecha_termino` VARCHAR(10) NULL,
+  `fecha_inicio` DATE NULL,
+  `fecha_termino` DATE NULL,
   `descripcion_evento` TEXT NULL,
   `portada` VARCHAR(300) NULL,
   `ubicacion` TEXT NULL,
@@ -411,8 +409,8 @@ CREATE TABLE IF NOT EXISTS `enidserv_eniddbbbb3`.`escenario` (
   `tipoescenario` VARCHAR(200) NOT NULL DEFAULT 'General',
   `portada_escenario` VARCHAR(45) NULL,
   `status` VARCHAR(1) NOT NULL DEFAULT '1',
-  `fecha_presentacion_inicio` VARCHAR(20) NULL,
-  `fecha_presentacion_termino` VARCHAR(20) NULL,
+  `fecha_presentacion_inicio` DATE NULL,
+  `fecha_presentacion_termino` DATE NULL,
   PRIMARY KEY (`idescenario`),
   INDEX `fk_esenario_evento1_idx` (`idevento` ASC),
   CONSTRAINT `fk_esenario_evento1`
@@ -452,7 +450,7 @@ CREATE TABLE IF NOT EXISTS `enidserv_eniddbbbb3`.`escenario_artista` (
   `hora_inicio` VARCHAR(20) NULL,
   `hora_termino` VARCHAR(20) NULL,
   `url_social_youtube` TEXT NULL,
-  `url_sound_cloud` VARCHAR(45) NULL,
+  `url_sound_cloud` TEXT NULL,
   `status_confirmacion` VARCHAR(45) NOT NULL DEFAULT 'pendiente por confirmar',
   INDEX `fk_escenario_has_artista_artista1_idx` (`idartista` ASC),
   INDEX `fk_escenario_has_artista_escenario1_idx` (`idescenario` ASC),
@@ -492,8 +490,8 @@ CREATE TABLE IF NOT EXISTS `enidserv_eniddbbbb3`.`acceso` (
   `idacceso` INT NOT NULL AUTO_INCREMENT,
   `descripcion` TEXT NULL,
   `precio` VARCHAR(45) NULL,
-  `inicio_acceso` VARCHAR(20) NULL,
-  `termino_acceso` VARCHAR(20) NULL,
+  `inicio_acceso` DATE NULL,
+  `termino_acceso` DATE NULL,
   `status` VARCHAR(1) NULL,
   `idevento` INT NOT NULL,
   `idtipo_acceso` INT NOT NULL,
@@ -1261,6 +1259,48 @@ CREATE TABLE IF NOT EXISTS `enidserv_eniddbbbb3`.`empresa_tipo_incidencia` (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
+
+-- -----------------------------------------------------
+-- Table `enidserv_eniddbbbb3`.`estado`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `enidserv_eniddbbbb3`.`estado` ;
+
+CREATE TABLE IF NOT EXISTS `enidserv_eniddbbbb3`.`estado` (
+  `id_estado` INT NOT NULL AUTO_INCREMENT,
+  `estado` VARCHAR(45) NULL,
+  `idCountry` INT(5) NOT NULL,
+  PRIMARY KEY (`id_estado`),
+  INDEX `fk_estado_countries1_idx` (`idCountry` ASC),
+  CONSTRAINT `fk_estado_countries1`
+    FOREIGN KEY (`idCountry`)
+    REFERENCES `enidserv_eniddbbbb3`.`countries` (`idCountry`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `enidserv_eniddbbbb3`.`imagen_evento`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `enidserv_eniddbbbb3`.`imagen_evento` ;
+
+CREATE TABLE IF NOT EXISTS `enidserv_eniddbbbb3`.`imagen_evento` (
+  `id_imagen` INT NOT NULL,
+  `id_evento` INT NOT NULL,
+  INDEX `fk_evento_has_imagen_imagen1_idx` (`id_imagen` ASC),
+  INDEX `fk_evento_has_imagen_evento1_idx` (`id_evento` ASC),
+  CONSTRAINT `fk_evento_has_imagen_evento1`
+    FOREIGN KEY (`id_evento`)
+    REFERENCES `enidserv_eniddbbbb3`.`evento` (`idevento`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_evento_has_imagen_imagen1`
+    FOREIGN KEY (`id_imagen`)
+    REFERENCES `enidserv_eniddbbbb3`.`imagen` (`idimagen`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
 USE `enidserv_eniddbbbb3` ;
 
 -- -----------------------------------------------------
@@ -1434,8 +1474,7 @@ IF NOT EXISTS(SELECT * FROM evento_servicio WHERE idevento= id_event) THEN
 ELSE 
   DELETE FROM evento_servicio WHERE idevento = id_event;
 END IF;
-END
-$$
+END$$
 
 DELIMITER ;
 
@@ -1498,6 +1537,78 @@ $$
 
 DELIMITER ;
 
+-- -----------------------------------------------------
+-- procedure repo_eventos_admin
+-- -----------------------------------------------------
+
+USE `enidserv_eniddbbbb3`;
+DROP procedure IF EXISTS `enidserv_eniddbbbb3`.`repo_eventos_admin`;
+
+DELIMITER $$
+USE `enidserv_eniddbbbb3`$$
+CREATE PROCEDURE repo_eventos_admin(emp int) 
+BEGIN 
+
+/*para los escenarios y  artistas*/
+DROP TABLE IF EXISTS repo_escenarios_artistas;
+CREATE TABLE repo_escenarios_artistas AS select e.idevento,
+    sum(case
+        when ea.idescenario is not null then 1
+        else 0
+    end) artistas from
+    escenario e
+        left outer join
+    escenario_artista ea ON e.idescenario = ea.idescenario
+group by e.idevento;
+
+
+DROP TABLE IF EXISTS repo_evento_puntos_venta;
+CREATE TABLE repo_evento_puntos_venta AS select ep . *, count(idevento) evento_punto_venta from
+    evento_punto_venta ep
+group by idevento;
+ 
+
+
+DROP TABLE IF EXISTS repo_evento_servicios;
+CREATE TABLE repo_evento_servicios AS select es . *, count(idevento) servicios from
+    evento_servicio es
+group by idevento;
+
+
+
+DROP TABLE IF EXISTS reporte_evento_accesos;
+CREATE TABLE reporte_evento_accesos AS select a.idevento, count(0) accesos from
+    acceso a
+group by a.idevento;
+
+
+
+DROP TABLE IF EXISTS repo_eventos_escenarios;
+CREATE TABLE repo_eventos_escenarios AS select e.idevento,
+    e.nombre_evento,
+    e.fecha_inicio,
+    e.fecha_termino,
+    e.status,
+    e.edicion,
+    e.descripcion_evento,
+    sum(case
+        when es.idescenario is not null then 1
+        else 0
+    end) escenarios from
+    evento e
+        left outer join
+    escenario es ON e.idevento = es.idevento
+where
+    e.idempresa = emp
+group by e.idevento; 
+
+
+
+END 
+$$
+
+DELIMITER ;
+
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
@@ -1507,7 +1618,28 @@ SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `enidserv_eniddbbbb3`;
-INSERT INTO `enidserv_eniddbbbb3`.`countries` (`idCountry`, `countryCode`, `countryName`, `status`) VALUES (1, 'ND', 'Aún sin definir', '\'1\'');
+INSERT INTO `enidserv_eniddbbbb3`.`countries` (`idCountry`, `countryName`) VALUES (1, 'Argentina');
+INSERT INTO `enidserv_eniddbbbb3`.`countries` (`idCountry`, `countryName`) VALUES (2, 'Bolivia');
+INSERT INTO `enidserv_eniddbbbb3`.`countries` (`idCountry`, `countryName`) VALUES (3, 'Brasil');
+INSERT INTO `enidserv_eniddbbbb3`.`countries` (`idCountry`, `countryName`) VALUES (4, 'Canada');
+INSERT INTO `enidserv_eniddbbbb3`.`countries` (`idCountry`, `countryName`) VALUES (5, 'Chile');
+INSERT INTO `enidserv_eniddbbbb3`.`countries` (`idCountry`, `countryName`) VALUES (6, 'Colombia');
+INSERT INTO `enidserv_eniddbbbb3`.`countries` (`idCountry`, `countryName`) VALUES (7, 'Costa Rica');
+INSERT INTO `enidserv_eniddbbbb3`.`countries` (`idCountry`, `countryName`) VALUES (8, 'Cuba');
+INSERT INTO `enidserv_eniddbbbb3`.`countries` (`idCountry`, `countryName`) VALUES (9, 'Ecuador');
+INSERT INTO `enidserv_eniddbbbb3`.`countries` (`idCountry`, `countryName`) VALUES (10, 'El Salvador');
+INSERT INTO `enidserv_eniddbbbb3`.`countries` (`idCountry`, `countryName`) VALUES (11, 'España');
+INSERT INTO `enidserv_eniddbbbb3`.`countries` (`idCountry`, `countryName`) VALUES (12, 'Estados Unidos');
+INSERT INTO `enidserv_eniddbbbb3`.`countries` (`idCountry`, `countryName`) VALUES (13, 'Guatemala');
+INSERT INTO `enidserv_eniddbbbb3`.`countries` (`idCountry`, `countryName`) VALUES (14, 'Honduras');
+INSERT INTO `enidserv_eniddbbbb3`.`countries` (`idCountry`, `countryName`) VALUES (15, 'México');
+INSERT INTO `enidserv_eniddbbbb3`.`countries` (`idCountry`, `countryName`) VALUES (16, 'Nicaragua');
+INSERT INTO `enidserv_eniddbbbb3`.`countries` (`idCountry`, `countryName`) VALUES (17, 'Panama');
+INSERT INTO `enidserv_eniddbbbb3`.`countries` (`idCountry`, `countryName`) VALUES (18, 'Paraguay');
+INSERT INTO `enidserv_eniddbbbb3`.`countries` (`idCountry`, `countryName`) VALUES (19, 'Peru');
+INSERT INTO `enidserv_eniddbbbb3`.`countries` (`idCountry`, `countryName`) VALUES (20, 'Puerto Rico');
+INSERT INTO `enidserv_eniddbbbb3`.`countries` (`idCountry`, `countryName`) VALUES (21, 'Uruguay');
+INSERT INTO `enidserv_eniddbbbb3`.`countries` (`idCountry`, `countryName`) VALUES (0, 'Aún sin definir');
 
 COMMIT;
 
@@ -1651,6 +1783,7 @@ INSERT INTO `enidserv_eniddbbbb3`.`permiso` (`idpermiso`, `nombrepermiso`, `desc
 INSERT INTO `enidserv_eniddbbbb3`.`permiso` (`idpermiso`, `nombrepermiso`, `descripcionpermiso`, `idrecurso`, `urlpaginaweb`, `iconpermiso`) VALUES (22, 'Administrar', NULL, 16, 'index.php/puntosventa/administrar', NULL);
 INSERT INTO `enidserv_eniddbbbb3`.`permiso` (`idpermiso`, `nombrepermiso`, `descripcionpermiso`, `idrecurso`, `urlpaginaweb`, `iconpermiso`) VALUES (23, 'Mis eventos administrados', NULL, 7, 'index.php/tendencias/miseventos', NULL);
 INSERT INTO `enidserv_eniddbbbb3`.`permiso` (`idpermiso`, `nombrepermiso`, `descripcionpermiso`, `idrecurso`, `urlpaginaweb`, `iconpermiso`) VALUES (24, 'Configuración', NULL, 18, 'index.php/emp/lahistoria', NULL);
+INSERT INTO `enidserv_eniddbbbb3`.`permiso` (`idpermiso`, `nombrepermiso`, `descripcionpermiso`, `idrecurso`, `urlpaginaweb`, `iconpermiso`) VALUES (25, 'Incidencias', NULL, 18, 'index.php/emp/incidencias', NULL);
 
 COMMIT;
 
@@ -1692,6 +1825,8 @@ INSERT INTO `enidserv_eniddbbbb3`.`perfil_permiso` (`idperfil`, `idpermiso`) VAL
 INSERT INTO `enidserv_eniddbbbb3`.`perfil_permiso` (`idperfil`, `idpermiso`) VALUES (5, 21);
 INSERT INTO `enidserv_eniddbbbb3`.`perfil_permiso` (`idperfil`, `idpermiso`) VALUES (5, 24);
 INSERT INTO `enidserv_eniddbbbb3`.`perfil_permiso` (`idperfil`, `idpermiso`) VALUES (4, 24);
+INSERT INTO `enidserv_eniddbbbb3`.`perfil_permiso` (`idperfil`, `idpermiso`) VALUES (5, 25);
+INSERT INTO `enidserv_eniddbbbb3`.`perfil_permiso` (`idperfil`, `idpermiso`) VALUES (4, 25);
 
 COMMIT;
 

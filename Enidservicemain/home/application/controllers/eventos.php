@@ -17,7 +17,7 @@ class Eventos extends CI_Controller{
         $this->load->model('generosmusicalesmodel');
         $this->load->model("eventmodel");
         $this->load->model("escenariomodel");
-        $this->load->model("servicioseventmodel");
+        $this->load->model("servicioseventmodel");        
         $this->load->library('sessionclass');      
     }
 
@@ -51,14 +51,39 @@ class Eventos extends CI_Controller{
         $text_status = get_statusevent($status);
         $data = $this->validate_user_sesssion($text_status);
         $idempresa =  $this->sessionclass->getidempresa();                                                
-        
-                        
+
+                                
         if ($this->checkifexist($id_evento) == 1 ) {
 
+
                 $data["evento"] = $id_evento;
-                    
 
                 $id_user = $this->sessionclass->getidusuario();        
+
+                $data["base_path_img"] =   "application/uploads/uploads/empresa/".$this->sessionclass->getidempresa()."/evento/";
+                $base_path = substr($_SERVER["SCRIPT_FILENAME"], 0 , (strlen($_SERVER["SCRIPT_FILENAME"]) -9)  )."application/uploads/uploads/empresa/".$this->sessionclass->getidempresa()."/evento/";
+                
+                
+
+
+                if ( create_dinamic_dic($base_path) ==  1 ) {
+                    $data["base_path"] = $base_path;
+                }
+                else{
+                    $data["base_path"] = "1";
+                }
+
+                
+                /*slider*/
+
+                $data_img_evento = $this->eventmodel->get_img_evento($id_evento);
+                $data["slider_principal_evento"] =  get_slider_img_evento($data_img_evento);
+
+                /*slider termina */
+
+
+
+
                 $plantillas_descripcion = $this->templmodel->get_templ_contenido($id_user, 1 );
                 $data["plantillas_descripcion"] = display_contenido_templ($plantillas_descripcion, 0 , 0 ,  "contenido-text-templ");
 

@@ -21,13 +21,26 @@ class Escenario  extends CI_Controller {
     function configuracionavanzada($id_escenario){
 
 
+
         $evento =  $this->eventmodel->get_by_escenario($id_escenario);
         $nombre_evento = $evento[0]["nombre_evento"];        
-        $data = $this->validate_user_sesssion("Escenario del evento " . $nombre_evento);                                                         
+        ///1
+        $id_evento= $evento[0]["idevento"];
+        $url_evento = base_url("index.php/eventos/nuevo") . "/". $id_evento ;
+
+
+
+
+
+        $data = $this->validate_user_sesssion("Escenario del evento " . "<a href='".$url_evento ."'>" . $nombre_evento . "</a>");                                                         
         $base_path = substr($_SERVER["SCRIPT_FILENAME"], 0 , (strlen($_SERVER["SCRIPT_FILENAME"]) -9)  )."application/uploads/uploads/empresa/".$this->sessionclass->getidempresa()."/ee/";
         $base_path_artista = substr($_SERVER["SCRIPT_FILENAME"], 0 , (strlen($_SERVER["SCRIPT_FILENAME"]) -9)  )."application/uploads/uploads/empresa/".$this->sessionclass->getidempresa()."/ar/";
-        
+  
 
+
+
+        $escenarios_data =  $this->escenariomodel->get_escenarios_evento($id_evento);
+        $data["otros_escenarios"] =  escenarios_in_evento($escenarios_data , $id_escenario);
 
         if ( create_dinamic_dic($base_path) ==  1 ) {
             $data["base_path"] = $base_path;
@@ -36,8 +49,7 @@ class Escenario  extends CI_Controller {
             $data["base_path"] = "1";
         }
 
-        /*creamos las carpetas pertinentes para la sección de imagenes*/                
-
+        
         if (create_dinamic_dic($base_path_artista) ==  1 ) {
             $data["base_path_artista"] =  $base_path_artista;
         }else{
@@ -46,11 +58,15 @@ class Escenario  extends CI_Controller {
         }
 
 
+      
 
-        /*imagenes del escenario  sección principal*/
+
+        
         $img_data = $this->img_model->get_imgs_escenario($id_escenario);
-        $data["slider_principal_escenario"] =  get_slider_img_escenario($img_data);
 
+
+        /***************************/
+        $data["slider_principal_escenario"] =  get_slider_img($img_data);
 
 
         
@@ -80,6 +96,9 @@ class Escenario  extends CI_Controller {
         $data['resumen_artistas'] = resumen_artistas_table($this->escenarioartistamodel->get_artistas_resumen($id_escenario, $data_escenario[0], $nombre_evento ));         
 
         $this->dinamic_view_event( 'escenarios/configuracion_avanzado' , $data);            
+
+
+        
     }
 
 

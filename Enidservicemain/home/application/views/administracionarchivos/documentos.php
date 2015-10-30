@@ -1,3 +1,4 @@
+<?=ini_set('display_errors', '1');?>
 <script type="text/javascript" src="<?=base_url('application/js/archivos/solicituddocumentos.js')?>"></script>
 <script type="text/javascript" src="<?=base_url('application/js/archivos/editararchivo.js')?>"></script>
 

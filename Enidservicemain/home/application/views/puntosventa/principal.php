@@ -1,4 +1,5 @@
 <script type="text/javascript" src="<?=base_url('application/js/puntosventa/principal.js')?>"></script>
+
 <div class="container">
     <div class="row">
         <div class="center-block" id='punto-venta-resumen'>
@@ -99,6 +100,7 @@
             </div>
             <div class="modal-body">            
                 <!--Nuevo contacto form -->
+
 <form class='form-puntos-venta' id="form-puntos-venta" method="post" action="<?=base_url('index.php/api/puntosventa/punto/format/json/')?>">    
     <div class='status-registro'>
 
@@ -123,6 +125,10 @@
         <textarea rows="12" name="descripcion" class="col-sm-10 form-control" placeholder="Nota para el público"></textarea>                
     </div>
     <button type="submit" class="btn btn-primary">Registrar</button>
+
+
+    <div class='response-registro' id="response-registro"></div>
+    
 </form>
                 <!--Termina nuevo contacto -->
             </div>

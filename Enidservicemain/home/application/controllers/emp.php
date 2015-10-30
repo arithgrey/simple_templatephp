@@ -35,6 +35,7 @@ class Emp  extends CI_Controller{
         $id_empresa =  $this->sessionclass->getidempresa();  
         $id_user = $this->sessionclass->getidusuario();        
 
+
         $data_empresa= $this->empresamodel->get_empresa_by_id($id_empresa)[0];
         $data["data_empresa"] =  $data_empresa;
 
@@ -44,9 +45,9 @@ class Emp  extends CI_Controller{
         $data["years"]= get_count_select(1 ,  50 , "Años"  , $data_empresa["años"] );
         $data["empresa_contactos_num"] =  $this->empresamodel->get_contactos_empresanum($id_empresa);
 
+        $data["select_pais"] = select_pais($this->empresamodel->get_paices($id_empresa ) );
+
         $base_path = substr($_SERVER["SCRIPT_FILENAME"], 0 , (strlen($_SERVER["SCRIPT_FILENAME"]) -9)  )."application/uploads/uploads/empresa/".$this->sessionclass->getidempresa()."/emp/";
-
-
         $data["base_path"]  =  $base_path;
 
 

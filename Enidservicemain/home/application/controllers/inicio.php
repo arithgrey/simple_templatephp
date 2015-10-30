@@ -11,7 +11,10 @@ class Inicio extends CI_Controller {
 			$data = $this->validate_user_sesssion("Eventos");											
 			$idempresa =  $this->sessionclass->getidempresa();	
 			$data["pagination_event"] = get_paginarion_principal($limit_events);
-			$data["ultimos_eventos"] =$this->eventmodel->get_last_events($idempresa , $limit_events );							
+			
+			$ultimos_eventos = $this->eventmodel->get_last_events($idempresa , $limit_events );							
+			$data["ultimos_eventos"] =  get_last_events_empresa($ultimos_eventos, 270 , 1 , 1 , 200);
+			
 			$this->dinamic_view_event('principal/bienvenidaestratega' , $data);
 	}
 	/*Termina la función*/
@@ -62,7 +65,7 @@ class Inicio extends CI_Controller {
 	/**/
 	function dinamic_view_event($center_view , $data){
             $this->load->view('TemplateEnid/header_template', $data);
-            $this->load->view($center_view, $data);                                      
+            $this->load->view($center_view, $data);                                                  
             $this->load->view('TemplateEnid/footer_template', $data);    
     }
 	

@@ -18,9 +18,9 @@ function get_artista_in_escenario($data){
 /**/
 function nuevo( $nombre , $evento ,  $idempresa  ){
 
-	$query_insert ="INSERT INTO escenario (nombre , idevento  ) 
-	values ('$nombre' , '$evento '  )";
-	return $this->db->query($query_insert);
+	$query_insert ="INSERT INTO escenario (nombre , idevento  ) values ('$nombre' , '$evento '  )";
+	$this->db->query($query_insert);
+	return $this->db->insert_id(); 						
 }	
 
 function get_escenarios_byidevent($id_evento){

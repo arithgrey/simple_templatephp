@@ -11,7 +11,16 @@ $(".contactos_asociados").click(try_update_medios_contacto);
 
 $("#imgs-empresa").change(upload_main_imgs);
 $("#modal-img-logo-empresa").click(clean_img);
-	
+
+$("#pais-select").change(update_country_org);	
+
+$("#text-nombre-empresa").click(function(){
+	$(".pais_empresa_input").show();
+});
+
+
+
+
 
 });
 
@@ -174,6 +183,11 @@ function load_data_empresa(){
 		$("#logo_empresa_img").attr("src", url_nueva_imagen);		
 		$("#imgs-empresa").change(upload_main_imgs);
 
+		countryName  = data[0].countryName; 
+		
+		llenaelementoHTML("#text-nombre-empresa", countryName);
+		$(".pais_empresa_input").hide();
+
 	}).fail(function(){
 
 		alert("Error al cargar la información de la empresa ");
@@ -187,5 +201,16 @@ function clean_img(){
 	$('#response_img').html('');
 	$("#lista-imagene").html("");
 }
+/**/
+function update_country_org(){
 
-
+	url = now  +  "index.php/api/emp/empresa_country/format/json/"; 
+	country = $(this).val();
+	$.ajax(url , { data : {country: country} , type: 'PUT'} ).done(function(data){
+		
+		load_data_empresa();
+	}).fail(function(){
+		alert("Error al actualizar el país de la empresa, reportar al administrador");
+	});
+}
+/**/

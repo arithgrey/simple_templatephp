@@ -1,5 +1,25 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 if(!function_exists('invierte_date_time')){
+
+function select_pais($data){
+  
+  $options ="";
+  foreach ($data as $row) {
+    
+    if ($row["nombreempresa"] != null ) {
+
+      $options .="<option value='". $row["idCountry"] ."' selected>". $row["countryName"] . "</option>";  
+    }else{
+      $options .="<option value='". $row["idCountry"] ."'>". $row["countryName"] . "</option>";
+    }
+    
+  }
+  return $options;
+
+
+}
+
+/**/
 function usuarios_reportados($data){
 
   $options ="";

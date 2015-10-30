@@ -1,5 +1,6 @@
 <?php
 
+/*
 $e = $_GET["e"];
 $ds = "/";  
 $storeFolder = 'uploads';   
@@ -36,6 +37,8 @@ if (!empty($_FILES)) {
     header('Content-type: application/json');
     echo json_encode($result);
 }
+
+*/
 
 
 

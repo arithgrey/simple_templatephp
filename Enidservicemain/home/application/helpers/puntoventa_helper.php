@@ -119,7 +119,7 @@ if(!function_exists('invierte_date_time')){
 		
 		$ingresos =0;
 		$flag =0;
-		$b=0;
+		$b=1;
 
 		foreach ($data as $row) {
 
@@ -136,7 +136,7 @@ if(!function_exists('invierte_date_time')){
 
 			$table.="<tr class='text-center'>";
 
-				$table.="<td>".$b."</td>";	
+				$table.="<td>".$b  ."</td>";	
 				$table.="<td class='franja-vertical' >".$razon_social."</td>";	
 
 				$table.="<td></td>";	

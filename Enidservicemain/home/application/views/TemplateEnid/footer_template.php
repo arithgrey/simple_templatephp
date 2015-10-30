@@ -72,13 +72,15 @@
         .left-side,  .sticky-left-side , .sticky-header , .logo{
             //background: #09AFDF !important;
             //background: none repeat scroll 0% 0% #12ADA2 !important;
-            //background: none repeat scroll 0% 0% #03C7FC !important;
+            
             //background-color: rgba(29, 119, 145, 1) !important;
-            background: #043544 !important;
+            //background: #043544 !important;
+            background: #1ECAFF none repeat scroll 0% 0% !important
         }
         .main-content{
 
             background: white;
+            //background: #BF2C2C none repeat scroll 0% 0%;
             color: #00090C;
         }
 
@@ -112,9 +114,9 @@
         }
         .header-section , .notification-menu ,  .dropdown-toggle{
 
-            background: none repeat scroll 0% 0% #09AFDF !important;
+            
             color: white !important;
-            //background: #1C84A7;
+            background: #1C84A7 !important;
         }
 
         .panel-heading .nav > li > a {

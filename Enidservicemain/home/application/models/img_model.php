@@ -70,6 +70,19 @@ function get_imgs_escenario($id_escenario){
     return $this->db->query($query_insert);
   }
 
+
+  function insert_imagen_evento($data , $id_usuario , $id_empresa  ){
+
+    $id_imagen = $this->insert_img($data , $id_usuario , $id_empresa  );    
+    $id_evento =  $data["id_evento"];
+    $query_insert ="INSERT INTO  imagen_evento(id_imagen , id_evento  ) VALUES('". $id_imagen."' , '". $id_evento ."'  )";    
+    return $this->db->query($query_insert);
+    
+
+  }
+
+  /**/
+
   /**/
   function insert_principal_escenario_artista($data , $id_usuario , $id_empresa ){    
 

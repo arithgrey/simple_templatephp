@@ -11,6 +11,17 @@ class Img_controller extends REST_Controller{
             
   }     
 
+  function upload_img_evento_POST(){
+
+      $this->validate_user_sesssion();                
+      $id_usuario = $this->sessionclass->getidusuario();   
+      $id_empresa =  $this->sessionclass->getidempresa();            
+      $db_response = $this->img_model->insert_imagen_evento($this->post() , $id_usuario , $id_empresa );
+      $this->response($db_response);  
+      
+
+  }
+
   function logo_empresa_DELETE(){
 
       $this->validate_user_sesssion();                
@@ -50,9 +61,10 @@ class Img_controller extends REST_Controller{
       $id_empresa =  $this->sessionclass->getidempresa();            
       $db_response = $this->img_model->insert_principal_escenario($this->post() , $id_usuario , $id_empresa );
       
+
       $id_escenario= $this->post("id_escenario");
       $img_data = $this->img_model->get_imgs_escenario($id_escenario);
-      $slider_principal_escenario =  get_slider_img_escenario($img_data);
+      $slider_principal_escenario =  get_slider_img($img_data);
 
 
 

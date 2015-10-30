@@ -24,6 +24,10 @@ $(document).on("ready", function(){
 		load_data_puntos_venta(null);
 	});
 
+	$("#nuevo-contacto-button").click(function(){
+		llenaelementoHTML("#response-registro", "");
+	});
+
 });
 /*nuevo punto de venta*/
 function record_punto_venta(){
@@ -32,11 +36,12 @@ function record_punto_venta(){
 	$.post(url , $("#form-puntos-venta").serialize() ).done(function(data){
 
 		load_data_puntos_venta(null);
-
+		llenaelementoHTML("#response-registro", "<div class='alert alert-info'><strong>Punto de venta agregado!</strong> </div>");
+		document.getElementById("form-puntos-venta").reset();
 
 	}).fail(function(){
 		
-		alert("Error al registrar");
+		llenaelementoHTML("#response-registro", "<div class='alert alert-warning'><strong>Ocurrió una falla al intentar agregar el punto de venta, si el punto agregado no aparece en el listado intentar nuevamente, reporte error</strong> </div>")
 	});	
 	return false;
 }

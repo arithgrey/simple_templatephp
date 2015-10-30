@@ -192,5 +192,21 @@ function recordempresawhitname( $nombreempresa ){
 
     
 }/*Termina la función */
+
+function get_paices($id_empresa ){
+
+  $query_get ="select c.* , e.nombreempresa  from  countries c left outer join empresa e on c.idCountry =  e.idCountry and  e.idempresa = '". $id_empresa ."' ";
+  $result = $this->db->query($query_get);
+  return $result ->result_array();
+}
+/**/
+
+function update_country_empresa($id_empresa, $data){
+
+  $query_update ="update empresa set idCountry = '". $data["country"]."' where idempresa ='".$id_empresa."'  "; 
+  $result = $this->db->query($query_update);
+  return $result;
+  
+}
 /*Termina modelo */
 }

@@ -40,7 +40,7 @@
 
 
 
-                                <div class="panel-body p-states green-box medios-contacto" style='background:#081019;' data-toggle="modal" data-target="#modal-contactos"  >
+                                <div class="panel-body p-states green-box medios-contacto" style='background:#0D3441;' data-toggle="modal" data-target="#modal-contactos"  >
                                     <div class="summary pull-left">
                                         <h4  >
                                           Medios de  <span>contacto <i class="fa fa-mobile"></i></span></h4>
@@ -52,6 +52,37 @@
 
                                     <div id="expense2" class="chart-bar"><canvas width="68" height="35" style="display: inline-block; width: 68px; height: 35px; vertical-align: top;"></canvas></div>
                                 </div>
+                                <br>
+
+
+
+
+                                
+                                <div class="panel-body p-states green-box" style='background:#0D3441;'  >
+                                    <div class="summary pull-left">
+                                          
+                                          <h4>País</h4>
+                                          <div class='pais_empresa_text' >  
+                                            <h3 id='text-nombre-empresa'><?=$data_empresa["countryName"]?></h3>
+                                          </div>                                            
+                                          <div class='pais_empresa_input'>
+                                            <select class="form-control" id="pais-select" name="pais">
+                                              <?=$select_pais;?>
+                                            </select>
+                                          </div>
+
+                                    </div>
+
+
+
+                                    <div id="expense2" class="chart-bar"><canvas width="68" height="35" style="display: inline-block; width: 68px; height: 35px; vertical-align: top;"></canvas></div>
+                                </div>
+
+
+
+
+
+
                             </div>
                         </div>
                     </div>
@@ -229,73 +260,14 @@
 
 
 
-                                        <a class="btn p-follow-btn pull-left" href="#"> <i class="fa fa-check"></i> Following</a>
-
-                                        <ul class="p-social-link pull-right">
-                                            <li>
-                                                <a href="#">
-                                                    <i class="fa fa-facebook"></i>
-                                                </a>
-                                            </li>
-                                            <li class="active">
-                                                <a href="#">
-                                                    <i class="fa fa-twitter"></i>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="#">
-                                                    <i class="fa fa-google-plus"></i>
-                                                </a>
-                                            </li>
-                                        </ul>
+                                        
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="panel">
-                                <form>
-                                    <textarea class="form-control input-lg p-text-area" rows="2" placeholder="Whats in your mind today?"></textarea>
-                                </form>
-                                <footer class="panel-footer">
-                                    <button class="btn btn-post pull-right">Post</button>
-                                    <ul class="nav nav-pills p-option">
-                                        <li>
-                                            <a href="#"><i class="fa fa-user"></i></a>
-                                        </li>
-                                        <li>
-                                            <a href="#"><i class="fa fa-camera"></i></a>
-                                        </li>
-                                        <li>
-                                            <a href="#"><i class="fa  fa-location-arrow"></i></a>
-                                        </li>
-                                        <li>
-                                            <a href="#"><i class="fa fa-meh-o"></i></a>
-                                        </li>
-                                    </ul>
-                                </footer>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="panel">
-                                <header class="panel-heading">
-                                    recent activities
-                                    <span class="tools pull-right">
-                                        <a class="fa fa-chevron-down" href="javascript:;"></a>
-                                        <a class="fa fa-times" href="javascript:;"></a>
-                                     </span>
-                                </header>
-                                
-                            </div>
-                        </div>
-                    </div>
+                    </div>                                      
                 </div>
             </div>
-
         </div>
 
 
@@ -506,3 +478,8 @@
 
 
 <script type="text/javascript" src="<?=base_url('application/js/Organizacion/img.js')?>"></script>
+<style type="text/css">
+.pais_empresa_input{
+  display: none;
+}
+</style>

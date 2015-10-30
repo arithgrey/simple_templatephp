@@ -17,7 +17,10 @@ class Accesos extends CI_Controller {
 
         $data_evento  = $this->eventmodel->getEventbyid($id_evento);        
         $nombre_evento = $data_evento[0]["nombre_evento"];
-        $data = $this->validate_user_sesssion("Accesos al evento ". $nombre_evento );        
+
+
+        $url_evento =  base_url('index.php/eventos/nuevo'). "/" . $data_evento[0]["idevento"];
+        $data = $this->validate_user_sesssion("Accesos al evento ". "<a href='".$url_evento  ."'>" .$nombre_evento . "</a>");        
         $data_accesos = $this->accesosmodel->get_acceso_by_event($id_evento);  
 
         $id_user = $this->sessionclass->getidusuario();        
@@ -33,10 +36,7 @@ class Accesos extends CI_Controller {
         $data["tipos_accesos"] =list_tipos_accesos( $this->accesosmodel->get_tipos_accesos());
         $data["puntos_venta"]= list_puntos_venta_evento($puntos_venta);
 
-
-
         /**/
-
         $base_path = substr($_SERVER["SCRIPT_FILENAME"], 0 , (strlen($_SERVER["SCRIPT_FILENAME"]) -9)  )."application/uploads/uploads/empresa/".$this->sessionclass->getidempresa()."/a/".$id_user."/";    
         if ( create_dinamic_dic($base_path) ==  1 ) {
             $data["base_path"] = $base_path;
@@ -48,12 +48,7 @@ class Accesos extends CI_Controller {
         $data["base_path"]=  $base_path;
         $data["base_path_img"] =  "application/uploads/uploads/empresa/".$this->sessionclass->getidempresa()."/a/".$id_user."/";    
 
-
-
-
-        $this->dinamic_view_event('accesos/avanzado', $data);     
-
-           
+        $this->dinamic_view_event('accesos/avanzado', $data);        
 
     }/**************************Termina Configuracion del acceso avanzado **************++*/
 

@@ -197,15 +197,15 @@ function update_status_in_db(res , base_path ){
         $.post(url , {"id_escenario" :  id_escenario ,    "name_img" : res["name_img"] , "type" : res["type"] , "size" : res["size"] , "base_path_img" : base_path_img , "base_path" : base_path } ).done(function(data){
 
             
-            if (data["stus_response"] ==  true) {
+            
                 
-                llenaelementoHTML("#slider-principal-escenario" , data["slider_principal_escenario"]);
+            llenaelementoHTML("#slider-principal-escenario" , data["slider_principal_escenario"]);
 
-            }
+            
             
             
         }).fail(function(){
-            
+            alert("ERR");
         });
         
         /*****************************************************************/                

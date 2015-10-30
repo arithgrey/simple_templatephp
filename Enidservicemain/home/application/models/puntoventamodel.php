@@ -133,9 +133,9 @@ where idusuario ='". $id_usuario ."'  ";
 
 		$query_get ="select  epv.idpunto_venta  punto_v , p.*   from punto_venta p  
 			left outer join evento_punto_venta epv  
-			on  p.idpunto_venta =  epv.idpunto_venta 
+			on  p.idpunto_venta =  epv.idpunto_venta  and idevento = '". $id_evento."'
 			where p.status =  'Disponible para todos los colaboradores de la empresa'
-			and p.idempresa = '". $id_empresa ."'  ";
+			and p.idempresa = '". $id_empresa ."'   ";
 		
 		$result = $this->db->query($query_get);				
 		return $result->result_array();

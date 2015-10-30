@@ -49,6 +49,15 @@ class Emp extends REST_Controller{
     	$contactos_empresa_data  = data_contactos_empresa($this->empresamodel->get_contactos_empresa($id_empresa, $id_user));   
     	$this->response($contactos_empresa_data );        
     }  
+
+    function empresa_country_PUT(){
+
+        $this->validate_user_sesssion();
+        $id_empresa = $this->sessionclass->getidempresa();
+        $response_db =  $this->empresamodel->update_country_empresa($id_empresa, $this->put()  );
+        
+        $this->response($response_db);
+    }
     /**/
    	function empresa_contacto_PUT(){
 

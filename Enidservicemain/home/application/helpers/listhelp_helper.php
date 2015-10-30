@@ -32,26 +32,4 @@ if(!function_exists('invierte_date_time')){
 
 	
 
-	function getimg_event($id_event){
-
-
-        $ds = "/";  
-        $storeFolder = 'uploads';           
-        $directorio = dirname(dirname(__FILE__)). "/". $storeFolder."/".$storeFolder."/".$id_event."/";
-        
-        
-       
-        $result  = array();        
-        $files = scandir($directorio);     
-        $img_name ="";
-        foreach ( $files as $file ) {
-            if ( '.'!=$file && '..'!=$file) {       //2
-                $obj['name'] = $file;                
-                $img_name = $file;
-                $result[] = $obj;
-            }
-        }
-  
-  		return $img_name;
-	}
 }/*Termina el helper*/

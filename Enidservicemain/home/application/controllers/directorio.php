@@ -27,8 +27,12 @@ class Directorio  extends CI_Controller {
         $id_usuario =  $this->sessionclass->getidusuario();
 
         $base_path = substr($_SERVER["SCRIPT_FILENAME"], 0 , (strlen($_SERVER["SCRIPT_FILENAME"]) -9)  )."application/uploads/uploads/empresa/".$this->sessionclass->getidempresa()."/cu/".$id_usuario."/";    
+
+    
+        
         if ( create_dinamic_dic($base_path) ==  1 ) {
             $data["base_path"] = $base_path;
+
         }
         else{
             $data["base_path"] = "1";
