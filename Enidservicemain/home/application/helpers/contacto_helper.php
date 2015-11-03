@@ -20,6 +20,8 @@ if(!function_exists('invierte_date_time')){
 					  	
 		$contacto .= get_td ("Estado" , "" );
 		$contacto .= get_td ("Registro" , "" );
+
+		$contacto .= get_td ("Nota" , "" );		
 		$contacto .= get_td ("Editar" , "" );
 					  	
 		
@@ -75,7 +77,9 @@ if(!function_exists('invierte_date_time')){
 						$contacto .= get_td($tipo, ""); 						
 						$contacto .= get_td($status , ""); 
 						$contacto .= get_td($fecha_registro, ""); 
-
+	
+			$contacto .='<td data-toggle="modal" data-target="#contact-nota" >
+			<i id="'. $idcontacto.'" class="nota-c fa fa-comment" ></i></td>';						
 			$contacto .='<td data-toggle="modal" data-target="#contact-modal-edit" ><i id="'. $idcontacto.'" class="editar-contacto fa fa-pencil-square fa-lg" ></i></td>
 			</tr>';			
 			$b++;
@@ -97,7 +101,8 @@ if(!function_exists('invierte_date_time')){
 				$contacto .= get_td("Tipo" , "" );					  	
 				$contacto .= get_td("Estado" , "" );
 				$contacto .= get_td("Fecha registro" , "" );					  	
-				$contacto .= get_td("" , "" );					  	
+				$contacto .= get_td ("Nota" , "" );		
+				$contacto .= get_td("Editar" , "" );					  	
 			$contacto.= "</tr>";	
 		}
 

@@ -126,6 +126,7 @@
 
         .title-page-enid{
             margin-top: -1px;
+
         }
         .wrapper{
   //  background: rgb(255, 252, 231);
@@ -143,7 +144,11 @@
             color: white !important;
         }
         .blue-col-enid-more{
-            background: rgba(10, 62, 66, 0.9) none repeat scroll 0% 0% !important;
+            //background: rgba(10, 62, 66, 0.9) none repeat scroll 0% 0% !important;
+            //background: white !important;
+            background: #FCF566 none repeat scroll 0% 0% !important;
+            color: black !important;
+            font-size: 1.5em !important;
         }
 
         .blue-col-enid-complement{
@@ -152,6 +157,12 @@
         .usr-info .thumb{
             width: 60px !important;
             height: 60px !important;
+        }
+        .title_main{
+            text-align: center;
+        }
+        .content-enid-sec{
+            background: #1C84A7 none repeat scroll 0% 0% !important;
         }
         
         </style>

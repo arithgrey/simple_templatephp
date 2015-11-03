@@ -1,37 +1,66 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 if(!function_exists('invierte_date_time')){
 /*******************************************************************************************************/
-function list_resum_escenarios($array_escenario, $id_evento , $limit_text, $background='blue-col-enid'){
-
+function list_resum_escenarios($array_escenario, $id_evento , $limit_text, $background='' , $horizontal = '0'){
 
     $list ='';
     foreach ($array_escenario as $row){
-         $nombre = $row["nombre"];
-         $descripcion = $row["descripcion_escenario"];
+        $nombre = $row["nombre"];
+        $descripcion = $row["descripcion_escenario"];
+        $url_escenario = base_url("index.php/escenario/inevento"). "/".$row["idescenario"]. "/".$id_evento;                     
 
-         if ($row["tipoescenario"] == "General") {
-              $tipo_escenario ='<li ><a style="text-decoration: none;" href="#">'.$row["tipoescenario"] .'</a></li>';      
-         }else{
-              $tipo_escenario ='<li ><a style="text-decoration: none;" href="#"> <i class="fa fa-star"></i>'.$row["tipoescenario"] .'</a></li>';
-         }
+        $url_sound_cloud  = ""; 
+        $path_img =  ""; 
+
+
+        $dinamic_content = '';
+        if ($row["url_sound_cloud"] !=  null  && strlen($row["url_sound_cloud"] ) > 10 ) {
+
+            $url_sound_cloud  =    $row["url_sound_cloud"];
+
+            $dinamic_content  .='
+            <div class="audio-wrapper">
+                <iframe class="margin-clear" src="https://w.soundcloud.com/player/?url='. $url_sound_cloud.' " height="166"></iframe>
+            </div>';
+
+        }else{
+
+            $path_img  =  base_url($row["base_path_img"] . $row["nombre_imagen"]);
+            $dinamic_content  .='
+
+            <div class="audio-wrapper">
+                <img src="'. $path_img .'" > 
+            </div>';    
+        }
+
+       
+            $list .='
+            <div class="row grid-space-10">
+                                    <div class="col-md-6">' . $dinamic_content .'
+
+                                        
+                                    </div>
+                                    <div class="col-md-6">
+                                        <header>
+                                            <h2><a  style="color:#1DB3BF !important;" href="'. $url_escenario .'">'.$nombre .'</a></h2>
+                                            <div class="post-info">
+                                                <span class="post-date">
+                                                    <i class="icon-calendar"></i>
+                                                    <span class="day">'. $row["fecha_presentacion_inicio"].'</span>
+                                                    <span class="month"> al '. $row["fecha_presentacion_termino"] .'</span>
+                                                </span>
+                                                <span class="submitted"><i class="icon-user-1"></i> , Tipo  <a  style="color:#1DB3BF !important;"  href="#">'. $row["tipoescenario"] .'</a></span>
+                                                <span class="comments"><i class="icon-chat"></i> <a style="color:#1DB3BF !important;"  href="#">'. $row["num_artistas"] .' Artistas</a></span>
+                                            </div>
+                                        </header>
+                                        <div class="blogpost-content">
+                                            <p>'.substr( $descripcion , 0 , $limit_text )  .'</p>
+                                        </div>
+                                    </div>
+                                </div>';    
+
         
 
-
-        $url_escenario = base_url("index.php/escenario/inevento"). "/".$row["idescenario"]. "/".$id_evento; 
-        $list .='<div class="media bloc_escenario_desc">                   
-                <div class="media-body">
-                <a style="text-decoration:none;"  href="'. $url_escenario .'"> <h4  class="media-heading  '.$background.' " style="padding:10px;">'. $nombre. '</h4></a>
-                <div class="descripcion-esc">'.   substr( $descripcion , 0 , $limit_text )   .'</div>';
-
-
-        
-        $list.='</div> <ul class="revenue-nav">'.$tipo_escenario.'
-                       <li class="active">
-                       <a style="text-decoration: none;" href="#">
-                       <i class="fa fa-play-circle-o"></i>
-                       '.$row["num_artistas"] .' Artistas </a></li>                                        
-                        </ul>
-                </div>';       
     }
     
     return $list;

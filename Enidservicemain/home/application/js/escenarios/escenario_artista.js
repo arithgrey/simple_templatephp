@@ -50,6 +50,7 @@ function load_data_escenario_artista(){
 	url =now + "index.php/api/escenario/escenario_artista/format/json";			
 	$.get(url, {"escenario" :  escenario}).done(function(data){
 
+
 		llenaelementoHTML("#artistas-escenario-section", data);
 		$(".remove-artista").click(delete_escenario_artista);
 		$("#form-escenario-artista").submit(nuevo_artista);
@@ -67,6 +68,10 @@ function load_data_escenario_artista(){
 		$(".img-artista-evento").click(try_upload_img_artistas);
 		$(".status-confirmacion").click(try_update_status_artista);
 		$(".artistas-inputs").click(try_update_nombre_artista);	
+
+
+
+		load_resumen_artistas_escenario();
 
 	}).fail(function(){
 		alert(genericresponse[0]);
@@ -168,6 +173,7 @@ function update_sounda_url(e){
 	social = "Sound Cloud";
 	
 	load_data_escenario_artista_dinamic(artista, "s" , social );
+
 	
 }
 
@@ -236,8 +242,18 @@ function try_update_nombre_artista(e){
 
 
 	});
+}
+/**/
+function load_resumen_artistas_escenario(){
 
+	id_escenario  = $("#id_escenario").val();
+	nombre_evento = $("#nombre_evento").val();
+	url = now  + "index.php/api/escenario/resumen_artistas/format/json/";
 
-
+	$.get(url , {"escenario" :  id_escenario , "nombre_evento" :  nombre_evento}).done(function(data){
+		llenaelementoHTML(".resumen-artistas-escenario-event", data);
+	}).fail(function(){
+		alert("Error");
+	});
 
 }

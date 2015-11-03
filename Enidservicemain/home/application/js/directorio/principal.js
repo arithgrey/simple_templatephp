@@ -126,15 +126,33 @@ function load_contactos_dinamic(){
 			$("#imgs-contacto").attr("value" , "");		
 			$("#imgs-contacto").change(upload_main_imgs);
 
+			
 		});
-
-		
-		
+		$(".nota-c").click(load_nota_contacto);
 		
 	}).fail(function(){
 		alert("Error al cargar tus contactos, informar al administrador si  el problema persiste");
 	});
 
 	return false;
+
+}
+/**/
+function load_nota_contacto(e){
+	
+	contacto =  e.target.id;
+
+	url = now + "index.php/api/contactos/contacto_id/format/json/";	
+
+	$.get(url , {contacto : contacto}).done(function(data){
+		
+
+		llenaelementoHTML(".nota-contacto-text" , "");
+		llenaelementoHTML(".nota-contacto-text" , data[0].nota);			
+		
+
+	}).fail(function(){
+		alert("Error al cargar los datos del contacto, informar al administrador");
+	});
 
 }

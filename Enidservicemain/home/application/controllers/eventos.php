@@ -208,11 +208,12 @@ function accesosalevento($id_evento , $status){
                 $dataevent = $this->eventmodel->getEventbyid($id_evento);
 
                 $data =  $this->validate_user_session_event($dataevent[0]["nombre_evento"] , $dataevent[0]["status"]);                                                                        
-                $data["img_event"]=  get_img_by_event_in_directory($id_evento);                                    
-                $data["base_img"]= base_url()."application/uploads/uploads/". $id_evento."/";                                    
-                
+             
+
                 $list_escenarios = $this->escenariomodel->get_escenarios_byidevent($id_evento);
-                $data["escenarios"] = list_resum_escenarios($list_escenarios, $id_evento , 200 , "blue-col-enid-more");
+                
+                $data["escenarios"] = list_resum_escenarios($list_escenarios, $id_evento , 500 , "" ,  1);
+
                 $list_generosdb = $this->eventmodel->get_list_generos_musicales_byidev($id_evento);
                 $data["generos_musicales_tags"] = get_tags_generos($list_generosdb);
                 $data["evento"] =  $dataevent[0];
@@ -220,8 +221,12 @@ function accesosalevento($id_evento , $status){
                 $array_servicios_includos = $this->eventmodel->get_servicios_evento_by_id($id_evento);
                 $data["servicios_evento"] = list_services_default_view($array_servicios_includos); 
                 $data["idevento"] = $id_evento;
-                    
-                
+
+
+
+
+                $data["slider_evento_principal"]= get_slider_principal_evento($this->eventmodel->get_img_evento($id_evento));
+                                    
                 $this->show_data_event($data, 'eventos/previsualizarevent'  );   
                 
 

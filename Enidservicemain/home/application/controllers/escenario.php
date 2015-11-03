@@ -68,12 +68,13 @@ class Escenario  extends CI_Controller {
         /***************************/
         $data["slider_principal_escenario"] =  get_slider_img($img_data);
 
-
+        $data["nombre_evento"] =  $nombre_evento;
         
         $data_escenario = $this->escenariomodel->get_escenariobyId($id_escenario);                 
         $data["data_escenario"]=$data_escenario[0];
 
         $descripcion_escenario =trim($data_escenario[0]["descripcion"]);        
+
         if (empty( $descripcion_escenario)  || is_null($descripcion_escenario ) ||  strlen($descripcion_escenario) == 0   ){
 
             $data["descripcion_escenario"] =  "Describe la experiencia del escenario";
@@ -93,6 +94,7 @@ class Escenario  extends CI_Controller {
         $artitastas_data = $this->escenarioartistamodel->get_artistas_inevent($id_escenario);
         $data['artistas'] = list_artistas_escenario($artitastas_data, 'Artistas que se presentarán en este escenario' , 1 , $id_escenario);
         $data['id_escenario'] =  $id_escenario;
+
         $data['resumen_artistas'] = resumen_artistas_table($this->escenarioartistamodel->get_artistas_resumen($id_escenario, $data_escenario[0], $nombre_evento ));         
 
         $this->dinamic_view_event( 'escenarios/configuracion_avanzado' , $data);            

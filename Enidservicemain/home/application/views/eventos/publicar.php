@@ -42,10 +42,17 @@
           
 
             <div class='text-fecha-evento'  href="" data-toggle="modal" data-target="#edith_fecha_modal"  >Fecha del evento <?=$fecha_evento; ?> </div>
+              
+            
               <button id='tipificacion-evento' class='btn  btn-template' data-toggle="modal" data-target="#tipo-evento" ><?=$data_evento['tipo']?></button>
+
             <span class="tools pull-right">
               <a class="fa  fa-caret-down" href="javascript:;"></a>
             </span>
+            <a href="<?=base_url('index.php/eventos/visualizar')?>/<?=$evento;?>" class='pull-right'>
+                <button class="btn btn-primary" type="button"> Visualizar antes de publicar  </button>    
+
+              </a>
           </header>                          
           <!--Inicia  la seccion general del eveto -->
           <div class="panel-body" >        
@@ -294,6 +301,12 @@
 
 <!--Inicia section tres -->
   <div class="col-md-4 section-enid-events-left">
+
+  
+  
+  <!--******************** button pre visualizar ***************************** -->
+
+
       <!--Accesos button-->    
         <div class="panel" >
             <button id="accesos-button" data-toggle="modal" data-target="#accesosmodal" class="btn blue-col-enid col-xs-12  col-sm-12 col-md-12 col-lg-12 accesos-button" style="text-align: left; padding: 10px!important; " ><strong> <i class="fa fa-credit-card"></i>  ACCESOS AL EVENTO </strong></button>
@@ -380,16 +393,6 @@
 
 
 
-<div class="col-md-12">
-  <!--******************** button pre visualizar ***************************** -->
-  <center>
-    <a href="<?=base_url('index.php/eventos/visualizar')?>/<?=$evento;?>">
-    <button class="btn btn-primary btn-lg" type="button"> Visualizar antes de publicar  </button>    
-
-    </a>
-  </center>  
-  <!--******************** button pre visualizar ***************************** -->
-</div>
 
 
   
@@ -497,6 +500,7 @@
         <h4 class='fecha_edit' id='fecha_edit'>                    
           <i class="fa fa-calendar"></i> Fecha del evento  <?=$fecha_evento;?>
         </h4>
+
 
 
 
@@ -793,7 +797,8 @@
             <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
             
-        <h4 class="modal-title" id="myModalLabel"><i class="fa fa-calendar-o"></i> Fecha del evento </h4>
+              <h4 class="modal-title" id="myModalLabel"><i class="fa fa-calendar-o"></i> Fecha del evento </h4>
+
             </div>
             <div class="modal-body">
                 
@@ -950,8 +955,6 @@
 
 <input type='hidden' name='base_path_img' id="base_path_img" class='base_path_img' value='<?=$base_path_img;?>'>
 <input type='hidden' name='base_path' id='base_path' class='base_path' value='<?=$base_path;?>'>
-<?=$base_path?>
-
 
 
 

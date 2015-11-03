@@ -24,16 +24,22 @@ function nuevo( $nombre , $evento ,  $idempresa  ){
 }	
 
 function get_escenarios_byidevent($id_evento){
-	$query_select ="select e.idescenario , SUBSTRING( e.descripcion , 1,  135 ) as descripcion_escenario , 
-	e.nombre, e.tipoescenario, e.portada_escenario ,  
-	count(a.idartista) as num_artistas
-	from escenario as e
-	left outer join escenario_artista as ea 
-	on e.idescenario = ea.idescenario
-	left outer join artista as a 
-	on ea.idartista = a.idartista
-	where e.idevento = '".$id_evento."'
-	group by e.idescenario order by tipoescenario  desc";
+	$query_select ="select e.idescenario ,  e.descripcion  as descripcion_escenario , 
+e.nombre, e.tipoescenario, e.portada_escenario ,  
+count(a.idartista) as num_artistas , e.* ,  ea.* , i.* 
+from escenario as e
+left outer join escenario_artista as ea 
+on e.idescenario = ea.idescenario and ea.url_sound_cloud is not null 
+left outer join artista as a 
+on ea.idartista = a.idartista
+left outer join imagen_escenario ie on 
+e.idescenario  =  ie.id_escenario 
+left outer join  imagen i on 
+ie.id_imagen =  i.idimagen 
+where e.idevento = '".$id_evento."'
+group by e.idescenario order by tipoescenario  desc
+
+";
 
 	$result= $this->db->query($query_select);
 	return $result-> result_array();

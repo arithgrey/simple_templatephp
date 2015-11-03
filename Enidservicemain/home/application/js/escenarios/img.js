@@ -1,4 +1,5 @@
 function upload_main_imgs_escenario(){
+
     var formdata = false;
     if(window.FormData){
 
@@ -201,7 +202,7 @@ function update_status_in_db(res , base_path ){
                 
             llenaelementoHTML("#slider-principal-escenario" , data["slider_principal_escenario"]);
 
-            
+            llenaelementoHTML(".response"   , "imagen cargada correctamente");        
             
             
         }).fail(function(){

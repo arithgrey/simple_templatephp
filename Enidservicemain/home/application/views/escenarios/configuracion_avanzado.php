@@ -1,6 +1,9 @@
 <?=ini_set('display_errors', '1');?>
 <div class='col-lg-1'>
-
+  <strong id='img-button-more-imgs' data-toggle="modal" data-target="#modal-img-escenario-principal"  >
+        <i class="fa fa-plus-circle fa-5x"></i>                            
+        <span style='color:white;'>Cargar Imagenes</span>
+        </strong>
 </div>
 <div class='col-lg-9'>
 <div class="center-block">
@@ -9,29 +12,28 @@
         <div class='slider-principal-escenario' id='slider-principal-escenario'>
             <?=$slider_principal_escenario;?>                                
         </div>
+         <div class='row'>
+      
     </div>
-    <div class='row'>
-        <strong id='img-button-more-imgs' data-toggle="modal" data-target="#modal-img-escenario-principal"  >
-        <i class="fa fa-plus-circle fa-5x"></i>                            
-        <span style='color:white;'>Cargar Imagenes</span>
-        </strong>
+   
     </div>
+    
     <input type='hidden' name='action' value="carga-imgenes-escenario">                    
 </div>    
 
+
 <div class='row'>
-    <h1 class='nombre-escenario-text'><?=$data_escenario["nombre"];?></h1>       
-</div>        
-<div>
-    <div class="form-group">
-        <div class='section-nombre-evento-in'>
-            <div class='input-group'>                    
-                    <span class="input-group-addon">Nombre del escenario </span>
-                    <input  class="form-control in-nombre-escenario" id='in-nombre-escenario' value="<?=$data_escenario["nombre"];?>" name='nuevo_nombre' style="width: 100%" type="text">			            
+        <h1 class='nombre-escenario-text'><?=$data_escenario["nombre"];?></h1>       
+        <div class="form-group">
+            <div class='section-nombre-evento-in'>
+                <div class='input-group'>                    
+                        <span class="input-group-addon">Nombre del escenario </span>
+                        <input  class="form-control in-nombre-escenario" id='in-nombre-escenario' value="<?=$data_escenario["nombre"];?>" name='nuevo_nombre' style="width: 100%" type="text">			            
+                </div>
             </div>
-        </div>
-    </div>	   
-</div>
+        </div>	   
+
+</div>    
 <div class='row'>
 
     <div class="jumbotron">
@@ -92,7 +94,7 @@
 
 
 <!--*********************************************************************-->
-<div> 
+<div class='resumen-artistas-escenario-event'> 
     <?=$resumen_artistas;?>
 </div>
 <section class="panel">        
@@ -121,24 +123,15 @@
 </div>
 
 </div></div>
-<div class='col-lg-1'>
+
+
+<div class='col-lg-2'>
+                                    
+        <div class="row state-overview">
+                        <?=$otros_escenarios?>        
+        </div>
     
-
-
-    <div class="row">
-                <div class="col-md-12">
-                    <!--statistics start-->
-                    <div class="row state-overview">
-
-                        <?=$otros_escenarios?>
-
-                        
-                        
-                    <!--statistics end-->
-                    </div>
-              
-                </div>
-    </div>
+</div>
 
 
 
@@ -481,6 +474,8 @@
 
 
 
+
+
 <div class="modal fade" id="modal-img-escenario-principal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -490,15 +485,15 @@
             </div>
             <div class="modal-body">
             
-
-
-            <form action ='<?=base_url("application/controllers/api/imgs_controller.php")?>'  method="post" id="form_imgs_escenario" enctype="multipart/form-data" id='formulario-principal-img' class='pull-right'>
+        <div class='response' id="response"></div>        
+        <div class='row'>
+            <form action ='<?=base_url("application/controllers/api/imgs_controller.php")?>'  method="post" id="form_imgs_escenario" enctype="multipart/form-data" id='formulario-principal-img' >
                 <div class="form-group">
                 Imagen:<input type="file" name="images[]"  id="imgs-escenario">
                         <input type='hidden' name="e" value='1'>
                 </div>                      
             </form>
-
+        </div>        
 
             </div>            
             <div class="modal-footer">                
@@ -753,7 +748,7 @@
 
 
 
-
+<input type='hidden' name='nombre_evento' id='nombre_evento' value="<?=$nombre_evento?>"> 
 <input type='hidden' name='base_path_img' id="base_path_img" class='base_path_img' value='<?=$base_path_img;?>'>
 <input type='hidden' name='base_path' id='base_path' class='base_path' value='<?=$base_path;?>'>
 <input type='hidden' name='id_escenario' id='id_escenario' class='id_escenario' value="<?=$id_escenario;?>">

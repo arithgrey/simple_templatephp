@@ -357,6 +357,263 @@ function get_slider_img_evento($data){
 
 
 	
+	/***********************************************************************************/
+
+
+	function get_slider_principal_evento($data){
+
+		$b =0;
+		$slider= '<div class="banner clearfix">              
+        <div class="slideshow">          
+          <div class="slider-banner-container">
+            <div class="slider-banner-fullwidth-big-height">
+              <ul class="slides">';
+
+		foreach($data as $row){
+
+			$imagen_evento =   $row["base_path_img"].$row["nombre_imagen"];
+			
+			if ($b%2 != 0) {
+				$slider .='
+			<li data-transition="slidehorizontal" data-slotamount="1" data-masterspeed="500" data-saveperformance="on" data-title="Next Generation Template">
+
+                <img src="'. base_url($imagen_evento) .'" alt="slidebg1" data-bgposition="center top"  data-bgrepeat="no-repeat" data-bgfit="cover">
+                
+              
+                <div class="tp-caption dark-translucent-bg"
+                  data-x="center"
+                  data-y="bottom"
+                  data-speed="600"
+                  data-start="0">
+                </div>
+
+                <div class="tp-caption sfb fadeout large_white"
+                  data-x="left"
+                  data-y="150"
+                  data-speed="500"
+                  data-start="1000"
+                  data-easing="easeOutQuad"
+                  data-end="10000">Next Generation Template
+                </div>  
+
+               
+                <div class="tp-caption sfb fadeout text-left medium_white"
+                  data-x="left"
+                  data-y="230" 
+                  data-speed="500"
+                  data-start="1300"
+                  data-easing="easeOutQuad"
+                  data-endspeed="600"><span class="icon default-bg circle small hidden-xs"><i class="fa fa-laptop"></i></span> 100% Responsive
+                </div>
+
+                <div class="tp-caption sfb fadeout text-left medium_white"
+                  data-x="left"
+                  data-y="290" 
+                  data-speed="500"
+                  data-start="1600"
+                  data-easing="easeOutQuad"
+                  data-endspeed="600"><span class="icon default-bg circle small hidden-xs"><i class="icon-check"></i></span> Bootstrap Based
+                </div>
+
+               
+                <div class="tp-caption sfb fadeout text-left medium_white"
+                  data-x="left"
+                  data-y="350" 
+                  data-speed="500"
+                  data-start="1900"
+                  data-easing="easeOutQuad"
+                  data-endspeed="600"><span class="icon default-bg circle small hidden-xs"><i class="icon-gift"></i></span> Packed Full of Features
+                </div>
+
+                <div class="tp-caption sfb fadeout text-left medium_white"
+                  data-x="left"
+                  data-y="410" 
+                  data-speed="500"
+                  data-start="2200"
+                  data-easing="easeOutQuad"
+                  data-endspeed="600"><span class="icon default-bg circle small hidden-xs"><i class="icon-hourglass"></i></span> Very Easy to Customize
+                </div>
+
+                
+                <div class="tp-caption sfb fadeout small_white"
+                  data-x="left"
+                  data-y="480"
+                  data-speed="500"
+                  data-start="2500"
+                  data-easing="easeOutQuad"
+                  data-endspeed="600"><a href="#" class="btn btn-default-transparent btn-lg btn-animated">Purchase <i class="fa fa-cart-arrow-down"></i></a>
+                </div>
+
+                </li>';                
+
+
+
+
+			}else{
+
+				$slider .= '<li data-transition="random" data-slotamount="7" data-masterspeed="500" data-saveperformance="on" data-title="Inteligencia de negocio para tus eventos">
+                
+                
+                <img src="'. base_url($imagen_evento)  .'" alt="slidebg1" data-bgposition="center top"  data-bgrepeat="no-repeat" data-bgfit="cover">
+                
+                
+                <div class="tp-caption dark-translucent-bg"
+                  data-x="center"
+                  data-y="bottom"
+                  data-speed="500"
+                  data-easing="easeOutQuad"
+                  data-start="0">
+                </div>
+
+                
+                <div class="tp-caption sfr stl xlarge_white"
+                  data-x="center"
+                  data-y="70"
+                  data-speed="200"
+                  data-easing="easeOutQuad"
+                  data-start="1000"
+                  data-end="2500"
+                  data-splitin="chars"
+                  data-elementdelay="0.1"
+                  data-endelementdelay="0.1"
+                  data-splitout="chars">Eventos
+                </div>
+
+                
+                <div class="tp-caption sfl str xlarge_white"
+                  data-x="center"
+                  data-y="70"
+                  data-speed="200"
+                  data-easing="easeOutQuad"
+                  data-start="2500"
+                  data-end="4000"
+                  data-splitin="chars"
+                  data-elementdelay="0.1"
+                  data-endelementdelay="0.1"
+                  data-splitout="chars">innovación
+                </div>
+
+                
+                <div class="tp-caption sfr stt xlarge_white"
+                  data-x="center"
+                  data-y="70"
+                  data-speed="200"
+                  data-easing="easeOutQuad"
+                  data-start="4000"
+                  data-end="6000"
+                  data-splitin="chars"
+                  data-elementdelay="0.1"
+                  data-endelementdelay="0.1"
+                  data-splitout="chars"
+                  data-endspeed="400">Sucesos
+                </div>          
+
+                
+                <div class="tp-caption sft fadeout text-center large_white"
+                  data-x="center"
+                  data-y="70"
+                  data-speed="500"
+                  data-easing="easeOutQuad"
+                  data-start="6400"
+                  data-end="10000"><span class="logo-font">El<span class="text-default">proyecto</span></span> <br> que cambiará la forma de organizar eventos
+                </div>  
+
+                
+                <div class="tp-caption sfr fadeout"
+                  data-x="center"
+                  data-y="210"
+                  data-hoffset="-232"
+                  data-speed="500"
+                  data-easing="easeOutQuad"
+                  data-start="1000"
+                  data-end="5500"><span class="icon large circle"><i class="circle fa fa-play-circle-o"></i></span>
+                </div>
+
+                
+                <div class="tp-caption sfl fadeout"
+                  data-x="center"
+                  data-y="210"
+                  data-speed="500"
+                  data-easing="easeOutQuad"
+                  data-start="2500"
+                  data-end="5500"><span class="icon large circle"><i class="circle fa fa-line-chart"></i></span>
+                </div>
+
+                
+                <div class="tp-caption sfr fadeout"
+                  data-x="center"
+                  data-y="210"
+                  data-hoffset="232"
+                  data-speed="500"
+                  data-easing="easeOutQuad"
+                  data-start="4000"
+                  data-end="5500"><span class="icon large circle"><i class="circle fa fa-globe"></i></span>
+                </div>
+
+                
+                <div class="tp-caption ZoomIn fadeout text-center tp-resizeme large_white"
+                  data-x="center"
+                  data-y="170"
+                  data-speed="500"
+                  data-easing="easeOutQuad"
+                  data-start="6400"
+                  data-end="10000"><div class="separator light"></div>
+                </div>  
+
+                
+                <div class="tp-caption sft fadeout medium_white text-center"
+                  data-x="center"
+                  data-y="210"
+                  data-speed="500"
+                  data-easing="easeOutQuad"
+                  data-start="5800"
+                  data-end="10000"
+                  data-endspeed="600">Lorem ipsum dolor sit amet, consectetur adipisicing elit. <br> Nesciunt, maiores, aliquid. Repellat eum numquam aliquid culpa offici, <br> tenetur fugiat dolorum sapiente eligendi...
+                </div>
+
+                
+                <div class="tp-caption fade fadeout"
+                  data-x="center"
+                  data-y="bottom"
+                  data-voffset="100"
+                  data-speed="500"
+                  data-easing="easeOutQuad"
+                  data-start="2000"
+                  data-end="10000"
+                  data-endspeed="200">
+                  <a href="#page-start" class="btn btn-lg moving smooth-scroll"><i class="icon-down-open-big"></i><i class="icon-down-open-big"></i><i class="icon-down-open-big"></i></a>
+                </div>
+                </li>
+                ';
+			}
+
+			
+
+
+
+
+
+
+
+
+
+
+			$b++;
+
+
+		}
+
+
+		$slider .= '</ul>
+              <div class="tp-bannertimer"></div>
+            </div>
+          </div>
+        
+        </div>
+        
+</div>';
+		return $slider;
+	}
 
 
 

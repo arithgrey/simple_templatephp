@@ -11,6 +11,16 @@ class Escenario extends REST_Controller{
             $this->load->library('sessionclass');            
     }     
 
+    function resumen_artistas_get(){
+
+        $this->validate_user_sesssion();
+        $id_escenario = $this->get("escenario");
+        $data_escenario = $this->escenariomodel->get_escenariobyId($id_escenario);                 
+        $nombre_evento =  $this->get("nombre_evento");
+        $resumen_artistas = resumen_artistas_table($this->escenarioartistamodel->get_artistas_resumen($id_escenario, $data_escenario[0], $nombre_evento ));         
+        $this->response($resumen_artistas); 
+
+    }
     function artista_nombre_PUT(){
 
         $this->validate_user_sesssion();

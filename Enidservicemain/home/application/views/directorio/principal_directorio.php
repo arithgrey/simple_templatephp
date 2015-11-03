@@ -12,7 +12,8 @@
 
 
 
-<?=$base_path;?>
+
+
 
 
 <div class="container">
@@ -73,7 +74,7 @@
 
 
 
-        <a href="http://localhost/Enidservicemain/home/index.php/inicio/eventos"><button type="button" class="btn btn-primary btn-sm">Ir a puntos de venta</button></a> 
+        <a href="<?=base_url('index.php/puntosventa/administrar')?>"><button type="button" class="btn btn-primary btn-sm">Ir a puntos de venta</button></a> 
     </div>
 
 </div>
@@ -476,6 +477,66 @@
                     </form>
                 </div>
 
+                <!--Termina nuevo contacto -->
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="modal fade in" id="contact-nota" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            
+                <h4 class="modal-title" id="myModalLabel" class='title-modal-contacto'>Nota del contacto</h4>
+            </div>
+            <div class="modal-body">
+                
+                <div class='nota-contacto-text'></div>
+                <div class='edit-contact-mod'></div>
                 <!--Termina nuevo contacto -->
             </div>
             <div class="modal-footer">
