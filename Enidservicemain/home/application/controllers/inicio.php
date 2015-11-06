@@ -13,7 +13,7 @@ class Inicio extends CI_Controller {
 			$data["pagination_event"] = get_paginarion_principal($limit_events);
 			
 			$ultimos_eventos = $this->eventmodel->get_last_events($idempresa , $limit_events );							
-			$data["ultimos_eventos"] =  get_last_events_empresa($ultimos_eventos, 270 , 1 , 1 , 200);
+			$data["ultimos_eventos"] =  get_last_events_empresa($ultimos_eventos, 270 , 1 , 1 , 1);
 			
 			$this->dinamic_view_event('principal/bienvenidaestratega' , $data);
 	}

@@ -3,11 +3,13 @@ if(!function_exists('invierte_date_time')){
 /*******************************************************************************************************/
 function list_resum_escenarios($array_escenario, $id_evento , $limit_text, $background='' , $horizontal = '0'){
 
+
     $list ='';
     foreach ($array_escenario as $row){
+
         $nombre = $row["nombre"];
         $descripcion = $row["descripcion_escenario"];
-        $url_escenario = base_url("index.php/escenario/inevento"). "/".$row["idescenario"]. "/".$id_evento;                     
+        $url_escenario = base_url("index.php/escenario/inevento"). "/". $row["id_escenario"]. "/".$id_evento;                     
 
         $url_sound_cloud  = ""; 
         $path_img =  ""; 
@@ -264,11 +266,12 @@ $generos .= '</div>
 }
 
 
+
 /**/
 function get_slider_img($data){
 
 
-    $slider = '<div class="row" style="padding:5%; background: #069F89; border-radius: 10px;" ><div id="Carousel-escenario" class="carousel slide" data-ride="carousel">';
+    $slider = '<div class="row" id="section_escenario_principal" style="padding:5%; background: #069F89; border-radius: 10px;" ><div id="Carousel-escenario" class="carousel slide" data-ride="carousel">';
     $slider .= '<div class="row"><ol class="carousel-indicators">';
 
     for ($a=0; $a <count($data); $a++) {                 

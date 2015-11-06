@@ -148,7 +148,7 @@ function get_date_event_format($inicio , $termino){
 /*Últimos eventos */
 
 
-function get_last_events_empresa($ultimos_eventos, $limit_text= 270 ,  $show_edit=0 , $show_delete = 0 ){
+function get_last_events_empresa($ultimos_eventos, $limit_text= 270 ,  $show_edit=0 , $show_delete = 0 , $show_view_like_public = 0){
 		$elements ="";
 		
 		if (count($ultimos_eventos) == 0 ) {
@@ -266,13 +266,25 @@ function get_last_events_empresa($ultimos_eventos, $limit_text= 270 ,  $show_edi
 	                                            </a>
                                                 </li>";
 
+                                                
+                                                if ($show_view_like_public ==  1 ) {
+
+                                                	$elements .="<li class=''> <a class='view-event' href='". base_url('index.php/eventos/visualizar/') ."/". $id_evento."'>
+                                               		<i class='delete_evento fa  fa-arrow-circle-o-right' id='".$id_evento."'></i>
+                                               		ver como el público
+                                               		</a></li>";
+                                                }
+
                                                 if ($show_edit == 1 ){
                                                 	$elements .="<li class='active' ><a href='#'>". $estadoevento ."</a></li>";
                                                 }if ($show_delete == 1) {
-                                               		$elements .=" <li class=''> <a class='delete_evento' id='".$id_evento. "'  ><i class='delete_evento fa fa-trash-o' id='".$id_evento."'></i></a></li>";		 	
+                                               		$elements .=" <li class=''> <a class='delete_evento' id='".$id_evento. "'  >
+                                               		<i class='delete_evento fa fa-trash-o' id='".$id_evento."'></i></a></li>";		 	
                                                 }
                                                 
+                                                
                                                 $elements.="
+
 		                                    </ul>		                                    
                                         </div>
                                     </div>";
@@ -360,9 +372,64 @@ function get_slider_img_evento($data){
 	/***********************************************************************************/
 
 
-	function get_slider_principal_evento($data){
+	function get_slider_principal_evento($data , $data_evento  , $list_generosdb , $servicios , $resumen_evento){
 
 		$b =0;
+
+		/*data de evento general*/
+		$nombre_evento    =  $data_evento["nombre_evento"];
+		$edicion =  $data_evento["edicion"];
+		$fecha_inicio =  $data_evento["fecha_inicio"];
+		$fecha_termino =  $data_evento["fecha_termino"];
+
+
+		$fecha_evento = "";	
+		if ($fecha_inicio ==  $fecha_termino  ) {
+			$fecha_evento  =  "este ". $fecha_inicio; 
+		}else{
+			$fecha_evento  = " del " . $fecha_inicio . " al" . $fecha_termino;
+		}
+
+		$breve_descripcion =  $data_evento["breve_descripcion"];
+		$eslogan =  $data_evento["eslogan"];
+
+		/*data evento generos musicales */
+
+
+		$title_1 ='';
+		$title_2 ='';
+		$title_3 ='';
+
+		if (count($list_generosdb) > 2) {
+			
+			$title_1 = $list_generosdb[rand(0, count($list_generosdb) -1  )]["nombre"];		
+			$title_2 = $list_generosdb[rand(1, count($list_generosdb) -1 )]["nombre"];		
+			$title_3 = $list_generosdb[rand(2, count($list_generosdb) -1)]["nombre"];		
+		
+		}else if(count($servicios) > 2 ){
+				
+
+			$title_1 = $servicios[rand(0, count($servicios) -1  )]["servicio"];			
+			$title_2 = $servicios[rand(1, count($servicios) -1 )]["servicio"];			
+			$title_3 = $servicios[rand(2, count($servicios) -1 )]["servicio"];			
+
+		}else if(count($servicios) > 0  && count($list_generosdb)> 0  ){
+				
+
+			$title_1 = $servicios[rand(0, count($servicios) -1  )]["servicio"];			
+			$title_2 = $list_generosdb[rand(0, count($list_generosdb) -1  )]["nombre"];
+			$title_3 = "Más";			
+
+		}else{
+
+			$title_1 = "La experiencia";			
+			$title_2 = "El momento";			
+			$title_3 = "Más";						
+		}
+
+
+
+
 		$slider= '<div class="banner clearfix">              
         <div class="slideshow">          
           <div class="slider-banner-container">
@@ -393,7 +460,7 @@ function get_slider_img_evento($data){
                   data-speed="500"
                   data-start="1000"
                   data-easing="easeOutQuad"
-                  data-end="10000">Next Generation Template
+                  data-end="10000">'. $nombre_evento . "<span>". $fecha_evento ."<span>" .'
                 </div>  
 
                
@@ -403,7 +470,8 @@ function get_slider_img_evento($data){
                   data-speed="500"
                   data-start="1300"
                   data-easing="easeOutQuad"
-                  data-endspeed="600"><span class="icon default-bg circle small hidden-xs"><i class="fa fa-laptop"></i></span> 100% Responsive
+                  data-endspeed="600"><span class="icon default-bg circle small hidden-xs"><i class="fa fa-laptop"></i></span> 
+                  '. $resumen_evento[0]["escenarios"].' Escenarios 
                 </div>
 
                 <div class="tp-caption sfb fadeout text-left medium_white"
@@ -412,7 +480,8 @@ function get_slider_img_evento($data){
                   data-speed="500"
                   data-start="1600"
                   data-easing="easeOutQuad"
-                  data-endspeed="600"><span class="icon default-bg circle small hidden-xs"><i class="icon-check"></i></span> Bootstrap Based
+                  data-endspeed="600"><span class="icon default-bg circle small hidden-xs"><i class="icon-check"></i></span>
+                  '.$resumen_evento[0]["artistas"].' Artistas
                 </div>
 
                
@@ -422,7 +491,8 @@ function get_slider_img_evento($data){
                   data-speed="500"
                   data-start="1900"
                   data-easing="easeOutQuad"
-                  data-endspeed="600"><span class="icon default-bg circle small hidden-xs"><i class="icon-gift"></i></span> Packed Full of Features
+                  data-endspeed="600"><span class="icon default-bg circle small hidden-xs"><i class="icon-gift"></i></span> 
+                  '. $resumen_evento[0]["generos_musicales"] .' Géneros musicales
                 </div>
 
                 <div class="tp-caption sfb fadeout text-left medium_white"
@@ -431,19 +501,22 @@ function get_slider_img_evento($data){
                   data-speed="500"
                   data-start="2200"
                   data-easing="easeOutQuad"
-                  data-endspeed="600"><span class="icon default-bg circle small hidden-xs"><i class="icon-hourglass"></i></span> Very Easy to Customize
+                  data-endspeed="600"><span class="icon default-bg circle small hidden-xs"><i class="icon-hourglass"></i></span> 
+                   '. $resumen_evento[0]["servicios"] .'servicios 
                 </div>
-
-                
-                <div class="tp-caption sfb fadeout small_white"
+                <div class="tp-caption sfb fadeout text-left medium_white"
                   data-x="left"
-                  data-y="480"
+                  data-y="470" 
                   data-speed="500"
                   data-start="2500"
                   data-easing="easeOutQuad"
-                  data-endspeed="600"><a href="#" class="btn btn-default-transparent btn-lg btn-animated">Purchase <i class="fa fa-cart-arrow-down"></i></a>
+                  data-endspeed="600"><span class="icon default-bg circle small hidden-xs"><i class="icon-hourglass"></i></span> 
+                   '. $resumen_evento[0]["evento_punto_venta"] .' puntos de venta 
                 </div>
+                 
 
+                
+               
                 </li>';                
 
 
@@ -465,7 +538,9 @@ function get_slider_img_evento($data){
                   data-start="0">
                 </div>
 
-                
+               
+
+
                 <div class="tp-caption sfr stl xlarge_white"
                   data-x="center"
                   data-y="70"
@@ -476,7 +551,7 @@ function get_slider_img_evento($data){
                   data-splitin="chars"
                   data-elementdelay="0.1"
                   data-endelementdelay="0.1"
-                  data-splitout="chars">Eventos
+                  data-splitout="chars">'.  $title_1  .'
                 </div>
 
                 
@@ -490,7 +565,7 @@ function get_slider_img_evento($data){
                   data-splitin="chars"
                   data-elementdelay="0.1"
                   data-endelementdelay="0.1"
-                  data-splitout="chars">innovación
+                  data-splitout="chars">'. $title_2 .'
                 </div>
 
                 
@@ -505,17 +580,28 @@ function get_slider_img_evento($data){
                   data-elementdelay="0.1"
                   data-endelementdelay="0.1"
                   data-splitout="chars"
-                  data-endspeed="400">Sucesos
+                  data-endspeed="400">'. $title_3.'
                 </div>          
 
                 
+
+
+
+
+
+
+
+
+
+
                 <div class="tp-caption sft fadeout text-center large_white"
                   data-x="center"
                   data-y="70"
                   data-speed="500"
                   data-easing="easeOutQuad"
                   data-start="6400"
-                  data-end="10000"><span class="logo-font">El<span class="text-default">proyecto</span></span> <br> que cambiará la forma de organizar eventos
+                  data-end="10000"><span class="logo-font"><span class="text-default">'. $nombre_evento.'</span></span> <br> '. $edicion  .'
+
                 </div>  
 
                 
@@ -568,7 +654,7 @@ function get_slider_img_evento($data){
                   data-easing="easeOutQuad"
                   data-start="5800"
                   data-end="10000"
-                  data-endspeed="600">Lorem ipsum dolor sit amet, consectetur adipisicing elit. <br> Nesciunt, maiores, aliquid. Repellat eum numquam aliquid culpa offici, <br> tenetur fugiat dolorum sapiente eligendi...
+                  data-endspeed="600">'. $eslogan.' 
                 </div>
 
                 

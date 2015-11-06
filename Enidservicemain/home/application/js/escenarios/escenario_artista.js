@@ -4,14 +4,24 @@ $(document).on("ready", function(){
 	$(".remove-artista").click(delete_escenario_artista);
 	$(".img-artista-evento").click(try_upload_img_artistas);
 	$(".horario_artista").click(update_horario_artista);
-	$(".artista_yt").click(update_youtube_url);
-	$(".artista_sound").click(update_sounda_url);
+	$(".artista_yt").click(load_data_youtube);
+	$(".artista_sound").click(load_data_sound);
 	escenario =  $("#escenario").val();
-	$(".status-confirmacion").click(try_update_status_artista);
-	
+	$(".status-confirmacion").click(try_update_status_artista);	
 	$(".artistas-inputs").click(try_update_nombre_artista);	
 
 
+		$(".artista_nota").click(load_data_nota);
+
+
+	    $('#artista').keyup(function (e){ 
+
+	        	Stringentrante = $(this).val(); 	        
+	            buscarartista(Stringentrante);
+	    });	  
+		
+		
+		
 
 
 });
@@ -20,31 +30,12 @@ function nuevo_artista(){
 
 	url = now + "index.php/api/escenario/escenario_artista/format/json";	
 	$.post(url, $("#form-escenario-artista").serialize()).done(function(data){
-
 		load_data_escenario_artista();
 	}).fail(function(){
 		alert(genericresponse[0]);
 	});
 	return false;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /*cargamos la lista de artistas*/
 function load_data_escenario_artista(){
 	url =now + "index.php/api/escenario/escenario_artista/format/json";			
@@ -55,21 +46,19 @@ function load_data_escenario_artista(){
 		$(".remove-artista").click(delete_escenario_artista);
 		$("#form-escenario-artista").submit(nuevo_artista);
 		$(".horario_artista").click(update_horario_artista);
-		$(".artista_yt").click(update_youtube_url);
-		$(".artista_sound").click(update_sounda_url);
+		$(".artista_yt").click(load_data_youtube);
+		$(".artista_sound").click(load_data_sound);
+		$(".artista_nota").click(load_data_nota);
 
 
 	    $('#artista').keyup(function (e){ 
 
 	        	Stringentrante = $(this).val(); 	        
 	            buscarartista(Stringentrante);
-	    });
-	  
+	    });	  
 		$(".img-artista-evento").click(try_upload_img_artistas);
 		$(".status-confirmacion").click(try_update_status_artista);
 		$(".artistas-inputs").click(try_update_nombre_artista);	
-
-
 
 		load_resumen_artistas_escenario();
 
@@ -82,7 +71,7 @@ function delete_escenario_artista(e){
 	
 	artista = e.target.id;
 	escenario =  $("#escenario").val();
-	
+
 	url =now + "index.php/api/escenario/escenario_artista/format/json";
 	eliminar_data(url , {"idescenario" : escenario , "idartista": artista });		
 	load_data_escenario_artista();
@@ -103,80 +92,172 @@ function update_horario_artista(e){
 		load_data_escenario_artista();
 	});
 }
-/**/
-function update_youtube_url(e){
-			
-	artista = e.target.id;
-	url = $("#form-arista-social-youtube").attr('action');	
-	social = "youtube";
-
-	load_data_escenario_artista_dinamic(artista, "y" , social );
-	
-}
 
 /**/
-function load_data_escenario_artista_dinamic(artista, campo , social ){
 
-	llenaelementoHTML(".response_youtube", "");
-	llenaelementoHTML(".response-sound", "");
 
-	url =  now + "index.php/api/escenario/artista_escenario/format/json/";
-	$.get(url , {artista: artista ,  escenario : escenario }).done(function(data){
 
-		if (campo == 'y') {
-			$("#url_youtube").val(data[0].url_social_youtube);	
-		}else{
 
-			$("#url_sound").val(data[0].url_sound_cloud);	
-			
-		}
+
+
+
+
+/*****************************/
+function load_data_nota(e){
+
+	$("#response_nota").html("");
+	idartista = e.target.id;
+	url =  now + "index.php/api/escenario/escenario_artista_id/format/json/";
+	$.get(url , {"idescenario" :  escenario , "idartista" : idartista } ).done(function(data){	
+		/**/
+		
+		$("#nota_artista").val(data[0].nota);
+		$("#idartistanota").val(idartista );
+		$("#form-arista-nota").submit(update_nota_artista);
 
 	}).fail(function(){
-		alert("Error al cargar información del artista en el escenario");
+
+		alert("Error al cargar datos");
+
+	});
+}
+
+
+function update_nota_artista(){
+	
+	artista = $("#idartistanota").val();
+	data_send = $("#form-arista-nota").serialize() + "&"+ $.param({"artista" : artista  , escenario :  escenario });
+	
+	url =  now + "index.php/api/escenario/escenario_artista_nota/format/json/";
+	$.ajax({
+	   url: url,
+	   type: 'PUT',
+	   data : data_send  }).done(function(data){
+	   			
+	   		
+	   		$("#response_nota").html("Datos actualizados");
+
+	}).fail(function(){
+	   		alert("falla al intentar actualizar");
+	});
+	
+
+	return false; 
+}
+
+
+
+
+/******************************/
+function load_data_youtube(e){
+	$("#response_youtube").html("");			
+	idartista = e.target.id;
+	url =  now + "index.php/api/escenario/escenario_artista_id/format/json/";
+	$.get(url , {"idescenario" :  escenario , "idartista" : idartista } ).done(function(data){	
+		/**/
+		url_social_youtube  = data[0].url_social_youtube; 				
+		$("#url_youtube").val(url_social_youtube);
+		$("#dinamic_artista_youtube").val(idartista);
+		$("#form-arista-social-youtube").submit(upload_data_youtube);		
+
+
+	}).fail(function(){
+
+		alert("Error al cargar datos");
+	});
+}
+function upload_data_youtube(){
+
+	url_youtube  = $("#url_youtube").val();
+	data_send =  $("#form-arista-social-sound").serialize() + "&"+ $.param({"social" : "youtube"  , "escenario" :  escenario , "url" :  url_youtube }); 
+	
+
+	url =  now + "index.php/api/escenario/escenario_artista_social/format/json/";
+	$.ajax({
+	   url: url,
+	   type: 'PUT',
+	   data : data_send  }).done(function(data){
+	   		
+	   		$("#response_youtube").html("Datos actualizados");
+
+	}).fail(function(){
+	   		alert("falla al intentar actualizar");
 	});
 
 
-	if ( social ==  "youtube") {
-		url = $("#form-arista-social-youtube").attr('action');	
-			$("#form-arista-social-youtube").submit(function(){			
-					url_youtube = $("#url_youtube").val();						
-					registra_data(url , { artista : artista   , escenario : escenario ,  url : url_youtube , social : social } );			
-					llenaelementoHTML(".response_youtube" , "Datos actualizados");
-					return false;
-
-			});
-			return false;
-	}else{
-
-		url = $("#form-arista-social-sound").attr('action');	
-			$("#form-arista-social-sound").submit(function(){			
-					url_sound = $("#url_sound").val();						
-					registra_data(url , { artista : artista   , escenario : escenario ,  url : url_sound , social : social } );			
-					llenaelementoHTML(".response-sound" , "Datos actualizados");
-					return false;
-
-			});
-			return false;
-
-	}
-	
-
-
+	return false;
 }
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*****************************/
+function load_data_sound(e){
+
+	$("#response-sound").html("");
+	idartista = e.target.id;
+	url =  now + "index.php/api/escenario/escenario_artista_id/format/json/";
+	$.get(url , {"idescenario" :  escenario , "idartista" : idartista } ).done(function(data){	
+		/**/
+		url_sound  = data[0].url_sound_cloud; 				
+		$("#url_sound").val(url_sound);
+		$("#dinamic_artista_sound").val(idartista);
+
+		$("#form-arista-social-sound").submit(upload_data_sound);
+		
+
+	}).fail(function(){
+
+		alert("Error al cargar datos");
+
+	});
+}
+/***/
+function upload_data_sound(){
+
+	data_send =  $("#form-arista-social-sound").serialize() + "&"+ $.param({"social" : "sound"  , "escenario" :  escenario}); 
+	url =  now + "index.php/api/escenario/escenario_artista_social/format/json/";
+	$.ajax({
+	   url: url,
+	   type: 'PUT',
+	   data : data_send  }).done(function(data){
+	   		
+	   	/*aquí mostrar el mensaje de respuesta */
+	   	
+	   	$("#response-sound").html("Datos actualizados");
+	}).fail(function(){
+
+	   		alert("falla al intentar actualizar");
+	});
+
+
+	return false;
+}
 /**/
-function update_sounda_url(e){
 
-	artista = e.target.id;	
-	social = "Sound Cloud";
-	
-	load_data_escenario_artista_dinamic(artista, "s" , social );
-
-	
-}
-
+ 
 /**/
 function  try_upload_img_artistas(e){
 	

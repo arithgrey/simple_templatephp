@@ -9,8 +9,17 @@ class Escenario extends REST_Controller{
             $this->load->model("escenariomodel");
             $this->load->model("escenarioartistamodel");                
             $this->load->library('sessionclass');            
-    }     
+    }   
 
+    function escenario_artista_id_GET(){
+
+        $this->validate_user_sesssion();        
+        $id_escenario= $this->get("idescenario");
+        $id_artista =  $this->get("idartista");
+        $db_response= $this->escenarioartistamodel->get_escenario_artista($id_artista , $id_escenario);
+        $this->response($db_response);
+    }
+    /**/
     function resumen_artistas_get(){
 
         $this->validate_user_sesssion();
@@ -114,16 +123,27 @@ class Escenario extends REST_Controller{
         $this->response( infoescenario($info)  ); 
             
     }
+
+
+
+    function escenario_artista_nota_PUT(){
+        $this->validate_user_sesssion();                                                    
+        $db_response = $this->escenariomodel->update_nota_escenario_artista($this->put());     
+        $this->response($db_response);
+    
+    }
     /**/
-    function escenario_artista_social_post(){
+    function escenario_artista_social_put(){
       
         $this->validate_user_sesssion();
-        $id_escenario =  $this->post("escenario");
-        $id_artista =  $this->post("artista");
-        $url = $this->post("url");
-        $social = $this->post("social");
+         
+        $id_escenario =  $this->put("escenario");
+        $id_artista =  $this->put("dinamic_artista_sound");
+        $url = $this->put("url");
+        $social = $this->put("social");
         $this->response($this->escenariomodel->record_url_artista($id_escenario , $id_artista , $url , $social ));
-
+    
+    
     }
     /**/
     function escenario_artista_post(){

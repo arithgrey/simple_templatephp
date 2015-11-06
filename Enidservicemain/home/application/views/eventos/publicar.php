@@ -244,13 +244,13 @@
                   <!--Termina  descripcion del evento -->
                   <div>
                   <button class='btn  btn-template' data-toggle="modal" data-target="#templa-descripcion-contenido" ><i class='fa fa-file-text-o'></i> Plantilla de descripciones</button>
-                  <button class='btn btn-info' id='generos_musicales_button'><i class='fa fa-caret-down'></i> Géneros musicales</button>
+                  <button class='btn btn-info' id='generos_musicales_button'><i class='fa fa-caret-down'></i> <?=$resumen_evento["generos_musicales"]?> Géneros musicales</button>
                     
                    
 
 
                    <div class="input-group">
-                    <div class="input-group-addon">Género musical </div>
+                    <div class="input-group-addon"> Género musical </div>
                     <input   placeholder="Genero musical"  id="genero-busqueda" class="genero-busqueda form-control" type="text">
                     
                   </div>
@@ -309,19 +309,22 @@
 
       <!--Accesos button-->    
         <div class="panel" >
-            <button id="accesos-button" data-toggle="modal" data-target="#accesosmodal" class="btn blue-col-enid col-xs-12  col-sm-12 col-md-12 col-lg-12 accesos-button" style="text-align: left; padding: 10px!important; " ><strong> <i class="fa fa-credit-card"></i>  ACCESOS AL EVENTO </strong></button>
+            <button id="accesos-button" data-toggle="modal" data-target="#accesosmodal" class="btn section-left col-xs-12  col-sm-12 col-md-12 col-lg-12 accesos-button" style="text-align: left; padding: 10px!important; " ><strong> <i class="fa fa-credit-card"></i> <?=$resumen_evento["accesos"]?>  ACCESOS AL EVENTO </strong>
+              <strong> , <?=$resumen_evento["evento_punto_venta"]?> PUNTOS DE VENTA </strong>
+            </button>
         </div> 
-        <!--Termina acceso button-->
+       
+
 
         <!--Servicios button-->    
         <div class="panel" >
-            <button id="servicios-button" data-toggle="modal" data-target="#serviciosmodal" class="btn blue-col-enid col-xs-12  col-sm-12 col-md-12 col-lg-12 accesos-button" style="text-align: left; padding: 10px!important; " ><strong> <i class="fa fa-cutlery"></i> SERVICIOS INCLUIDOS </strong></button>
+            <button id="servicios-button" data-toggle="modal" data-target="#serviciosmodal" class="btn section-left col-xs-12  col-sm-12 col-md-12 col-lg-12 accesos-button" style="text-align: left; padding: 10px!important; " ><strong> <i class="fa fa-cutlery"></i> <?=$resumen_evento["servicios"]?>  SERVICIOS INCLUIDOS  </strong></button>
         </div> 
         <!--Termina servicios button-->
 
     <!--Social media  button-->    
         <div class="panel">
-            <button id="social-button" class="btn blue-col-enid col-xs-12  col-sm-12 col-md-12 col-lg-12 accesos-button" style="text-align: left; padding: 10px!important; " >
+            <button id="social-button" class="btn section-left col-xs-12  col-sm-12 col-md-12 col-lg-12 accesos-button" style="text-align: left; padding: 10px!important; " >
               <strong> <i class="fa fa-flag"></i> SOCIAL </strong>
             </button>
             
@@ -345,7 +348,7 @@
     <!--Termina social media  button-->
     <!--Temática ******************************************** Temática **************+-->
         <div class="panel" >
-            <button id="tematica-button" class="btn blue-col-enid col-xs-12  col-sm-12 col-md-12 col-lg-12 tematica-button" style="text-align: left; padding: 10px!important; " >
+            <button id="tematica-button" class="btn section-left col-xs-12  col-sm-12 col-md-12 col-lg-12 tematica-button" style="text-align: left; padding: 10px!important; " >
               <strong> <i class="fa fa-tree"></i> TEMÁTICA </strong>
 
             </button>            
@@ -365,8 +368,17 @@
         
 
                         <div class="panel">
-                                <header class="panel-heading" style="background: #074456;">
-                                  <div class="numero_escenarios" id="numero_escenarios"></div>                                  
+                                <header class="panel-heading" style="background: #000; color: white;">
+
+
+                                    <div class="numero_escenarios" id="numero_escenarios"></div>                                 
+                                  
+                                    
+                                    <i class="fa fa-play-circle"></i>
+<span>
+ Artistas </span> <?=$resumen_evento["artistas"];?>
+
+                                  
                                     <span class="tools pull-right">
                                         <a class="fa  fa-caret-down" href="javascript:;"></a>                                        
                                      </span>
@@ -762,6 +774,7 @@
         <p>Da click en tu plantilla  para cargar tu descripción, los cambios se verán reflejados automáticamente en la sección, descripción del evento. </p>
       </div>            
       <div class="modal-body">    
+
                 
         <div class='panel'>
           <?=$plantillas_descripcion;?>                                    
@@ -1036,3 +1049,9 @@ role="dialog" aria-labelledby="basicModal" aria-hidden="true">
 
 
      
+<style type="text/css">
+.section-left{
+  background: #1C84A7;
+  color: white;
+}
+</style>

@@ -1,9 +1,15 @@
-<?=ini_set('display_errors', '1');?>
+|<?=ini_set('display_errors', '1');?>
 <div class='col-lg-1'>
-  <strong id='img-button-more-imgs' data-toggle="modal" data-target="#modal-img-escenario-principal"  >
+    <strong id='img-button-more-imgs' data-toggle="modal" data-target="#modal-img-escenario-principal"  >
         <i class="fa fa-plus-circle fa-5x"></i>                            
         <span style='color:white;'>Cargar Imagenes</span>
-        </strong>
+    </strong>
+    <strong>
+        <a href="<?=base_url('index.php/escenario/inevento')?>/<?=$id_escenario;?>/<?=$data_escenario['idevento'];?> " style='color:black;'>
+        <i class="fa fa-arrow-circle-o-right fa-5x"></i>        
+        </a>
+    </strong>
+
 </div>
 <div class='col-lg-9'>
 <div class="center-block">
@@ -13,6 +19,7 @@
             <?=$slider_principal_escenario;?>                                
         </div>
          <div class='row'>
+
       
     </div>
    
@@ -126,7 +133,11 @@
 
 
 <div class='col-lg-2'>
-                                    
+        
+        
+        
+                
+                                  
         <div class="row state-overview">
                         <?=$otros_escenarios?>        
         </div>
@@ -267,7 +278,7 @@
 
 <!---->
 <div class="modal fade" id="modal_link_sound" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
-    <div class="modal-dialog">
+    <div class="modal-dialog">dinamic_artista_sound
         <div class="modal-content">
             <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
@@ -275,12 +286,15 @@
             </div>
             <div class="modal-body">    						
 								<div class="col-md-12">
+                                    
+
                                     <form role="form" id="form-arista-social-sound" class="form-inline" action="<?=base_url('index.php/api/escenario/escenario_artista_social/format/json/')?>">
                                         <div class="input-group input-group-sm m-bot15">
 			                                <span class="input-group-addon">URL de algún track de sound cloud</span>
-			                                <input name="url_sound"  id="url_sound" class="form-control" placeholder="" type="url" required>
+			                                <input name="url"  id="url_sound" class="form-control" placeholder="" type="url" required>
 			                            </div>
 
+                                        <input type='hidden' id='dinamic_artista_sound' name='dinamic_artista_sound'> 
                                         <div class='response-sound' id='response-sound' ></div>
                                         <button class="btn btn-primary pull-left" type="submit">registrar</button>
                                     </form>
@@ -288,6 +302,42 @@
 
             </div>
             <div class="modal-footer">            	
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>                
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+<div class="modal fade" id="modal_nota" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h4 class="modal-title" id="myModalLabel">Nota del artista </h4>
+            </div>
+            <div class="modal-body">                            
+                                <div class="col-md-12">
+
+                                    <form  id="form-arista-nota"  action="<?=base_url('index.php/api/escenario/escenario_artista_social/format/json/')?>">
+                                        <div class="col-md-12">
+                                            <label for="nota_artista" class="control-label col-lg-12">Nota para el públic</label>
+                                            <textarea class="form-control" id="nota_artista" name="nota_artista" required=""></textarea>
+                                            <input type='hidden' name='idartistanota' id="idartistanota" >
+                                            <button class="btn btn-primary pull-left" type="submit">Actualizar</button>
+                                            <span id="response_nota" class='response_nota'></span>
+                                        </div>
+                                    </form>
+
+                                </div>
+
+            </div>
+            <div class="modal-footer">              
                 <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>                
             </div>
         </div>
@@ -319,7 +369,9 @@
                                     <form role="form" id="form-arista-social-youtube" class="form-inline" action="<?=base_url('index.php/api/escenario/escenario_artista_social/format/json/')?>">
                                         <div class="input-group input-group-sm m-bot15">
 			                                <span class="input-group-addon">URL video de youtube</span>
-			                                <input name="url_youtube"  id="url_youtube" class="form-control" placeholder="" type="url" required>
+			                                <input  id="url_youtube" class="form-control" placeholder="" type="url" required>
+                                            <input type='hidden' id='dinamic_artista_youtube' name='dinamic_artista_sound'> 
+
 			                            </div>
 
                                         <div class='response_youtube' id='response_youtube'></div>

@@ -72,6 +72,81 @@ if(!function_exists('invierte_date_time')){
 		return $result;
 
 	}
+
+
+	/**/
+
+	function get_info_artistas_escenario_user($data){
+
+		$article_artista ="";
+		foreach ($data as $row) {
+
+
+			$idescenario = $row["idescenario"];        
+			$idartista = $row["idartista"];          
+			$fecha_registro = $row["fecha_registro"];     
+
+			$hora_inicio = $row["hora_inicio"];        
+			$hora_termino = $row["hora_termino"];       
+
+			$url_social_youtube = $row["url_social_youtube"]; 
+			$url_sound_cloud = $row["url_sound_cloud"];    
+			$status_confirmacion = $row["status_confirmacion"];
+			$nombre_artista   = $row["nombre_artista"];
+			$nota = $row["nota"];
+			$img  =   $row["base_path_img"] .  $row["nombre_imagen"];
+
+			$dinamic_section =  '';
+			if ($url_sound_cloud != null  &&  strlen($url_sound_cloud)> 10 ) {
+				
+
+				$dinamic_section =  '<div class="col-md-6">
+										<div class="embed-responsive embed-responsive-16by9">
+										<iframe class="embed-responsive-item" src="'.$url_sound_cloud.'"></iframe>
+										</div>
+									</div>';
+			}else{
+
+				$dinamic_section = '<div class="col-md-6">
+										<div class="overlay-container">
+											<img src="'.base_url($img).'" alt="">
+											<a class="overlay-link" href="blog-post.html"><i class="fa fa-link"></i></a>
+										</div>
+									</div>';
+			}
+			
+			$article_artista .= '<article class="blogpost">
+								<div class="row grid-space-10">
+									
+									'. $dinamic_section  .'
+									<div class="col-md-6">
+										<header>
+											<h2><a href="blog-post.html">'. $nombre_artista   .'</a></h2>
+											<div class="post-info">
+												<span class="post-date">
+													<i class="fa fa-clock-o"></i>
+													<span class="day">'.$hora_inicio .'</span>
+													<span class="month">a '. $hora_termino.'</span>
+												</span>
+												 <a href="'. $url_social_youtube .'"><span class="submitted"><i class="fa fa-youtube-play"></i> </span></a>
+												<a href="'. $url_sound_cloud .'"><span class="comments"><i class="fa fa-play"></i> </span></a>
+											</div>
+										</header>
+										<div class="blogpost-content">
+											<p>'. $nota .'</p>
+										</div>
+									</div>
+								</div>
+								<footer class="clearfix">
+									
+									
+								</footer>
+							</article>';
+
+			
+		}
+		return $article_artista;
+	}
 	/**/
 	function get_artistas_default_template($artistas_array){
 
@@ -176,6 +251,9 @@ if(!function_exists('invierte_date_time')){
                                         	<i id="'.$id_artista.'" class="remove-artista fa fa-minus-circle"></i>                                        	
                                         	<a href="" data-toggle="modal" data-target="#modal_link_youtube" class="artista_yt" id="'.$id_artista.'"> <i class="artista_yt fa fa-youtube-play" id="'.$id_artista.'" ></i></a>
                                         	<a href="" data-toggle="modal" data-target="#modal_link_sound" class="artista_sound" id="'.$id_artista.'">  <i class="artista_sound fa fa-play-circle" id="'.$id_artista.'" ></i></a>
+                                        	<a href="" data-toggle="modal" data-target="#modal_nota" class="artista_nota" id="'.$id_artista.'">
+                                        	  <i class="artista_nota fa fa-file-text-o" id="'.$id_artista.'" ></i></a>
+                                        	
                                             	
                                         		
 

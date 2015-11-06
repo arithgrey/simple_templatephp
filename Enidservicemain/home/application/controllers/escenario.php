@@ -105,24 +105,28 @@ class Escenario  extends CI_Controller {
 
 
 
+
     /**************************Termina Configuracion del escenario avanzado **************++*/
 	function inevento($id_escenario , $id_evento){
 
-		$dataevent = $this->eventmodel->getEventbyid($id_evento);    
-        
+		$dataevent = $this->eventmodel->getEventbyid($id_evento);            
         $data = $this->validate_user_session_event("Escenarios" , $dataevent[0]["status"]);
-        $data["evento"] =  $dataevent[0];
-        
-        
+        $data["evento"] =  $dataevent[0];    
 
         $artistas_array = $this->escenarioartistamodel->get_artistas_inevent($id_escenario);
         $escenariodb= $this->escenariomodel->get_escenariobyId($id_escenario);
-        $data["escenario"] =$escenariodb[0]; 
+        $data["escenario"] =$escenariodb[0];                 
+
+        $img_data = $this->img_model->get_imgs_escenario($id_escenario);
+        $data["slider_principal_escenario"] =  get_slider_img($img_data);
+
         $list_escenarios = $this->escenariomodel->get_escenarios_byidevent_menosuno($id_evento , $id_escenario);
         $data["otros_escenarios"]= list_resum_escenarios($list_escenarios, $id_evento, 200);
         $data["generos_tags"] = get_generos( $this->escenariomodel->get_generos($id_escenario, $id_evento) );
 
+
         $data["artitas"]= get_artistas_default_template($artistas_array);
+        $data["artistas_info"] =  get_info_artistas_escenario_user($artistas_array);
         $this->dinamic_view_event('escenarios/principal_escenario' , $data);
         
 	}

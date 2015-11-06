@@ -74,7 +74,10 @@ class Eventos extends CI_Controller{
                 }
 
                 
+                /**/
+                $data["resumen_evento"] =   $this->eventmodel->get_resum_by_id_event($id_evento)[0];
                 /*slider*/
+
 
                 $data_img_evento = $this->eventmodel->get_img_evento($id_evento);
                 $data["slider_principal_evento"] =  get_slider_img_evento($data_img_evento);
@@ -222,10 +225,8 @@ function accesosalevento($id_evento , $status){
                 $data["servicios_evento"] = list_services_default_view($array_servicios_includos); 
                 $data["idevento"] = $id_evento;
 
-
-
-
-                $data["slider_evento_principal"]= get_slider_principal_evento($this->eventmodel->get_img_evento($id_evento));
+                $resumen_evento =  $this->eventmodel->get_resum_by_id_event($id_evento);
+                $data["slider_evento_principal"]= get_slider_principal_evento($this->eventmodel->get_img_evento($id_evento) , $dataevent[0]  , $list_generosdb , $array_servicios_includos , $resumen_evento);
                                     
                 $this->show_data_event($data, 'eventos/previsualizarevent'  );   
                 

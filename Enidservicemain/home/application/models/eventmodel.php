@@ -6,6 +6,34 @@ function __construct(){
         $this->load->database();
 }
 
+
+
+function get_resum_by_id_event($id_evento){
+	
+	$query_procedure = "call data_event_public($id_evento)";	
+	$this->db->query($query_procedure);
+
+	$query_get ="
+select ee.* , ea. artistas , ep.evento_punto_venta, es.generos_musicales, eserv.servicios , va.accesos
+from    v_eventos_escena ee 
+left outer join v_escenarios_artistas_e ea  on 
+ee.idevento  =   ea.idevento			
+left outer join v_evento_punto_v ep 
+on ee.idevento = ep.idevento	
+left outer join  v_evento_sound es 
+on ee.idevento = es.idevento 
+left outer join v_event_serv eserv 
+on  ee.idevento = eserv.idevento
+left outer join v_accesos va 
+on ee.idevento = va.idevento 
+ 
+";
+
+	$result = $this->db->query($query_get);
+	return $result->result_array();
+
+}
+
 /**/
 function get_img_evento($id_evento){
 

@@ -24,9 +24,9 @@ function nuevo( $nombre , $evento ,  $idempresa  ){
 }	
 
 function get_escenarios_byidevent($id_evento){
-	$query_select ="select e.idescenario ,  e.descripcion  as descripcion_escenario , 
-e.nombre, e.tipoescenario, e.portada_escenario ,  
-count(a.idartista) as num_artistas , e.* ,  ea.* , i.* 
+
+	$query_select ="select e.* , e.idescenario id_escenario,  e.descripcion  as descripcion_escenario , 
+count(a.idartista) as num_artistas  ,  ea.* , i.* 
 from escenario as e
 left outer join escenario_artista as ea 
 on e.idescenario = ea.idescenario and ea.url_sound_cloud is not null 
@@ -36,9 +36,8 @@ left outer join imagen_escenario ie on
 e.idescenario  =  ie.id_escenario 
 left outer join  imagen i on 
 ie.id_imagen =  i.idimagen 
-where e.idevento = '".$id_evento."'
+where e.idevento = '". $id_evento ."'
 group by e.idescenario order by tipoescenario  desc
-
 ";
 
 	$result= $this->db->query($query_select);
@@ -140,13 +139,23 @@ function get_escenariobyId($id_escenario){
 }
 /*Todos los escenarios menos uno*/
 function get_escenarios_byidevent_menosuno($id_evento, $id_escenario){
-	$query_select ="select e.idescenario , SUBSTRING( e.descripcion , 1,  135 ) 
-	as descripcion_escenario ,  e.nombre, e.tipoescenario, e.portada_escenario ,   
-	count(a.idartista) as num_artistas from escenario
-	as e left outer join escenario_artista as ea  on e.idescenario = ea.idescenario 
-	left outer join artista as a  
-	on ea.idartista = a.idartista where e.idevento = '". $id_evento ."' and
-	e.idescenario != '". $id_escenario ."' group by e.idescenario order by tipoescenario  desc";
+	
+
+	$query_select ="select e.idescenario id_escenario,  e.descripcion  as descripcion_escenario , 
+e.nombre, e.tipoescenario, e.portada_escenario ,  
+count(a.idartista) as num_artistas , e.* ,  ea.* , i.* 
+from escenario as e
+left outer join escenario_artista as ea 
+on e.idescenario = ea.idescenario and ea.url_sound_cloud is not null 
+left outer join artista as a 
+on ea.idartista = a.idartista
+left outer join imagen_escenario ie on 
+e.idescenario  =  ie.id_escenario 
+left outer join  imagen i on 
+ie.id_imagen =  i.idimagen 
+where e.idevento = '".$id_evento."' and e.idescenario != '". $id_escenario ."'
+group by e.idescenario order by tipoescenario  desc
+";
 
 	$result= $this->db->query($query_select);
 	return $result-> result_array();
@@ -175,7 +184,6 @@ function get_generos($id_escenario, $id_evento){
 
 
 function record_url_artista($id_escenario , $id_artista , $url , $social ){
-	
 	$query_update ="";	
 	if ($social == "youtube") {
 
@@ -183,10 +191,17 @@ function record_url_artista($id_escenario , $id_artista , $url , $social ){
 	}else{
 		$query_update ="update escenario_artista set url_sound_cloud = '".$url."' WHERE idescenario = '".$id_escenario."'  AND idartista = '".$id_artista."'  ";	
 	}
-
-	
 	return  $this->db->query($query_update);
 }
 
+
+
+/**/
+function update_nota_escenario_artista($param){
+	$query_update =  "update escenario_artista set nota ='". $param["nota_artista"] ."' where idartista = '". $param["artista"] ."' and  idescenario = '". $param["escenario"] ."'  "; 
+	return  $this->db->query($query_update);
+	
+	
+}
 /*Termina modelo */
 }
