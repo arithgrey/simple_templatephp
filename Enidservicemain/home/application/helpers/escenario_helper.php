@@ -55,7 +55,7 @@ function list_resum_escenarios($array_escenario, $id_evento , $limit_text, $back
                                                 <span class="comments"><i class="icon-chat"></i> <a style="color:#1DB3BF !important;"  href="#">'. $row["num_artistas"] .' Artistas</a></span>
                                             </div>
                                         </header>
-                                        <div class="blogpost-content">
+                                        <div class="">
                                             <p>'.substr( $descripcion , 0 , $limit_text )  .'</p>
                                         </div>
                                     </div>

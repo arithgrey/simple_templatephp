@@ -1,60 +1,43 @@
 <script type="text/javascript" src="<?=base_url('application/js/usuarios/principal.js')?>"></script>
 
-<div class="container">
+
+
+<div class='print-section' id="print-section">
+<div class="container" >
     <div class="row">
-        <div class="center-block" id='resumen-section'>
+        <div class="center-block" >
+
         <?=$resumen_usuarios;?>
         </div>
     </div>
 </div>    
 
-<div class='row'>
     <div class="col-xs-12  col-sm-12 col-md-12 col-lg-12 centered">
-
-
-
         <div class="container">
         <div class="row">
         <div class="center-block">    
             <button id="nuevo-contacto-button" type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal">
                 + nuevo integrante
-            </button>  
+            </button>              
             <div class="input-group pull-right col-md-3">
                 <div class="input-group-addon">Miembro de la cuenta </div>
                 <input list="integrantes-list" id="integrantes-l" class='integrantes-l form-control' >    
                 <?=$integrantes_filtro;?>        
             </div>                
-
-
             <div class='integrantes-table-info' id="integrantes-table-info">
                 <br>
-                <?=$integrantes;?>                             
+                <?=$integrantes;?>                                             
+                
             </div>
-
-
-
+            <form action="<?=base_url('index.php/excel_export')?>" method="get"  id="FormularioExportacion">
+                             <button class='botonExcel btn btn-info pull-right col-md-2 '  > Exportar a Excel <i class="fa fa-file-pdf-o"></i> </button>  
+                            <input type="hidden" id="datos_a_enviar" name="datos_a_enviar" />
+            </form>
         </div>
         </div>            
         </div>         
-
-
-        
-        
-
-        
-
-
-
-
-
-
-
     </div>
-</div><!--Termina row-->
-
-
-
-
+</div>
 
 
 
@@ -195,7 +178,7 @@
                         <button class="btn btn-info ">
                                 Perfiles del sistema
                         </button>        
-
+                        
 
 
                         <br>

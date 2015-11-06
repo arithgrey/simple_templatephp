@@ -270,3 +270,9 @@ function eliminar_data_test(url , data_send ){
 	   		alert("falla al intentar actualizar");
 	});
 }
+
+function exporta_excel(){
+	
+    $("#datos_a_enviar").val( $("<div>").append( $("#print-section").eq(0).clone()).html());
+    $("#FormularioExportacion").submit();
+}

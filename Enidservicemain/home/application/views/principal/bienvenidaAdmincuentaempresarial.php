@@ -1,5 +1,5 @@
 
-<div class="container" id='contenedor-time'>
+<div  class="container" id='contenedor-time' >
     
     <ul class="timeline">
         <li id='panel-eventos'>

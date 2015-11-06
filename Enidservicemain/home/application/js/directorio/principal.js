@@ -14,7 +14,7 @@ $(document).on("ready", function(){
 	});
 
 	$("#form-filtro").submit(load_contactos_dinamic);
-
+	$(".botonExcel").click(exporta_excel);
 
 
 });

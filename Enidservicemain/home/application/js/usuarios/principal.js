@@ -11,6 +11,10 @@ $(document).on("ready" , function(){
 
     });    
 
+
+    $(".botonExcel").click(exporta_excel);
+    
+
 });
 
 /*Carga los usuarios de la cuenta*/
@@ -93,6 +97,11 @@ function load_resumen_usuarios(){
         alert("Error");
     });
 
+}
+function exporta_excel(){
 
 
+
+    $("#datos_a_enviar").val( $("<div>").append( $("#print-section").eq(0).clone()).html());
+    $("#FormularioExportacion").submit();
 }

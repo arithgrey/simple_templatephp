@@ -4,7 +4,7 @@ $(document).on("ready", function(){
 		registra_contenido("#new-contenido-form" , "restricciones");
 		return false;
 	});
-	
+	$(".botonExcel").click(exporta_excel);
 	load_contenidos_templ_data( 1 , "list-templ-descripcion" );
 	$(".delete_contenido_templ").click(delete_contenido);
 	$("#form-articulo-permitido").submit(record_articulo_permitido);	

@@ -5,6 +5,7 @@ $(document).on("ready", function(){
 	$(".contactos").click(update_contactos_in_punto_venta);
 	$(".delete-punto-venta").click(delete_punto_venta);
 
+	$(".botonExcel").click(exporta_excel);
 		$(".img_punto_venta").click(function(e){
 
 								

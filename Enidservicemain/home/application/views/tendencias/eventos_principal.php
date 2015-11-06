@@ -1,14 +1,15 @@
 <link rel="stylesheet" type="text/css" href="<?=base_url('application/css/eventos/edicion.css')?>">
 <link rel="stylesheet" type="text/css" href="<?=base_url('application/js/js/bootstrap-datepicker/css/datepicker-custom.css')?>" />
-
+<script type="text/javascript" src="<?=base_url('application/js/tendencias/principal_funnel.js')?>"></script>
 
 <div class='row'>
 	<div class='col-lg-2'></div>
 					<div class='col-lg-8'>
+
 					<form method="POST" class="update-fecha-evento-form" id="update-fecha-evento-form">
 				                    <input name="update_evento" id="update_evento" type="hidden">
 				                    <div class="input-group">
-				                      <table>
+				                      <table class='table' >
 				                        <tr>
 				                          <td>
 				                            <div data-date-viewmode="years" data-date-format="yyyy-mm-dd" data-date="2012-02-12" class="input-append date dpYears">
@@ -37,8 +38,19 @@
 </div>
 </div>
 
-
 <div class='row'>
+
+	<div class='col-lg-5'></div>
+   <form action="<?=base_url('index.php/excel_export')?>" method="get"  id="FormularioExportacion">
+			<button class='botonExcel btn btn-info  col-lg-2 '  > Exportar a Excel <i class="fa fa-file-pdf-o"></i> </button>  
+			<input type="hidden" id="datos_a_enviar" name="datos_a_enviar" />
+    </form>
+    <div class='col-lg-5'></div>
+</div>    
+<br>
+    
+<div class='row' id='print-section'>
+	
 	<div class='col-lg-2'></div>
 	<div class='col-lg-8'>
 	<?=$funel?>

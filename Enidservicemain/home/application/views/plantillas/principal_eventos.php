@@ -8,6 +8,9 @@
 </a>
 
 
+
+
+
 <div class="container" id='content-section'>
 	<div class="row">
 		<section>
@@ -57,11 +60,15 @@
 
                 
                 <div class="container">
-                    <div class="row" >
+                    <div class="row"  id="print-section">
                         <div id='resumen-plantilla'>
                             <?=$resumen_teplates;?>
                         </div>
                     </div>
+                    <form action="<?=base_url('index.php/excel_export')?>" method="get"  id="FormularioExportacion">
+                            <button class='botonExcel btn btn-info pull-right col-md-2 '  > Exportar a Excel <i class="fa fa-file-pdf-o"></i> </button>  
+                            <input type="hidden" id="datos_a_enviar" name="datos_a_enviar" />
+                    </form>
                 </div>
                 
                 <div class="tab-content">

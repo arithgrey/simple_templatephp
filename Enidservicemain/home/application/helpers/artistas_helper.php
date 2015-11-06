@@ -110,7 +110,7 @@ if(!function_exists('invierte_date_time')){
 				$dinamic_section = '<div class="col-md-6">
 										<div class="overlay-container">
 											<img src="'.base_url($img).'" alt="">
-											<a class="overlay-link" href="blog-post.html"><i class="fa fa-link"></i></a>
+											<a class="overlay-link" href=""><i class="fa fa-link"></i></a>
 										</div>
 									</div>';
 			}
@@ -121,7 +121,7 @@ if(!function_exists('invierte_date_time')){
 									'. $dinamic_section  .'
 									<div class="col-md-6">
 										<header>
-											<h2><a href="blog-post.html">'. $nombre_artista   .'</a></h2>
+											<h2><a href="">'. $nombre_artista   .'</a></h2>
 											<div class="post-info">
 												<span class="post-date">
 													<i class="fa fa-clock-o"></i>

@@ -16,13 +16,18 @@
 
 
 
-<div class="container">
-    <div class="row">
+<div class="container" >
+    <div class="row print-section" id="print-section">
         <div class="center-block" id='resumen-contactos'>
         <div ><?=$resumen;?></div>
         </div>
     </div>
+       <form action="<?=base_url('index.php/excel_export')?>" method="get"  id="FormularioExportacion">
+                <button class='botonExcel btn btn-info pull-right col-md-2 '  > Exportar a Excel <i class="fa fa-file-pdf-o"></i> </button>  
+                <input type="hidden" id="datos_a_enviar" name="datos_a_enviar" />
+        </form>
 </div>    
+
 
 <div class="container">
     <div class="row">
