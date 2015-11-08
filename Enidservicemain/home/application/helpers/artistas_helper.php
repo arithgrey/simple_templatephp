@@ -185,10 +185,7 @@ if(!function_exists('invierte_date_time')){
 					<div class="panel">
                         <header class="panel-heading">
                             '.$title_panel .'
-                            <span class="tools pull-right">
-                                <a href="javascript:;" class="fa fa-chevron-down"></a>
-                                
-                             </span>
+                            
                         </header>
 
 
@@ -232,14 +229,14 @@ if(!function_exists('invierte_date_time')){
 
 
 
-		               	$artistas_in_evento .='<div data-toggle="modal" data-target="#modal-img-artista-evento" class="prog-avatar"> 						
+		               	$artistas_in_evento .='<div  data-toggle="modal" data-target="#modal-img-artista-evento" class="prog-avatar" title="Actualizar la imagen del artista"> 						
 						                            
 						                            <img  class="img-artista-evento thumb" id="'.$id_artista.'" src="'.$img .'" alt="">
 												</div>';
 
 
 				}else{
-						$artistas_in_evento .='<div  data-toggle="modal" data-target="#modal-img-artista-evento" class="prog-avatar"> 												                            						                            
+						$artistas_in_evento .='<div title="Cargar imagen del artista" data-toggle="modal" data-target="#modal-img-artista-evento" class="prog-avatar"> 												                            						                            
 						                            <i class="img-artista-evento thumb fa fa-cloud-upload fa-3x" id="'.$id_artista.'"  ></i>
 												</div>';
 				}
@@ -248,11 +245,12 @@ if(!function_exists('invierte_date_time')){
 
                 $artistas_in_evento.='<div class="details">
                                         <div class="title">
-                                        	<i id="'.$id_artista.'" class="remove-artista fa fa-minus-circle"></i>                                        	
-                                        	<a href="" data-toggle="modal" data-target="#modal_link_youtube" class="artista_yt" id="'.$id_artista.'"> <i class="artista_yt fa fa-youtube-play" id="'.$id_artista.'" ></i></a>
-                                        	<a href="" data-toggle="modal" data-target="#modal_link_sound" class="artista_sound" id="'.$id_artista.'">  <i class="artista_sound fa fa-play-circle" id="'.$id_artista.'" ></i></a>
-                                        	<a href="" data-toggle="modal" data-target="#modal_nota" class="artista_nota" id="'.$id_artista.'">
-                                        	  <i class="artista_nota fa fa-file-text-o" id="'.$id_artista.'" ></i></a>
+                                        	<i id="'.$id_artista.'" class="remove-artista fa fa-minus-circle" title="Quitar del escenario" ></i>                                        	
+                                        	<a href="" title="Enlace algún  video del artista en youtube" data-toggle="modal" data-target="#modal_link_youtube" class="artista_yt" id="'.$id_artista.'"> <i class="artista_yt fa fa-youtube-play" id="'.$id_artista.'" ></i></a>
+                                        	<a href="" data-toggle="modal"  title="Enlace"  data-target="#modal_link_sound" class="artista_sound" id="'.$id_artista.'">  <i class="artista_sound fa fa-play-circle" id="'.$id_artista.'" ></i></a>
+                                        	<a href="" data-toggle="modal"  title="Mensaje del artista al público" data-target="#modal_nota" class="artista_nota" id="'.$id_artista.'">
+                                        	 	
+                                        	 	<i class="artista_nota fa fa-file-text-o" id="'.$id_artista.'" ></i></a>
                                         	
                                             	
                                         		
@@ -262,10 +260,10 @@ if(!function_exists('invierte_date_time')){
 	                                            	<ul class="revenue-nav">
 
 	                                            				                                        			                                        
-				                                        <li class=""><a class="artistas-inputs"  data-toggle="modal" data-target="#edit-nombre-artista"   id="'. $id_artista.'" >'. $nombre_artista .'</a>
+				                                        <li class=""><a class="artistas-inputs"  data-toggle="modal" data-target="#edit-nombre-artista"   title="artista" id="'. $id_artista.'" >'. $nombre_artista .'</a>
 				                                        
 				                                        </li>
-				                                        <li class="active"  data-toggle="modal" data-target="#edit-status-confirmacion" ><a class="status-confirmacion" id="'. $id_artista.'" >'. $status_confirmacion.'</a></li>
+				                                        <li class="active"  data-toggle="modal" data-target="#edit-status-confirmacion"  ><a class="status-confirmacion" id="'. $id_artista.'" >'. $status_confirmacion.'</a></li>
 				                                    </ul>
 			                                    </div>
 			                                    
@@ -279,7 +277,7 @@ if(!function_exists('invierte_date_time')){
 
 
 
-                                            <a href="" data-toggle="modal" data-target="#modal_record_horario">                                            
+                                            <a title="Horario que se presentará  el artista" href="" data-toggle="modal" data-target="#modal_record_horario">                                            
                                             <i class="fa fa-clock-o horario_artista" id="'.$id_artista.'">
                                             </i></a> Horario '.$horario.' 
                                             

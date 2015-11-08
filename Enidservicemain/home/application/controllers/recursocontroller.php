@@ -47,7 +47,7 @@ class Recursocontroller extends CI_Controller {
 	/**/
 	function informacioncuenta(){
 				
-			$data = $this->validate_user_sesssion("Mi cuenta");					
+			$data = $this->validate_user_sesssion("Pefil");					
 			$this->dinamic_view_event('micuenta/principal' , $data);				
 	}	
 

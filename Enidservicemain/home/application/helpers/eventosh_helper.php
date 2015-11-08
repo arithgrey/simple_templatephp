@@ -52,20 +52,20 @@ function get_paginarion_principal($limit_display){
 	$anterior = "";
 			switch ($limit_display) {
 				case 3:
-					$anterior = '<li class="active"><a href="'. base_url('index.php/inicio/eventos/') .'">3</a></li>
+					$anterior = '<li class="active" title="Mostrar"><a href="'. base_url('index.php/inicio/eventos/') .'">3</a></li>
                     <li><a href="'. base_url('index.php/inicio/eventos/10') .'">10</a></li>
                     <li><a href="'. base_url('index.php/inicio/eventos/50').'">50</a></li>                    
                     <li><a href="'. base_url('index.php/inicio/eventos/1000').'">TODOS</a></li>';
 					break;
 				case 10:
-					$anterior = '<li><a href="'. base_url('index.php/inicio/eventos/') .'">ANTERIOR</a></li>
+					$anterior = '<li title="Mostrar" ><a href="'. base_url('index.php/inicio/eventos/') .'">ANTERIOR</a></li>
 					<li><a href="'. base_url('index.php/inicio/eventos/') .'">3</a></li>
                     <li class="active"><a href="'. base_url('index.php/inicio/eventos/10') .'">10</a></li>
                     <li><a href="'. base_url('index.php/inicio/eventos/50').'">50</a></li>                    
                     <li><a href="'. base_url('index.php/inicio/eventos/1000').'">TODOS</a></li>';
 					break;
 				case 50:
-					$anterior = '<li><a href="'. base_url('index.php/inicio/eventos/10') .'">ANTERIOR</a></li>
+					$anterior = '<li title="Mostrar"><a href="'. base_url('index.php/inicio/eventos/10') .'">ANTERIOR</a></li>
 					<li ><a href="'. base_url('index.php/inicio/eventos/') .'">3</a></li>
                     <li><a href="'. base_url('index.php/inicio/eventos/10') .'">10</a></li>
                     <li class="active"><a href="'. base_url('index.php/inicio/eventos/50').'">50</a></li>                    
@@ -74,7 +74,7 @@ function get_paginarion_principal($limit_display){
 
 				break;
 				case 1000:
-					$anterior = '<li><a href="'. base_url('index.php/inicio/eventos/50') .'">ANTERIOR</a></li>
+					$anterior = '<li title="Mostrar" ><a href="'. base_url('index.php/inicio/eventos/50') .'">ANTERIOR</a></li>
 					<li ><a href="'. base_url('index.php/inicio/eventos/') .'">3</a></li>
                     <li><a href="'. base_url('index.php/inicio/eventos/10') .'">10</a></li>
                     <li ><a href="'. base_url('index.php/inicio/eventos/50').'">50</a></li>                    
@@ -297,7 +297,7 @@ function get_last_events_empresa($ultimos_eventos, $limit_text= 270 ,  $show_edi
 /*RETORNA LA PLANTILLA EN CASO DE QUE EL CLIENTE AÚN NO HAYA REGISTRADO EVENTOS */
 	function default_template_eventos(){
 					$elements = "
-								<div class='panel'>
+								<div class='panel' title='Ejemplo' >
                                     <div class='panel-body ' style='' >
                                         <div class='media blog-cmnt'>
                                                 <a href='javascript:;' class='pull-left'>

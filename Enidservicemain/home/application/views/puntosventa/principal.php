@@ -22,12 +22,12 @@
         <div class="center-block">
 
         
-        <button id="nuevo-contacto-button" type="button" class="btn btn-info" data-toggle="modal" data-target="#contact-modal">
-        <i class="fa fa-check"></i>Agregar punto de venta
+        <button id="nuevo-contacto-button" type="button" class="btn btn btn_nnuevo" data-toggle="modal" data-target="#contact-modal">
+        + Nuevo punto de venta
         </button>
         
 
-        <div class='pull-right'>
+        <div class='pull-right' title='Filtro criterio'>
             
             <div class="input-group">
                 <div class="input-group-addon">Estado</div>                
@@ -38,7 +38,7 @@
         </div>
 
 
-        <div class='pull-right'>
+        <div class='pull-right' title='Filtro criterio'>
 
             <div class="input-group">
                 <div class="input-group-addon">Punto de venta </div>

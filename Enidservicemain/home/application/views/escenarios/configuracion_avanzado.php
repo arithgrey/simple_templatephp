@@ -1,10 +1,10 @@
 |<?=ini_set('display_errors', '1');?>
 <div class='col-lg-1'>
-    <strong id='img-button-more-imgs' data-toggle="modal" data-target="#modal-img-escenario-principal"  >
+    <strong title='Cargar imagenes del escenario' id='img-button-more-imgs' data-toggle="modal" data-target="#modal-img-escenario-principal"  >
         <i class="fa fa-plus-circle fa-5x"></i>                            
-        <span style='color:white;'>Cargar Imagenes</span>
+        
     </strong>
-    <strong>
+    <strong title='Ver como el público'>
         <a href="<?=base_url('index.php/escenario/inevento')?>/<?=$id_escenario;?>/<?=$data_escenario['idevento'];?> " style='color:black;'>
         <i class="fa fa-arrow-circle-o-right fa-5x"></i>        
         </a>
@@ -30,7 +30,7 @@
 
 
 <div class='row'>
-        <h1 class='nombre-escenario-text'><?=$data_escenario["nombre"];?></h1>       
+        <h1  title='Actualizar nombre del escenario' class='nombre-escenario-text'><?=$data_escenario["nombre"];?></h1>       
         <div class="form-group">
             <div class='section-nombre-evento-in'>
                 <div class='input-group'>                    
@@ -45,7 +45,7 @@
 
     <div class="jumbotron">
         <h3><span class="label label-default">La experiencia </span></h3>
-    <p class='descripcion-escenario-text'>                        
+    <p  title='Actializar información' class='descripcion-escenario-text'>                        
         <?=$descripcion_escenario;?> 
     </p>
 
@@ -88,7 +88,7 @@
 	      </div>     
 	    </div>
 <!--*********************************************************************-->	    
-        <a href="" data-toggle="modal" data-target="#modal-date-escenario">
+        <a href="" data-toggle="modal" data-target="#modal-date-escenario" title='Fecha para éste escenario'>
             <div class='pull-right'>
             <i class="fa fa-calendar"></i>
             Presentación 
@@ -929,6 +929,7 @@
     display: none;
 }
 </style>
+
 
 
 

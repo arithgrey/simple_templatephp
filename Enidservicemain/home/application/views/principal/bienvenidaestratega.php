@@ -1,4 +1,5 @@
-<button class='btn btn-info' data-toggle="modal" data-target="#modal-nuevo-evento">+  Nuevo Evento <i class='fa fa-headphones'></i></button>
+
+<button class='btn btn btn_nnuevo' title='Registra un nuevo evento para el público' data-toggle="modal" data-target="#modal-nuevo-evento">+  Nuevo Evento <i class='fa fa-headphones'></i></button>
 <div class="modal fade" id="modal-nuevo-evento" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -166,11 +167,7 @@
                                     Últimos eventos anunciados                                     
                                     <?=$pagination_event;?>
                                     <span class="tools pull-right">                                        
-                                        <button class="btn btn-block btn-info ver-todos" type="button">                                           
-                                            <span class="pull-left"> 
-                                             <span class="">+ Ver todos </span> 
-                                            </span>                                                
-                                        </button>                                        
+                                        
                                         <a class="fa fa-chevron-down" href="javascript:;"></a>                                        
                                      </span>
                                 </header>                                

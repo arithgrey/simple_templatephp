@@ -1,3 +1,4 @@
+    
 <style type="text/css">
 .text-fecha-evento:hover{
   padding: 6px;
@@ -50,13 +51,14 @@
               <a class="fa  fa-caret-down" href="javascript:;"></a>
             </span>
             <a href="<?=base_url('index.php/eventos/visualizar')?>/<?=$evento;?>" class='pull-right'>
-                <button class="btn btn-primary" type="button"> Visualizar antes de publicar  </button>    
+                <button title='Lo que el mundo verá del evento' class="btn btn-primary" type="button"> Ver como el público  </button>    
 
               </a>
           </header>                          
           <!--Inicia  la seccion general del eveto -->
           <div class="panel-body" >        
-                <h2 class='nombre-evento-h1'><?=$data_evento['nombre_evento'];?></h2>
+                <h2  class='nombre-evento-h1'><?=$data_evento['nombre_evento'];?></h2>
+
                 <div class="form-group nombre" >
                   <input placeholder="Registra el nombre del evento" class="form-control"  type="text" value="<?=$data_evento['nombre_evento'];?>"  id="nombre-input" name='nombre-input' >
                 </div>
@@ -78,7 +80,7 @@
                         </div>
                     
                     <div class='row'>
-                        <strong id='img-button-more-imgs' data-toggle="modal" data-target="#modal-img-evento-section"  >
+                        <strong title='Cargar imagenes del evento' id='img-button-more-imgs' data-toggle="modal" data-target="#modal-img-evento-section"  >
                         <i class="fa fa-plus-circle fa-5x"></i>                            
                         <span style='color:white;'>Cargar Imagenes</span>
                         </strong>
@@ -125,7 +127,7 @@
                         <a href="#portlet_tab3" data-toggle="tab">
                         <i class="fa fa-exclamation-triangle"></i>Lo prohibido </a>
                       </li>
-                      <li class='permitidonow'>
+                      <li class='permitidonow' title='Lo que el cliente podrá acceder al evento'>
                         <a href="#portlet_tab2" data-toggle="tab">
                         <i class="fa fa-check permitidonow" ></i>Lo permitido </a>
                       </li>
@@ -134,7 +136,7 @@
                         <i class="fa fa-circle"></i>Políticas </a>
                       </li>                    
                       <li class="active">
-                        <a href="#portlet_tab4" data-toggle="tab">
+                        <a href="#portlet_tab4" data-toggle="tab" >
                          Evento </a>
                       </li>          
             </ul>
@@ -173,7 +175,7 @@
                       
                       <!--Lista de objetos permitidos -->
 
-                      <button class='btn btn-info articulos-permitidos-button'><i class='fa fa-caret-down'></i> Articulos permitidos</button>
+                      <button title='Lista de objetos permitidos' class='btn btn-info articulos-permitidos-button'><i class='fa fa-caret-down'></i> Articulos permitidos</button>
                       <div class='row' id='section-articulos-permitidos'>                                  
                           
                             <table class="table">
@@ -218,7 +220,7 @@
                 <h2>  La experiencia</h2>                
                   <!--Inicia Eslogan del evento-->
                   <div>
-                    <div class="form-group alert alert-info">                            
+                    <div class="form-group alert alert-info" title='Lema del evento'>                            
                       <i class="fa fa-flag"></i> Eslogan: <span class='eslogan-p' id='eslogan-p'> <?=valida_text_replace($data_evento["eslogan"],  "<i class='fa fa-space-shuttle'></i> Mensaje eslogan del evento" , "<i class='fa fa-space-shuttle'></i>  Eslogan del evento" );?> </span>                          
                       <input class="form-control eslogan-evento" id="eslogan-evento" name='eslogan-evento'  placeholder="Si es en méxico, estará lleno de colores" required>
                     </div>
@@ -243,13 +245,13 @@
                   </div> 
                   <!--Termina  descripcion del evento -->
                   <div>
-                  <button class='btn  btn-template' data-toggle="modal" data-target="#templa-descripcion-contenido" ><i class='fa fa-file-text-o'></i> Plantilla de descripciones</button>
-                  <button class='btn btn-info' id='generos_musicales_button'><i class='fa fa-caret-down'></i> <?=$resumen_evento["generos_musicales"]?> Géneros musicales</button>
+                  <button class='btn  btn-template' title='Éstas agilizan la redacción de la experiencia que vivirá el cliente en cada evento'  data-toggle="modal" data-target="#templa-descripcion-contenido" ><i class='fa fa-file-text-o'></i> Plantilla de descripciones</button>
+                  <button title='Asociar géneros musicales al evento' class='btn btn-info' id='generos_musicales_button'><i class='fa fa-caret-down'></i> <?=$resumen_evento["generos_musicales"]?> Géneros musicales</button>
                     
                    
 
 
-                   <div class="input-group">
+                   <div class="input-group" >
                     <div class="input-group-addon"> Género musical </div>
                     <input   placeholder="Genero musical"  id="genero-busqueda" class="genero-busqueda form-control" type="text">
                     
@@ -309,7 +311,8 @@
 
       <!--Accesos button-->    
         <div class="panel" >
-            <button id="accesos-button" data-toggle="modal" data-target="#accesosmodal" class="btn section-left col-xs-12  col-sm-12 col-md-12 col-lg-12 accesos-button" style="text-align: left; padding: 10px!important; " ><strong> <i class="fa fa-credit-card"></i> <?=$resumen_evento["accesos"]?>  ACCESOS AL EVENTO </strong>
+            
+            <button title='Registra el precio de los accesos al evento en sus diferentes etapas'  id="accesos-button" data-toggle="modal" data-target="#accesosmodal" class="btn section-left col-xs-12  col-sm-12 col-md-12 col-lg-12 accesos-button" style="text-align: left; padding: 10px!important; " ><strong> <i class="fa fa-credit-card"></i> <?=$resumen_evento["accesos"]?>  ACCESOS AL EVENTO </strong>
               <strong> , <?=$resumen_evento["evento_punto_venta"]?> PUNTOS DE VENTA </strong>
             </button>
         </div> 
@@ -318,13 +321,13 @@
 
         <!--Servicios button-->    
         <div class="panel" >
-            <button id="servicios-button" data-toggle="modal" data-target="#serviciosmodal" class="btn section-left col-xs-12  col-sm-12 col-md-12 col-lg-12 accesos-button" style="text-align: left; padding: 10px!important; " ><strong> <i class="fa fa-cutlery"></i> <?=$resumen_evento["servicios"]?>  SERVICIOS INCLUIDOS  </strong></button>
+            <button  title='Lo que el evento ofrece al cliente' id="servicios-button" data-toggle="modal" data-target="#serviciosmodal" class="btn section-left col-xs-12  col-sm-12 col-md-12 col-lg-12 accesos-button" style="text-align: left; padding: 10px!important; " ><strong> <i class="fa fa-cutlery"></i> <?=$resumen_evento["servicios"]?>  SERVICIOS INCLUIDOS  </strong></button>
         </div> 
         <!--Termina servicios button-->
 
     <!--Social media  button-->    
         <div class="panel">
-            <button id="social-button" class="btn section-left col-xs-12  col-sm-12 col-md-12 col-lg-12 accesos-button" style="text-align: left; padding: 10px!important; " >
+            <button title='Las redes sociales del evento'  id="social-button" class="btn section-left col-xs-12  col-sm-12 col-md-12 col-lg-12 accesos-button" style="text-align: left; padding: 10px!important; " >
               <strong> <i class="fa fa-flag"></i> SOCIAL </strong>
             </button>
             
@@ -367,7 +370,7 @@
     <!--end Temática ******************************************** End Temática **************+-->
         
 
-                        <div class="panel">
+                        <div class="panel" title='Los escenarios y artistas que se presentarán en el evento'>
                                 <header class="panel-heading" style="background: #000; color: white;">
 
 
@@ -502,87 +505,78 @@
     <div class="modal-content">      
       <div class="modal-header"><!--Inicia el header -->
         <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title"><i class="fa fa-money"></i> Ventas, promociones, preventas ... </h4>
-          <a href="<?=base_url('index.php/accesos/configuracionavanzada/1/')?>/<?=$evento;?>">">
-            <button class='btn btn-primary pull-right'>Avanzado </button>
-          </a>
+        <h4 class="modal-title"><i class="fa fa-money"></i> Ventas, promociones, preventas ... <span class='pull-right'>Evento <?=$fecha_evento;?></span></h4>
+          
       </div><!--Termina el header -->
   <div class="modal-body"><!-- dialog body -->           
 
-        <h4 class='fecha_edit' id='fecha_edit'>                    
-          <i class="fa fa-calendar"></i> Fecha del evento  <?=$fecha_evento;?>
-        </h4>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
          <!--************FORMULARIO DE REGISTRO   ****************-->  
-        <table class="table" >
+         
+
+
+         <div class='form-section-accesos'>
+
           <form class='form-accesos-modal' id="form-accesos-modal">
 
-            <input type="hidden" value="<?=$evento;?>" id="evaccesos"  class='evaccesos' name='evaccesos'>                                                      
-            <tr>
 
+                <input type="hidden" value="<?=$evento;?>" id="evaccesos"  class='evaccesos' name='evaccesos'>                                                                  
+                <div class='col-md-12'>
+                    <div class="input-group">                        
+                      <span class="input-group-addon">Acceso </span>
+                      <select class='form-control data-option-accesos' name='acceso-tipo-modal'></select>
+                    </div>
+                </div>
 
-              <td colspan='2'>   
-                <div class="input-group">                        
-                  <span class="input-group-addon">Acceso </span>
-                  <select class='form-control data-option-accesos' name='acceso-tipo-modal'></select>
-                </div>
-              </td>
-              <td>
-                <div class="input-group">
-                  <span class="input-group-addon">$ Precio </span>
-                  <input type="number" name='precio-acceso-modal' class="form-control">
-                  <span class="input-group-addon ">.00</span>
-                </div>
-              </td>
-            </tr>  
-            <tr>                                      
-              <td>
-                <div class="input-group" >
-                            <div data-date-viewmode="years" data-date-format="yyyy-mm-dd" data-date="2012-02-12" class="input-append date dpYears"  >
-                                  <input readonly="" value="2012-02-12" size="16" class="form-control"  name="nuevo_inicio_acceso" id="nuevo_inicio_acceso"  type="text"  >
-                                  <span class="input-group-btn add-on">
-                                   <button class="btn btn-primary" type="button"><i class="fa fa-calendar"></i></button>
-                                  </span>
-                            </div>                                          
-                </div>  
-              </td>
-              <td>
-                <div class="input-group" >
-                  <div data-date-viewmode="years" data-date-format="yyyy-mm-dd" data-date="2012-02-12" class="input-append date dpYears"  >
-                                    <input readonly="" value="2012-02-12" size="16" class="form-control"  name="nuevo_termino_acceso" id="nuevo_termino_acceso" type="text"  >
-                                    <span class="input-group-btn add-on">
-                                     <button class="btn btn-primary" type="button"><i class="fa fa-calendar"></i></button>
-                                    </span>
-                  </div>
-                </div>
-              </td>    
+                <div class='col-md-12'>
+                    <div class="input-group">
+                      <span class="input-group-addon">$ Precio </span>
+                      <input type="number" name='precio-acceso-modal' class="form-control">
+                      <span class="input-group-addon ">.00</span>
+                    </div>
+                </div>   
 
-               <td>
-                <button style="background:black !important" class="btn btn-primary pull-right" type="submit" id="nuevo-acceso">
+                
+                <div class='col-md-3'>
+                    <div class="input-group" >
+                                <div data-date-viewmode="years" data-date-format="yyyy-mm-dd" data-date="2015-02-12" class="input-append date dpYears"  >
+                                      <input readonly="" value="2015-02-12" size="16" class="form-control"  name="nuevo_inicio_acceso" id="nuevo_inicio_acceso"  type="text"  >
+                                      <span class="input-group-btn add-on">
+                                       <button class="btn btn-primary" type="button"><i class="fa fa-calendar"></i></button>
+                                      </span>
+                                </div>                                          
+                    </div>  
+                </div> 
+                
+                <div class='col-md-3'>
+                    <div class="input-group" >
+                      <div data-date-viewmode="years" data-date-format="yyyy-mm-dd" data-date="2015-02-12" class="input-append date dpYears"  >
+                                        <input readonly="" value="2015-02-12" size="16" class="form-control"  name="nuevo_termino_acceso" id="nuevo_termino_acceso" type="text"  >
+                                        <span class="input-group-btn add-on">
+                                         <button class="btn btn-primary" type="button"><i class="fa fa-calendar"></i></button>
+                                        </span>
+                      </div>
+                    </div>
+                </div>
+                 
+
+              <div class='col-md-3 pull-right'>
+                <button  class="btn btn-primary pull-right col-md-12" type="submit" id="nuevo-acceso">
                   <i class="fa fa-plus"></i>
                 </button>
-              </td>                        
-            </tr>
+              </div>
+
+            
             </form>
-        </table>  
+          </div>
+            
+        
+
+
+
+
+
+
+
     <!--************TERMINA FORMULARIO DE REGISTRO   ****************-->    
 
     <!--************INICIA LA LISTA DE PRECIOS DEL EVENTO ****************-->
@@ -639,7 +633,7 @@
       
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Servicios que incluirá en evento</h4>
+        <h4 class="modal-title">Servicios que incluirá el evento</h4>
       </div>            
       <div class="modal-body">    
                 
@@ -770,7 +764,7 @@
       
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Servicios que incluirá en evento</h4>
+        <h4 class="modal-title">Servicios que incluirá el evento</h4>
         <p>Da click en tu plantilla  para cargar tu descripción, los cambios se verán reflejados automáticamente en la sección, descripción del evento. </p>
       </div>            
       <div class="modal-body">    
@@ -827,8 +821,8 @@
                           <td>
 
 
-                            <div data-date-viewmode="years" data-date-format="yyyy-mm-dd" data-date="2012-02-12" class="input-append date dpYears"  >
-                                  <input readonly="" value="2012-02-12" size="16" class="form-control"  id="update_inicio" name="update_inicio"   type="text"  >
+                            <div data-date-viewmode="years" data-date-format="yyyy-mm-dd" data-date="2015-02-12" class="input-append date dpYears"  >
+                                  <input readonly="" value="2015-02-12" size="16" class="form-control"  id="update_inicio" name="update_inicio"   type="text"  >
                                   <span class="input-group-btn add-on">
                                    <button class="btn btn-primary" type="button"><i class="fa fa-calendar"></i></button>
                                   </span>
@@ -847,8 +841,8 @@
 
                           <td>
 
-                            <div data-date-viewmode="years" data-date-format="yyyy-mm-dd" data-date="2012-02-12" class="input-append date dpYears"  >
-                                  <input readonly="" value="2012-02-12" size="16" class="form-control" id="update_termino" name="update_termino"  type="text"  >
+                            <div data-date-viewmode="years" data-date-format="yyyy-mm-dd" data-date="2015-02-12" class="input-append date dpYears"  >
+                                  <input readonly="" value="2015-02-12" size="16" class="form-control" id="update_termino" name="update_termino"  type="text"  >
                                   <span class="input-group-btn add-on">
                                    <button class="btn btn-primary" type="button"><i class="fa fa-calendar"></i></button>
                                   </span>

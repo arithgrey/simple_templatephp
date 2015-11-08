@@ -16,10 +16,10 @@
         <div class="container">
         <div class="row">
         <div class="center-block">    
-            <button id="nuevo-contacto-button" type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal">
+            <button id="nuevo-contacto-button" type="button" class="btn btn btn_nnuevo" title='Registra un nuevo integrante a la cuenta' data-toggle="modal" data-target="#myModal">
                 + nuevo integrante
             </button>              
-            <div class="input-group pull-right col-md-3">
+            <div title='Filtrar por nombre' class="input-group pull-right col-md-3">
                 <div class="input-group-addon">Miembro de la cuenta </div>
                 <input list="integrantes-list" id="integrantes-l" class='integrantes-l form-control' >    
                 <?=$integrantes_filtro;?>        
@@ -175,9 +175,6 @@
 
 
                     
-                        <button class="btn btn-info ">
-                                Perfiles del sistema
-                        </button>        
                         
 
 

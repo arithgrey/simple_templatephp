@@ -9,8 +9,6 @@
 
 
 
-
-
 <div class="container" id='content-section'>
 	<div class="row">
 		<section>
@@ -20,31 +18,31 @@
                 <ul class="nav nav-tabs" role="tablist">
 
                     
-                    <li role="presentation" class="restriccion-section disabled">
-                        <a data-original-title="Step 2" href="#step2" data-toggle="tab" aria-controls="step2" role="tab" title="">
+                    <li role="presentation" class="restriccion-section"  >
+                        <a data-original-title="Step 2" href="#step2" data-toggle="tab" aria-controls="step2" role="tab" title='Registra las restricciones más comunes que la organización exige a sus clientes en los eventos'>
                             <span class="round-tab">
                                 <i class="glyphicon fa fa-exclamation-triangle"></i>
                             </span>
                         </a>
                     </li>
 
-                    <li role="presentation" class="disabled">
-                        <a data-original-title="Step 3" href="#step3" data-toggle="tab" aria-controls="step3" role="tab" title="">
+                    <li role="presentation" >
+                        <a data-original-title="Step 3" href="#step3" data-toggle="tab" aria-controls="step3" role="tab" title="Registra los articulos que usualmente la empresa permite ingresar a los clientes en los eventos" >
                             <span class="round-tab">
                                 <i class="glyphicon fa fa-check"></i>
                             </span>
                         </a>
                     </li>
 
-                    <li role="presentation" class="politicas-section disabled">
-                        <a data-original-title="Complete" href="#complete" data-toggle="tab" aria-controls="complete" role="tab" title="">
+                    <li role="presentation" class="politicas-section" >
+                        <a data-original-title="Complete" href="#complete" data-toggle="tab" aria-controls="complete" role="tab" title='Redacta las políticas frecuentes de los eventos'>
                             <span class="round-tab">
                                 <i class="glyphicon fa fa-circle"></i>
                             </span>
                         </a>
                     </li>
-                    <li role="presentation" class="active">
-                        <a data-original-title="Step 1" href="#plantillas_descripciones" data-toggle="tab" aria-controls="plantillas_descripciones" role="tab" title="">
+                    <li role="presentation" class="active" >
+                        <a data-original-title="Step 1" href="#plantillas_descripciones" data-toggle="tab" aria-controls="plantillas_descripciones" role="tab"  title='Redacta la experiencia  que los clientes usualmente viven en tus eventos'>
                             <span class="round-tab">
                                 <i class="glyphicon fa fa-bars"></i>
                             </span>

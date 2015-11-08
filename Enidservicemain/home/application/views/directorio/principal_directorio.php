@@ -15,7 +15,6 @@
 
 
 
-
 <div class="container" >
     <div class="row print-section" id="print-section">
         <div class="center-block" id='resumen-contactos'>
@@ -29,13 +28,12 @@
 </div>    
 
 
-<div class="container">
+<div class="container" title='Filtrar por criterio'>
     <div class="row">
         <div class="center-block">
 
-                <button id="nuevo-contacto-button" type="button" class="btn btn-info" data-toggle="modal" data-target="#contact-modal">
-                <i class="fa fa-check"></i>
-                Agregar contacto
+                <button id="nuevo-contacto-button" title='Registrar contacto' type="button" class="btn btn btn_nnuevo" data-toggle="modal" data-target="#contact-modal">                
+                + Nuevo contacto
                 </button>    
        
 

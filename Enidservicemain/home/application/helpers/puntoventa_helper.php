@@ -30,18 +30,10 @@ if(!function_exists('invierte_date_time')){
 					<td > ". porcentaje_puntos_venta($row["contactos_asociados"]  , $row["contactos_asociados"])  ." </td>
 					<td> ". porcentaje_puntos_venta($row["contactos_asociados"]  , ($row["con_tel"] + $row["con_tel_movil"]) ) ." </td>
 					<td> ". porcentaje_puntos_venta($row["contactos_asociados"]  ,  $row["con_locacion"] ) ." </td>
-					<td> ". porcentaje_puntos_venta($row["contactos_asociados"]  ,  $row["con_web"])."  </td>
-					
+					<td> ". porcentaje_puntos_venta($row["contactos_asociados"]  ,  $row["con_web"])."  </td>					
 				</tr>";		
-
-
-	
-
 		}		
-
 		$table .="</table>";			
-
-
 		return $table;
 	}
 	/**/	
@@ -316,11 +308,11 @@ if(!function_exists('invierte_date_time')){
 
 				
 
-			$list.="<td  class='contactos' id='". $idpunto_venta  ."' > 
+			$list.="<td  title='Contactos del directorio que han sido asociados al punto de venta' class='contactos' id='". $idpunto_venta  ."' > 
 						<i class='fa fa-book contactos' id='". $idpunto_venta  ."' 
 						data-toggle='modal' data-target='#contactos-modal' ></i>
 					</td>			
-					<td><i  data-toggle='modal' data-target='#editd-punto-venta-modal'    class='editar-punto-venta fa fa-pencil-square fa-lg'  id='". $idpunto_venta  ."'  ></i></td>					
+					<td title='Editar contacto' ><i  data-toggle='modal' data-target='#editd-punto-venta-modal'    class='editar-punto-venta fa fa-pencil-square fa-lg'  id='". $idpunto_venta  ."'  ></i></td>					
 					<td> <i class='delete-punto-venta fa fa-trash'  id='". $idpunto_venta  ."'   data-toggle='modal' data-target='#delete-punto-venta-modal'  ></i></td>										
 					</tr>";			
 					$num_puntos_venta ++;

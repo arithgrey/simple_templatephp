@@ -43,8 +43,16 @@ function getTipoEscenario(){
 }
 function insert( $precio , $inicio_acceso , $termino_acceso , $idevento , $idtipo_acceso, $descripcion=''){
 
-	$query_inser="INSERT INTO acceso(precio , inicio_acceso , termino_acceso , idevento , idtipo_acceso , descripcion  ) VALUES ( '$precio' , '$inicio_acceso' , '$termino_acceso' , '$idevento' , '$idtipo_acceso'  , '$descripcion')";
-	return $this->db->query($query_inser);
+
+
+	if ($precio< 1 ){		
+		$precio = 1;		
+	}	
+	$query_insert ="INSERT INTO acceso(precio , inicio_acceso ,  termino_acceso , idevento ,idtipo_acceso , descripcion  ) VALUES ( $precio , '$inicio_acceso' , '$termino_acceso' , '$idevento' , '$idtipo_acceso'  , '$descripcion')";	
+	return $this->db->query($query_insert);
+	
+	
+	
 
 }
 /*********************/

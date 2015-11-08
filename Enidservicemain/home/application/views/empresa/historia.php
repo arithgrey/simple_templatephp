@@ -1,9 +1,9 @@
 <div class="wrapper">
             <div class="row">
                 <div class="col-md-4">
-                    <div class="row" >
+                    <div class="row"  >
                         <div class="col-md-12"  data-toggle="modal" data-target="#modal-logo-empresa"  id='modal-img-logo-empresa'  >
-                            <div class="panel">
+                            <div class="panel" title='Actualizar logo  de la empresa'>
                                 <div class="panel-body">
                                     <div class="profile-pic text-center">
                                         
@@ -12,9 +12,9 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-12">
+                        <div class="col-md-12" >
                             <div class="panel">
-                                <div class="panel-body p-states green-box">
+                                <div class="panel-body p-states green-box" title='Actualizar información' >
                                     <div class="summary pull-left">
                                         <h4 class='años-empresa-text' id='años-empresa-text'  >Años  <span>haciendo historia</span> <i class="fa fa-pencil-square-o"></i></h4>
                                         <h3 class='años-empresa-text_place' id="años-empresa-text_place"><?=$data_empresa["años"];?></h3>
@@ -40,7 +40,7 @@
 
 
 
-                                <div class="panel-body p-states green-box medios-contacto" style='background:#0D3441;' data-toggle="modal" data-target="#modal-contactos"  >
+                                <div class="panel-body p-states green-box medios-contacto" style='background:#0D3441;' data-toggle="modal" data-target="#modal-contactos" title='Por cuales medios pueden localizar a la empresa'  >
                                     <div class="summary pull-left">
                                         <h4  >
                                           Medios de  <span>contacto <i class="fa fa-mobile"></i></span></h4>
@@ -59,9 +59,9 @@
 
                                 
                                 <div class="panel-body p-states green-box" style='background:#0D3441;'  >
-                                    <div class="summary pull-left">
+                                    <div class="summary pull-left" >
                                           
-                                          <h4>País</h4>
+                                          <h4>País origen </h4>
                                           <div class='pais_empresa_text' >  
                                             <h3 id='text-nombre-empresa'><?=$data_empresa["countryName"]?></h3>
                                           </div>                                            
@@ -94,7 +94,7 @@
                                 <div class="panel-body">
                                     <div class="profile-desk">
                                         <h1> 
-                                          <div class='row'>
+                                          <div class='row' title='Actualizar nombre de la empresa'>
       <h1 class='nombre-empresa-text' id='nombre-empresa-text'>
 
         <span class="label label-default"> Empresa  <?=$data_empresa["nombreempresa"];?></span>
@@ -136,7 +136,7 @@
 
                                         </h1>
 <!--*********************************************Quienes somos *********************************************-->
-                                        <div class='row'>                                          
+                                        <div class='row' title='Actualizar información'>                                          
                                             <br>
                                             <span class="designation description-empresa-text" id="description-empresa-text"> Quiénes somos <i class="fa fa-pencil-square-o"></i></span>
                                           
@@ -148,7 +148,7 @@
                                         </p>
                                         <div class='row section-description-empresa' id="section-description-empresa">
                                               <div class="input-group">               
-                                                <span class="input-group-addon" id="sizing-addon1">Quiénes somos</span>
+                                                <span class="input-group-addon" id="sizing-addon1" title='editar'>Quiénes somos</span>
                                                 <div >        
                                                   <textarea class="form-control" id='descripcion-empresa-input' class='descripcion-empresa-input' rows="3">
                                                     <?=$data_empresa["quienes_somos"]?>
@@ -163,7 +163,7 @@
 <!--*********************************************Misión empresa  *********************************************-->
 
 
-                                        <div class='row'>                                                                                      
+                                        <div class='row' title='Actualizar información'>                                                                                      
                                             <span class='designation misions-empresa-text' id='mision-empresa-text'> Misión <i class="fa fa-pencil-square-o"></i></span>                                          
                                         </div>
 
@@ -187,7 +187,7 @@
 
 
 
-                                        <div class='row'>                                                                                      
+                                        <div class='row' title='Actualizar información' >                                                                                      
                                             <span class='designation vision-empresa-text' id='vision-empresa-text'> Visión <i class="fa fa-pencil-square-o"></i></span>                                          
                                         </div>
                                         <p class='vision-empresa-text_place' id="vision-empresa-text_place">
@@ -209,7 +209,7 @@
 
 
 
-                                        <div class='row'>                                                                                      
+                                        <div class='row' title='Actualizar información'>                                                                                      
                                             <span class='mas-info-empresa-text designation ' id='mas-info-empresa-text'> + Información <i class="fa fa-pencil-square-o"></i></span>                                          
                                         </div>
                                         <p class='mas-info-empresa-text_place' id="mas-info-empresa-text_place">
@@ -369,9 +369,9 @@
   <div class="modal-content">      
       <!--*************************** Header modal *********************************-->
 
-      <div class="modal-header">
+      <div class="modal-header" >
         <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Medios de contacto</h4>
+        <h4 class="modal-title" title='Por cuales medios pueden localizar a la empresa' >Medios de contacto</h4>
       </div>            
       <!--***************************End Header modal *********************************-->
       <div class="modal-body">                  

@@ -146,7 +146,7 @@
 
 
         
-        <a class="toggle-btn"><i class="fa fa-th"></i></a>
+        <a class="toggle-btn" title='Ampliar menú'><i class="fa fa-th"></i></a>
 
 
         

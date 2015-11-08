@@ -146,7 +146,7 @@
 
 
         
-        <a class="toggle-btn"><i class="fa fa-th"></i></a>
+        <a title='Deslizar menú' class="toggle-btn"><i class="fa fa-th"></i></a>
 
 
         
@@ -183,7 +183,7 @@
         <div class="menu-right">
             
             <ul class="notification-menu">
-                <li>
+                <li title='Tareas pendientes'>
                     <a href="#" class="btn btn-default dropdown-toggle info-number" data-toggle="dropdown">
                         <i class="fa fa-tasks"></i>
                         <span class="badge">8</span>
@@ -255,7 +255,7 @@
                         </ul>
                     </div>
                 </li>
-                <li>
+                <li title='Mensajes' >
                     <a href="#" class="btn btn-default dropdown-toggle info-number" data-toggle="dropdown">
                         <i class="fa fa-envelope-o"></i>
                         <span class="badge">5</span>
@@ -312,58 +312,18 @@
                         </ul>
                     </div>
                 </li>
-                <li>
-                    <a href="#" class="btn btn-default dropdown-toggle info-number" data-toggle="dropdown">
-                        <i class="fa fa-bell-o"></i>
-                        <span class="badge">4</span>
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-head pull-right">
-                        <h5 class="title">Notifications</h5>
-                        <ul class="dropdown-list normal-list">
-                            <li class="new">
-                                <a href="">
-                                    <span class="label label-danger"><i class="fa fa-bolt"></i></span>
-                                    <span class="name">Server #1 overloaded.  </span>
-                                    <em class="small">34 mins</em>
-                                </a>
-                            </li>
-                            <li class="new">
-                                <a href="">
-                                    <span class="label label-danger"><i class="fa fa-bolt"></i></span>
-                                    <span class="name">Server #3 overloaded.  </span>
-                                    <em class="small">1 hrs</em>
-                                </a>
-                            </li>
-                            <li class="new">
-                                <a href="">
-                                    <span class="label label-danger"><i class="fa fa-bolt"></i></span>
-                                    <span class="name">Server #5 overloaded.  </span>
-                                    <em class="small">4 hrs</em>
-                                </a>
-                            </li>
-                            <li class="new">
-                                <a href="">
-                                    <span class="label label-danger"><i class="fa fa-bolt"></i></span>
-                                    <span class="name">Server #31 overloaded.  </span>
-                                    <em class="small">4 hrs</em>
-                                </a>
-                            </li>
-                            <li class="new"><a href="">See All Notifications</a></li>
-                        </ul>
-                    </div>
-                </li>
-                <li>
-                    <a href="#" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                        <img src="" alt="" />
+                
+                <li >
+                    <a title='Más opciones' href="#" class="btn btn-default dropdown-toggle" data-toggle="dropdown">                        
                         <?=$nombre;?>
-                        
+                        <i class="fa fa-sort-desc"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-menu-usermenu pull-right">
                         
-                        <li><a class='config-my-data'  href="<?=base_url('index.php/recursocontroller/informacioncuenta')?>"><i class="fa fa-cog"></i>  Configuración</a></li>
+                        <li><a class='config-my-data'  href="<?=base_url('index.php/recursocontroller/informacioncuenta')?>"><i class="fa fa-cog"></i>  Mis datos</a></li>
                         <li><a href="" data-toggle="modal"  data-target="#basicModal">
                         <i class="fa fa-code"></i>Versión del sistema </a></li>
-                        <li><a href="<?=base_url('index.php/sessioncontroller/logout')?>"><i class="fa fa-sign-out"></i> Salir </a></li>
+                        <li title='Terminar sessión del sistema'><a href="<?=base_url('index.php/sessioncontroller/logout')?>"><i class="fa fa-sign-out"></i> Salir </a></li>
 
 
                     </ul>

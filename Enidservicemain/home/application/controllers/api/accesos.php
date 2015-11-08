@@ -62,6 +62,7 @@ class Accesos extends REST_Controller{
     }    
     /***/        
     function load_post(){
+
             $this->validate_user_sesssion();
             $idempresa =  $this->sessionclass->getidempresa();                
             $evento = $this->post("evento");                        
@@ -88,18 +89,14 @@ class Accesos extends REST_Controller{
         
         
 
-        $tipo = $this->post("tipo");
-        $precio = $this->post("precio");
-        $inicio = $this->post("inicio");
-        
-
+        $tipo = $this->post("tipo");        
+        $precio = $this->post("precio");        
+        $inicio = $this->post("inicio");        
         $termino =  $this->post("termino");
-        $evento = $this->post("evento");
-        
-
-
+        $evento = $this->post("evento");        
         $descripcion  = $this->post("descripcion");
-
+        
+          
         $dbrespose = $this->accesosmodel->insert($precio  ,  $inicio  , $termino , $evento , $tipo , $descripcion);
         
 
