@@ -11,7 +11,7 @@
           	
             <div class="col-xs-12  col-sm-12 col-md-12 col-lg-12 text-center">
               
-              <a href="<?=base_url('index.php/soportesocialintelligence/opensource')?>">
+              <a style='color:white;' href="<?=base_url('index.php/soportesocialintelligence/opensource')?>">
               
                 	 <i class="fa fa-github-alt fa-3x"></i>
                 	 <br>
@@ -62,20 +62,34 @@
  <style type="text/css">
 
 
+
+/*
         .header-table-info{
             //background:  #12ADA2  !important;
             //background:  #0ED0D0 !important;
-            background: rgba(226 , 73, 73, 0.87);
-            color: white;
+            //background: rgba(226 , 73, 73, 0.87);
+
+            //background: none repeat scroll 0% 0% #12ADA2 !important;
+            //background: none repeat scroll 0% 0% #09AFDF !important;
+            //background: #1C84A7 !important;
+            //background:  rgba(27, 66, 71, 0.91) none repeat scroll 0% 0% !important;
+            //background: #007075 none repeat scroll 0% 0% !important;            
+            background: #007075 none repeat scroll 0% 0% !important;            
             font-size: .8em !important;        
-        }                
+        }    
+        */
+
         .left-side,  .sticky-left-side , .sticky-header , .logo{
             //background: #09AFDF !important;
             //background: none repeat scroll 0% 0% #12ADA2 !important;
             
             //background-color: rgba(29, 119, 145, 1) !important;
             //background: #043544 !important;
-            background: #1ECAFF none repeat scroll 0% 0% !important
+            background: #1ECAFF none repeat scroll 0% 0% !important;
+            
+
+
+
         }
         .main-content{
 
@@ -96,20 +110,24 @@
             font-size: 1em;
             color: white;
         }
-        .enid-header-table{
+        .enid-header-table , .header-table-info{
             
             //background: none repeat scroll 0% 0% #12ADA2 !important;
             //background: none repeat scroll 0% 0% #09AFDF !important;
             //background: #1C84A7 !important;
-            background:  rgba(27, 66, 71, 0.91) none repeat scroll 0% 0% !important;
-            color: white !important;
+            //background:  rgba(27, 66, 71, 0.91) none repeat scroll 0% 0% !important;
+            //background: rgba(226, 233, 198, 0.9) none repeat scroll 0% 0% !important;
+            background: rgb(229, 233, 208) none repeat scroll 0% 0% !important; 
+            
+            //background: #0F7D81 none repeat scroll 0% 0% !important;
+            
+            
             text-align: center !important;
             font-size: .9em;
         }
         .franja-vertical{
-            //background: #19D4D4 !important;
-            //background: rgba(25, 198, 198, 0.87)!important;
-            background: none repeat scroll 0% 0% #12ADA2 !important;
+            
+            background: #0F272C none repeat scroll 0% 0% !important;
             color: white !important;
         }
         .header-section , .notification-menu ,  .dropdown-toggle{
@@ -117,6 +135,8 @@
             
             color: white !important;
             background: #1C84A7 !important;
+            
+
         }
 
         .panel-heading .nav > li > a {
@@ -129,9 +149,12 @@
 
         }
         .wrapper{
-  //  background: rgb(255, 252, 231);
-}
-        
+          //background: rgb(255, 252, 231);          
+          //background: #124048;
+          
+
+
+        }
         .modal-header{
             background: #09AFDF !important;
             
@@ -158,11 +181,32 @@
             width: 60px !important;
             height: 60px !important;
         }
-        .title_main{
-            text-align: center;
+        .title_main{            
+            color: #1C84A7 ; 
         }
         .content-enid-sec{
             background: #1C84A7 none repeat scroll 0% 0% !important;
+        }
+        .btn_nnuevo{
+            //background: black;
+            color: white !important;
+            background: #1C84A7 !important;
+
+        }
+        .next-to{
+            background: #1C84A7 !important;
+            color: white !important;
+        }
+        footer{
+            background: #1C84A7 none repeat scroll 0% 0% !important;
+            color: white !important;
+        }
+        .section-main-content{
+            //background: white;
+            //padding: 8px;
+        }
+        .section-enid-title{
+            padding: 11px;
         }
         
         </style>

@@ -16,7 +16,7 @@ function displayrecursobyperfiles($perfiles){
 
             $query_dinamico ="SELECT  r.nombre , r.urlpaginaweb , r.iconorecurso, r.descripcionrecurso , pr.idrecurso 
                             FROM recurso AS r , perfil_recurso AS pr WHERE 
-                            r.idrecurso = pr.idrecurso AND pr.idperfil = $idperfil ";
+                            r.idrecurso = pr.idrecurso AND pr.idperfil = $idperfil  order by order_negocio asc";
 
 
             $result = $this->db->query($query_dinamico);  

@@ -32,7 +32,8 @@
                             <div class="tab-content">
 
                                 <a  class='pull-right' href="<?=base_url('index.php/recursocontroller/usuarios')?>">
-                                    <button class='btn btn-info '>
+                                    <button class='btn  btn-default next-to'>
+
                                         <i class='fa fa-users'></i> Miembros de la cuenta
                                     </button>
                                 </a>

@@ -8,7 +8,7 @@
     </div>
 
        <form action="<?=base_url('index.php/excel_export')?>" method="get"  id="FormularioExportacion">
-                             <button class='botonExcel btn btn-info pull-right col-md-2 '  > Exportar a Excel <i class="fa fa-file-pdf-o"></i> </button>  
+                             <button class='botonExcel btn btn-default pull-right col-md-2 '  > Exportar a Excel <i class="fa fa-file-pdf-o"></i> </button>  
                             <input type="hidden" id="datos_a_enviar" name="datos_a_enviar" />
         </form>
 
@@ -16,7 +16,7 @@
 
 </div>    
 
-
+<br>
 <div class="container">
     <div class="row">
         <div class="center-block">
@@ -54,7 +54,7 @@
             <?=$puntos_venta;?>
         </div>
 
-        <a href="<?=base_url('index.php/inicio/eventos/')?>"><button type="button"class="btn btn-primary btn-sm">Ir a la sección de eventos</button></a>                                
+        <a href="<?=base_url('index.php/inicio/eventos/')?>"><button type="button"class="btn btn-default next-to">Ir a la sección de eventos</button></a>                                
         </div>
     </div>
 </div>
@@ -133,7 +133,7 @@
     <div class="form-group">                
         <textarea rows="12" name="descripcion" class="col-sm-10 form-control" placeholder="Nota para el público"></textarea>                
     </div>
-    <button type="submit" class="btn btn-primary">Registrar</button>
+    <button type="submit" class="btn btn-default btn_save">Registrar</button>
 
 
     <div class='response-registro' id="response-registro"></div>
@@ -268,7 +268,7 @@
     <div class="form-group">                
         <textarea rows="12" name="ndescripcion" class="col-sm-10 form-control" placeholder="Nota para el público"></textarea>                
     </div>
-    <button type="submit" class="btn btn-primary">Guardar cambios</button>
+    <button type="submit" class="btn btn-default btn_save">Guardar cambios</button>
 </form>
                 <!--Termina nuevo contacto -->
             </div>

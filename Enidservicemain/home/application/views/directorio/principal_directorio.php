@@ -12,7 +12,8 @@
 
 
 
-
+<div style='background:white; padding:10px;'>
+    <br>
 
 
 <div class="container" >
@@ -22,7 +23,7 @@
         </div>
     </div>
        <form action="<?=base_url('index.php/excel_export')?>" method="get"  id="FormularioExportacion">
-                <button class='botonExcel btn btn-info pull-right col-md-2 '  > Exportar a Excel <i class="fa fa-file-pdf-o"></i> </button>  
+                <button class='botonExcel btn btn-default pull-right col-md-2 '  > Exportar a Excel <i class="fa fa-file-pdf-o"></i> </button>  
                 <input type="hidden" id="datos_a_enviar" name="datos_a_enviar" />
         </form>
 </div>    
@@ -77,8 +78,12 @@
 
 
 
-        <a href="<?=base_url('index.php/puntosventa/administrar')?>"><button type="button" class="btn btn-primary btn-sm">Ir a puntos de venta</button></a> 
+        <a href="<?=base_url('index.php/puntosventa/administrar')?>"><button type="button" class="btn btn-default next-to">Ir a puntos de venta</button></a> 
     </div>
+
+</div>
+
+
 
 </div>
 
@@ -98,12 +103,8 @@
 
 
 
-
-
-
-
 <div class="modal fade in" id="contact-modal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="false">
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
@@ -125,88 +126,152 @@
 
 
      
+    <div class='col-lg-12'>
+        <div class='col-lg-6'>
+          <div class="form-group">            
+             <div class="input-group m-bot15">
+                <span class="input-group-addon">
+                    Nombre 
+                </span>
+                
+                <input type="text" class="form-control" name="nombre" placeholder="Nombre" required>
+             </div>
+          </div>
+        </div>
+        <div class='col-lg-6'>
+         <div class="form-group">            
+             <div class="input-group m-bot15">
+                <span class="input-group-addon">
+                    Organización
+                </span>            
+                <input type="text" class="form-control" name="organizacion" placeholder="Añadir nombre de la organización">
+             </div>
+         </div>
+         </div>
+    </div> 
 
-      <div class="form-group">            
-         <div class="input-group m-bot15">
-            <span class="input-group-addon">
-                Nombre 
-            </span>
-            
-            <input type="text" class="form-control" name="nombre" placeholder="Nombre" required>
+
+
+
+
+    <div class='col-lg-12'>
+        <div class='col-lg-6'>
+             <div class="form-group">            
+                 <div class="input-group m-bot15">
+                    <span class="input-group-addon">
+                        Tel.
+                    </span>
+                    <input class="form-control" name="telefono"   placeholder="Teléfono" type="text" required>
+                 </div>
+             </div>
+        </div>     
+        <div class='col-lg-6'>
+         <div class="form-group">            
+             <div class="input-group m-bot15">
+                <span class="input-group-addon">
+                    Móvil 
+                </span>
+                <input class="form-control" name="movil"   placeholder="Teléfono celular" type="text">
+             </div>
+
+         </div>
+        </div>
+    </div>
+
+    <div class='col-lg-12'>
+        <div class='col-lg-12'>
+          <div class="form-group">            
+             <div class="input-group m-bot15">
+                <span class="input-group-addon">
+                    Página web  www
+                </span>
+                <input class="form-control" name="pagina_web"   placeholder="http://enidservice.com/home/" type="url">
+             </div>
+         </div>
+        </div> 
+    </div>
+
+
+    <div class='col-lg-12'>
+        <div class='col-lg-12'>
+         <div class="form-group">            
+             <div class="input-group m-bot15">
+                <span class="input-group-addon">
+                    Facebook
+                </span>
+                <input class="form-control" name="pagina_fb"  type="url">
+             </div>
+         </div>
+        </div> 
+    </div> 
+
+    <div class='col-lg-12'>
+        <div class='col-lg-12'> 
+         <div class="form-group">            
+             <div class="input-group m-bot15">
+                <span class="input-group-addon">
+                    Twitter
+                </span>
+                <input class="form-control" name="pagina_tw"  type="url">
+             </div>
+        </div>
+     </div>
+    </div> 
+
+    <div class='col-lg-12'> 
+        <div class='col-lg-12'> 
+         <div class="form-group">            
+             <div class="input-group m-bot15">
+                <span class="input-group-addon">
+                    Dirección
+                </span>
+                <input class="form-control" name="direccion"   placeholder="Av. sur 89 col...  " type="text">
+             </div>
+
+         </div>
          </div>
      </div>
-     <div class="form-group">            
-         <div class="input-group m-bot15">
-            <span class="input-group-addon">
-                Organización
-            </span>
-            
-            <input type="text" class="form-control" name="organizacion" placeholder="Añadir nombre de la organización">
-         </div>
-     </div>
-     <div class="form-group">            
-         <div class="input-group m-bot15">
-            <span class="input-group-addon">
-                Tel.
-            </span>
-            <input class="form-control" name="telefono"   placeholder="Teléfono" type="text" required>
-         </div>
-     </div>
-     <div class="form-group">            
-         <div class="input-group m-bot15">
-            <span class="input-group-addon">
-                Móvil 
-            </span>
-            <input class="form-control" name="movil"   placeholder="Teléfono celular" type="text">
-         </div>
-
-     </div>
-      <div class="form-group">            
-         <div class="input-group m-bot15">
-            <span class="input-group-addon">
-                Página web  www
-            </span>
-            <input class="form-control" name="pagina_web"   placeholder="http://enidservice.com/home/" type="url">
-         </div>
-     </div>
-
-     <div class="form-group">            
-         <div class="input-group m-bot15">
-            <span class="input-group-addon">
-                Correo Electrónico @
-            </span>
-            <input class="form-control" name="correo"   placeholder="arithgrey@gmail.com" type="text">
-         </div>
-
-     </div>
-     <div class="form-group">            
-         <div class="input-group m-bot15">
-            <span class="input-group-addon">
-                Dirección
-            </span>
-            <input class="form-control" name="direccion"   placeholder="Av. sur 89 col...  " type="text">
-         </div>
-
-     </div>
 
 
-    <div class="form-group" >
-        
-        <select class="form-control col-sm-12" name="tipo">
-            <option >Seleccione</option>
-            <option value="Proveedor">Proveedor</option>
-            <option value="Artista">Artista </option>
-            <option value="Colaborador">Colaborador</option>
-            <option value="Contacto Comercial">Contacto comercial</option>
-            <option value="Cliente">Cliente</option>
-            <option value="Contacto personal">Contacto personal </option>
-            <option value="Institución">Institución</option>
-            <option value="Productora">Productora</option>
-            <option value="Productora">Otro</option>
-        </select> 
-    </div>    
+    <div class='col-lg-12'>
+        <div class='col-lg-6'>
+             <div class="form-group">            
+                 <div class="input-group m-bot15">
+                    <span class="input-group-addon">
+                        Correo Electrónico @
+                    </span>
+                    <input class="form-control" name="correo"   placeholder="arithgrey@gmail.com" type="text">
+                 </div>
+
+             </div>
+        </div>
+
+        <div class='col-lg-6'>
+            <div class="form-group" >
+                
+                <select class="form-control col-sm-12" name="tipo">            
+                    <option value="Proveedor">Proveedor</option>
+                    <option value="Artista">Artista </option>
+                    <option value="Colaborador">Colaborador</option>
+                    <option value="Contacto Comercial">Contacto comercial</option>
+                    <option value="Cliente">Cliente</option>
+                    <option value="Contacto personal">Contacto personal </option>
+                    <option value="Institución">Institución</option>
+                    <option value="Productora">Productora</option>
+                    <option value="Patrocinador">Patrocinador</option>
+                    <option value="Productora">Otro</option>
+                </select> 
+            </div>    
 
 
+        </div>
+
+    </div> 
+
+
+    
+
+    
     <div class="form-group">
         <label class="col-sm-12 control-label">Nota</label>
         
@@ -216,7 +281,7 @@
      
 
     
-    <button type="submit" id="button-registrar" class="btn btn-primary">Registrar</button>
+    <button type="submit" id="button-registrar" class="btn btn-default btn_save ">Registrar</button>
 
 
 
@@ -268,7 +333,7 @@
 
 <!--Editar contacto -->
     <div class="modal fade in" id="contact-modal-edit" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="false">
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
@@ -289,88 +354,163 @@
     </div>
     
      
-
-      <div class="form-group">            
-         <div class="input-group m-bot15">
-            <span class="input-group-addon">
-                Nuevo nombre 
-            </span>
-            
-            <input type="text" class="form-control" name="nnombre" id='nnombre' placeholder="Nombre" required>
-         </div>
-     </div>
-     <div class="form-group">            
-         <div class="input-group m-bot15">
-            <span class="input-group-addon">
-                Nueva organización
-            </span>
-            
-            <input type="text" class="form-control" id="norganizacion" name="norganizacion" placeholder="Añadir nombre de la organización">
-         </div>
-     </div>
-     <div class="form-group">            
-         <div class="input-group m-bot15">
-            <span class="input-group-addon">
-                Nuevo Tel.
-            </span>
-            <input class="form-control" name="ntelefono"  id="ntelefono"   placeholder="Teléfono" type="text" required>
+    <div class='col-lg-12'>
+        <div class='col-lg-6'>
+          <div class="form-group">            
+                <div class="input-group m-bot15">
+                    <span class="input-group-addon">
+                        Nuevo nombre 
+                    </span>                    
+                    <input type="text" class="form-control" name="nnombre" id='nnombre' placeholder="Nombre" required>
+                 </div>
+             </div>
          </div>
 
-     </div>
-     <div class="form-group">            
-         <div class="input-group m-bot15">
-            <span class="input-group-addon">
-                Nuevo Móvil 
-            </span>
-            <input class="form-control" name="nmovil" id="nmovil"   placeholder="Teléfono celular" type="text">
-         </div>
 
-     </div>
 
-    <div class="form-group">            
-         <div class="input-group m-bot15">
-            <span class="input-group-addon">
-                Página web  www
-            </span>
-            <input class="form-control" name="npagina_web" id="npagina_web"   placeholder="Teléfono celular" type="url">
+
+         <div class='col-lg-6'>
+        <div class="form-group">            
+             <div class="input-group m-bot15">
+                <span class="input-group-addon">
+                    Nueva organización
+                </span>
+                
+                <input type="text" class="form-control" id="norganizacion" name="norganizacion" placeholder="Añadir nombre de la organización">
+             </div>
          </div>
      </div>
 
-     <div class="form-group">            
-         <div class="input-group m-bot15">
-            <span class="input-group-addon">
-                Nuevo correo electrónico @
-            </span>
-            <input class="form-control" name="ncorreo"  id="ncorreo"  placeholder="arithgrey@gmail.com" type="text">
+
+    </div>
+
+    
+
+
+
+
+
+    <div class='col-lg-12'>
+        <div class='col-lg-6'>
+         <div class="form-group">            
+             <div class="input-group m-bot15">
+                <span class="input-group-addon">
+                    Nuevo Tel.
+                </span>
+                <input class="form-control" name="ntelefono"  id="ntelefono"   placeholder="Teléfono" type="text" required>
+             </div>
+         </div>
+         </div>
+         <div class='col-lg-6'>
+         <div class="form-group">            
+             <div class="input-group m-bot15">
+                <span class="input-group-addon">
+                    Nuevo Móvil 
+                </span>
+                <input class="form-control" name="nmovil" id="nmovil"   placeholder="Teléfono celular" type="text">
+             </div>
+
+         </div>
          </div>
 
-     </div>
-     <div class="form-group">            
+    </div> 
+
+
+
+    <div class='col-lg-12'>
+        <div class='col-lg-12'>
+
+        <div class="form-group">            
+             <div class="input-group m-bot15">
+                <span class="input-group-addon">
+                    Página web  www
+                </span>
+                <input class="form-control" name="npagina_web" id="npagina_web"   placeholder="Teléfono celular" type="url">
+             </div>
+         </div>
+         </div>
+         <div class='col-lg-12'>
+         <div class="form-group">            
+             <div class="input-group m-bot15">
+                <span class="input-group-addon">
+                    Facebook
+                </span>
+                <input class="form-control" name="npagina_fb" id='npagina_fb'  type="url">
+             </div>
+         </div>
+         </div>
+         <div class='col-lg-12'>
+         <div class="form-group">            
+             <div class="input-group m-bot15">
+                <span class="input-group-addon">
+                    Twitter
+                </span>
+                <input class="form-control" name="npagina_tw" id='npagina_tw'  type="url">
+             </div>
+         </div>
+         </div>
+
+
+
+         <div class='col-lg-12'>
+         <div class="form-group">            
          <div class="input-group m-bot15">
             <span class="input-group-addon">
                 Nueva dirección
             </span>
             <input class="form-control" name="ndireccion" id="ndireccion"   placeholder="Av. sur 89 col...  " type="text">
          </div>
-
+        </div> 
      </div>
-    <div class="form-group" >        
-        <select class="form-control col-sm-12" id="ntipo" name="ntipo">
-            <option >Seleccione</option>
-            <option value="Proveedor">Proveedor</option>
-            <option value="Colaborador">Colaborador</option>
-            <option value="Contacto Comercial">Contacto comercial</option>
-            <option value="Cliente">Cliente</option>
-            <option value="Contacto personal">Contacto personal </option>
-            <option value="Contacto personal">Otro </option>
+    </div>     
 
-        </select> 
-    </div>    
+
+
+
+
+    <div class='col-lg-12'>
+        <div class='col-lg-6'>
+             <div class="form-group">            
+                 <div class="input-group m-bot15">
+                    <span class="input-group-addon">
+                        Nuevo correo electrónico @
+                    </span>
+                    <input class="form-control" name="ncorreo"  id="ncorreo"  placeholder="arithgrey@gmail.com" type="text">
+                 </div>
+
+             </div>
+
+        </div>     
+        <div class='col-lg-6'>
+         <div class="form-group" >        
+            <select class="form-control col-sm-12" id="ntipo" name="ntipo">
+                <option >Seleccione</option>
+                <option value="Proveedor">Proveedor</option>
+                <option value="Colaborador">Colaborador</option>
+                <option value="Contacto Comercial">Contacto comercial</option>
+                <option value="Cliente">Cliente</option>
+                <option value="Contacto personal">Contacto personal </option>
+                <option value="Patrocinador">Patrocinador </option>
+                <option value="Contacto personal">Otro </option>
+
+            </select> 
+        </div>    
+        </div> 
+    </div>
+
+
+
+
+
+
+
+     
+    
     <div class="form-group">
         <label class="col-sm-12 control-label">Nueva nota</label>        
         <textarea rows="12" name="nnota" id="nnota" class="col-sm-12 form-control"></textarea>        
     </div>    
-    <button id="button-update" class="btn btn-primary">Actualizar información del  contacto</button>   
+    <button id="button-update" class="btn btn-default btn_save">Actualizar información del  contacto</button>   
 </form>
 
                 <!--Termina nuevo contacto -->

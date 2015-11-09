@@ -4,45 +4,55 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-            <h4 class="modal-title" id="myModalLabel">Cargar evento </h4>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="myModalLabel">Cargar evento </h4>
             </div>
             <div class="modal-body">
-                <h3>Del evento</h3>
+                
 
 
 
 
 
                  <div class="row">
-                                <div class="col-md-12">
+                                <div class="">
                                     <form role="form" class="form-inline" method="POST" id="nuevo-evento-form"  action=""> 
                                         <div class="form-group todo-entry">
-                                            <input name='nuevo_evento' placeholder="Evento ejemplo Gala Festival " class="form-control" style="width: 100%" type="text">
 
 
-                                            <!--Campos ocultos-->
-                                            <div id='dinamic-field'>
-                                                <input name='nueva_edicion' placeholder="Edición México 2015 " class="form-control" style="width: 100%" type="text">
-
+                                            <div  class='col-md-12'>
+                                                <input name='nuevo_evento' placeholder="Evento ejemplo Gala Festival " class="form-control" style="width: 100%" type="text">
+                                                <!--Campos ocultos-->
+                                            </div>
+                                            <div  class='col-md-12'>
+                                                <div id='dinamic-field'>
+                                                    <input name='nueva_edicion' placeholder="Edición México 2015 " class="form-control" style="width: 100%" type="text">
+                                                </div>
                                             </div>
                                             
-                                            <br>
-                                            <div class="input-group">                                                
-                                                <div data-date-viewmode="years" data-date-format="yyyy-mm-dd" data-date="2012-02-12" class="input-append date dpYears"  >
-                                                        <input readonly="" value="2012-02-12" size="16" class="form-control" name="nuevo_inicio"  type="text"  >
-                                                <span class="input-group-btn add-on">
-                                                <button class="btn btn-primary" type="button"><i class="fa fa-calendar"></i></button>
-                                                </span>
+                                            
+                                            <div class="input-group">                                                                                                
+                                                <div  class='col-md-6'>
+                                                    <div data-date-viewmode="years" data-date-format="yyyy-mm-dd" data-date="2015-02-12" class="input-append date dpYears"  >
+                                                            <input readonly="" value="2015-02-12" size="16" class="form-control" name="nuevo_inicio"  type="text"  >
+                                                    <span class="input-group-btn add-on">
+                                                    <button class="btn btn-primary" type="button"><i class="fa fa-calendar"></i></button>
+                                                    </span>
+                                                    </div>
                                                 </div>
-                                                
-                                                    <div data-date-viewmode="years" data-date-format="yyyy-mm-dd" data-date="2012-02-12" class="input-append date dpYears">
-                                                        <input readonly="" value="2012-02-12" size="16" class="form-control" name="nuevo_termino"  type="text"  >
+                                                <div  class='col-md-6'>
+                                                    <div data-date-viewmode="years" data-date-format="yyyy-mm-dd" data-date="2015-02-12" class="input-append date dpYears">
+                                                        <input readonly="" value="2015-02-12" size="16" class="form-control" name="nuevo_termino"  type="text"  >
                                                         <span class="input-group-btn add-on">
                                                             <button class="btn btn-primary" type="button"><i class="fa fa-calendar"></i></button>
                                                         </span>
                                                     </div>
+                                                </div>    
                                                 <span class="help-block">Periodo del evento</span>
+                                                <button class="btn btn-primary pull-right" type="submit">
+                                                   Registrar
+                                                </button>                                        
+                                                
                                                     
                                             </div> 
                                             
@@ -56,9 +66,7 @@
 
 
 
-                                        <button class="btn btn-primary pull-right" type="submit">
-                                            <i class="fa fa-check"></i>
-                                        </button>                                        
+                                        
                                     </form>
                                 </div>
 
@@ -282,15 +290,15 @@
                 <form method="POST" class='update-fecha-evento-form' id="update-fecha-evento-form">
                     <input type="hidden" name='update_evento' id='update_evento'>
                     <div class="input-group">                        
-                                                <div data-date-viewmode="years" data-date-format="yyyy-mm-dd" data-date="2012-02-12" class="input-append date dpYears"  >
-                                                        <input readonly="" value="2012-02-12" size="16" class="form-control" id="update_inicio" name="update_inicio" type="text"  >
+                                                <div data-date-viewmode="years" data-date-format="yyyy-mm-dd" data-date="2015-02-12" class="input-append date dpYears"  >
+                                                        <input readonly="" value="2015-02-12" size="16" class="form-control" id="update_inicio" name="update_inicio" type="text"  >
                                                         <span class="input-group-btn add-on">
                                                             <button class="btn btn-primary" type="button"><i class="fa fa-calendar"></i></button>
                                                         </span>
                                                 </div>
 
-                                                <div data-date-viewmode="years" data-date-format="yyyy-mm-dd" data-date="2012-02-12" class="input-append date dpYears">
-                                                        <input readonly="" value="2012-02-12" size="16" class="form-control" name="update_termino"  type="text" id="update_termino"  >
+                                                <div data-date-viewmode="years" data-date-format="yyyy-mm-dd" data-date="2015-02-12" class="input-append date dpYears">
+                                                        <input readonly="" value="2015-02-12" size="16" class="form-control" name="update_termino"  type="text" id="update_termino"  >
                                                         <span class="input-group-btn add-on">
                                                             <button class="btn btn-primary" type="button"><i class="fa fa-calendar"></i></button>
                                                         </span>
@@ -394,7 +402,7 @@
             <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
             
-        <h4 class="modal-title" id="myModalLabel"><i class="fa fa-calendar-o"></i>Agregar escenario al evento </h4>
+        <h4 class="modal-title" id="myModalLabel"><i class="fa fa-calendar-o"></i> Agregar escenario al evento </h4>
             </div>
             <div class="modal-body">                
                 <h4>Nuevo escenario</h4>
@@ -403,6 +411,7 @@
                     <div class="form-group">  
                         <input type="text" class="form-control" id="nuevo-escenario" name='nuevoescenario' placeholder='Nombre del escenario' required >
                     </div>
+                    <button class="btn btn-default btn_save" type="submit">Agregar</button>
                 </form>                    
                 <!--***********************************  ***************************-->
             </div>

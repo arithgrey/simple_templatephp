@@ -7,7 +7,7 @@ if(!function_exists('invierte_date_time')){
 					<tr class="text-center enid-header-table">';
         $accesos .= get_td("#" , "");  
         $accesos .= '<td><i class="fa fa-star"></i> Acceso</td>';  
-        $accesos .= '<td class="text-center"><i class="fa fa-credit-card"></i> Precio</td>';  
+        $accesos .= '<td class="text-center"><i class="fa fa-credit-card"></i>Precio</td>';  
         $accesos .= '<td class="text-center"><i class="fa fa-calendar-o"></i> Periodo</td>';    
         $accesos .= '<td class="text-center"><i class="fa fa-angle-double-right"></i> Avanzado</td>';    
        	$accesos .=  '<td class="text-center"><i class="fa fa-minus-circle"></i> Eliminar</td>';        
@@ -16,7 +16,7 @@ if(!function_exists('invierte_date_time')){
 		foreach ($arreglo["listaccesos"] as $rowccesos) {
 
 					$periodo  = $rowccesos["inicio_acceso"] . "al"  . $rowccesos["termino_acceso"];					
-					$accesos .= "<tr class='text-center'><td class='blue-col-enid'> ". $in ."</td>";
+					$accesos .= "<tr class='text-center'><td class='franja-vertical'> ". $in ."</td>";
 					$accesos .= get_td($rowccesos["tipo"] , "");                       			 
 	                $accesos .= get_td("$". money_format( "%i" ,  $rowccesos["precio"] ) , "");	                
 		            $accesos.=  get_td($periodo  , "") ;

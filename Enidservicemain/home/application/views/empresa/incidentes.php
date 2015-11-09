@@ -92,7 +92,7 @@
 					    name='descripcion' rows="3"></textarea>
 					</div>
 					
-			  <p id="guardar-info"><a class="btn btn-primary btn-lg" href="#" role="button">Guardar</a></p>
+			  <p id="guardar-info"><a class="btn btn-default btn_save" href="#" role="button">Guardar</a></p>
 			</div>
 		  </form>
 

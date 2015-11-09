@@ -15,6 +15,9 @@ if(!function_exists('invierte_date_time')){
 					  			  	
 		$contacto .= get_td ("Correo" , "" );
 		$contacto .= get_td ("Página web" , "" );
+		$contacto .= get_td ("Facebook" , "" );
+		$contacto .= get_td ("Twitter" , "" );
+
 		$contacto .= get_td ("Dirección" , "" );
 		$contacto .= get_td ("Tipo" , "" );
 					  	
@@ -38,6 +41,9 @@ if(!function_exists('invierte_date_time')){
 			$movil         = $row["movil"];
 			$correo        = $row["correo"];
 			$pagina_web =  $row["pagina_web"];
+			$pagina_fb =  $row["pagina_fb"];
+			$pagina_tw =  $row["pagina_tw"];
+
 			$direccion    = $row["direccion"]; 
 			$status         =  $row["status"];
 			$fecha_registro =  $row["fecha_registro"];
@@ -71,8 +77,20 @@ if(!function_exists('invierte_date_time')){
 						$contacto .= get_td($organizacion, ""); 
 						$contacto .= get_td($tel, ""); 
 						$contacto .= get_td($movil, ""); 
-						$contacto .= get_td($correo, ""); 
-						$contacto .= get_td($pagina_web, ""); 
+						$contacto .= get_td($correo, ""); 						
+
+						$pagina_web_d =  "<a style='color: #26A0D1 !important;' href='". $pagina_web ."'> www </a>";
+						$contacto .= get_td($pagina_web_d  , ""); 
+
+
+						$pagina_web_f =  "<a  style='color: #26A0D1 !important;'  href='". $pagina_fb ."'> Facebook </a>";
+						$contacto .= get_td($pagina_web_f  , ""); 
+						
+						$pagina_web_t =  "<a style='color: #26A0D1 !important;' href='". $pagina_tw ."'> Twitter </a>";
+						$contacto .= get_td($pagina_web_t  , ""); 
+						
+						
+
 						$contacto .= get_td($direccion, ""); 
 						$contacto .= get_td($tipo, ""); 						
 						$contacto .= get_td($status , ""); 
@@ -97,6 +115,9 @@ if(!function_exists('invierte_date_time')){
 				$contacto .= get_td("Movil" , "" );
 				$contacto .= get_td("Correo" , "" );
 				$contacto .= get_td("Página web" , "" );
+				$contacto .= get_td ("Facebook" , "" );
+				$contacto .= get_td ("Twitter" , "" );
+
 				$contacto .= get_td("Dirección" , "" );
 				$contacto .= get_td("Tipo" , "" );					  	
 				$contacto .= get_td("Estado" , "" );
@@ -151,9 +172,15 @@ if(!function_exists('invierte_date_time')){
 					  	$table .= get_td( "Colaboradores", "" );
 					  	$table .= get_td( "Contactos comerciales", "" );
 					  	$table .= get_td( "Clientes", "" );
-					  	$table .= get_td( "Instituciones", "" );					  
+					  	$table .= get_td( "Instituciones", "" );
+					  	$table .= get_td( "Patrocinadores", "" );
+					  						  
 					  	$table .= get_td( "Con correo electrónico", "" );					  		
 					  	$table .= get_td( "Con página web", "" );					  		
+					  	
+					  	$table .= get_td( "Con Facebook", "" );	
+					  	$table .= get_td( "Con Twitter", "" );	
+
 					  	$table .= get_td( "Con tel ", "" );
 
 		$table .='</tr>';
@@ -170,8 +197,14 @@ if(!function_exists('invierte_date_time')){
 						$table .=get_td($row["Contacto_comercial"] , "" );
 						$table .=get_td($row["Clientes"] , "" );
 						$table .=get_td($row["instituciones"] , "" );
+						$table .=get_td($row["Patrocinador"] , "" );
+						
+
 						$table .=get_td($row["con_correo"] , "" );
 						$table .=get_td($row["con_pagina_web"] , "" );
+						$table .=get_td($row["con_pagina_fb"] , "" );
+						$table .=get_td($row["con_pagina_tw"] , "" );
+
 						$table .=get_td($row["con_tel"] , "" );
 						
 
@@ -184,8 +217,14 @@ if(!function_exists('invierte_date_time')){
 						$table .= get_td( get_porcentajes_contactos( $row["contactos"],  $row["Contacto_comercial"]  ) , "");
 						$table .= get_td( get_porcentajes_contactos( $row["contactos"], $row["Clientes"] ) , "");
 						$table .= get_td( get_porcentajes_contactos( $row["contactos"], $row["instituciones"]) , "");
+						$table .= get_td( get_porcentajes_contactos( $row["contactos"], $row["Patrocinador"]) , "");
+
+						
 						$table .= get_td( get_porcentajes_contactos( $row["contactos"], $row["con_correo"]) , "");
 						$table .= get_td( get_porcentajes_contactos( $row["contactos"], $row["con_pagina_web"]) , "");
+						$table .= get_td( get_porcentajes_contactos( $row["contactos"], $row["con_pagina_fb"]) , "");
+						$table .= get_td( get_porcentajes_contactos( $row["contactos"], $row["con_pagina_tw"]) , "");
+
 						$table .= get_td( get_porcentajes_contactos( $row["contactos"], $row["con_tel"]) , "");
 						
 

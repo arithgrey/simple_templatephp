@@ -143,12 +143,8 @@
 
         <!-- header section start-->
         <div class="header-section">
-
-
-        
-        <a title='Deslizar menú' class="toggle-btn"><i class="fa fa-th"></i></a>
-
-
+        <a title='Deslizar menú' class="toggle-btn"><i class="fa fa-th"></i></a>    
+            
         
 
 
@@ -368,9 +364,12 @@
         <!--body wrapper start-->
         <div class="wrapper">
             
-            <h1 class='title_main'>
+
+
+
+
+
+ <h1 class='title_main'>
                  &raquo; <?=$titulo;?>
             </h1>
             
-        
-

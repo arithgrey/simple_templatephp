@@ -20,7 +20,9 @@ $(document).on("ready", function(){
 });
 function record_contacto(e){
 
+
 	url = $("#form-contactos").attr("action");	
+
 	$.post(url, $("#form-contactos").serialize()).done(function(data){
 			$(".status-registro").show();
 			load_contactos_dinamic();
@@ -60,7 +62,14 @@ function get_data_contacto_in_modal(contacto){
 		valorHTML("#ncorreo" , data[0].correo);
 		valorHTML("#ndireccion" , data[0].direccion);
 		valorHTML("#npagina_web" , data[0].pagina_web);		
+		valorHTML("#npagina_fb" , data[0].pagina_fb);		
+		valorHTML("#npagina_tw" , data[0].pagina_tw);		
+		
+		
+
+
 		$('#ntipo > option[value="'+ data[0].tipo +'"]').attr('selected', 'selected');
+
 		valorHTML("#nmovil" , data[0].nota);
 			
 

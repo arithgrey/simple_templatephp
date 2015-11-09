@@ -155,7 +155,8 @@ function lista_usuarios_cuenta($integrantes)
                 </table>
 
                     <a href="'. base_url('index.php/recursocontroller/perfilconfig') .'">
-                        <button class="btn btn-info pull-right">
+                        <button class="btn btn-default next-to pull-right">
+
                                 Perfiles del sistema
                         </button>        
                     </a>';

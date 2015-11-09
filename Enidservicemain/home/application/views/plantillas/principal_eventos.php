@@ -1,11 +1,6 @@
 <script type="text/javascript" src="<?=base_url('application/js/plantillas/principal.js')?>"></script>
 
 
-<a class='pull-right' href="<?=base_url('index.php/inicio/eventos')?>">
-<button type="button" class="btn btn-default" >
-    Ir a la sección de eventos
-</button>
-</a>
 
 
 
@@ -64,7 +59,7 @@
                         </div>
                     </div>
                     <form action="<?=base_url('index.php/excel_export')?>" method="get"  id="FormularioExportacion">
-                            <button class='botonExcel btn btn-info pull-right col-md-2 '  > Exportar a Excel <i class="fa fa-file-pdf-o"></i> </button>  
+                            <button class='botonExcel btn btn-default pull-right col-md-2 '  > Exportar a Excel <i class="fa fa-file-pdf-o"></i> </button>  
                             <input type="hidden" id="datos_a_enviar" name="datos_a_enviar" />
                     </form>
                 </div>
@@ -85,9 +80,14 @@
                         <header class="panel-heading blue-col-enid">
                             <i class="fa fa-list"></i>
                             Nueva plantilla, descripción de eventos
-                             <span class="tools pull-right">
-                                <a class="fa fa-chevron-down" href="javascript:;"></a>                                
-                             </span>
+
+                             
+                            <a class='pull-right' href="<?=base_url('index.php/inicio/eventos')?>">
+                                <button type="button" class="btn btn-default" >
+                                    Ir a la sección de eventos
+                                </button>
+                            </a>
+
                         </header>
                         <div class="blue-col-enid-complement panel-body">
                             
@@ -109,7 +109,8 @@
 
 
                                                 <textarea rows="6" class="form-control" name="contenido_text" id="descripcion-contenid-templ" required></textarea>
-                                                <button class='btn  btn-template' id='registro-template-descripcion-evento' >
+                                                <br>
+                                                <button class='btn  btn-default btn_save' id='registro-template-descripcion-evento' >
                                                     
                                                     Registrar
                                                 </button>
@@ -142,9 +143,12 @@
                         <header class="panel-heading blue-col-enid">
                             <i class="fa fa-star"></i>
  Nueva plantilla de restricción  
-                             <span class="tools pull-right">
-                                <a class="fa fa-chevron-down" href="javascript:;"></a>                                
-                             </span>
+                             <a class='pull-right' href="<?=base_url('index.php/inicio/eventos')?>">
+<button type="button" class="btn btn-default" >
+    Ir a la sección de eventos
+</button>
+</a>
+
                         </header>
                         <div class="blue-col-enid-complement panel-body">
                 
@@ -156,7 +160,8 @@
                                             <input type='hidden' name="type" value="3">
 
                                         </div>
-                                        <button class="btn btn-primary pull-right" type="submit">
+                                        <br>
+                                        <button class="btn btn-default btn_save pull-right" type="submit">
                                             Registrar
                                         </button>
 
@@ -178,9 +183,12 @@
                         <header class="panel-heading blue-col-enid">
                             <i class="fa fa-heart"></i>
  Nueva plantilla Artículos permitidos
-                             <span class="tools pull-right">
-                                <a class="fa fa-chevron-down" href="javascript:;"></a>                                
-                             </span>
+                <a class='pull-right' href="<?=base_url('index.php/inicio/eventos')?>">
+<button type="button" class="btn btn-default" >
+    Ir a la sección de eventos
+</button>
+</a>
+
                         </header>
                         <div class="panel-body">                        
                         <?=$plantilla_obj_permitidos;?>
@@ -192,7 +200,8 @@
                                                                                             
                                             <textarea rows="4"  class="form-control" style="width: 100%"  name="nueva_descripcion" id="nueva_descripcion" ></textarea>
                                         </div>
-                                        <button class="btn btn-primary pull-right" type="submit">Registrar</button>
+                                        <br>
+                                        <button class="btn btn-default btn_save pull-right" type="submit">Registrar</button>
                                     </form>
                                 </div>
                             </div>
@@ -213,9 +222,12 @@
                             <i class="fa fa-flag"></i>
 
                             Nueva plantilla Políticas
-                             <span class="tools pull-right">
-                                <a class="fa fa-chevron-down" href="javascript:;"></a>                                
-                             </span>
+                             <a class='pull-right' href="<?=base_url('index.php/inicio/eventos')?>">
+<button type="button" class="btn btn-default" >
+    Ir a la sección de eventos
+</button>
+</a>
+
                         </header>       
                     <div class="blue-col-enid-complement panel-body">                                     
                     <div class='list-politicas' id="list-politicas"></div>
@@ -233,7 +245,8 @@
 
 
                                                 <textarea rows="6" class="form-control" name="contenido_text" id="contenido_descripcion" required></textarea>
-                                                <button class='btn  btn-template' id='registro-template-descripcion-evento' >                                                    
+                                                <br>
+                                                <button class='btn  btn-default btn_save' id='registro-template-descripcion-evento' >                                                    
                                                     Registrar
                                                 </button>
                                                                                     
@@ -263,6 +276,7 @@
                 </div>
             
         </div>
+
     </section>
    </div>
 </div>

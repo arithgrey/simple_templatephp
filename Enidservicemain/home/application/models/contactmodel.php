@@ -14,7 +14,7 @@
     return $result->result_array();
   }
   /*recorc contacto */
-  function record( $nombre , $organizacion , $telefono, $movil, $correo , $direccion, $tipo , $idusuario, $nota , $pagina_web ){
+  function record( $nombre , $organizacion , $telefono, $movil, $correo , $direccion, $tipo , $idusuario, $nota , $pagina_web , $pagina_fb , $pagina_tw  ){
 
     
  
@@ -27,8 +27,10 @@
                     , tipo           
                     , idusuario
                     , nota 
-                    , pagina_web ) 
-                  VALUES( '".$nombre ."' , '".$organizacion."' , '".$telefono."', '".$movil."', '".$correo."' , '".$direccion ."', '".$tipo."' ,  '".$idusuario ."', '".$nota ."' ,  '". $pagina_web  ."' ) ";
+                    , pagina_web 
+                    , pagina_fb 
+                    , pagina_tw ) 
+                  VALUES( '".$nombre ."' , '".$organizacion."' , '".$telefono."', '".$movil."', '".$correo."' , '".$direccion ."', '".$tipo."' ,  '".$idusuario ."', '".$nota ."' ,  '". $pagina_web  ."'  , '". $pagina_fb ."' , '". $pagina_tw ."'  ) ";
 
 
 
@@ -109,11 +111,11 @@
     return $result->result_array();
   }
   /**/
-  function update( $nombre , $organizacion , $telefono, $movil, $correo , $direccion, $tipo , $idusuario, $nota , $pagina_web ,  $id_contacto){
+  function update( $nombre , $organizacion , $telefono, $movil, $correo , $direccion, $tipo , $idusuario, $nota , $pagina_web ,  $id_contacto , $pagina_fb , $pagina_tw){
 
     $query_update="UPDATE contacto SET nombre =  '". $nombre ."'  ,  organizacion = '".$organizacion."' ,  tel= '".$telefono."'   ,
                   movil = '".$movil."' , correo =  '".$correo."' ,  direccion =  '".$direccion ."' ,  tipo = '".$tipo."' ,
-                  nota  = '".$nota ."' , pagina_web = '". $pagina_web  ."' WHERE idcontacto = '". $id_contacto."' ";
+                  nota  = '".$nota ."' , pagina_web = '". $pagina_web  ."'   , pagina_fb ='". $pagina_fb ."'  , pagina_tw = '". $pagina_tw  ."'    WHERE idcontacto = '". $id_contacto."' ";
                                                                     
     return $this->db->query($query_update);                 
 
@@ -137,8 +139,12 @@ sum(case when  tipo = "Colaborador" then 1 else 0 end )Colaboradores,
 sum(case when  tipo = "Contacto Comercia" then 1 else 0 end )Contacto_comercial,
 sum(case when  tipo = "Cliente" then 1 else 0 end )Clientes,
 sum(case when  tipo = "Institución" then 1 else 0 end )instituciones,
+sum(case when  tipo = "Patrocinador" then 1 else 0 end )Patrocinador,
 sum(case  when length(correo) > 0 then  1 else  0 end ) con_correo,
 sum(case  when length(pagina_web) > 0 then  1 else  0 end ) con_pagina_web,
+
+sum(case  when length(pagina_fb) > 0 then  1 else  0 end ) con_pagina_fb,
+sum(case  when length(pagina_tw) > 0 then  1 else  0 end ) con_pagina_tw,
 sum(case  when length(tel) > 0 then  1 else  0 end ) con_tel
 
 from contacto where idusuario= "'. $id_usuario.'"

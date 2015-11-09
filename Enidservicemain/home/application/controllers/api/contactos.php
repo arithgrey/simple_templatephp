@@ -29,10 +29,14 @@ class Contactos extends REST_Controller{
       $tipo =  $this->post("tipo");      
       $nota = $this->post("nota");
       $pagina_web = $this->post("pagina_web");
+      $pagina_fb  = $this->post("pagina_fb");
+      $pagina_tw  = $this->post("pagina_tw");
+
       $idusuario =  $this->sessionclass->getidusuario();
   
-      $response_db =$this->contactmodel->record( $nombre , $organizacion , $telefono, $movil          
-                    , $correo , $direccion, $tipo , $idusuario, $nota , $pagina_web );      
+      $response_db = $this->contactmodel->record( $nombre , $organizacion , $telefono, $movil          
+                    , $correo , $direccion, $tipo , $idusuario, $nota , $pagina_web ,
+                     $pagina_fb  , $pagina_tw );      
 
       $this->response($response_db);
 
@@ -70,10 +74,13 @@ class Contactos extends REST_Controller{
       $tipo =  $this->put("ntipo");      
       $nota = $this->put("nnota");
       $pagina_web = $this->put("npagina_web");
+      $pagina_fb = $this->put("npagina_fb");
+      $pagina_tw = $this->put("npagina_tw");
+
       $idusuario =  $this->sessionclass->getidusuario();
 
       $response_db = $this->contactmodel->update( $nombre , $organizacion , $telefono, $movil          
-                    , $correo , $direccion, $tipo , $idusuario, $nota , $pagina_web , $id_contacto);      
+                    , $correo , $direccion, $tipo , $idusuario, $nota , $pagina_web , $id_contacto , $pagina_fb , $pagina_tw);      
 
       $this->response($response_db);
 
