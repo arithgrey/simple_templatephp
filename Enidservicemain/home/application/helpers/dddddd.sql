@@ -121,6 +121,7 @@ CREATE TABLE IF NOT EXISTS `enidserv_eniddbbbb3`.`recurso` (
   `urlpaginaweb` VARCHAR(500) NOT NULL,
   `iconorecurso` VARCHAR(500) NULL,
   `status` VARCHAR(55) NULL,
+  `order_negocio` INT NOT NULL,
   PRIMARY KEY (`idrecurso`))
 ENGINE = InnoDB;
 
@@ -377,7 +378,7 @@ CREATE TABLE IF NOT EXISTS `enidserv_eniddbbbb3`.`evento` (
   `restricciones` TEXT NULL,
   `permitido` TEXT NULL,
   `breve_descripcion` VARCHAR(200) NULL,
-  `eslogan` VARCHAR(80) NULL,
+  `eslogan` VARCHAR(255) NULL,
   `tipo` VARCHAR(300) NOT NULL DEFAULT 'Evento público',
   PRIMARY KEY (`idevento`),
   INDEX `fk_evento_empresa1_idx` (`idempresa` ASC),
@@ -452,6 +453,7 @@ CREATE TABLE IF NOT EXISTS `enidserv_eniddbbbb3`.`escenario_artista` (
   `url_social_youtube` TEXT NULL,
   `url_sound_cloud` TEXT NULL,
   `status_confirmacion` VARCHAR(45) NOT NULL DEFAULT 'pendiente por confirmar',
+  `nota` TEXT NULL,
   INDEX `fk_escenario_has_artista_artista1_idx` (`idartista` ASC),
   INDEX `fk_escenario_has_artista_escenario1_idx` (`idescenario` ASC),
   CONSTRAINT `fk_escenario_has_artista_escenario1`
@@ -680,6 +682,8 @@ CREATE TABLE IF NOT EXISTS `enidserv_eniddbbbb3`.`contacto` (
   `idusuario` INT NOT NULL,
   `nota` TEXT NULL,
   `pagina_web` TEXT NULL,
+  `pagina_fb` TEXT NULL,
+  `pagina_tw` TEXT NULL,
   PRIMARY KEY (`idcontacto`),
   INDEX `fk_contacto_usuario1_idx` (`idusuario` ASC),
   CONSTRAINT `fk_contacto_usuario1`
@@ -1609,6 +1613,175 @@ $$
 
 DELIMITER ;
 
+-- -----------------------------------------------------
+-- procedure funnel
+-- -----------------------------------------------------
+
+USE `enidserv_eniddbbbb3`;
+DROP procedure IF EXISTS `enidserv_eniddbbbb3`.`funnel`;
+
+DELIMITER $$
+USE `enidserv_eniddbbbb3`$$
+CREATE PROCEDURE funnel(emp int) 
+BEGIN 
+
+/*para los escenarios y  artistas*/
+DROP TABLE IF EXISTS r_escenarios_artistas;
+CREATE TABLE r_escenarios_artistas AS select e.idevento,
+    sum(case
+        when ea.idescenario is not null then 1
+        else 0
+    end) artistas from
+    escenario e
+        left outer join
+    escenario_artista ea ON e.idescenario = ea.idescenario
+group by e.idevento;
+
+
+DROP TABLE IF EXISTS r_evento_puntos_venta;
+CREATE TABLE r_evento_puntos_venta AS select ep . *, count(idevento) evento_punto_venta from
+    evento_punto_venta ep
+group by idevento;
+ 
+
+
+DROP TABLE IF EXISTS r_evento_servicios;
+CREATE TABLE r_evento_servicios AS select es . *, count(idevento) servicios from
+    evento_servicio es
+group by idevento;
+
+
+
+DROP TABLE IF EXISTS rrte_evento_accesos;
+CREATE TABLE rrte_evento_accesos AS select a.idevento, count(0) accesos from
+    acceso a
+group by a.idevento;
+
+
+DROP TABLE IF EXISTS r_evento_generos_musicales;
+CREATE TABLE r_evento_generos_musicales AS select idevento, count(*) generos_musicales from
+    evento_genero_musical
+group by idevento;
+
+
+
+DROP TABLE IF EXISTS r_eventos_escenarios;
+CREATE TABLE r_eventos_escenarios AS select e.idevento,
+    e.nombre_evento,
+    e.fecha_inicio,
+    e.fecha_termino,
+    e.status,
+    e.edicion,
+    e.descripcion_evento,
+    sum(case
+        when es.idescenario is not null then 1
+        else 0
+    end) escenarios from
+    evento e
+        left outer join
+    escenario es ON e.idevento = es.idevento
+where
+    e.idempresa = emp
+group by e.idevento; 
+
+
+
+
+
+
+END 
+$$
+
+DELIMITER ;
+
+-- -----------------------------------------------------
+-- procedure data_event_public
+-- -----------------------------------------------------
+
+USE `enidserv_eniddbbbb3`;
+DROP procedure IF EXISTS `enidserv_eniddbbbb3`.`data_event_public`;
+
+DELIMITER $$
+USE `enidserv_eniddbbbb3`$$
+CREATE PROCEDURE data_event_public(id_event  int) 
+BEGIN 
+
+/*para los escenarios y  artistas*/
+DROP TABLE IF EXISTS v_escenarios_artistas_e;
+CREATE TABLE v_escenarios_artistas_e AS select e.idevento,
+    sum(case
+        when ea.idescenario is not null then 1
+        else 0
+    end) artistas from
+    escenario e
+        left outer join
+    escenario_artista ea ON e.idescenario = ea.idescenario
+where
+    e.idevento = id_event
+group by e.idevento;
+
+
+
+DROP TABLE IF EXISTS v_evento_punto_v;
+CREATE TABLE v_evento_punto_v AS select ep . *, count(*) evento_punto_venta from
+    evento_punto_venta ep
+where
+    idevento = id_event
+group by idevento;
+ 
+
+
+
+
+DROP TABLE IF EXISTS v_event_serv;
+CREATE TABLE v_event_serv AS select es . *, count(*) servicios from
+    evento_servicio es
+where
+    idevento = id_event
+group by idevento;
+
+
+
+DROP TABLE IF EXISTS v_evento_sound;
+CREATE TABLE v_evento_sound AS select idevento, count(*) generos_musicales from
+    evento_genero_musical
+where
+    idevento = id_event
+group by idevento;
+
+
+
+
+DROP TABLE IF EXISTS v_eventos_escena;
+CREATE TABLE v_eventos_escena AS select e.idevento,
+    sum(case
+        when es.idescenario is not null then 1
+        else 0
+    end) escenarios from
+    evento e
+        left outer join
+    escenario es ON e.idevento = es.idevento
+where
+    e.idevento = id_event
+group by e.idevento; 
+
+
+
+
+DROP TABLE IF EXISTS v_accesos;
+create table v_accesos as select idevento, count(*) accesos from
+    acceso
+where
+    idevento = id_event
+group by idevento;
+
+
+
+END 
+$$
+
+DELIMITER ;
+
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
@@ -1695,20 +1868,21 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `enidserv_eniddbbbb3`;
-INSERT INTO `enidserv_eniddbbbb3`.`recurso` (`idrecurso`, `nombre`, `fecha_registro`, `descripcionrecurso`, `urlpaginaweb`, `iconorecurso`, `status`) VALUES (1, 'Colaboradores', NULL, 'Matriz que tiene que ver con los Usuarios', 'index.php/recursocontroller/usuarios', 'fa fa-users', 'Disponible');
-INSERT INTO `enidserv_eniddbbbb3`.`recurso` (`idrecurso`, `nombre`, `fecha_registro`, `descripcionrecurso`, `urlpaginaweb`, `iconorecurso`, `status`) VALUES (5, 'Módulos', NULL, 'Cambios en los perfiles del sistema', 'index.php/recursocontroller/perfiles', 'fa fa-cogs', 'No Disponible');
-INSERT INTO `enidserv_eniddbbbb3`.`recurso` (`idrecurso`, `nombre`, `fecha_registro`, `descripcionrecurso`, `urlpaginaweb`, `iconorecurso`, `status`) VALUES (6, 'Log', NULL, 'Modulo para ver los reportes por parte de los usuarios', 'index.php/reportecontrolador/listarReportes', 'fa fa-tasks', 'No Disponible');
-INSERT INTO `enidserv_eniddbbbb3`.`recurso` (`idrecurso`, `nombre`, `fecha_registro`, `descripcionrecurso`, `urlpaginaweb`, `iconorecurso`, `status`) VALUES (7, 'Tendencias', NULL, 'Como director, quiero entender las tendencias del mercado, tomando en cuenta artistas y géneros musicales, con la finalidad de cuantificar la eficiencia y eficacia de las acciones de mi organización.', 'index.php/tendencias', 'fa fa-line-chart', 'Disponible');
-INSERT INTO `enidserv_eniddbbbb3`.`recurso` (`idrecurso`, `nombre`, `fecha_registro`, `descripcionrecurso`, `urlpaginaweb`, `iconorecurso`, `status`) VALUES (8, 'General', NULL, 'Como director, quiero  visualizar histogramas, estadísticas y gráficos resultantes de los diversos análisis efectuados por el sistema, con la finalidad de evaluar las fortalezas, oportunidades, riesgos y debilidades de mi negocio. ', 'index.php/general', 'fa fa-angle-double-right', 'No Disponible');
-INSERT INTO `enidserv_eniddbbbb3`.`recurso` (`idrecurso`, `nombre`, `fecha_registro`, `descripcionrecurso`, `urlpaginaweb`, `iconorecurso`, `status`) VALUES (9, 'Seguimiento', NULL, 'Como estratega digital, quiero saber que personas se interesan por la marca con la finalidad de  dar seguimiento a los clientes y tener nuevas alternativas para ampliar el negocio. ', 'index.php/seguimiento', 'fa fa-heartbeat', 'No Disponible');
-INSERT INTO `enidserv_eniddbbbb3`.`recurso` (`idrecurso`, `nombre`, `fecha_registro`, `descripcionrecurso`, `urlpaginaweb`, `iconorecurso`, `status`) VALUES (10, 'Eventos', NULL, 'Como estratega digital, quiero poder  filtrar la promoción de eventos los cuales integren funcionalidades de las plataformas Youtube y soundcloud, con la finalidad de potencializar  la imagen de los eventos y las experiencias se hagan palpables  previos a cada  suceso. ', 'index.php/inicio/eventos', 'fa fa-headphones', 'Disponible');
-INSERT INTO `enidserv_eniddbbbb3`.`recurso` (`idrecurso`, `nombre`, `fecha_registro`, `descripcionrecurso`, `urlpaginaweb`, `iconorecurso`, `status`) VALUES (11, 'Timelineevents', NULL, 'Como público que frecuenta al sistema, quiero poder consultar los diferentes eventos de las organizaciones, con filtros que incluyan zonas geográficas, géneros y artistas, con la finalidad de   considerar mi asistencia a ellos. ', 'index.php/timelineevents', 'fa fa-calendar', 'No Disponible');
-INSERT INTO `enidserv_eniddbbbb3`.`recurso` (`idrecurso`, `nombre`, `fecha_registro`, `descripcionrecurso`, `urlpaginaweb`, `iconorecurso`, `status`) VALUES (12, 'Disfruta la experiencia', '', 'Como público que frecuenta al sistema, quiero poder requerir a las organizaciones la  presentación de sus eventos en mi país, con la finalidad de disfrutar la experiencia que se vive en otras naciones.\n', 'index.php/disfrutalaexperiencia', 'fa fa-fighter-jet', 'No Disponible');
-INSERT INTO `enidserv_eniddbbbb3`.`recurso` (`idrecurso`, `nombre`, `fecha_registro`, `descripcionrecurso`, `urlpaginaweb`, `iconorecurso`, `status`) VALUES (13, 'Directorio', NULL, NULL, 'index.php/directorio', 'fa fa-book', 'Disponible');
-INSERT INTO `enidserv_eniddbbbb3`.`recurso` (`idrecurso`, `nombre`, `fecha_registro`, `descripcionrecurso`, `urlpaginaweb`, `iconorecurso`, `status`) VALUES (14, 'Plantillas', NULL, 'Plantillas comunes en el sistema y su uso', 'index.php/template', 'fa fa-file-text-o', 'Disponible');
-INSERT INTO `enidserv_eniddbbbb3`.`recurso` (`idrecurso`, `nombre`, `fecha_registro`, `descripcionrecurso`, `urlpaginaweb`, `iconorecurso`, `status`) VALUES (16, 'Puntos de venta', NULL, NULL, 'index.php/puntosventa', 'fa fa-credit-card', 'Disponible');
-INSERT INTO `enidserv_eniddbbbb3`.`recurso` (`idrecurso`, `nombre`, `fecha_registro`, `descripcionrecurso`, `urlpaginaweb`, `iconorecurso`, `status`) VALUES (17, 'Actividades', NULL, '', 'index.php/actividades', 'fa fa-calendar', 'Disponible');
-INSERT INTO `enidserv_eniddbbbb3`.`recurso` (`idrecurso`, `nombre`, `fecha_registro`, `descripcionrecurso`, `urlpaginaweb`, `iconorecurso`, `status`) VALUES (18, 'Organización', NULL, '', 'index.php/emp/lahistoria', 'fa fa-building', 'Disponible');
+INSERT INTO `enidserv_eniddbbbb3`.`recurso` (`idrecurso`, `nombre`, `fecha_registro`, `descripcionrecurso`, `urlpaginaweb`, `iconorecurso`, `status`, `order_negocio`) VALUES (1, 'Miembros', NULL, 'Matriz que tiene que ver con los Usuarios', 'index.php/recursocontroller/usuarios', 'fa fa-users', 'Disponible', 3);
+INSERT INTO `enidserv_eniddbbbb3`.`recurso` (`idrecurso`, `nombre`, `fecha_registro`, `descripcionrecurso`, `urlpaginaweb`, `iconorecurso`, `status`, `order_negocio`) VALUES (5, 'Módulos', NULL, 'Cambios en los perfiles del sistema', 'index.php/recursocontroller/perfiles', 'fa fa-cogs', 'No Disponible', 11);
+INSERT INTO `enidserv_eniddbbbb3`.`recurso` (`idrecurso`, `nombre`, `fecha_registro`, `descripcionrecurso`, `urlpaginaweb`, `iconorecurso`, `status`, `order_negocio`) VALUES (6, 'Log', NULL, 'Modulo para ver los reportes por parte de los usuarios', 'index.php/reportecontrolador/listarReportes', 'fa fa-tasks', 'No Disponible', 10);
+INSERT INTO `enidserv_eniddbbbb3`.`recurso` (`idrecurso`, `nombre`, `fecha_registro`, `descripcionrecurso`, `urlpaginaweb`, `iconorecurso`, `status`, `order_negocio`) VALUES (7, 'Tendencias', NULL, 'Como director, quiero entender las tendencias del mercado, tomando en cuenta artistas y géneros musicales, con la finalidad de cuantificar la eficiencia y eficacia de las acciones de mi organización.', 'index.php/tendencias', 'fa fa-line-chart', 'Disponible', 2);
+INSERT INTO `enidserv_eniddbbbb3`.`recurso` (`idrecurso`, `nombre`, `fecha_registro`, `descripcionrecurso`, `urlpaginaweb`, `iconorecurso`, `status`, `order_negocio`) VALUES (8, 'General', NULL, 'Como director, quiero  visualizar histogramas, estadísticas y gráficos resultantes de los diversos análisis efectuados por el sistema, con la finalidad de evaluar las fortalezas, oportunidades, riesgos y debilidades de mi negocio. ', 'index.php/general', 'fa fa-angle-double-right', 'No Disponible', 12);
+INSERT INTO `enidserv_eniddbbbb3`.`recurso` (`idrecurso`, `nombre`, `fecha_registro`, `descripcionrecurso`, `urlpaginaweb`, `iconorecurso`, `status`, `order_negocio`) VALUES (9, 'Seguimiento', NULL, 'Como estratega digital, quiero saber que personas se interesan por la marca con la finalidad de  dar seguimiento a los clientes y tener nuevas alternativas para ampliar el negocio. ', 'index.php/seguimiento', 'fa fa-heartbeat', 'No Disponible', 13);
+INSERT INTO `enidserv_eniddbbbb3`.`recurso` (`idrecurso`, `nombre`, `fecha_registro`, `descripcionrecurso`, `urlpaginaweb`, `iconorecurso`, `status`, `order_negocio`) VALUES (10, 'Eventos', NULL, 'Como estratega digital, quiero poder  filtrar la promoción de eventos los cuales integren funcionalidades de las plataformas Youtube y soundcloud, con la finalidad de potencializar  la imagen de los eventos y las experiencias se hagan palpables  previos a cada  suceso. ', 'index.php/inicio/eventos', 'fa fa-headphones', 'Disponible', 7);
+INSERT INTO `enidserv_eniddbbbb3`.`recurso` (`idrecurso`, `nombre`, `fecha_registro`, `descripcionrecurso`, `urlpaginaweb`, `iconorecurso`, `status`, `order_negocio`) VALUES (11, 'Timelineevents', NULL, 'Como público que frecuenta al sistema, quiero poder consultar los diferentes eventos de las organizaciones, con filtros que incluyan zonas geográficas, géneros y artistas, con la finalidad de   considerar mi asistencia a ellos. ', 'index.php/timelineevents', 'fa fa-calendar', 'No Disponible', 14);
+INSERT INTO `enidserv_eniddbbbb3`.`recurso` (`idrecurso`, `nombre`, `fecha_registro`, `descripcionrecurso`, `urlpaginaweb`, `iconorecurso`, `status`, `order_negocio`) VALUES (12, 'Disfruta la experiencia', '', 'Como público que frecuenta al sistema, quiero poder requerir a las organizaciones la  presentación de sus eventos en mi país, con la finalidad de disfrutar la experiencia que se vive en otras naciones.\n', 'index.php/disfrutalaexperiencia', 'fa fa-fighter-jet', 'No Disponible', 15);
+INSERT INTO `enidserv_eniddbbbb3`.`recurso` (`idrecurso`, `nombre`, `fecha_registro`, `descripcionrecurso`, `urlpaginaweb`, `iconorecurso`, `status`, `order_negocio`) VALUES (13, 'Directorio', NULL, NULL, 'index.php/directorio', 'fa fa-book', 'Disponible', 4);
+INSERT INTO `enidserv_eniddbbbb3`.`recurso` (`idrecurso`, `nombre`, `fecha_registro`, `descripcionrecurso`, `urlpaginaweb`, `iconorecurso`, `status`, `order_negocio`) VALUES (14, 'Plantillas', NULL, 'Plantillas comunes en el sistema y su uso', 'index.php/template', 'fa fa-file-text-o', 'Disponible', 6);
+INSERT INTO `enidserv_eniddbbbb3`.`recurso` (`idrecurso`, `nombre`, `fecha_registro`, `descripcionrecurso`, `urlpaginaweb`, `iconorecurso`, `status`, `order_negocio`) VALUES (16, 'Puntos de venta', NULL, NULL, 'index.php/puntosventa', 'fa fa-credit-card', 'Disponible', 5);
+INSERT INTO `enidserv_eniddbbbb3`.`recurso` (`idrecurso`, `nombre`, `fecha_registro`, `descripcionrecurso`, `urlpaginaweb`, `iconorecurso`, `status`, `order_negocio`) VALUES (17, 'Actividades', NULL, '', 'index.php/actividades', 'fa fa-calendar', 'Disponible', 8);
+INSERT INTO `enidserv_eniddbbbb3`.`recurso` (`idrecurso`, `nombre`, `fecha_registro`, `descripcionrecurso`, `urlpaginaweb`, `iconorecurso`, `status`, `order_negocio`) VALUES (18, 'Organización', NULL, '', 'index.php/emp/lahistoria', 'fa fa-building', 'Disponible', 1);
+INSERT INTO `enidserv_eniddbbbb3`.`recurso` (`idrecurso`, `nombre`, `fecha_registro`, `descripcionrecurso`, `urlpaginaweb`, `iconorecurso`, `status`, `order_negocio`) VALUES (19, 'Incidencias', NULL, NULL, 'index.php/emp/incidencias', 'fa fa-tint', NULL, 9);
 
 COMMIT;
 
@@ -1756,6 +1930,7 @@ INSERT INTO `enidserv_eniddbbbb3`.`perfil_recurso` (`idperfil`, `idrecurso`) VAL
 INSERT INTO `enidserv_eniddbbbb3`.`perfil_recurso` (`idperfil`, `idrecurso`) VALUES (3, 18);
 INSERT INTO `enidserv_eniddbbbb3`.`perfil_recurso` (`idperfil`, `idrecurso`) VALUES (4, 18);
 INSERT INTO `enidserv_eniddbbbb3`.`perfil_recurso` (`idperfil`, `idrecurso`) VALUES (6, 18);
+INSERT INTO `enidserv_eniddbbbb3`.`perfil_recurso` (`idperfil`, `idrecurso`) VALUES (4, 19);
 
 COMMIT;
 
@@ -1765,25 +1940,23 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `enidserv_eniddbbbb3`;
-INSERT INTO `enidserv_eniddbbbb3`.`permiso` (`idpermiso`, `nombrepermiso`, `descripcionpermiso`, `idrecurso`, `urlpaginaweb`, `iconpermiso`) VALUES (1, 'Invitar', '', 1, 'index.php/recursocontroller/usuarios', 'fa fa-user-plus');
+INSERT INTO `enidserv_eniddbbbb3`.`permiso` (`idpermiso`, `nombrepermiso`, `descripcionpermiso`, `idrecurso`, `urlpaginaweb`, `iconpermiso`) VALUES (1, 'Miembros de la cuenta', '', 1, 'index.php/recursocontroller/usuarios', 'fa fa-user-plus');
 INSERT INTO `enidserv_eniddbbbb3`.`permiso` (`idpermiso`, `nombrepermiso`, `descripcionpermiso`, `idrecurso`, `urlpaginaweb`, `iconpermiso`) VALUES (8, 'Configuración', NULL, 5, 'index.php/recursocontroller/perfiles', 'fa fa-wrench');
 INSERT INTO `enidserv_eniddbbbb3`.`permiso` (`idpermiso`, `nombrepermiso`, `descripcionpermiso`, `idrecurso`, `urlpaginaweb`, `iconpermiso`) VALUES (9, 'general', NULL, 6, 'index.php/reportecontrolador/listarReportes', 'fa fa-th');
-INSERT INTO `enidserv_eniddbbbb3`.`permiso` (`idpermiso`, `nombrepermiso`, `descripcionpermiso`, `idrecurso`, `urlpaginaweb`, `iconpermiso`) VALUES (10, 'principal', 'Como estratega digital, quiero poder  filtrar la promoción de eventos los cuales integren funcionalidades de las plataformas Youtube y soundcloud, con la finalidad de potenciar la imagen de los eventos y las experiencias se hagan palpables  previos a cada  suceso. \n', 10, 'index.php/inicio/eventos', 'fa fa-star');
+INSERT INTO `enidserv_eniddbbbb3`.`permiso` (`idpermiso`, `nombrepermiso`, `descripcionpermiso`, `idrecurso`, `urlpaginaweb`, `iconpermiso`) VALUES (10, 'Administrar eventos', 'Como estratega digital, quiero poder  filtrar la promoción de eventos los cuales integren funcionalidades de las plataformas Youtube y soundcloud, con la finalidad de potenciar la imagen de los eventos y las experiencias se hagan palpables  previos a cada  suceso. \n', 10, 'index.php/inicio/eventos', 'fa fa-star');
 INSERT INTO `enidserv_eniddbbbb3`.`permiso` (`idpermiso`, `nombrepermiso`, `descripcionpermiso`, `idrecurso`, `urlpaginaweb`, `iconpermiso`) VALUES (11, 'Linea de tiempo', NULL, 10, 'index.php/eventos/timeline', 'fa fa-list-alt');
 INSERT INTO `enidserv_eniddbbbb3`.`permiso` (`idpermiso`, `nombrepermiso`, `descripcionpermiso`, `idrecurso`, `urlpaginaweb`, `iconpermiso`) VALUES (12, 'Contactos', NULL, 13, 'index.php/directorio/contactos', 'fa fa-cart-plus');
 INSERT INTO `enidserv_eniddbbbb3`.`permiso` (`idpermiso`, `nombrepermiso`, `descripcionpermiso`, `idrecurso`, `urlpaginaweb`, `iconpermiso`) VALUES (13, 'Eventos', 'plantillas de uso común al crear eventos', 14, 'index.php/templates/eventos', 'fa fa-play');
-INSERT INTO `enidserv_eniddbbbb3`.`permiso` (`idpermiso`, `nombrepermiso`, `descripcionpermiso`, `idrecurso`, `urlpaginaweb`, `iconpermiso`) VALUES (14, 'Escenarios', NULL, 14, 'index.php/templates/escenarios', 'fa fa-play');
-INSERT INTO `enidserv_eniddbbbb3`.`permiso` (`idpermiso`, `nombrepermiso`, `descripcionpermiso`, `idrecurso`, `urlpaginaweb`, `iconpermiso`) VALUES (15, 'Artistas', NULL, 14, 'index.php/templates/artistas', 'fa fa-play');
 INSERT INTO `enidserv_eniddbbbb3`.`permiso` (`idpermiso`, `nombrepermiso`, `descripcionpermiso`, `idrecurso`, `urlpaginaweb`, `iconpermiso`) VALUES (16, 'Permisos', NULL, 1, 'index.php/recursocontroller/perfilconfig', 'fa fa-wrench');
 INSERT INTO `enidserv_eniddbbbb3`.`permiso` (`idpermiso`, `nombrepermiso`, `descripcionpermiso`, `idrecurso`, `urlpaginaweb`, `iconpermiso`) VALUES (17, 'Linea de tiempo', NULL, 7, 'index.php/tendencias/lineatiempo', NULL);
 INSERT INTO `enidserv_eniddbbbb3`.`permiso` (`idpermiso`, `nombrepermiso`, `descripcionpermiso`, `idrecurso`, `urlpaginaweb`, `iconpermiso`) VALUES (18, 'Eventos por usuario', NULL, 7, 'index.php/tendencias/eventosporusuario', NULL);
-INSERT INTO `enidserv_eniddbbbb3`.`permiso` (`idpermiso`, `nombrepermiso`, `descripcionpermiso`, `idrecurso`, `urlpaginaweb`, `iconpermiso`) VALUES (19, 'Tendencias por tipo de evento', NULL, 7, 'index.php/tendencias/tendenciasportipoevento', NULL);
+INSERT INTO `enidserv_eniddbbbb3`.`permiso` (`idpermiso`, `nombrepermiso`, `descripcionpermiso`, `idrecurso`, `urlpaginaweb`, `iconpermiso`) VALUES (19, 'Funnel', NULL, 7, 'index.php/tendencias/', NULL);
 INSERT INTO `enidserv_eniddbbbb3`.`permiso` (`idpermiso`, `nombrepermiso`, `descripcionpermiso`, `idrecurso`, `urlpaginaweb`, `iconpermiso`) VALUES (20, 'Rendimiento', NULL, 7, 'index.php/tendencias/tendenciasportipoevento', NULL);
 INSERT INTO `enidserv_eniddbbbb3`.`permiso` (`idpermiso`, `nombrepermiso`, `descripcionpermiso`, `idrecurso`, `urlpaginaweb`, `iconpermiso`) VALUES (21, 'Próximamente', NULL, 17, 'index.php/actividades/proximamente', NULL);
 INSERT INTO `enidserv_eniddbbbb3`.`permiso` (`idpermiso`, `nombrepermiso`, `descripcionpermiso`, `idrecurso`, `urlpaginaweb`, `iconpermiso`) VALUES (22, 'Administrar', NULL, 16, 'index.php/puntosventa/administrar', NULL);
 INSERT INTO `enidserv_eniddbbbb3`.`permiso` (`idpermiso`, `nombrepermiso`, `descripcionpermiso`, `idrecurso`, `urlpaginaweb`, `iconpermiso`) VALUES (23, 'Mis eventos administrados', NULL, 7, 'index.php/tendencias/miseventos', NULL);
 INSERT INTO `enidserv_eniddbbbb3`.`permiso` (`idpermiso`, `nombrepermiso`, `descripcionpermiso`, `idrecurso`, `urlpaginaweb`, `iconpermiso`) VALUES (24, 'Configuración', NULL, 18, 'index.php/emp/lahistoria', NULL);
-INSERT INTO `enidserv_eniddbbbb3`.`permiso` (`idpermiso`, `nombrepermiso`, `descripcionpermiso`, `idrecurso`, `urlpaginaweb`, `iconpermiso`) VALUES (25, 'Incidencias', NULL, 18, 'index.php/emp/incidencias', NULL);
+INSERT INTO `enidserv_eniddbbbb3`.`permiso` (`idpermiso`, `nombrepermiso`, `descripcionpermiso`, `idrecurso`, `urlpaginaweb`, `iconpermiso`) VALUES (25, 'Reportar', NULL, 19, 'index.php/emp/incidencias', NULL);
 
 COMMIT;
 
@@ -1801,7 +1974,6 @@ INSERT INTO `enidserv_eniddbbbb3`.`perfil_permiso` (`idperfil`, `idpermiso`) VAL
 INSERT INTO `enidserv_eniddbbbb3`.`perfil_permiso` (`idperfil`, `idpermiso`) VALUES (5, 10);
 INSERT INTO `enidserv_eniddbbbb3`.`perfil_permiso` (`idperfil`, `idpermiso`) VALUES (4, 10);
 INSERT INTO `enidserv_eniddbbbb3`.`perfil_permiso` (`idperfil`, `idpermiso`) VALUES (3, 11);
-INSERT INTO `enidserv_eniddbbbb3`.`perfil_permiso` (`idperfil`, `idpermiso`) VALUES (4, 11);
 INSERT INTO `enidserv_eniddbbbb3`.`perfil_permiso` (`idperfil`, `idpermiso`) VALUES (5, 11);
 INSERT INTO `enidserv_eniddbbbb3`.`perfil_permiso` (`idperfil`, `idpermiso`) VALUES (3, 12);
 INSERT INTO `enidserv_eniddbbbb3`.`perfil_permiso` (`idperfil`, `idpermiso`) VALUES (4, 12);
@@ -1809,17 +1981,11 @@ INSERT INTO `enidserv_eniddbbbb3`.`perfil_permiso` (`idperfil`, `idpermiso`) VAL
 INSERT INTO `enidserv_eniddbbbb3`.`perfil_permiso` (`idperfil`, `idpermiso`) VALUES (5, 13);
 INSERT INTO `enidserv_eniddbbbb3`.`perfil_permiso` (`idperfil`, `idpermiso`) VALUES (4, 13);
 INSERT INTO `enidserv_eniddbbbb3`.`perfil_permiso` (`idperfil`, `idpermiso`) VALUES (3, 13);
-INSERT INTO `enidserv_eniddbbbb3`.`perfil_permiso` (`idperfil`, `idpermiso`) VALUES (4, 14);
-INSERT INTO `enidserv_eniddbbbb3`.`perfil_permiso` (`idperfil`, `idpermiso`) VALUES (4, 15);
 INSERT INTO `enidserv_eniddbbbb3`.`perfil_permiso` (`idperfil`, `idpermiso`) VALUES (4, 16);
 INSERT INTO `enidserv_eniddbbbb3`.`perfil_permiso` (`idperfil`, `idpermiso`) VALUES (4, 17);
 INSERT INTO `enidserv_eniddbbbb3`.`perfil_permiso` (`idperfil`, `idpermiso`) VALUES (4, 18);
-INSERT INTO `enidserv_eniddbbbb3`.`perfil_permiso` (`idperfil`, `idpermiso`) VALUES (4, 19);
-INSERT INTO `enidserv_eniddbbbb3`.`perfil_permiso` (`idperfil`, `idpermiso`) VALUES (4, 20);
 INSERT INTO `enidserv_eniddbbbb3`.`perfil_permiso` (`idperfil`, `idpermiso`) VALUES (4, 21);
 INSERT INTO `enidserv_eniddbbbb3`.`perfil_permiso` (`idperfil`, `idpermiso`) VALUES (4, 22);
-INSERT INTO `enidserv_eniddbbbb3`.`perfil_permiso` (`idperfil`, `idpermiso`) VALUES (5, 14);
-INSERT INTO `enidserv_eniddbbbb3`.`perfil_permiso` (`idperfil`, `idpermiso`) VALUES (5, 15);
 INSERT INTO `enidserv_eniddbbbb3`.`perfil_permiso` (`idperfil`, `idpermiso`) VALUES (5, 23);
 INSERT INTO `enidserv_eniddbbbb3`.`perfil_permiso` (`idperfil`, `idpermiso`) VALUES (4, 23);
 INSERT INTO `enidserv_eniddbbbb3`.`perfil_permiso` (`idperfil`, `idpermiso`) VALUES (5, 21);
@@ -1827,6 +1993,9 @@ INSERT INTO `enidserv_eniddbbbb3`.`perfil_permiso` (`idperfil`, `idpermiso`) VAL
 INSERT INTO `enidserv_eniddbbbb3`.`perfil_permiso` (`idperfil`, `idpermiso`) VALUES (4, 24);
 INSERT INTO `enidserv_eniddbbbb3`.`perfil_permiso` (`idperfil`, `idpermiso`) VALUES (5, 25);
 INSERT INTO `enidserv_eniddbbbb3`.`perfil_permiso` (`idperfil`, `idpermiso`) VALUES (4, 25);
+INSERT INTO `enidserv_eniddbbbb3`.`perfil_permiso` (`idperfil`, `idpermiso`) VALUES (4, 19);
+INSERT INTO `enidserv_eniddbbbb3`.`perfil_permiso` (`idperfil`, `idpermiso`) VALUES (5, 19);
+INSERT INTO `enidserv_eniddbbbb3`.`perfil_permiso` (`idperfil`, `idpermiso`) VALUES (3, 19);
 
 COMMIT;
 

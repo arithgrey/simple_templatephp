@@ -1,4 +1,4 @@
-|<?=ini_set('display_errors', '1');?>
+<?=ini_set('display_errors', '1');?>
 <div class='col-lg-1'>
     <strong title='Cargar imagenes del escenario' id='img-button-more-imgs' data-toggle="modal" data-target="#modal-img-escenario-principal"  >
         <i class="fa fa-plus-circle fa-5x"></i>                            
@@ -400,6 +400,9 @@
 
 
 
+
+
+
 <!--modal para definir la hora de inicio y termino en la presentación de un artista-->
 <div class="modal fade" id="modal_record_horario" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
     <div class="modal-dialog">
@@ -414,9 +417,10 @@
 
 
 <div class="row">
+  <div class='col-lg-6'>
   <div class="form-group">
-  <label class="control-label col-md-3">Hora de inicio</label>
-    <div class="col-md-4">
+  <label class="control-label col-lg-12">Hora de inicio</label>
+    <div class="col-lg-12">
       <div class="input-group bootstrap-timepicker">
         <input class="form-control timepicker-default" id="hiartista" name="hiartista" type="text">
           <span class="input-group-btn">
@@ -425,11 +429,13 @@
       </div>
     </div>
   </div>
-</div>
-<div class="row">
+  </div>  
+
+
+  <div class='col-lg-6'>
   <div class="form-group">
-  <label class="control-label col-md-3">Hora de término</label>
-    <div class="col-md-4">
+  <label class="control-label col-lg-12">Hora de término</label>
+    <div class="col-lg-12">
       <div class="input-group bootstrap-timepicker">
         <input class="form-control timepicker-default" id="htartista" name="htartista" type="text">
           <span class="input-group-btn">
@@ -441,16 +447,7 @@
 </div>
 
 
-
-
-
-
-
-
-
-
-
-            </div>
+</div>
             <button type="button" class="pull-left guardar_horario btn btn-default" data-dismiss="modal">Guardar</button>
             <div class="modal-footer">
             	
@@ -929,6 +926,7 @@
     display: none;
 }
 </style>
+
 
 
 

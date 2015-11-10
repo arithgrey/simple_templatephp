@@ -149,148 +149,159 @@ function get_date_event_format($inicio , $termino){
 
 
 function get_last_events_empresa($ultimos_eventos, $limit_text= 270 ,  $show_edit=0 , $show_delete = 0 , $show_view_like_public = 0){
-		$elements ="";
-		
+		$elements ="";		
 		if (count($ultimos_eventos) == 0 ) {
-
 			$elements.= default_template_eventos();
 		}
 
         foreach ($ultimos_eventos as $row){
 			
-			$urlnext = base_url('index.php/eventos/nuevo/'.$row["idevento"]."?start=".$row["fecha_inicio"] ."&end=".$row["fecha_termino"]."&status=".$row["status"] );
+			$urlnext = base_url('index.php/eventos/nuevo/'.$row["idevento"]);
 			$id_evento = $row["idevento"];
-			
-			
 			$img = "<img src='". base_url($row["portada"])."' class='media-object'> ";
-
 			$estadoevento = get_statusevent($row["status"]);			 
-			$elements .="<div class='panel'>
-                                    <div class='panel-body ' style='' >
+			$view_like= "";
+			$estado_event =  "";
+			$delete_event  =  ""; 	
 
+			if ($show_view_like_public ==  1 ) {
+
+				$view_like  .="<a title='Ver como el público'  class='view-event ' href='". base_url('index.php/eventos/visualizar/') ."/". $id_evento."'> 
+							 	<i class='fa  fa-arrow-circle-o-right fa-2x'></i>					          
+							   </a>";
+			}
+			if ($show_edit == 1 ){
+				$estado_event .="<a href='#'>". $estadoevento ."</a>";
+			}if ($show_delete == 1) {
+				$delete_event  .="<a class='delete_evento' id='".$id_evento. "'  >
+									<i class='delete_evento fa fa-trash-o fa-2x' id='".$id_evento."'></i>
+								  </a>";		 	
+			}
+                                                
+
+
+
+	
+			
+
+			$elements .="<div class='panel'>
+                                    <div class='panel-body '>
                                         <div class='media blog-cmnt'>
                                                 <a href='$urlnext' class='pull-left'>
                                                     ".$img."
                                                 </a>
                                                 <div class='media-body'>
-                                                    <h4 class='media-heading' >
-                                                        <a  href='$urlnext'> <label>".$row["nombre_evento"] ."</label>
+                                                    <h4>
+                                                        <a style='color: black !important; ' href='$urlnext'> 
+                                                        <label>".$row["nombre_evento"] ."</label>
                                                         ".  $row["edicion"] ." </a>
 
                                                     </h4>
-                                                    <span style='font-size: 1em;' class='mp-less'>
-                                                        ". substr ($row["descripcion_evento"] , 0, $limit_text) ."...
-                                                    </span>
-                                                    
+                                                    <span style='font-size: .9em; color: #7E908A' class='mp-less'>
+                                                        ". substr ($row["descripcion_evento"] , 0, $limit_text) ."...	                                                    
+		                                                    <div class='pull-right'>	                                                  	
+			                                                  	$estado_event
+			                                                  	$delete_event
+			                                                  	$view_like   
+			                                                    <a  class='edith-fecha-evento'  data-toggle='modal' data-target='#modal-update-evento'   id='". $row["idevento"]  ."'>
+					                                        		<i class='fa fa-calendar-o fa-2x'></i> ".  $row["fecha_inicio"]." - ".$row["fecha_termino"] ."
+				                                            	</a>
+			                                            	<div>
+                                                    </span>                                                                                                        
                                                 </div>
                                             </div>
-                                            <ul class='revenue-nav'>		                                        
-		                                        <li>
+                                        </div>    
+                                    </div>    
 
-		                                        <div class='btn-group-vertical' aria-label='Vertical button group'>
-											      
 
-											      <div class='escenarios_evento btn-group'    role='group'>
-											        <button id='". $id_evento ."' type='button' class='btn btn-default dropdown-toggle' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>											          
-											          <li>
-											          <a href='#'><i class='fa fa-play'></i> </a></li> Escenarios ". $row["escenarios"]."
-											          <span class='caret'></span>
+                                            
+                                     <ul class='revenue-nav'>		                                        
+		                                <li>
+		                                        <div class='btn-group-vertical'>											      
+											      	<div class='escenarios_evento btn-group' role='group' >
+												        <button id='". $id_evento ."' type='button' class='btn btn-default dropdown-toggle'  data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'  >											          
+												          	<li>
+												          		<a style='background:black; color:white;' href='#'>
+												          			<i class='fa fa-play'></i>
+												          		</a>
+												          	</li> Escenarios ". $row["escenarios"]."
+												          	<span class='caret'></span>
+												        </button>
 
-											        </button>
+												        <ul class='dropdown-menu' aria-labelledby='btnGroupVerticalDrop1' >											          
+												          <div class='escenarios_in_event_".$id_evento." '   id='escenarios_in_event_".$id_evento." '></div>											          
+												        </ul>
 
-											        <ul class='dropdown-menu' aria-labelledby='btnGroupVerticalDrop1'>											          
-											          <div class='escenarios_in_event_".$id_evento."'  id='escenarios_in_event_".$id_evento." '></div>											          
-											        </ul>
-
-											      </div>											      
+											      	</div>											      
 											    </div>
 
 
-											    
-											    <button  type='button' class='btn btn-default dropdown-toggle' 
-											        style='background:#586D74 !important;' >											          
-											          <li>
-											          
-											          <i class='fa fa-headphones'></i>
- 													  </li> ". $row["artistas"]." Artistas
+											    <div class='btn-group-vertical'>											      
+											      	<div class='escenarios_artistas_principal btn-group' role='group'>
+												        <button id='". $id_evento ."' type='button' class='btn btn-default dropdown-toggle'  data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'  >											          
+												          	<li>
+												          		<a style='background:black; color:white;' href='#'>
+												          			<i class='fa fa-headphones'></i> 	
+												          		</a>
+												          	</li> Artistas  ". $row["artistas"]." 
+												          	<span class='caret'></span>
+												        </button>
 
-											          <span class='caret'></span>
-											    </button>
-											    
-
+												        <ul class='dropdown-menu' aria-labelledby='btnGroupVerticalDrop1' >											          
+												          <div class='artistas_in_event_".$id_evento."'  id='artistas_in_event_".$id_evento." '></div>											          
+												        </ul>
+											      	</div>											      
+											    </div>
 
 
 												<div class='btn-group-vertical' aria-label='Vertical button group'>											      
-											      <div class='acceso_evento btn-group'    role='group'>
-											        <button id='". $id_evento ."' type='button' class='btn btn-default dropdown-toggle' 
-											        data-toggle='dropdown' aria-haspopup='true' aria-expanded='false' style='background:#0D6B8A !important;' >											          
-											          <li>
-											          <a style='background: #10382E !important' href='#'>
-											          <i class='fa fa-money'></i>
- 													  </a></li> ". $row["accesos"]." Accesos
-
-											          <span class='caret'></span>
-											        </button>
-											        <ul class='dropdown-menu' aria-labelledby='btnGroupVerticalDrop1'>											          
-											         
-											          <div class='acceso_in_event_".$id_evento."'  id='acceso_in_event_".$id_evento." '></div>											          
-
-											        </ul>
-											      </div>											      
+												    <div class='acceso_evento btn-group'    role='group'>
+												        <button id='". $id_evento ."' type='button' class='btn btn-default dropdown-toggle'  data-toggle='dropdown' aria-haspopup='true' aria-expanded='false' >											          
+												          <li>
+													          <a style='background:black; color:white;' href='#'>
+													          	<i class='fa fa-money'></i>
+		 													  </a>
+	 													  </li> ". $row["accesos"]." Accesos
+												          <span class='caret'></span>
+												        </button>
+												        <ul class='dropdown-menu' aria-labelledby='btnGroupVerticalDrop1'>											          												         
+												         	<div class='acceso_in_event_".$id_evento."'  id='acceso_in_event_".$id_evento." '></div>											          
+												        </ul>
+												    </div>											      
 											    </div>
 
 
-											   	
-											   	
-											    <button   type='button' class='btn btn-default dropdown-toggle puntos_venta_next' 
-											        style='background:rgb(23, 78, 96) !important;' id='".$id_evento ."' >											          
-											          
-											          <li>
-											          
-											          <i class='fa fa-credit-card'></i>
- 													  </li> ". $row["evento_punto_venta"]." puntos venta
+											
 
-											          <span class='caret'></span>
-											    </button>
+												<div class='btn-group-vertical' aria-label='Vertical button group'>											      
+												    <div class='btn-group'    role='group'>
+												        <button  type='button' class='btn btn-default dropdown-toggle'  data-toggle='dropdown' aria-haspopup='true' aria-expanded='false' >											          
+												          <li>
+													          <a style='background:black; color:white;' href='#'>
+													          	<i class='fa fa-credit-card'></i> 
+		 													  </a>
+	 													  </li> ". $row["evento_punto_venta"]." Puntos venta
+												          <span class='caret'></span>
+												        </button>
+												        
+												    </div>											      
+											    </div>
+															   	
+											   
 											    
 
-
-
-
-
-
-		                                        <a class='edith-fecha-evento'  data-toggle='modal' data-target='#modal-update-evento'   id='". $row["idevento"]  ."'>
-		                                        		<i class='fa fa-calendar-o'></i>
-	                                                     ".  $row["fecha_inicio"]." -
-	                                                     ".$row["fecha_termino"] ."
-	                                            </a>
-                                                </li>";
+                                                </li>
 
                                                 
-                                                if ($show_view_like_public ==  1 ) {
-
-                                                	$elements .="<li class=''> <a class='view-event' href='". base_url('index.php/eventos/visualizar/') ."/". $id_evento."'>
-                                               		<i class='delete_evento fa  fa-arrow-circle-o-right' id='".$id_evento."'></i>
-                                               		ver como el público
-                                               		</a></li>";
-                                                }
-
-                                                if ($show_edit == 1 ){
-                                                	$elements .="<li class='active' ><a href='#'>". $estadoevento ."</a></li>";
-                                                }if ($show_delete == 1) {
-                                               		$elements .=" <li class=''> <a class='delete_evento' id='".$id_evento. "'  >
-                                               		<i class='delete_evento fa fa-trash-o' id='".$id_evento."'></i></a></li>";		 	
-                                                }
                                                 
-                                                
-                                                $elements.="
-
 		                                    </ul>		                                    
                                         </div>
+                                        
                                     </div>";
         }                            
 		return $elements;                                    	
 	}
+
 
 
 /*****************************************************************************************/
@@ -705,3 +716,4 @@ function get_slider_img_evento($data){
 
 
 }/*Termina el helper*/
+

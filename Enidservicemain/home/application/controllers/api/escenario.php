@@ -237,8 +237,14 @@ class Escenario extends REST_Controller{
         $db_response = $this->escenariomodel->get_escenarios_evento($id_evento);
         $this->response($db_response);
     }
-
-
+    /**/
+    function escenario_evento_artista_GET()
+    {        
+        $id_evento =  $this->get("evento");    
+        $db_response =  $this->escenarioartistamodel->get_list_artistas_evento($id_evento);        
+        $this->response($db_response);
+    }
+    /**/
     function validate_user_sesssion(){
         if( $this->sessionclass->is_logged_in() == 1) {}else{
             /*Terminamos la session*/

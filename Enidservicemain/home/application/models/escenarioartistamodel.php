@@ -155,5 +155,13 @@ function update_nombre_artista($data){
 	return $this->db->query($query_update);
 
 }
+
+/**/
+function get_list_artistas_evento($id_evento)
+{
+	$query_get =  "select a.* from artista a  inner join  escenario_artista ea  on a.idartista  =  ea.idartista inner join escenario e on ea.idescenario = e.idescenario where e.idevento =  '". $id_evento."' ";
+	$result =  $this->db->query($query_get);
+	return $result ->result_array();
+}
 /*Termina modelo */
 }

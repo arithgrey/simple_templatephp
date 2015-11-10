@@ -1,8 +1,43 @@
 $(document).on("ready" , function(){
 
 	$(".escenarios_evento").click(list_informe_escenarios);
+	$(".escenarios_artistas_principal").click(list_informe_artistas);
 
 });
+
+
+/*lista el nombre del los escenarios en el botton */
+function list_informe_artistas(e){
+
+	evento = e.target.id;
+	place = ".artistas_in_event_" + evento;
+	url = now + "index.php/api/escenario/escenario_evento_artista/format/json/";
+	$.get(url , {"evento" : evento} ).done(function(data){
+
+
+		artistas_list  = "";		
+		if (data.length == 0) {
+			artistas_list  += "<li><a> Ningún artista registrado en el evento</a></li>";			
+		}
+		
+		for(var a = 0  in  data ) {
+			
+			//url_next = now + "index.php/escenario/configuracionavanzada/" + data[a].idescenario;
+			artistas_list += "<li><a>" + data[a].nombre_artista + "</a></li>";
+		}
+		
+		llenaelementoHTML( place , artistas_list);
+		
+
+	}).fail(function(){
+		
+
+	});
+
+}
+
+
+
 /*lista el nombre del los escenarios en el botton */
 function list_informe_escenarios(e){
 

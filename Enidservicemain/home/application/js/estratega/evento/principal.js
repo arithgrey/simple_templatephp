@@ -8,6 +8,7 @@ $(document).on("ready", function(){
 
 	$(".delete_evento").click(delete_evento);
 	$(".edith-fecha-evento").click(update_fecha_evento_evento);
+	
 
 });
 function trynewevent(){
