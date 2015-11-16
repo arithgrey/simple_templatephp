@@ -50,6 +50,16 @@ function get_porcentaje_templates_eventos($contenidos , $val ){
 /*Desplegamos las listas de restricciones*/ 
 function display_contenido_templ($data_contenido, $del=0 , $check=0 , $identificador = 'identificador' ){
 
+
+
+
+
+
+    $list_templa_contenido='';
+
+    if (count($data_contenido) > 0){
+        
+    
     $list_templa_contenido='<div class="panel">
                                 <div class="panel-body">
                                     <ul class="to-do-list ui-sortable" id="sortable-todo">';
@@ -84,6 +94,7 @@ function display_contenido_templ($data_contenido, $del=0 , $check=0 , $identific
                                 $flag++;
     }
     $list_templa_contenido .= '</ul></div>  </div>' ;                   
+    }
     return  $list_templa_contenido;
 
 }

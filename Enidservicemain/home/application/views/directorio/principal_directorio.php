@@ -22,6 +22,7 @@
         <div ><?=$resumen;?></div>
         </div>
     </div>
+
        <form action="<?=base_url('index.php/excel_export')?>" method="get"  id="FormularioExportacion">
                 <button class='botonExcel btn btn-default pull-right col-md-2 '  > Exportar a Excel <i class="fa fa-file-pdf-o"></i> </button>  
                 <input type="hidden" id="datos_a_enviar" name="datos_a_enviar" />
@@ -193,7 +194,7 @@
 
 
     <div class='col-lg-12'>
-        <div class='col-lg-12'>
+        <div class='col-lg-6'>
          <div class="form-group">            
              <div class="input-group m-bot15">
                 <span class="input-group-addon">
@@ -203,21 +204,21 @@
              </div>
          </div>
         </div> 
-    </div> 
 
-    <div class='col-lg-12'>
-        <div class='col-lg-12'> 
-         <div class="form-group">            
-             <div class="input-group m-bot15">
-                <span class="input-group-addon">
-                    Twitter
-                </span>
-                <input class="form-control" name="pagina_tw"  type="url">
-             </div>
-        </div>
-     </div>
-    </div> 
 
+        <div class='col-lg-6'> 
+             <div class="form-group">            
+                 <div class="input-group m-bot15">
+                    <span class="input-group-addon">
+                        Twitter
+                    </span>
+                    <input class="form-control" name="pagina_tw"  type="url">
+                 </div>
+            </div>
+         </div>
+
+    </div> 
+    
     <div class='col-lg-12'> 
         <div class='col-lg-12'> 
          <div class="form-group">            
@@ -234,11 +235,11 @@
 
 
     <div class='col-lg-12'>
-        <div class='col-lg-6'>
+        <div class='col-lg-4'>
              <div class="form-group">            
                  <div class="input-group m-bot15">
                     <span class="input-group-addon">
-                        Correo Electrónico @
+                        Correo @
                     </span>
                     <input class="form-control" name="correo"   placeholder="arithgrey@gmail.com" type="text">
                  </div>
@@ -246,7 +247,19 @@
              </div>
         </div>
 
-        <div class='col-lg-6'>
+        <div class='col-lg-4'>
+             <div class="form-group">            
+                 <div class="input-group m-bot15">
+                    <span class="input-group-addon">
+                        Correo alterno @
+                    </span>
+                    <input class="form-control" name="correo_alterno"   placeholder="arithgrey@gmail.com" type="text">
+                 </div>
+
+             </div>
+        </div>
+
+        <div class='col-lg-4'>
             <div class="form-group" >
                 
                 <select class="form-control col-sm-12" name="tipo">            
@@ -429,24 +442,29 @@
              </div>
          </div>
          </div>
+         
+         <div class='row'>
          <div class='col-lg-12'>
-         <div class="form-group">            
-             <div class="input-group m-bot15">
-                <span class="input-group-addon">
-                    Facebook
-                </span>
-                <input class="form-control" name="npagina_fb" id='npagina_fb'  type="url">
+            <div class='col-lg-6'>
+                 <div class="form-group">            
+                     <div class="input-group m-bot15">
+                        <span class="input-group-addon">
+                            Twitter
+                        </span>
+                        <input class="form-control" name="npagina_tw" id='npagina_tw'  type="url">
+                     </div>
+                 </div>
+            </div>     
+            <div class='col-lg-6'>
+                <div class="form-group">            
+                 <div class="input-group m-bot15">
+                    <span class="input-group-addon">
+                        Facebook
+                    </span>
+                    <input class="form-control" name="npagina_fb" id='npagina_fb'  type="url">
+                 </div>
              </div>
-         </div>
-         </div>
-         <div class='col-lg-12'>
-         <div class="form-group">            
-             <div class="input-group m-bot15">
-                <span class="input-group-addon">
-                    Twitter
-                </span>
-                <input class="form-control" name="npagina_tw" id='npagina_tw'  type="url">
-             </div>
+            </div>    
          </div>
          </div>
 
@@ -469,11 +487,11 @@
 
 
     <div class='col-lg-12'>
-        <div class='col-lg-6'>
+        <div class='col-lg-4'>
              <div class="form-group">            
                  <div class="input-group m-bot15">
                     <span class="input-group-addon">
-                        Nuevo correo electrónico @
+                        Correo @
                     </span>
                     <input class="form-control" name="ncorreo"  id="ncorreo"  placeholder="arithgrey@gmail.com" type="text">
                  </div>
@@ -481,7 +499,19 @@
              </div>
 
         </div>     
-        <div class='col-lg-6'>
+         <div class='col-lg-4'>
+             <div class="form-group">            
+                 <div class="input-group m-bot15">
+                    <span class="input-group-addon">
+                        Correo  alterno @
+                    </span>
+                    <input class="form-control" name="ncorreoalterno"  id="ncorreoalterno"  placeholder="arithgrey@gmail.com" type="text">
+                 </div>
+
+             </div>
+
+        </div>   
+        <div class='col-lg-4'>
          <div class="form-group" >        
             <select class="form-control col-sm-12" id="ntipo" name="ntipo">
                 <option >Seleccione</option>

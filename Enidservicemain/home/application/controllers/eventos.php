@@ -35,8 +35,9 @@ class Eventos extends CI_Controller{
             $data = $this->validate_user_sesssion("Linea de tiempo");
             $this->load->helper("timelineevent");
             $idempresa =  $this->sessionclass->getidempresa();
-            $longitud_descripcion_text = 400;
-            $arreglo_time_line = $this->eventmodel->get_time_events_byid($idempresa);
+            $longitud_descripcion_text = 150;
+
+            $arreglo_time_line = $this->eventmodel->get_last_events($idempresa , 100 );
             $data["time_line"] = get_time_line_event($arreglo_time_line, $longitud_descripcion_text);
 
             $this->load->view('TemplateEnid/header_template', $data);

@@ -1,13 +1,9 @@
-
-//Fucion de JQuery para precargar la estructura de al momento de hacer click en el texto
-
 	$(document).on("ready",function(){
-
-		//Manda a llamar las funciones que muestran datos extraidos de la bd usando JSON
 		mostrarNombre();
 		mostrarPuesto();
 		mostrarDescripcion();
 
+		$("#form-user-update").submit(actualizar_data_usuario);
 		//Referencia a el <h1 id="nomPersona">, al hacer click haga un evento
 		$( "#nomPersona" ).click(function() {
 			//ocultando el h1			//Asignando a una variable el texto que tiene el h1
@@ -204,18 +200,31 @@ function mostrarDescripcion()
     			llenaelementoHTML("#texto" , data[x].descripcion);
     		}
     	}
-    	/*
-    	if(descripcion.length==0){
-    		mensaje = "Registra descripcion";
-    			llenaelementoHTML("#texto" , mensaje);
-    		}
-    		else
-    		{
-    	//$("#nomPersona").html(puesto);
-    	
-    		}*/
+    
   	})
  	.fail(function() {
     	alert( "error" );
 	});
+ }
+ /**/
+ function actualizar_data_usuario() {
+ 	
+ 	url = $("#form-user-update").attr("action"); 
+ 	data_send =  $("#form-user-update").serialize();
+ 	
+ 	$.ajax({url: url, type: 'PUT', data : data_send  }).done(function(data){
+
+ 		
+ 		if (data ==  true ) {
+
+ 			llenaelementoHTML("#msj_update_status" ,  "<div class='alert alert-info'>Datos Actualizados</div>");
+ 		}else{
+ 			llenaelementoHTML("#msj_update_status" ,  "<div class='alert alert-warning'>El corre ya se encuentra registrado por otro usuario</div>");
+ 		}
+ 		
+
+
+ 	});
+
+ 	return false;
  }

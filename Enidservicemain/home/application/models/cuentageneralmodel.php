@@ -133,9 +133,17 @@ function get_resumen_usuarios_cuenta($id_empresa){
 
   $result = $this->db->query($query_get);   
   return $result ->result_array();
-
-
-
 }
+
+
+/**/
+function get_data_user_by_id($id_usuario){    
+  $query_get = "SELECT * FROM usuario WHERE idusuario = '".$id_usuario."'  "; 
+  $result = $this->db->query($query_get);
+  return $result ->result_array();
+}
+
+/**/
+
 /*Termina modelo */
 }

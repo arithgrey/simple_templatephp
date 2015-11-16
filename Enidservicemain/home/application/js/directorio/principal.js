@@ -64,7 +64,7 @@ function get_data_contacto_in_modal(contacto){
 		valorHTML("#npagina_web" , data[0].pagina_web);		
 		valorHTML("#npagina_fb" , data[0].pagina_fb);		
 		valorHTML("#npagina_tw" , data[0].pagina_tw);		
-		
+		valorHTML("#ncorreoalterno" , data[0].correo_alterno); 
 		
 
 

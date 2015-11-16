@@ -20,8 +20,7 @@ class Recursocontroller extends CI_Controller {
 			$data= $this->validate_user_sesssion("Miembros de la cuenta");						
 			$iduser  = $this->sessionclass->getidusuario();
 			$id_empresa =  $this->sessionclass->getidempresa();                                            
-
-
+			
 			$data_resumen_usuarios = $this->cuentageneralmodel->get_resumen_usuarios_cuenta($id_empresa);
 			$data["resumen_usuarios"]=  resumen_usuarios_cuenta($data_resumen_usuarios);
 		    $integrantes  = $this->cuentageneralmodel->getintegrantesinforme($iduser, 0 , $id_empresa);								
@@ -48,6 +47,8 @@ class Recursocontroller extends CI_Controller {
 	function informacioncuenta(){
 				
 			$data = $this->validate_user_sesssion("Pefil");					
+			$id_usuario  = $this->sessionclass->getidusuario();			
+			$data["data_user"] =  $this->cuentageneralmodel->get_data_user_by_id($id_usuario)[0];
 			$this->dinamic_view_event('micuenta/principal' , $data);				
 	}	
 

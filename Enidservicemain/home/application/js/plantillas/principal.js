@@ -63,6 +63,8 @@ function load_contenidos_templ_data(type , tag ){
 	$.get(url , {"type" : type } ).done(function(data){		
 		document.getElementById(tag).innerHTML="";	
 		idtag ="#"+ tag;
+		
+		
 		llenaelementoHTML(idtag , data);
 		$(".delete_contenido_templ").click(delete_contenido);
 		limpia_inputs();

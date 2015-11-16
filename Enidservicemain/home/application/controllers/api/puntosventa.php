@@ -66,6 +66,20 @@ class Puntosventa extends REST_Controller{
     $db_response = $this->puntoventamodel->update_punto_venta_evento($id_evento, $id_punto_venta );
     $this->response($db_response);
   }
+
+  //**/
+
+  
+  function puntoventacontacto_PUT(){
+
+    $this->validate_user_sesssion();
+    $contacto = $this->put("contacto");
+    $punto_venta  =  $this->put("punto_venta");
+    $response_db =  $this->puntoventamodel->insert_punto_venta_contacto( $punto_venta , $contacto);
+    $this->response($response_db);    
+
+  }
+  
   /**/
   function puntoventacontacto_POST(){
 
@@ -78,7 +92,7 @@ class Puntosventa extends REST_Controller{
 
   }
   function puntoventacontacto_GET(){
-
+    
     $this->validate_user_sesssion();
     $id_usuario =  $this->sessionclass->getidusuario();
     $punto_venta = $this->get("punto_venta");

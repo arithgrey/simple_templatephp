@@ -4,6 +4,57 @@
       parent::__construct();        
       $this->load->database();
   }
+  /**/
+  function get_contacto_q($id_usuario ,  $q){ 
+
+    $query_get ="SELECT c.* , i.*  FROM contacto c  
+                left outer  join  imagen_contacto ic on 
+                c.idcontacto =  ic.id_contacto 
+                left outer  join imagen  i  on  ic.id_imagen =  i.idimagen 
+                where  idusuario ='".$id_usuario."'  and c.nombre like '%".$q."%' 
+                or c.organizacion like '%". $q ."%'
+                or c.tel like '%". $q ."%'
+                or c.correo like '%".$q."%'
+
+                order by c.nombre desc limit 5";
+    $result =  $this->db->query($query_get);                  
+    return $result->result_array();
+  }
+  /**/
+  function update_contacto_empresa($id_empresa , $contacto , $id_usuario ){
+
+    $query_exist = "select * from empresa_contacto where id_empresa = '". $id_empresa ."' ";
+    $result_exist = $this->db->query($query_exist);
+    $data_contact = $result_exist ->result_array();
+    $exist =   count($data_contact);
+
+    if ($exist > 0 ){
+      
+      $id_contacto_update  = $data_contact[0]["id_contacto"];
+      $query_update =  "update contacto set   
+                         nombre   =  '". $contacto["nombre"] ."' ,
+                         organizacion   =  '". $contacto["organizacion"]  ."' ,
+                         tel            =  '". $contacto["telefono"] ."' ,
+                         movil          =  '". $contacto["movil"] ."' ,
+                         correo         =  '". $contacto["correo"]."' ,
+                         direccion      =  '". $contacto["direccion"]  ."' ,
+                         tipo           = 'Organización' ,
+                         nota           = '". $contacto["nota"] ."' ,
+                         pagina_web     = '". $contacto["pagina_web"] ."' ,
+                         pagina_fb      = '".  $contacto["pagina_fb"]."' , 
+                         pagina_tw      = '". $contacto["pagina_tw"] ."' ,
+                         correo_alterno = '". $contacto["correo_alterno"] ."' 
+                         where idcontacto = '". $id_contacto_update . "'"; 
+      return  $this->db->query($query_update);
+
+
+    }else{
+      $new_contact = $this->record( $contacto["nombre"] , $contacto["organizacion"]  , $contacto["telefono"]  , $contacto["movil"]    , $contacto["correo"] , $contacto["direccion"]  , "Organización" , $id_usuario , $contacto["nota"]  , $contacto["pagina_web"]  , $contacto["pagina_fb"]  ,$contacto["pagina_tw"] , $contacto["correo_alterno"] );
+      $query_insert =  "INSERT INTO empresa_contacto VALUES('".$id_empresa ."' , '". $new_contact ."')";   
+      return $this->db->query($query_insert);
+    }
+    
+  }
 
 
 
@@ -14,7 +65,7 @@
     return $result->result_array();
   }
   /*recorc contacto */
-  function record( $nombre , $organizacion , $telefono, $movil, $correo , $direccion, $tipo , $idusuario, $nota , $pagina_web , $pagina_fb , $pagina_tw  ){
+  function record( $nombre , $organizacion , $telefono, $movil, $correo , $direccion, $tipo , $idusuario, $nota , $pagina_web , $pagina_fb , $pagina_tw  , $correo_alterno  ){
 
     
  
@@ -29,13 +80,13 @@
                     , nota 
                     , pagina_web 
                     , pagina_fb 
-                    , pagina_tw ) 
-                  VALUES( '".$nombre ."' , '".$organizacion."' , '".$telefono."', '".$movil."', '".$correo."' , '".$direccion ."', '".$tipo."' ,  '".$idusuario ."', '".$nota ."' ,  '". $pagina_web  ."'  , '". $pagina_fb ."' , '". $pagina_tw ."'  ) ";
+                    , pagina_tw 
+                    , correo_alterno ) 
+                  VALUES( '".$nombre ."' , '".$organizacion."' , '".$telefono."', '".$movil."', '".$correo."' , '".$direccion ."', '".$tipo."' ,  '".$idusuario ."', '".$nota ."' ,  '". $pagina_web  ."'  , '". $pagina_fb ."' , '". $pagina_tw ."' , '". $correo_alterno."'  ) ";
 
+   $result_insert  =  $this->db->query($query_insert);                 
+   return $this->db->insert_id();               
 
-
-
-   return $this->db->query($query_insert);                 
   }
   /*Termina la función*/
    
@@ -111,11 +162,11 @@
     return $result->result_array();
   }
   /**/
-  function update( $nombre , $organizacion , $telefono, $movil, $correo , $direccion, $tipo , $idusuario, $nota , $pagina_web ,  $id_contacto , $pagina_fb , $pagina_tw){
+  function update( $nombre , $organizacion , $telefono, $movil, $correo , $direccion, $tipo , $idusuario, $nota , $pagina_web ,  $id_contacto , $pagina_fb , $pagina_tw , $correo_alterno){
 
     $query_update="UPDATE contacto SET nombre =  '". $nombre ."'  ,  organizacion = '".$organizacion."' ,  tel= '".$telefono."'   ,
                   movil = '".$movil."' , correo =  '".$correo."' ,  direccion =  '".$direccion ."' ,  tipo = '".$tipo."' ,
-                  nota  = '".$nota ."' , pagina_web = '". $pagina_web  ."'   , pagina_fb ='". $pagina_fb ."'  , pagina_tw = '". $pagina_tw  ."'    WHERE idcontacto = '". $id_contacto."' ";
+                  nota  = '".$nota ."' , pagina_web = '". $pagina_web  ."'   , pagina_fb ='". $pagina_fb ."'  , pagina_tw = '". $pagina_tw  ."' , correo_alterno='". $correo_alterno ."'    WHERE idcontacto = '". $id_contacto."' ";
                                                                     
     return $this->db->query($query_update);                 
 
@@ -155,5 +206,13 @@ from contacto where idusuario= "'. $id_usuario.'"
     return $result->result_array();
 
   }
+
+
+/**/
+function get_contacto_empresa($id_empresa){
+  $query_get = "select ce.* , c.*  from empresa_contacto ce inner join contacto c on c.idcontacto = ce.id_contacto where ce.id_empresa = '". $id_empresa."' ";
+  $result = $this->db->query($query_get);
+  return $result->result_array();
+}
 /*Termina modelo */
 }

@@ -60,7 +60,8 @@
 
 
         <div id='nuevoaccesosection' class='col-xs-12  col-sm-12 col-md-12 col-lg-12 centered' style="background: #166781;  padding:50px;" >
-            <h1>+ Venta, promoción, preventa .... </h1>
+            <h1 style='color:white;'>+ Venta, promoción, preventa .... </h1>
+
         <form id="form-new-acceso" action="<?=base_url('index.php/api/accesos/acceso/format/json')?>" method="post" >
             
             <div class='col-xs-12  col-sm-12 col-md-12 col-lg-4 centered' >

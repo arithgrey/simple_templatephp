@@ -4,10 +4,12 @@ class Emp  extends CI_Controller{
 		parent::__construct();
         $this->load->helper("empresa");
         $this->load->helper("img_eventsh");
+        $this->load->model("contactmodel");
         $this->load->model("empresamodel");
      	$this->load->library('sessionclass');    
 	}
 	/**/    
+
     function incidencias(){
 
         $data = $this->validate_user_sesssion("Incidencias");                
@@ -36,12 +38,13 @@ class Emp  extends CI_Controller{
         $id_user = $this->sessionclass->getidusuario();        
 
 
+
         $data_empresa= $this->empresamodel->get_empresa_by_id($id_empresa)[0];
         $data["data_empresa"] =  $data_empresa;
 
         $data["logo_imagen"] =  base_url($data_empresa["base_path_img"].  $data_empresa["nombre_imagen"]);
 
-        $data["contactos_empresa"] = data_contactos_empresa($this->empresamodel->get_contactos_empresa($id_empresa, $id_user));    
+        
         $data["years"]= get_count_select(1 ,  50 , "Años"  , $data_empresa["años"] );
         $data["empresa_contactos_num"] =  $this->empresamodel->get_contactos_empresanum($id_empresa);
 
@@ -61,6 +64,8 @@ class Emp  extends CI_Controller{
 
          $data["base_path_img"] =  "application/uploads/uploads/empresa/".$this->sessionclass->getidempresa()."/emp/";    
 
+        
+        $data["contacto"] = $this->contactmodel->get_contacto_empresa($id_empresa)[0]; 
 
         $this->load->view('TemplateEnid/header_template', $data);
         $this->load->view('empresa/historia');

@@ -1,8 +1,4 @@
-<script type="text/javascript" src="<?= base_url('application/js/sha1.js')?>"></script>
-<script type="text/javascript" src="<?= base_url('application/js/MiCuenta/principal.js')?>"></script>
-<script type="text/javascript" src="<?= base_url('application/js/MiCuenta/password.js')?>"></script>
 <style type="text/css">
-
     #nomPersona:hover{
         font-size: 1.2em;
         cursor:pointer;
@@ -48,127 +44,11 @@
     }
     /*Fin Estilo para el html*/  
 </style>
-</style>
-
-
-
-                        
-                            
-                
-                            
-                        
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-            
-              
                 
                     <div class="row">
 
 
-                        <div class="col-xs-12  col-sm-4 col-md-4 col-lg-4 text-center">
+                        <div class="col-xs-12  col-sm-4 col-md-2 col-lg-4 text-center">
                             <div class="panel">
                                 <div class="panel-body">
                                     <div class="profile-desk">
@@ -218,23 +98,281 @@
 
 
 
-                    <div class='col-xs-12  col-sm-8 col-md-8 col-lg-8 text-center'>
 
-                    <div class="panel-group" id="accordion">
-                        <div class="panel">
-                            <div class="panel-heading">
-                                <h4 class="">
-                                    <a class="accordion-toggle collapsed title-collapse-enid" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
-                                    <i class="fa fa-unlock-alt"></i>
-                                        Cambio de contraseña
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="col-md-8">
+                    
+
+                    <section class="panel">
+                        <header class="panel-heading custom-tab blue-tab">
+                            <ul class="nav nav-tabs">
+                                <li>
+                                    <a data-toggle="tab" href="#home4">
+                                        <i class="fa fa-home"></i>
                                     </a>
-                                </h4>
-                            </div>
-                            <div style="height: 0px;" id="collapseOne" class="panel-collapse collapse">
-                                <div class="panel-body">
-                                
+                                </li>
+                                <li class="active">
+                                    <a data-toggle="tab" href="#about4">
+                                        <i class="fa fa-user"></i>
+                                        Mis dato personales
+                                    </a>
+                                </li>
+                                <li class="">
+                                    <a data-toggle="tab" href="#contact4">
+                                        
+                                        *** Contraseña de acceso
+                                    </a>
+                                </li>
+                            </ul>
+                        </header>
+                        <div class="panel-body">
+                            <div class="tab-content">
+                                <div id="home4" class="tab-pane ">
+                                    Home
+                                </div>
+                                <div id="about4" class="tab-pane active">
 
-<!--Cambio de contraseña inicia -->
+
+
+
+
+
+
+
+
+
+<form class="form-horizontal" id='form-user-update' method='POST' action="<?=base_url('index.php/api/misdatoscontrolador/usuario/format/json')?>">
+<fieldset>
+
+<!-- Form Name -->
+<div class='msj_update_status' id="msj_update_status"></div>
+
+<!-- Prepended text-->
+<div class="form-group">
+  <label class="col-md-2 control-label" for="prependedtext"></label>
+  <div class="col-md-8">
+    <div class="input-group">
+      <span class="input-group-addon">Nombre(s)</span>
+      <input id="prependedtext" name="nombre" class="form-control" placeholder="Jonathan Medrano" value="<?=$data_user['nombre']?>" required="" type="text">
+    </div>
+    
+  </div>
+</div>
+
+<!-- Prepended text-->
+<div class="form-group">
+  <label class="col-md-2 control-label" for="prependedtext"></label>
+  <div class="col-md-8">
+    <div class="input-group">
+      <span class="input-group-addon">Apellido Paterno</span>
+      <input id="prependedtext" name="apellido_paterno" class="form-control" value="<?=$data_user['apellido_paterno'];?>" placeholder="placeholder" type="text">
+    </div>
+    
+  </div>
+</div>
+<div class="form-group">
+  <label class="col-md-2 control-label" for=""></label>
+  <div class="col-md-8">
+    <div class="input-group">
+      <span class="input-group-addon">Apellido Materno</span>
+      <input id="" name="apellido_materno" class="form-control" value="<?=$data_user['apellido_materno']?>" placeholder="Apellido Materno" type="text">
+    </div>
+    
+  </div>
+</div>
+
+<!-- Prepended text-->
+<div class="form-group">
+  <label class="col-md-2 control-label" for=""></label>
+  <div class="col-md-8">
+    <div class="input-group">
+      <span class="input-group-addon">Tel. Contacto</span>
+      <input id="tel_contacto"  name='tel_contacto' value="<?=$data_user['tel_contacto']?>" name="contacto" class="form-control" placeholder="5115..." type="text">
+    </div>
+    
+  </div>
+</div>
+
+<!-- Prepended text-->
+
+<!-- Prepended text-->
+<div class="form-group">
+  <label class="col-md-2 control-label" for=""></label>
+  <div class="col-md-8">
+    <div class="input-group">
+      <span class="input-group-addon">Tel. Alterno</span>
+      <input id="" name="tel_alterno" value="<?=$data_user['tel_contacto_alterno']?>" class="form-control" placeholder="5115..." type="text">
+    </div>
+    
+  </div>
+</div>
+
+<!-- Prepended text-->
+<div class="form-group">
+  <label class="col-md-2 control-label" for="prependedtext"></label>
+  <div class="col-md-8">
+    <div class="input-group">
+      <span class="input-group-addon">Correo</span>
+      <input id="prependedtext" name="email" class="form-control" value="<?=$data_user['email']?>"  placeholder="arithgrey@gmail.com" type="text" required>
+    </div>
+    
+  </div>
+</div>
+
+
+
+<!-- Prepended text-->
+<div class="form-group">
+  <label class="col-md-2 control-label" for="prependedtext"></label>
+  <div class="col-md-8">
+    <div class="input-group">
+      <span class="input-group-addon">Correo alterno</span>
+      <input id="prependedtext" name="email_alternativo" class="form-control" value="<?=$data_user['email_alterno']?>"  placeholder="arithgrey@gmail.com" type="text">
+    </div>
+    
+  </div>
+</div>
+
+
+<!-- Select Basic -->
+<div class="form-group">
+  <label class="col-md-2 control-label" for="selectbasic">Edad</label>
+  <div class="col-md-8">
+    <select id="selectbasic" name="edad" class="form-control">    
+      <?=get_count_select(18  , 100 , "" , $data_user['edad'] );?>
+    </select>
+  </div>
+</div>
+
+
+
+
+  
+  <div class="form-group">
+  <label class="col-md-2 control-label" for="selectbasic">Inicio de labores </label>
+    <div class="col-md-8">
+      <div class="input-group bootstrap-timepicker">
+        <input class="form-control timepicker-default" id="inicio_labor" name="inicio_labor" value="<?=$data_user['inicio_labor']?>" type="text">
+          <span class="input-group-btn">
+          <button class="btn btn-default" type="button"><i class="fa fa-clock-o"></i></button>
+          </span>
+      </div>
+    </div>
+  </div>
+  
+
+
+  
+  <div class="form-group">
+    
+  <label class="col-md-2 control-label">Hora de término</label>
+    <div class="col-md-8">
+      <div class="input-group bootstrap-timepicker">
+        <input class="form-control timepicker-default" id="fin_labor" name="fin_labor" value="<?=$data_user['fin_labor']?>" type="text">
+          <span class="input-group-btn">
+          <button class="btn btn-default" type="button"><i class="fa fa-clock-o"></i></button>
+          </span>
+      </div>
+    </div>
+  </div>
+
+
+
+   
+
+<!-- Button -->
+<div class="form-group">
+  <label class="col-md-2 control-label" for=""></label>
+  <div class="col-md-2">
+    <button class="btn btn-primary">Actualizar información</button>
+  </div>
+</div>
+
+</fieldset>
+</form>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                </div>
+                                <div id="contact4" class="tab-pane ">
+                                    <!--Cambio de contraseña inicia -->
                     <div id="div-cambio-pw">
 
                                            
@@ -242,7 +380,7 @@
                                                     <div class="input-group">
                                                         <span class="input-group-addon">   
                                                             <label for="inputPassword1" class="control-label">
-                                                                 Contraseña Anterior
+                                                                 Antigua contraseña de acceso
                                                             </label>
                                                         </span>
                                                         <input type="password" class="form-control" id="anteriorP" placeholder="Anterior" required >            
@@ -251,7 +389,7 @@
                                                     <div class="input-group">
                                                         <span class="input-group-addon">   
                                                                <label for="inputPassword1" class="control-label">
-                                                                 Contraseña Nueva
+                                                                 Nueva contraseña
                                                                 </label>
                                                         </span>
                                                         <input type="password" class="form-control" id="nuevoP" placeholder="Nuevo" required > 
@@ -259,7 +397,7 @@
                                                     <div class="input-group">
                                                         <span class="input-group-addon">                   
                                                                 <label for="inputPassword1" class="control-label">
-                                                                    Verifica Contraseña Nueva
+                                                                    Verifica contraseña
                                                                  </label>
                                                         </span>
                                                         <input type="password" class="form-control" id="verificaP" placeholder="Verifica" required>                                                    
@@ -277,41 +415,47 @@
 
 
 
-                                </div>
-                            </div>
-                        </div>
-                        <div class="panel">
-                            <div class="panel-heading">
-                                <h4 class="">
-                                    <a class="accordion-toggle collapsed title-collapse-enid" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
-                                        Collapsible Group Item #2
-                                    </a>
-                                </h4>
-                            </div>
-                            <div style="height: 0px;" id="collapseTwo" class="panel-collapse collapse">
-                                <div class="panel-body">
-                                    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
-                                </div>
-                            </div>
-                        </div>
-                        <div class="panel">
-                            <div class="panel-heading">
-                                <h4 class="">
-                                    <a class="accordion-toggle title-collapse-enid" data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
-                                        Collapsible Group Item #3
-                                    </a>
-                                </h4>
-                            </div>
-                            <div style="height: auto;" id="collapseThree" class="panel-collapse collapse in">
-                                <div class="panel-body">
-                                   
+
+
+
 
                                 </div>
                             </div>
                         </div>
-                    </div>
-                
-                </div>    <!--collapse end-->
-            </div><!--row-->
+                    </section>
 
 
+                </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="<?= base_url('application/js/sha1.js')?>"></script>
+<script type="text/javascript" src="<?= base_url('application/js/MiCuenta/principal.js')?>"></script>
+<script type="text/javascript" src="<?= base_url('application/js/MiCuenta/password.js')?>"></script>
+
+
+
+<link rel="stylesheet" type="text/css" href="<?=base_url('application/css/eventos/edicion.css')?>">
+<link rel="stylesheet" type="text/css" href="<?=base_url('application/js/js/bootstrap-datepicker/css/datepicker-custom.css')?>" />
+<!--pickers css-->
+<link rel="stylesheet" type="text/css" href="<?=base_url('application/js/js/bootstrap-timepicker/css/timepicker.css')?>" />
+<script type="text/javascript" src="<?=base_url('application/js/js/bootstrap-datepicker/js/bootstrap-datepicker.js')?>"></script>
+<script type="text/javascript" src="<?=base_url('application/js/js/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js')?>"></script>
+<script type="text/javascript" src="<?=base_url('application/js/js/bootstrap-daterangepicker/moment.min.js')?>"></script>
+<script type="text/javascript" src="<?=base_url('application/js/js/bootstrap-daterangepicker/daterangepicker.js')?>"></script>
+<script type="text/javascript" src="<?=base_url('application/js/js/bootstrap-colorpicker/js/bootstrap-colorpicker.js')?>"></script>
+<script type="text/javascript" src="<?=base_url('application/js/js/bootstrap-timepicker/js/bootstrap-timepicker.js')?>"></script>
+<script src="<?=base_url('application/js/js/pickers-init.js')?>"></script>
+<!--Escenarios modal-->

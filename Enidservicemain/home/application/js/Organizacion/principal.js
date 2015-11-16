@@ -70,7 +70,7 @@ function try_update_años(){
 
 	$("#años-input").change(function(){
 
-		update_data_emp("años", $(this).val(),  "#años-empresa-text_place" , "#años-section"  );		
+		update_data_emp("años", $(this).val() + " Años haciendo historía",  "#años-empresa-text_place" , "#años-section"  );		
 
 	});
 }	

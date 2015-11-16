@@ -6,9 +6,18 @@ class Contactos extends REST_Controller{
        
         $this->load->helper("contacto");    
         $this->load->model("contactmodel");
-        $this->load->library('sessionclass');
-            
+        $this->load->library('sessionclass');                
   }     
+  /**/
+  function contacto_q_GET(){
+      $this->validate_user_sesssion();
+      $id_usuario =  $this->sessionclass->getidusuario();
+      $q =  $this->get("q");
+      $db_response = $this->contactmodel->get_contacto_q( $id_usuario , $q);  
+      $this->response($db_response);
+
+  }
+  /**/
   function contactos_resumen_GET(){
     
       $this->validate_user_sesssion();
@@ -16,6 +25,20 @@ class Contactos extends REST_Controller{
       $data_repo_contactos = $this->contactmodel->get_repo_contactos($id_usuario);        
       $this->response(resumen_contactos( $data_repo_contactos));              
   }      
+  function contacto_emp_put(){
+  
+      $this->validate_user_sesssion();            
+      $id_empresa= $this->sessionclass->getidempresa();
+      $id_usuario =  $this->sessionclass->getidusuario();
+      $contacto_data =  $this->put();
+      $this->response($this->contactmodel->update_contacto_empresa($id_empresa , $contacto_data , $id_usuario ));
+      /**/
+
+
+  }
+  
+
+
   /**/
   function contacto_post(){
   
@@ -31,12 +54,12 @@ class Contactos extends REST_Controller{
       $pagina_web = $this->post("pagina_web");
       $pagina_fb  = $this->post("pagina_fb");
       $pagina_tw  = $this->post("pagina_tw");
-
+      $correo_alterno = $this->post("correo_alterno");
       $idusuario =  $this->sessionclass->getidusuario();
   
       $response_db = $this->contactmodel->record( $nombre , $organizacion , $telefono, $movil          
                     , $correo , $direccion, $tipo , $idusuario, $nota , $pagina_web ,
-                     $pagina_fb  , $pagina_tw );      
+                     $pagina_fb  , $pagina_tw , $correo_alterno );      
 
       $this->response($response_db);
 
@@ -76,11 +99,12 @@ class Contactos extends REST_Controller{
       $pagina_web = $this->put("npagina_web");
       $pagina_fb = $this->put("npagina_fb");
       $pagina_tw = $this->put("npagina_tw");
+      $correo_alterno  =  $this->put("ncorreoalterno");      
 
       $idusuario =  $this->sessionclass->getidusuario();
 
       $response_db = $this->contactmodel->update( $nombre , $organizacion , $telefono, $movil          
-                    , $correo , $direccion, $tipo , $idusuario, $nota , $pagina_web , $id_contacto , $pagina_fb , $pagina_tw);      
+                    , $correo , $direccion, $tipo , $idusuario, $nota , $pagina_web , $id_contacto , $pagina_fb , $pagina_tw ,  $correo_alterno);      
 
       $this->response($response_db);
 

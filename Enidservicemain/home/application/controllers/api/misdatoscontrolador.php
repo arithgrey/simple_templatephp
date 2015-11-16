@@ -5,7 +5,19 @@ class MisDatosControlador extends REST_Controller{
         parent::__construct();
         $this->load->model("misdatosmodel");            
         $this->load->library('sessionclass');       
-    }        
+    } 
+
+
+    /**/
+    function usuario_PUT()
+    {
+        $this->validate_user_sesssion();        
+        $id_usuario= $this->sessionclass->getidusuario();
+        $db_response = $this->misdatosmodel->update_data_user($this->put() , $id_usuario );        
+        $this->response($db_response);
+        
+    }
+
     /**/
     function actualizarNombre_post(){
 

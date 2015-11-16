@@ -1,9 +1,6 @@
 <script type="text/javascript" src="<?=base_url('application/js/plantillas/principal.js')?>"></script>
 
 
-
-
-
 <div class="container" id='content-section'>
 	<div class="row">
 		<section>
@@ -399,6 +396,9 @@ span.round-tab:hover {
     margin-top: 0;
 }
 
+
+
+
 @media( max-width : 585px ) {
 
     .wizard {
@@ -426,6 +426,10 @@ span.round-tab:hover {
     }
 
 }
+
+
+
+
 </style>
 
 

@@ -107,7 +107,14 @@ function displaypermisos(){
 	       	}/*Termila el primer ciclo*/ 
 
 	       	
-	       	list+= "<td><a href='"+ now + "index.php/recursocontroller/perfilconfigad/"+ idrecurso+ "'> <i class='fa fa-cog' id='"+idrecurso+"' ></i></td>";
+
+
+            if (idrecurso ==  1 ) {
+                list+= "<td></td>";
+            }else{
+                list+= "<td><a href='"+ now + "index.php/recursocontroller/perfilconfigad/"+ idrecurso+ "'> <i class='fa fa-cog' id='"+idrecurso+"' ></i></td>";
+            }
+	       	
         	list+="</tr>";
         	
 

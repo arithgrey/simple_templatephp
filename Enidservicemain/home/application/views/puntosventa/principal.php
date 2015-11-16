@@ -7,11 +7,10 @@
         </div>
     </div>
 
-       <form action="<?=base_url('index.php/excel_export')?>" method="get"  id="FormularioExportacion">
+        <form action="<?=base_url('index.php/excel_export')?>" method="get"  id="FormularioExportacion">
                              <button class='botonExcel btn btn-default pull-right col-md-2 '  > Exportar a Excel <i class="fa fa-file-pdf-o"></i> </button>  
                             <input type="hidden" id="datos_a_enviar" name="datos_a_enviar" />
         </form>
-
 
 
 </div>    
@@ -49,12 +48,12 @@
         
 
 
-        <div id="puntos-venta-list">
-            
+        <div id="puntos-venta-list">            
             <?=$puntos_venta;?>
         </div>
 
         <a href="<?=base_url('index.php/inicio/eventos/')?>"><button type="button"class="btn btn-default next-to">Ir a la sección de eventos</button></a>                                
+        <a href="<?=base_url('index.php/directorio/contactos')?>"><button type="button"class="btn btn-default next-to">Ir a la sección de contactos</button></a>                                
         </div>
     </div>
 </div>
@@ -86,14 +85,27 @@
                 Asociar contactos al punto de venta
             </h4>
             </div>
+
+
+
+
             <div class="modal-body">            
-                <!--Nuevo contacto form -->
+                <div class='col-lg-12'>
+                    <div class="form-group">
+                      <label for="f_contacto" class=''>Asociar contacto:</label>
+                      <input type="text" class="form-control" id="f_contacto">
+
+
+                      <div class='contactos_encontrados'></div>
+                    </div>
+                </div>
+                <!--Nuevo contacto form -->                
+                <div class='col-lg-12 status-punto-venta-contacto'></div>
                 <div id="contactos-punto-venta"></div>
                 <!--Termina nuevo contacto -->
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-                
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>            
             </div>
         </div>
     </div>

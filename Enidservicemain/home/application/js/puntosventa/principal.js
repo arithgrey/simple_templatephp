@@ -1,5 +1,5 @@
 $(document).on("ready", function(){
-
+	var dinamic_pv = 0;
 	$(".editar-punto-venta").click(edit_punto_venta);
 	$("#form-puntos-venta").submit(record_punto_venta);
 	$(".contactos").click(update_contactos_in_punto_venta);
@@ -29,6 +29,17 @@ $(document).on("ready", function(){
 		llenaelementoHTML("#response-registro", "");
 	});
 
+
+	$("#f_contacto").keyup(function(){
+
+		if ($("#f_contacto").val() !=  null ){
+			buscar_contacto();	
+		}
+		
+
+	});
+
+
 });
 /*nuevo punto de venta*/
 function record_punto_venta(){
@@ -49,7 +60,11 @@ function record_punto_venta(){
 /**/
 function update_contactos_in_punto_venta(e){
 
+	llenaelementoHTML(".contactos_encontrados" , "");
+	llenaelementoHTML(".status-punto-venta-contacto" , "");
+	$("#f_contacto").val("");
 	punto_venta =  e.target.id;
+	dinamic_pv =  punto_venta;
 	url = now + "index.php/api/puntosventa/puntoventacontacto/format/json/";
 	$.get(url, {"punto_venta" :  punto_venta}).done(function(data){
 
@@ -60,6 +75,10 @@ function update_contactos_in_punto_venta(e){
 			contacto   = this.id;
 			update_contacto_punto_venta( contacto , punto_venta);
 		});
+
+
+
+
 
 	}).fail(function(){
 		alert("error al cargar ");
@@ -156,4 +175,42 @@ function load_resumen_punto_venta(){
 	}).fail(function(){
 		alert("Error al cargar el resumen");
 	});
+}/**/
+function buscar_contacto(){
+	
+	q= $("#f_contacto").val();
+	url =  now + "index.php/api/contactos/contacto_q/format/json/";
+	$.get(url , {"q": q }).done(function(data){
+
+		contactos =  ""; 
+		for (var x in data ) {
+			
+			img =  now + data[x].base_path_img  + data[x].nombre_imagen;
+			contactos +=  "<div class='col-lg-12' style='background:#0E5669 !important; color:white !important;'><div class='col-lg-1'><img width='100%' src='" + img + "'></div><div class='col-lg-10'><span>"+ data[x].nombre   + "- " + data[x].organizacion +" - "+ data[x].tel  + " - " + data[x].correo +" </span></div><div class='agregar_contacto col-lg-1' id='"+ data[x].idcontacto+ "'>+</div><br></div>"; 
+		}
+		
+		llenaelementoHTML(".contactos_encontrados", contactos);
+
+
+		$(".agregar_contacto").click(enlazar_contacto_punto_venta);
+	}).fail(function(){
+		alert("Error en la búsqueda");
+	});		
+} 
+/**/
+function enlazar_contacto_punto_venta(e){
+	
+	contacto = e.target.id;
+	url = now + "index.php/api/puntosventa/puntoventacontacto/format/json/";
+	$.ajax({url: url , type: 'PUT', data : {"punto_venta" :  dinamic_pv , "contacto" : contacto }  }).done(function(data){
+		   	
+		load_data_puntos_venta(null);				
+		llenaelementoHTML(".status-punto-venta-contacto", "Contacto asociado al punto de venta");
+	}).fail(function(){
+		alert("Error");
+	});
+		
+	
+	//url = now + "index.php/api/puntosventa/puntoventacontacto/format/json/";
+	//registra_data(url , {"contacto" :  contacto , "punto_venta": punto_venta } );	
 }

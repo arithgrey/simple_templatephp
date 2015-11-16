@@ -1,18 +1,16 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 if(!function_exists('invierte_date_time')){
 function get_time_line_event($arreglo_time_line , $longitud_descripcion_text){
-
   $time_list ="";
   $i=0;
   $b =1;
-
 
   if (count($arreglo_time_line) ==  0 ) {
     $time_list = get_time_def();
   }
 
   foreach ($arreglo_time_line as $row) {
-      
+  
       $idevento = $row["idevento"];
       $nombre_evento = $row["nombre_evento"];
       $descripcion_evento = $row["descripcion_evento"];
@@ -22,11 +20,44 @@ function get_time_line_event($arreglo_time_line , $longitud_descripcion_text){
       $url_social = $row["url_social"];
       $url_social_youtube =  $row["url_social_youtube"];
       $portada = $row["portada"];
-      $status = $row["estadoevento"];
+      $status = $row["status"];
       $edicion = $row["edicion"];
-      $totalescenarios = $row["totalescenarios"];
-      $url_complete = base_url('index.php/eventos/nuevo/'.$idevento."?start=".$fecha_inicio."&end=".$fecha_termino."&status=" . $status );
+      $totalescenarios = $row["escenarios"];
+      $url_complete = base_url('index.php/eventos/nuevo/'.$idevento);
       $url_complete_view = base_url('index.php/eventos/visualizar/'.$idevento."?start=".$fecha_inicio."&end=".$fecha_termino."&status=" . $status );
+      $eslogan =  $row["eslogan"];
+      $artistas  =  $row["artistas"];
+      $evento_punto_venta =  $row["evento_punto_venta"];      
+      $accesos  =  $row["accesos"];
+    
+      $tipo = $row["tipo"];              
+      $ubicacion =  $row["ubicacion"];         
+            
+      if ($artistas ==  1 ) {
+          $artistas .=   " Artista";      
+      }else{
+          $artistas  .=  " Artistas";      
+      }    
+
+
+
+      if ($totalescenarios ==  1 ) {
+          $totalescenarios .= " Escenario";
+      }else{
+          $totalescenarios .= " Escenarios";
+      }
+
+      if ($evento_punto_venta ==  1 ) {
+          $evento_punto_venta  .=  " Punto de venta";
+      }else{
+          $evento_punto_venta.=  " Puntos venta"; 
+      }
+
+      if ($accesos ==  1 ) {
+          $accesos  .= " Acceso"; 
+      }else{
+          $accesos  .= " Accesos"; 
+      }
 
       $fecha_time = $fecha_inicio ." al día " . $fecha_termino  ;
       $i++; 
@@ -35,21 +66,26 @@ function get_time_line_event($arreglo_time_line , $longitud_descripcion_text){
        
              $time_list .="<article class='timeline-item '>
                               <div class='timeline-desk'>
-                                  <div class='panel'>
-                                      <div class='panel-body enid-p-b'>
-                                          <span class='arrow'></span>
-                                          <span class='timeline-icon'>". $b ."</span>
-                                          <span class='timeline-date'>10:00 am</span>
-                                          
-                                          <h1 class=''><i class='fa fa-edit'></i><a href='$url_complete'>".$nombre_evento."</a></h1>
-                                          <h1 class=''><i class='fa  fa-eye'></i><a href='$url_complete_view'> Ver </a></h1>
-                                            <p class=' auth-row white-p'>
-                                                Edición <a href='#'>". $edicion ."</a>   |   ". $fecha_time ."   | <a href='#''>".$totalescenarios." Escenarios| ". get_statusevent($status) ."</a>
-                                            </p>
-
-                                          <p class='white-p'>
-                                              ". $descripcion_evento ."
+                                  <div class='panel' style='background:#D12F2F;'>
+                                      <div class='panel-body'>
+                                                                                    
+                                          <div style='background:black; padding:10px; border-radius:3px;' >
+                                            <a style='font-size:1.2em; color: white;' href='$url_complete'>".$nombre_evento . "<span style='font-size:.8em; color:#0AA4EC;'> " . $edicion  ."</span>" ."</a> 
+                                            
+                                            <a style='font-size: .9em; color:#FFFFE2;  ' class='pull-right'>". $fecha_time ." </a>
+                                          </div>                                          
+                                          <p class='col-lg-12  auth-row white-p' style='background:#07444B; color:white; !important; padding:1px;' >
+                                                   <a  class='pull-right ' href='#'>".$totalescenarios." | ". $artistas ." | ". $evento_punto_venta  ." | ". $accesos ." </a>
                                           </p>
+                                          
+                                          <div class='well col-lg-12' >
+                                            <p class='col-lg-9'>
+                                                ". $descripcion_evento ."
+                                            </p>
+                                            <div class='col-lg-3'>
+                                              <img width='100%' style='border-radius:10px;' src='". base_url($portada) ."'> 
+                                            </div>
+                                          </div>
 
 
                                       </div>
@@ -65,25 +101,35 @@ function get_time_line_event($arreglo_time_line , $longitud_descripcion_text){
 
              $time_list .=" <article class='timeline-item alt'>
                               <div class='timeline-desk'>
-                                  <div class='panel'>
-                                      <div class='panel-body enid-p-b'>
-                                          <span class='arrow-alt'></span>
-                                          <span class='timeline-icon'>". $b ."</span>
-                                          <span class='timeline-date'>08:25 am</span>
+
+                                  <div class='panel' style='background:#D12F2F;'>
+                                      <div class='panel-body'>
+                                                                                    
+                                          <div style='background:black; padding:10px; border-radius:3px;' >
+                                            <a style='font-size:1.2em; color: white;' href='$url_complete'>".$nombre_evento . "<span style='font-size:.8em; color:#0AA4EC;'> " . $edicion  ."</span>" ."</a> 
                                             
-                                            <h1 class=''><i class='fa fa-edit'></i><a href='$url_complete'>".$nombre_evento."</a></h1>
-                                            <h1 class=''><i class='fa  fa-eye'></i><a href='$url_complete_view'>Ver</a></h1>
-                                            <p class=' auth-row '>
-                                                Edición <a href='#'>". $edicion ."</a>   |  ".$fecha_time."   | <a href='#''>".$totalescenarios." Escenarios</a>
-                                            </p>
-
-                                          <p class='white-p '>
-                                              ". $descripcion_evento ."
-
+                                            <a style='font-size: .9em; color:#FFFFE2;  ' class='pull-right'>". $fecha_time ." </a>
+                                          </div>                                          
+                                          <p class='col-lg-12  auth-row white-p' style='background:#07444B; color:white; !important; padding:1px;' >
+                                                   <a  class='pull-right ' href='#'>".$totalescenarios." | ". $artistas ." | ". $evento_punto_venta  ." | ". $accesos ." </a>
                                           </p>
+                                          
+                                          <div class='well col-lg-12' >
+                                            <p class='col-lg-9'>
+                                                ". $descripcion_evento ."
+                                            </p>
+                                            <div class='col-lg-3'>
+                                              <img width='100%' style='border-radius:10px;' src='". base_url($portada) ."'> 
+                                            </div>
+                                          </div>
+
 
                                       </div>
                                   </div>
+
+
+
+                                  
                               </div>
                           </article>";
 

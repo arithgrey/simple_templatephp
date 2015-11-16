@@ -26,12 +26,12 @@ if(!function_exists('invierte_date_time')){
 				$table.="</tr>";		
 
 			$table.="<tr class='text-center'>						
-					<td style='border-color:white;'> </td>
-					<td > ". porcentaje_puntos_venta($row["contactos_asociados"]  , $row["contactos_asociados"])  ." </td>
-					<td> ". porcentaje_puntos_venta($row["contactos_asociados"]  , ($row["con_tel"] + $row["con_tel_movil"]) ) ." </td>
-					<td> ". porcentaje_puntos_venta($row["contactos_asociados"]  ,  $row["con_locacion"] ) ." </td>
-					<td> ". porcentaje_puntos_venta($row["contactos_asociados"]  ,  $row["con_web"])."  </td>					
-				</tr>";		
+					<td style='border-color:white;'> </td>";
+					$table .=get_td( porcentaje_puntos_venta($row["contactos_asociados"]  , $row["contactos_asociados"])  );
+					$table .=get_td(  porcentaje_puntos_venta($row["contactos_asociados"]  , ($row["con_tel"] + $row["con_tel_movil"]) ) );
+					$table .=get_td( porcentaje_puntos_venta($row["contactos_asociados"]  ,  $row["con_locacion"] ) );
+					$table .=get_td( porcentaje_puntos_venta($row["contactos_asociados"]  ,  $row["con_web"]) );
+			$table.="</tr>";		
 		}		
 		$table .="</table>";			
 		return $table;
@@ -58,12 +58,12 @@ if(!function_exists('invierte_date_time')){
 			$table .="</tr>";	
 
 
-			$table .="<tr class='text-center' style='font-size:.8em;'>
-						<td>".  porcentaje_puntos_venta($total , $total )   ."</td>
-						<td>". porcentaje_puntos_venta($total ,  $row["ventas_unicas"]) ."</td>
-						<td>". porcentaje_puntos_venta($total , $row["preveentas"]) ."</td>
-						<td>". porcentaje_puntos_venta($total , $row["promociones"]) ."</td>
-					  </tr>";	
+			$table .="<tr class='text-center' style='font-size:.8em;'>";
+						$table .= get_td(  porcentaje_puntos_venta($total , $total )   );
+						$table .= get_td( porcentaje_puntos_venta($total ,  $row["ventas_unicas"]) );
+						$table .= get_td( porcentaje_puntos_venta($total , $row["preveentas"]) );
+						$table .= get_td( porcentaje_puntos_venta($total , $row["promociones"]) );
+			$table .="</tr>";	
 			 					
 		}
 
@@ -171,23 +171,33 @@ if(!function_exists('invierte_date_time')){
 	/*regresal la lista de contactos activa en el punto de venta */
 	function list_contactos_punto_venta($data){
 
-		$list ="<table class='table display table table-bordered dataTable' border='1'>";
-		$list .="<tr class='text-center enid-header-table'><td>IMG</td> <td class='text-center'>Contacto</td><td class='text-center' >Organización  </td> <td class='text-center' >Tel </td> <td class='text-center'>Móvil </td><td class='text-center'>Página web </td>
-		<td class='text-center'> +agregar </td>  </tr>";
+		$list ="<table class='table display table table-bordered dataTable' >        
+		        <tr class='enid-header-table' >";
+
+		$list .=  get_td("IMG" , "");        
+		$list .=  get_td("Contacto" , "");        
+		$list .=  get_td("Organización" , "");        
+		$list .=  get_td("Tel" , "");        
+		$list .=  get_td("Móvil" , "");        
+		$list .=  get_td("Página web" , "");        
+		$list .=  get_td("Facebook" , "");        
+		$list .=  get_td("Twitter" , "");        
+		$list .=  get_td("" , "");        
+		$list .= "</tr>";
+		
 		$flag=0;
 		$contacos_asociados =0;
 
-		foreach ($data as $row) {
-			
-
-
-
+		foreach ($data as $row) {		
 			
 			$nombre  = $row["nombre"];
 			$organizacion  =  $row["organizacion"];			
 			$tel =  $row["tel"];
 			$movil  = $row["movil"];
 			$pagina_web = $row["pagina_web"];
+			$pagina_fb = $row["pagina_fb"];
+			$pagina_tw = $row["pagina_tw"];
+
 
 			$puntoventacontacto =  $row["puntoventacontacto"];
 			$input ="";
@@ -220,26 +230,32 @@ if(!function_exists('invierte_date_time')){
 					}
 
 
-			$list.="<td class='franja-vertical'>".$nombre."</td><td>".$organizacion ."</td>";
-						
-
-
+			$list.= get_td( $nombre , "");
+			$list.= get_td( $organizacion  , "");
+			$list.= get_td( $tel , "");
+			$list.= get_td($movil , "");
+			$pagina_web =  "<a href='". $pagina_web  ."'>www</a>";
+			$list.= get_td($pagina_web , "");
 			
 
+			
+			$pagina_fb =  "<a href='". $pagina_fb  ."'>Facebook</a>";
+			$list.= get_td($pagina_fb , "");
+			
 
-			$list.="<td>".$tel."</td> 
-						<td>".$movil ."</td>
-						<td>".$pagina_web ."</td>
-						<td>". $input ."</td>
-						</tr>";
+			$pagina_tw =  "<a href='". $pagina_tw  ."'>Twitter</a>";
+			$list.= get_td($pagina_tw , "");
+			
 
+			$list.= get_td( $input , "");
+			$list.="</tr>";
 			$flag++;				
 		}
 
 		$list .="</table>
-		<div><span>Contactos disponibles: ". $flag.", asociados al punto de venta: ". $contacos_asociados  ."</span></div>
-		<div>
-			<span><a href='". base_url('index.php/directorio/contactos') ."'><button class='btn btn-block btn-info'>+ir  a la sección de contactos</button></a></span>
+		
+		<div class='row'>
+			<span class='col-lg-3 pull-left'><a href='". base_url('index.php/directorio/contactos') ."'><button class='btn btn-default next-to'>+ir  a la sección de contactos</button></a></span>
 		</div>";
 		return $list;
 	}

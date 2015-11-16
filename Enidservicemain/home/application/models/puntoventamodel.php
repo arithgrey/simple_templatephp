@@ -5,8 +5,22 @@ class puntoventamodel extends CI_Model {
 	        $this->load->database();
 	}
 
+	function insert_punto_venta_contacto($punto_venta , $id_contacto){
+		$query_get="select * from punto_venta_contacto where idpunto_venta = '". $punto_venta  ."'  and idcontacto ='". $id_contacto ."' ";
+		$result  = $this->db->query($query_get);		
+		$exits = $result->result_array();		
+		$query_update ="";
 
+		if (count($exits) > 0 ){
+			$query_update  =  "select 1+1";
+		}else{
+			$query_update = "insert into punto_venta_contacto values('". $punto_venta ."' , '". $id_contacto ."' )";
+			
+		}
+		return $this->db->query($query_update);
 
+	}
+	/**/
 	function get_estados_punto_venta(){
 
 		$query_get ="select distinct(status) estado_punto_venta  from punto_venta";
@@ -80,10 +94,6 @@ class puntoventamodel extends CI_Model {
 						left outer join   imagen  i 
 						on  ipv.id_imagen = i.idimagen
 						where  pv.idempresa='". $id_empresa ."'  ". $filtro ." ";	
-
-
-
-		
 		
 		$result_db = $this->db->query($query_get);								
 		return $result_db->result_array();
@@ -100,17 +110,22 @@ class puntoventamodel extends CI_Model {
 	function get_contactos_in_punto_venta($id_usuario , $id_punto_venta ){
 
 
+
 		$query_get="select  c.* , i.*,  pvc.idpunto_venta   puntoventacontacto   from contacto  c
-left outer join punto_venta_contacto pvc 
-on c.idcontacto  = pvc.idcontacto and  pvc.idpunto_venta = '".$id_punto_venta."'
-left outer join imagen_contacto ic  
-on c.idcontacto = ic.id_contacto 
-left outer join imagen i 
-on ic.id_imagen = i.idimagen
-where idusuario ='". $id_usuario ."'  ";
+					inner join punto_venta_contacto pvc 
+					on c.idcontacto  = pvc.idcontacto and  pvc.idpunto_venta = '".$id_punto_venta."'
+					left outer join imagen_contacto ic  
+					on c.idcontacto = ic.id_contacto 
+					left outer join imagen i 
+					on ic.id_imagen = i.idimagen
+					where idusuario ='". $id_usuario ."'  ";
 		$result_db  = $this->db->query($query_get);								
 		return $result_db->result_array();					
 	}
+
+
+
+
 	/*Actualiza el contacto asociado al punto de venta */
 	function update_punto_venta_contacto($contacto , $puntoventa){
 

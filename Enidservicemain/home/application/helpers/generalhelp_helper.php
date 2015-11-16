@@ -5,6 +5,8 @@ if(!function_exists('invierte_date_time')){
 
     return "<td  style='font-size:.9em !important;' ". $extra .">". $val ."</td>";
   }
+
+  
 /**/
   function get_count_select($inicio, $fin , $text_intermedio , $selected){
 
