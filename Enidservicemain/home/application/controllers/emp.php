@@ -4,6 +4,9 @@ class Emp  extends CI_Controller{
 		parent::__construct();
         $this->load->helper("empresa");
         $this->load->helper("img_eventsh");
+        $this->load->helper("generoshelp");
+
+        $this->load->model("generosmusicalesmodel");
         $this->load->model("contactmodel");
         $this->load->model("empresamodel");
      	$this->load->library('sessionclass');    
@@ -66,6 +69,13 @@ class Emp  extends CI_Controller{
 
         
         $data["contacto"] = $this->contactmodel->get_contacto_empresa($id_empresa)[0]; 
+        
+        
+        $generos_musicales = $this->generosmusicalesmodel->get_generos_musicales();
+        $data["data_list_generos"]= get_data_list_generos($generos_musicales);
+        $g = $this->generosmusicalesmodel->get_geros_empresa($id_empresa);
+        $data["list_generos"] =  list_generos_empresa($g);
+        $data["tags_generos"]= get_tags_generos($g);
 
         $this->load->view('TemplateEnid/header_template', $data);
         $this->load->view('empresa/historia');

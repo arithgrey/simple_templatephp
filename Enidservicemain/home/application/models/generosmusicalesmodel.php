@@ -40,5 +40,49 @@ function update_genero_evento($idempresa, $idevento , $idgenero ){
 
 
 }
+/**/
+function get_geros_empresa($id_empresa){
+
+	$query_get = "SELECT g.* , egm.* FROM genero_musical g inner join  empresa_genero_musical egm on g.idgenero_musical = egm.idgenero_musical  and  egm.id_empresa =  '". $id_empresa."' ";
+	$result =  $this->db->query($query_get);	
+	return $result->result_array();
+}
+/**/
+function get_generos_musicales(){
+	$query_get =  "SELECT *  FROM genero_musical"; 	
+	$result =  $this->db->query($query_get);	
+	return $result->result_array();
+
+}
+/**/
+function insert_genero_empresa($id_empresa , $param ){
+	
+	/**/
+	$query_get ="SELECT * FROM genero_musical WHERE nombre ='". $param["genero_musical"]."' ";	
+	$result =  $this->db->query($query_get);
+	$id_genero = $result->result_array()[0]["idgenero_musical"];
+
+		/*Verifica si existe*/
+		$query_exist =  "SELECT *  FROM empresa_genero_musical WHERE id_empresa   ='". $id_empresa ."'  AND idgenero_musical = '". $id_genero."'  "; 
+		$result_exist =  $this->db->query($query_exist);
+		$re = $result_exist ->result_array();
+
+		if(count($re) > 0 ){
+			return 1;
+		}else{
+			/*Insertamos en la base de datos*/
+			$query_insert = "INSERT INTO empresa_genero_musical VALUES('". $id_empresa ."' , '".  $id_genero  ."'   )";
+			return $this->db->query($query_insert);
+
+		}
+
+
+}
+/**/
+function delete_genero_empresa($id_empresa , $id_genero){
+
+	$query_delete ="DELETE FROM empresa_genero_musical WHERE id_empresa   ='". $id_empresa ."' AND idgenero_musical = '". $id_genero."' ";
+	return $this->db->query($query_delete);
+}
 /*Termina modelo */
 }

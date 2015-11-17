@@ -18,6 +18,9 @@ $("#text-nombre-empresa").click(function(){
 	$(".pais_empresa_input").show();
 });
 
+$("#form-genero-empresa").submit(insert_genero_musical_empresa);
+
+$(".delete_genero_empresa").click(delete_genero_empresa);
 
 
 
@@ -214,3 +217,35 @@ function update_country_org(){
 	});
 }
 /**/
+function insert_genero_musical_empresa(){
+
+	
+	llenaelementoHTML(".status-genero" , "");
+	url =  $("#form-genero-empresa").attr("action");	
+	$.post(url  , $("#form-genero-empresa").serialize()).done(function(data){
+		llenaelementoHTML(".status-genero" , "Género musical asociado correctamente.!");
+		load_generos_empresa();
+	});
+	return false;
+
+}
+/**/
+function load_generos_empresa(){
+	url =  $("#form-genero-empresa").attr("action");	
+	$.get(url).done(function(data){
+		llenaelementoHTML(".generos_musicales_empresa" , data);
+		$(".delete_genero_empresa").click(delete_genero_empresa);
+	});
+}
+/**/
+function delete_genero_empresa(e){
+
+	url =  $("#form-genero-empresa").attr("action");	
+	genero = e.target.id;
+	data_send = {"genero" : genero }
+	
+	$.ajax({ url: url, type: 'DELETE', data : data_send }).done(function(data){
+	   	load_generos_empresa();
+	});
+
+}

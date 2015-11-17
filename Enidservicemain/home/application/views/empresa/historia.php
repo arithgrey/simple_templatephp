@@ -35,6 +35,20 @@
                         </div>
 
 
+                        <div class="col-md-12"  data-toggle="modal" data-target="#generos_empresa"  id=''  >
+                            <div class="panel" title=''>
+                                <div class="panel-body">
+                                    <div class="profile-pic text-center">  
+
+                                          <i style='color: black' class='fa fa-pencil-square-o ' ></i> <span   style='color:black;'>Representante de los mejores géneros musicales</span>
+                                          <?=$tags_generos;?>
+                                          
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
 
 
                         <div class="col-md-12" >
@@ -686,3 +700,81 @@
 <script type="text/javascript" src="<?=base_url('application/js/directorio/emp.js')?>"></script>
   
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div id="generos_empresa" class="modal fade">  
+<div class="modal-dialog modal-lg">
+  <div class="modal-content">      
+      <!--*************************** Header modal *********************************-->
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Géneros que representa la empresa </h4> 
+      </div>            
+      <!--***************************End Header modal *********************************-->
+      <div class="modal-body">                  
+
+
+        <div class='col-lg-12'>
+          
+
+          <div class='col-lg-12'>
+            <div class='col-lg-2'></div>
+              <div class='col-lg-8'>                
+                <div class='col-lg-10'>
+                  <form id='form-genero-empresa' method='POST' action='<?=base_url("index.php/api/emp/genero_musical/format/json/")?>'>
+                  <div class="input-group">
+                    <div class="input-group-addon">Genero </div>
+                    <input list="generos-list" name="genero_musical" class="generos-filtro form-control" placeholder='jazz'>                                                       
+                    <?=$data_list_generos?>                    
+                  </div>
+                </div>
+                <div class='col-lg-2'>
+                  <button class='btn btn btn_nnuevo' >Agregar</button>
+                  </form>  
+                </div>                
+
+
+
+
+                <br>
+                <br>
+                <div class='col-lg-12'>
+                  <div class='status-genero'></div>
+                  <div class='generos_musicales_empresa'>
+                    <?=$list_generos?>  
+                  </div>
+                </div>
+
+
+                </div>
+
+              </div>
+              <div class='col-lg-2'></div>
+          </div>       
+
+
+
+
+      </div><!--*********************Termina body modal ******************* -->             
+      <!--Modal footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+      </div>
+  </div>
+</div>
+</div>

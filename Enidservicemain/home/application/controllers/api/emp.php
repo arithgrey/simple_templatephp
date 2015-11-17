@@ -3,10 +3,41 @@ require APPPATH.'/libraries/REST_Controller.php';
 class Emp extends REST_Controller{      
     function __construct(){
             parent::__construct();			
-			$this->load->helper("empresa");            	
+			$this->load->helper("empresa");       
+            $this->load->helper("generoshelp");     	
+            $this->load->model("generosmusicalesmodel");                      
            	$this->load->model("empresamodel"); 	                 
             $this->load->model("organizacionmodel");
             $this->load->library('sessionclass');                    
+    }
+    /**/
+    function genero_musical_DELETE(){
+    
+        $this->validate_user_sesssion();    
+        $id_empresa= $this->sessionclass->getidempresa();                     
+        $id_genero  =  $this->delete("genero");
+        $db_response = $this->generosmusicalesmodel->delete_genero_empresa($id_empresa , $id_genero);
+        $this->response($db_response);
+
+    }   
+    
+    /**/
+    function genero_musical_GET(){
+    
+        $this->validate_user_sesssion();    
+        $id_empresa= $this->sessionclass->getidempresa();                     
+        $this->response(list_generos_empresa($this->generosmusicalesmodel->get_geros_empresa($id_empresa)) );
+
+    }   
+    /**/
+    function genero_musical_post(){
+    
+        $this->validate_user_sesssion();    
+        $id_empresa= $this->sessionclass->getidempresa();         
+        $db_response = $this->generosmusicalesmodel->insert_genero_empresa($id_empresa , $this->post() );
+        $this->response($db_response );
+
+
     }   
     function incidencia_POST(){
 

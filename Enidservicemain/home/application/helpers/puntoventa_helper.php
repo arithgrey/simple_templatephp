@@ -27,10 +27,11 @@ if(!function_exists('invierte_date_time')){
 
 			$table.="<tr class='text-center'>						
 					<td style='border-color:white;'> </td>";
-					$table .=get_td( porcentaje_puntos_venta($row["contactos_asociados"]  , $row["contactos_asociados"])  );
-					$table .=get_td(  porcentaje_puntos_venta($row["contactos_asociados"]  , ($row["con_tel"] + $row["con_tel_movil"]) ) );
-					$table .=get_td( porcentaje_puntos_venta($row["contactos_asociados"]  ,  $row["con_locacion"] ) );
-					$table .=get_td( porcentaje_puntos_venta($row["contactos_asociados"]  ,  $row["con_web"]) );
+					$table .=get_td( porcentaje_puntos_venta($row["contactos_asociados"]  , $row["contactos_asociados"])  , ""  );
+					$table .=get_td(  porcentaje_puntos_venta($row["contactos_asociados"]  , ($row["con_tel"] + $row["con_tel_movil"]) ) , "" );
+					$table .=get_td( porcentaje_puntos_venta($row["contactos_asociados"]  ,  $row["con_locacion"] )  , "");
+					$table .=get_td( porcentaje_puntos_venta($row["contactos_asociados"]  ,  $row["con_web"])  , "");
+
 			$table.="</tr>";		
 		}		
 		$table .="</table>";			
@@ -59,10 +60,10 @@ if(!function_exists('invierte_date_time')){
 
 
 			$table .="<tr class='text-center' style='font-size:.8em;'>";
-						$table .= get_td(  porcentaje_puntos_venta($total , $total )   );
-						$table .= get_td( porcentaje_puntos_venta($total ,  $row["ventas_unicas"]) );
-						$table .= get_td( porcentaje_puntos_venta($total , $row["preveentas"]) );
-						$table .= get_td( porcentaje_puntos_venta($total , $row["promociones"]) );
+						$table .= get_td(  porcentaje_puntos_venta($total , $total )   , "" );
+						$table .= get_td( porcentaje_puntos_venta($total ,  $row["ventas_unicas"]) , "" );
+						$table .= get_td( porcentaje_puntos_venta($total , $row["preveentas"]) , "" );
+						$table .= get_td( porcentaje_puntos_venta($total , $row["promociones"]) , "" );
 			$table .="</tr>";	
 			 					
 		}
