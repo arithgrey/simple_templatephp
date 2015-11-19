@@ -13,10 +13,6 @@ class Escenario  extends CI_Controller {
 		$this->load->library('sessionclass');    
 	}
 	
-
-
-
-
     /**************************Configuracion del escenario avanzado **************++*/
     function configuracionavanzada($id_escenario){
 
@@ -27,10 +23,6 @@ class Escenario  extends CI_Controller {
         ///1
         $id_evento= $evento[0]["idevento"];
         $url_evento = base_url("index.php/eventos/nuevo") . "/". $id_evento ;
-
-
-
-
 
         $data = $this->validate_user_sesssion("Escenario del evento " . "<a href='".$url_evento ."'>" . $nombre_evento . "</a>");                                                         
         $base_path = substr($_SERVER["SCRIPT_FILENAME"], 0 , (strlen($_SERVER["SCRIPT_FILENAME"]) -9)  )."application/uploads/uploads/empresa/".$this->sessionclass->getidempresa()."/ee/";
@@ -110,7 +102,8 @@ class Escenario  extends CI_Controller {
 	function inevento($id_escenario , $id_evento){
 
 		$dataevent = $this->eventmodel->getEventbyid($id_evento);            
-        $data = $this->validate_user_session_event("Escenarios" , $dataevent[0]["status"]);
+        $url_editar =  base_url("index.php/escenario/configuracionavanzada/" . $id_escenario);
+        $data = $this->validate_user_session_event("<a href='".$url_editar ."'>Editar</a>");
         $data["evento"] =  $dataevent[0];    
 
         $artistas_array = $this->escenarioartistamodel->get_artistas_inevent($id_escenario);
@@ -124,11 +117,10 @@ class Escenario  extends CI_Controller {
         $data["otros_escenarios"]= list_resum_escenarios($list_escenarios, $id_evento, 200);
         $data["generos_tags"] = get_generos( $this->escenariomodel->get_generos($id_escenario, $id_evento) );
 
-
         $data["artitas"]= get_artistas_default_template($artistas_array);
         $data["artistas_info"] =  get_info_artistas_escenario_user($artistas_array);
         $this->dinamic_view_event('escenarios/principal_escenario' , $data);
-        
+
 	}
     /**/
     function validate_user_sesssion($titulo_dinamico_page){
@@ -151,13 +143,13 @@ class Escenario  extends CI_Controller {
             }   
     }
     
-    function validate_user_session_event($titulo_dinamico_page , $status_event ){
+    function validate_user_session_event($titulo_dinamico_page){
 
         if ( $this->sessionclass->is_logged_in() == 1) {                                        
                     
                     $menu = $this->sessionclass->generadinamymenu();
                     $nombre = $this->sessionclass->getnombre();                                         
-                    $data['titulo']= $titulo_dinamico_page . "<span class='btn btn-info edit-status-event'><a data-toggle='modal' data-target='#update-status-ev-modal'>" . get_statusevent($status_event) . " <i class='fa fa-edit'></i></span></a>";              
+                    $data['titulo']= $titulo_dinamico_page;              
                     $data["menu"] = $menu;              
                     $data["nombre"]= $nombre;                                               
                     $data["perfilactual"] =  $this->sessionclass->getnameperfilactual();                

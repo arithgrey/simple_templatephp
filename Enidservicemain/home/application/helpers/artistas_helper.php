@@ -181,110 +181,61 @@ if(!function_exists('invierte_date_time')){
 	/*lista los artistas, template simple para edición*/
 	function list_artistas_escenario($data , $title_panel, $record=0 , $id_escenario ){		            
 
-		$artistas_in_evento = '
-					<div class="panel">
-                        <header class="panel-heading">
-                            '.$title_panel .'
-                            
-                        </header>
-
-
-                        <br>	
-                        	
-                        <div class="panel-body">
-                            <ul class="goal-progress">
-                                ';
-
-
+		$artistas_in_evento = '<div class="panel">
+		                        <header class="panel-heading">
+		                            '.$title_panel .'                            
+		                        </header>                                   	
+		                        <div class="panel-body">
+		                            <ul class="goal-progress">';
 
 	foreach ($data as $row) {
-	
-	$id_artista = $row["idartista"];	
-	$status = $row["status"];
-	$idescenario = $row["idescenario"];
-	$fecha_registro = $row["fecha_registro"];
-	$hora_inicio = $row["hora_inicio"];
-	$hora_termino = $row["hora_termino"];
-	$nombre_artista= $row["nombre_artista"];
-	$status_confirmacion = $row["status_confirmacion"];
+		
+		$id_artista = $row["idartista"];	
+		$status = $row["status"];
+		$idescenario = $row["idescenario"];
+		$fecha_registro = $row["fecha_registro"];
+		$hora_inicio = $row["hora_inicio"];
+		$hora_termino = $row["hora_termino"];
+		$nombre_artista= $row["nombre_artista"];
+		$status_confirmacion = $row["status_confirmacion"];
 
 
 	
-	if ($hora_inicio!= null OR strlen($hora_inicio)>3  ){
-		$horario = "de ". $hora_inicio ." a ".  $hora_termino;	
-	}else{
-		$horario = "por definir";
-	}
-	
-
+		if ($hora_inicio!= null OR strlen($hora_inicio)>3  ){
+			$horario = "de ". $hora_inicio ." a ".  $hora_termino;	
+		}else{
+			$horario = "por definir";
+		}
 
 				$artistas_in_evento .= '<li class="media usr-info">';
-
-
 				if ($row["nombre_imagen"]!= null ) {
 
 						$img = base_url( $row["base_path_img"].$row["nombre_imagen"]);													
-
-
-
-
-
-		               	$artistas_in_evento .='<div  data-toggle="modal" data-target="#modal-img-artista-evento" class="prog-avatar" title="Actualizar la imagen del artista"> 						
-						                            
+		               	$artistas_in_evento .='<div  data-toggle="modal" data-target="#modal-img-artista-evento" class="prog-avatar" title="Actualizar la imagen del artista"> 												                            
 						                            <img  class="img-artista-evento thumb" id="'.$id_artista.'" src="'.$img .'" alt="">
 												</div>';
-
-
 				}else{
 						$artistas_in_evento .='<div title="Cargar imagen del artista" data-toggle="modal" data-target="#modal-img-artista-evento" class="prog-avatar"> 												                            						                            
 						                            <i class="img-artista-evento thumb fa fa-cloud-upload fa-3x" id="'.$id_artista.'"  ></i>
 												</div>';
 				}
 
-
-
                 $artistas_in_evento.='<div class="details">
                                         <div class="title">
                                         	<i id="'.$id_artista.'" class="remove-artista fa fa-minus-circle" title="Quitar del escenario" ></i>                                        	
                                         	<a href="" title="Enlace algún  video del artista en youtube" data-toggle="modal" data-target="#modal_link_youtube" class="artista_yt" id="'.$id_artista.'"> <i class="artista_yt fa fa-youtube-play" id="'.$id_artista.'" ></i></a>
                                         	<a href="" data-toggle="modal"  title="Enlace"  data-target="#modal_link_sound" class="artista_sound" id="'.$id_artista.'">  <i class="artista_sound fa fa-play-circle" id="'.$id_artista.'" ></i></a>
-                                        	<a href="" data-toggle="modal"  title="Mensaje del artista al público" data-target="#modal_nota" class="artista_nota" id="'.$id_artista.'">
-                                        	 	
-                                        	 	<i class="artista_nota fa fa-file-text-o" id="'.$id_artista.'" ></i></a>
-                                        	
-                                            	
-                                        		
-
-                                        		
-                                            	<div class="pull-right">
-	                                            	<ul class="revenue-nav">
-
-	                                            				                                        			                                        
-				                                        <li class=""><a class="artistas-inputs"  data-toggle="modal" data-target="#edit-nombre-artista"   title="artista" id="'. $id_artista.'" >'. $nombre_artista .'</a>
-				                                        
-				                                        </li>
-				                                        <li class="active"  data-toggle="modal" data-target="#edit-status-confirmacion"  ><a class="status-confirmacion" id="'. $id_artista.'" >'. $status_confirmacion.'</a></li>
-				                                    </ul>
-			                                    </div>
-			                                    
+                                        	<a href="" data-toggle="modal"  title="Mensaje del artista al público" data-target="#modal_nota" class="artista_nota" id="'.$id_artista.'"><i class="artista_nota fa fa-file-text-o" id="'.$id_artista.'" ></i></a>                                        	                                            	                                                                              		                                            	                                        
+                                            <a title="Horario que se presentará  el artista" href="" data-toggle="modal" data-target="#modal_record_horario"><i class="fa fa-clock-o horario_artista" id="'.$id_artista.'"></i></a> Horario '.$horario.' 	                                           
                                             
+                                            <div class="pull-right">
+	                                            <a  data-toggle="modal" data-target="#edit-status-confirmacion"  style="background: #EA391C;  color:white; padding:2px; border-radius: 5px;"  class="status-confirmacion" id="'. $id_artista.'" >'. $status_confirmacion.'</a>				                                    			                                   
+	                                            <a class="artistas-inputs"  data-toggle="modal" data-target="#edit-nombre-artista"   title="artista" id="'. $id_artista.'" >'. $nombre_artista .'</a>
+                                            <div>
 
-
-
-
-
-
-
-
-
-                                            <a title="Horario que se presentará  el artista" href="" data-toggle="modal" data-target="#modal_record_horario">                                            
-                                            <i class="fa fa-clock-o horario_artista" id="'.$id_artista.'">
-                                            </i></a> Horario '.$horario.' 
-                                            
-                                        </div> 
-                                        	
-                                    </div>
-                                </li>';				                                	
+	                                       </div>                                         	
+	                                   </div>
+	                                </li>';				                                	
 	}                                
 
 

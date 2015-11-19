@@ -269,48 +269,37 @@ $generos .= '</div>
 
 /**/
 function get_slider_img($data){
+        $slider = '<div id="Carousel-escenario" class="carousel slide" data-ride="carousel">';
+            $slider .= '<ol class="carousel-indicators">';
 
+                        for ($a=0; $a <count($data); $a++) {                 
+                            if($a < 1 ){
+                                $slider .= '<li data-target="#Carousel-escenario" data-slide-to="'.$a.'" class="active"></li>';                
+                            }else{
+                                $slider .= '<li data-target="#Carousel-escenario" data-slide-to="'.$a.'" ></li>';        
 
-    $slider = '<div class="row" id="section_escenario_principal" style="padding:5%; background: #069F89; border-radius: 10px;" ><div id="Carousel-escenario" class="carousel slide" data-ride="carousel">';
-    $slider .= '<div class="row"><ol class="carousel-indicators">';
+                            }        
+                        }
+            $slider .= '</ol>
+                    <div>';    
 
-    for ($a=0; $a <count($data); $a++) {                 
-        if($a < 1 ){
-            $slider .= '<li data-target="#Carousel-escenario" data-slide-to="'.$a.'" class="active"></li>';                
-        }else{
-            $slider .= '<li data-target="#Carousel-escenario" data-slide-to="'.$a.'" ></li>';        
-
-        }        
-    }
-    $slider .= '</ol><div>';    
-    $slider .='<div class="row"><div class="carousel-inner" role="listbox">';
-    $flag =0;
-    foreach ($data as $row) {   
-
-        $path_img = $row["base_path_img"]. $row["nombre_imagen"]; 
-        if ($flag < 1 ) {
-            
-            $slider .= '<div class="item active">
-                      <img src="'. base_url($path_img) .'" alt="">
-                    </div>';            
-        }else{
-            $slider .= '<div class="item">
-                      <img src="'. base_url($path_img) .'" alt="">
-                    </div>';        
-        }        
-        $flag ++;
-    }
-    $slider .= '</div></div>';
-
-    $slider .= '<div class="row">  <a class="left carousel-control" href="#Carousel-escenario" role="button" data-slide="prev">
-                <span class="fa fa-chevron-left  fa-3x" aria-hidden="true"></span>
-                <span class="sr-only">Anterior</span>
-              </a>
-              <a class="right carousel-control" href="#Carousel-escenario" role="button" data-slide="next">
-                <span class="fa fa-chevron-right  fa-3x" aria-hidden="true"></span>
-                <span class="sr-only">Siguiente</span>
-              </a></div>';
-    $slider .= '</div></div>';
+    $slider .='<div class="carousel-inner" style="height:700px;" role="listbox">';
+                    $flag =0;
+                    foreach ($data as $row) {   
+                        $path_img = $row["base_path_img"]. $row["nombre_imagen"]; 
+                        if ($flag < 1 ) {                            
+                            $slider .= '<div class="item active">
+                                            <img  style="width:100%" src="'. base_url($path_img) .'" alt="">
+                                         </div>';            
+                        }else{
+                            $slider .= '<div class="item">
+                                          <img style="width:100%" src="'. base_url($path_img) .'" alt="">
+                                        </div>';        
+                        }        
+                        $flag ++;
+                    }
+        $slider .= '</div>';          
+    
     
     return $slider; 
 }
@@ -321,23 +310,22 @@ function escenarios_in_evento($data , $id_evento ){
     $escenarios =  '';      
     foreach ($data as $row) {
 
-
-
         if ($row["idescenario"] != $id_evento) {
          
         $url = base_url('index.php/escenario/configuracionavanzada') ."/". $row["idescenario"];
         
-        $escenarios .= '<a href="'.$url.'" style="color:white" href=""><div class="col-md-12 col-xs-12 col-sm-12">
-                            <div class="panel blue">
-                                <div class="symbol">
-                                    <i class="fa fa-chevron-circle-right"></i>
-                                </div>
-                                <div class="state-value">
-                                    
-                                    <div class="title">'.$row["nombre"].'</div>
+        $escenarios .= '<a href="'.$url.'" style="color:white" >
+                            <div class="col-lg-12">
+                                <div class="panel blue">
+                                    <div class="symbol">
+                                        <i class="fa fa-chevron-circle-right"></i>
+                                    </div>
+                                    <div class="state-value">                                        
+                                        <div class="title">'.$row["nombre"].'</div>
+                                    </div>
                                 </div>
                             </div>
-                        </div></a>';   
+                        </a>';   
         }
     }
     return $escenarios;

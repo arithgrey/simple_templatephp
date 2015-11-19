@@ -96,5 +96,23 @@ function get_accesos_tipo_evento($id_evento){
 	$result = $this->db->query($query_get);	
 	return $result ->result_array();	
 }
+/**/
+function get_data_acceso_public($id_evento){
+	$query_get ="select a.* , t.tipo , i.*   from  acceso a 
+				inner  join  tipo_acceso t  on 
+				a.idtipo_acceso =  t.idtipo_acceso
+				left outer join imagen_acceso ia 
+				on ia.id_acceso =  a.idacceso
+				left  outer join  
+				imagen i 
+				on  
+				ia.id_imagen  = i.idimagen  
+				where a.idevento = '". $id_evento ."' ";
+
+	$result =  $this->db->query($query_get);			
+	return $result->result_array();
+
+}
+
 /*Termina modelo */
 }

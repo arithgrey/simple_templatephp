@@ -179,21 +179,24 @@ function diaevento($id_evento){
 
 
 
+
+
+
+
+
 /****************************** Accesos al evento ************************************/
-function accesosalevento($id_evento , $status){
+function accesosalevento($id_evento){
         
-        if ($this->checkifexist($id_evento) == 1 ) {    
+        if ($this->checkifexist($id_evento) == 1 ) {                
             
-            
+            $data = $this->validate_user_sesssion("Eventos");
+            $data_accesos  = $this->accesosmodel->get_data_acceso_public($id_evento);
 
-            $data = $this->validate_user_session_event("Accesos al evento " , $status);                
-            $data_accesos_evento= $this->accesosmodel->get_acceso_by_event($id_evento);
-            $data["accesos_evento"] = accesos_view_default($data_accesos_evento);            
-            $data_eventos_experiencia = $this->eventmodel->get_last_events_experience(4 , $id_evento);                  
-
-            $data["ultimos_eventos_experiencia"] = $data_eventos_experiencia;
-            /* Vistas */
-            $this->show_data_event($data, 'eventos/accesos_evento');            
+            $data["data_evento"] = $this->eventmodel->getEventbyid($id_evento)[0];
+            $resumen_event = $this->eventmodel->get_resum_by_id_event($id_evento);
+            $data["resumen_event"] = resumen_cliente($resumen_event); 
+            $data["accesos_evento"]=  lista_accesos_publicos($data_accesos);  
+            $this->dinamic_view_event( "accesos/evento_accesos_principal_client" , $data);
             
             
 
@@ -201,6 +204,9 @@ function accesosalevento($id_evento , $status){
             header('Location:' . base_url('index.php/inicio/eventos'));
         }                
 }
+
+
+
 /****************************** Termina Accesos al evento  ************************************/
 
 

@@ -194,4 +194,101 @@ if(!function_exists('invierte_date_time')){
 		return $option_acceso;
 	}
 	/**/
+
+
+	/****************************Resumen Accesos principal cliente  ******************************************************************/
+	function resumen_cliente($data){
+
+		$resumen = "<div class='col-lg-12' style='margin-top: 10px;' border='1'>";		
+		foreach ($data as $row){
+			
+			$escenarios  = $row["escenarios"];
+			$artistas = $row["artistas"];
+			$evento_punto_venta =  $row["evento_punto_venta"];
+			$accesos 	 = $row["accesos"];
+			$generos_musicales =  $row["generos_musicales"];
+			$servicios  =  $row["servicios"];
+
+			$resumen .="<div class='col-lg-3'><strong><h1 style='color:#8FE4DE; font-size:3em' >Adquiere tus <p style='color:black !important; font-size:.9em;'>accesos</p></h1></strong> </div>";
+			$resumen .="<div class='col-lg-9' style='background:white; color: #011117; font-size:1.2em;'>";
+			$resumen .=  "<br><br><div class='col-lg-2 text-center'>". $escenarios  ."<br> Escenarios</div>"; 
+			$resumen .=  "<div class='col-lg-2 text-center'>". $artistas  ."<br> Artistas </div>"; 
+			$resumen .=  "<div class='col-lg-2 text-center'>". $evento_punto_venta  ."<br> Puntos de venta</div>"; 			
+			$resumen .=  "<div class='col-lg-2 text-center'>". $generos_musicales  ."<br> Géneros musicales </div>"; 
+			$resumen .=  "<div class='col-lg-2 text-center'>". $servicios  ."<br> Servicios </div>"; 
+			$resumen .=  "<div class='col-lg-2 text-center' style='background:#56C5F9; color:#56C5F9;'>". $servicios  ."<br> Servicios </div>"; 
+			
+
+			$resumen .=  "</div>";
+
+			 
+		}
+		$resumen .=  "</div>"; 
+		return $resumen;
+	}
+
+	/**/
+	function lista_accesos_publicos($data){
+
+
+		$accesos   =""; 
+		foreach ($data as $row) {
+			
+			$precio  = $row["precio"];			
+			$descripcion = $row["descripcion"];			
+			
+			$inicio_acceso  = $row["inicio_acceso"];			
+			$termino_acceso = $row["termino_acceso"];			
+
+			$tipo   = $row["tipo"];			
+			$nombre_imagen = $row["nombre_imagen"];			
+			$base_path_img= $row["base_path_img"];			
+			$img =  base_url($base_path_img. $nombre_imagen);
+			
+					$accesos .=  '<div class="col-lg-6">
+									<div class="audio-wrapper">
+										<img style="width:50%;" src="'. $img .'">
+									</div>
+			                    </div>
+
+                    <div class="col-lg-6">
+                                        <header>
+                                            <h2><a style="color:#1DB3BF !important;" >'. $tipo .'</a> , $'. $precio .'.00</h2>
+                                            <div class="post-info">
+                                                
+	                                            <span class="comments">
+	                                                <span class="post-date">
+	                                                    <i class="icon-calendar"></i>
+	                                                    Periodo
+	                                                    <span class="day">'. $inicio_acceso  .'</span>
+	                                                    <span class="month"> al ' . $termino_acceso . '</span>
+	                                                </span>
+	                                            </span>    
+	                                                
+                                            </div>
+                                        </header>
+                                        
+        				<p>'.$descripcion.'</p>                                        
+					</div>'; 
+			
+
+		}		
+
+
+		
+		return $accesos;				
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+
 }/*Termina el helper*/
