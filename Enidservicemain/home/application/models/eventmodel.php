@@ -354,18 +354,21 @@ function get_by_escenario($id_escenario){
 
 function get_generos($id_empresa , $id_evento , $genero_filtro){
 
-
-	
 	$query_get ="select g.* , egm.idevento  , egm.idgenero_musical  idg  from genero_musical g 
 	left outer join evento_genero_musical egm 	
 	on g.idgenero_musical =  egm.idgenero_musical  and egm.idevento = '".$id_evento."'
 	where nombre like '".$genero_filtro."%'";		
 
-
-
 	$result  = $this->db->query($query_get);
 	return $result->result_array();
 
+}
+/**/
+function get_days_to_event($fecha_inicio){
+
+	$query_get = "SELECT DATEDIFF( '". $fecha_inicio."' , CURRENT_DATE() ) AS DateDiff";
+	$result = $this->db->query($query_get); 
+	return $result->result_array(); 
 }
 
 /*Termina modelo */

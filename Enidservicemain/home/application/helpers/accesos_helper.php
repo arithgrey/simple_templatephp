@@ -197,9 +197,10 @@ if(!function_exists('invierte_date_time')){
 
 
 	/****************************Resumen Accesos principal cliente  ******************************************************************/
-	function resumen_cliente($data){
+	function resumen_cliente($data , $id_evento ){
 
-		$resumen = "<div class='col-lg-12' style='margin-top: 10px;' border='1'>";		
+
+		$resumen = "";		
 		foreach ($data as $row){
 			
 			$escenarios  = $row["escenarios"];
@@ -207,25 +208,181 @@ if(!function_exists('invierte_date_time')){
 			$evento_punto_venta =  $row["evento_punto_venta"];
 			$accesos 	 = $row["accesos"];
 			$generos_musicales =  $row["generos_musicales"];
-			$servicios  =  $row["servicios"];
+			$servicios  =  $row["servicios"];		
 
-			$resumen .="<div class='col-lg-3'><strong><h1 style='color:#8FE4DE; font-size:3em' >Adquiere tus <p style='color:black !important; font-size:.9em;'>accesos</p></h1></strong> </div>";
-			$resumen .="<div class='col-lg-9' style='background:white; color: #011117; font-size:1.2em;'>";
-			$resumen .=  "<br><br><div class='col-lg-2 text-center'>". $escenarios  ."<br> Escenarios</div>"; 
-			$resumen .=  "<div class='col-lg-2 text-center'>". $artistas  ."<br> Artistas </div>"; 
-			$resumen .=  "<div class='col-lg-2 text-center'>". $evento_punto_venta  ."<br> Puntos de venta</div>"; 			
-			$resumen .=  "<div class='col-lg-2 text-center'>". $generos_musicales  ."<br> Géneros musicales </div>"; 
-			$resumen .=  "<div class='col-lg-2 text-center'>". $servicios  ."<br> Servicios </div>"; 
-			$resumen .=  "<div class='col-lg-2 text-center' style='background:#56C5F9; color:#56C5F9;'>". $servicios  ."<br> Servicios </div>"; 
-			
+		$resumen .=  '  					
+        <div class="col-lg-3" >
+            <div class="form_hover" style="background-color: #32AE94;" >
+                <p style="text-align: center; margin-top: 50px;">
+	                <span style="font-size: 120px;">
+	                    '. $escenarios .'
+	                </span>    
+                </p>
+                <div class="header">
+                    <div class="evento_escenarios  blur" id="'. $id_evento.'"></div>
+                    <div class="header-text" >
+                        <div class="panel" style="height: 247px; background:#32AE94; background:#32AE94;">
+                            <div class="panel-heading "  >
+                                <h4 style="color: white;">Escenarios</h4>
+                            </div>
+                            <div class="panel-body "  >
+                                
+                                <div id="escenarios_resumen"></div>
+                                <div class="form-group">
+                                    User Rating:<br />
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star-o"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3" >
+            <div class="form_hover " style="background-color: #32AE94;">
+                <p style="text-align: center; margin-top: 50px;">
+                    <span style="font-size: 120px;">
+                    	'.$artistas.'
+                    </span>
+                </p>
+                <div class="header">
+                    <div class="evento_artistas  blur"  id="'. $id_evento .'"></div>
+                    <div class="header-text">
+                        <div class="panel " style="height: 247px; background:#32AE94;">
+                            <div class="panel-heading">
+                                <h4 style="color: white;">Artistas</h4>
+                            </div>
+                            <div class="panel-body">
+                                <div id="artistas_resumen"></div>
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3">
+            <div class="form_hover " style="background-color: #32AE94;">
+                <p style="text-align: center; margin-top: 50px;">                    
+                    <span style="font-size: 120px;">
+                    '. $generos_musicales  .'
+                    </span>
+                </p>
+                <div class="header">
+                    <div class="blur evento_generos" id="'. $id_evento .'"></div>
+                    <div class="header-text">
+                        <div class="panel " style="height: 247px; background:#32AE94;">
+                            <div class="panel-heading">
+                                <h4 style="color: white;">Géneros musicales</h4>
+                            </div>
+                            <div class="panel-body">
+                                <div id="generos_resumen"></div>
+                                <div class="form-group">
+                                    User Rating:<br />
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>                                    
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star-o"></i>
+                                    <i class="fa fa-star-o"></i>
+                                    <i class="fa fa-star-o"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-			$resumen .=  "</div>";
+        <div class="col-lg-3">
+            <div class="form_hover " style="background-color: #32AE94;">
+                <p style="text-align: center; margin-top: 50px;">
+                    <span style="font-size: 120px;">
+                    '. $servicios.'
+                    </span>
+                </p>
+                <div class="header">
+                    <div class="evento_servicios  blur" id="'. $id_evento .'"></div>
+                    <div class="header-text">
+                        <div class="panel " style="height: 247px; background:#32AE94;">
+                            <div class="panel-heading">
+                                <h4 style="color: white;">Servicios </h4>
+                            </div>
+                            <div class="panel-body">
+                                
+                            	<div id="servicios_resumen"></div>	
 
-			 
-		}
-		$resumen .=  "</div>"; 
+                                <div class="form-group">
+                                    User Rating:<br />
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star-o"></i>
+                                    <i class="fa fa-star-o"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>    
+';
+
+        }
+		
 		return $resumen;
+
+		/*
+		$resumen = "<table class='table'>";		
+		foreach ($data as $row){
+			
+			$escenarios  = $row["escenarios"];
+			$artistas = $row["artistas"];
+			$evento_punto_venta =  $row["evento_punto_venta"];
+			$accesos 	 = $row["accesos"];
+			$generos_musicales =  $row["generos_musicales"];
+			$servicios  =  $row["servicios"];		
+			
+			$resumen .= "<tr class='text-center blue-col-enid' >";
+			$resumen .= get_td($escenarios , "class='evento_escenarios'  id='". $id_evento ."' ");
+			$resumen .= get_td($artistas  , "class='evento_artistas'  id='". $id_evento ."' ");
+			$resumen .= get_td($evento_punto_venta , "class='evento_puntos_venta'  id='". $id_evento ."' ");
+			$resumen .= get_td($accesos, "class='evento_accesos'  id='". $id_evento ."' ");
+			$resumen .= get_td($generos_musicales   , "class='evento_generos'  id='". $id_evento ."' ");
+			$resumen .= get_td($servicios , "class='evento_servicios'  id='". $id_evento ."' ");
+			$resumen .= "</tr>";
+
+
+
+
+			$resumen .= "<tr class='text-center' >";
+			$resumen .= get_td("Escenarios" , "");
+			$resumen .= get_td("Artistas"  , "");
+			$resumen .= get_td("Puntos de venta" , "");
+			$resumen .= get_td("Promociones", "");
+			$resumen .= get_td( "Géneros musicales.."   , "");
+			$resumen .= get_td( "Servicios" , "");
+			$resumen .= "</tr>";
+
+		}
+		$resumen .=  "</table>";
+		return $resumen;
+		*/
+
 	}
+
+
+
+
+
 
 	/**/
 	function lista_accesos_publicos($data){
@@ -245,31 +402,30 @@ if(!function_exists('invierte_date_time')){
 			$base_path_img= $row["base_path_img"];			
 			$img =  base_url($base_path_img. $nombre_imagen);
 			
-					$accesos .=  '<div class="col-lg-6">
-									<div class="audio-wrapper">
-										<img style="width:50%;" src="'. $img .'">
-									</div>
-			                    </div>
+					$accesos .=  '<div class="col-lg-12"> 
+									<div class="col-lg-6">
+										<div class="audio-wrapper">
+											<img style="width:100%;" src="'. $img .'">
+										</div>
+				                    </div>
 
-                    <div class="col-lg-6">
-                                        <header>
-                                            <h2><a style="color:#1DB3BF !important;" >'. $tipo .'</a> , $'. $precio .'.00</h2>
-                                            <div class="post-info">
-                                                
-	                                            <span class="comments">
-	                                                <span class="post-date">
-	                                                    <i class="icon-calendar"></i>
-	                                                    Periodo
-	                                                    <span class="day">'. $inicio_acceso  .'</span>
-	                                                    <span class="month"> al ' . $termino_acceso . '</span>
-	                                                </span>
-	                                            </span>    
-	                                                
-                                            </div>
-                                        </header>
-                                        
-        				<p>'.$descripcion.'</p>                                        
-					</div>'; 
+				                    <div class="col-lg-6">
+				                                        <header>
+				                                            <h2><a style="color:#1DB3BF !important;" >'. $tipo .'</a> , $'. $precio .'.00</h2>
+				                                            <div class="post-info">                                                
+					                                            <span class="comments">
+					                                                <span class="post-date">
+					                                                    <i class="icon-calendar"></i> Periodo
+					                                                    <span class="day"> '. $inicio_acceso  .' </span>
+					                                                    <span class="month"> al '. $termino_acceso . ' </span>
+					                                                </span>
+					                                            </span>    	                                               
+				                                            </div>
+				                                        </header>
+				                                        
+				        				<p>'.$descripcion.'</p>                                        
+									</div>
+								</div>'; 
 			
 
 		}		

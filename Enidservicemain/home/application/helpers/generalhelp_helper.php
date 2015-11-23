@@ -124,4 +124,20 @@ function get_statusevent($status){
   
 
 
+  /**/
+  function dias_evento($dias_evento){
+    /**/
+    $response =  ""; 
+    if ($dias_evento < 0 ){
+      $response =  "El evento ya ha sucedido"; 
+    }else if($dias_evento == 0 ){
+      $response =  "Éste día es el evento";           
+    }else{
+      $response =   "Días para el evento " .  $dias_evento;
+    }
+
+    return $response;
+  }
+  
+
 }/*Termina el helper*/

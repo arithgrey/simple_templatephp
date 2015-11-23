@@ -143,8 +143,27 @@ class puntoventamodel extends CI_Model {
 		}
 		
 	}
+
+
+	/**/	
+
+	function get_puntos_venta_cliente($id_evento){
+
+		$query_get="select pv.*  , i.base_path_img , i.nombre_imagen  from  evento_punto_venta evp 
+					left outer join  punto_venta pv  
+					on  evp.idpunto_venta =  pv.idpunto_venta
+					left outer join imagen_punto_venta  imp 
+					on evp.idpunto_venta  =  imp.idpunto_venta 
+					left outer join imagen  i 
+					on  imp.id_imagen =  i.idimagen 
+					where evp.idevento =  '". $id_evento ."' ";
+		$result = $this->db->query($query_get);			
+		return $result->result_array();
+
+	}
+
 	/*termina la función*/
-	function get_puntos_venta_evento( $id_evento , $id_user , $id_empresa){
+	function get_puntos_venta_evento( $id_evento ,  $id_empresa){
 
 		$query_get ="select  epv.idpunto_venta  punto_v , p.*   from punto_venta p  
 			left outer join evento_punto_venta epv  

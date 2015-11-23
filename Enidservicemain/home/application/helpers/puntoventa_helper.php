@@ -105,7 +105,7 @@ if(!function_exists('invierte_date_time')){
 		$table .="<form action ='". base_url('index.php/api/puntosventa/punto_venta_evento_all/format/json') ."' id='form-punto-in-evento' ><tr  class='enid-header-table text-center'>";		
 		$table .= get_td("#" , "" ); 
 				  $table .= get_td("Punto de venta" , "" );				 
-				  $table .= get_td("Log" , "" );
+				  $table .= get_td("Logo" , "" );
 				  $table .= get_td("Medios de contacto" , "" );  
 				  $table .= get_td("Asociado al event" , "" );		
 		$table .="</tr>";		
@@ -126,6 +126,7 @@ if(!function_exists('invierte_date_time')){
 			$idpunto_venta =  $row["idpunto_venta"];
 			
 
+			
 
 			$table.="<tr class='text-center'>";
 
@@ -443,5 +444,51 @@ if(!function_exists('invierte_date_time')){
 		}
 		return $result;
 
+	}
+	/**/
+	function list_puntos_venta_cliente($puntos_venta){
+
+
+		$b =  0;   
+		$puntos_venta_section = ''; 	
+		foreach ($puntos_venta as $row) {		
+
+			$razon_social  = $row["razon_social"];
+			$descripcion  = $row["descripcion"];			
+
+			$base_path_img  = $row["base_path_img"];
+			$nombre_imagen= $row["nombre_imagen"];
+			$img =  base_url($base_path_img . $nombre_imagen);
+
+
+			
+			
+				
+				$puntos_venta_section .='<div class="col-lg-4 text-center" >
+			            <div class="icon-box">
+			              <img style="width:30%;" src="'. $img  .'"> 
+			              
+
+			              <h3 style="color:white;" class="title-sm text-theme-sm text-theme">'. $razon_social  .'</h3>
+			              <p class="text-theme-sm text-center" style = "color:white; font-size:.8em;" >
+			              '. $descripcion .'
+			              </p>
+			              					<div class="col-md-12">                                               
+                                                <a class="web_link"><i title=""></i></a>                                                
+                                                <a class="web_link"><iclass="fa fa-envelope-o"></i></a>
+                                                <a class="web_link"><i class="fa fa-map-marker"></i></a>
+                                                <a class="web_link"><i class="fa fa-facebook"></i></a>
+                                                <a class="web_link"><i class="fa fa-twitter"></i></a>  
+                                                <a class="web_link" href="">www</a>  
+                                            </div>
+
+			            </div>
+			          </div>';
+
+			
+			$b++; 
+		}
+
+		return $puntos_venta_section;
 	}
 }/*Termina el helper*/

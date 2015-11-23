@@ -117,11 +117,11 @@
             //background: #1C84A7 !important;
             //background:  rgba(27, 66, 71, 0.91) none repeat scroll 0% 0% !important;
             //background: rgba(226, 233, 198, 0.9) none repeat scroll 0% 0% !important;
-            background: rgb(229, 233, 208) none repeat scroll 0% 0% !important; 
+            
             
             //background: #0F7D81 none repeat scroll 0% 0% !important;
             
-            
+            background: rgb(229, 233, 208) none repeat scroll 0% 0% !important; 
             text-align: center !important;
             font-size: .9em;
         }
@@ -208,7 +208,19 @@
         .section-enid-title{
             padding: 11px;
         }
-        
+        .panel-contenido{
+            background: #0F272C none repeat scroll 0% 0% !important;            
+            color: white !important;
+        }
+        .header-panel{
+            background: rgb(229, 233, 208) none repeat scroll 0% 0% !important; 
+            text-align: center !important;
+            font-size: .9em;            
+        }
+        .editar_client{
+            background:  #1493BD !important;
+            padding: 5px;
+        }
         </style>
        
 

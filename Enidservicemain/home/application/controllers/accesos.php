@@ -25,7 +25,7 @@ class Accesos extends CI_Controller {
 
         $id_user = $this->sessionclass->getidusuario();        
         $id_empresa =  $this->sessionclass->getidempresa();  
-        $puntos_venta = $this->puntoventamodel->get_puntos_venta_evento( $id_evento , $id_user , $id_empresa);
+        $puntos_venta = $this->puntoventamodel->get_puntos_venta_evento( $id_evento , $id_empresa);
 
         
         $data["resumen_accesos"] = resumen_puntos_venta_f($this->puntoventamodel->get_resumen_accesos($id_evento) );

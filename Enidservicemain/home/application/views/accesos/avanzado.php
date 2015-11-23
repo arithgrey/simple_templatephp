@@ -27,6 +27,12 @@
             <i class="fa fa-map-marker"></i> Puntos donde el cliente podrá adquirir sus accesos
             </a>
         </li>                            
+        <li class="">
+            <a href="<?=base_url('index.php/eventos/accesosalevento/')?>/<?=$evento;?>">
+                <i class="fa  fa-arrow-circle-o-right"></i>  Ver como el público 
+            </a>
+        </li>
+
     </ul>
 
     </header>

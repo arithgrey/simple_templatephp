@@ -12,12 +12,14 @@ class Eventos extends CI_Controller{
         $this->load->helper('generoshelp');
         $this->load->helper('accesos');
         $this->load->helper('escenario');
+        $this->load->helper('puntoventa');
         $this->load->model("templmodel");
         $this->load->model("accesosmodel");
         $this->load->model('generosmusicalesmodel');
         $this->load->model("eventmodel");
         $this->load->model("escenariomodel");
         $this->load->model("servicioseventmodel");        
+        $this->load->model("puntoventamodel");
         $this->load->library('sessionclass');      
     }
 
@@ -189,13 +191,29 @@ function accesosalevento($id_evento){
         
         if ($this->checkifexist($id_evento) == 1 ) {                
             
-            $data = $this->validate_user_sesssion("Eventos");
+            $data_evento =   $this->eventmodel->getEventbyid($id_evento)[0];    
+            $data = $this->validate_user_sesssion("Adquiere tus accesos");
+            $id_empresa =  $this->sessionclass->getidempresa();
             $data_accesos  = $this->accesosmodel->get_data_acceso_public($id_evento);
 
-            $data["data_evento"] = $this->eventmodel->getEventbyid($id_evento)[0];
+            
+            $dias_evento = $this ->eventmodel->get_days_to_event($data_evento["fecha_inicio"])[0]["DateDiff"];    
+
+            $data["days_to_event"] = dias_evento($dias_evento);
+            
+
+
+
+            $data["data_evento"] = $data_evento;
             $resumen_event = $this->eventmodel->get_resum_by_id_event($id_evento);
-            $data["resumen_event"] = resumen_cliente($resumen_event); 
+            $data["resumen_event"] = resumen_cliente($resumen_event , $id_evento); 
             $data["accesos_evento"]=  lista_accesos_publicos($data_accesos);  
+
+
+
+            $puntos_venta = $this->puntoventamodel->get_puntos_venta_cliente($id_evento);
+            $data["puntos_venta"] =  list_puntos_venta_cliente($puntos_venta);
+
             $this->dinamic_view_event( "accesos/evento_accesos_principal_client" , $data);
             
             

@@ -73,6 +73,19 @@ class Event extends REST_Controller{
         $this->response($this->eventmodel->updateurlyout($nueva_url , $idevento ) );
     }
     /**/
+    function servicios_GET(){
+
+        $id_evento =  $this->get("evento");
+        $this->response($this->eventmodel->get_servicios_evento_by_id($id_evento));
+    }
+    /**/
+    function generos_musicales_GET(){
+       
+       $id_evento  =  $this->get("evento");     
+       $this->response($this->eventmodel->get_list_generos_musicales_byidev($id_evento));
+       
+    }
+    /**/
     function genero_put(){     
         $this->validate_user_sesssion();            
         $nuevos_generos = $this->put("generos");
