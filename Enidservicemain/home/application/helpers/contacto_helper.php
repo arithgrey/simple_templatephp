@@ -234,7 +234,6 @@ if(!function_exists('invierte_date_time')){
 		return $table;
 
 	}
-
 	/**/
 	function get_porcentajes_contactos($contactos , $val ){
 
@@ -246,6 +245,63 @@ if(!function_exists('invierte_date_time')){
 		}
 
 		return $result;
+	}
+
+	/**/
+	function contactos_list($data){
+
+		$info_contacto = "<table class='table'>"; 	
+		foreach ($data as $row) {				
+
+			$nombre =  $row["nombre"];         
+			$organizacion   =  $row["organizacion"];
+			$tel =  $row["tel"];          
+			$movil  =  $row["movil"];        
+		 	$correo  =  $row["correo"];
+			$direccion  =  $row["direccion"];     
+			
+			$nota   =  $row["nota"];         
+			$pagina_web     = $row["pagina_web"];
+			$pagina_fb = $row["pagina_fb"];      
+			$pagina_tw = $row["pagina_tw"];	       		
+			$correo_alterno = $row["correo_alterno"];	  
+
+
+			$info_contacto .=  "<tr>"; 
+				$info_contacto .= get_td( $nombre , "" );
+
+
+
+				$tel =  "<a title= '". $tel ."' style='color: #26A0D1 !important;' > <i title= 'Teléfono de contacto : ". $tel ."' class='fa fa-phone'></i> </a>";
+				$info_contacto .= get_td( $tel , "" );
+				
+				$movil =  "<a title= '". $movil."' style='color: #26A0D1 !important;' > <i title= 'Móvil :". $movil ."' class='fa fa-mobile'></i> </a>";
+				$info_contacto .= get_td( $movil , "" );
+
+				$correo =  "<a title= '". $correo ."' style='color: #26A0D1 !important;' > <i title= 'Correo electrónico : ".$correo."' class='fa fa-envelope-o'></i> </a>";
+				$info_contacto .= get_td( $correo , "" );
+
+				$correo_alterno =  "<a title= '". $correo_alterno ."' style='color: #26A0D1 !important;' > <i title= 'Correo alterno ".$correo_alterno ."' class='fa fa fa-envelope'></i> </a>";				
+
+				$info_contacto .= get_td( $correo_alterno , "" );
+
+				$locacion =  "<a title= '".$direccion."' style='color: #26A0D1 !important;' > <i title= 'Dirección :".$direccion."' class='fa fa-map-marker'></i> </a>";
+				$info_contacto .= get_td( $locacion , "" );
+
+				$pagina_web_d =  "<a style='color: #26A0D1 !important;' href='". $pagina_web ."'> www </a>";
+				$info_contacto .= get_td($pagina_web_d  , ""); 
+				$pagina_web_f =  "<a  style='color: #26A0D1 !important;'  href='". $pagina_fb ."'> Facebook </a>";
+				$info_contacto .= get_td($pagina_web_f  , ""); 					
+				$pagina_web_t =  "<a style='color: #26A0D1 !important;' href='". $pagina_tw ."'> Twitter </a>";
+				$info_contacto .= get_td($pagina_web_t  , ""); 					
+			$info_contacto .=  "</tr>"; 
+
+		}
+		if (count($data) == 0  ) {
+			$info_contacto = "Punto de venta sin contactos asignados ";
+		}
+
+		return $info_contacto; 
 	}
 
 }/*Termina el helper*/

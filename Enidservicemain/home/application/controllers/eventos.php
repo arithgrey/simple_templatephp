@@ -2,8 +2,6 @@
 class Eventos extends CI_Controller{
     function __construct(){
         parent::__construct();
-
-
         
         $this->load->helper("plantillas");        
         $this->load->helper('servicios');
@@ -20,6 +18,7 @@ class Eventos extends CI_Controller{
         $this->load->model("escenariomodel");
         $this->load->model("servicioseventmodel");        
         $this->load->model("puntoventamodel");
+        $this->load->model("eventos_model_cliente");
         $this->load->library('sessionclass');      
     }
 
@@ -178,41 +177,43 @@ function diaevento($id_evento){
             header('Location:' . base_url('index.php/inicio/eventos'));
         }                
 }/*Termina la función */
+/********************************Próximos eventos de la organización*********************/
+function get_proximos_eventos($id_empresa , $id_evento  ){
+    /*Pŕoximos eventos*/
+    $data_proximos_eventos =  $this->eventos_model_cliente->get_proximos($id_empresa , $id_evento  );
 
+    /*Termina próximos*/
+    return proximos_eventos($data_proximos_eventos);
 
-
-
-
-
-
+}
 
 /****************************** Accesos al evento ************************************/
 function accesosalevento($id_evento){
         
         if ($this->checkifexist($id_evento) == 1 ) {                
-            
+                
+
             $data_evento =   $this->eventmodel->getEventbyid($id_evento)[0];    
             $data = $this->validate_user_sesssion("Adquiere tus accesos");
+            
+            $data["proximos_eventos"] = $this->get_proximos_eventos($data_evento["idempresa"] , $id_evento );
+
             $id_empresa =  $this->sessionclass->getidempresa();
             $data_accesos  = $this->accesosmodel->get_data_acceso_public($id_evento);
 
             
             $dias_evento = $this ->eventmodel->get_days_to_event($data_evento["fecha_inicio"])[0]["DateDiff"];    
-
             $data["days_to_event"] = dias_evento($dias_evento);
             
-
-
 
             $data["data_evento"] = $data_evento;
             $resumen_event = $this->eventmodel->get_resum_by_id_event($id_evento);
             $data["resumen_event"] = resumen_cliente($resumen_event , $id_evento); 
             $data["accesos_evento"]=  lista_accesos_publicos($data_accesos);  
 
-
-
             $puntos_venta = $this->puntoventamodel->get_puntos_venta_cliente($id_evento);
-            $data["puntos_venta"] =  list_puntos_venta_cliente($puntos_venta);
+            $data["puntos_venta"] =  list_puntos_venta_cliente($puntos_venta , $id_evento);
+
 
             $this->dinamic_view_event( "accesos/evento_accesos_principal_client" , $data);
             

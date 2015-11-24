@@ -1,5 +1,9 @@
 
 <style>
+	.web_link{
+		color: #F6D314 !important;
+
+	}
     .form_hover {
         padding: 0px;
         position: relative;
@@ -202,9 +206,12 @@
                             <div class="panel">
                                 <div class="panel-body p-states">
                                     <div class="summary pull-left">
-                                        <h4>Total <span>Sales</span></h4>
-                                        <span>Monthly Summary</span>
-                                        <h3>$ 5,600</h3>
+                                        <h4>Próximos <span> eventos</span></h4>
+                                        
+                                        <div>
+                                        	<?=$proximos_eventos?>
+                                        </div>
+                                       
                                     </div>
                                     <div id="expense" class="chart-bar"><canvas height="35" width="68" style="display: inline-block; width: 68px; height: 35px; vertical-align: top;"></canvas></div>
                                 </div>
@@ -214,37 +221,81 @@
                             <div class="panel">
                                 <div class="panel-body p-states green-box">
                                     <div class="summary pull-left">
-                                        <h4>Product <span>refund</span></h4>
-                                        <span>Monthly Summary</span>
-                                        <h3>160</h3>
+                                        <h4>La experiencia <span></span></h4>                                        
+                                        <span style='font-size:.8em;'><?=$data_evento["descripcion_evento"];?></span>
                                     </div>
                                     <div id="pro-refund" class="chart-bar"><canvas height="35" width="68" style="display: inline-block; width: 68px; height: 35px; vertical-align: top;"></canvas></div>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-12">
-                            <div class="panel">
-                                <div class="panel-body p-states">
-                                    <div class="summary pull-left">
-                                        <h4>Total <span>Earning</span></h4>
-                                        <span>Monthly Summary</span>
-                                        <h3>$ 51,2600</h3>
-                                    </div>
-                                    <div id="expense2" class="chart-bar"><canvas height="35" width="68" style="display: inline-block; width: 68px; height: 35px; vertical-align: top;"></canvas></div>
-                                </div>
-                            </div>
-                        </div>
+                        
                     </div>
                 </div>
             </div>
 
 
 
-<div class="col-md-12"  style='background: #32AE94; padding:10px;'>
+<div class="col-md-12"  style='background:#074141; padding:10px;'>
 	<h1 style='color:white;'>Puntos de venta</h1>
 	<?=$puntos_venta?>	
 </div> 	
                        
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- Trigger the modal with a button -->
+
+
+<!-- Modal -->
+<div id="contactos-modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Dónde pudo adquirir mis accesos</h4>
+      </div>
+      <div class="modal-body">
+        
+        <div class='row'>
+        	<div class='informacion-contact'></div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

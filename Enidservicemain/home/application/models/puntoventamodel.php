@@ -4,7 +4,17 @@ class puntoventamodel extends CI_Model {
 	        parent::__construct();        
 	        $this->load->database();
 	}
+	/**/
+	function get_contactos($id_punto_venta){
 
+		$query_get =  "select c.*  from punto_venta_contacto pvc  
+						inner join contacto c on   pvc.idcontacto =  c.idcontacto
+						where pvc.idpunto_venta  ='". $id_punto_venta."'  "; 
+		$result = $this->db->query($query_get);					
+		return $result->result_array();
+
+	}
+	/**/
 	function insert_punto_venta_contacto($punto_venta , $id_contacto){
 		$query_get="select * from punto_venta_contacto where idpunto_venta = '". $punto_venta  ."'  and idcontacto ='". $id_contacto ."' ";
 		$result  = $this->db->query($query_get);		

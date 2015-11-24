@@ -1,11 +1,10 @@
 $(document).on("ready" , function(){
-
 	$(".evento_escenarios").hover(load_data_escenarios);
 	$(".evento_artistas").hover(load_data_artistas);	
 	$(".evento_generos").hover(load_data_generos);
 	$(".evento_servicios").hover(load_data_servicios);	
-
-
+	$(".contactos-modal-btn").click(load_data_contact);
+	var punto_venta_global  = 0; 
 });
 /**/
 function load_data_escenarios(e){
@@ -61,8 +60,6 @@ function load_data_generos(e){
 	url =  now + "index.php/api/event/generos_musicales/format/json/"; 
 	$.get(url , {"evento" :  evento } ).done(function(data){
 
-
-
 		buttons =  ""; 			
 		for(var x in data){
 
@@ -102,3 +99,20 @@ function load_data_servicios(e){
 
 }
 /**/
+function load_data_contact(e){
+	
+	punto_venta  = e.target.id;
+	punto_venta_global =  punto_venta;
+	url = now + "index.php/api/puntosventa/contacto/format/json"; 
+	llenaelementoHTML(".informacion-contact" , "");
+
+	$.get(url , {punto_venta : punto_venta_global} ).done(function(data){
+
+		llenaelementoHTML(".informacion-contact" , data);
+	}).fail(function(){
+
+		alert("Error");
+	});
+	
+
+}

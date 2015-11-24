@@ -1,5 +1,22 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 if(!function_exists('invierte_date_time')){
+
+/**/
+
+function proximos_eventos($data){
+	$proximos_eventos =  "";  
+	foreach ($data as $row){
+		
+		$id_evento		=  $row["idevento"];
+		$nombre_evento	=  $row["nombre_evento"];
+		$fecha_inicio =  $row["fecha_inicio"];	
+		$url = base_url('index.php/eventos/visualizar/')."/" .  $id_evento;
+		$proximos_eventos .=  "<a href='". $url ."'><button style='background:#093245; color:white;' class='btn btn-default'>". $nombre_evento ."</button></a>";
+	}
+	return $proximos_eventos;
+}
+
+/**/
 function listobjetosp( $arreglo ){ 	
 	$list ="";
 	$b =1;

@@ -225,8 +225,7 @@ if(!function_exists('invierte_date_time')){
                             <div class="panel-heading "  >
                                 <h4 style="color: white;">Escenarios</h4>
                             </div>
-                            <div class="panel-body "  >
-                                
+                            <div class="panel-body "  >                               
                                 <div id="escenarios_resumen"></div>
                                 <div class="form-group">
                                     User Rating:<br />
@@ -259,8 +258,7 @@ if(!function_exists('invierte_date_time')){
                                 <h4 style="color: white;">Artistas</h4>
                             </div>
                             <div class="panel-body">
-                                <div id="artistas_resumen"></div>
-                                
+                                <div id="artistas_resumen"></div>                                
                             </div>
                         </div>
                     </div>
@@ -319,7 +317,7 @@ if(!function_exists('invierte_date_time')){
                             	<div id="servicios_resumen"></div>	
 
                                 <div class="form-group">
-                                    User Rating:<br />
+                                    User Rating:<br/>
                                     <i class="fa fa-star"></i>
                                     <i class="fa fa-star"></i>
                                     <i class="fa fa-star"></i>
@@ -333,49 +331,11 @@ if(!function_exists('invierte_date_time')){
                     </div>
                 </div>
             </div>
-        </div>    
-';
+        </div>';
 
         }
 		
 		return $resumen;
-
-		/*
-		$resumen = "<table class='table'>";		
-		foreach ($data as $row){
-			
-			$escenarios  = $row["escenarios"];
-			$artistas = $row["artistas"];
-			$evento_punto_venta =  $row["evento_punto_venta"];
-			$accesos 	 = $row["accesos"];
-			$generos_musicales =  $row["generos_musicales"];
-			$servicios  =  $row["servicios"];		
-			
-			$resumen .= "<tr class='text-center blue-col-enid' >";
-			$resumen .= get_td($escenarios , "class='evento_escenarios'  id='". $id_evento ."' ");
-			$resumen .= get_td($artistas  , "class='evento_artistas'  id='". $id_evento ."' ");
-			$resumen .= get_td($evento_punto_venta , "class='evento_puntos_venta'  id='". $id_evento ."' ");
-			$resumen .= get_td($accesos, "class='evento_accesos'  id='". $id_evento ."' ");
-			$resumen .= get_td($generos_musicales   , "class='evento_generos'  id='". $id_evento ."' ");
-			$resumen .= get_td($servicios , "class='evento_servicios'  id='". $id_evento ."' ");
-			$resumen .= "</tr>";
-
-
-
-
-			$resumen .= "<tr class='text-center' >";
-			$resumen .= get_td("Escenarios" , "");
-			$resumen .= get_td("Artistas"  , "");
-			$resumen .= get_td("Puntos de venta" , "");
-			$resumen .= get_td("Promociones", "");
-			$resumen .= get_td( "Géneros musicales.."   , "");
-			$resumen .= get_td( "Servicios" , "");
-			$resumen .= "</tr>";
-
-		}
-		$resumen .=  "</table>";
-		return $resumen;
-		*/
 
 	}
 

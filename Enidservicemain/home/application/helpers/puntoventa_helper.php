@@ -446,13 +446,15 @@ if(!function_exists('invierte_date_time')){
 
 	}
 	/**/
-	function list_puntos_venta_cliente($puntos_venta){
+	function list_puntos_venta_cliente($puntos_venta ,  $id_evento){
 
 
 		$b =  0;   
 		$puntos_venta_section = ''; 	
-		foreach ($puntos_venta as $row) {		
+		foreach ($puntos_venta as $row) {	
 
+
+			$idpunto_venta =  $row["idpunto_venta"];
 			$razon_social  = $row["razon_social"];
 			$descripcion  = $row["descripcion"];			
 
@@ -469,19 +471,15 @@ if(!function_exists('invierte_date_time')){
 			              <img style="width:30%;" src="'. $img  .'"> 
 			              
 
-			              <h3 style="color:white;" class="title-sm text-theme-sm text-theme">'. $razon_social  .'</h3>
+			              <h3 style="color:#F6D314;" class="title-sm text-theme-sm text-theme">'. $razon_social  .'</h3>
 			              <p class="text-theme-sm text-center" style = "color:white; font-size:.8em;" >
 			              '. $descripcion .'
 			              </p>
-			              					<div class="col-md-12">                                               
-                                                <a class="web_link"><i title=""></i></a>                                                
-                                                <a class="web_link"><iclass="fa fa-envelope-o"></i></a>
-                                                <a class="web_link"><i class="fa fa-map-marker"></i></a>
-                                                <a class="web_link"><i class="fa fa-facebook"></i></a>
-                                                <a class="web_link"><i class="fa fa-twitter"></i></a>  
-                                                <a class="web_link" href="">www</a>  
-                                            </div>
 
+
+			              	<button type="button" id="'. $idpunto_venta.'" class="contactos-modal-btn btn btn-default" data-toggle="modal" data-target="#contactos-modal">Dónde</button>
+
+			              
 			            </div>
 			          </div>';
 

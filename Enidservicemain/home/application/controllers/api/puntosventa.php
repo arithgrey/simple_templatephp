@@ -3,6 +3,7 @@ require APPPATH.'/libraries/REST_Controller.php';
 class Puntosventa extends REST_Controller{
   function __construct(){
         parent::__construct();              
+        $this->load->helper("contacto");
         $this->load->helper("puntoventa"); 
         $this->load->model("puntoventamodel");
         $this->load->library('sessionclass');
@@ -165,6 +166,15 @@ class Puntosventa extends REST_Controller{
 
   }
 
+  /**/
+  function contacto_GET(){
+
+    $id_punto_venta = $this->get("punto_venta");
+    $db_response = $this->puntoventamodel->get_contactos($id_punto_venta);
+    $this->response(contactos_list($db_response));
+
+  }
+  /**/
 
 
     /**/
