@@ -76,13 +76,22 @@ DROP TABLE IF EXISTS `enidserv_eniddbbbb3`.`usuario` ;
 CREATE TABLE IF NOT EXISTS `enidserv_eniddbbbb3`.`usuario` (
   `idusuario` INT NOT NULL AUTO_INCREMENT,
   `nombre` VARCHAR(100) NULL,
-  `email` VARCHAR(75) NOT NULL,
+  `email` VARCHAR(250) NOT NULL,
   `password` VARCHAR(45) NOT NULL,
   `fecha_registro` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `idempresa` INT NOT NULL,
   `descripcion` TEXT NULL,
   `puesto` VARCHAR(200) NULL,
   `status` VARCHAR(200) NOT NULL DEFAULT 'Usuario Activo',
+  `apellido_paterno` VARCHAR(150) NULL,
+  `apellido_materno` VARCHAR(150) NULL,
+  `email_alterno` VARCHAR(250) NULL,
+  `tel_contacto` BIGINT(10) NULL,
+  `tel_contacto_alterno` BIGINT(10) NULL,
+  `edad` INT NULL,
+  `numero_empleado` INT NULL,
+  `inicio_labor` VARCHAR(15) NULL,
+  `fin_labor` VARCHAR(15) NULL,
   PRIMARY KEY (`idusuario`),
   INDEX `fk_usuario_empresa1_idx` (`idempresa` ASC),
   CONSTRAINT `fk_usuario_empresa1`
@@ -674,16 +683,17 @@ CREATE TABLE IF NOT EXISTS `enidserv_eniddbbbb3`.`contacto` (
   `organizacion` VARCHAR(200) NULL,
   `tel` VARCHAR(10) NULL,
   `movil` VARCHAR(15) NULL,
-  `correo` VARCHAR(45) NULL,
+  `correo` VARCHAR(255) NULL,
   `direccion` TEXT NOT NULL,
   `status` VARCHAR(45) NOT NULL DEFAULT 'Contacto disponible para ser usado',
   `fecha_registro` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `tipo` VARCHAR(17) NOT NULL,
+  `tipo` VARCHAR(20) NOT NULL,
   `idusuario` INT NOT NULL,
   `nota` TEXT NULL,
   `pagina_web` TEXT NULL,
   `pagina_fb` TEXT NULL,
   `pagina_tw` TEXT NULL,
+  `correo_alterno` VARCHAR(255) NULL,
   PRIMARY KEY (`idcontacto`),
   INDEX `fk_contacto_usuario1_idx` (`idusuario` ASC),
   CONSTRAINT `fk_contacto_usuario1`
@@ -1542,78 +1552,6 @@ $$
 DELIMITER ;
 
 -- -----------------------------------------------------
--- procedure repo_eventos_admin
--- -----------------------------------------------------
-
-USE `enidserv_eniddbbbb3`;
-DROP procedure IF EXISTS `enidserv_eniddbbbb3`.`repo_eventos_admin`;
-
-DELIMITER $$
-USE `enidserv_eniddbbbb3`$$
-CREATE PROCEDURE repo_eventos_admin(emp int) 
-BEGIN 
-
-/*para los escenarios y  artistas*/
-DROP TABLE IF EXISTS repo_escenarios_artistas;
-CREATE TABLE repo_escenarios_artistas AS select e.idevento,
-    sum(case
-        when ea.idescenario is not null then 1
-        else 0
-    end) artistas from
-    escenario e
-        left outer join
-    escenario_artista ea ON e.idescenario = ea.idescenario
-group by e.idevento;
-
-
-DROP TABLE IF EXISTS repo_evento_puntos_venta;
-CREATE TABLE repo_evento_puntos_venta AS select ep . *, count(idevento) evento_punto_venta from
-    evento_punto_venta ep
-group by idevento;
- 
-
-
-DROP TABLE IF EXISTS repo_evento_servicios;
-CREATE TABLE repo_evento_servicios AS select es . *, count(idevento) servicios from
-    evento_servicio es
-group by idevento;
-
-
-
-DROP TABLE IF EXISTS reporte_evento_accesos;
-CREATE TABLE reporte_evento_accesos AS select a.idevento, count(0) accesos from
-    acceso a
-group by a.idevento;
-
-
-
-DROP TABLE IF EXISTS repo_eventos_escenarios;
-CREATE TABLE repo_eventos_escenarios AS select e.idevento,
-    e.nombre_evento,
-    e.fecha_inicio,
-    e.fecha_termino,
-    e.status,
-    e.edicion,
-    e.descripcion_evento,
-    sum(case
-        when es.idescenario is not null then 1
-        else 0
-    end) escenarios from
-    evento e
-        left outer join
-    escenario es ON e.idevento = es.idevento
-where
-    e.idempresa = emp
-group by e.idevento; 
-
-
-
-END 
-$$
-
-DELIMITER ;
-
--- -----------------------------------------------------
 -- procedure funnel
 -- -----------------------------------------------------
 
@@ -1782,6 +1720,85 @@ $$
 
 DELIMITER ;
 
+-- -----------------------------------------------------
+-- procedure repo_eventos_admin
+-- -----------------------------------------------------
+
+USE `enidserv_eniddbbbb3`;
+DROP procedure IF EXISTS `enidserv_eniddbbbb3`.`repo_eventos_admin`;
+
+DELIMITER $$
+USE `enidserv_eniddbbbb3`$$
+CREATE PROCEDURE repo_eventos_admin(emp int) 
+BEGIN 
+
+/*para los escenarios y  artistas*/
+DROP TABLE IF EXISTS repo_escenarios_artistas;
+CREATE TABLE repo_escenarios_artistas AS select e.idevento,
+    sum(case
+        when ea.idescenario is not null then 1
+        else 0
+    end) artistas from
+    escenario e
+        left outer join
+    escenario_artista ea ON e.idescenario = ea.idescenario
+group by e.idevento;
+
+
+DROP TABLE IF EXISTS repo_evento_puntos_venta;
+CREATE TABLE repo_evento_puntos_venta AS select ep . *, count(idevento) evento_punto_venta from
+    evento_punto_venta ep
+group by idevento;
+ 
+
+
+DROP TABLE IF EXISTS repo_evento_servicios;
+CREATE TABLE repo_evento_servicios AS select es . *, count(idevento) servicios from
+    evento_servicio es
+group by idevento;
+
+
+
+DROP TABLE IF EXISTS reporte_evento_accesos;
+CREATE TABLE reporte_evento_accesos AS select a.idevento, count(0) accesos from
+    acceso a
+group by a.idevento;
+
+
+
+DROP TABLE IF EXISTS repo_eventos_escenarios;
+CREATE TABLE repo_eventos_escenarios AS select e.idevento,
+    e.nombre_evento,
+    e.status,
+    e.edicion,
+    e.descripcion_evento,    
+    e.idempresa,
+    e.idusuario,
+    e.fecha_inicio,
+    e.fecha_termino,
+    e.ubicacion,
+    e.url_social,
+    e.url_social_youtube,
+    e.eslogan,
+    e.tipo,
+    sum(case
+        when es.idescenario is not null then 1
+        else 0
+    end) escenarios from
+    evento e
+        left outer join
+    escenario es ON e.idevento = es.idevento
+where
+    e.idempresa = emp
+group by e.idevento; 
+
+
+
+END 
+$$
+
+DELIMITER ;
+
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
@@ -1843,9 +1860,9 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `enidserv_eniddbbbb3`;
-INSERT INTO `enidserv_eniddbbbb3`.`usuario` (`idusuario`, `nombre`, `email`, `password`, `fecha_registro`, `idempresa`, `descripcion`, `puesto`, `status`) VALUES (1, 'arithgrey', 'arithgrey@gmail.com', '870058cbcebe244bce513be539acd6905bca8d99', NULL, 1, NULL, NULL, 'Usuario Activo');
-INSERT INTO `enidserv_eniddbbbb3`.`usuario` (`idusuario`, `nombre`, `email`, `password`, `fecha_registro`, `idempresa`, `descripcion`, `puesto`, `status`) VALUES (2, 'estratega test', 'estrategatest@gmail.com', '870058cbcebe244bce513be539acd6905bca8d99', NULL, 1, NULL, NULL, 'Usuario Activo');
-INSERT INTO `enidserv_eniddbbbb3`.`usuario` (`idusuario`, `nombre`, `email`, `password`, `fecha_registro`, `idempresa`, `descripcion`, `puesto`, `status`) VALUES (3, 'administradortest', 'administradortest@gmail.com', '870058cbcebe244bce513be539acd6905bca8d99', '', 1, NULL, NULL, 'Usuario Activo');
+INSERT INTO `enidserv_eniddbbbb3`.`usuario` (`idusuario`, `nombre`, `email`, `password`, `fecha_registro`, `idempresa`, `descripcion`, `puesto`, `status`, `apellido_paterno`, `apellido_materno`, `email_alterno`, `tel_contacto`, `tel_contacto_alterno`, `edad`, `numero_empleado`, `inicio_labor`, `fin_labor`) VALUES (1, 'arithgrey', 'arithgrey@gmail.com', '870058cbcebe244bce513be539acd6905bca8d99', NULL, 1, NULL, NULL, 'Usuario Activo', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `enidserv_eniddbbbb3`.`usuario` (`idusuario`, `nombre`, `email`, `password`, `fecha_registro`, `idempresa`, `descripcion`, `puesto`, `status`, `apellido_paterno`, `apellido_materno`, `email_alterno`, `tel_contacto`, `tel_contacto_alterno`, `edad`, `numero_empleado`, `inicio_labor`, `fin_labor`) VALUES (2, 'estratega test', 'estrategatest@gmail.com', '870058cbcebe244bce513be539acd6905bca8d99', NULL, 1, NULL, NULL, 'Usuario Activo', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `enidserv_eniddbbbb3`.`usuario` (`idusuario`, `nombre`, `email`, `password`, `fecha_registro`, `idempresa`, `descripcion`, `puesto`, `status`, `apellido_paterno`, `apellido_materno`, `email_alterno`, `tel_contacto`, `tel_contacto_alterno`, `edad`, `numero_empleado`, `inicio_labor`, `fin_labor`) VALUES (3, 'administradortest', 'administradortest@gmail.com', '870058cbcebe244bce513be539acd6905bca8d99', '', 1, NULL, NULL, 'Usuario Activo', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 
 COMMIT;
 
@@ -1931,6 +1948,7 @@ INSERT INTO `enidserv_eniddbbbb3`.`perfil_recurso` (`idperfil`, `idrecurso`) VAL
 INSERT INTO `enidserv_eniddbbbb3`.`perfil_recurso` (`idperfil`, `idrecurso`) VALUES (4, 18);
 INSERT INTO `enidserv_eniddbbbb3`.`perfil_recurso` (`idperfil`, `idrecurso`) VALUES (6, 18);
 INSERT INTO `enidserv_eniddbbbb3`.`perfil_recurso` (`idperfil`, `idrecurso`) VALUES (4, 19);
+INSERT INTO `enidserv_eniddbbbb3`.`perfil_recurso` (`idperfil`, `idrecurso`) VALUES (4, 11);
 
 COMMIT;
 
@@ -1996,6 +2014,7 @@ INSERT INTO `enidserv_eniddbbbb3`.`perfil_permiso` (`idperfil`, `idpermiso`) VAL
 INSERT INTO `enidserv_eniddbbbb3`.`perfil_permiso` (`idperfil`, `idpermiso`) VALUES (4, 19);
 INSERT INTO `enidserv_eniddbbbb3`.`perfil_permiso` (`idperfil`, `idpermiso`) VALUES (5, 19);
 INSERT INTO `enidserv_eniddbbbb3`.`perfil_permiso` (`idperfil`, `idpermiso`) VALUES (3, 19);
+INSERT INTO `enidserv_eniddbbbb3`.`perfil_permiso` (`idperfil`, `idpermiso`) VALUES (4, 11);
 
 COMMIT;
 
