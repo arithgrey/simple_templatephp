@@ -1,0 +1,195 @@
+
+
+
+
+
+<style type="text/css">
+
+
+#form p {
+  text-align: center;
+}
+
+
+input[type="radio"] {
+  display: none;
+}
+
+label {
+  color: #337AB7;
+  font-size: 2.5em;
+}
+
+.clasificacion {
+  direction: rtl;
+  unicode-bidi: bidi-override;
+}
+
+label:hover,
+label:hover ~ label {
+  color: #E8DBC2;
+}
+input[type="radio"]:checked ~ label {
+  color: #E8DBC2;
+}
+</style>
+
+
+
+
+<div class="container">
+	<div class="row">
+		<section>
+        <div class="wizard">
+            <div class="wizard-inner">
+                <div class="connecting-line"></div>
+                <ul class="nav nav-tabs" role="tablist">
+
+                    <li role="presentation" class="active">
+                        <a href="#step1" data-toggle="tab" aria-controls="step1" role="tab" title="Step 1">
+                            <span class="round-tab">
+                                <i class="glyphicon glyphicon-folder-open"></i>
+                            </span>
+                        </a>
+                    </li>
+
+                    <li role="presentation" class="disabled">
+                        <a href="#step2" data-toggle="tab" aria-controls="step2" role="tab" title="Step 2">
+                            <span class="round-tab">
+                                <i class="glyphicon glyphicon-pencil"></i>
+                            </span>
+                        </a>
+                    </li>
+                    <li role="presentation" class="disabled">
+                        <a href="#step3" data-toggle="tab" aria-controls="step3" role="tab" title="Step 3">
+                            <span class="round-tab">
+                                <i class="glyphicon glyphicon-picture"></i>
+                            </span>
+                        </a>
+                    </li>
+
+                    <li role="presentation" class="disabled">
+                        <a href="#complete" data-toggle="tab" aria-controls="complete" role="tab" title="Complete">
+                            <span class="round-tab">
+                                <i class="glyphicon glyphicon-ok"></i>
+                            </span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <form role="form">
+                <div class="tab-content">
+                    <div class="tab-pane active" role="tabpanel" id="step1">
+                        <h3>Cuentanos tu historia</h3>                        
+                        <div class="container">
+						    <div class="row">
+						        <div class="col-md-12">
+						            <div class="panel-group" id="accordion">
+						                <div class="panel panel-default">
+						                    
+						                    <div id="collapseOne" class="panel-collapse collapse in">
+						                        <div class="panel-body">
+						                            <div class="row">
+						                                <div class="col-md-12">
+						                                    <div class="form-group">
+						                                        <input type="text" class="form-control" name="re" placeholder="Breve descripción" required />
+						                                    </div>
+						                                    <div class="form-group">
+						                                        <textarea class="form-control" placeholder="La experiencia" name="Descripción" rows="5" required></textarea>
+						                                    </div>
+						                                </div>
+						                            </div>                          
+							                 
+							                    	<div class='col-md-12'>
+							                    		<h3>Calificamos .!</h3>
+												        <form>								
+															    <input id="radio1" type="radio" name="estrellas" value="5">
+															    <label for="radio1"> &#9733;  </label>
+															    <input id="radio2" type="radio" name="estrellas" value="4">
+															    <label for="radio2"> &#9733;</label>
+															    <input id="radio3" type="radio" name="estrellas" value="3">
+															    <label for="radio3"> &#9733;</label>
+															    <input id="radio4" type="radio" name="estrellas" value="2">
+															    <label for="radio4"> &#9733;</label>
+															    <input id="radio5" type="radio" name="estrellas" value="1">
+															    <label for="radio5"> &#9733;</label>
+														  
+														</form>
+													</div>
+											                         
+						                        </div>
+						                    </div>
+
+
+
+
+
+
+						                </div>
+						              	
+						            </div>
+						        </div>
+
+						        
+
+
+
+						    </div>
+						</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                    </div>
+                    <div class="tab-pane" role="tabpanel" id="step2">
+                        <h3>Step 2</h3>
+                        <p>This is step 2</p>
+                        <ul class="list-inline pull-right">
+                            <li><button type="button" class="btn btn-default prev-step">Previous</button></li>
+                            <li><button type="button" class="btn btn-primary next-step">Save and continue</button></li>
+                        </ul>
+                    </div>
+                    <div class="tab-pane" role="tabpanel" id="step3">
+                        <h3>Step 3</h3>
+                        <p>This is step 3</p>
+                        <ul class="list-inline pull-right">
+                            <li><button type="button" class="btn btn-default prev-step">Previous</button></li>
+                            <li><button type="button" class="btn btn-default next-step">Skip</button></li>
+                            <li><button type="button" class="btn btn-primary btn-info-full next-step">Save and continue</button></li>
+                        </ul>
+                    </div>
+                    <div class="tab-pane" role="tabpanel" id="complete">
+                        <h3>Complete</h3>
+                        <p>You have successfully completed all steps.</p>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+            </form>
+        </div>
+    </section>
+   </div>
+</div>
+
