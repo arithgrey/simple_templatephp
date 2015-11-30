@@ -1226,3 +1226,276 @@ border-radius: 10px;
                 </div>
             </section> 
             <!-- /slider -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="https://cdn2.f-cdn.com/build/css/landing/layout/find-page-hero.css?v=9efe290abbbf2f4baeb28a5f0464b2ca&amp;amp%3Bm=6" type="text/css" rel="stylesheet" />
+        
+
+                <section class="steps-circle-section">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-xs-12 col-md-10 col-md-offset-1">
+                                <ul class="steps-circle row">
+                                    <li class="step-circle col-xs-12 col-sm-4 col-md-4">
+                                        <div class="circle-badge">
+                                            <span class="fl-icon-files"></span>
+                                        </div>
+                                        <p>
+                                            
+                                                
+                                                
+                                                    Dile a los Bootstrap Developers lo que necesitas 
+                                                
+                                            
+                                             
+                                        </p>
+                                        <div class="dotted-divider"></div>
+                                    </li>
+                                    <li class="step-circle col-xs-12 col-sm-4 col-md-4">
+                                        <div class="circle-badge">
+                                            <span class="fl-icon-comments"></span>
+                                        </div>
+                                        <p>
+                                            
+                                                
+                                                
+                                                    Bootstrap Developers te contactan 
+                                                
+                                            
+                                            
+                                        </p>
+                                        <div class="dotted-divider"></div>
+                                    </li>
+                                    <li class="step-circle col-xs-12 col-sm-4 col-md-4">
+                                        <div class="circle-badge">
+                                            <span class="fl-icon-star-full"></span>
+                                        </div>
+                                        <p>
+                                            
+                                                
+                                                
+                                                    Tu elijes al mejor Bootstrap Developer
+                                                
+                                            
+                                            
+                                        </p>
+                                    </li>
+                                </ul>
+                            </div>
+                         </div>
+                    </div>
+                </section>
+
+                    
+
+                    <section class="form-section">
+                        <div class="container">
+                            <div class="row">
+                    <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
+                        <form id="post-project" method="post" >
+
+                            <div class="form-group">
+                                <label class="control-label" for="project_name">Que necesitas?  *</label>
+                                <input id="project_name" name="project_name" type="text" class="form-control" placeholder="">
+                                <span class="help-block"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="control-label" for="project-description">Describe lo que quieres hecho? *</label>
+                                <textarea id="project-description" name="description" class="form-control" rows="5"></textarea>
+                                <span class="help-block"></span>
+                            </div>
+                            <div id="project-language-detector-container" class="form-group"></div>
+                            <div class="form-group">
+                            <label class="control-label" for="skill_input">&iquest;Que habilidades son requeridas?  *</label>
+                                <select id="skill_input" name="skill_input"
+                                    placeholder="Comienza a escribir para ver la lista..."
+                                    style="display: none; width: 100%; max-width:460px;"
+                                    multiple="multiple">
+                                </select>
+                                <span class="help-block"></span>
+                                <div id="hidden_submit_job_list" style="display: none"></div>
+                            </div>
+
+                            <input type="hidden" name="budgetPeriod" value="fixed" />
+
+                            
+                            
+                            <div class="form-group">
+                                <label for="currency">&iquest;Que presupuesto tienes en mente? </label>
+                                <select id="currency" name="currency" class="form-control">
+                                    
+                                </select>
+                                <span class="help-block"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <select id="budget" name="budget" class="form-control">
+                                  
+                                    
+                                </select>
+                                <span class="help-block"></span>
+                            </div>
+                            
+
+                            
+                                <div class="form-group">
+                                    <label for="">&iquest;Que es tu email? *</label>
+                                    <input name="email" type="email" class="form-control">
+                                    <span class="help-block"></span>
+                                </div>
+
+                                <div class="form-group signup" data-target="signup-field">
+                                    <label for="">Crear un nombre de usuario: *</label>
+                                    <input name="newusername" type="text" class="form-control">
+                                    <span class="help-block"></span>
+                                </div>
+
+                                <div class="form-group signup" data-target="signup-field">
+                                    <label for="">Contrase&ntilde;a:  *</label>
+                                    <input name="newuserpasswd" type="password" class="form-control">
+                                    <span class="help-block"></span>
+                                </div>
+
+                                <input type="hidden" name="newuserpasswd1" value="" />
+                                <input type="hidden" id="userType" name="userType" value="userTypeNew" />
+                                <input type="hidden" name="looking_for" value="Employer" />
+                            
+
+                            <div class="btn-wrapper">
+                                <img class="spinner" alt="Freelancer cargando" src="https://cdn2.f-cdn.com/static/css/images/ajax-loader-med-dark.gif?v=133e8031041fc05a4b697d0bb1b6930c&amp%3Bm=6" style="display:none;" />
+                                
+                                <button type="submit" class="btn btn-success" data-qtsb-section='HirePage' data-qtsb-label='PostProject' data-qtsb-subsection='ButtonControl'>Solicitar presupuesto gratuitamente</button>
+                                
+                                
+                            </div>
+                            
+
+                        </form>
+                    </div>
+                </div>
+
+
+                            
+                <div class="recent-projects">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h2 class="section-title">Los &uacute;ltimos proyectos de Bootstrap  </h2>
+                            <table class="table table-striped table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Nombre del proyecto</th>
+                                        <th>Presupuestos </th>
+                                        <th>Habilidades </th>
+                                        <th>Primera cotizaci&oacute;n en</th>
+                                        <th>Precio </th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+
+        </div>
+    </section>
+    <section class="hireme-card-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                
+                
+                
+                    
+                    
+                        
+                        <h2 class="section-title">Principales Bootstrap Developers</h2>
+                    
+                
+                <div class="contact-card-list"></div>
+                <hr>
+                
+                
+                    
+                        
+                        
+                            <h3 class="stats-title">Nuestra comunidad de Bootstrap </h3>
+                        
+                    
+                    
+                
+                <ul class="footer-stats-values stat">
+                  <li class="site-stat">
+                    <span class="site-stats-value ">45,146</span>
+                    
+                    
+                        
+                        
+                            <span class="site-stats-key">Bootstrap Developers</span>
+                        
+                    
+                  </li>
+                  <li class="site-stat">
+                    <span class="site-stats-value ">€<span class="">4,334,107</span></span>
+                    <span class="site-stats-key">Proyectos publicados </span>
+                  </li>
+                  <li class="site-stat">
+                    <span class="site-stats-value ">13,322</span>
+                    <span class="site-stats-key">Proyectos </span>
+                  </li>
+                </ul>
+             </div>
+        </div>
+    </div>
+</section>
+
+    
