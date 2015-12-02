@@ -891,3 +891,10 @@
 
 
   
+begin
+SET @num =  emp; 
+SET @dinamic_table =  CONCAT('CREATE TABLE db_j.tmp_user_' , @num  , ' AS ' , 'SELECT  * FROM  db_j.tmp_user'  ); 
+PREPARE stmt from @dinamic_table; 
+EXECUTE stmt;
+DEALLOCATE PREPARE stmt;
+end
