@@ -860,3 +860,106 @@ border-radius: 10px;
         </div>
     </div>
 </section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	  <div clas='solicitud-artista-section row' id="solicitud-artista-section" >
+	        <div class="span12">
+	        	<div class="thumbnail center text-center">
+	                <h2> </h2>                
+	                <p></p>                
+	                <form action="" method="POST"  id="form-solicitud-artist">
+	                	<center>
+		                	<div class="input-group"> 
+			                    <div class="input-form">
+			                    	<span class="add-on">
+			                    		<i class="icon-envelope">
+			                    		</i>
+			                    	</span>
+			                        <input type="text"  class='form-control' id="name-artis" name="name-artis" placeholder="">
+			                    </div>
+		                	</div>
+	                	</center><br>
+
+	                    <input type="submit" value="Registra ahora.!" class="btn btn-large" />
+	              	</form>
+	            </div>    
+	        </div>
+	  </div>
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  $("#name-artis").keyup(load_data_artistas);
+	function get_data_reporte(){
+
+		url = "controller/generacortes.php";
+		$.get(url,{"action" : "cortes_productividad"} ).done(function(data){
+			//$("#text-examp").html(data);
+			$(".cortes_section").html(data);
+		}).fail(function(){
+			/*Error */
+		});
+	}
+	/**/
+	function record_solitud_artis(){
+
+		$.post(url , $("#form-solicitud-artist").serialize()).done(function(data){
+			alert(data);
+		}).fail(function(){
+			alert("");
+		});
+		return  false;
+	}
+	/**/
+	function load_data_artistas(){
+		
+		url  = ""; 		
+		$.get(url ,  {"nombre" : $("#name-artis").val()} ).done(function(data){
+			alert(data);
+		
+		}).fail(function(){
+
+			alert("Error en la búsqueda");
+		});	
+	}
