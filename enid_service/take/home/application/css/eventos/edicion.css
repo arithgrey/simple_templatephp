@@ -1,0 +1,141 @@
+.avanzado-accesos:hover{
+  cursor: pointer;
+}
+.ubicacion-panel:hover , .accesos-panel:hover{
+    padding: 10px;    
+    cursor: pointer;
+}
+.descripcion_escenario_update:hover, .nombre-escenario-modal:hover{
+  font-size: 1.2em;
+  cursor: pointer;
+}
+#guardar-generos{
+  display: none;
+}
+#file_input{
+  display: none;
+}
+.nombre-evento-h1:hover{
+    font-size: 1.5em;
+    cursor: pointer;
+}
+.edicion-evento:hover{
+ font-size: 1.2em;   
+ cursor: pointer;
+}
+.descripcion-p:hover{
+ font-size: 1.1em;      
+ cursor: pointer;
+}
+.restricciones-p:hover , .politicas-p:hover , .permitido-p:hover{
+  cursor: pointer;
+  font-size: 1.2em;
+}
+
+.section_generosmusicales, .generos_musicales_div{
+  display: none;
+}
+#tematica_section , .tematica_section, #section-articulos-permitidos{
+  display: none;
+ }
+
+.eslogan-input{
+  display: none;
+}
+#nombre-input, #edicion-input , #evento , #descripcion-evento, #ubicacion-input, .descripcion-in-modal-escenario, .nombre-escenario-input-modal, .day_escenario_inputs ,.social-media-event, #restricciones-evento ,  #politicas-evento, #permitido-evento {
+    display: none;
+}
+.newdescripesenario{
+  display: none;
+}
+
+.title-page-enid{
+    display: none;
+}
+
+#eslogan-evento{
+  display: none;
+}
+.descripcion-modal-text:hover , .eslogan-p:hover{
+  font-size: 1.2em;
+  cursor: pointer;
+
+}
+/*
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.todo-title, #title-modal-heading{
+  color: black;
+}
+
+.tag span{
+    color: white;
+}
+.tag-items-form{
+    
+    background: none repeat scroll 0% 0% #043544 !important;    
+}
+.panel-enid-right{
+    background: red;
+}
+.p-states.green-box{
+    background: white !important;   
+}
+.green-box {
+    box-shadow: 0px 5px 0px #09AFDF !important;
+}
+.direccion-event-lab{
+    color: white;
+}
+.descripcion-evento-p{
+    background:  #13979C;
+    color: white;
+}
+ .white{
+    color: white !important;
+}
+
+.dropzone{
+    margin-top: -10px !important;
+}
+
+#map-section{
+    background:  #09AFDF;
+   //background: none repeat scroll 0% 0% #13979C;
+    padding: 10px;
+}
+#span-ubicacion{
+    font-size: 1.3em;
+    color: white;
+}
+.panel-heading {
+    color: white;
+}
+.activity-list li{
+    background: white;
+    padding: 5px;
+    border-radius: 5px;
+}
+#my-awesome-dropzone{
+    background: white;
+}
+h4{
+    color: black !important;
+}
+#accesos-plus:hover{
+    font-size: 1.2em;
+}*/
