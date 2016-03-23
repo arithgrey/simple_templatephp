@@ -1,0 +1,78 @@
+<?=ini_set('display_errors', '1');?>
+
+    
+  
+    
+
+
+
+<!---->
+   <!--Formulario de accceso al sistema  -->
+              <div class='col-lg-4 col-md-4 col-sm-12'></div>                
+                <div class='col-lg-4 col-md-4 col-sm-12'>              
+
+
+
+                  <div class="panel">
+                      <div class="panel-body">
+                          <div class="profile-desk">
+                              <h1>
+                                Inicia sessión ahora .!
+                              </h1>
+                              <span class="designation">
+                                Enid service 
+                              </span>                            
+                          </div>
+                      </div>
+                  </div>
+                
+                    
+
+                  <form id="in" method="post" action="">                    
+                      <div class="input-group">
+                        <span class="input-group-addon" id="basic-addon1">
+                         usuario (@email)
+                        </span>
+                        <input type="mail" name='mail' id="mail"  class="form-control" placeholder="" aria-describedby="basic-addon1">                                    
+                      </div>
+                      <div class="input-group">
+                        <span class="input-group-addon" >
+                          Contraseña
+                        </span>
+                        <input type="password" class="form-control"  name='pw' id="pw" aria-describedby="basic-addon1" >
+                        <input type='hidden' name='secret' id="secret">
+                      </div>                                
+                      <div class="control-group">                                  
+                        <label  id="reportesession">
+                        </label>                                  
+                      </div>                
+                      <button id="inbutton" class='btn btn-default btn_save '>
+                        Iniciar
+                      </button>                          
+                      <div class="row">                                              
+                        <a data-toggle="modal" class='pull-right' href="#recuperacion-pw">                                                 
+                          Recuperar contraseña                         
+                        </a>                                                                                        
+                      </div>  
+                  </form>
+                </div>   
+              <div class='col-lg-4 col-md-4 col-sm-12'></div>                 
+<!--Termina formulario de acceso al sistema  -->
+
+
+
+
+
+
+
+<!--Cargamos modals de configuración-->
+<?=$this->load->view("user/modal/config_inicio_session");?>
+<!--Terminamos de cargar  modals de configuración-->
+
+<script type="text/javascript" src="<?=base_url('application/js/recuperapassword/recuperaPassword.js')?>"></script>
+<script src="<?=base_url('application/js/sha1.js');?>"></script>
+<script type="text/javascript" src="<?=base_url('application/js/home/iniciosession/iniciosession.js')?>"></script>
+
+
+
+

@@ -1,0 +1,1 @@
+<a href="<?=base_url('index.php/sessioncontroller/iniciosessionuser')?>">iniciar</a>
