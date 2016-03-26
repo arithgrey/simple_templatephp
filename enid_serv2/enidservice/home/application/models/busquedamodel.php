@@ -39,8 +39,9 @@ function busqueda_por_palabra_clave($param){
 /**/
 function busqueda_por_fechas_palabra_clave($param){
 
+
 	$where_fecha = $this->get_where_fecha($param["cuando"]);	
-	$query_procedure = "call enidserv_eniddbbbb3.create_temp_palabra_clave(  '2=2' );"; 	
+	$query_procedure = "call enidserv_eniddbbbb3.create_temp_palabra_clave(' ". $where_fecha ." ');"; 	
 	$this->db->query($query_procedure);
 }
 /****************************** Para las fechas ***************************/

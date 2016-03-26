@@ -57,8 +57,8 @@
     <!--Termina  menú de accesos  -->
     
         <div class="tab-content">
-            <div id="home3" class="tab-pane active">                                
-                <div id='nuevoaccesosection' class='col-xs-12  col-sm-12 col-md-12 col-lg-12 centered '>
+            <div id="home3"  class="tab-pane active">                                
+                <div  id='nuevoaccesosection' class='col-xs-12  col-sm-12 col-md-12 col-lg-12 centered '>
                     <a href="#print-section">
                         <button class='btn btn btn_nnuevo pull-right'>
                             <em>   
@@ -230,6 +230,7 @@
         display: none;
     }
 </style>
+
 
 
 

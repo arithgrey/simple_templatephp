@@ -1896,7 +1896,7 @@ ul.user-states li {
 }
 
 .custom-tab {
-    background: #e0e1e7 !important;
+    //background: #e0e1e7 !important;
     border-radius: 5px 5px 0 0;
     -webkit-border-radius: 5px 5px 0 0;
     border-bottom: none;
@@ -1955,12 +1955,12 @@ ul.user-states li {
 }
 
 .panel-heading .nav > li > a {
-    color: #898989;
+    //color: #898989;
 }
 
 .panel-heading .nav > li.active > a, .panel-heading .nav > li > a:hover {
     color: #65CEA7;
-    background: #fff;
+    //background: #fff;
 }
 
 .panel-heading .nav > li:first-child.active > a, .panel-heading .nav > li:first-child > a:hover {
