@@ -72,7 +72,7 @@
                 </ul>
             </div>            
              <!--Desplegamos el menú-->
-            <ul class="nav nav-pills nav-stacked custom-nav">               
+            <ul class="nav nav-pills nav-stacked custom-nav">                               
                 <?php echo $menu; ?>                
             </ul>            
             <!--Termina Desplegamos el menú-->

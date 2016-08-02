@@ -1,5 +1,17 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 if(!function_exists('invierte_date_time')){
+  function btn_comunidad($id_empresa){    
+
+      $url =  base_url('index.php/emp/lahistoria')."/".$id_empresa;
+      $btn =  "<li>
+                <a aria-expanded='true' href='$url' >          
+                  Nuestra historia
+                </a>
+              </li>  
+              ";
+      return $btn;
+  }
+  /**/
   function get_random(){
     return  mt_rand();       
   }

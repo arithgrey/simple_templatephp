@@ -1,4 +1,5 @@
-<br>
+<div class='separate-enid'>
+</div>
 <div > 
     <div id="blue">
         <div class="col-md-12 ">
@@ -34,6 +35,7 @@
                     </a>
                 </span>  
               </div>
+              
             </div>
         </div>
     </div>

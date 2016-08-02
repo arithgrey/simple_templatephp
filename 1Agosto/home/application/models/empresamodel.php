@@ -5,6 +5,25 @@ class empresamodel extends CI_Model{
       $this->load->database();
   }  
   /**/
+  function get_solicitud_ciudad_cliente($param){
+
+    $_num =  get_random();
+    $query_procedure =  "DROP TABLE IF exists tmp_solicitud_artista_".$_num; 
+    $this->db->query($query_procedure);
+
+
+    $query_procedure =  "CREATE TABLE  tmp_solicitud_artista_".$_num . "  AS  
+    select  id_artista ,  sum(case when  id_artista is not null  then 1 else  0 end )solicitudes  from solicitud_artista_org where id_empresa =1 and date(fecha_registro) BETWEEN  DATE_ADD(CURRENT_DATE() , INTERVAL -1 MONTH ) AND CURRENT_DATE()
+    GROUP BY  id_artista ";
+    return $query_procedure;
+
+
+    
+
+
+    
+  }
+  /**/
   function experienciaq($param){    
     $q = $param["q"]; 
     $val =  $param["val"];
@@ -101,7 +120,7 @@ class empresamodel extends CI_Model{
   /**/
   function create_solicitud_artista($id_artista , $id_empresa , $id_ciudad  ){
       
-      $query_insert =  "INSERT INTO solicitud_artista_org (id_artista , id_empresa , id_Country ) VALUES('". $id_artista  ."' ,  '". $id_empresa ."' , '". $id_ciudad  ."'  )"; 
+      $query_insert =  "INSERT INTO solicitud_artista_org(id_artista , id_empresa , id_Country ) VALUES('". $id_artista  ."' ,  '". $id_empresa ."' , '". $id_ciudad  ."'  )"; 
       return  $this->db->query($query_insert);
   }
 

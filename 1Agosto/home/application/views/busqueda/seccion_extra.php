@@ -2,9 +2,6 @@
    <h1> Ahora los eventos llegan a tí.
    </h1> 
 </div>
-
-
-
 <div class="block clearfix">
     <div class='row'>
       <span class="titulo-tw pull-right">
@@ -48,11 +45,55 @@
         </li>
     </ul>
 </div>                              
-
-
-
 <hr>
-<span class="titulo-tw pull-right">
-      Vive nuevamente la experiencia
-</span>    
+<!---->
+<div id="comments" class="">
+  <h1 class="title">
+  Vive nuevamente la experiencia    
+  </h1>
+  <div id="disqus_thread">
+  </div>    
+</div>
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+.seccion-historia{
+  margin-left: 10%;
+}
+</style>

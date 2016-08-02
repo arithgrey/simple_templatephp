@@ -22,7 +22,7 @@ $(document).on("ready", function(){
 	$(".cuentanos-tu-histori-sec").click(dinamic_contenido);
 	$("#artista-solicitud").keyup(load_posibles_artistas);
 
-	$("#solicitud-ciudad-form").submit(registra_solicitud_ciudad);
+	//$("#solicitud-ciudad-form").submit(registra_solicitud_ciudad);
 
 	$(".contactos-sec").click(load_contactos_empresa_data);
 
@@ -379,6 +379,7 @@ function load_posibles_artistas(){
 	});	
 }
 /******************************************************************/
+/*
 function registra_solicitud_ciudad(e){
 
 	url =  $("#solicitud-ciudad-form").attr("action");
@@ -397,6 +398,7 @@ function registra_solicitud_ciudad(e){
 	});
 	e.preventDefault();
 }
+*/
 /**************************************************************************/
 function load_contactos_empresa_data(){
 

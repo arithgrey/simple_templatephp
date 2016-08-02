@@ -22,6 +22,7 @@
           Precios y promociones
         </a>
       </li>
+      <?=btn_comunidad($evento["idempresa"])?>
       <?=editar_btn($in_session , base_url('index.php/eventos/nuevo/')."/" . $evento["idevento"] ."#config_data_evento" ); ?>
   </ul>
 </div>

@@ -64,12 +64,16 @@
 
 <div class='separador-exp'></div>
 <hr>
-<div class='row'>	
+<div class='row'>			
+	<a href="<?=base_url('index.php/emp/solicitatuartista')?>/<?=$data_empresa["idempresa"]?>" class="link-org-artista" title='Solicitar artistas'>
+		Solicita tu artista 
+	</a>
 	<div class='col-lg-8 col-lg-offset-2 text-center'>
 		<div class='place_comentarios'>
 		</div>
 	</div>	
 </div>
+
 <style type="text/css">
 .section-experiencia-cliente{
   display: none;
@@ -152,4 +156,14 @@ input[type="radio"]:checked ~ label {
 	.separador-exp{
 		margin-top: 19%;
 	}
+	
+	.link-org-artista, .link-org-artista:hover{
+		background: #d9534f;
+	    border-radius: 2px;
+	    color: white;
+	    padding: 8px;
+	    text-decoration: none;	
+	}
+	
+
 </style>

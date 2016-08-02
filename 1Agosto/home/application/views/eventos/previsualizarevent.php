@@ -16,6 +16,11 @@
         Servicios 
       </a>
     </li>  
+
+    <?=btn_comunidad(1);?>
+    
+
+
     <?=editar_btn($in_session , base_url('index.php/eventos/nuevo')."/" . $evento["idevento"] ); ?>                                        
     <?=construye_tipo_evento($evento["tipo"] ,  $in_session , $evento["idevento"])?>
     <?=estado_evento($evento["status"] ,  $in_session , $evento["idevento"] , $evento["programado"])?>  

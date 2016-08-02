@@ -467,6 +467,11 @@
             font-size: 2em;
             font-weight: bold;
           }
+
+        .btn-comunidad{
+            background: #046188;
+        }
+          
         </style>
 
 

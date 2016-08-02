@@ -94,7 +94,6 @@ function accesosalevento($id_evento){
             $data = $this->val_session("");                
             $data["data_evento"] = $data_evento;                    
             $data["data_accesos"]=  $this->accesosmodel->get_data_acceso_public($id_evento);        
-
             $dias_restantes = $this->eventos_model_cliente->get_dias_faltantes($id_evento);
             $data["dias_restantes_evento"] = get_dias_restantes_evento( $dias_restantes);
             $this->show_data_page( $data , "accesos/evento_accesos_principal_client" );        

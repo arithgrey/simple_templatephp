@@ -49,6 +49,13 @@ class Emp extends REST_Controller{
         $this->response($db_response );
     }
     /**/
+    function solicitud_ciudad_GET(){
+
+        $data = $this->get();
+        $data["solicitudes"] = $this->empresamodel->get_solicitud_ciudad_cliente($data);
+        $this->load->view("empresa/artistas_solicitados" ,  $data );
+    }
+    /**/
     function solicitudartista_POST(){
         $db_response = $this->empresamodel->insert_solicidud_artista($this->post());
         $this->response($db_response );

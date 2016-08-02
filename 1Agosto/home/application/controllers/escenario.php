@@ -35,12 +35,12 @@ class Escenario  extends CI_Controller {
 		$dataevent = $this->eventmodel->getEventbyid($id_evento);            
         $url_editar =  base_url("index.php/escenario/configuracionavanzada/" . $id_escenario);
         $data = $this->val_session("");
-        $data["evento"] =  $dataevent[0];    
-        
+        $data["evento"] =  $dataevent[0];            
         $data["escenario"] = $this->escenariomodel->get_escenariobyId($id_escenario)[0];
         $dias_restantes = $this->eventos_model_cliente->get_dias_faltantes($id_evento);
         $data["dias_restantes_evento"] = get_dias_restantes_evento( $dias_restantes);
         $this->show_data_page('escenarios/principal_escenario' , $data);
+        
 
 	}
 

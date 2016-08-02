@@ -21,11 +21,13 @@
       </a>
     </li>   
      <li>
-      <a aria-expanded="true" href="<?=base_url('index.php/eventos/diaevento/'). "/" . $evento["idevento"]?>  " >
-        
+      <a aria-expanded="true" href="<?=base_url('index.php/eventos/diaevento/'). "/" . $evento["idevento"]?>  " >        
         Servicios 
       </a>
     </li>
+
+
+    <?=btn_comunidad($evento["idempresa"])?>
    	<?=editar_btn($in_session , base_url('index.php/escenario/configuracionavanzada/')."/" . $escenario["idescenario"] ); ?>
   </ul>            
 </div>

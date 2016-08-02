@@ -29,6 +29,7 @@
             Servicios 
           </a>
         </li>
+        <?=btn_comunidad($data_evento["idempresa"])?>
         <?=editar_btn($in_session , base_url('index.php/accesos/configuracionavanzada/1/' . $data_evento['idevento']) ); ?>
     </ul>
 </div>
