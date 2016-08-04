@@ -35,9 +35,7 @@
 					Zona : <?=$zona;?>
 				</span>
 				<div class='pull-right'>
-					<a class='ocultar_infor_punto_venta'>
-						ocultar info
-					</a>
+					
 					<a href="<?=base_url('index.php/puntosventa/administrar')?>">
 						<i class='fa fa-cog editar-acceso'>
 						</i> 

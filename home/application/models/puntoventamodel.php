@@ -9,31 +9,10 @@ class puntoventamodel extends CI_Model {
 		$query_delete = "DELETE FROM punto_venta_contacto WHERE idpunto_venta = '". $punto_venta ."' AND  idcontacto = '".$id_contacto."'  "; 
 		return $this->db->query($query_delete);
 	}
-	/**/
-	function asocia_evento($param){
-
-
-		$id_evento   =  $param["evento"];
-		$id_punto_venta =  $param["puntoventa"];
-
-		$query_exist ="select * from evento_punto_venta 
-						where idevento =  '". $id_evento."' and idpunto_venta = '". $id_punto_venta."' limit 1";
-		$result = $this->db->query($query_exist);					
-		$exist = $result->num_rows(); 		
-		$dinamic_query = "SELECT 1 ";		
-
-		if($exist ==  0 ){
-			$dinamic_query ="INSERT INTO evento_punto_venta VALUES('". $id_evento."'  , '". $id_punto_venta ."') ";
-		}
-
-		return $this->db->query($dinamic_query);
-
-		
-	}
+	
 	function update_punto_venta_nota($param){
 		$query_update ="UPDATE punto_venta set descripcion = '". $param["nota-punto-venta"] ."' WHERE  idpunto_venta = '". $param["punto_venta"]."' limit 1"; 
-		return $this->db->query($query_update);		
-		
+		return $this->db->query($query_update);				
 	}
 	/**/
 	function get_punto_venta($param){
@@ -42,14 +21,7 @@ class puntoventamodel extends CI_Model {
 		return $result->result_array();
 	}
 	/**/
-	function delete_punto_venta_evento($id_evento , $id_punto_venta){
-
-		$query_delete = "DELETE FROM evento_punto_venta WHERE idevento = '". $id_evento."' AND idpunto_venta = '". $id_punto_venta."'   ";
-		return  $this->db->query($query_delete);
-	}
-	/**/
 	function get_contactos($id_punto_venta){
-
 		$query_get =  "select c.*  from punto_venta_contacto pvc  
 						inner join contacto c on   pvc.idcontacto =  c.idcontacto
 						where pvc.idpunto_venta  ='". $id_punto_venta."'  "; 
@@ -57,7 +29,6 @@ class puntoventamodel extends CI_Model {
 		return $result->result_array();
 
 	}
-
 	/**/
 	function insert_punto_venta_contacto($punto_venta , $id_contacto){
 
@@ -84,10 +55,6 @@ class puntoventamodel extends CI_Model {
 		}	
 		return $this->db->query($query_update);		
 	}
-
-
-
-
 	/**/
 	function get_estados_punto_venta(){
 
@@ -124,26 +91,23 @@ class puntoventamodel extends CI_Model {
 		$query_delete ="DELETE FROM punto_venta WHERE idpunto_venta = '". $punto_venta."'  limit 1";		
 		return $this->db->query($query_delete);
 	}
-
-
+	/**/
 	function valida_input_zona($param){
-
 		$f =  "Zona de la ciudad no definida"; 
 		if (isset($param["nzona"])) {
 			$f=$param["nzona"];
 		}
 		return $f; 		
 	}
-
 	/**/
 	function valida_input($param, $dia ){
-
 		$f =  0; 
 		if (isset($param[$dia])) {
 			$f=1;
 		}
 		return $f; 		
 	}
+	/**/
 	function insert($param , $id_empresa  ){
 		
         $status = $param["status"];              
@@ -198,15 +162,8 @@ class puntoventamodel extends CI_Model {
 			'".$sitio_web."'
 			)"; 	 
 	 	
-	 	return $this->db->query($query_insert);	 	 
-	 	//return $result_db->result_array();
-	 	
+	 	return $this->db->query($query_insert);	 	 	 	 	
 	}
-	
-
-
-
-
 
 	/*selecciona todos los puntos de venta por empresa y usuario*/	
 	/*
@@ -241,8 +198,7 @@ class puntoventamodel extends CI_Model {
 	
 	}
 	*/
-
-		function get_puntos_venta_empresa_usuario($id_empresa, $param ){
+	function get_puntos_venta_empresa_usuario($id_empresa, $param ){
 
 		$filtro = $this->filtro_punto_venta($param);		
 		$_num = $this->cargamos_base_img_puntos_venta(4 , 0);				
@@ -263,15 +219,12 @@ class puntoventamodel extends CI_Model {
 		$data_complete =   $result_db->result_array();
 		$this-> tmp_contacos_pv($_num , 1 ); 
 		$_num = $this->cargamos_base_img_puntos_venta(4 , 1 , $_num);
-		return $data_complete;
-		
-	
+		return $data_complete;			
 	}
 	/**/
-	function tmp_contacos_pv($_num , $flag ){
+	function tmp_contacos_pv($_num , $flag ){		
 		
 		if ($flag == 0 ){
-
 			$query_drop ="DROP TABLE IF exists tmp_contactos_pv_$_num"; 
 			$result_db = $this->db->query($query_drop);					
 			/*Creamos ahora */
@@ -282,10 +235,7 @@ class puntoventamodel extends CI_Model {
 			$query_drop ="DROP TABLE IF exists tmp_contactos_pv_$_num"; 
 			$result_db = $this->db->query($query_drop);			
 		}	
-	}
-
-
-	
+	}	
 	/**/
 	function filtro_punto_venta($param){
 
@@ -343,18 +293,11 @@ class puntoventamodel extends CI_Model {
 		$result_db  = $this->db->query($query_get);								
 		return $result_db->result_array();					
 	}
-
-
-
-
 	/*Actualiza el contacto asociado al punto de venta */
 	function update_punto_venta_contacto($contacto , $puntoventa){
-
 		$query_get="select * from punto_venta_contacto where idpunto_venta = '". $puntoventa ."'  and idcontacto ='". $contacto ."'";
 		$exits = $this->db->query($query_get);
 		$num = $exits->num_rows();		
-		
-
 		if ($num>0 ) {
 			$query_update ="delete from  punto_venta_contacto where idpunto_venta = '". $puntoventa ."'  and idcontacto ='". $contacto ."'  ";
 			return $this->db->query($query_update);
@@ -364,8 +307,6 @@ class puntoventamodel extends CI_Model {
 		}
 		
 	}
-
-
 	/**/	
 	function get_puntos_venta_cliente($id_evento){		
 		/**/
@@ -386,10 +327,8 @@ class puntoventamodel extends CI_Model {
 		return $data_complete; 
 
 	}
-
 	/**/
-	function load_puntos_venta_evento_icon($id_punto_venta){
-	
+	function load_puntos_venta_evento_icon($id_punto_venta){	
 		/**/
 		$_num = $this->cargamos_base_img_puntos_venta(4 , 0);
 		$query_get ="SELECT 
@@ -411,7 +350,6 @@ class puntoventamodel extends CI_Model {
 		return $data_complete; 
 	}
 	/**/
-
 	function load_puntos_venta_evento($id_evento ){
 
 		$query_get ="SELECT *  FROM punto_venta p INNER JOIN  evento_punto_venta ep 
@@ -458,11 +396,6 @@ class puntoventamodel extends CI_Model {
 		return $this->db->query($dinamic_query);
 
 	}/**/
-
-
-
-
-
 	function update($param, $id_empresa ){
 
 		$razon_social		= $param["nrazon_social"];
@@ -471,8 +404,6 @@ class puntoventamodel extends CI_Model {
 		$zona = $this->valida_input_zona($param) ;				
 		$id_punto_venta= $param["punto_venta"];
 
-
-		
 		$L =   $this->valida_input(  $param, "nL");
 		$M =   $this->valida_input(  $param, "nM");
 		$MM =   $this->valida_input( $param, "nMM");
@@ -501,9 +432,7 @@ class puntoventamodel extends CI_Model {
 						where idempresa  = '".$id_empresa . "' 
 						and 
 						idpunto_venta = '".$id_punto_venta ."' limit 1";
-		return $this->db->query($query_update);						 						 		
-		
-		
+		return $this->db->query($query_update);						 						 				
 	}
 	/**/
 
@@ -624,8 +553,6 @@ group by  pv.idempresa
 			$query_insert ="INSERT INTO  evento_punto_venta VALUES ('".$id_evento."' , '". $id_punto_venta."' )";
 			return $this->db->query($query_insert);			
 		}
-
-
 	}
 	/**/
 	function q_evento($id_evento , $q){
@@ -648,9 +575,76 @@ group by  pv.idempresa
 					   p.idpunto_venta = '".$param["punto_venta"]."'  "; 
 		$result =  $this->db->query($query_get);
 		return $result ->result_array();
-
 	}
 
+
+/**/
+function insert_log($tipo_evento , $descripcion , $id_evento , $id_usuario){
+
+	$navegador = navegador();
+	$ip =  ip_user(); 
+	$modulo =  1;
+
+	$query_insert = "INSERT INTO log(
+						navegador,					
+						ip,
+						modulo,
+						tipo_evento,
+						descripcion,
+						id_modulo
+					)VALUES(						
+						'$navegador',					
+						'$ip',
+						'$modulo',
+						'$tipo_evento',
+						'$descripcion',
+						'$id_evento'
+					)"; 
+	
+	$result =  $this->db->query($query_insert);
+	$id_log   = $this->db->insert_id(); 
+
+
+	$query_insert =  "INSERT INTO usuario_log(id_usuario , id_log) VALUES('$id_usuario' , '$id_log'  )";
+	$this->db->query($query_insert);
+	return $result;
+
+}
+/**/
+function asocia_evento($param){
+
+	$id_evento   =  $param["evento"];
+	$id_punto_venta =  $param["puntoventa"];
+	$query_exist ="select * from evento_punto_venta 
+						where idevento =  '". $id_evento."' and idpunto_venta = '". $id_punto_venta."' limit 1";
+	$result = $this->db->query($query_exist);					
+	$exist = $result->num_rows(); 		
+	$dinamic_query = "SELECT 1 ";		
+	if($exist ==  0 ){
+		$dinamic_query ="INSERT INTO evento_punto_venta VALUES('". $id_evento."'  , '". $id_punto_venta ."') ";
+	}	
+	$result =   $this->db->query($dinamic_query);		
+	if ($result ==  true) {		
+		$log_evento =  "Cargo un punto de venta al evento id- ".$id_punto_venta;
+		$this->insert_log(1 , $log_evento , $id_punto_venta , $param["id_usuario"]);
+	}
+	return $result;
+}
+/**/
+function delete_punto_venta_evento($id_evento , $id_punto_venta , $id_usuario ){
+	$query_delete = "DELETE FROM evento_punto_venta 
+					 WHERE idevento = '". $id_evento."' 
+					 AND 
+					 idpunto_venta = '". $id_punto_venta."' ";
+
+	$result =   $this->db->query($query_delete);
+
+	if ($result ==  true ){
+		$log_evento =  "Indicó que el punto de venta id- ".$id_punto_venta ." ya no está disponible para el evento";
+		$this->insert_log(1 , $log_evento , $id_punto_venta , $id_usuario);		
+	}
+	return $result;
+}
 
 
 /*Termina modelo */

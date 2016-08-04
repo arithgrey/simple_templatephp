@@ -21,6 +21,7 @@ class Puntosventa extends REST_Controller{
 
     $this->validate_user_sesssion();
     $param =  $this->put();
+    $param["id_usuario"] = $this->sessionclass->getidusuario();    
     $db_response =  $this->puntoventamodel->asocia_evento($param);
     $this->response($db_response);
   }
@@ -69,7 +70,8 @@ class Puntosventa extends REST_Controller{
     $this->validate_user_sesssion();  
     $id_evento= $this->delete("evento");  
     $id_punto_venta = $this->delete("punto_venta");  
-    $db_response= $this->puntoventamodel->delete_punto_venta_evento($id_evento , $id_punto_venta);
+    $id_usuario= $this->sessionclass->getidusuario();    
+    $db_response= $this->puntoventamodel->delete_punto_venta_evento($id_evento , $id_punto_venta , $id_usuario);
     $this->response($db_response);
 
   }
