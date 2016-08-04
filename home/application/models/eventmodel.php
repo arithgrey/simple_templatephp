@@ -275,29 +275,6 @@ function get_days_to_event($fecha_inicio){
 	return $result->result_array(); 
 }
 /**/
-
-/*
-function record_log($actividad , $idusuario , $idempresa , $id_evento , $tipo , $accion ){
-
-	$query_insert="INSERT INTO  log_evento(
-					actividad  , 
-					id_usuario , 
-					idempresa , 
-					id_evento  , 
-					tipo , 
-					accion ) 
-				VALUES(
-					'". $actividad."' , 
-					'". $idusuario  ."' ,  
-					'". $idempresa ."' , 
-					'". $id_evento ."' , 
-					'". $tipo ."' , 
-					'". $accion ."' )";
-
-	$this->db->query($query_insert);						
-}
-*/	
-/**/
   function carga_base_img_event( $flag  , $id_empresa , $_num = 0 ){      
     if($_num == 0 ) {
        $_num = mt_rand();       
@@ -374,7 +351,11 @@ function contruye_tmp_evento_edit($id_evento , $f , $_num='0' ){
 }
 /**/
 function insert_log($tipo_evento , $descripcion , $id_evento , $id_usuario){
-	$navegador = navegador();$ip =  ip_user(); $modulo =  1;
+
+	$navegador = navegador();
+	$ip =  ip_user(); 
+	$modulo =  1;
+
 	$query_insert = "INSERT INTO log(
 						navegador,					
 						ip,
@@ -391,7 +372,14 @@ function insert_log($tipo_evento , $descripcion , $id_evento , $id_usuario){
 						'$id_evento'
 					)"; 
 	
-	return $this->db->query($query_insert);
+	$result =  $this->db->query($query_insert);
+	$id_log   = $this->db->insert_id(); 
+
+
+	$query_insert =  "INSERT INTO usuario_log(id_usuario , id_log) VALUES('$id_usuario' , '$id_log'  )";
+	$this->db->query($query_insert);
+	return $result;
+
 }
 /**/
 function update_eslogan($id_evento , $eslogan , $id_usuario , $id_empresa ){
@@ -466,6 +454,7 @@ function updateNombre($nuevo_nombre , $id_evento , $id_usuario , $id_empresa ){
 }
 /**/
 function create( $nombre , $edicion , $inicio , $termino , $id_usuario , $idempresa){
+
 
 	$query_insert ="INSERT INTO evento(
 		nombre_evento , 

@@ -230,15 +230,17 @@ class templmodel extends CI_Model {
     }
     /**/
     function get_templ_contenido($id_user , $type ){
-      
+    
       $query_get =  "SELECT * FROM contenido  as c
       INNER JOIN plantilla_contenido  as pc
       ON c.idcontenido = pc.idcontenido
       INNER JOIN plantilla  as p 
       ON pc.idplantilla = p.idplantilla
       WHERE p.idusuario = '".$id_user ."' AND p.idtipo_plantilla = '".$type."'  ";  
-      $result_get  = $this->db->query($query_get);  
+      
+      $result_get  = $this->db->query($query_get);        
       return $result_get ->result_array();      
+      
     }
     /*********************************Articulos *************************************+*/
     function record_articulo_empresa($nuevo_articulo , $nuevo_descripcion, $id_empresa ){

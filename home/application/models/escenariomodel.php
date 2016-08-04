@@ -5,25 +5,17 @@ function __construct(){
         $this->load->database();
 }
 /**/
-		 
-function update_descripcion_escenario_template($param , $id_escenario ,  $id_artista  , $id_usuario  , $id_empresa){	
+function update_nota_escenario_artista($param){
 
-	$contenido =  $param["contenido"];
-	$escenario  =  $param["escenario"];
-
-	$query_update ="update escenario set descripcion = (
-		select descripcion_contenido from contenido where idcontenido='".$contenido ."') where 
-		idescenario = '". $escenario ."' limit  1";
-	
-		$result =  $this->db->query($query_update);
-		if ($result  == true){
-
-			$actividad = "Actualizó la experiencia del escenario empleando una de sus plantillas"; 
-			$this->record_log($actividad , $id_usuario , $id_empresa , $param["evento"] ,  'UPDATE' ,  $id_escenario );			
-		}
-
-	return $result; 
+	$query_update =  "update escenario_artista 
+	set nota ='". $param["nota_artista"] ."'
+	where 
+	idartista = '". $param["artista"] ."' 
+	and  
+	idescenario = '". $param["escenario"] ."'  "; 
+	return  $this->db->query($query_update);	
 }
+/**/
 function get_artista_in_escenario($data){
 	
 	$query_get ="select * from escenario_artista where idescenario = '". $data["escenario"] ."' and idartista = '". $data["artista"]  ."'  ";
@@ -31,24 +23,8 @@ function get_artista_in_escenario($data){
 	return $result->result_array();
 }
 /**/
-function nuevo( $nombre , $evento ,  $id_empresa  , $id_usuario , $nombre_usuario ){
-
-	$query_insert ="INSERT INTO escenario (nombre , idevento  ) values ('$nombre' , '$evento ' )";	
-	$this->db->query($query_insert);
-	$id_escenario = $this->db->insert_id(); 							
-	/*Cargamos el log */
-	if ($id_escenario > 0 ){		
-		/**/
-		$actividad = "con el nombre " . $nombre;		
-		$this->record_log($actividad , $id_usuario , $id_empresa , $evento ,  'INSERT' ,  $id_escenario );		
-		
-	}
-	return $id_escenario;
-}	
-/**/
 function get_escenarios_byidevent($id_evento){
 	/**/	
-
 	$_num =  $this->carga_base_img_escenario(2 , 0);   
 	$query_get ="select e.* , 
 						e.idescenario id_escenario,  
@@ -87,15 +63,9 @@ function load_escenario_byid( $idescenario,  $idempresa ){
 
 	$resultartistas = $this->db->query($query_get_artistas);
 	$data["artistas"] =  $resultartistas->result_array();
-
 	return $data;
 
-
-
-
 }	
-
-
 /******************************RETORNA EL RESUMEN DE LOS ESCENARIOS DE A CUERDO AL EVENTO ********************************/
 function load_by_event( $id_evento ){
 	//2 para escenario 
@@ -143,55 +113,13 @@ function carga_base_img_escenario($tipo , $f  , $_num = 0 ){
 }
 
 
-function updatedescripcion( $nueva_descripcion , $evento , $idescenario,  $idempresa ) {
-
-	$query_upload ="UPDATE  escenario set descripcion = '$nueva_descripcion' WHERE idevento = '".$evento."' and  idescenario ='$idescenario' ";
-	$result = $this->db->query($query_upload);
-	return $result;	
-}
-function updatedescripcionbyid( $nueva_descripcion , $idescenario,  $idempresa ){
-	$query_upload ="UPDATE  escenario set descripcion = '$nueva_descripcion' WHERE   idescenario ='$idescenario' limit 1";
-	$result = $this->db->query($query_upload);
-	return $result;	
-
-}
 function deleteescenariobyid( $idescenario,  $idempresa ){
 	
 	$query_delete ="call delete_escenacio_evento('". $idescenario ."');";	
 	return $this->db->query($query_delete);
 	 
 }
-function updateescenariotipobyid($id_escenario , $tipoescenario , $id_empresa ,  $id_usuario ,  $id_evento ){
-	
-	$query_upload ="UPDATE  escenario set tipoescenario = '$tipoescenario' 
-	WHERE   idescenario ='$id_escenario' limit 1";
-	$result = $this->db->query($query_upload);
-	/*Log*/	
-	if ($result ==  true ){
-		$actividad = " el tipo de escenario";
-		$this->record_log($actividad , $id_usuario , $id_empresa , $id_evento ,  "UPDATE" , $id_escenario );
-	}
-	return $result;	
 
-}
-function update_campo($idescenario , $nuevonombre, $campo ,  $idempresa , $id_usuario , $id_evento ){ 
-
-	$query_update ="UPDATE  
-					escenario 
-					SET ". $campo ." = '". $nuevonombre ."' 
-					WHERE   
-					idescenario ='$idescenario' ";
-	
-					
-	$result = $this->db->query($query_update);
-
-	if ($result ==  1 ){
-		$actividad = $this->construye_text_log($campo);
-		$this->record_log($actividad , $id_usuario , $idempresa , $id_evento  ,   'UPDATE' , $idescenario);			   
-	}
-	return $result;	
-	
-}
 /**/
 function construye_text_log($campo){
 
@@ -202,14 +130,7 @@ function construye_text_log($campo){
 	}
 }
 /************************************************************************/
-function updateescenarioinicioterminobyid($idescenario , $idempresa , $nuevoinicio , $nuevotermino){
-	
-	$query_update ="UPDATE  escenario set fecha_presentacion_inicio = '$nuevoinicio' , fecha_presentacion_termino='$nuevotermino' 
-	WHERE   idescenario ='$idescenario' limit 1";
-	$result = $this->db->query($query_update);
-	return $result;	
 
-}
 /*************************************** ****************************************/
 function get_escenariobyId($id_escenario){
 
@@ -242,7 +163,6 @@ group by e.idescenario order by tipoescenario  desc
 /*retorna la data de los escenarios dentro de un evento */
 function get_escenarios_evento($id_evento){
 
-	
 	$_num =  $this->carga_base_img_escenario(2 , 0);  
 	$query_get ="SELECT e.* , i.*   FROM escenario e 
 				LEFT  OUTER JOIN imagen_escenario   ie 
@@ -272,43 +192,126 @@ function get_generos($id_escenario, $id_evento){
 	$result = $this->db->query($query_get);
 	return $result ->result_array();
 }
-
 /**/
-function update_nota_escenario_artista($param){
+function insert_log($tipo_evento , $descripcion , $id_evento , $id_usuario){
+	$navegador = navegador();
+	$ip =  ip_user(); 
+	$modulo =  2;
 
-	$query_update =  "update escenario_artista 
-	set nota ='". $param["nota_artista"] ."'
-	where 
-	idartista = '". $param["artista"] ."' 
-	and  
-	idescenario = '". $param["escenario"] ."'  "; 
-	return  $this->db->query($query_update);
+	$query_insert = "INSERT INTO log(
+						navegador,					
+						ip,
+						modulo,
+						tipo_evento,
+						descripcion,
+						id_modulo
+					)VALUES(						
+						'$navegador',					
+						'$ip',
+						'$modulo',
+						'$tipo_evento',
+						'$descripcion',
+						'$id_evento'
+					)"; 
 	
-	
-	
+	$result =  $this->db->query($query_insert);
+	$id_log   = $this->db->insert_id(); 
+
+	$query_insert =  "INSERT INTO usuario_log(id_usuario , id_log) VALUES('$id_usuario' , '$id_log'  )";
+	$this->db->query($query_insert);
+	return $result;
 }
 /**/
-function record_log($actividad , $idusuario , $idempresa , $id_evento ,  $accion , $id_escenario ){
+function nuevo( $nombre , $evento ,  $id_empresa  , $id_usuario , $nombre_usuario ){
 
-	$query_insert="INSERT INTO log_evento(
-				actividad  , 
-				id_usuario , 
-				idempresa , 
-				id_evento  , 
-				tipo , 
-				accion ,
-				id_escenario ) 
-				VALUES(
-					'". $actividad."' , 
-					'". $idusuario  ."' ,  
-					'". $idempresa ."' , 
-					'". $id_evento ."' , 
-					'2' , 
-					'". $accion ."' , 
-					'". $id_escenario ."' )";
-
-	$this->db->query($query_insert);						
+	$query_insert ="INSERT INTO escenario (nombre , idevento  ) values ('$nombre' , '$evento ' )";	
+	$this->db->query($query_insert);
+	$id_escenario = $this->db->insert_id(); 							
+	
+	if ($id_escenario > 0 ){
+		$log_evento =  "Cargo un nuevo escenario al evento- id ". $id_escenario;
+		$this->insert_log(1, $log_evento , $id_escenario , $id_usuario);
+	}
+	return $id_escenario;
 }	
+/**/
+function update_descripcion_escenario_template($param , $id_escenario ,  $id_artista  , $id_usuario  , $id_empresa){	
+
+	$contenido =  $param["contenido"];
+	$escenario  =  $param["escenario"];
+	$query_update ="update escenario set descripcion = (select descripcion_contenido from contenido where idcontenido='".$contenido ."') where  idescenario = '". $escenario ."' limit  1";
+	
+	$result =  $this->db->query($query_update);
+	if ($result  == true){
+
+		$log_evento =  "Actualizó la experiencia que vivirá el público al asistir al escenario- " . $id_escenario;
+		$this->insert_log(2, $log_evento , $id_escenario , $id_usuario);
+
+	}
+	return $result; 
+}
+/**/
+function update_tipo($id_escenario , $tipo_escenario , $id_empresa ,  $id_usuario ,  $id_evento ){
+	
+	$query_upload ="UPDATE  escenario set tipoescenario = '$tipo_escenario' 
+	WHERE   idescenario ='$id_escenario' limit 1";
+	$result = $this->db->query($query_upload);
+	/*Log*/	
+	if($result == true){
+		$log_evento =  "Indicó que el escenario pertenecerá a la categoría- " . $tipo_escenario;
+		$this->insert_log(2, $log_evento , $id_escenario , $id_usuario);
+	}
+	return $result;	
+}
+/**/
+function update_campo($id_escenario , $nuevonombre, $campo ,  $idempresa , $id_usuario , $id_evento ){ 
+
+	$query_update ="UPDATE  
+					escenario 
+					SET ". $campo ." = '". $nuevonombre ."' 
+					WHERE   
+					idescenario ='$id_escenario' ";					
+	$result = $this->db->query($query_update);
+	/*Log*/	
+	if($result == true){
+		$log_evento =  "Actualizón la información del esceario- ".$nuevonombre;
+		$this->insert_log(2, $log_evento , $id_escenario , $id_usuario);
+	}
+
+	return $result;		
+}
+/**/
+function update_fecha($id_escenario , $fecha_inicio , $fecha_termino, $id_usuario){
+	
+	$query_update ="UPDATE  escenario 
+	SET 
+	fecha_presentacion_inicio = '$fecha_inicio' , 
+	fecha_presentacion_termino='$fecha_termino' 
+	WHERE   idescenario ='$id_escenario' LIMIT 1";
+	$result = $this->db->query($query_update);
+
+
+	if ($result ==  1) {		
+		$log_evento =  "Indicó que la fecha que la fecha para el escenario será- " .fechas_enid_format( $fecha_inicio , $fecha_termino);
+		$this->insert_log(2, $log_evento , $id_escenario , $id_usuario);
+	}
+	return $result;	
+
+}
+/*POSIBLES FUNCIONES QUE NO SE EMPLEAN  */
+/**/
+function updatedescripcion( $nueva_descripcion , $evento , $idescenario,  $idempresa ) {
+
+	$query_upload ="UPDATE  escenario set descripcion = '$nueva_descripcion' WHERE idevento = '".$evento."' and  idescenario ='$idescenario' ";
+	$result = $this->db->query($query_upload);
+	return $result;	
+}
+function updatedescripcionbyid( $nueva_descripcion , $idescenario,  $idempresa ){
+	$query_upload ="UPDATE  escenario set descripcion = '$nueva_descripcion' WHERE   idescenario ='$idescenario' limit 1";
+	$result = $this->db->query($query_upload);
+	return $result;	
+
+}
 
 
 /*Termina modelo */

@@ -47,8 +47,7 @@ class Escenario extends REST_Controller{
         $id_escenario= $this->get("idescenario");
         $id_artista =  $this->get("idartista");
         $id_usuario =  $this->sessionclass->getidusuario();
-        $id_empresa =  $this->sessionclass->getidempresa();   
-                                                       
+        $id_empresa =  $this->sessionclass->getidempresa();                                                       
         $db_response = $this->escenariomodel->update_descripcion_escenario_template($data , $id_escenario ,  $id_artista , $id_usuario , $id_empresa );
         $this->response($db_response);
     }
@@ -76,15 +75,19 @@ class Escenario extends REST_Controller{
     function artista_nombre_PUT(){
 
         $this->validate_user_sesssion();
-        $responsedb   = $this->escenarioartistamodel->update_nombre_artista($this->put());
+        $param =  $this->put(); 
+        $param["id_usuario"] =  $this->sessionclass->getidusuario();
+        $responsedb   = $this->escenarioartistamodel->update_nombre_artista($param);
         $this->response($responsedb);
     
     }
     function escenario_artista_status_PUT(){
     
         $this->validate_user_sesssion();
-        $responsedb   = $this->escenarioartistamodel->update_status($this->put());
-        $this->response($responsedb);
+        $param= $this->put();
+        $param["id_usuario"]=  $this->sessionclass->getidusuario();
+        $db_response   = $this->escenarioartistamodel->update_status($param);
+        $this->response($db_response);
     }
     function artista_escenario_GET(){
 
@@ -180,14 +183,15 @@ class Escenario extends REST_Controller{
     
     /**/
     function escenario_artista_post(){
-        
+    
         $this->validate_user_sesssion();
         $id_evento =  $this->post("evento");
         $id_escenario =  $this->post("idescenario");
         $nuevoartista =  $this->post("nuevoartista");
         $id_empresa =  $this->sessionclass->getidempresa();                                        
         $id_usuario = $this->sessionclass->getidusuario(); 
-        $responsedb = $this->escenarioartistamodel->registraartistaescenario($id_escenario ,  $nuevoartista  , $id_empresa , $id_evento , $id_usuario );
+
+        $responsedb = $this->escenarioartistamodel->registra_artista_escenario($id_escenario ,  $nuevoartista  , $id_empresa , $id_evento , $id_usuario );
         $this->response($responsedb);                 
         
     }
@@ -222,7 +226,7 @@ class Escenario extends REST_Controller{
         $id_empresa =  $this->sessionclass->getidempresa();                                        
         $id_usuario = $this->sessionclass->getidusuario(); 
         
-        $responsedb = $this->escenarioartistamodel->deleteescenarioartosta($id_escenario , $id_artista , $id_empresa , $id_evento , $id_usuario);
+        $responsedb = $this->escenarioartistamodel->delete_escenario_artista($id_escenario , $id_artista , $id_empresa , $id_evento , $id_usuario);
         $this->response($responsedb);         
     }/*Termina la función*/
 
@@ -249,8 +253,9 @@ class Escenario extends REST_Controller{
         $id_escenario =  $this->put("escenario");
         $nuevo_inicio =  $this->put("nuevoinicio");
         $nuevo_termino = $this->put("nuevotermino");                
-        $id_empresa =  $this->sessionclass->getidempresa();                                            
-        $responsedb = $this->escenariomodel->updateescenarioinicioterminobyid($id_escenario , $id_empresa , $nuevo_inicio , $nuevo_termino);
+                    
+        $id_usuario = $this->sessionclass->getidusuario();                                 
+        $responsedb = $this->escenariomodel->update_fecha($id_escenario , $nuevo_inicio , $nuevo_termino, $id_usuario);
         $this->response($responsedb);         
     }
     /**************************Actualiza el tipo de escenario *******************************/
@@ -264,7 +269,7 @@ class Escenario extends REST_Controller{
         $id_evento =  $this->put("evento");  
         $id_evento =  $this->put("evento");                                                                
         
-        $responsedb = $this->escenariomodel->updateescenariotipobyid($id_escenario , $tipoescenario , $id_empresa ,  $id_usuario ,  $id_evento );
+        $responsedb = $this->escenariomodel->update_tipo($id_escenario , $tipoescenario , $id_empresa ,  $id_usuario ,  $id_evento );
         $this->response($responsedb);                     
     }
     /**************************************************************************/
@@ -278,9 +283,7 @@ class Escenario extends REST_Controller{
         $id_empresa =  $this->sessionclass->getidempresa();                                            
         $id_usuario = $this->sessionclass->getidusuario();
         $id_evento =  $this->put("evento");                                                                
-
-        $responsedb = $this->escenarioartistamodel->updateinicioterminoartistabyid($id_artista , $id_escenario  , $hiartista  , $htartista , $id_empresa ,  $id_usuario , $id_evento );
-
+        $responsedb = $this->escenarioartistamodel->update_fecha_presentacion($id_artista , $id_escenario  , $hiartista  , $htartista , $id_empresa ,  $id_usuario , $id_evento );
         $this->response($responsedb);                 
     }/*Termina*/
     /**/
@@ -330,7 +333,9 @@ class Escenario extends REST_Controller{
 
     function artista_tipo_POST(){
 
+        $this->validate_user_sesssion();             
         $param =  $this->post();
+        $param["id_usuario"] = $this->sessionclass->getidusuario();                                                      
         $db_response =  $this->escenarioartistamodel->update_tipo_artista($param);
         $this->response($db_response);
     }

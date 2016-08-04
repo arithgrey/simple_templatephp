@@ -13,6 +13,7 @@ $(document).ready(function(){
 	});
 	/**/
 	$("#button-template").click(function(){
+		
 		muestra_plantilla_escenario(5 , ".tmp_escenario" , ".place_tmp_escenario");
 	});
 	/**/
@@ -198,23 +199,16 @@ function muestra_plantilla_escenario(type , contenido , dinamic_place){
 	$.ajax({
 		url : url , 
 		type :  "GET",
-		data : {"tipo" : 3 ,  "public" :  0 , "identificador" :   "escenarios"} , 
+		data : {"tipo" : 5 ,  "public" :  0 , "identificador" :   "escenarios"} , 
 		beforeSend : function(){
 			show_load_enid( dinamic_place , "Cargando plantillas disponibles  ... " , 1); 
 		} 
 	}).done(function(data){
-
-
 		
+
 		$(dinamic_place).empty();
 		llenaelementoHTML(contenido , data );		
-		$(".escenarios").click(carga_plantilla);
-		
-		
-
-
-
-
+		$(".escenarios").click(carga_plantilla);	
 	}).fail(function(){
 		show_error_enid(".place_experiencias_tmp_seccion"  , "Error al al registrar artista"); 				
 	});
