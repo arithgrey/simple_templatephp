@@ -48,7 +48,9 @@ class Accesos extends REST_Controller{
         $nueva_descripcion =  $this->put("nueva_descripcion");
         $nuevo_tipo_acceso =  $this->put("nuevo_tipo_acceso");
         $nueva_moneda =  $this->put("nueva_moneda");
-        $responsedb = $this->accesosmodel->update($id_acceso , $nuevo_precio , $nuevo_inicio_acceso , $nuevo_termino_acceso , $nueva_descripcion , $nuevo_tipo_acceso , $nueva_moneda);
+
+        $id_usuario = $this->sessionclass->getidusuario(); 
+        $responsedb = $this->accesosmodel->update($id_acceso , $nuevo_precio , $nuevo_inicio_acceso , $nuevo_termino_acceso , $nueva_descripcion , $nuevo_tipo_acceso , $nueva_moneda , $id_usuario);
         $this->response($responsedb);
     }
     function list_get(){
@@ -116,11 +118,12 @@ class Accesos extends REST_Controller{
     }
     /*****************Elimina el acceso del evento **************/
     function deletebyid_post(){
-        
+
         $this->validate_user_sesssion();               
         $id_evento = $this->post("evento");      
-        $id_acceso = $this->post("acceso");                  
-        $db_response = $this->accesosmodel->deletebyid( $id_evento , $id_acceso );
+        $id_acceso = $this->post("acceso");    
+        $id_usuario = $this->sessionclass->getidusuario(); 
+        $db_response = $this->accesosmodel->delete( $id_evento , $id_acceso , $id_usuario);
         $this->response($db_response);         
     }
     /*Regresa la información de un sólo acceso mediante su id */
