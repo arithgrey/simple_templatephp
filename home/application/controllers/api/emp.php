@@ -226,4 +226,16 @@ class Emp extends REST_Controller{
         $this->response($db_response);
     }
     /**/
+    function actividades_GET(){
+
+        $this->validate_user_sesssion();        
+        $param =  $this->get();     
+        $param["id_empresa"]= $this->sessionclass->getidempresa();        
+        $data["log"] = $this->empresamodel->get_actividad($param);     
+        echo  $this->load->view("log/empresa",  $data);
+
+
+
+
+    }
 }?>

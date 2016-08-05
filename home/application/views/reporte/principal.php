@@ -55,7 +55,8 @@
             </div>
 
             <div class="tab-pane fade" id="faq-cat-4">
-                ok movimietos
+                <div class='place_ultimos_movimientos'>
+                </div>                
             </div>
     	</div>
   	</div>       

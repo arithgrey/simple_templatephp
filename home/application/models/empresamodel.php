@@ -471,6 +471,120 @@ function create_tmp_experiencias($flag , $_num ,  $id_empresa ,  $param){
   return $db_response;  
 }
 /**/
+
+function get_actividad($param){
+  $_num =  get_random();
+  $this->create_tmps_actividad_e($_num ,  0 , $param);
+  $query_get =  "SELECT * FROM log_e_$_num ORDER BY  fecha_registro desc"; 
+  $result =  $this->db->query($query_get);
+  $data_complete =  $result ->result_array();
+  $this->create_tmps_actividad_e($_num ,  1 , $param);
+  return $data_complete;
+}
+/**/
+function create_tmps_actividad_e($_num,  $flag , $param ){
+  
+  $f =  $this->create_tmp_user_e($_num,  $flag , $param); 
+  $f =  $this->create_tmp_movimientos_users( $_num , $flag  ,  $param );
+  $f = $this->create_tmp_logs( $_num , $flag  ,  $param );
+  return $f;
+}
+/*creamos tmp para usuarios*/
+function create_tmp_user_e($_num,  $flag , $param){
+  $query_drop =  "DROP TABLE IF exists usuario_emp_e_$_num";
+  $db_response =  $this->db->query($query_drop);
+  $id_empresa =  $param["id_empresa"];  
+    
+  if ($flag == 0 ){
+      $query_create = "CREATE TABLE  
+                      usuario_emp_e_$_num AS 
+                      SELECT
+                      idusuario , 
+                      nombre  ,
+                      email,
+                      puesto,
+                      cargo
+                      FROM  usuario 
+                      WHERE idempresa = $id_empresa and tipo =1 "; 
+      $db_response = $this->db->query($query_create);                
+
+    }
+  return $db_response;  
+    
+}
+/**/
+function create_tmp_movimientos_users( $_num , $flag  ,  $param ){
+  
+  $query_drop =  "DROP TABLE IF exists usuario_log_complete_e_$_num";
+  $db_response =  $this->db->query($query_drop);
+
+  $query_drop =  "DROP TABLE IF exists usuario_log_e_$_num";
+  $db_response =  $this->db->query($query_drop);
+  
+  if ($flag == 0 ) {
+
+    /*operamos sobre la tabla completa*/
+    $query_create =  "CREATE TABLE  usuario_log_complete_e_$_num AS 
+                      SELECT *  FROM  usuario_log l WHERE  DATE(fecha_registro) 
+                      BETWEEN  DATE_ADD(CURRENT_DATE() , INTERVAL -15 DAY )  
+                      AND  CURRENT_DATE()"; 
+    
+    $this->db->query($query_create);                  
+            /*Operamos sobre lo del periodo*/
+            $query_create =  "CREATE TABLE  
+                              usuario_log_e_$_num AS 
+                              SELECT *  FROM  usuario_log_complete_e_$_num l 
+                              INNER JOIN usuario_emp_e_$_num u 
+                              ON l.id_usuario =  u.idusuario"; 
+              $db_response = $this->db->query($query_create);                
+  }
+  
+  return $db_response;  
+}
+/**/
+function create_tmp_logs( $_num , $flag  ,  $param ){
+  
+  $query_drop =  "DROP TABLE IF exists log_complete_e_$_num";
+  $db_response =  $this->db->query($query_drop);
+  
+  $query_drop =  "DROP TABLE IF exists log_e_$_num";
+  $db_response =  $this->db->query($query_drop);
+
+
+  if ($flag == 0 ){    
+    $query_create =  "CREATE TABLE log_complete_e_$_num AS 
+                      SELECT
+                      id_log id_logf,
+                      modulo ,
+                      tipo_evento  ,
+                      descripcion,
+                      id_modulo
+                      FROM log 
+                      WHERE  DATE(fecha_registro) 
+                      BETWEEN  DATE_ADD(CURRENT_DATE() , INTERVAL -15 DAY )  
+                      AND  CURRENT_DATE()";
+    $db_response = $this->db->query($query_create);                
+
+    /**/
+    $query_create =  "CREATE TABLE log_e_$_num AS 
+    SELECT  u.* , 
+            l.modulo,             
+            l.tipo_evento,
+            l.descripcion,
+            l.id_modulo  
+            FROM  usuario_log_e_$_num u 
+    INNER JOIN log_complete_e_$_num l
+    ON 
+    u.id_log = l.id_logf";
+
+    $db_response = $this->db->query($query_create);                    
+  }
+  return $db_response;
+}
+
+
+
+/**/
 /*Termina modelo */
 }
 

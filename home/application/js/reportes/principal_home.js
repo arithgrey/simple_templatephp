@@ -9,6 +9,8 @@ $(document).ready(function(){
 	$(".carga_resumen_cominidad").click(carga_informe_comunidad);			
 	/**/
 	$(".carga_resumen_solicitudes").click(carga_solicitados_artistas);
+	/**/
+	$(".carga_resumen_movimientos").click(carga_ultimos_movimientos);
 });
 /**/
 function carga_informe_global(){
@@ -73,4 +75,22 @@ function carga_solicitados_artistas(){
 	}).fail(function(){
 		show_error_enid(".place_solicitudes_artistas" , "Problemas al cargar tu solicitud, reporte al administrador");				
 	});	
+}
+/**/
+function carga_ultimos_movimientos(){
+	/**/
+	url =  now +  "index.php/api/emp/actividades/format/json/";
+	$.ajax({
+
+		url :  url , 
+		data : {},
+		type :  "GET",
+		beforeSend: function(){
+			show_load_enid(".place_ultimos_movimientos" , "Cargando solicitudes  " , 1 );				
+		}
+	}).done(function(data){
+		llenaelementoHTML(".place_ultimos_movimientos" , data);
+	}).fail(function(){		
+		show_error_enid(".place_ultimos_movimientos" , "Problemas al cargar, reporte al administrador.");				
+	});
 }
