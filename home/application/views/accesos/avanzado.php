@@ -113,6 +113,7 @@
 <input type='hidden' name='evento' id='evento' class='evento' value="<?=$data_evento['idevento']?>">
 <input class='dinamic_acceso' id='dinamic_acceso' type='hidden'>
 <input class='empresa' id="empresa" value="<?=$empresa;?>" type='hidden'>
+<input class='enid_evento' id='enid_evento' value="<?=$data_evento["nombre_evento"]?>" type='hidden'> 
 <script type="text/javascript" src="<?=base_url('application/js/evento/accesos/img.js')?>"></script>
 <link rel="stylesheet" type="text/css" href="<?=base_url('application/js/js/bootstrap-datepicker/css/datepicker-custom.css')?>" />
 <script type="text/javascript" src="<?=base_url('application/js/js/bootstrap-datepicker/js/bootstrap-datepicker.js')?>"></script>

@@ -81,12 +81,11 @@ function carga_ultimos_movimientos(){
 	/**/
 	url =  now +  "index.php/api/emp/actividades/format/json/";
 	$.ajax({
-
 		url :  url , 
-		data : {},
+		data : { "tipo_actividad" : "eventos" },
 		type :  "GET",
 		beforeSend: function(){
-			show_load_enid(".place_ultimos_movimientos" , "Cargando solicitudes  " , 1 );				
+			show_load_enid(".place_ultimos_movimientos" , "Cargando ultimos movimientos" , 1 );				
 		}
 	}).done(function(data){
 		llenaelementoHTML(".place_ultimos_movimientos" , data);

@@ -4,7 +4,8 @@
             + Nuevo contacto
         </button>
     </div>
-    <br>
+    <div class='separate-enid'>
+    </div>
     <!--Inicioa  formulario de búsqueda  -->    
     <div class='row'>
         <form method='GET' action="" id='form-filtro' >

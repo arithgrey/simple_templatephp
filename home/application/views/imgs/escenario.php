@@ -1,4 +1,3 @@
-<!---->
 <form accept-charset="utf-8" method="POST" id="form_img_enid_escenario"  class="form_img_enid_escenario" enctype="multipart/form-data" >      
     <input type="file" id='imagen_img_escenario' class='imagen_img_escenario' name="imagen"/>
     <input type='hidden' name='q' value='portada_escenario'>         

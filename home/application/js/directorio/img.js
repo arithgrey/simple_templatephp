@@ -33,8 +33,12 @@ function upload_imgs_enid_contacto(){
 }
 /**/
 function registra_img_contacto(e){
+    
+    /**/
     e.preventDefault();
     var formData = new FormData(document.getElementById("form_img_enid_contacto"));    
+    //alert(formData);
+
     url =  now + "index.php/api/archivo/imgs";
     
     $.ajax({
@@ -46,7 +50,7 @@ function registra_img_contacto(e){
             contentType: false,
             processData: false ,
             beforeSend : function(){
-                 show_load_enid(".place_form_img" , "Cargando imagen a contacto" , 1 );       
+                show_load_enid(".place_form_img" , "Cargando imagen a contacto" , 1 );       
             }
     }).done(function(data){
 

@@ -38,8 +38,8 @@ class Accesos extends REST_Controller{
     }    
     /*update info acceso */    
     function acceso_PUT(){
-        $this->validate_user_sesssion();        
-        
+
+        $this->validate_user_sesssion();                
         $id_evento = $this->put("evento");  
         $id_acceso = $this->put("acceso");
         $nuevo_precio =  $this->put("nuevo_precio");
@@ -48,9 +48,9 @@ class Accesos extends REST_Controller{
         $nueva_descripcion =  $this->put("nueva_descripcion");
         $nuevo_tipo_acceso =  $this->put("nuevo_tipo_acceso");
         $nueva_moneda =  $this->put("nueva_moneda");
-
+        $param =  $this->put();
         $id_usuario = $this->sessionclass->getidusuario(); 
-        $responsedb = $this->accesosmodel->update($id_acceso , $nuevo_precio , $nuevo_inicio_acceso , $nuevo_termino_acceso , $nueva_descripcion , $nuevo_tipo_acceso , $nueva_moneda , $id_usuario);
+        $responsedb = $this->accesosmodel->update($id_acceso , $nuevo_precio , $nuevo_inicio_acceso , $nuevo_termino_acceso , $nueva_descripcion , $nuevo_tipo_acceso , $nueva_moneda , $id_usuario , $param );
         $this->response($responsedb);
     }
     function list_get(){
@@ -112,7 +112,8 @@ class Accesos extends REST_Controller{
         $descripcion  = $this->post("descripcion");
         $moneda =  $this->post("moneda");
         $id_empresa =  $this->sessionclass->getidempresa();                              
-        $dbrespose = $this->accesosmodel->insert( $nombre , $precio  ,  $inicio  , $termino , $id_evento , $tipo , $descripcion , $id_empresa , $id_usuario ,  $nombre_usuario , $moneda );        
+        $param =  $this->post();
+        $dbrespose = $this->accesosmodel->insert( $nombre , $precio  ,  $inicio  , $termino , $id_evento , $tipo , $descripcion , $id_empresa , $id_usuario ,  $nombre_usuario , $moneda , $param);        
         $this->response($dbrespose);
   
     }
@@ -123,7 +124,8 @@ class Accesos extends REST_Controller{
         $id_evento = $this->post("evento");      
         $id_acceso = $this->post("acceso");    
         $id_usuario = $this->sessionclass->getidusuario(); 
-        $db_response = $this->accesosmodel->delete( $id_evento , $id_acceso , $id_usuario);
+        $param  =  $this->post();
+        $db_response = $this->accesosmodel->delete( $id_evento , $id_acceso , $id_usuario,  $param);
         $this->response($db_response);         
     }
     /*Regresa la información de un sólo acceso mediante su id */

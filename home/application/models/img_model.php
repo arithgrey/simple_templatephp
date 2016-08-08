@@ -184,9 +184,12 @@ function insert_contacto($data , $id_usuario , $id_empresa ){
     }
     $id_imagen = $this->insert_img($data , $id_usuario , $id_empresa ,6 );  
     $dinamic_query ="INSERT INTO  imagen_contacto(id_imagen , id_contacto  ) VALUES('". $id_imagen."' , '". $id_contacto ."' )";          
-    return $this->db->query($dinamic_query);    
-    
-  }  
+    return $this->db->query($dinamic_query);        
+}  
+/**/
+function insert_testing($data , $id_usuario , $id_empresa){
+  
+}
   /**/
   function consulta_existencia($sql){    
       $result_exist =  $this->db->query($sql);       

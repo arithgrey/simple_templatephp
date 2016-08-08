@@ -86,20 +86,16 @@ class Archivo extends REST_Controller{
 
              case 'acceso':                            
                 $db_response = $this->img_model->insert_acceso($prm , $id_usuario , $id_empresa );
-                return $this->response_status_img($db_response);    
-                
-                
-                
+                return $this->response_status_img($db_response);                    
                 break;    
            
-
-                
+             case 'testing':                            
+                $db_response = $this->img_model->insert_testing($prm , $id_usuario , $id_empresa );
+                return $this->response_status_img($db_response);               
+                break;                                
+            
             default:
 
-
-
-
-                
                 break;
         }
 
@@ -115,17 +111,12 @@ class Archivo extends REST_Controller{
     }
     /*Validar session para modificar datos*/
     function validate_user_sesssion(){
-        if( $this->sessionclass->is_logged_in() == 1) {                        
-
-            }else{
-        /*Terminamos la session*/
-                $this->sessionclass->logout();
+        if($this->sessionclass->is_logged_in() == 1){}else{        
+            $this->sessionclass->logout();
         }   
-    }
-   
+    }   
     /**/
 }?>
-
 
 
 

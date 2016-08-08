@@ -8,7 +8,7 @@ function  nuevo_escenario(e){
 	if (flag ==  1  ) {
 		$.ajax({
 			url :  url , 
-			data : $("#form-escenario").serialize() , 
+			data : $("#form-escenario").serialize()+"&"+ $.param({"enid_evento" : enid_evento}), 
 			type : "POST", 
 			beforeSend: function(){
 				llenaelementoHTML(".section_escenarios_admin" , "Cargando ...");

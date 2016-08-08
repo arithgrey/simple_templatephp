@@ -1,4 +1,7 @@
 $(document).ready(function(){
+
+
+	enid_evento=  $("#nombre_evento_val").val(); 
 	evalua_modal();
 	tipo_contenido = "";
 	evento = $("#evento").val();	
@@ -104,7 +107,7 @@ function update_db_name_evento(){
 	if (flag == 1) {
 			url =  now + "index.php/api/event/nombre/format/json/";    
 			nuevotexto = $("#nombre-input").val();		
-			data_send  = {"nombre" : nuevotexto , "evento" : $("#evento").val()}			
+			data_send  = {"nombre" : nuevotexto , "evento" : $("#evento").val() , "enid_evento" : enid_evento }			
 			$.ajax({
 					url :  url , 
 					type : "PUT", 
@@ -141,7 +144,7 @@ function update_db_edicion_evento(){
 
 			url =  now + "index.php/api/event/edicion/format/json/";    
 			nuevotexto = $("#edicion-input").val(); 			
-			data_send= { "edicion" : nuevotexto , "evento" : $("#evento").val() }			
+			data_send= { "edicion" : nuevotexto , "evento" : $("#evento").val() ,  "enid_evento" : enid_evento }			
 			$.ajax({
 					url :  url , 
 					type : "PUT", 
@@ -173,7 +176,7 @@ function update_descripcion_db_evento(){
 	if (flag == 1) {
 			url =  now + "index.php/api/event/descripcion/format/json/";
 			nuevotexto = $("#descripcion-evento").val();		
-			data_send = { "descripcion_evento" : nuevotexto , "evento" : $("#evento").val() }     
+			data_send = { "descripcion_evento" : nuevotexto , "evento" : $("#evento").val() ,  "enid_evento" : enid_evento}     
 			$.ajax({
 					url :  url , 
 					type : "PUT", 
@@ -205,7 +208,7 @@ function update_db_politicas_evento(){
 	if (flag == 1) {
 			url =  now + "index.php/api/event/politicas/format/json/";    
 			nuevotexto = $("#politicas-evento").val();				
-			data_send = { "politicas_evento" : nuevotexto , "evento" : $("#evento").val() }
+			data_send = { "politicas_evento" : nuevotexto , "evento" : $("#evento").val() ,  "enid_evento" : enid_evento }
 			$.ajax({
 					url :  url , 
 					type : "PUT", 
@@ -234,7 +237,7 @@ function update_db_permitido_evento(e){
 	if (flag == 1 ) {		
 		nuevotexto = $("#permitido-evento").val(); 
 		url =  now + "index.php/api/event/permitido/format/json/";    
-		data_send = { "permitido_evento" : nuevotexto , "evento" : evento  };  
+		data_send = { "permitido_evento" : nuevotexto , "evento" : evento  ,  "enid_evento" : enid_evento };  
 
 				$.ajax({
 					url :  url , 
@@ -263,7 +266,7 @@ function update_db_restricciones(){
 	flag = valida_text_form("#restricciones-evento" , ".place_restricciones" , 255 , "Descripción " ); 	
 	nuevotexto = $("#restricciones-evento").val(); 				
 	url =  now + "index.php/api/event/restricciones/format/json/";    
-	data_send = { "restricciones_evento" : nuevotexto , "evento" : $("#evento").val() }
+	data_send = { "restricciones_evento" : nuevotexto , "evento" : $("#evento").val() ,  "enid_evento" : enid_evento}
 	if (flag == 1  ) {
 		$.ajax({
 				url :  url , 
@@ -292,7 +295,7 @@ function update_ubicacion_evento(){
 		if (flag ==1  ) {
 			nuevotexto = $("#pac-input").val(); 			
 			url =  now + "index.php/api/event/ubicacion/format/json/";  
-			data_send = { "ubicacion" : nuevotexto , "evento" : $("#evento").val() }  		
+			data_send = { "ubicacion" : nuevotexto , "evento" : $("#evento").val(),  "enid_evento" : enid_evento }  		
 
 			$.ajax({
 					url :  url , 
@@ -348,7 +351,7 @@ function update_eslogan_db_evento(){
 	if (flag == 1) {
 			url =  now + "index.php/api/event/eslogan/format/json/";    			
 			nuevotexto = $("#eslogan-evento").val();		
-			data_send = { evento : $("#evento").val() , eslogan : $("#eslogan-evento").val()}
+			data_send = { evento : $("#evento").val() , eslogan : $("#eslogan-evento").val() ,  "enid_evento" : enid_evento }
 			$.ajax({
 					url :  url , 
 					type : "PUT", 
@@ -372,7 +375,7 @@ function update_descripcion_evento_by_template(e){
 
 	url =  now + "index.php/api/event/descripcion_template/format/json/";	
 	template_content =  e.target.id;			
-	data_send =  { "template_content" : template_content , "evento" : evento }; 
+	data_send =  { "template_content" : template_content , "evento" : evento ,  "enid_evento" : enid_evento}; 
 	$.ajax({
 		url : url , 
 		type : "PUT", 
@@ -395,7 +398,7 @@ function update_descripcion_evento_by_template(e){
 function record_contenido_evento_template(e){		
 	contenido = e.target.id;
 	url = now  + "index.php/api/templ/templates_contenido_evento/format/json/";		
-	data_send =  {"contenido": contenido , "evento" : evento }; 
+	data_send =  {"contenido": contenido , "evento" : evento ,  "enid_evento" : enid_evento }; 
 	$.ajax({
 		url : url , 
 		type : "PUT", 
@@ -435,7 +438,7 @@ function get_contenido_evento_temp(type,  place){
 	
 	evento = $("#evento").val();		
 	url = now  + "index.php/api/templ/templates_contenido_evento/format/json/";		
-	data_send =  {"type": type , "evento" : evento }
+	data_send =  {"type": type , "evento" : evento ,  "enid_evento" : enid_evento }
 	$.ajax({
 		url:  url , 
 		type : "GET", 
@@ -471,7 +474,7 @@ function update_fecha_evento(){
 	$.ajax({
 		url : url , 
 		type :  "PUT",
-		data : { "evento" : id_evento , "nuevo_inicio" : update_inicio , "nuevo_termino" : update_termino } , 
+		data : { "evento" : id_evento , "nuevo_inicio" : update_inicio , "nuevo_termino" : update_termino ,  "enid_evento" : enid_evento } , 
 		beforeSend: function(){			
 			show_load_enid(".place_fecha_evento" , "Actualizando fecha del evento .. " , 1); 	
 		}
@@ -494,7 +497,7 @@ function carga_section_escenarios(){
 	evento = $("#evento").val();		
 	$.ajax({
 		url : url , 
-		data :  {"evento_escenario" : evento } , 
+		data :  {"evento_escenario" : evento ,  "enid_evento" : enid_evento } , 
 		dataType: "HTML",
 		type :  "GET", 
 		beforeSend :  function(){			
@@ -513,7 +516,7 @@ function carga_template_disponible_politica(){
 	$.ajax({
 		url : url , 
 		type :  "GET",
-		data : {"tipo" : 4 ,  "public" :  0 ,  "identificador" :  "new_politica_template"} , 
+		data : {"tipo" : 4 ,  "public" :  0 ,  "identificador" :  "new_politica_template" ,  "enid_evento" : enid_evento} , 
 		beforeSend : function(){
 			show_load_enid(".place_politicas_tmp_seccion" , "Cargando contenidos disponibles " , 1); 		
 		} 
@@ -537,7 +540,7 @@ function carga_template_disponible_restricciones(){
 	$.ajax({
 		url : url , 
 		type :  "GET",
-		data : {"tipo" : 3 ,  "public" :  0 , "identificador" :   "new_restricciones_templ"} , 
+		data : {"tipo" : 3 ,  "public" :  0 , "identificador" :   "new_restricciones_templ" ,  "enid_evento" : enid_evento} , 
 		beforeSend : function(){
 			show_load_enid(".place_restricciones_tmp_seccion" , "Cargando contenidos disponibles " , 1); 		
 		} 
@@ -563,7 +566,7 @@ function carga_template_disponible_experiencia(){
 	$.ajax({
 		url : url , 
 		type :  "GET",
-		data : {"tipo" : 1 ,  "public" :  0 , "identificador" :   "contenido-text-templ"} , 
+		data : {"tipo" : 1 ,  "public" :  0 , "identificador" :   "contenido-text-templ" ,  "enid_evento" : enid_evento} , 
 		beforeSend : function(){
 			show_load_enid(".place_experiencias_tmp_seccion" , "Cargando contenidos disponibles " , 1); 		
 		} 
@@ -583,7 +586,7 @@ function registra_redes_sociales(e){
 
 		url =  $("#form_social").attr("action");	
 		evento  =  $("#evento").val(); 
-		data_send = $("#form_social").serialize() + "&" + $.param({ "evento" :  evento });
+		data_send = $("#form_social").serialize() + "&" + $.param({ "evento" :  evento ,  "enid_evento" : enid_evento  });
 
 		$.ajax({		
 			url :  url , 
@@ -613,7 +616,7 @@ function update_tipificacion_evento(){
 	$.ajax({
 		url :  url , 
 		type :  "PUT" ,
-		data :  {"tipificacion_evento" : tipificacion_evento , "evento" : evento},
+		data :  {"tipificacion_evento" : tipificacion_evento , "evento" : evento ,  "enid_evento" : enid_evento},
 		beforeSend: function(){			
 			show_load_enid(".place_tipo_evento" , "Registrando cambios" , 1); 		
 		}
@@ -634,7 +637,7 @@ function update_tipificacion_evento(){
 function load_data_tematica(){			
 	evento =  $("#evento").val();
 	url =  now + "index.php/api/event/tematica/format/json/";    					
-	data_send = $("#form-tematica").serialize() + "&" + $.param({"evento" : evento });
+	data_send = $("#form-tematica").serialize() + "&" + $.param({"evento" : evento,  "enid_evento" : enid_evento });
 	$.ajax({
 		url : url ,
 		type :  "GET",
@@ -666,7 +669,7 @@ function update_tematica_evento(){
 
 	url =now + "index.php/api/event/tematica/format/json/";		
 	evento =  $("#evento").val();
-	data_send =   $("#form-tematica").serialize() + "&" + $.param({"evento" :  evento});
+	data_send =   $("#form-tematica").serialize() + "&" + $.param({"evento" :  evento , "enid_evento" : enid_evento});
 	$.ajax({
 		url : url , 
 		type:  "PUT",

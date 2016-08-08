@@ -137,20 +137,23 @@ if(!function_exists('invierte_date_time')){
         
   function create_icon_img($row , $class , $id , $extra= '' ,  $letra ='[Img]' ){      
 
-    
     $color_random = '';  
-
+    $base_img = base_url("application/img/img_def.png");
+    $img =  "";
     if (isset($row["nombre_imagen"] )) {
         if (strlen($row["nombre_imagen"]) > 2  ){        
           $img =  '<img '. $extra .' class="'. $class .'" id="'.$id.'"  style="display:block;margin:0 auto 0 auto; width: 90%;" src="data:image/jpeg;base64, '. base64_encode($row["img"])  .'  " />';
-          return $img;      
+          
         }else{
           /*Generamos color al de fondo */           
-          return  "<div ". $extra."  style = '". $color_random."' style='margin: 0 auto;' class='img-icon-enid text-center ". $class ." ' id='".$id  ."'  >". $letra ."</div>";
+          //return  "<div ". $extra."  style = '". $color_random."' style='margin: 0 auto;' class='img-icon-enid text-center ". $class ." ' id='".$id  ."'  >". $letra ."</div>";          
+          $img =  '<img '. $extra .' class="'. $class .'" id="'.$id.'"  style="display:block;margin:0 auto 0 auto; width: 90%;" src="'.$base_img.'  " />';
         }      
     }else{
-          return  "<div ". $extra."  style = '". $color_random."' style='margin: 0 auto;' class='img-icon-enid text-center ". $class ." ' id='".$id  ."'  >". $letra ."</div>";
+          //return  "<div ". $extra."  style = '". $color_random."' style='margin: 0 auto;' class='img-icon-enid text-center ". $class ." ' id='".$id  ."'  >". $letra ."</div>";
+      $img =  '<img '. $extra .' class="'. $class .'" id="'.$id.'"  style="display:block;margin:0 auto 0 auto; width: 90%;" src="'.$base_img.'  " />';
     }
+    return $img;      
     
   }  
  /**/

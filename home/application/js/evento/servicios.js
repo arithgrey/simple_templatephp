@@ -5,7 +5,7 @@ function load_data_servicios(){
 	evento = $(".eventoservicios").val();
 	$.ajax({
 		url : url , 
-		data : { evento : evento } , 
+		data : { evento : evento ,  "enid_evento" : enid_evento } , 
 		type : "GET", 
 		beforeSend : function(){						
 			show_load_enid(".place_servicios_incluidos" , "Cargando ..." , 1); 				
@@ -34,7 +34,7 @@ function serviciocheck(e){
 	$.ajax({
 	 	url : url , 
 	 	type :  "POST",
-	 	data :  { evento : evento , idservicio : idservicio  } , 
+	 	data :  { evento : evento , idservicio : idservicio ,  "enid_evento" : enid_evento } , 
 	 	beforeSend: function(){
 	 		show_load_enid(".place_servicios_incluidos" , "Actualizando " , 1); 				
 	 	}
@@ -126,7 +126,7 @@ function eliminar_servicio_evento(e){
 	$.ajax({
 	 	url : url , 
 	 	type :  "POST",
-	 	data :  { evento : evento , idservicio : idservicio  } , 
+	 	data :  { evento : evento , idservicio : idservicio ,  "enid_evento" : enid_evento } , 
 	 	beforeSend: function(){
 	 		show_load_enid(".place_servicios_incluidos" , "Actualizando " , 1); 				
 	 	}

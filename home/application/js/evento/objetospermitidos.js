@@ -36,7 +36,7 @@ function update_all_objects(e){
 	$.ajax({                                                                                          
 		url :  url , 
 		type :  "PUT",
-		data :  {"evento" : id_evento } , 
+		data :  {"evento" : id_evento ,  "enid_evento" : enid_evento } , 
 		beforeSend : function(){
 			show_load_enid(".place_obj_permitidos" , "Cargando la lista completa al evento" , 1); 						
 		}

@@ -128,27 +128,6 @@ function carga_base_img($tipo , $f  , $_num = 0 ){
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 function insert_log($tipo_evento , $descripcion , $id_evento , $id_usuario){
 	$navegador = navegador();
 	$ip =  ip_user(); 
@@ -177,15 +156,14 @@ function insert_log($tipo_evento , $descripcion , $id_evento , $id_usuario){
 	return $result;
 }
 /**/
-function insert( $nombre_acceso  , $precio , $inicio_acceso , $termino_acceso , $id_evento , $idtipo_acceso, $descripcion=''  , $id_empresa , $id_usuario , $nombre_usuario , $moneda  ){
+function insert( $nombre_acceso  , $precio , $inicio_acceso , $termino_acceso , $id_evento , $idtipo_acceso, $descripcion=''  , $id_empresa , $id_usuario , $nombre_usuario , $moneda , $param  ){
 
 	if ($precio< 1 ){$precio = 1;}	
 	$query_insert ="INSERT INTO acceso( nombre  , precio , inicio_acceso ,  termino_acceso , idevento ,idtipo_acceso , descripcion ,  moneda  ) VALUES ( '$nombre_acceso' ,  $precio , '$inicio_acceso' , '$termino_acceso' , '$id_evento' , '$idtipo_acceso'  , '$descripcion' , '$moneda')";			
 	$db_response  =  $this->db->query($query_insert);
 	if ($db_response ==  true ){		
-
 		$id_acceso  = $this->db->insert_id(); 
-		$log_evento =  "Cargo el nuevo accceso al evento con un precio de -".$precio; 
+		$log_evento =  "Cargo el nuevo accceso al evento ". $param["enid_evento"]." con un precio de -".$precio; 
 		$this->insert_log(1 , $log_evento , $id_acceso ,  $id_usuario);
 	}
 	return $db_response; 		
@@ -193,22 +171,20 @@ function insert( $nombre_acceso  , $precio , $inicio_acceso , $termino_acceso , 
 }
 /**/
 /*********************/
-function delete( $evento , $id_acceso , $id_usuario ){
+function delete( $evento , $id_acceso , $id_usuario  , $param){
 
 	$query_delete ="DELETE FROM imagen_acceso WHERE id_acceso = '". $id_acceso ."' ";	
 	$this->db->query($query_delete);
 	$query_delete ="DELETE FROM acceso WHERE idacceso = '".$id_acceso."'  limit 1";
 	$result =  $this->db->query($query_delete);	
 	if ($result ==  true ){				
-		$log_evento =  "Eliminó un acceso del evento- id ".$id_acceso; 
+		$log_evento =  "Eliminó un acceso del evento ". $param["enid_evento"] ."- id ".$id_acceso; 
 		$this->insert_log(3 , $log_evento , $id_acceso ,  $id_usuario);
 	}
-
 	return $result; 
-
 }
 /**/
-function update($id_acceso , $nuevo_precio , $nuevo_inicio_acceso , $nuevo_termino_acceso , $nueva_descripcion , $nuevo_tipo_acceso, $moneda  ,$id_usuario){	
+function update($id_acceso , $nuevo_precio , $nuevo_inicio_acceso , $nuevo_termino_acceso , $nueva_descripcion , $nuevo_tipo_acceso, $moneda  ,$id_usuario , $param ){	
 	$query_update ="UPDATE acceso SET 
 					descripcion= '".$nueva_descripcion."'  ,  
 					precio = '".$nuevo_precio. "' , 
@@ -217,14 +193,11 @@ function update($id_acceso , $nuevo_precio , $nuevo_inicio_acceso , $nuevo_termi
 					idtipo_acceso  = '". $nuevo_tipo_acceso ."' ,
 					moneda = '".$moneda."'
 					WHERE idacceso = '". $id_acceso ."'  limit 1 ";
-	$result  =  $this->db->query($query_update);
-	
-	if ($result ==  true ){		
-		
-		$log_evento =  "Modifico la información del acceso - ". $id_acceso; 
+	$result  =  $this->db->query($query_update);	
+	if ($result ==  true ){				
+		$log_evento =  "Modifico la información del acceso - ". $id_acceso."  del evento   ". $param["enid_evento"]."   "; 
 		$this->insert_log(2 , $log_evento , $id_acceso ,  $id_usuario);
 	}
-
 	return $result;
 }
 

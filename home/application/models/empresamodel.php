@@ -292,9 +292,7 @@ function get_empresa_by_id($id_empresa){
   return $result->result_array(); 
 }
 /**/
-
 function exist_company_byname( $nombreempresa ){
-
     $query_exist = "SELECT * FROM empresa WHERE nombreempresa = '".$nombreempresa."' ";     
     $result = $this->db->query($query_exist);                   
     $flag = 0;     
@@ -302,7 +300,6 @@ function exist_company_byname( $nombreempresa ){
           $flag++;
       }     
     return $flag;
-
 
 }/*Termina la función */
 
@@ -483,10 +480,20 @@ function get_actividad($param){
 }
 /**/
 function create_tmps_actividad_e($_num,  $flag , $param ){
-  
-  $f =  $this->create_tmp_user_e($_num,  $flag , $param); 
-  $f =  $this->create_tmp_movimientos_users( $_num , $flag  ,  $param );
-  $f = $this->create_tmp_logs( $_num , $flag  ,  $param );
+    $f = "";
+    if ($param["tipo_actividad"] ==  "eventos"){
+
+      $f =  $this->create_tmp_user_e($_num,  $flag , $param); 
+      $f =  $this->create_tmp_movimientos_users( $_num , $flag  ,  $param );
+      $f = $this->create_tmp_logs( $_num , $flag  ,  $param );   
+    }else{
+
+      $f =  $this->create_tmp_user_e($_num,  $flag , $param); 
+      $f =  $this->create_tmp_movimientos_users( $_num , $flag  ,  $param );
+      $f = $this->create_tmp_logs( $_num , $flag  ,  $param );   
+    }
+
+   
   return $f;
 }
 /*creamos tmp para usuarios*/
@@ -505,7 +512,8 @@ function create_tmp_user_e($_num,  $flag , $param){
                       puesto,
                       cargo
                       FROM  usuario 
-                      WHERE idempresa = $id_empresa and tipo =1 "; 
+                      WHERE idempresa = $id_empresa 
+                      and tipo =1 "; 
       $db_response = $this->db->query($query_create);                
 
     }
@@ -545,8 +553,7 @@ function create_tmp_movimientos_users( $_num , $flag  ,  $param ){
 function create_tmp_logs( $_num , $flag  ,  $param ){
   
   $query_drop =  "DROP TABLE IF exists log_complete_e_$_num";
-  $db_response =  $this->db->query($query_drop);
-  
+  $db_response =  $this->db->query($query_drop);  
   $query_drop =  "DROP TABLE IF exists log_e_$_num";
   $db_response =  $this->db->query($query_drop);
 

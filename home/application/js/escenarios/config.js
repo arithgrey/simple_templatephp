@@ -1,5 +1,10 @@
 $(document).ready(function(){    
 	
+	
+	enid_evento =  $(".enid_evento").val(); 
+	enid_escenario  =  $(".enid_escenario").val(); 	
+
+
 	flag_carga_otros = 0; 
 	artista_tmp  =  0; 	
 	$(".tipo-escenario").click(update_type);	
@@ -48,15 +53,19 @@ $(document).ready(function(){
 /**/
 function update_type(e){
 
+
 	type_escenario  = e.target.id	
 	url =now + "index.php/api/escenario/escenario_tipo/format/json"; 
 	evento =  $("#evento").val();
-	actualiza_data(url , {"idescenario": escenario , "tipoescenario" : type_escenario  , "evento" : evento} );
+
+	
+
+	actualiza_data(url , {"idescenario": escenario , "tipoescenario" : type_escenario  , "evento" : evento ,  "enid_evento": enid_evento ,  "enid_escenario":  enid_escenario } );
 
 	$.ajax({
 		url : url , 
 		type :  "PUT",
-		data :  {"idescenario": escenario , "tipoescenario" : type_escenario  , "evento" : evento} , 
+		data :  {"idescenario": escenario , "tipoescenario" : type_escenario  , "evento" : evento ,  "enid_evento": enid_evento ,  "enid_escenario":  enid_escenario } , 
 		beforeSend: function(){
 			
 			show_load_enid(".place_tipo", "Registrando cambios" , 1); 
@@ -88,7 +97,7 @@ function  update_nombre_escenario(){
 
 				url :  url , 
 				type :  "PUT",
-				data :  { "campo": "nombre" ,    "escenario" : escenario , "nuevonombre" : nuevo_nombre }  , 
+				data :  { "campo": "nombre" ,    "escenario" : escenario , "nuevonombre" : nuevo_nombre ,  "enid_evento": enid_evento ,  "enid_escenario":  enid_escenario }  , 
 				beforeSend: function(){					
 					show_load_enid(".place_nombre_escenario", "Registrando cambios" , 1); 
 				}
@@ -120,7 +129,7 @@ function  update_descripcion_escenario(){
 			$.ajax({
 				url :  url , 
 				type : "PUT" , 
-				data : { "campo": "descripcion" ,    "escenario" : escenario , "nuevonombre" : nuevo_nombre } , 
+				data : { "campo": "descripcion" ,    "escenario" : escenario , "nuevonombre" : nuevo_nombre ,  "enid_evento": enid_evento ,  "enid_escenario":  enid_escenario } , 
 				beforeSend : function(){					
 					show_load_enid(".place_descripcion", "Registrando cambios" , 1); 
 				}
@@ -143,7 +152,7 @@ function update_campo(campo, place, input , msj ){
 
 	url = now + "index.php/api/escenario/evento_escenario_campo/format/json";	
 	evento =  $("#evento").val();
-	$.get(url , {"campo" : campo , "escenario" : escenario , "evento" : evento } ).done(function(data){			
+	$.get(url , {"campo" : campo , "escenario" : escenario , "evento" : evento ,  "enid_evento": enid_evento ,  "enid_escenario":  enid_escenario} ).done(function(data){			
 		data = data.trim(); 
 		
 		if (data.length === 0 ) {
@@ -167,7 +176,7 @@ function update_fecha_escenario(e){
 	$.ajax({
 			url : url ,
 			type:  "PUT" ,
-			data :  {"escenario" : escenario , "nuevoinicio" :  inicio , "nuevotermino" : termino} , 
+			data :  {"escenario" : escenario , "nuevoinicio" :  inicio , "nuevotermino" : termino ,  "enid_evento": enid_evento ,  "enid_escenario":  enid_escenario} , 
 			beforeSend: function(){
 				/*place_fechas_evento*/				
 				show_load_enid(".place_fechas_evento", "Registrando cambios " , 1); 
@@ -241,7 +250,7 @@ function carga_plantilla(e){
 	id_contenido  = e.target.id; 	
 	evento =  $("#evento").val();
 	escenario =  $("#id_escenario").val();
-	data_send = {"contenido" : id_contenido , "escenario" : escenario  , "evento" : evento };
+	data_send = {"contenido" : id_contenido , "escenario" : escenario  , "evento" : evento ,  "enid_evento": enid_evento ,  "enid_escenario":  enid_escenario};
 	url = now + "index.php/api/escenario/descripcion_template/format/json/"; 
 	$.ajax({
 		   url: url,
@@ -292,7 +301,7 @@ function t_nuevo_escenario(e){
 
 		evento =  $("#evento").val();
 		url =  now  + "index.php/api/escenario/escenario_evento/format/json/";				
-		data_send  =  $("#registra-nuevo-escenario-form").serialize() + "&" + $.param({"evento_escenario" : evento}); 	
+		data_send  =  $("#registra-nuevo-escenario-form").serialize() + "&" + $.param({"evento_escenario" : evento ,  "enid_evento": enid_evento ,  "enid_escenario":  enid_escenario}); 	
 		$.ajax({
 			url :   url , 
 			type :  "POST", 

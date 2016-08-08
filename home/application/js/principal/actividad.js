@@ -7,19 +7,23 @@ function dinamic_remov_class(section , clases){
 }
 /**/
 function carga_ultima_actividad_eventos(){
-	url =  now + "index.php/api/activity/eventos_administracion/format/json"; 
+
+/**/
+  url =  now +  "index.php/api/emp/actividades/format/json/";
   $.ajax({
-          url :  url , 
-          type :  "GET",
-          beforeSend : function(){
-            show_load_enid(".last-activity-enid" , "Cargando" , 1); 
-          }
-        }).done(function(data){
-            llenaelementoHTML(".last-activity-enid" , data);
-            $("footer").ready(q_eventos);
-        }).fail(function(){
-            show_error_enid(".last-activity-enid"  , "Error al al registrar artista");       
-        });
+    url :  url , 
+    data : {"tipo_actividad" : "eventos" },
+    type :  "GET",
+    beforeSend: function(){
+       show_load_enid(".last-activity-enid" , "Cargando" , 1);      
+    }
+  }).done(function(data){
+      llenaelementoHTML(".last-activity-enid" , data);
+      $("footer").ready(q_eventos);
+  }).fail(function(){   
+      show_error_enid(".last-activity-enid"  , "Error al al registrar artista");       
+  });
+
 }
 /**/
 function dinamic_section_left(){

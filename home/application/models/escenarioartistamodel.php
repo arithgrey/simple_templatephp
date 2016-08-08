@@ -106,6 +106,10 @@ function get_artista_by_id($id_artista){
 	$result = $this->db->query($query_get);
 	return $result ->result_array();      
 }
+
+
+
+
 /**/
 function insert_log($tipo_evento , $descripcion , $id_evento , $id_usuario){
 
@@ -146,13 +150,14 @@ function nuevoartista($nuevoartista){
 	return $data;
 }
 /**/
-function registra_artista_escenario($id_escenario , $nuevoartista , $id_empresa, $id_evento , $id_usuario){
+function registra_artista_escenario($id_escenario , $nuevoartista , $id_empresa, $id_evento , $id_usuario , $param){
 	$registroartista = $this->nuevoartista($nuevoartista);
 	if ($registroartista[0] ==  true) {
 		$idartista = $registroartista[1];
 		$result =   $this->nuevo_escenario_artista($id_escenario , $idartista , $id_evento , $nuevoartista , $id_usuario , $id_empresa);	
 		if ($result ==  1 ) {
-			$log_evento =  "Indicó que el artista " .$nuevoartista . "Se presentará en el evento"; 
+
+			$log_evento =  "Indicó que el artista " .$nuevoartista . "Se presentará en el evento  ". $param["enid_evento"]." "; 
 			$this->insert_log(1 , $log_evento , $id_evento , $id_usuario);
 		}
 		return $result;
@@ -161,20 +166,20 @@ function registra_artista_escenario($id_escenario , $nuevoartista , $id_empresa,
 	}	
 }	
 /**/
-function delete_escenario_artista($id_escenario , $id_artista , $id_empresa , $id_evento , $id_usuario ){
+function delete_escenario_artista($id_escenario , $id_artista , $id_empresa , $id_evento , $id_usuario , $param ){
 
 	$delet_escenario_artista ="DELETE FROM escenario_artista  WHERE idescenario = '".$id_escenario."'  and idartista ='".$id_artista."' ";	
 	$result_delete =  $this->db->query($delet_escenario_artista);
 	$query_delete = "DELETE FROM evento_artista WHERE id_evento = '". $id_evento  ."'  AND id_artista = '". $id_artista ."'  ";
 	$result = $this->db->query($query_delete);	
 	if ($result == true){
-		$log_evento =  "Eliminó al artista del evento- ".$id_artista; 
+		$log_evento =  "Eliminó al artista -id ".$id_artista."  del escenario ". $param["enid_escenario"]." en el evento ". $param["enid_evento"]."  - ".$id_artista; 
 		$this->insert_log(3 , $log_evento , $id_evento , $id_usuario);		
 	}	
 	return $result; 
 }
 /**/
-function update_fecha_presentacion($id_artista , $idescenario  , $hiartista  , $htartista , $id_empresa , $id_usuario , $id_evento){
+function update_fecha_presentacion($id_artista , $idescenario  , $hiartista  , $htartista , $id_empresa , $id_usuario , $id_evento , $param ){
 	$query_update ="UPDATE  
 					escenario_artista 
 					set hora_inicio = '". $hiartista ."' ,
@@ -186,7 +191,7 @@ function update_fecha_presentacion($id_artista , $idescenario  , $hiartista  , $
 	$result = $this->db->query($query_update);
 	if ($result ==  true ){
 		/**/
-		$log_evento =  "Indicó que el artista se presentará en un horario- ".hora_enid_format($hiartista  , $htartista); 
+		$log_evento =  "Indicó que el artista -id ". $id_artista."  se presentará en un horario- ".hora_enid_format($hiartista  , $htartista). " del evento  ". $param["enid_escenario"]." "; 
 		$this->insert_log(2 , $log_evento , $id_artista , $id_usuario);				
 	}
 	return $result;
@@ -198,7 +203,7 @@ function update_status($data){
 	$result =  $this->db->query($query_update);	
 	if($result == 1){
 		/**/
-		$log_evento =  "Señalo que el artista se encuentra en el siguiente estado de confirmación en el evento -". $data["nuevo_status"]; 
+		$log_evento =  "Señalo que un artista -id ".$data["artista"]." del artista  del evento ". $data["enid_evento"] ."  ha  -". $data["nuevo_status"]; 
 		$this->insert_log(2 , $log_evento ,  $data["artista"] , $data["id_usuario"]);				
 	}
 	return $result;	
@@ -212,7 +217,7 @@ function update_nombre_artista($data){
 	$result =  $this->db->query($query_update);
 	if ($result == 1 ) {
 	
-		$log_evento =  "Modificó el nombre del artista ha- ".$data["nuevo_nombre"]; 
+		$log_evento =  "Modificó el nombre del artista ha- ".$data["nuevo_nombre"] . " del evento ". $data["enid_evento"] ."   -id del artista " . $data["artista"]; 
 		$this->insert_log(2 , $log_evento ,  $data["artista"] , $data["id_usuario"]);				
 		
 	}
@@ -230,13 +235,14 @@ function update_tipo_artista($param){
 	$result = $this->db->query($query_update);
 	if ($result == 1 ) {
 	
-		$log_evento =  "Señaló que artista será del tipo- ". $param["tipo_artista"]; 
+		$log_evento =  "Señaló que artista del evento evento ". $param["enid_evento"] ."  
+						será del tipo- ".$param["tipo_artista"]."-id del artista ".$param["artista"]." escenario ".$param["enid_escenario"].""; 
 		$this->insert_log(2 , $log_evento ,  $param["artista"] , $param["id_usuario"]);						
 	}
 	return $result;
 }
 /**/
-function record_url_artista($id_escenario , $id_artista , $url , $social , $id_usuario , $id_empresa , $id_evento  ){
+function record_url_artista($id_escenario , $id_artista , $url , $social , $id_usuario , $id_empresa , $id_evento,  $param ){
 	
 	$query_update ="update escenario_artista set url_sound_cloud = '".$url."' WHERE idescenario = '".$id_escenario."'  AND idartista = '".$id_artista."'  ";	
 	if ($social == "youtube"){
@@ -245,7 +251,7 @@ function record_url_artista($id_escenario , $id_artista , $url , $social , $id_u
 	$result =  $this->db->query($query_update);	
 
 	if ($result == true  ) {		
-		$log_evento =  "Actualizó las redes sociales del artista"; 
+		$log_evento =  "Actualizó las redes sociales del artista id- " .$id_artista. " en el evento " .  $param["enid_evento"]; 
 		$this->insert_log(2 , $log_evento ,  $id_artista  ,$id_usuario);								
 	}
 	return  $result;	

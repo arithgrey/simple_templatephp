@@ -1,4 +1,6 @@
 $(document).on("ready", function(){
+	/**/
+	enid_evento  =  $(".enid_evento").val(); 
 	empresa  =  $("#empresa").val();
 	$("#form-new-acceso").submit(record_acceso);
 	$(".punto_venta").click(update_status_punto_venta_evento );	
@@ -14,11 +16,11 @@ $(document).on("ready", function(){
 	$("#nuevo-acceso-button").click(reset_form_acceso);
 	$("footer").ready(valida_modal);
 });
-function update_status_punto_venta_evento (e){
+function update_status_punto_venta_evento(e){
+
 	punto_venta = e.target.id;
 	url = now + "index.php/api/puntosventa/punto_venta_evento/format/json";
-	actualiza_data(url , {"evento" :  evento , "punto_venta" : punto_venta} );
-	
+	actualiza_data(url , {"evento" :  evento , "punto_venta" : punto_venta} );	
 }
 /**/
 function load_data_puntos_venta_asociados_accesos(){	
@@ -29,58 +31,27 @@ function load_data_puntos_venta_asociados_accesos(){
 	}).fail(function(){
 		alert("Error al cargar el resumen de los accesos en ele evento ");		
 	});
-
 }
 /**/
 function load_data_puntos_venta_accesos_info(e){
 
 	punto_venta =  e.target.id;
 	url = now + "index.php/api/puntosventa/puntoventacontacto/format/json/";
-	$.get(url, {"punto_venta" :  punto_venta}).done(function(data){		
-		
-
+	$.get(url, {"punto_venta" :  punto_venta}).done(function(data){				
 		llenaelementoHTML("#contactos-punto-venta" , data);
-
 		$(".contacto-punto-venta").click(function(){
 			contacto   = this.id;
 			update_contacto_punto_venta( contacto , punto_venta);
-		});
-				
+		});				
 	}).fail(function(){
 		alert("error al cargar ");
 	});	
-
 }
 /**/
 function update_contacto_punto_venta( contacto , punto_venta ){
 	url = now + "index.php/api/puntosventa/puntoventacontacto/format/json/";
-	registra_data(url , {"contacto" :  contacto , "punto_venta": punto_venta } );
+	registra_data(url , {"contacto" :  contacto , "punto_venta": punto_venta ,  "enid_evento" : enid_evento } );
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /*Registrando  */
 function record_acceso(e){
 
@@ -94,7 +65,7 @@ function record_acceso(e){
 
 
 			evento =  $(".evento").val();
-			data_send =  $("#form-new-acceso").serialize() + "&"  + $.param({"evento" :  evento });
+			data_send =  $("#form-new-acceso").serialize() + "&"  + $.param({"evento" :  evento ,  "enid_evento" : enid_evento  });
 			$.ajax({
 					url :  url , 
 					type :  "POST", 
@@ -160,7 +131,7 @@ function remove_acceso(e){
 		$.ajax({
 			url : url , 
 			type :  "POST",
-			data : { evento : evento , acceso :  acceso } , 
+			data : { evento : evento , acceso :  acceso,  "enid_evento" : enid_evento } , 
 			beforeSend : function(){
 				
 				show_load_enid( ".place_remov_acceso" , "Eliminando acceso del evento " , 1 );
@@ -194,7 +165,7 @@ function editar_acceso(e){
 	$.ajax({
 		url : url , 
 		type: "GET", 
-		data :  {"evento": evento   , "acceso" : acceso} , 
+		data :  {"evento": evento   , "acceso" : acceso ,  "enid_evento" : enid_evento} , 
 		beforeSend: function(){
 			show_load_enid( ".place_editar_acceso" , "Cargando datos del acceso " , 1 );			
 		}
@@ -231,7 +202,7 @@ function editar_acceso(e){
 function actualiza_data_accesos(){
 	/*evento*/
 	url  = $("#dinamic-form-accesos").attr("action");	
-	data_send =  $("#dinamic-form-accesos").serialize(); 		
+	data_send =  $("#dinamic-form-accesos").serialize() +  "&"+ $.param({"enid_evento" : enid_evento}); 		
 	
 	$.ajax({
 	   url: url,
@@ -259,19 +230,16 @@ function actualiza_data_accesos(){
 /**/
 function eventos_puntos_venta_registrados(){
 	$(".delete-punto-venta-icon").click(delete_punto_venta_evento);
-	$(".img-horizontal").click(show_complete_info);
-	
+	$(".img-horizontal").click(show_complete_info);	
 }
 /**/
 function dinamic_resumen(){
 	resumen_event(".section-resumen" , ".menos-info" , ".mas-info");
 }
-
 /**/
 function reset_form_acceso(){
 	llenaelementoHTML(".estado_registro_acceso" ,  "");
 }
-/**/
 /**/
 function carga_puntos_venta_agregados(){	
 	url  =  now + "index.php/api/puntosventa/evento_icon/format/json/"; 
@@ -296,7 +264,7 @@ function asocia_punto_venta_evento(e){
 
 	evento =  $(".evento").val();
 	puntosventa =  e.target.id; 
-	data_send =  {"puntoventa" : puntosventa , "evento" :  evento }; 
+	data_send =  {"puntoventa" : puntosventa , "evento" :  evento ,  "enid_evento" : enid_evento }; 
 	url =  now + "index.php/api/puntosventa/asocia_evento/format/json/"; 
 	$.ajax({
 		   url: url,
@@ -343,7 +311,7 @@ function busqueda_punto_venta(){
 /**/
 function confirm_delete_punto_venta(){
 	url =  now + "index.php/api/puntosventa/punto_venta_evento/format/json/";
-	data_send =  {punto_venta :  dinamic_del_pv , evento :  evento }		
+	data_send =  {punto_venta :  dinamic_del_pv , evento :  evento ,  "enid_evento" : enid_evento }		
 	$.ajax({
 		url: url,
 		type: 'DELETE',
@@ -408,8 +376,7 @@ function ocultar_infor_punto_venta(){
 	llenaelementoHTML(".info_pv" ,  "");	
 }
 /**/
-function valida_modal(){
-
+function valida_modal(){	
 	qparam = $(".qparam").val();
 	switch(qparam){
 		case "acceso": 

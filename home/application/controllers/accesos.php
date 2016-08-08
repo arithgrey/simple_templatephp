@@ -1,8 +1,7 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 class Accesos extends CI_Controller {
-	function __construct(){
+	function __construct(){        
 		parent::__construct();
-
         $this->load->model("puntoventamodel");
         $this->load->helper("img_eventsh");
         $this->load->helper("puntoventa");                
@@ -25,6 +24,7 @@ class Accesos extends CI_Controller {
         $data["q"] =  $q;
         $data["q2"] =  $q2; 
         $this->show_data_page( $data , 'accesos/avanzado');        
+
 
     }/**************************Termina Configuracion del acceso avanzado **************++*/
 

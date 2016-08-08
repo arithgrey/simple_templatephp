@@ -1,5 +1,4 @@
 function eventos_artistas(){
-
 	id_escenario  = $("#id_escenario").val();
 	nombre_evento = $("#nombre_evento").val();
 	$(".remove-artista").click(t_delete_escenario_artista);
@@ -13,7 +12,6 @@ function eventos_artistas(){
 	$(".artistas-inputs").click(try_update_nombre_artista);			
 	$(".tipo_artista").click(t_up_tipo_artista);
 	$(".img-artista-evento").click(carga_form_imagenes_artista);	
-
 }
 /**/
 function t_up_tipo_artista(e){
@@ -22,7 +20,7 @@ function t_up_tipo_artista(e){
 	url =  now +  "index.php/api/escenario/escenario_artista_id/format/json/"; 
 	$.ajax({
 		url : url , 
-		data:  {idartista: artista ,  idescenario :  $("#id_escenario").val() }, 
+		data:  {idartista: artista ,  idescenario :  $("#id_escenario").val() ,  "enid_evento": enid_evento ,  "enid_escenario":  enid_escenario }, 
 		beforeSend: function(){
 			show_load_enid(".place_tipo_artista" , "Cargando el tipo de participación del artista" , 1); 	
 		}
@@ -42,7 +40,7 @@ function t_up_tipo_artista(e){
 /**/
 function update_tipo_artista(artista){
 
-	data_send =  $("#tipo-artista-form").serialize() +  "&" + $.param({"artista" : artista  , "escenario" : $("#id_escenario").val()  }); 
+	data_send =  $("#tipo-artista-form").serialize() +  "&" + $.param({"artista" : artista  , "escenario" : $("#id_escenario").val() ,  "enid_evento": enid_evento ,  "enid_escenario":  enid_escenario }); 
 	url =  $("#tipo-artista-form").attr("action");
 	$.ajax({
 		url :  url , 
@@ -63,7 +61,7 @@ function update_tipo_artista(artista){
 function nuevo_artista(e){
 
 	url = now + "index.php/api/escenario/escenario_artista/format/json";	
-	data_send =  $("#form-escenario-artista").serialize() + "&" + $.param({"evento" :  $("#evento").val()}); 
+	data_send =  $("#form-escenario-artista").serialize() + "&" + $.param({"evento" :  $("#evento").val() ,  "enid_evento": enid_evento ,  "enid_escenario":  enid_escenario   }); 
 	flag =  valida_text_form("#artista" , ".place_artista" , 2 , "Nombre para el artista" ); 
 	if (flag == 1  ) {
 		$.ajax({
@@ -96,7 +94,7 @@ function load_data_escenario_artista(){
 		url : url , 
 		type: "GET", 
 
-		data : {"escenario" :  escenario , "public" :  0  , "in_session"  : in_session } , 
+		data : {"escenario" :  escenario , "public" :  0  , "in_session"  : in_session ,  "enid_evento": enid_evento ,  "enid_escenario":  enid_escenario } , 
 		beforeSend : function(){				
 			show_load_enid(".place_artistas" , "Cargando artistas del escenario ..  " , 1); 			
 		}		
@@ -123,7 +121,7 @@ function t_delete_escenario_artista(e){
 function delete_escenario_artista(artista){
 
 	url =now + "index.php/api/escenario/escenario_artista/format/json";	
-	data_send =  {"idescenario" : escenario , "idartista": artista , "evento" : $("#evento").val() }; 
+	data_send =  {"idescenario" : escenario , "idartista": artista , "evento" : $("#evento").val() ,  "enid_evento": enid_evento ,  "enid_escenario":  enid_escenario }; 
 
 	$.ajax({
 		url :  url ,
@@ -153,7 +151,7 @@ function t_update_horario_artista(e){
 
 	$.ajax({
 		url : url , 
-		data:  {idartista: artista ,  idescenario :  $("#id_escenario").val() }, 
+		data:  {idartista: artista ,  idescenario :  $("#id_escenario").val() ,  "enid_evento": enid_evento ,  "enid_escenario":  enid_escenario   }, 
 		beforeSend: function(){
 			show_load_enid(".place_horario_artista" , "Cargando horario actial del artista" , 1); 	
 		}
@@ -175,7 +173,7 @@ function t_update_horario_artista(e){
 			 	htartista = $("#htartista").val();
 				url = now + "index.php/api/escenario/inicioterminoartista/format/json/";
 				evento = $("#evento").val();		
-				data_send = { artista : artista , escenario : escenario , hiartista : hiartista , htartista : htartista , "evento" : evento }
+				data_send = { artista : artista , escenario : escenario , hiartista : hiartista , htartista : htartista , "evento" : evento ,  "enid_evento": enid_evento ,  "enid_escenario":  enid_escenario  }
 				update_horario_artista(data_send); 	
 			});
 
@@ -232,7 +230,7 @@ function load_data_nota(e){
 function update_nota_artista(e){
 
 	artista = $("#idartistanota").val();
-	data_send = $("#form-arista-nota").serialize() + "&"+ $.param({"artista" : artista  , "escenario" :  escenario });	
+	data_send = $("#form-arista-nota").serialize() + "&"+ $.param({"artista" : artista  , "escenario" :  escenario  ,  "enid_evento": enid_evento ,  "enid_escenario":  enid_escenario  });	
 	url =  now + "index.php/api/escenario/escenario_artista_nota/format/json/";
 	/*Validación previa */
 	flag  = valida_text_form("#nota_artista" , ".place_nota_artista" , 200  , "Mensaje para el público " ); 
@@ -291,7 +289,7 @@ function upload_data_youtube(e){
 	url_youtube  = $("#url_youtube").val();
 	evento = $("#evento").val();
 	url_send =  now + "index.php/api/escenario/escenario_artista_social/format/json/";
-	data_send =  $("#form-arista-social-youtube").serialize() + "&"+ $.param({"social" : "youtube"  , "escenario" :  escenario ,  "evento" : evento }); 
+	data_send =  $("#form-arista-social-youtube").serialize() + "&"+ $.param({"social" : "youtube"  , "escenario" :  escenario ,  "evento" : evento ,  "enid_evento": enid_evento ,  "enid_escenario":  enid_escenario   }); 
 	
 	flag =  valida_url_form( ".place_url_youtube" , "#url_youtube"  ,  "Url no válida" ); 
 	if (flag ==  1  ) {
@@ -342,7 +340,7 @@ function load_data_sound(e){
 function upload_data_sound(e){	
 
 	escenario  = $("#id_escenario").val();
-	data_send =  $("#form-arista-social-sound").serialize() + "&"+ $.param({"social" : "sound"  , "escenario" :  escenario}); 	
+	data_send =  $("#form-arista-social-sound").serialize() + "&"+ $.param({"social" : "sound"  , "escenario" :  escenario ,  "enid_evento": enid_evento ,  "enid_escenario":  enid_escenario  }); 	
 	url_send =  now + "index.php/api/escenario/escenario_artista_social/format/json/";	
 	flag =  valida_url_form( ".place_url_sound" , "#url_sound"  ,  "Url no válida" ); 
 	if (flag ==  1 ) {
@@ -371,7 +369,7 @@ function t_up_estatus(e){
 	artista = e.target.id;
 	$("#status-artista-evento").change(function(){
 		nuevo_status = $("#status-artista-evento").val();
-		data_send =  { artista :  artista , escenario :  escenario , nuevo_status :  nuevo_status  }
+		data_send =  { artista :  artista , escenario :  escenario , nuevo_status :  nuevo_status ,  "enid_evento": enid_evento ,  "enid_escenario":  enid_escenario  }
 		$.ajax({				
 			url :  url , 
 			type : 'PUT' , 
@@ -396,7 +394,7 @@ function try_update_nombre_artista(e){
 	$.ajax({			
 		url : url , 
 		type :  "GET", 			
-		data :  {"artista" : artista } , 
+		data :  {"artista" : artista  ,  "enid_evento": enid_evento ,  "enid_escenario":  enid_escenario  } , 
 		beforeSend: function(){
 			show_load_enid(".place_nombre_artista" , "Cargando.. " , 1); 						
 			$(".place_nombre_artista").empty();
@@ -413,7 +411,7 @@ function try_update_nombre_artista(e){
 function t_up_nombre_artista(){
 	url =  now +"index.php/api/escenario/artista_nombre/format/json/";	
 	nuevo_nombre =  $("#nuevo-nombre-artista").val();
-	data_send =  { artista :  artista , nuevo_nombre  : nuevo_nombre}
+	data_send =  { artista :  artista , nuevo_nombre  : nuevo_nombre ,  "enid_evento": enid_evento ,  "enid_escenario":  enid_escenario  }
 	/*Valiadamos antes de actualizar */
 	flag =  valida_text_form("#nuevo-nombre-artista" , ".place_nombre_artista" , 2 , "Nombre para el artista" ); 
 	if (flag == 1 ){

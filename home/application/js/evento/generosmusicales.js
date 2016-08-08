@@ -6,7 +6,7 @@ function update_genero_evento(e){
 	$.ajax({
 		url :  url , 
 		type : "PUT" , 
-		data : { evento : evento , genero : genero   } , 
+		data : { evento : evento , genero : genero  ,  "enid_evento" : enid_evento } , 
 		beforeSend: function(){
 			show_load_enid(".place_generos_musicales", "Guardando  cambios ... " , 1); 
 		}
@@ -24,7 +24,7 @@ function  carga_generos_registrados(){
 	$.ajax({
 		url :  url , 
 		type : "GET" , 
-		data : {"evento" : evento } , 
+		data : {"evento" : evento ,  "enid_evento" : enid_evento} , 
 		beforeSend: function(){
 			show_load_enid(".place_generos_musicales", "Cargando ... " , 1); 
 		}
@@ -53,7 +53,7 @@ function elimina_genero(e){
 	$.ajax({
 		url : url , 
 		type: "DELETE",
-		data :   {"genero" :  genero , "evento" :  evento }, 
+		data :   {"genero" :  genero , "evento" :  evento,  "enid_evento" : enid_evento }, 
 		beforeSend : function(){
 			show_load_enid(".place_generos_musicales", "Actualizando ... " , 1); 	
 		}
@@ -75,7 +75,7 @@ function busqueda_geros_musicales(e){
 	$.ajax({
 		url :  url , 
 		type : "GET" , 
-		data : {"filtro": genero_filtro , "evento" : evento } , 
+		data : {"filtro": genero_filtro , "evento" : evento,  "enid_evento" : enid_evento } , 
 		beforeSend: function(){
 			show_load_enid(".place_generos_musicales_busqueda", "Buscando genero musical  " , 1); 
 		}

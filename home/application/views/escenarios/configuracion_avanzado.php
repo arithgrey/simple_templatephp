@@ -62,10 +62,15 @@
 <input type='hidden' name='q' class='qparam' value="<?=$q?>">
 <link rel="stylesheet" type="text/css" href="<?=base_url('application/css/eventos/edicion.css')?>">
 <link rel="stylesheet" type="text/css" href="<?=base_url('application/js/js/bootstrap-datepicker/css/datepicker-custom.css')?>" />
+
 <script type="text/javascript" src="<?=base_url('application/js/escenarios/escenario_artista.js')?>"></script>
 <script type="text/javascript" src="<?=base_url('application/js/escenarios/config.js')?>"></script>
 <script type="text/javascript" src="<?=base_url('application/js/escenarios/img.js')?>"></script>
 
+
+
+<input type='hidden' value="<?=$evento['nombre_evento']?>" class='enid_evento' id='enid_evento'>
+<input type='hidden' value="<?=$data_escenario["nombre"];?>" class='enid_escenario' id='enid_escenario'> 
 <style type="text/css">
 .nombre-escenario-text:hover, .descripcion-escenario-text:hover {
     cursor: pointer;    

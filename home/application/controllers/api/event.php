@@ -44,7 +44,8 @@ class Event extends REST_Controller{
         $id_evento = $this->put("evento");
         $id_objeto =  $this->put("objetopermitido");
         $id_usuario = $this->sessionclass->getidusuario();    
-        $responsedb = $this->eventmodel->update_obj_permitido($id_evento, $id_objeto, $id_usuario );
+        $param =  $this->put();
+        $responsedb = $this->eventmodel->update_obj_permitido($id_evento, $id_objeto, $id_usuario ,$param  );
         $this->response($responsedb);
     }    
     /**/
@@ -65,7 +66,8 @@ class Event extends REST_Controller{
         $nueva_url_fb  = $this->put("url_social_evento");            
         $url_social_evento_youtube =  $this->put("url_social_evento_youtube");
         $id_usuario = $this->sessionclass->getidusuario();    
-        $db_response =  $this->eventmodel->update_url($nueva_url_fb , $url_social_evento_youtube , $id_evento ,$id_usuario ); 
+        $param =  $this->put();
+        $db_response =  $this->eventmodel->update_url($nueva_url_fb , $url_social_evento_youtube , $id_evento , $id_usuario ,$param  ); 
         $this->response($db_response);
 
     }/*Termina la función*/    
@@ -74,7 +76,8 @@ class Event extends REST_Controller{
         $this->validate_user_sesssion();           
         $nueva_url = $this->put("url_social_evento_youtube");            
         $id_evento = $this->put("evento_social_y");
-        $this->response($this->eventmodel->update_url_yout($nueva_url , $id_evento ) );
+        $param =  $this->put();
+        $this->response($this->eventmodel->update_url_yout($nueva_url , $id_evento  , $param ) );
     }
     /**/
     function servicios_GET(){
@@ -99,8 +102,9 @@ class Event extends REST_Controller{
     function genero_put(){     
         $this->validate_user_sesssion();            
         $nuevos_generos = $this->put("generos");
-        $id_evento = $this->put("evento");        
-        $this->response($this->eventmodel->update_generos($nuevos_generos , $id_evento ) );
+        $id_evento = $this->put("evento"); 
+        $param =  $this->put();       
+        $this->response($this->eventmodel->update_generos($nuevos_generos , $id_evento  ,$param ) );
 
     }
     function genero_delete(){
@@ -108,7 +112,6 @@ class Event extends REST_Controller{
         $this->validate_user_sesssion();            
         $param =  $this->delete();        
         $param["id_usuario"] = $this->sessionclass->getidusuario();    
-
         $db_response =  $this->eventmodel->delete_genero($param); 
         $this->response($db_response);
     }
@@ -136,10 +139,11 @@ class Event extends REST_Controller{
     function ubicacion_put(){
         $this->validate_user_sesssion();            
         $nueva_ubicacion = $this->put("ubicacion");
+        $param =  $this->put();
         $id_evento = $this->put("evento");
         $id_usuario = $this->sessionclass->getidusuario();    
         $id_empresa =  $this->sessionclass->getidempresa();
-        $this->response($this->eventmodel->updateUbicacion($nueva_ubicacion , $id_evento , $id_usuario , $id_empresa )  );
+        $this->response($this->eventmodel->update_ubicacion($nueva_ubicacion , $id_evento , $id_usuario , $id_empresa , $param  )  );
 
     }   
     /**/
@@ -150,7 +154,8 @@ class Event extends REST_Controller{
         $id_evento = $this->put("evento"); 
         $id_usuario = $this->sessionclass->getidusuario();    
         $id_empresa =  $this->sessionclass->getidempresa();
-        $this->response($this->eventmodel->updateNombre( validate_text($nuevo_nombre)  , $id_evento , $id_usuario , $id_empresa ) );
+        $param =  $this->put();
+        $this->response($this->eventmodel->updateNombre( validate_text($nuevo_nombre)  , $id_evento , $id_usuario , $id_empresa  , $param) );
     }    
     /**/
     function edicion_put(){
@@ -159,8 +164,8 @@ class Event extends REST_Controller{
         $id_evento = $this->put("evento");
         $id_usuario = $this->sessionclass->getidusuario();    
         $id_empresa =  $this->sessionclass->getidempresa();        
-
-        $db_response =  $this->eventmodel->updateEdicion( $nuevo_edicion , $id_evento  , $id_usuario , $id_empresa );
+        $param = $this->put();
+        $db_response =  $this->eventmodel->updateEdicion( $nuevo_edicion , $id_evento  , $id_usuario , $id_empresa ,$param  );
         $this->response($db_response );
     }    
     /**/
@@ -171,7 +176,8 @@ class Event extends REST_Controller{
         $id_evento = $this->put("evento");
         $id_usuario = $this->sessionclass->getidusuario();    
         $id_empresa =  $this->sessionclass->getidempresa();        
-        $this->response($this->eventmodel->updateDescripcion( $nueva_descripcion , $id_evento  , $id_usuario , $id_empresa ) );
+        $param =  $this->put();
+        $this->response($this->eventmodel->updateDescripcion( $nueva_descripcion , $id_evento  , $id_usuario , $id_empresa , $param  ) );
     }   
     /**/ 
     function descripcion_template_put(){
@@ -180,7 +186,9 @@ class Event extends REST_Controller{
         $id_evento = $this->put("evento");
         $id_usuario = $this->sessionclass->getidusuario();    
         $id_empresa =  $this->sessionclass->getidempresa();        
-        $response_up= $this->eventmodel->update_descripcion_by_content($id_contenido , $id_evento  ,  $id_usuario ,  $id_empresa );        
+
+        $param =  $this->put();
+        $response_up= $this->eventmodel->update_descripcion_by_content($id_contenido , $id_evento  ,  $id_usuario ,  $id_empresa , $param );        
         $this->response($response_up);
     }
     /*updatepoliticas********+updatepoliticasupdatepoliticasupdatepoliticasupdatepoliticasupdatepolit*/
@@ -189,7 +197,8 @@ class Event extends REST_Controller{
         $nueva_politica = $this->put("politicas_evento");
         $id_evento = $this->put("evento");
         $id_usuario = $this->sessionclass->getidusuario();    
-        $this->response($this->eventmodel->updatePoliticas( validate_text($nueva_politica) , $id_evento , $id_usuario ) );
+        $param =  $this->put();
+        $this->response($this->eventmodel->updatePoliticas( validate_text($nueva_politica) , $id_evento , $id_usuario , $param  ) );
 
     }    
     /**Load temántica *Load temántica *Load temántica *Load temántica *Load temántica *Load temántica **/
@@ -214,7 +223,8 @@ class Event extends REST_Controller{
         $nuevo_permitido = $this->put("permitido_evento");
         $id_evento = $this->put("evento");
         $id_usuario = $this->sessionclass->getidusuario();    
-        $this->response($this->eventmodel->update_permitido( validate_text($nuevo_permitido)  , $id_evento , $id_usuario) );
+        $param =  $this->put();
+        $this->response($this->eventmodel->update_permitido( validate_text($nuevo_permitido)  , $id_evento , $id_usuario , $param   ) );
     }    
     /*restricciones **restricciones **restricciones **restricciones **restricciones ***/
     function restricciones_put(){
@@ -222,7 +232,8 @@ class Event extends REST_Controller{
         $nueva_restriccion = $this->put("restricciones_evento");
         $id_evento = $this->put("evento");
         $id_usuario = $this->sessionclass->getidusuario();    
-        $this->response($this->eventmodel->update_restricciones( validate_text( $nueva_restriccion )  , $id_evento , $id_usuario  ) );
+        $param = $this->put();
+        $this->response($this->eventmodel->update_restricciones( validate_text( $nueva_restriccion )  , $id_evento , $id_usuario ,$param  ) );
     }   
     /************************Dinamic select From event *****************************************************/    
     function get_event_texts_get(){
@@ -264,16 +275,20 @@ class Event extends REST_Controller{
         $this->validate_user_sesssion();                    
         $id_evento= $this->put("evento");
         $eslogan = $this->put("eslogan");
+        $param =  $this->put();
+
         $id_usuario = $this->sessionclass->getidusuario();    
         $id_empresa =  $this->sessionclass->getidempresa();
-        $this->response($this->eventmodel->update_eslogan($id_evento , validate_text($eslogan)  , $id_usuario , $id_empresa  ) );            
+        $this->response($this->eventmodel->update_eslogan($id_evento , validate_text($eslogan)  , $id_usuario , $id_empresa , $param ) );            
     }/*Termina*/
     function tipificacion_put(){
         $this->validate_user_sesssion();                    
         $id_evento= $this->put("evento");
         $tipo_evento =  $this->put("tipificacion_evento");
         $id_usuario = $this->sessionclass->getidusuario(); 
-        $this->response($this->eventmodel->update_tipo_evento($id_evento , $tipo_evento , $id_usuario ));
+        $param =  $this->put();
+
+        $this->response($this->eventmodel->update_tipo_evento($id_evento , $tipo_evento , $id_usuario , $param ));
         
     }
     /*Actualiza la fecha del evento */
@@ -283,7 +298,8 @@ class Event extends REST_Controller{
         $nuevo_inicio = $this->put("nuevo_inicio");
         $nuevo_termino = $this->put("nuevo_termino");
         $id_usuario = $this->sessionclass->getidusuario(); 
-        $this->response($this->eventmodel->update_date($id_evento , $nuevo_inicio , $nuevo_termino , $id_usuario ));
+        $param =  $this->put();        
+        $this->response($this->eventmodel->update_date($id_evento , $nuevo_inicio , $nuevo_termino , $id_usuario , $param  ));
     }
     function all_objetos_permitidos_put(){
             

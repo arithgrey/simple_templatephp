@@ -349,6 +349,14 @@ function contruye_tmp_evento_edit($id_evento , $f , $_num='0' ){
 	$this->db->query($query_procedure);
 	return $_num; 
 }
+
+
+
+
+
+
+
+
 /**/
 function insert_log($tipo_evento , $descripcion , $id_evento , $id_usuario){
 
@@ -381,72 +389,73 @@ function insert_log($tipo_evento , $descripcion , $id_evento , $id_usuario){
 	return $result;
 
 }
+
 /**/
-function update_eslogan($id_evento , $eslogan , $id_usuario , $id_empresa ){
+function update_eslogan($id_evento , $eslogan , $id_usuario , $id_empresa , $param){
 	/*UPDATE*/
 	$query_update ="UPDATE evento SET eslogan= '$eslogan' WHERE idevento = '". $id_evento ."' limit 1";	
 	$result =   $this->db->query($query_update);
 
 	if ($result == true){		
-		$log_evento =  "Actualizó el slogan a- " . $eslogan;		
+		$log_evento =  "Actualizó el slogan del evento ". $param["enid_evento"]." a- " . $eslogan;		
 		$this->insert_log(2 , $log_evento , $id_evento ,  $id_usuario );		
 	}
 	return $result;  
 }
 /**/
-function updateUbicacion($nueva_ubicacion , $id_evento , $id_usuario , $id_empresa  ) {	
+function update_ubicacion($nueva_ubicacion , $id_evento , $id_usuario , $id_empresa , $param   ) {	
 
 	$query_update = "UPDATE evento SET ubicacion='". $nueva_ubicacion ."' WHERE idevento ='".$id_evento."' limit 1";		
 	$result =   $this->db->query($query_update);	
 	if ($result == 1){		
-		$log_evento =  "Indicó que la dirección del evento será en- " . $nueva_ubicacion;		
+		$log_evento =  "Indicó que la dirección del evento ". $param["enid_evento"]."   será en- " . $nueva_ubicacion;		
 		$this->insert_log(2 , $log_evento , $id_evento ,  $id_usuario );		
 	}
 	return $result; 
 }
 /**/
-function update_descripcion_by_content($id_contenido , $id_evento  ,  $id_usuario ,  $id_empresa ){
+function update_descripcion_by_content($id_contenido , $id_evento  ,  $id_usuario ,  $id_empresa , $param ){
 
 	$query_update ="UPDATE evento SET descripcion_evento = (SELECT descripcion_contenido FROM contenido WHERE  idcontenido='". $id_contenido ."' ) WHERE idevento='".$id_evento."' limit 1";
 	$result =  $this->db->query($query_update);	
 	if ($result  ==  1 ){	
-		$log_evento =  "Indicó que la experiencia en el evento será- " . $nueva_ubicacion;		
+		$log_evento =  "Indicó que la experiencia en el evento ". $param["enid_evento"]."   será- " . $nueva_ubicacion;		
 		$this->insert_log(2 , $log_evento , $id_evento ,  $id_usuario );				
 	} 
 	return $result;
 }
 /**/
-function updateDescripcion($nueva_descripcion , $id_evento  , $id_usuario , $id_empresa ) {
+function updateDescripcion($nueva_descripcion , $id_evento  , $id_usuario , $id_empresa , $param ) {
 	
 	$query_update = "UPDATE evento SET descripcion_evento='". $nueva_descripcion."' WHERE idevento ='".$id_evento."'  limit 1";				
 	$result =  $this->db->query($query_update); 	
 	if ( $result == 1 ){		
-		$log_evento =  "Indicó que la experiencia en el evento será-  " . $nueva_descripcion;		
+		$log_evento =  "Indicó que la experiencia en el evento ". $param["enid_evento"]."   será-  " . $nueva_descripcion;		
 		$this->insert_log(2 , $log_evento , $id_evento ,  $id_usuario );					
 	}
 	return $result; 	
 }
 /***/
-function updateEdicion( $nuevo_edicion , $id_evento  , $id_usuario  ,  $id_empresa ){
+function updateEdicion( $nuevo_edicion , $id_evento  , $id_usuario  ,  $id_empresa , $param ){
 
 	$query_update = "UPDATE evento SET edicion = '". $nuevo_edicion."' WHERE idevento ='".$id_evento."' limit 1";		
 	$result =  $this->db->query($query_update);		
 	if ($result ==  1 ){
-		$log_evento =  "Indicó que la edición del evento será- " . $nuevo_edicion;
+		$log_evento =  "Indicó que la edición del evento ". $param["enid_evento"]."  será- " . $nuevo_edicion;
 		$this->insert_log(2 , $log_evento , $id_evento ,  $id_usuario );						
 	}
 	return $result;
 	/**/	
 }
 /**/
-function updateNombre($nuevo_nombre , $id_evento , $id_usuario , $id_empresa ){	
+function updateNombre($nuevo_nombre , $id_evento , $id_usuario , $id_empresa ,  $param ){	
 
 	$query_update = "UPDATE evento SET nombre_evento = '". $nuevo_nombre."' WHERE idevento ='".$id_evento."' ";	
 	$result = $this->db->query($query_update);
 	/**/	
 	if ($result == 1){
 	
-		$log_evento =  "Actualizó el nombre del evento a- " . $nuevo_nombre;
+		$log_evento =  "Actualizó el nombre del evento ". $param["enid_evento"]."  a- " . $nuevo_nombre;
 		$this->insert_log(2 , $log_evento , $id_evento ,  $id_usuario );							
 	}
 	/**/
@@ -484,20 +493,20 @@ function create( $nombre , $edicion , $inicio , $termino , $id_usuario , $idempr
 		return $msj_response;
 }
 /**/
-function updatePoliticas($nueva_politica , $id_evento , $id_usuario){
+function updatePoliticas($nueva_politica , $id_evento , $id_usuario,  $param ){
 	
 	$query_update = "UPDATE evento SET  politicas='". $nueva_politica ."' WHERE idevento ='".$id_evento."' limit 1";		
 	$result=   $this->db->query($query_update);
 	
 	if ($result == 1){	
-		$log_evento =  "Especificó que la politica del evento es- " . $nueva_politica;
+		$log_evento =  "Especificó que la politica del evento ". $param["enid_evento"]." es- " . $nueva_politica;
 		$this->insert_log(2 , $log_evento , $id_evento ,  $id_usuario );							
 	}
 	return $result;
 
 }
 /*Actualiza los objetos permitidos dentro del evento*/
-function update_obj_permitido($id_evento, $id_objeto , $id_usuario){
+function update_obj_permitido($id_evento, $id_objeto , $id_usuario , $param ){
 
 	$query_exist ="SELECT * FROM evento_objetopermitido WHERE  idevento ='".$id_evento."' AND  
 	idobjetopermitido='". $id_objeto ."' ";
@@ -517,7 +526,7 @@ function update_obj_permitido($id_evento, $id_objeto , $id_usuario){
 		/*insert*/
 		$dinamic_query ="INSERT INTO evento_objetopermitido (idevento , idobjetopermitido ) 
 		VALUES('".$id_evento."' , '". $id_objeto ."' )";		
-		$log_evento =  "Cargo un nuevo articulo permitido en el evento ";
+		$log_evento =  "Cargo un nuevo articulo permitido en el evento ". $param["enid_evento"]." ";
 		$tipo_evento = 1;
 
 	}
@@ -530,53 +539,53 @@ function update_obj_permitido($id_evento, $id_objeto , $id_usuario){
 
 }
 /**/
-function update_permitido($nuevo_permitido , $id_evento , $id_usuario ){
+function update_permitido($nuevo_permitido , $id_evento , $id_usuario ,  $param ){
 	$query_update = "UPDATE evento SET  permitido='". $nuevo_permitido ."' WHERE idevento ='".$id_evento."'  limit 1";		
 	$result =    $this->db->query($query_update);
 
 	if ($result ==  1 ){
-		$log_evento =  "Cargo una nueva nota de aquello que está permitido en el evento- ".$nuevo_permitido;
+		$log_evento =  "Cargo una nueva nota de aquello que está permitido en el evento ". $param["enid_evento"]." - ".$nuevo_permitido;
 		$this->insert_log(2 , $log_evento , $id_evento ,  $id_usuario );								
 	}
 	return $result; 
 }
 /**/
-function update_restricciones($nuevo_restriccion , $id_evento , $id_usuario){
+function update_restricciones($nuevo_restriccion , $id_evento , $id_usuario , $param ){
 
 	$query_update = "UPDATE evento SET  restricciones ='". $nuevo_restriccion ."' WHERE idevento ='".$id_evento."'  limit 1";		
 	$result = $this->db->query($query_update);
 	if ($result ==  1 ) {
 	
-		$log_evento =  "Actualizó la descripcion de la restricción de evento a- ".$nuevo_restriccion;
+		$log_evento =  "Actualizó la descripcion de la restricción de evento ". $param["enid_evento"]." a- ".$nuevo_restriccion;
 		$this->insert_log(2 , $log_evento , $id_evento ,  $id_usuario );										
 	}
 	return $result; 
 }
 /**/
-function update_tipo_evento($id_evento , $tipo_evento , $id_usuario ){
+function update_tipo_evento($id_evento , $tipo_evento , $id_usuario , $param ){
 
 	$query_update ="UPDATE evento SET tipo= '$tipo_evento' WHERE idevento = '".$id_evento."' limit 1";
 	$result=  $this->db->query($query_update);
 	
 	if ($result == 1) {
-		$log_evento =  "Indicó que el tipo de evento será- ". $tipo_evento;
+		$log_evento =  "Indicó que el tipo de evento ". $param["enid_evento"]." será- ". $tipo_evento;
 		$this->insert_log(2 , $log_evento , $id_evento ,  $id_usuario );											
 	}
 	return $result;
 }
 /**/
-function update_url($nueva_url , $url_social_evento_youtube , $id_evento , $id_usuario  ) {	
+function update_url($nueva_url , $url_social_evento_youtube , $id_evento , $id_usuario , $param   ) {	
 	$query_update = "UPDATE evento SET url_social='". $nueva_url ."' , url_social_youtube='". $url_social_evento_youtube ."'   WHERE idevento ='".$id_evento."'  limit 1";		
 	$result =   $this->db->query($query_update);
 
 	if ($result ==  1 ) {
-		$log_evento =  "Actualizó las redes sociales del evento";
+		$log_evento =  "Actualizó las redes sociales del evento ". $param["enid_evento"]." ";
 		$this->insert_log(2 , $log_evento , $id_evento ,  $id_usuario );											
 	}
 	return $result;
 }
 /**/
-function update_date($id_evento , $nuevo_inicio , $nuevo_termino , $id_usuario  ){
+function update_date($id_evento , $nuevo_inicio , $nuevo_termino , $id_usuario , $param  ){
 	/**/
 	$query_update ="UPDATE evento SET fecha_inicio = '". $nuevo_inicio."' , fecha_termino ='".$nuevo_termino."' WHERE idevento='".$id_evento."'  limit 1";	
 	$r =   $this->db->query($query_update);
@@ -585,7 +594,7 @@ function update_date($id_evento , $nuevo_inicio , $nuevo_termino , $id_usuario  
 	
 	if ($result ==  1 ) {
 		
-		$log_evento =  "Actualizó la fecha del evento a- ".fechas_enid_format($nuevo_inicio ,  $nuevo_termino );
+		$log_evento =  "Actualizó la fecha del evento ". $param["enid_evento"]."  a- ".fechas_enid_format($nuevo_inicio ,  $nuevo_termino );
 		$this->insert_log(2 , $log_evento , $id_evento ,  $id_usuario );												
 	}
 	return $result;
@@ -593,7 +602,7 @@ function update_date($id_evento , $nuevo_inicio , $nuevo_termino , $id_usuario  
 /**/
 /*POSIBLE DEPURACIÓN * POSIBLE DEPURACIÓN POSIBLE DEPURACIÓN POSIBLE DEPURACIÓN POSIBLE DEPURACIÓN POSIBLE DEPURACIÓN /
 /*puede que ésta función ya no se emplee ******** **puede que ésta función ya no se emplee ******** *puede que ésta función ya no se emplee ******** */
-function update_generos($nuevos_generos , $idevento ){
+function update_generos($nuevos_generos , $idevento , $param  ){
 
 	$query_update = "UPDATE evento SET genero_tupla='". $nuevos_generos ."' WHERE idevento ='".$idevento."'  limit 1";		
 	$result=    $this->db->query($query_update);
@@ -611,10 +620,9 @@ function delete_genero($param){
 	$r1 =  $this->db->query($query_delete);	
   	$query_delete =  "DELETE FROM  evento_genero_musical WHERE  idgenero_musical = '".$param["genero"] ."' and  idevento = '". $param["evento"]."' LIMIT 1"; 
 	$r2 = $this->db->query($query_delete);  		
-
-
+	
 	if ($r == 1){
-		$log_evento =  "Quitó un genero musical del evento";
+		$log_evento =  "Quitó un genero musical del evento ". $param["enid_evento"]." ";
 		$this->insert_log(3, $log_evento ,  $param["evento"] ,  $param["id_usuario"] );												
 	}
 	return $r1;   		
