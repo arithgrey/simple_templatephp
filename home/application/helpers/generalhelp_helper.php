@@ -1,5 +1,64 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 if(!function_exists('invierte_date_time')){
+
+
+  function slider_item($imgs ){
+
+
+    $item = '<div class="carousel-inner">';
+      $x =0;
+      foreach ($imgs as $row) {
+        $flag_indicator =  "";
+        $slider_num =  "slide-".$x;
+        if ($x == 0 ) {
+          $flag_indicator =  "active";     
+        }
+        
+        
+        $item .=  '<div class="item slides '.$flag_indicator.' ">';
+        $imagen  =  create_icon_img($row , $slider_num , " " );  
+        $item .="<div> ".$imagen."</div>";
+         /* 
+        $item .=' <div class="'.$slider_num.'" style="background-image: url(""); ">
+                  '.$imagen.'
+                  </div>';
+                  */
+                $item .='<div class="hero">
+                            <hgroup>
+                                <h1 class="nombre-evento-enid">We are creative</h1>        
+                                <h3>
+                                  Get start your next awesome project
+                                </h3>
+                            </hgroup>
+                            <button class="btn btn-hero btn-lg" role="button">
+                                See all features
+                            </button>
+                          </div>'; 
+
+        $item .=  '</div>';
+        $x ++;
+      }
+    $item .= '</div>';
+    return $item;
+
+  }
+  /**/
+  function slider_ol($num_imgs){
+
+    $indicator =  '<ol class="carousel-indicators">'; 
+    for ($x=0; $x <$num_imgs ; $x++) {       
+      $flag_indicator =  "";
+      if ($x == 0 ) {
+        $flag_indicator =  "active";     
+      }
+      $indicator.=  '<li data-target="#bs-carousel" data-slide-to="'.$x.'" class="'.$flag_indicator .'"></li>';
+      
+    }
+    $indicator.= '</ol>';
+    return $indicator;    
+  }
+
+  /**/
   function btn_comunidad($id_empresa){    
 
       $url =  base_url('index.php/emp/lahistoria')."/".$id_empresa;

@@ -1,11 +1,9 @@
 <div class='separate-enid sepador_superio' >
 </div>
-<div class='seccion_principal'>
-    <div class='separate-enid'>
-    </div>
+<div class='seccion_principal'>    
     <!--Slider del evento -->
-    <div class='row'>
-        <div class='seccion_slider_evento'>
+    <div>
+        <div>
             <div class='seccion_slider'>
             </div>
             <div class='place_slider'>

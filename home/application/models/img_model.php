@@ -187,8 +187,31 @@ function insert_contacto($data , $id_usuario , $id_empresa ){
     return $this->db->query($dinamic_query);        
 }  
 /**/
-function insert_testing($data , $id_usuario , $id_empresa){
+function insert_testing($data , $id_usuario , $id_empresa , $img ){
+
+
+
   
+  $query_insert ="INSERT 
+                            INTO 
+                            imagen(
+                              nombre_imagen ,                                               
+                              id_usuario  ,  
+                              id_empresa, 
+                              img
+                              
+                            ) VALUES 
+                            ('okoaskdo' ,                                               
+                            '". $id_usuario."' , 
+                            '".$id_empresa."' ,
+                            '".$img."'
+                            
+                            )";    
+  
+     $result =  $this->db->query($query_insert);
+     //return $this->db->insert_id();              
+return $result;
+
 }
   /**/
   function consulta_existencia($sql){    

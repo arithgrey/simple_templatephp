@@ -9,16 +9,44 @@ class Archivo extends REST_Controller{
     }
     function imgs_POST(){
 
+
+
+        $prm = $this->post(); 
+
+        if($_FILES['imagen']['error'] === 4) {
+            $this->response( 'Es necesario establecer una imagen' );        
+        }else if($_FILES['imagen']['error'] === 0 ){
+
+            $imagenBinaria = addslashes(file_get_contents($_FILES['imagen']['tmp_name']));
+            $nombreArchivo = $_FILES['imagen']['name'];
+            $extensiones = array('jpg', 'jpeg', 'gif', 'png', 'bmp' , "image/jpg", "image/jpeg", "image/gif", "image/png" );            
+            $extension = strtolower(end(explode('.', $nombreArchivo)));
+            if(!in_array($extension, $extensiones)) {
+                $this->response( 'Sólo se permiten archivos con las siguientes extensiones: '.implode(', ', $extensiones) );
+            }
+            $prm["imagenBinaria"] = $imagenBinaria;
+            $prm["nombreArchivo"] =  $nombreArchivo;
+            $prm["extension"] =  $extension; 
+            $img_response  = $this->gestiona_imagenes($prm);         
+            $this->response($img_response);            
+        }
+
+
+
+
+    
+    /*        
+
         $prm = $this->post(); 
 
         if($_FILES['imagen']['error'] === 4) {
             die( 'Es necesario establecer una imagen' );        
         }else if($_FILES['imagen']['error'] === 0 ){
 
-          
             $imagenBinaria = addslashes(file_get_contents($_FILES['imagen']['tmp_name']));
             $nombreArchivo = $_FILES['imagen']['name'];
-            $extensiones = array('jpg', 'jpeg', 'gif', 'png', 'bmp');
+            $extensiones = array('jpg', 'jpeg', 'gif', 'png', 'bmp' , "image/jpg", "image/jpeg", "image/gif", "image/png" );
+            //$extensiones =  array("image/jpg", "image/jpeg", "image/gif", "image/png");
             $extension = strtolower(end(explode('.', $nombreArchivo)));
             if(!in_array($extension, $extensiones)) {
                 die( 'Sólo se permiten archivos con las siguientes extensiones: '.implode(', ', $extensiones) );
@@ -27,12 +55,14 @@ class Archivo extends REST_Controller{
             $prm["imagenBinaria"] = $imagenBinaria;
             $prm["nombreArchivo"] =  $nombreArchivo;
             $prm["extension"] =  $extension; 
-            $img_response  = $this->gestiona_imagenes($prm );         
+            $img_response  = $this->gestiona_imagenes($prm);         
             $this->response($img_response);            
         }
+    */    
+        
     }
     /**/
-    function gestiona_imagenes($prm){ 
+    function gestiona_imagenes($prm ,  $img='' ){ 
 
         $this->validate_user_sesssion();            
         $id_usuario = $this->sessionclass->getidusuario();    
@@ -89,9 +119,10 @@ class Archivo extends REST_Controller{
                 return $this->response_status_img($db_response);                    
                 break;    
            
-             case 'testing':                            
-                $db_response = $this->img_model->insert_testing($prm , $id_usuario , $id_empresa );
-                return $this->response_status_img($db_response);               
+             case 'testing':                                 
+
+                $db_response = $this->img_model->insert_testing($prm, $id_usuario , $id_empresa , $img );
+                return $db_response;
                 break;                                
             
             default:
@@ -103,6 +134,7 @@ class Archivo extends REST_Controller{
     }
     /**/
     function response_status_img($status){
+
         $msj ="Error al cargar la image, reportar al admistrador ";
         if ($status ==  1  ) {
             $msj =  "Imagen guardada .!";

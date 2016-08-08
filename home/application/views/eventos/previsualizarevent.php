@@ -1,3 +1,4 @@
+<!--
 <div class='menu_seleccion_enid'>
   <ul class="nav nav-pills" role="tablist">
     <li class="active">
@@ -26,21 +27,23 @@
     <?=estado_evento($evento["status"] ,  $in_session , $evento["idevento"] , $evento["programado"])?>  
   </ul>
 </div>
+
+
 <div class='config_tipo animated  ' id='config_tipo'>
   <div class='configuracion_tipo'>
   </div>
   <div class='place_config_tipo'>
   </div>
 </div>
-
 <div class='config_estado animated ' id='config_estado'>
-
     <div class='configuracion_estado'>
     </div>
     <div class='place_config_estado'>
     </div>
-
 </div>
+
+
+-->
 
 <div>
   <div class="tab-content clear-style">

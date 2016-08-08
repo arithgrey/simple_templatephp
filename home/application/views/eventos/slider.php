@@ -1,84 +1,114 @@
 <?php
-
-    $imgs_portada =""; $class_extra =""; $flags =""; $flag =1;     $a = 0; 
-    $nombre_evento =  $param["nombre_evento"]; 
-    $imgs_portada .= '<div class="item active">
-                        <div class="portada_principal"> 
-                        	<span class="titulo_evento_slider">
-                        	'.$nombre_evento .'                                                          
-                        	</span>
-                        </div>                                
-                       </div>';
-
-    $flags .= '<li data-target="#myCarousel" data-slide-to="0" class="active">
-                    <a href="#">                            
-                        <small>
-                        	La experiencia 
-                        </small>
-                    </a>
-                </li>
-                    ';                  
-
-                        
-
-        foreach($imagenes_portada as $row){
-
-            $img =  create_icon_img($row , " "  , " " ); 
-            $a  ++; 
-            $imgs_portada .= '
-							<div class="item ">
-							    <div class="portada_principal">    
-							    '. $img .'
-							    </div>                               
-							    <div class="carousel-caption">
-							    </div>
-							</div>
-							';
-
-            $flags .= '<li data-target="#myCarousel" data-slide-to="'.$flag.'" class="indicador_slider">
-                            <a href="#">
-                            '.$a .'                            
-                            </a>
-                        </li>
-                        ';                  
-
-
-            $flag ++;                       
-        }
-
-        
-
+    $imgs_portada ="";     
+    $b = 0;           
+    $indicators = slider_ol(count($imagenes_portada)); 
+    $items =  slider_item($imagenes_portada);
 ?>
-<div class='seccion_principal_slider_enid'>
-    <div class='separate-enid'>
-    </div>
-    <div id="myCarousel" class="carousel slide" data-ride="carousel">        
-        <div class="carousel-inner">           
-          <?=$imgs_portada?>
-        </div>        
-        <div class="pagination_enid">
-            <ul class="nav nav-pills nav-justified">
-                <?=$flags?>
-            </ul>
-        </div>
-    </div>
-    <div class='separate-enid'>
-    </div>
-</div>
-<style type="text/css">
-    .titulo_evento_slider{
-    	font-size: 4em;
-    	text-align: center;
-    }
-    .seccion_principal_slider_enid{
-        background: rgb(54, 70, 84); 
-        width: 97%;
-        margin: 0 auto;
-    }
-    .titulo_evento_slider{
-        margin-left: 1%;
-        color: white;
-    }
-    
+<div style='background: rgba(0,0,0,.075);'>
   
+  <div class="carousel fade-carousel slide" data-ride="carousel" data-interval="3000" id="bs-carousel">
+  <div class="overlay">
+    </div>
+    <?=$indicators;?>
+    <?=$items;?>  
+  </div>
+
+</div>
+
+<style type="text/css">
+.fade-carousel {
+    position: relative;
+    height: 100vh;
+}
+.fade-carousel .carousel-inner .item {
+    height: 100vh;
+}
+.fade-carousel .carousel-indicators > li {
+    margin: 0 2px;
+    background-color: #f39c12;
+    border-color: #f39c12;
+    opacity: .7;
+}
+.fade-carousel .carousel-indicators > li.active {
+  width: 10px;
+  height: 10px;
+  opacity: 1;
+}
+.hero {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    z-index: 3;
+    color: #fff;
+    text-align: center;
+    text-transform: uppercase;
+    text-shadow: 1px 1px 0 rgba(0,0,0,.75);
+      -webkit-transform: translate3d(-50%,-50%,0);
+         -moz-transform: translate3d(-50%,-50%,0);
+          -ms-transform: translate3d(-50%,-50%,0);
+           -o-transform: translate3d(-50%,-50%,0);
+              transform: translate3d(-50%,-50%,0);
+}
+.hero h1 {
+    font-size: 6em;    
+    font-weight: bold;
+    margin: 0;
+    padding: 0;
+}
+.fade-carousel .carousel-inner .item .hero {
+    opacity: 0;
+    -webkit-transition: 2s all ease-in-out .1s;
+       -moz-transition: 2s all ease-in-out .1s; 
+        -ms-transition: 2s all ease-in-out .1s; 
+         -o-transition: 2s all ease-in-out .1s; 
+            transition: 2s all ease-in-out .1s; 
+}
+.fade-carousel .carousel-inner .item.active .hero {
+    opacity: 1;
+    -webkit-transition: 2s all ease-in-out .1s;
+       -moz-transition: 2s all ease-in-out .1s; 
+        -ms-transition: 2s all ease-in-out .1s; 
+         -o-transition: 2s all ease-in-out .1s; 
+            transition: 2s all ease-in-out .1s;    
+}
+.overlay {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+    background-color: #080d15;
+    opacity: .5;
+}
+
+.btn.btn-lg {padding: 10px 40px;}
+.btn.btn-hero,
+.btn.btn-hero:hover,
+.btn.btn-hero:focus {
+    color: #f5f5f5;
+    background-color: #252e36;
+    border-color: #364654;
+    outline: none;
+    margin: 20px auto;
+}
+
+
+.fade-carousel .slides .slide-1, 
+.fade-carousel .slides .slide-2,
+.fade-carousel .slides .slide-3 {
+  height: 100vh;
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+}
+
+
+@media screen and (min-width: 980px){
+    .hero { width: 980px; }    
+}
+@media screen and (max-width: 640px){
+    .hero h1 { font-size: 4em; }    
+}
+.nombre-evento-enid{
+  color: #d9534f !important;
+}
 </style>
