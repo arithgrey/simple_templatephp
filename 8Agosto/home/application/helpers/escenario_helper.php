@@ -631,7 +631,7 @@ function form_artista($public , $id_escenario  ){
                             </div>
                             <form role="form" class="form-inline" id="form-escenario-artista" >
                                 <div class="form-group todo-entry">                     
-                                    <input list="dinamic-artistas" placeholder="nombre del artista" class="form-control input-sm input_new_artista" id="artista" name="nuevoartista" style="width: 100%" type="text">                                                      
+                                    <input list="dinamic-artistas" placeholder="Nombre del artista" class="form-control input-sm input_new_artista" id="artista" name="nuevoartista" style="width: 100%" type="text">                                                      
                                     <input type="hidden" name="idescenario" value="'. $id_escenario .'">
                                 </div>
                                 <button class="btn btn-primary pull-right nuevo_artista_btn" type="submit">

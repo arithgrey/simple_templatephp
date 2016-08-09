@@ -1,4 +1,3 @@
-
 <?php
 	$list_artistas = '';	
 	foreach ($artistas as $row){
@@ -65,12 +64,12 @@
 				'. $m_delete.'
                 <div class="panel-body" >
                     <div class="row">
-                        	<div class="col-md-4">
+                        	<div class="col-lg-3  col-md-3 ">
 	                            <div class="blog-img-sm">
 	                                '.$img.'
 	                            </div>
                             </div>
-                            <div class="col-md-8 " >                           
+                            <div class="col-lg-9 col-md-9" >                           
 		                        <div>
 			                        <h1  "'. $m_nombre_artista .'"  >
 								   		<div class="artistas-inputs" id="'. $id_artista .'"  >
@@ -111,15 +110,14 @@
 ?>
 
 
-<div class='col-lg-6 col-md-6 pull-right'>
-	<span class='titulo_artistas'>
-		Artistas del escenario		
-	</span>
-	<span class='config-icon'>
-		<?=editar_btn($in_session , base_url('index.php/escenario/configuracionavanzada/'.$id_escenario.'/artista') );?>
-	</span>	
-</div>
 
+<div class='col-lg-6 col-md-6'>		
+	<?php
+	if ($public== 1){
+		echo editar_btn($in_session , base_url('index.php/escenario/configuracionavanzada/'.$id_escenario.'/artista') );
+	}		
+	?>	
+</div>
 <div class='separate-enid'>
 </div>
 
@@ -166,18 +164,12 @@
 .mas_info_artista{
 	text-align: right;
 }
-.tipo_artista_tag{
-	
-}.remove-artista:hover{
+.remove-artista:hover{
 	cursor: pointer;
 }
 .titulo_artistas{
 	font-size: 1.5em;
     font-weight: bold;
-}
-.artistas{
-	padding: 10px;
-	background: rgb(247, 252, 254);	
 }
 .sin_registro{
 	color: #93a2a9;
@@ -197,8 +189,6 @@
 .config-icon{
 	display: inline-table;
 }
-
-form_artista
 
 
 </style>

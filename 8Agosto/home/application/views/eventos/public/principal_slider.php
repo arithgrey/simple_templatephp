@@ -14,13 +14,29 @@
             </span>
             <div class='separate-enid'>
             </div> 
-            <span class='edicion_event'>
-                <?=create_text_edicion($evento["edicion"] ,  $in_session)?>
-            </span>            
+
         </div>       
     </div>
 </div>
-<?=create_text_descripcion($evento["descripcion_evento"] ,  $in_session  , $evento["idevento"])?>
+<section>
+    <div class="container">             
+        <h1>
+            La historia la haces tu
+        </h1>
+        <p>
+        <?=create_text_descripcion($evento["descripcion_evento"] ,  $in_session  , $evento["idevento"])?>
+        </p>
+        <div class='pull-right'>
+            <span class='edicion_event'>
+                Edición del evento<?=create_text_edicion($evento["edicion"] ,  $in_session)?>
+            </span>            
+        </div>
+    </div>
+</section>
+
+
+
+
 <div class='separate-enid'>
 </div>
 <?=get_tags_generos($list_generosdb , $evento['idevento']  , $in_session )?>
@@ -130,16 +146,12 @@
         font-weight: bold;        
     }
     .edicion_event{
-        
-        font-size: .8em;
+        font-weight: bold;     
+     
     }
     .seccion_escenarios_enid{
         background: whitesmoke;
         padding: 2%;
-    }
-    .descripcion_seccion{        
-        background: #e8f0f3;
-        font-size: .8em;    
     }
     
 

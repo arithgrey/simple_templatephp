@@ -15,8 +15,7 @@
     </li>         
 
     <li>
-      <a aria-expanded="true" href="<?=base_url('index.php/eventos/accesosalevento'). "/" . $evento["idevento"]?>  " >
-        
+      <a aria-expanded="true" href="<?=base_url('index.php/eventos/accesosalevento'). "/" . $evento["idevento"]?>  " >        
         Precios y promociones
       </a>
     </li>   
@@ -25,8 +24,6 @@
         Servicios 
       </a>
     </li>
-
-
     <?=btn_comunidad($evento["idempresa"])?>
    	<?=editar_btn($in_session , base_url('index.php/escenario/configuracionavanzada/')."/" . $escenario["idescenario"] ); ?>
   </ul>            
@@ -83,6 +80,10 @@
 <script type="text/javascript" src="<?=base_url('application/js/escenarios/principal_cliente.js')?>"></script>
 
 <style>
+  .seccion-down{
+    margin-top: 15px;
+  }
+
   #section_escenario_principal{
     background: white !important;
   }
@@ -134,11 +135,13 @@
 
   
 <style type="text/css">
+
   .text-descripcion-escenario{
-    background: #51d0e0;
-      font-size: .9em;
-      padding: 10px;
+    background: #e8f0f3;
+    font-size: .8em;  
+    padding: 10px;
   }
+
   .text-slogan{
     margin-left: 10px;
   }
@@ -146,10 +149,12 @@
     font-size: .8em;
     color: #0E7DBA;
   }
+  /*
   .seccion_extra{
     background: #353f48;
     padding: 10px;
   }
+  */
   .link_cliente{
     background: #032935;
       padding: 1px;
@@ -175,19 +180,20 @@
   }
   .dias_restantes{
     margin-bottom: 1%;
-    margin-right: 1%;
+    //margin-right: 1%;
     color: white;
     background: #E31F56;
     padding: 10px 10px;
     border-radius: 1px;
   }
   .resumen-escenario{
-    margin-left: 1%;
-    color: white;
+    
+    font-weight: bold;
   }
 </style>
 <input type='hidden' id='id_escenario' class='id_escenario' value='<?=$escenario["idescenario"]?>'>
 <input type='hidden' id='nombre_escenario' class='nombre_escenario' value='<?=$escenario["nombre"]?>'>
 <input type='hidden' class='evento' value="<?=$evento["idevento"];?>">
+
 
 
