@@ -1,6 +1,5 @@
 $(document).ready(function(){
 
-
 	enid_evento=  $("#nombre_evento_val").val(); 
 	evalua_modal();
 	tipo_contenido = "";
@@ -51,7 +50,7 @@ $(document).ready(function(){
 	//$("#form-accesos-modal").submit(registra_acceso);
 	$("#servicios-button").click(load_data_servicios);
 
-	$("#pac-input").click(update_ubicacion_evento);	
+	$(".locacion").click(update_ubicacion_evento);	
 	
 	$("#tematica-button").click( function (){
 		show_section_dinamic_button(".tematica_section");	
@@ -288,15 +287,45 @@ function update_db_restricciones(){
 /*Nueva dirección */
 function update_ubicacion_evento(){
 
-	showonehideone( "#ubicacion-input" , ".text-ubicacion" );
-	$("#pac-input").blur(function(){
+	$(".locacion").keyup(function(){
+		locacion_evento =  $(".locacion").val();
+		key =  "AIzaSyAGAc9HmfSltzzAyFhcvqQ9U0yk427NMTw";
+		url =  "https://maps.googleapis.com/maps/api/geocode/json"; 
+		$.ajax({
+				url :  url , 
+				type: "GET", 			
+				data: {address: locacion_evento , key :  key } 
+			}).done(function(data){
+				z = 0; 					
+				locaciones =  "<datalist class='locaciones' id='locaciones'>"; 
+				for(var x in data){						
+					if(data["status"] == "OK"){
+						locacion_escrita =  data[x][z].formatted_address; 
+						//place_id  =  data[x][z].place_id; 
+						//geometry = data[x][z].geometry;  					
+						//location_lat =  geometry.location.lat; 
+						//locacion_lng  =  geometry.location.lng;								
+						locaciones  +=  "<option value='"+locacion_escrita+"'>"; 						
+					}					
+					z++;
+				}
+				locaciones +=  "</datalist>";
+				llenaelementoHTML(".list-locaciones" ,  locaciones);
+			   	
+			}).fail(function(){
+				console.log("ocurrió un error en la locación");				
+			});
+	});
 
-		flag = valida_text_form("#pac-input" , ".place_ubicacion" , 10 , "Datos de la dirección" ); 	
+
+
+	//showonehideone( "#ubicacion-input" , ".text-ubicacion" );
+	$(".locacion").blur(function(){
+		flag = valida_text_form(".locacion" , ".place_ubicacion" , 10 , "Datos de la dirección" ); 	
 		if (flag ==1  ) {
-			nuevotexto = $("#pac-input").val(); 			
+			nuevotexto = $(".locacion").val(); 			
 			url =  now + "index.php/api/event/ubicacion/format/json/";  
 			data_send = { "ubicacion" : nuevotexto , "evento" : $("#evento").val(),  "enid_evento" : enid_evento }  		
-
 			$.ajax({
 					url :  url , 
 					type : "PUT", 
@@ -310,9 +339,15 @@ function update_ubicacion_evento(){
 						
 					}).fail(function(){
 						show_error_enid(".place_ubicacion"  , "Error al actualizar la dirección del evento, reporte al administrador");
+						console.log("Error al registrar la locación del evento, evento  blur ");
 			});
 		}
 	});
+	
+}
+/**/
+function registra_locacion_evento(){
+
 }
 
 /*******************************************/

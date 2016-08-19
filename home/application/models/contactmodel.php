@@ -5,6 +5,26 @@
       $this->load->database();
   }
   /**/
+  function update_locacion_maps($param){
+      $place_id =  $param["place_id"];
+      $formatted_address =  $param["formatted_address"];
+      $id_contacto =  $param["identificador"];
+      $lat = $param["lat"]; 
+      $lng = $param["lng"]; 
+      
+      $query_update = "UPDATE contacto 
+              SET           
+              place_id = '".$place_id ."'  ,  
+              formatted_address = '". $formatted_address  ."',          
+              lat =  '".$lat."' , 
+              lng = '".$lng."' 
+              WHERE idcontacto = '".$id_contacto."' limit 1"; 
+      return $this->db->query( $query_update);  
+      
+
+  }
+
+  /**/
   function delete($param){
     /**/    
     $query_delete = "DELETE  FROM contacto WHERE idcontacto = '".$param["contacto"]."'  limit 1 ";     

@@ -1,41 +1,46 @@
 <?php 	
-
-	$eventos_registrados = '<div class="item-content-block tags">';
+	$eventos_registrados = '';
 	$a = 0; 
-	foreach ($escenarios_evento as $row ){
-		
+	foreach ($escenarios_evento as $row){		
 		$nombre =  $row["nombre"];
 		$tipoescenario =  $row["tipoescenario"];
-		$img =  $row["img"];
-		$id_escenario =  $row["idescenario"];
-		//$id_evento =  $row["idevento"];
-		$url_escenario =  base_url("index.php/escenario/configuracionavanzada")."/".$id_escenario . "/".$id_evento;
+		//$img =  create_icon_img($row , "" , "" , "" , "" );
+		$id_escenario =  $row["idescenario"];		
+		/**/
+		$url_escenario =  base_url("index.php/escenario/inevento")."/".$id_escenario . "/".$id_evento;
 		$eventos_registrados .= "<a href='". $url_escenario ."'> ". $nombre ."</a>";	
 		$a++; 
 	}
+		$mensaje_evento = "	<span> 
+								Escenarios del evento.
+							</span>	
+								<div class='separate-enid'>
+								</div>												
+							<div class='row'>
+								<div class='col-lg-12'>
+									<a data-toggle='modal' data-target='#modal-nuevo-escenario-evento' id='$id_evento' class='escenario_evento_nuevo nuevo-elemento pull-left'  >
+									 + Nuevo escenario 
+									</a>
+								</div>
+							</div>
+							"; 		
 
-	$mensaje_evento=  "No se han registrado escenarios en éste evento aún. 
-					   <button data-toggle='modal' data-target='#modal-nuevo-escenario-evento' id='$id_evento' class='escenario_evento_nuevo btn btn btn_nnuevo'> 
-					   + Nuevo escenario 
-					   </button>"; 
-	if ($a > 0 ) {
-		$mensaje_evento = "Escenarios registrados  en el evento <button data-toggle='modal' data-target='#modal-nuevo-escenario-evento' id='$id_evento' class='escenario_evento_nuevo btn btn btn_nnuevo'> + Nuevo escenario </button>"; 		
-	}
 	
-	$eventos_registrados .= "</div>";
 ?>
 
-<div class='panel' style='background:#2C4B50; padding:20px;'>		
-	<i class=" menos_info_escenario  fa fa-caret-up" aria-hidden="true" id='<?=$id_evento?>'  >
-	</i>		
-	<center>
-		<span style='color:white;'>
+<div class='panel panel-resumen-evento'>		
+	<div class="item-content-block tags">
+		<i class="menos_info_escenario  fa fa-caret-up" aria-hidden="true" id='<?=$id_evento?>'  >
+		</i>			
+		<span class='msj-resumen'>
 			<?=$mensaje_evento;?>
-		</span>
-	</center>
-	<center>
-		<?=$eventos_registrados;?>
-	</center>
+		</span>	
+		<div class='separate-enid'>
+		</div>
+		<div>
+			<?=$eventos_registrados;?>
+		</div>
+	</div>	
 </div>
 
 <style type="text/css">
@@ -50,8 +55,9 @@
 	}
 	.menos_info_escenario:hover{
 		cursor: pointer;
-	}
-	.menos_info_escenario{
-		color:white;
 	}		
+	.icon_escenario{		
+		width: 10% !important;
+		margin: 0 auto;	
+	}
 </style>

@@ -1,30 +1,28 @@
 $(document).ready(function(){
-	/**/
 	$("footer").ready(carga_portada_event);
 	$("footer").ready(carga_escenarios_evento);
 	$("footer").ready(carga_resumen_extra_evento);
-	$("footer").ready(carga_mapa_evento);
+	//$("footer").ready(carga_mapa_evento);
 	$(".config_tipo_evento").click(carga_configuracion_tipo_evento);
 	$(".config_estado_evento").click(carga_configuracion_estado_evento);
 });
 /**/
 function carga_portada_event(){
 
-
     url =  now + "index.php/api/event/imagenes/format/json/";
     id_evento =  $("#evento").val();
     nombre_evento =  $("#nombre_evento_val").val();    
-   
+   	h_slogan = $(".h_slogan").val();
+   	in_session =  $(".in_session").val();
+   	
     $.ajax({
         url :  url , 
         type :  "GET", 
-        data: {"id_evento" : id_evento , "nombre_evento" : nombre_evento } , 
+        data: {"id_evento" : id_evento , "nombre_evento" : nombre_evento , "public" : 1 , "slogan" : h_slogan , "in_session"  : in_session }, 
         beforeSend : function(){            
             show_load_enid(".place_slider", "Cargando portada del evento" , 1); 
         }
-    }).done(function(data){        
-    	
-    	
+    }).done(function(data){            
         $(".place_slider").empty();
         llenaelementoHTML(".seccion_slider" , data );
     }).fail(function(){
@@ -78,27 +76,6 @@ function carga_resumen_extra_evento(){
 	}); 
 }
 /**/
-function carga_mapa_evento(){
-	
-	url = now + "index.php/api/event/mapa/format/json/";
-	id_evento =  $("#evento").val();
-	in_session =  $(".in_session").val();  		
-	ubicacion =  $(".h_ubicacion").val();
-	$.ajax({
-		url : url , 
-		type:  "GET",
-		data :  {"id_evento" : id_evento , "in_session" :  in_session , "ubicacion" :  ubicacion } ,
-		beforeSend: function(){
-			/*mostramos load*/			
-			show_load_enid(".place_mapa_locacion", "Cargando ubicación.." , 1); 
-		}
-	}).done(function(data){
-		$(".place_mapa_locacion").empty();
-		llenaelementoHTML(".mapa_locacion" , data);		
-	}).fail(function(){
-		show_error_enid(".place_mapa_locacion" , "Falla al cargar la ubicación  reporte al administrador");   
-	}); 
-}
 /**/
 function carga_configuracion_tipo_evento(){
 

@@ -5,8 +5,7 @@
         <i class='fa fa-users'>
         </i>        
       </a>
-      </li>
-    
+      </li>    
     <li>
       <a aria-expanded="false" href="#pill-2" role="tab" data-toggle="tab" title="Top Sellers">
         <i class=" icon-up-1">
@@ -33,3 +32,19 @@
 <script src="<?=base_url('application/js/sha1.js');?>"></script>    
 <script type="text/javascript" src="<?= base_url('application/js/MiCuenta/perfil_user.js')?>"></script>
 <link rel="stylesheet" type="text/css" href="<?=base_url('application/css/perfil_user/principal.css')?>">
+<style type="text/css">
+.title-user-descripcion{
+  font-weight: bold;
+  font-size: 1em;
+}
+.user-desc{
+  font-size: .8em !important;
+}
+.color_social{
+  color: rgb(62, 178, 192);
+}
+.sn_color_social{
+  color: rgb(191, 191, 191);  
+}
+
+</style>

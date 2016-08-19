@@ -11,9 +11,10 @@ class Event extends REST_Controller{
     }   
 
     function imagenes_GET(){            
+
         $id_evento = $this->get("id_evento");     
         $data["imagenes_portada"] = $this->eventmodel->get_img_evento($id_evento);
-        $data["param"] =  $this->get();
+        $data["param"] =  $this->get();    
         echo  $this->load->view("eventos/slider" , $data );
     }  
     /**/    
@@ -337,17 +338,9 @@ class Event extends REST_Controller{
         $param =  $this->get();
         $data["param"] = $param;
         $data["resumen_artistas"] =  $this->eventmodel->get_resumen_artistas($param);
-       // $data["resumen_acceso"] =  $this->eventmodel->get_resumen_accesos($param);
+     
         echo $this->load->view("eventos/public/extra" , $data);
-    }
-    /**/
-    function mapa_GET(){      
-        /**/  
-        $param =  $this->get();
-        $data["param"] = $param;
-        echo $this->load->view("eventos/public/mapa" , $data);
-    }
-    /**/
+    }  
     function config_tipo_GET(){
         $param =  $this->get();
         $data["param"] = $param;
@@ -397,8 +390,15 @@ class Event extends REST_Controller{
         $id_evento =  $this->get("id_evento");        
         $data["objs"] = $this->eventmodel->get_obj_permitidos($id_evento);   
         $data["param"] =  $this->get();
-        echo $this->load->view("servicios/permitidos" , $data);
+        echo $this->load->view("servicios/permitidos" , $data);    
+    }
+    /**/
+    function locacion_PUT(){
         
+        $param =  $this->put();
+        $db_response = $this->eventmodel->update_locacion_maps($param);
+        $this->response($db_response);
+   
     }
 
 

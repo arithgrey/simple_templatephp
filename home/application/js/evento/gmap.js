@@ -1,3 +1,5 @@
+
+/*
 function initialize() {
 
   var mapOptions = {
@@ -72,3 +74,4 @@ function initialize() {
   
 }
 
+*/

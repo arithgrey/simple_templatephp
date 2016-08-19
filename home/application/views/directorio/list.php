@@ -7,11 +7,10 @@
 			$height ="style='overflow-y:scroll;  height: 400px;' " ; 
 		}
 
-
 		$b =1;						  
 		foreach ($contactos as $row) {
 
-			$idcontacto  = $row["idcontacto"]; 
+			$id_contacto  = $row["idcontacto"]; 
 			$nombre      = $row["nombre"];  
 			$organizacion = $row["organizacion"];
 			$tel          = $row["tel"]; 
@@ -22,23 +21,23 @@
 			$pagina_web = $row["pagina_web"];
 			$pagina_fb =  $row["pagina_fb"];
 			$pagina_tw =  $row["pagina_tw"];
-			$direccion    = $row["direccion"]; 
+			$direccion    = evalua_direccion($row["direccion"],  $id_contacto ); 
 			$status       = $row["estado_contacto"];
-			$fecha_registro =$row["fecha_registro_contacto"];
+			$fecha_registro = $row["fecha_registro_contacto"];
 			$tipo          = $row["tipo"];
 			$idusuario     = $row["idusuario"];
 			$nota          = $row["nota"];
 			
 			
 			/**/					
-			$img = create_icon_img($row , ' img_contacto   ', $idcontacto   , 'a'  );		
+			$img = create_icon_img($row , ' img_contacto   ', $id_contacto   , 'a'  );		
 			$img  =  "<span data-toggle='modal' data-target='#contact-imagen-modal'  >" . $img . "</span>" . " "; 
 
 			
 			$direccion =  strtolower($direccion); 
 
 			$contacto .='<tr>';			
-				$contacto .= get_td( '<i id="'. $idcontacto.'" class="editar-contacto fa fa-cog" ></i> ' , ' data-toggle="modal" data-target="#contact-modal-edit"  ');										
+				$contacto .= get_td( '<i id="'. $id_contacto.'" class="editar-contacto fa fa-cog" ></i> ' , ' data-toggle="modal" data-target="#contact-modal-edit"  ');										
 				$contacto .= get_td($img,  "style='width:45px;' ");				
 				$contacto .= get_td($nombre , ' class="campo_contacto" ');
 				$contacto .= get_td($organizacion); 
@@ -53,11 +52,11 @@
 				$contacto .= get_td(valida_url_contacto($pagina_tw , "Twitter" )); 
 
 				$contacto .= get_td($direccion);
-				$contacto .= get_td(validate_descripcion_c($nota , $idcontacto ), ' data-toggle="modal" data-target="#contact-nota"');		 
+				$contacto .= get_td(validate_descripcion_c($nota , $id_contacto ), ' data-toggle="modal" data-target="#contact-nota"');		 
 				$contacto .= get_td($tipo  , "class='tipo_text' "); 						
 				$contacto .= get_td($status); 
 				$contacto .= get_td($fecha_registro); 
-				$contacto .= get_td("<i class='delete_contacto  fa fa-times eliminar_enid' id='". $idcontacto ."'></i>", ' data-target="#contact-delete"  data-toggle="modal"  '); 
+				$contacto .= get_td("<i class='delete_contacto  fa fa-times eliminar_enid' id='". $id_contacto ."'></i>", ' data-target="#contact-delete"  data-toggle="modal"  '); 
 
 			$contacto .='</tr>';			
 			$b++;

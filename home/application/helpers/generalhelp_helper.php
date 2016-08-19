@@ -1,63 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 if(!function_exists('invierte_date_time')){
 
-
-  function slider_item($imgs ){
-
-
-    $item = '<div class="carousel-inner">';
-      $x =0;
-      foreach ($imgs as $row) {
-        $flag_indicator =  "";
-        $slider_num =  "slide-".$x;
-        if ($x == 0 ) {
-          $flag_indicator =  "active";     
-        }
-        
-        
-        $item .=  '<div class="item slides '.$flag_indicator.' ">';
-        $imagen  =  create_icon_img($row , $slider_num , " " );  
-        $item .="<div> ".$imagen."</div>";
-         /* 
-        $item .=' <div class="'.$slider_num.'" style="background-image: url(""); ">
-                  '.$imagen.'
-                  </div>';
-                  */
-                $item .='<div class="hero">
-                            <hgroup>
-                                <h1 class="nombre-evento-enid">We are creative</h1>        
-                                <h3>
-                                  Get start your next awesome project
-                                </h3>
-                            </hgroup>
-                            <button class="btn btn-hero btn-lg" role="button">
-                                See all features
-                            </button>
-                          </div>'; 
-
-        $item .=  '</div>';
-        $x ++;
-      }
-    $item .= '</div>';
-    return $item;
-
-  }
-  /**/
-  function slider_ol($num_imgs){
-
-    $indicator =  '<ol class="carousel-indicators">'; 
-    for ($x=0; $x <$num_imgs ; $x++) {       
-      $flag_indicator =  "";
-      if ($x == 0 ) {
-        $flag_indicator =  "active";     
-      }
-      $indicator.=  '<li data-target="#bs-carousel" data-slide-to="'.$x.'" class="'.$flag_indicator .'"></li>';
-      
-    }
-    $indicator.= '</ol>';
-    return $indicator;    
-  }
-
   /**/
   function btn_comunidad($id_empresa){    
 
@@ -619,23 +562,7 @@ function get_statusevent($status){
   }
 
   /**/
-  function edita_section_mensaje_comunidad($val ,  $session , $class='' ){  
-
-    /*mensaje más  editar */    
-    $mensaje =  "<p>". $val ."</p>"; 
-    if ($session == 1 ){
-        $mensaje =  "<p $class >". $val ."</p>"; 
-        $mensaje .="<textarea rows='5' style='display:none;' cols='20' class='form-control' id='comunidad-mensaje-input' name='mensaje-comunidad' placeholder='Cómo la comunidad de tu organización'>".$val."</textarea>'";         
-        $mensaje .="<div  style ='display:none;' class='mensaje-comunidad-response' id='mensaje-comunidad-response'>
-                  La descripción de la comunidad ha sido actualizada correnctamente .! 
-                </div>
-                <div  style ='display:none;'  class='alert-fail-mensaje-comunidad' id='alert-fail-mensaje-comunidad'>
-                  Error al actualizar el mensaje para la comunidad, reporte al administrador
-                </div>";
-    }
-    return $mensaje; 
-    /**/
-  }
+  
   /**/
   function editar_btn($session , $href ){
     

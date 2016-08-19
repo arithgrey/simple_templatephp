@@ -89,9 +89,8 @@ function get_proximos_eventos($id_empresa , $id_evento  ){
 /**/
 /****************************** Accesos al evento ************************************/
 function accesosalevento($id_evento){    
-
-    if ($this->checkifexist($id_evento) == 1 ) {                
-
+    
+    if ($this->checkifexist($id_evento) == 1 ){                
             $data_evento =   $this->eventmodel->getEventbyid($id_evento)[0];    
             $data = $this->val_session("");                
             $data["data_evento"] = $data_evento;                    

@@ -1,4 +1,3 @@
-
 <script type="text/javascript" src="<?=base_url('application/js/evento/pasados/principal.js')?>"></script>
 
 

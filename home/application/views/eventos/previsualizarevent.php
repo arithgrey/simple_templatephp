@@ -1,4 +1,3 @@
-<!--
 <div class='menu_seleccion_enid'>
   <ul class="nav nav-pills" role="tablist">
     <li class="active">
@@ -17,18 +16,12 @@
         Servicios 
       </a>
     </li>  
-
     <?=btn_comunidad(1);?>
-    
-
-
-    <?=editar_btn($in_session , base_url('index.php/eventos/nuevo')."/" . $evento["idevento"] ); ?>                                        
+    <?=editar_btn($in_session , base_url('index.php/eventos/nuevo')."/" . $evento["idevento"] ); ?>                                            
     <?=construye_tipo_evento($evento["tipo"] ,  $in_session , $evento["idevento"])?>
-    <?=estado_evento($evento["status"] ,  $in_session , $evento["idevento"] , $evento["programado"])?>  
+    <?=estado_evento($evento["status"] ,  $in_session , $evento["idevento"] , $evento["programado"])?>    
   </ul>
 </div>
-
-
 <div class='config_tipo animated  ' id='config_tipo'>
   <div class='configuracion_tipo'>
   </div>
@@ -41,10 +34,6 @@
     <div class='place_config_estado'>
     </div>
 </div>
-
-
--->
-
 <div>
   <div class="tab-content clear-style">
     <div class="tab-pane active" id="pill-1">
@@ -60,7 +49,7 @@
 </div>
 
 
-
+<input type='hidden' class='h_slogan' value='<?=$evento["eslogan"]?>'> 
 <input type='hidden' class='h_programado' value="<?=trim($evento["programado"])?>">   
 <input type='hidden' class='h_status' value="<?=trim($evento["status"])?>">   
 <input type='hidden'  class='h_ubicacion' value="<?=trim($evento["ubicacion"]);?>">  

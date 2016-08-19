@@ -199,6 +199,26 @@ class usuariogeneralmodel extends CI_Model {
       $r =  $this->db->query($query_update);
       return $r;   
     }
-
     /*Termina el modelo*/
+    /**/
+    function update_locacion_maps($param){
+
+      $place_id =  $param["place_id"];
+      $formatted_address =  $param["formatted_address"];
+      $id_usuario =  $param["identificador"];
+      $lat = $param["lat"]; 
+      $lng = $param["lng"]; 
+      
+      $query_update = "UPDATE usuario 
+              SET           
+              place_id = '".$place_id ."'  ,  
+              formatted_address = '". $formatted_address  ."',          
+              lat =  '".$lat."' , 
+              lng = '".$lng."' 
+              WHERE idusuario = '".$id_usuario."' limit 1"; 
+      return $this->db->query( $query_update);  
+    }
+
+
+
 }

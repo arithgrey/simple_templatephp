@@ -61,9 +61,14 @@
                                         </div>
 
                                         <p class='user_descripcion_text'>
-
-                                          Acerca de ti :  <?=$data_user["descripcion_usuario"]?>  
+                                          <span class='title-user-descripcion'>
+                                             + Tu descripción :  
+                                          </span>
+                                          <span class='user-desc'>
+                                             <?=$data_user["descripcion_usuario"]?>  
+                                          </span>                                      
                                         </p>
+                                        
                                         <div class='row'>
                                           <div class='place_descripcion'>
                                           </div>
@@ -80,49 +85,27 @@
                                         </div>
 
                                         <ul class="p-social-link pull-right">
-                                            <li class='pfb'>
-                                                <a>
-                                                    <i class="fa fa-facebook"></i>
-                                                </a>
-                                            </li>
-                                            <li class='ptw'>
-                                                <a>
-                                                    <i class="fa fa-twitter"></i>
-                                                </a>
-                                            </li>
-                                            <li class='pwwww'>
-                                                <a>
-                                                    www
-                                                </a>
-                                            </li>
+                                            <?=validate_social( $data_user["url_fb"] , "pfb" , " fa fa-facebook " )?>
+                                            <?=validate_social( $data_user["url_tw"] , "ptw" , " fa fa-twitter " )?>
+                                            <?=validate_social( $data_user["url_www"] , "pwwww" , " fa fa-www " , 1)?>
                                         </ul>
-
-
                                         
-                                          <?=create_dinamic_input("url_fb" ,  "url_fb form-control input-sm" ,  "url_fb"  ,  "pfb_e hidden_enid" ,  $data_user["url_fb"]  , "placeholder= 'URL de la red social'  " ,  "url" );?>                                                                                
-                                          <div class='place_pfb'>
-                                          </div>
+                                        <?=create_dinamic_input("url_fb" ,  "url_fb form-control input-sm" ,  "url_fb"  ,  "pfb_e hidden_enid" ,  $data_user["url_fb"]  , "placeholder= 'URL de la red social'  " ,  "url" );?>                                                                                
+                                        <div class='place_pfb'>
+                                        </div>
 
-                                          <?=create_dinamic_input("url_tw" ,  "url_tw form-control input-sm" ,  "url_tw"  ,  "url_tw_e hidden_enid" ,  $data_user["url_tw"] , "placeholder= 'URL de la red social'  " ,  "url");?>                                                                                
-                                          <div class='place_url_tw'>
-                                          </div>
+                                        <?=create_dinamic_input("url_tw" ,  "url_tw form-control input-sm" ,  "url_tw"  ,  "url_tw_e hidden_enid" ,  $data_user["url_tw"] , "placeholder= 'URL de la red social'  " ,  "url");?>                                                                                
+                                        <div class='place_url_tw'>
+                                        </div>
 
-                                          <?=create_dinamic_input("url_www" ,  "url_www form-control input-sm" ,  "url_www"  ,  "url_www_e hidden_enid" ,  $data_user["url_www"] , "placeholder= 'URL de te página web'  "  ,  "url");?>                                                                                
-                                          <div class='place_url_www'>
-                                          </div>
-   
-
-
-
-   
-
+                                        <?=create_dinamic_input("url_www" ,  "url_www form-control input-sm" ,  "url_www"  ,  "url_www_e hidden_enid" ,  $data_user["url_www"] , "placeholder= 'URL de te página web'  "  ,  "url");?>                                                                                
+                                        <div class='place_url_www'>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    
-                    
+                    </div>                                      
                 </div>
                  <div class="col-md-4">
                     <div class="row">
@@ -216,3 +199,11 @@
 
 
             </div>
+
+
+
+<!---->
+<div>
+    <iframe height='500px;' width='100%'   id='iframe_maps_conf'  src="<?=base_url('index.php/maps/map')?>/<?=$data_user['idusuario']?>/3/99999999/">
+    </iframe> 
+</div>

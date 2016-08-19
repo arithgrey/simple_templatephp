@@ -433,23 +433,16 @@ function dinamic_section_info(){
 }
 /*Para imagenes */
 function mostrar_img_upload(source , idsection){
-
-
 		
-		var list = document.getElementById(idsection);
-		$.removeData(list);
-		li   = document.createElement('li');
-		img  = document.createElement('img');
-		img.setAttribute('width', '100%');
-		img.setAttribute('height', '100%');        
-	        
-
-		img.src = source;
-		
-		li.appendChild(img);
-		list.appendChild(li);
-
-
+	var list = document.getElementById(idsection);
+	$.removeData(list);
+	li   = document.createElement('li');
+	img  = document.createElement('img');
+	img.setAttribute('width', '50%');
+	img.setAttribute('height', '50%');        
+	img.src = source;		
+	li.appendChild(img);
+	list.appendChild(li);
 }
 /**/
 function  url_editar_user( url , text ){
@@ -514,3 +507,40 @@ function dinamic_t(){
       }
     }  
 }
+/**/
+
+
+/*
+function carga_maps(input_val, class_data_list , place_data_list){
+
+		locacion_evento =  $(input_val).val();
+		key =  "AIzaSyAGAc9HmfSltzzAyFhcvqQ9U0yk427NMTw";
+		url =  "https://maps.googleapis.com/maps/api/geocode/json"; 
+		$.ajax({
+				url :  url , 
+				type: "GET", 			
+				data: {address: locacion_evento , key :  key } 
+			}).done(function(data){
+				z = 0; 					
+				locaciones =  "<datalist class='"+class_data_list+"' id='"+class_data_list+"'>"; 
+				for(var x in data){						
+					if(data["status"] == "OK"){
+						locacion_escrita =  data[x][z].formatted_address; 
+						//place_id  =  data[x][z].place_id; 
+						//geometry = data[x][z].geometry;  					
+						//location_lat =  geometry.location.lat; 
+						//locacion_lng  =  geometry.location.lng;								
+						locaciones  +=  "<option value='"+locacion_escrita+"'>"; 						
+					}					
+					z++;
+				}
+				locaciones +=  "</datalist>";
+				llenaelementoHTML(place_data_list ,  locaciones);
+			   	
+			}).fail(function(){
+				console.log("ocurrió un error en la locación");				
+			});
+
+
+}
+*/

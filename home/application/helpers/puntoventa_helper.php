@@ -23,15 +23,15 @@ if(!function_exists('invierte_date_time')){
 		return $tmp_contacto;
 
 	}
-	/**/
-	function tmp_direccion($direccion , $idpunto_venta){
+	/**/	
+	function tmp_formatted_address($direccion , $idpunto_venta){
 		$d_direccion = ""; 
-		if (strlen(trim($direccion))> 5 ){
+		if (strlen(trim($direccion))> 4 ){
 			
-			$d_direccion =  "<i class='nota-punto-venta fa fa-list-alt ' id='".$idpunto_venta."' data-toggle='modal' data-target='#punto-venta-descripcion-modal'  title='". $direccion."'>
+			$d_direccion =  "<i class='nota-punto-venta fa fa-map-marker ' id='".$idpunto_venta."' data-toggle='modal' data-target='#punto-venta-descripcion-modal'  title='". $direccion."'>
 						</i>";	
 		}else{
-			$d_direccion =  "<i class='nota-punto-venta fa fa-list-alt direccion_registrada' id='".$idpunto_venta."' data-toggle='modal' data-target='#punto-venta-descripcion-modal'  title='". $direccion."'>
+			$d_direccion =  "<i class='nota-punto-venta fa fa-map-marker direccion_registrada' id='".$idpunto_venta."' data-toggle='modal' data-target='#punto-venta-descripcion-modal'  title='". $direccion."'>
 						</i>";	
 		}		
 		return $d_direccion; 
@@ -131,7 +131,7 @@ if(!function_exists('invierte_date_time')){
 
 	$puntos_disponibles .= '
 							<div class="row" >
-						        <div class=" col-md-6 col-md-offset-3">
+						        <div class="">
 						            <div class="panel panel_e coupon">
 						              <div class="panel-heading" id="head">
 						                <div class="panel-title" id="title">	

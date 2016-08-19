@@ -233,9 +233,15 @@ class Emp extends REST_Controller{
         $param["id_empresa"]= $this->sessionclass->getidempresa();        
         $data["log"] = $this->empresamodel->get_actividad($param);     
         echo  $this->load->view("log/empresa",  $data);
+    }
+    /**/
+    function iconos_comunidad_GET(){
+         
+        $param  =  $this->get();    
+        $iconos_experiencia =  $this->empresamodel->get_iconos_sociales($param);        
+        $data["iconos_experiencia_cliente"] =  contruye_iconos_experiencia_cliente($iconos_experiencia); 
+        //$this->response($param["id_empresa"] . "----------------- " );
 
-
-
-
+        $this->load->view("empresa/iconos_generales" , $data);
     }
 }?>

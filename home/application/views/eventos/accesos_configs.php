@@ -11,20 +11,10 @@
                 Ver como el público
               </button>            
               </a>
-              
-
-              <div class='alert-ok' id='alert-ok-servicios'>              
-                <em>
-                    Servicios actualizados correctamente.!
-                </em>
-              </div>
-              <div class='alert-fail' id='alert-fail-servicios'>
-                <em>
-                    Falla al cargar lo servicios al evento, reportar al administrador
-                </em>
-              </div>                             
+                                        
               <!--Lista de servicios inicia-->
-              <div class='list-servicios' id='list-servicios'></div>
+              <div class='list-servicios' id='list-servicios'>
+              </div>
               <!--Lista de servicios termina-->
           </div>
       </div>

@@ -1,35 +1,43 @@
 <?php 	
 
-	$accesos_registrados = '<div class="item-content-block tags">';
+	$accesos_registrados = '';
 	$a = 0; 
 	$url=  base_url('index.php/accesos/configuracionavanzada/')."/0/". $id_evento."/acceso"; 
 	foreach ($accesos as $row ){
-
 		$tipo =  $row["tipo"];					
 		$accesos_registrados .= "<a href='".$url."'> ". $tipo ."</a>";	
 		$a++; 
 	}
-	$mensaje_evento=  "No se han registrado puntos de venta."; 
+	$mensaje_evento=  "No se han registrado promociones aún."; 
 	if ($a > 0 ) {
 		$mensaje_evento = "Puntos de venta registrados en el evento. "; 		
 	}
+	$mensaje_evento .="	<div class='separate-enid'>
+		</div>		<div class='row'>
+							<div class='col-lg-12'>
+								<a class='nuevo-elemento pull-left' href='".$url."'> 
+									+ Registrar nuevo
+								</a>
+							</div>	
+						</div>";
 
-	$accesos_registrados .="<a style='background-color:#8CB1A3;' href='".$url."'> + Registrar nuevo</a>";
-	$accesos_registrados .= "</div>";
+	$mensaje_evento .= "";
 
 ?>
 
-<div class='panel' style='background:#2C4B50; padding:20px;'>	
-	<i class=" menos_info_puntos_venta  fa fa-caret-up" aria-hidden="true" id='<?=$id_evento?>'  >
-	</i>		
-	<center>
-		<span style='color:white;'>
+<div class='panel panel-resumen-evento' >	
+	<div class="item-content-block tags">
+		<i class=" menos_info_puntos_venta  fa fa-caret-up" aria-hidden="true" id='<?=$id_evento?>'  >
+		</i>			
+		<span class='msj-resumen'>
 			<?=$mensaje_evento;?>
-		</span>
-	</center>
-	<center>
-		<?=$accesos_registrados;?>
-	</center>
+		</span>	
+		<div class='separate-enid'>
+		</div>
+		<div>
+			<?=$accesos_registrados;?>
+		</div>
+	</div>
 </div>
 
 <style type="text/css">
@@ -45,7 +53,5 @@
 	.menos_info_puntos_venta:hover{
 		cursor: pointer;
 	}
-	.menos_info_puntos_venta{
-		color: white;
-	}
+	
 </style>

@@ -60,7 +60,7 @@ function cargar_otros(){
 	});
 }
 /**/
-function carga_portada_escenario(){	
+function carga_portada_escenario(){		
 	url =  now + "index.php/api/escenario/slider_admin/format/json/"; 
 	escenario =  $(".id_escenario").val();
 	nombre =  $(".nombre_escenario").val(); 
@@ -68,7 +68,7 @@ function carga_portada_escenario(){
 	$.ajax({
 		url : url , 		
 		type: "GET" ,
-		data : {"escenario" : escenario , "nombre_escenario" : nombre ,  "in_session" :  in_session } ,
+		data : {"escenario" : escenario , "nombre_escenario" : nombre ,  "in_session" :  in_session , "public":  1 } ,
 		beforeSend: function(){			
 			show_load_enid( ".slider-principal-escenario" , "Cargando portada del escenario" , 1 ); 				
 		}

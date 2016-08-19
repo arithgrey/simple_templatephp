@@ -86,5 +86,11 @@ class User extends REST_Controller{
         $db_response =  $this->usuariogeneralmodel->update_q($param ,  $id_user );         
         $this->response($db_response);       
     }
+    /**/
+    function locacion_PUT(){
+        $param =  $this->put();
+        $db_response = $this->usuariogeneralmodel->update_locacion_maps($param);
+        $this->response($db_response);        
+    }
 }
 ?>

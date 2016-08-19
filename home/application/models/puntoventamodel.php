@@ -590,7 +590,23 @@ function delete_punto_venta_evento($id_evento , $id_punto_venta , $id_usuario, $
 	}
 	return $result;
 }
-
+/**/
+function update_locacion_maps($param){	
+	
+	$place_id =  $param["place_id"];
+	$formatted_address =  $param["formatted_address"];
+	$punto_venta =  $param["identificador"];
+	$lat = $param["lat"]; 
+	$lng = $param["lng"]; 
+	$query_update = "UPDATE punto_venta 
+					SET  					
+					place_id = '".$place_id ."'  ,  
+					formatted_address = '". $formatted_address  ."', 					
+					lat =  '".$lat."' , 
+					lng = '".$lng."' 
+					WHERE idpunto_venta = '".$punto_venta."' limit 1"; 
+	return $this->db->query( $query_update);	
+}
 
 /*Termina modelo */
 }

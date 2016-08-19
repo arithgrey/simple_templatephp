@@ -1,68 +1,71 @@
 <div class='separate-enid sepador_superio' >
 </div>
-<div class='seccion_principal'>    
-    <!--Slider del evento -->
+<div class='seccion_principal'>            
     <div>
-        <div>
-            <div class='seccion_slider'>
-            </div>
-            <div class='place_slider'>
-            </div>
+        <div class='seccion_slider'>
         </div>
-    </div>
-    <!--Termina slider del evento-->
+        <div class='place_slider'>
+        </div>
+    </div>    
     <div class='row'>     
         <div class='text_edicion'>                                        
             <span class='dias_restantes'>
                 <?=$dias_restantes_evento;?>
             </span>
-            <br>    
-            <span class='edicion_event'>
-                <?=create_text_edicion($evento["edicion"] ,  $in_session)?>
-            </span>
+            <div class='separate-enid'>
+            </div> 
 
-            <span>
-                <?=create_text_slogan($evento["eslogan"], $in_session , $evento["idevento"])?>                                        
-            </span>                   
         </div>       
     </div>
 </div>
+<section>
+    <div class="container">             
+        <h1>
+            La historia la haces tu
+        </h1>
+        <p>
+        <?=create_text_descripcion($evento["descripcion_evento"] ,  $in_session  , $evento["idevento"])?>
+        </p>
+        <div class='pull-right'>
+            <span class='edicion_event'>
+                Edición del evento<?=create_text_edicion($evento["edicion"] ,  $in_session)?>
+            </span>            
+        </div>
+    </div>
+</section>
 
 
-<?=create_text_descripcion($evento["descripcion_evento"] ,  $in_session  , $evento["idevento"])?>
+
+
 <div class='separate-enid'>
 </div>
 <?=get_tags_generos($list_generosdb , $evento['idevento']  , $in_session )?>
-
 <div class='col-lg-8 col-md-8 col-sm-12 '>    
-    <span class='text_title_escenario'>
+    <div class='row'>
+        <span class='text_title_escenario'>
             Escenarios del evento         
-    </span>
-    <div class='seccion_escenarios_enid'>                
-        
-        <div>
-            <div class='seccion_escenarios'>
-            </div>
-            <div class='place_escenarios'>
+        </span>
+        <div class='seccion_escenarios_enid'>                            
+            <div>
+                <div class='seccion_escenarios'>
+                </div>
+                <div class='place_escenarios'>
+                </div>
             </div>
         </div>
     </div>
 </div>
 <div class='col-lg-4 col-md-4 col-sm-12 '>
-    <div class='resumen_extra_evento'>
-    </div>
-    <div class='place_resumen_extra_evento'>
+    <div class='row'>
+        <div class='resumen_extra_evento'>
+        </div>
+        <div class='place_resumen_extra_evento'>
+        </div>
     </div>
 </div>    
 
-
-<div class='col-lg-12 col-md-12 col-sm-12'>      
-    <div class='mapa_locacion'>
-    </div>
-    <div class='place_mapa_locacion'>
-    </div>
-</div>
-
+<?=valida_maps_public($evento['formatted_address'] , $evento['idevento'] )?>
+<!---->
 <div class='col-lg-12 col-md-12 col-sm-12'>
     <ul class="p-social-link pull-right">
         <?=evalua_social($evento["url_social"] , "fb" , $in_session )?>
@@ -95,10 +98,7 @@
         cursor: pointer;
     }
     .slogan{    
-        color: white;
-        background: #E31F56;
-        padding: 10px 10px;
-        border-radius: 1px;
+        color: white;        
     }
     .seccion_escenairos_evento{
         background:  #046188; 
@@ -138,19 +138,21 @@
         font-weight: bold;        
     }
     .edicion_event{
-        
-        font-size: .8em;
+        font-weight: bold;          
     }
     .seccion_escenarios_enid{
         background: whitesmoke;
         padding: 2%;
     }
-    .descripcion_seccion{
-        background: #51d0e0;
-        font-size: .9em;
+    .maps_enid{
+        background: #046188;
         padding: 10px;
+    }.text_map{
+        color: white;
     }
-    
+    .text-map-prox{
+        color: white;
+    }
 
 
 </style>

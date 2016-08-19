@@ -9,6 +9,14 @@ class Contactos extends REST_Controller{
         $this->load->library('sessionclass');                
   } 
   /**/
+  function locacion_PUT(){
+
+      $param =  $this->put();
+      $db_response = $this->contactmodel->update_locacion_maps($param);
+      $this->response($db_response);
+
+  }
+  /**/
   function form_img_GET(){
     $data["param"] =  $this->get();
     echo $this->load->view("imgs/contactos" , $data );

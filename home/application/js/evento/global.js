@@ -15,9 +15,9 @@ $(document).ready(function(){
 });
 /**/
 function q_eventos(){
+
 	url = now + "index.php/api/busqueda/eventos_empresa/format/json"; 
 	id_empresa  =  $(".empresa").val();
-
 	$.ajax({
 		url : url , 	
 		type: "GET", 
@@ -26,47 +26,15 @@ function q_eventos(){
 			show_load_enid(".ultimos_eventos"  , "Cargando .." , 1); 
 		}
 	}).done(function(data){
-
 		llenaelementoHTML(".ultimos_eventos" , data );		
 		$(".escenarios_evento").click(list_informe_escenarios);
 		$(".puntos_venta_principal").click(carga_puntos_venta_evento);	
 		$(".escenarios_artistas_principal").click(list_informe_artistas);
 		$(".acceso_evento").click(reporte_accesos);		
-
 	}).fail(function(){
 		show_error_enid(".place_artista" , "Error al acargar los ultimos eventos de la empresa, reporte al administrador"); 
 	});
 }
-/*
-function busqueda_eventos(){
-
-	url = now + "index.php/api/busqueda/eventos_pasados/format/json"; 
-	$.ajax({
-		url : url , 		
-		beforeSend : function(){			
-			show_load_enid(".ultimos_eventos"  , "Cargando .." , 1); 
-		}
-	}).done(function(data){
-		
-		llenaelementoHTML(".ultimos_eventos" , data );		
-
-		$(".escenarios_evento").click(list_informe_escenarios);
-		$(".puntos_venta_principal").click(carga_puntos_venta_evento);	
-		$(".escenarios_artistas_principal").click(list_informe_artistas);
-		$(".acceso_evento").click(reporte_accesos);	
-		
-
-	}).fail(function(){
-		
-		show_error_enid(".place_artista" , "Error al acargar los ultimos eventos de la empresa, reporte al administrador"); 
-	});
-
-}
-*/
-
-
-
-
 function registra_evento(e){
 	flag =  valida_text_form("#nombre-nuevo-evento" , ".place_nombre" , 3 , "Nombre para el evento " ); 
 	if (flag ==  1 ) {
@@ -108,12 +76,6 @@ function delete_evento(e){
 		 	/**/
 		 });
 		 redirect("");
-
-	/*
-		$.post(url , {evento : id_evento}).done(function(data){	
-		});
-		redirect("");
-	*/
 }
 /***            ***************************************                  ***************** **/
 function update_fecha_evento_evento(e){

@@ -23,14 +23,15 @@ function list_informe_artistas(e){
 /*lista el nombre del los escenarios en el botton */
 function list_informe_escenarios(e){
 	
-	evento = e.target.id;
-	
+	evento = e.target.id;	
 	url = now + "index.php/api/escenario/escenario_evento/format/json/";
 	dinamic_section =  ".dinamic_section" + evento; 
 	llenaelementoHTML(dinamic_section , "");
+	$(".in_session").val();
+
 	$.ajax({
 			url : url , 			
-			data: {"evento" : evento}, 
+			data: {"evento" : evento , in_session :  in_session ,  "public" : 0  }, 
 			type: "GET", 
 			beforeSend: function(){							
 				show_load_enid(dinamic_section  , "Cargando .. " , 1); 

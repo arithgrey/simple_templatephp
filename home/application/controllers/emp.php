@@ -48,20 +48,13 @@ class Emp  extends CI_Controller{
 
         $data = $this->val_session("Nuestra historia" ); 
         $data_empresa= $this->empresamodel->get_empresa_by_id($id_empresa)[0];        
-        /**/
-           
-        
-            $iconos_experiencia =  $this->empresamodel->get_iconos_sociales($id_empresa);        
-            $data["iconos_experiencia_cliente"] =  contruye_iconos_experiencia_cliente($iconos_experiencia); 
-        
-
-
+        /**/                    
             $data["data_empresa"] =  $data_empresa;        
             $data["years"]= get_count_select(1 ,  50 , "Años"  , $data_empresa["years"] );
             $data["empresa_contactos_num"] =  $this->empresamodel->get_contactos_empresanum($id_empresa);    
             $data["evento_publicados"] = $this->empresamodel->get_eventos_publicados($id_empresa);
             $data["generos_musicales_emp"] = $this->empresamodel->get_generos_musicales_empresa($id_empresa);            
-            $data["contacto"] =   $this->contactmodel->get_contacto_empresa($id_empresa);        
+            //$data["contacto"] =   $this->contactmodel->get_contacto_empresa($id_empresa);        
             $g = $this->generosmusicalesmodel->get_geros_empresa($id_empresa);        
             //$data["tags_generos"]= get_tags_generos($g);        
             $data["tags_generos"]= get_tags_generos($g , 1 ,0 );        

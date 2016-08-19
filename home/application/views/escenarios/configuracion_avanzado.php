@@ -32,11 +32,6 @@
   </ul>
 </div>
 
-
-
-
-
-
 <div class='contenidos_escenario'>
     <div class="tab-content">
         <div class="tab-pane tab_escenario active" id="pill-1">
@@ -109,9 +104,6 @@
         font-weight: bold;
     }#img-button-more-imgs:hover{
         cursor: pointer;
-    }
-    .config_general{
-        background: #e5f3f7;
     }
     .activa_focus{
         background: red;

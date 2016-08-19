@@ -13,9 +13,8 @@
             Lo accesos 
           </a>
         </li>
-         <li class='dinamic_menu_pv'>
-          <a aria-expanded="true" href="#pill-11" role="tab" data-toggle="tab" >
-              
+        <li class='dinamic_menu_pv'>
+          <a aria-expanded="true" href="#pill-11" role="tab" data-toggle="tab" >            
             Puntos de venta
           </a>
         </li>
@@ -56,78 +55,10 @@
     </div>
   </div> 
 </div>
-
-
-
-
-
-
-
 <input type='hidden' class='empresa' value='<?=$data_evento["idempresa"]?>'>
 <input type='hidden' class='evento' value='<?=$data_evento["idevento"]?>'>
 <input type='hidden' class='evento_escenario' value='<?=$data_evento["idevento"]?>'>
 <script type="text/javascript" src="<?=base_url('application/js/accesos/principal_cliente.js')?>"></script>
-
-
-<!---
-<style>       
-.form_hover {
-    padding: 0px;
-    position: relative;
-    overflow: hidden;
-    height: 240px;
-}
-.form_hover:hover .header {
-    opacity: 1;
-    transform: translateY(-172px);
-    -webkit-transform: translateY(-172px);
-    -moz-transform: translateY(-172px);
-    -ms-transform: translateY(-172px);
-    -o-transform: translateY(-172px);
-}
-.form_hover img {
-            z-index: 4;
-}
-.form_hover .header {
-    position: absolute;
-    top: 170px;
-    -webkit-transition: all 0.3s ease;
-    -moz-transition: all 0.3s ease;
-    -o-transition: all 0.3s ease;
-    -ms-transition: all 0.3s ease;
-    transition: all 0.3s ease;
-    width: 100%;
-}
-.form_hover .caption-text {
-    z-index: 10;
-    color: #fff;
-    position: absolute;
-    height: 240px;
-    text-align: center;
-    top: -20px;
-    width: 100%;
-}
-.section-header-title, .section-descripcion-evento-complete{
-    display: none;
-}
-.editar_client{
-    margin-right: 100px;
-    font-size:.8em;
-}        
-#donde_adquirir , .conoce_historia , .fechas{
-    font-size:.8em;    
-}
-.msj_fechas_evento{
-    font-size: 1.5em;    
-    text-decoration: none;
-}
-.msj_fechas_evento:hover{
-    text-decoration: none;
-}
-</style>
-
--->
-
 <style type="text/css">
 .contenedor_puntos_venta{
     background: rgb(22, 103, 129);    

@@ -14,10 +14,10 @@
                     <div class="form-group" >        
                         <div class="input-group">
                             <div class="input-group-addon">
-                                        Contacto 
+                                Contacto 
                             </div>
-                            <input type="text" list="contactos-lista" class="form-control input-sm" id="contacto-name"  name='nombre_b' placeholder="Nombre del contacto">                      
-                            <?=$list_contactos_name;?>
+                            <input type="text"  class="form-control input-sm" id="contacto-name"  name='nombre_b' placeholder="Nombre del contacto">                      
+                            
                         </div>
                     </div>
                 </div>
@@ -43,7 +43,7 @@
                 <div class='col-lg-1 col-md-1 col-sm-12'>
                     <div class="form-group pull-right" >        
                         <button class='btn btn_busqueda' type='submit'>
-                                    Buscar
+                        Buscar
                         </button>
                     </div>
                 </div>
@@ -58,7 +58,8 @@
     </div>
     <!--Termina  formulario -->       
     <div class='row'>
-        <div class="contactos"></div>
+        <div class="contactos">
+        </div>
     </div>                 
     <br>
     <div class='row'>
@@ -80,6 +81,9 @@
     display: none;
 }
 .nota-c:hover , .editar-contacto:hover , .img_contacto:hover{
+    cursor: pointer;
+}
+.locacion{
     cursor: pointer;
 }
 </style>

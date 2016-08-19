@@ -1,6 +1,21 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 if(!function_exists('invierte_date_time')){
 	/**/
+	function evalua_direccion($direccion ,  $id_contacto ){
+
+		$d_direccion = ""; 
+		if (strlen(trim($direccion))>4){		
+
+			$d_direccion =  "<i class='locacion fa fa-map-marker ' id='".$id_contacto."' data-toggle='modal' data-target='#locacion-modal'  title='". $direccion."'>
+							</i>";	
+		}else{
+			$d_direccion =  "<i class='locacion fa fa-map-marker direccion_registrada' id='".$id_contacto."' data-toggle='modal' data-target='#locacion-modal'  title='". $direccion."'>
+							</i>";	
+		}		
+		return $d_direccion; 
+
+	}
+	/**/
 	function get_tipos_contactos($name , $class , $id ){
 
 		$tipos_contactos = array("Proveedor", "Artista ", "Colaborador",  "Contacto comercial",  "Cliente",  "Contacto personal ",  "Institución", "Productora",  "Patrocinador",  "Otro" );

@@ -1,6 +1,50 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 if(!function_exists('invierte_date_time')){
 
+/**/
+function slider_item_escenario($imgs , $param){
+    $item = '<div class="carousel-inner">';
+      $x =0;
+      foreach ($imgs as $row) {
+        $flag_indicator =  "";
+        $slider_num =  "slide-".$x;
+        if ($x == 0 ) {
+          $flag_indicator =  "active";     
+        }
+        $msj_extra =  "";                        
+        if ($param["public"] == 1 ) {
+          $msj_extra = '
+              <span class="nombre-escenario-enid">
+                '.$param["nombre_escenario"].'
+              </span>                
+            ';
+        }          
+        $item .=  '<div class="item slides '.$flag_indicator.' ">';
+        $imagen  =  create_icon_img($row , $slider_num , " " );  
+        $item .="<div> ".$imagen."</div>";
+                 $item .='<div class="hero">                            
+                              '.$msj_extra .'
+                          </div>'; 
+        $item .=  '</div>';
+        $x ++;
+      }
+    $item .= '</div>';
+    return $item;
+}
+
+/**/
+function  slider_ol_escenario($num_imgs){
+    $indicator =  '<ol class="carousel-indicators">'; 
+    for ($x=0; $x <$num_imgs ; $x++) {       
+      $flag_indicator =  "";
+      if ($x == 0 ) {
+        $flag_indicator =  "active";     
+      }
+      $indicator.=  '<li data-target="#bs-carousel" data-slide-to="'.$x.'" class="'.$flag_indicator .'"></li>';    
+    }
+    $indicator.= '</ol>';
+    return $indicator;  
+}
 
 /**/
 function evalua_fechas_enid_format($format){
@@ -381,6 +425,7 @@ $generos = '';
  return $generos;                               
 }
 /**/
+/*
 function get_slider_img($imgs ,  $param ){    
 
         $imgs_escenario =""; $class_extra =""; $flags =""; $flag =1;  $edicion ="";
@@ -465,6 +510,7 @@ function get_slider_img($imgs ,  $param ){
 
         return $slider;
 }
+*/
 
 /**/
 /*
@@ -570,35 +616,37 @@ function contruye_info_escenario_cliente($nota ){
     return $seccion_nota;                
 }
 /**/
+
+
+
 function form_artista($public , $id_escenario  ){ 
     
     $form =  ""; 
     if ($public == 0) {
         $form .='  
-
-                <div class="separate-enid"></div>     
                 <div class="row">
-                    <div class="col-lg-12 formulario_artista">
-                        <div>                        
+                    <div class="form_artista col-lg-6 col-md-6 col-sm-12 pull-right">
+                        <div class="formulario_artista">                                               
                             <div class="place_artista">
                             </div>
                             <form role="form" class="form-inline" id="form-escenario-artista" >
                                 <div class="form-group todo-entry">                     
-                                    <input list="dinamic-artistas" placeholder="nombre del artista" class="form-control input-sm input_new_artista" id="artista" name="nuevoartista" style="width: 100%" type="text">                                                      
+                                    <input list="dinamic-artistas" placeholder="Nombre del artista" class="form-control input-sm input_new_artista" id="artista" name="nuevoartista" style="width: 100%" type="text">                                                      
                                     <input type="hidden" name="idescenario" value="'. $id_escenario .'">
                                 </div>
                                 <button class="btn btn-primary pull-right nuevo_artista_btn" type="submit">
-                                    +
+                                        +
                                 </button>
-                            </form>
+                            </form>                        
                         </div>
                     </div>
-                </div>
-                <div class="separate-enid"></div>     
+                </div>    
+                    
         ';
     }
     return $form; 
 }
+
 /**/
 function tag_tipo_artista($public , $id_artista ,  $tipo  ){
 

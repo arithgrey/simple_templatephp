@@ -15,19 +15,9 @@
 
 
 
-
-
-
-<?=construye_header_modal('punto-venta-descripcion-modal', " Dirección" );?>  
-    <form id='form-nota-pv' action="<?=base_url('index.php/api/puntosventa/punto_venta_nota/format/json/')?>">
-        <textarea rows="2" name="nota-punto-venta" id='nota-punto-venta' class="form-control" placeholder="Dirección ">
-        </textarea>            
-        <button class='btn btn-default btn_save' id='btn-update-nota'>
-            Registra cambios
-        </button>
-        <div class='place_actualizar_nota' >
-        </div>
-    </form>                
+<?=construye_header_modal('punto-venta-descripcion-modal', "Dirección del punto de venta" );?>      
+    <div class='contenedor_iframe_maps'>
+    </div>        
 <?=construye_footer_modal()?>    
            
 
@@ -131,15 +121,15 @@
             <input type='url' name='nsitio_web' id='nsitio_web' class='form-control input-sm' placeholder='sitio web www '>
         </div>
 
-        <div class="form-group">                
-            <textarea rows="12" name="ndescripcion" id="ndescripcion" class="col-sm-10 form-control" placeholder="Dirección ">
-            </textarea>                
+        <div class="form-group">                            
+            <textarea name="ndescripcion" id="ndescripcion" class="form-control input-sm nlocacion" placeholder="Nota/referencia">
+            </textarea>
+        </div>
+        <div class='place_list'>
         </div>
         <button type="submit" class="btn btn-default btn_save">
-                Guardar cambios
-        </button>
-
-        
+            Guardar cambios
+        </button>        
     </form>
 <?=construye_footer_modal()?> 
 
@@ -254,14 +244,22 @@
         </div> 
 
         <div class="form-group">               
-            <input type='url' name='sitio_web' id='sitio_web' class='form-control input-sm' placeholder='sitio web www '>
+            <input type='url' name='sitio_web' id='sitio_web' class='form-control input-sm' placeholder='sitio web www'>
         </div>   
-        <div class="form-group">            
-            <div >                        
-                <textarea rows="3" name="descripcion" id='area_descripcion' class="col-sm-10 form-control" placeholder="Dirección">
-                </textarea>                
-            </div>            
+        <div class="form-group">                        
+            <!--<input list='direcciones-disponibles'  class="form-control input-sm contacto_direccion" >        -->
+
+            <textarea class='form-control' name="descripcion" id='area_descripcion' placeholder="Nota/referencia">
+            </textarea>
         </div>    
+        <div class='place_lista_direcciones'>
+        </div>
+
+        <div class='map_pv'>
+        </div>
+        <div class='place_map_pv'>
+        </div>
+
         <button type="submit" class="btn btn-default btn_save">
                 Registrar
         </button>    

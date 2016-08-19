@@ -66,8 +66,7 @@
 <!--pickers initialization-->
 <script type="text/javascript" src="<?=base_url('application/js/js/pickers-init.js')?>"></script>
 <link rel="stylesheet" type="text/css" href="<?=base_url('application/js/js/bootstrap-datepicker/css/datepicker-custom.css')?>" />
-<script type="text/javascript" src="<?=base_url('application/js/evento/global.js')?>"></script>
-    
+<script type="text/javascript" src="<?=base_url('application/js/evento/global.js')?>"></script>    
 <script type="text/javascript" src="<?=base_url('application/js/escenarios/principal.js')?>"></script>
 <script type="text/javascript" src="<?=base_url('application/js/accesos/principal.js')?>"></script>
 <script type="text/javascript" src="<?=base_url('application/js/principal/actividad.js')?>" ></script>
@@ -114,8 +113,23 @@
         text-decoration: none;
     }
     .calendarios-evento{
-    margin-top: 11%;
-}
+        margin-top: 11%;
+    }
+    .panel-resumen-evento{
+        background: #23333a;
+        padding: 10px;        
+    }
+    .msj-resumen{
+        font-size: .8em;
+        color: white;
+    }.menos_info_puntos_venta , .menos_info_escenario, .menos_info_escenario , .menos_info_artistas{
+        background: #145770;
+        color: white;
+        padding: 10px;
+    }
+    .nuevo-elemento{
+        background: whitesmoke !important;
+        color: #242829 !important;
+    }
 </style>
-
 <input type='hidden' value='<?=$id_empresa?>' class='empresa'>

@@ -3,8 +3,6 @@ $(document).ready(function(){
 	
 	enid_evento =  $(".enid_evento").val(); 
 	enid_escenario  =  $(".enid_escenario").val(); 	
-
-
 	flag_carga_otros = 0; 
 	artista_tmp  =  0; 	
 	$(".tipo-escenario").click(update_type);	
@@ -273,7 +271,6 @@ function carga_plantilla(e){
 }
 /**/
 function carga_slider_admin(){
-
 	url =  now + "index.php/api/escenario/slider_admin/format/json/"; 
 	escenario =  $("#id_escenario").val();
 	nombre =  $(".nombre_escenario").val(); 
@@ -281,7 +278,7 @@ function carga_slider_admin(){
 	$.ajax({
 		url : url , 		
 		type: "GET" ,
-		data : {"escenario" : escenario , "nombre_escenario" : nombre , "in_session" : in_session} ,
+		data : {"escenario" : escenario , "nombre_escenario" : nombre , "in_session" : in_session , "public" : 0 } ,
 		beforeSend: function(){			
 			show_load_enid( ".slider-principal-escenario" , "Cargando portada del escenario" , 1 ); 				
 		}

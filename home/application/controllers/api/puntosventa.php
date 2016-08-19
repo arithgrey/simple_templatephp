@@ -252,5 +252,13 @@ class Puntosventa extends REST_Controller{
     $data["param"] =  $this->get();  
     echo $this->load->view("imgs/puntos_venta_admin" , $data );
   }
+  /**/
+  function locacion_PUT(){    
+
+    $param =  $this->put();
+    $db_response = $this->puntoventamodel->update_locacion_maps($param);
+    $this->response($db_response);
+
+  }
 }
 ?>

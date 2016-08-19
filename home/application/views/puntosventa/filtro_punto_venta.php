@@ -1,6 +1,6 @@
 <?php 	
 
-	$puntos_venta_registrados = '<div class="item-content-block tags">';
+	$puntos_venta_registrados = '';
 	$a = 0; 
 	$url=  base_url('index.php/accesos/configuracionavanzada/')."/0/". $id_evento."/puntoventa"; 
 	foreach ($puntos_venta as $row ){
@@ -15,23 +15,32 @@
 		$mensaje_evento = "Puntos de venta registrados en el evento. "; 		
 	}
 
-	$puntos_venta_registrados .="<a style='background-color:#8CB1A3;' href='".$url."'> + Registrar nuevo</a>";
-	$puntos_venta_registrados .= "</div>";
+	$mensaje_evento .="				<div class='separate-enid'>
+		</div><div class='row'>
+									<div class='col-lg-12'>
+										<a class='nuevo-elemento pull-left' href='".$url."'> 
+											+ Registrar nuevo
+										</a>
+									</div>	
+								  </div>
+								";
+	
 
 ?>
 
-<div class='panel' style='background:#2C4B50; padding:20px;'>		
-	<i class=" menos_info_puntos_venta  fa fa-caret-up" aria-hidden="true" id='<?=$id_evento?>'  >
-	</i>
-
-	<center>
-		<span style='color:white;'>
+<div class='panel panel-resumen-evento'>		
+	<div class="item-content-block tags">
+		<i class="menos_info_escenario  fa fa-caret-up" aria-hidden="true" id='<?=$id_evento?>'  >
+		</i>		
+		<span class='msj-resumen' >
 			<?=$mensaje_evento;?>
-		</span>
-	</center>
-	<center>
-		<?=$puntos_venta_registrados;?>
-	</center>
+		</span>	
+		<div class='separate-enid'>
+		</div>
+		<div>
+			<?=$puntos_venta_registrados;?>
+		</div>
+	</div>	
 </div>
 
 <style type="text/css">

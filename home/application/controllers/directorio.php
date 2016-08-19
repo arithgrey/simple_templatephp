@@ -18,13 +18,9 @@ class Directorio  extends CI_Controller {
 	}
     /*página principal , contactos */        
 	function contactos($q=''){    	
-
         if (valida_session_enid($this->sessionclass->is_logged_in())) {
             $data = $this->val_session("Mis contactos");  
-            $id_usuario =  $this->sessionclass->getidusuario();                
-            $data_contactos = $this->contactmodel->get_list_contactos($id_usuario);                        
-            $data_repo_contactos = $this->contactmodel->get_repo_contactos($id_usuario);            
-            $data["list_contactos_name"] = list_contactos_names($data_contactos);        
+            $id_usuario =  $this->sessionclass->getidusuario();                            
             $data["q"] =  $q; 
             $this->show_data_page($data , 'directorio/principal_directorio');    
         }

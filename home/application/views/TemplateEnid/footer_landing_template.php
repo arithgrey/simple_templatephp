@@ -8,9 +8,11 @@
 
 <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
  <style type="text/css">
+
     body{
         font:  16px/28px 'Hind','Helvetica Neue',Helvetica,sans-serif !important;
     }
+    ul { list-style: none !important }
     .left-side,  .sticky-left-side , .sticky-header , .logo{
         background: #032935 !important;            
     }    
@@ -495,9 +497,9 @@
 </script>
 
 <style type="text/css">
-/*
+
 .sticky-header .main-content{
     background: #00b3fe !important;
 }
-*/
+
 </style>

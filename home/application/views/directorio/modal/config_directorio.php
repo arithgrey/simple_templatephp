@@ -152,11 +152,13 @@
                             <span class="input-group-addon">
                                 Dirección
                             </span>
-                            <input class="form-control input-sm " name="direccion uppercase_enid"   placeholder="Av. sur 89 col...  " type="text" onkeyup="javascript:this.value=this.value.toUpperCase();">
+                            <input list='pdirecciones' class="form-control input-sm direccion " name="direccion uppercase_enid"   placeholder="Av. sur 89 col...  " type="text" onkeyup="javascript:this.value=this.value.toUpperCase();">
+                            <div class='place-direcciones'>
+                            </div>
                          </div>
-
                      </div>
                      </div>
+                    
                  </div>
                 <div class='col-lg-12'>
                     <div class='col-lg-6 col-md-6 col-sm-12'>
@@ -190,7 +192,8 @@
                 </div>   
                 <div class="col-lg-12  col-md-12  col-sm-12  ">              
                     <div class="col-lg-12  col-md-12  col-sm-12  ">
-                        <label class="control-label">Nota</label>                    
+                        <label class="control-label">Nota
+                        </label>                    
                         <textarea rows="3" name="nota" class="form-control">
                         </textarea>                    
                     </div>                 
@@ -411,7 +414,9 @@
                 <span class="input-group-addon">
                     Nueva dirección
                 </span>
-                <input class="form-control input-sm" name="ndireccion" id="ndireccion"   placeholder="Av. sur 89 col...  " type="text">
+                <input list='lista-ndireccion' class="form-control input-sm" name="ndireccion" id="ndireccion"   placeholder="Av. sur 89 col...  " type="text">
+                <div class='list-ndireccion'>
+                </div> 
              </div>
             </div> 
          </div>
@@ -496,10 +501,7 @@
 
 
 
-
-
 <!--**********************************-->
-
 <?=construye_header_modal('contact-delete', " Eliminar contacto " );?>
     Realmente decea eliminar el contacto ??
     <button type="button" class="btn btn-default" id="aceptar-delete" data-dismiss="modal">
@@ -512,3 +514,14 @@
     </div>
 <?=construye_footer_modal()?>                         
 <!--Termina nuevo contacto -->
+
+
+
+
+
+
+
+<?=construye_header_modal('locacion-modal', "Dirección del contacto");?>    
+    <div class='contenedor_iframe_maps'>
+    </div>
+<?=construye_footer_modal()?> 

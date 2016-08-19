@@ -1,6 +1,129 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 if(!function_exists('invierte_date_time')){
 
+
+function edita_section_mensaje_comunidad($val ,  $session , $class='' ){  
+    /*mensaje más  editar */    
+    $mensaje =  "<p>
+                    ". 
+                    $val 
+                    ."
+                 </p>"; 
+    if ($session == 1){
+        $mensaje .=  "<p $class >
+                      ". $val ."
+                     </p>"; 
+        $mensaje .="<textarea rows='5' style='display:none;' cols='20' class='form-control' id='comunidad-mensaje-input' name='mensaje-comunidad' placeholder='Cómo la comunidad de tu organización'>
+                    ".$val."
+                    </textarea>'";                           
+    }
+    return $mensaje; 
+    /**/
+  }
+
+
+function contruye_iconos_experiencia_cliente($data){
+
+        /*7,1,2 artistas  , evetos, escenarios  */        
+        $f_artistas =  0;         
+        $f_eventos =  0; 
+        $f_escenarios =  0; 
+        $clases = ''; 
+        $nombre =''; 
+        $imgs =  ''; 
+        $links = '
+                <li>
+                    <a  class="tag-enid-galery" href="#" data-filter="*"> 
+                        + 
+                    </a>
+                </li>
+                ';   
+        
+        foreach ($data as $row){
+
+            $idimagen =  $row["idimagen"];
+            $nombre_imagen =  $row["nombre_imagen"];
+            $type  =  $row["type"]; 
+            $img  =  $row["img"]; 
+            $extension =  $row["extension"];
+
+            switch ($type) {
+                case 7:
+                    $clases = '.artistas';
+                    $nombre = 'artistas';    
+                    if ($f_artistas == 0 ) {
+                         $links .= '
+                                    <li>
+                                        <a class="tag-enid-galery"  href="#" data-filter="'.$clases.'">
+                                            '.$nombre.'
+                                        </a>
+                                    </li>
+                                    ';
+
+                    }
+                    $f_artistas++; 
+
+
+                    break;
+
+                case 1:
+                    $clases = '.eventos';
+                    $nombre = 'eventos';
+                    if ($f_eventos == 0 ) {
+                         $links .= '
+                                <li>
+                                    <a class="tag-enid-galery"  href="#" data-filter="'.$clases.'">
+                                        '.$nombre.'
+                                    </a>
+                                </li>
+                                ';
+                    }
+                    $f_eventos ++; 
+                    break;
+
+                case 2:
+                    $clases = '.escenarios';                    
+                    $nombre = 'escenarios';
+
+                    if ($f_escenarios == 0 ) {
+                         $links .= '
+                                <li>
+                                    <a class="tag-enid-galery"  href="#" data-filter="'.$clases.'">
+                                        '.$nombre.'
+                                    </a>
+                                </li>
+                                ';    
+                    }
+                    $f_escenarios ++; 
+                    break;        
+                
+                default:
+                    
+                    break;
+            }
+
+
+            $img =  create_icon_img($row , ' ', ' '  ); 
+
+            $imgs .= '
+                    <div class=" '. $nombre .' item " >
+                        <a href="#myModal" data-toggle="modal">
+                            '. $img .'
+                        </a>
+                        <!--<p>
+                            img01.jpg 
+                        </p>-->
+                    </div>            
+                    ';
+           
+           
+        }
+        
+        $icons["links"] = $links; 
+        $icons["imagenes"] = $imgs;
+        return $icons;
+    }
+
 /**/
 function evalua_msj_solicitudes($public ){
 
@@ -296,25 +419,18 @@ function carga_logo_empresa($data_empresa , $in_session ){
   /*Cuendo se tiene imagen*/
   $img = ''; 
   $path_img  = ''; 
-
   $modal = "";
   if ($in_session == 1 ) {    
-
-
-    $modal = "data-toggle='modal' data-target='#modal-logo-empresa' ";   
+      $modal = "data-toggle='modal' data-target='#modal-logo-empresa' ";   
   }
-
   if (strlen($data_empresa["nombre_imagen"]) > 4 ){    
     $img =  '<img id="img-logo-emp" class="img-tmp-empresa" title="Logo de la empresa"   '. $modal .'  src="data:image/jpeg;base64, '. base64_encode($data_empresa["img"])  .'  " />';
   }else{
     /*Creamos la simulación de la imagen */
-    $img = '<div id="img-logo-emp" class="img-tmp-empresa" title="Logo de la empresa"   '. $modal .'  >
-              <br>
+    $img = '<div id="img-logo-emp" class="img-tmp-empresa" title="Logo de la empresa" '. $modal .'>              
               <center> 
                 <span class="text-logo-img"> 
-                  Logo 
-                  <br>
-                  +
+                  + Nuestro logo
                 </span>
               </center> 
             </div>'; 

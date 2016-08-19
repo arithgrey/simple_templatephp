@@ -1,9 +1,9 @@
+<!--]Hasta aquí iniciamos la barra lateral -->
 <script type="text/javascript">
 $(function() {
     $('nav, .nav-controller').on('click', function(event) {
         $('nav').toggleClass('focus');
     });
-
     $('nav, .nav-controller').on('mouseover', function(event) {
         $('nav').addClass('focus');
         $('.controller-open').hide();
@@ -17,9 +17,7 @@ $(function() {
     })
 })
 </script>
-
 <style type="text/css">
-
 .nav-controller {
     position: fixed;
     top: 45px;
@@ -31,10 +29,8 @@ $(function() {
     font-size: 12pt;
     cursor: pointer;
     z-index: 300;
-}
-
-/**/
-nav {
+}/**/
+nav{
   position: fixed;
   top: 0px;
   right: -100%;
@@ -43,12 +39,14 @@ nav {
   height: 100%;
   max-width: 200px;
   text-align: right;
-  background-color: rgb(255, 255, 255);
+  //background-color: rgb(255, 255, 255);
+  //background-color: #677e86;
+  background-color: #0f89b3;
   box-shadow: -3px 0px 3px 0px rgba(160, 160, 160, 0.30);
   z-index: 100;    
   overflow: auto;
 }
-
+/**/
 nav.focus {
     right: 0px;
 }
@@ -56,86 +54,59 @@ nav > ul {
     list-style: none;
 }
 nav > ul > li > a:hover {
-    font-size: 1.1em;
+    font-size: 1em;
     font-weight: 700;
     color: rgb(51, 51, 51);
     text-decoration: none;
 }
 </style>
+<nav class="animate seccion-lateral">    
+    <div class='separate-enid'>
+    </div>
+    <span class='title-mejora'>
+        Mejorando la experiencia de tus eventos musicales
+    </span>    
+    <div class='separate-enid'>
+    </div>
+    <div class="divider">
+    </div>
 
 
+    <div class='separate-enid'>
+    </div>
 
-<nav class="animate" style='background:#052E3A;'>
-    <p style='background:#09AFDF; padding:50px; color:white; font-size:1.1em;'>
-      <strong>Todo a tu alcance.! </strong>
-    </p>
-    <div class="divider"></div>
+
+    <div class='separate-enid'>
+    </div>
     <ul>
         <li>
-          <a href="<?=base_url('index.php/emp/cuentanostuhistoria')?>/<?=$data_empresa['idempresa']?>" style='color:white;'>
+          <a href="<?=base_url('index.php/emp/cuentanostuhistoria')?>/<?=$data_empresa['idempresa']?>" class='link-encuesta'>
             Cuentanos tu historia
           </a>
-        </li>
-       
+        </li>       
         <li>
-          <a href="<?=base_url('index.php/emp/solicitatuartista/')?>/<?=$data_empresa['idempresa']?>" style='color:white;'>
+          <a href="<?=base_url('index.php/emp/solicitatuartista/')?>/<?=$data_empresa['idempresa']?>" class='link-encuesta'>
             Solicita tu artista
           </a>
         </li>        
     </ul>      
 </nav>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
  <div class="nav-controller img-down">
     <span class="fa  fa-angle-double-left  controller-open">
     </span>
     <span  style='display:none;' class="fa fa-angle-double-right   controller-close">
     </span>
 </div>
+<!--]Hasta aquí terminamos la barra lateral -->
 
-
-
-
-
-
-
-
-
-<div >          
+<div>          
   <ul class="nav nav-pills" role="tablist">
     <li class="active">
       <a aria-expanded="true" href="#pill-1" role="tab" data-toggle="tab" title="Latest Arrivals">
         <i class='fa fa-star'>
         </i>        
       </a>
-      </li>
-    
+    </li>    
     <li class="section-comunidad" id='section-comunidad'>
       <a aria-expanded="false" href="#pill-3" role="tab" data-toggle="tab" title="Top Sellers">
         <i class=" icon-up-1">
@@ -151,16 +122,15 @@ nav > ul > li > a:hover {
     </a>
     </li>
   </ul>
-
   <div class="tab-content clear-style">
     <div class="tab-pane active" id="pill-1">
-      <?=$this->load->view("empresa/empresa_general.php");?>
+      <?=$this->load->view("empresa/empresa_general");?>
     </div>
     <div class="tab-pane" id="pill-2">
-        <?=$this->load->view("empresa/detalle_historia.php");?>
+        <?=$this->load->view("empresa/detalle_historia");?>
     </div>
     <div class="tab-pane" id="pill-3">
-          <?=$this->load->view("empresa/historia_imagenes.php")?>
+        <?=$this->load->view("empresa/historia_imagenes")?>
     </div>
   </div>            
 </div>
@@ -182,7 +152,7 @@ nav > ul > li > a:hover {
 
 <!--*****************************************************************************-->
 
-<input type='hidden' value="<?=$data_empresa['idempresa']?>" id='id_empresa' > 
+<input type='hidden' value="<?=$data_empresa['idempresa']?>" id='id_empresa' class='id_empresa' > 
 
 <script type="text/javascript" src="<?=base_url('application/js/directorio/emp.js')?>"></script>
 <script type="text/javascript" src="<?=base_url('application/js/Organizacion/principal.js')?>"></script>
@@ -194,16 +164,8 @@ nav > ul > li > a:hover {
   .section-mision-empresa,.section-vision-empresa, #años-section,
    #section-mas-info , #reponse-exp , .reponse-exp , .slogan-edit-section {
     display: none;
-  }
+  }    
   
-  .description-empresa-text:hover, .nombre-empresa-text:hover .misions-empresa-text:hover, .vision-empresa-text:hover, .mas-info-empresa-text:hover, .años-empresa-text:hover , .slogan-text:hover , #artistas-empresa-text:hover, #mision-empresa-text:hover{
-    padding: 1px;
-    cursor: pointer;    
-  }
-  #nombre-empresa-text:hover{
-    cursor: pointer;
-    padding: 5px;
-  }
   #principal-contenido-historia:hover{
     cursor: pointer;
     padding: 100px;
@@ -415,24 +377,86 @@ nav > ul > li > a:hover {
     color: white; 
 }
 .mas-info-empresa-text:hover .editar-mas-info-empresa{
-  filter: alpha(opacity=80);
+    filter: alpha(opacity=80);
     opacity: .8;
     font-size: .7em;
     background: #0B9BCB;
     color: white;   
 }
-.social-fb:hover , 
-.social-tw:hover ,
-.social-gp:hover, 
-.la-historia:hover, 
-.tu-artista:hover , 
-.social-www:hover{
-  cursor: pointer;
-  padding: 1px;
 
+</style>
+
+<style type="text/css">
+.img-tmp-empresa{
+  width: 100%;
+  height: 400px;
+}
+.text-logo-img{
+  font-size: 4.5em;  
+  cursor: pointer;
+}#logo_empresa_img{
+  cursor: pointer;
 }
 </style>
 
 
 
+
+
+
+
+
 <?=$this->load->view("empresa/historia_contactos_modal");?>
+<!--CSS YA DEPURADOS -->
+<style type="text/css">
+  .seccion-lateral{
+    
+  }.nombre_empresa:hover , .nombre-empresa-text:hover ,.social-fb:hover , .social-tw:hover , .social-gp:hover, .la-historia:hover,  .tu-artista:hover ,   .social-www:hover , .description-empresa-text:hover,  .misions-empresa-text:hover, .vision-empresa-text:hover, .mas-info-empresa-text:hover, .años-empresa-text:hover , .slogan-text:hover , #artistas-empresa-text:hover, #mision-empresa-text:hover{
+      cursor: pointer;    
+  }.nombre-empresa-text{
+    font-size: 6em;
+  }.rubberBand{
+    height:90%; margin-left: 20%; margin-right:20%;
+  }
+  .alert-info{    
+    background-color: #d9edf7;
+    border-color: #bce8f1;
+    color: #31708f;
+  }.descripcion-empresa{
+    background: #223c48;
+    padding: 10px;
+    margin-left: 1%;
+  }.title-saber{
+    font-size: 3em;
+    font-weight: bold;
+    padding: 10px;
+    color: white;
+  }
+  .contenedor-title-saber{
+    text-align: right;
+    padding: 10px;
+  }.last-seccion{
+    height:100%; background:#152A2D;
+  }.title-mode-us{
+      color:white !important;
+  }.artistas-section{
+      display:none;
+  }.ranking{ 
+    padding: 1px;
+  }.title-mejora{
+    font-size: 2em;
+    font-weight: bold;
+    color: white;    
+  }.link-encuesta{
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+  }.resumen-us{
+      background: #1e5771;
+      color: white;
+  }.lb-pais{
+    font-weight: bold;
+  }.lb-pais:hover{
+    cursor: pointer;
+  }
+</style>

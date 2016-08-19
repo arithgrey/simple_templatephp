@@ -1,10 +1,10 @@
-function carga_img_portada(){
-    
+function carga_img_portada(){    
     url = now +  "index.php/api/event/form_evento/format/json/";  
     evento =  $("#evento").val();
-    $.ajax({
+
+    $.ajax({        
             url : url ,
-            data : {evento :  evento },
+            data : {"evento" : evento ,"public" : 1 },
             beforeSend : function(){
                 show_load_enid(".place_form_portada", "Cargando formulario " , 1); 
             }
@@ -13,7 +13,6 @@ function carga_img_portada(){
             $(".place_form_portada").empty();
             llenaelementoHTML(".seccion_form_portada" , data);
             $(".imagen_portada_evento").change(upload_imgs_portada_evento);
-
         }).fail(function(){
             show_error_enid(".place_form_portada" , "Falla al actualizar al cargar el formulario para la carga de la portada, reporte al administrador " );   
         });    
@@ -65,13 +64,16 @@ function load_data_slider(){
     id_evento =  $("#evento").val();
     url =  now + "index.php/api/event/imagenes/format/json/";
     nombre_evento =  $("#nombre_evento_val").val();
-        
+    in_session =  $(".in_session").val();
+    slogan  =  $(".eslogan").val();
+    
+
     $.ajax({
         url :  url , 
         type :  "GET", 
-        data: {"id_evento" : id_evento , "nombre_evento" : nombre_evento } , 
+        data: {"id_evento" : id_evento , "nombre_evento" : nombre_evento ,  "public" :  0  , "in_session" : in_session ,  "slogan" : slogan  } , 
         beforeSend : function(){            
-            show_load_enid(".place_slider_portada", "Cargando portada del evento" , 1); 
+            show_load_enid(".place_slider_portada", "Cargando portada del evento ... " , 1); 
         }
     }).done(function(data){        
         

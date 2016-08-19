@@ -1,12 +1,91 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 if(!function_exists('invierte_date_time')){
+	/**/
+	function valida_maps_public($formatted_address ,  $id_evento  ){
+		$maps =  "<span class='text-map-prox'>
+					Próximamen la se publicará el lugar del evento
+				  </span>"; 
+
+		if (trim(strlen($formatted_address)) >  3 ){
+			$url = base_url('index.php/maps/map') . "/".$id_evento."/0/";
+			$maps ="
+			    <span class='text_map'>
+		        	".$formatted_address." 
+		        </span>
+		        <iframe  height='500px;' width='100%'   id='iframe_maps_conf'  
+		             src='".$url."'>
+		        </iframe> 
+		        ";	
+		}
+
+
+
+		$maps_complete =  "
+						<div class='col-lg-12 col-md-12 col-sm-12'>      
+		    				<div class='maps_enid'>
+							".$maps."		
+							</div>
+						</div>
+						";
+		return $maps_complete;				
+		
+
+
+	}
 /**/
+  function slider_item($imgs , $param){
+    $item = '<div class="carousel-inner">';
+      $x =0;
+      foreach ($imgs as $row) {
+        $flag_indicator =  "";
+        $slider_num =  "slide-".$x;
+        if ($x == 0 ) {
+          $flag_indicator =  "active";     
+        }
+        $msj_extra =  "";                
+        $text_slogan =  create_text_slogan($param["slogan"], $param["in_session"], $param["id_evento"]);  
+        if ($param["public"] == 1 ) {
+          $msj_extra = '
+              <span class="nombre-evento-enid">
+                '.$param["nombre_evento"].'
+              </span>        
+              <h3>
+               	'.$text_slogan .'
+              </h3>                                          
+            ';
+        }          
+        $item .=  '<div class="item slides '.$flag_indicator.' ">';
+        $imagen  =  create_icon_img($row , $slider_num , " " );  
+        $item .="<div> ".$imagen."</div>";
+                 $item .='<div class="hero">                            
+                              '.$msj_extra .'
+                          </div>'; 
+        $item .=  '</div>';
+        $x ++;
+      }
+    $item .= '</div>';
+    return $item;
+  }
+  /**/
+  function slider_ol($num_imgs){
+
+    $indicator =  '<ol class="carousel-indicators">'; 
+    for ($x=0; $x <$num_imgs ; $x++) {       
+      $flag_indicator =  "";
+      if ($x == 0 ) {
+        $flag_indicator =  "active";     
+      }
+      $indicator.=  '<li data-target="#bs-carousel" data-slide-to="'.$x.'" class="'.$flag_indicator .'"></li>';
+      
+    }
+    $indicator.= '</ol>';
+    return $indicator;    
+  }
 
 /**/
 function construye_resumen_eventos_e($data_eventos , $limit_text= 270 ,  $show_edit=0 , $show_delete = 0 , $show_view_like_public = 0 ){
 
-	if ($data_eventos["num_eventos"]>0 ) {
-		//return get_last_events_empresa($ultimos_eventos, $limit_text ,  $show_edit , $show_delete , $show_view_like_public = 0);
+	if ($data_eventos["num_eventos"]>0 ) {		
 		return "ok";
 	}else{
 		return "<center><span class=''>No has publicado eventos durante los últimos 30 días</span></center>";
@@ -80,39 +159,8 @@ function objs_pemitidos($objs , $in_session ,  $id_evento){
 	$num_elementos = count($objs); 
 	$href =  base_url("index.php/eventos/nuevo/"  . $id_evento . "/objs/#portlet_tab2" );
 	$editable = agregar_btn($in_session  , $href );
-
-
 	if ($num_elementos > 0 ) {		
-		
-		
-
-		/*
-		$d_class =  "";
-		if ($num_elementos  > 6 ) {$d_class =  " seccion_table_objs_scroll ";}				
-		$table = "<div class='seccion_table_objs  ". $d_class." '>
-					<table  class='table_objs_permitidos'>"; 
-			foreach ($objs as $row){		
-				$idobjetopermitido = $row["idobjetopermitido"];
-				$nombre = $row["nombre"];
-				$descripcion = $row["descripcion"];
-				$status = $row["status"];
-				
-
-				$table .="<tr>";
-					$table .=  get_td($nombre); 
-					$table .=  get_td($descripcion); 					
-				$table .="</tr>";
-			}
-		$table .=  "</table>
-				</div>
-
-				".$editable;				
-		$list_objs =  $table;
-		*/
 		$list_objs =  display_objs_pemitidos($objs);
-
-
-
 	}else{
 		$list_objs = tmp_objs_permitidos( $in_session ,  $id_evento);
 	}
@@ -227,35 +275,6 @@ function listobjetosp( $arreglo ,  $id_evento ){
 	return $list;
 
 }
-/*********************************************************************************+*/
-
-/*
-function get_list_objpermitidos( $data ){
-
-
-	$list_objpermitidos ='<div>
-								<ul>';
-	foreach ($data as $row) {
-		$list_objpermitidos .= '<li class="objeto-permitido-evento">
-									<i class="fa fa-check text-default">
-									</i> '
-									. $row["nombre"].'
-										<div class="descripcion-objeto-permitido" >'.								
-											$row["descripcion"]
-											.
-										'</div>
-									</li>';
-
-		
-	}
-	$list_objpermitidos .='</ul></div>';
-    return $list_objpermitidos;								
-}
-
-*/
-
-/****************************+ Pagination  **********************************/
-
 function get_pagination_principal($limit_display){
 
 	$anterior = "";
@@ -386,11 +405,8 @@ function get_last_events_empresa($ultimos_eventos, $limit_text= 270 ,  $show_edi
 			$evento_punto_venta =  $row["evento_punto_venta"];
 			$accesos =  $row["accesos"];
 			$dinamic_section = "dinamic_section".$id_evento;
-
-		
-			
-
 			$config =""; 
+			$url_maps=  base_url('index.php/maps/map') ."/". $id_evento."/0/";
 			$resumen_section  = resumen_evento($show_edit , $escenarios , $id_evento , $artistas , $evento_punto_venta , $accesos ); 
 
 			if($show_edit == 1){									
@@ -423,7 +439,8 @@ function get_last_events_empresa($ultimos_eventos, $limit_text= 270 ,  $show_edi
 
                             <p>
                             <p class=" auth-row">
-                                <a href="#"></a> '.$edicion .'  |  '.$fecha_evento.'   | <a href="#">5 Comments</a>
+                                <a href="#"></a> '.$edicion .'  |  '.$fecha_evento.'   | <a href="#">5 Comments</a>|
+                                <a href="'.$url_maps.'"><i class="fa fa-map-marker locacion" id="'.$id_evento.'" ></i></a>
                             </p>
                             
                             '. $descripcion_evento .'
@@ -642,7 +659,7 @@ function get_slider_img_evento($data){
 		$seccion = ''; 
 		if ($in_session ==1  ) {						
 			$msj =  "
-						No has registrado un slogan para el evento. 
+					No has registrado un slogan para el evento. 
 					"; 
 			if ( strlen(trim($slogan))> 0) { $seccion =  seccion_slogan($slogan , $in_session ,  $id_evento   );}else{$seccion =  seccion_slogan($msj , $in_session ,  $id_evento );}		
 		}else{			
@@ -655,10 +672,9 @@ function get_slider_img_evento($data){
 
 		$url =  base_url('index.php/eventos/nuevo/'.$id_evento.'/eslogan');
 		$btn =  editar_btn($in_session , $url ); 
-		$seccion = '<span class="pull-right">
+		$seccion = '<span>
 						<small class="slogan">                   
-						'. $msj .'
-
+						'.$msj.'
 						</small>'.$btn.'
 					</span>';
 		return $seccion; 

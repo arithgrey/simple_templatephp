@@ -29,6 +29,7 @@
     body{
         font:  16px/28px 'Hind','Helvetica Neue',Helvetica,sans-serif !important;
     }
+    ul { list-style: none !important }
     .t_enid{
         font-size: 2em;
         font-weight: bold;
@@ -272,6 +273,10 @@
             text-align:center; 
             padding:10px; 
             width:100%;
+        }
+        .locacion{
+            cursor: pointer;
+            color: #607D8B;
         }
     .animationload {
           background-color: #032935;
@@ -533,4 +538,10 @@
 .sticky-header .header-section{
     //background: #223c48;
 }
+/*
+.sticky-header .main-content{
+    background: #00b3fe !important;
+}
+*/
+
 </style>

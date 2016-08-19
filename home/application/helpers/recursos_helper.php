@@ -1,6 +1,32 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 if(!function_exists('invierte_date_time')){
 
+/**/
+function validate_social($url , $class , $class_icon ,  $flag  = 0  ){
+
+    $red_social =  ""; 
+    $class_extra =  "";
+
+    if ( trim(strlen($url) ) > 7){
+        $class_extra =  " color_social ";        
+    }
+    $url_text =  "<i class='". $class_icon."  $class_extra'>
+                  </i>
+                ";
+    if ($flag == 1 ){
+        $url_text =  "www";
+    }
+    return "
+            <li class='". $class  ." '>
+                <a>
+                ".$url_text."                
+                </a>
+            </li>
+            "; 
+    
+
+}
+/**/
 function resumen_usuarios_cuenta($data){   
 
     $table ='<table class="table table-bordered">                                          

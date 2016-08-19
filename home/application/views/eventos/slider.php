@@ -2,27 +2,19 @@
     $imgs_portada ="";     
     $b = 0;           
     $indicators = slider_ol(count($imagenes_portada)); 
-    $items =  slider_item($imagenes_portada);
+    $items =  slider_item($imagenes_portada , $param  );
 ?>
-<div style='background: rgba(0,0,0,.075);'>
-  
+<div style='background: rgba(0,0,0,.075);'>  
   <div class="carousel fade-carousel slide" data-ride="carousel" data-interval="3000" id="bs-carousel">
-  <div class="overlay">
+    <div class="overlay">
     </div>
     <?=$indicators;?>
     <?=$items;?>  
   </div>
-
 </div>
 
+
 <style type="text/css">
-.fade-carousel {
-    position: relative;
-    height: 100vh;
-}
-.fade-carousel .carousel-inner .item {
-    height: 100vh;
-}
 .fade-carousel .carousel-indicators > li {
     margin: 0 2px;
     background-color: #f39c12;
@@ -71,6 +63,7 @@
          -o-transition: 2s all ease-in-out .1s; 
             transition: 2s all ease-in-out .1s;    
 }
+
 .overlay {
     position: absolute;
     width: 100%;
@@ -79,7 +72,6 @@
     background-color: #080d15;
     opacity: .5;
 }
-
 .btn.btn-lg {padding: 10px 40px;}
 .btn.btn-hero,
 .btn.btn-hero:hover,
@@ -90,18 +82,7 @@
     outline: none;
     margin: 20px auto;
 }
-
-
-.fade-carousel .slides .slide-1, 
-.fade-carousel .slides .slide-2,
-.fade-carousel .slides .slide-3 {
-  height: 100vh;
-  background-size: cover;
-  background-position: center center;
-  background-repeat: no-repeat;
-}
-
-
+/**********************************************************************************************************************/
 @media screen and (min-width: 980px){
     .hero { width: 980px; }    
 }
@@ -109,6 +90,9 @@
     .hero h1 { font-size: 4em; }    
 }
 .nombre-evento-enid{
-  color: #d9534f !important;
+  //color: #252e36 !important;
+  color:  #c6d2d4 !important;
+  font-size: 3em;
+  font-weight: bold;
 }
 </style>

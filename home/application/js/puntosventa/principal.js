@@ -1,13 +1,11 @@
 $(document).on("ready", function(){
-
 	var dinamic_pv = 0;
 	var  pv = 0;  
 	$("footer").ready(evalua_q);
 	$("footer").ready(load_data_puntos_venta);
 	$("#form-filtro").submit(busqueda);
 	$("#form-puntos-venta").submit(record_punto_venta);	
-
-
+	$(".close").click(load_data_puntos_venta);
 });
 
 /*Actualiza el estado del contacto asociado al punto de venta*/
@@ -32,16 +30,17 @@ function record_punto_venta(e){
 				type : "POST" , 
 				beforeSend : function(){			
 					show_load_enid(".place_nuevo" , "Registrando .. " , 1); 			
-					$(".place_razon_social_vali").empty();	
+					$(".place_razon_social_vali").empty();						
+					$(".place_nuevo").empty();				
+					$(".place_razon_social_vali").empty();
 				}
 			}).done(function(data){			
-				$(".place_nuevo").empty();				
 				var  fields =  ["#nombre_razon_social" , "#area_descripcion" , "#sitio_web"];
 				reset_fields(fields); 
 				var  inputs = ["L" , "M"  , "MM" , "J" , "V" , "S" , "D" ];
 				reset_checks(inputs); 
 				load_data_puntos_venta();
-				$(".place_razon_social_vali").empty();
+				
 				$("#contact-modal").modal("hide");									
 				show_response_ok_enid( ".place_puntos_venta", "Punto de venta registrado con éxito.!"); 
 
@@ -65,11 +64,14 @@ function load_data_puntos_venta(){
 		type : "GET",
 		data : $("#form-filtro").serialize() , 
 		beforeSend: function(){
+			
 			show_load_enid(".place_puntos_venta" , "Cargando .. " ,1);			
+			
 		}
 	}).done(function(data){
 		
 		$(".place_puntos_venta").empty();
+
 		llenaelementoHTML( ".puntos_venta" , data);				
 		$(".editar-punto-venta").click(edit_punto_venta);
 		$(".contactos").click(carga_section_contactos_admin);
@@ -111,10 +113,11 @@ function carga_data_punto_venta(punto_venta){
 		data : {"punto_venta" :  punto_venta},
 		beforeSend: function(){
 			show_load_enid(".place_seccion_configurar" , "cargando datos del punto de venta" , 1);
+			$(".place_seccion_configurar").empty();
 		}
 	}).done(function(data){
 		/**/
-		$(".place_seccion_configurar").empty();
+		
 		razon_social =  data[0].razon_social;
 		descripcion =  data[0].descripcion;	
 		zona =  data[0].zona;
@@ -144,6 +147,13 @@ function carga_data_punto_venta(punto_venta){
 		document.getElementById("nzona").value = zona;
 		$(".form-puntos-venta-edit").submit(registra_cambios_punto_venta);
 		$("#nsitio_web").val(sitio_web);
+
+
+		$(".nlocacion").keyup(function(){
+			carga_maps(".nlocacion", "lista-locaciones" , ".place_list");
+		});
+
+
 	}).fail(function(){
 		show_error_enid(".place_seccion_configurar" , "Error al cargar datos del punto de venta, reporte al administrador");
 	});	
@@ -195,10 +205,11 @@ function actualiza_nota_punto_venta(e){
 		   data : data_send ,
 		   beforeSend : function(){
 		   		show_load_enid(".place_actualizar_nota" , "Actualizando" , 1);
+		   		$(".place_actualizar_nota").empty();
 		   }
 		}).done(function(data){	   	
 			$("#punto-venta-descripcion-modal").modal("hide");
-			$(".place_actualizar_nota").empty();
+			
 			load_data_puntos_venta();
 		   	show_response_ok_enid(".place_puntos_venta" , "Datos de la dirección actualizadon con éxito");
 
@@ -211,24 +222,12 @@ function actualiza_nota_punto_venta(e){
 }
 /**/
 function load_nota_punto_venta(e){
-	punto_venta  = e.target.id;
-	pv= punto_venta;
-	url =  now + "index.php/api/puntosventa/punto_venta/format/json/"; 
 	
-		$.ajax({
-		   url: url,
-		   type: 'GET',
-		   data : {"punto_venta" : punto_venta} ,
-		   beforeSend : function(){
-		   		show_load_enid(".place_actualizar_nota" , "Cargando dirección del punto de venta " ,1 );
-		   }
-		}).done(function(data){	   	
-			$(".place_actualizar_nota").empty();
-			valorHTML("#nota-punto-venta" , data[0].descripcion);   	
-			$("#form-nota-pv").submit(actualiza_nota_punto_venta);
-		}).fail(function(){
-			show_error_enid(".place_actualizar_nota" , "Error al cargar la dirección del punto de venta, reporte al administrador");		   
-		});
+	punto_venta  = e.target.id;
+	url =  now + "index.php/maps/map/"+punto_venta+"/2/99999999/";
+	iframe =  "<iframe   height='500px;' width='100%'   id='iframe_maps_conf' src='"+url+"'> </iframe>";
+	llenaelementoHTML(".contenedor_iframe_maps" , iframe );
+	/**/	
 }
 /**/
 function delete_punto_venta(e){
@@ -264,10 +263,11 @@ function load_contactos_punto_venta(){
 		data :  {"punto_venta" :  dinamic_pv} , 
 		beforeSend :  function(){
 			llenaelementoHTML(".place_contactos_asociados_pv" , "Cargando contacdos asociados a este punto de venta.. ");
+			$(".place_contactos_asociados_pv").empty();
 		}
 	}).done(function(data){
 		
-		$(".place_contactos_asociados_pv").empty();
+		
 		llenaelementoHTML(".contactos_asociados_pv" , data );
 		$("#f_contacto").keyup(function(){
 			if ($("#f_contacto").val() !=  null ){
@@ -357,11 +357,10 @@ function enlazar_contacto_punto_venta(e){
 		/****** ********************* ***************** ******************** ************** */
 		load_contactos_punto_venta(); 
 		show_response_ok_enid(".status-punto-venta-contacto", "Contacto agregado con éxito");
-		load_data_puntos_venta();
+		$(".punto-venta-descripcion-modal").modal("hide");
 		/****** ********************* ***************** ******************** ************** */
 	}).fail(function(){
 		show_error_enid(".status-punto-venta-contacto" , "Falla al agregar contacto a punto de venta, reporte al administrador");
-
 	});
 }
 
@@ -407,3 +406,4 @@ function evalua_q(){
 	}
 
 }
+/**/

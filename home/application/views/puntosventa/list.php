@@ -25,13 +25,15 @@
 			$S  =  $row["S"];
 			$D  =  $row["D"];
 			$sitio_web =  create_url_sitio_web($row["sitio_web"]);
+			$formatted_address  =  $row["formatted_address"];
 
+		
 			$nombre = "";			
 			$estado_usuario ="";
 			$list.="<tr>";
 				
 				$img =  create_icon_img($row , " img_punto_venta " , $idpunto_venta , " data-toggle='modal' data-target='#punto-venta-imagen-modal' " ); 
-				$fa_nota = tmp_direccion($descripcion , $idpunto_venta ); 
+				$fa_nota = tmp_formatted_address($formatted_address , $idpunto_venta ); 
 					
 
 				$list .=  get_td("<i  data-toggle='modal' data-target='#editd-punto-venta-modal'  class='editar-punto-venta fa fa-cog'  id='". $idpunto_venta  ."'  ></i>" ,"title='Editar contacto'" );

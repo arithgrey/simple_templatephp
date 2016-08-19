@@ -1,8 +1,6 @@
 function edita_logo_empresa(){
-    /**/
     $(".guardar_img_enid").hide();
     $(".imagen_logo_empresa").change(upload_imgs_enid_logo);
-
 }
 /**/
 function upload_imgs_enid_logo(){        
@@ -30,23 +28,20 @@ function registra_img_logo(e){
             cache: false,
             contentType: false,
             processData: false, 
-            beforeSend: function(){
-                llenaelementoHTML(".response_img_logo_empresa" ,  "Cargando imagen ... ");
-                   
+            beforeSend: function(){                
+                show_load_enid(".response_img_logo_empresa" , "Cargando ..." , 1 ); 
             }
 
     }).done(function(data){
         
-        $(".guardar_img_enid").hide();
-        $(".response_img_logo_empresa").html(data);
-        muestra_alert_segundos(".response_img_logo_empresa"); 
+        $(".guardar_img_enid").hide();                       
+        show_response_ok_enid(".response_img_logo_empresa" ,  data);
         $('#modal-logo-empresa').modal('hide');        
-        $("#lista_imagenes_logo").html("");
+        $("#lista_imagenes_logo").empty();
         $("#guardar_img_logo").hide();
-
          
-    }).fail(function(){
-        alert("Error ");
+    }).fail(function(){        
+        show_error_enid(".response_img_logo_empresa" , "Problemas al cargar imagen, reporte al administrador");
     });
     $.removeData(formData);
 }

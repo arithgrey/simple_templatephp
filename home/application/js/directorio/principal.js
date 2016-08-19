@@ -1,5 +1,5 @@
-$(document).on("ready", function(){
-	
+$(document).on("ready", function(){	
+	/**/
 	dinamic_contacto_val = 0;
 	var  dinamic_contacto_delete = 0;	
 	$("#form-contactos").submit(record_contacto);
@@ -25,12 +25,13 @@ function record_contacto(e){
 							type: "POST" , 
 							beforeSend: function(){					
 								show_load_enid(".place_nuevo_contacto"  , "Cargando .. " , 1); 							
+								$(".place_nombre_contacto").empty();
+								$(".place_tel_vali").empty();
+								$(".place_nuevo_contacto").empty();
 							}
 						}).done(
 						function(data){						
-							$(".place_nombre_contacto").empty();
-							$(".place_tel_vali").empty();
-							$(".place_nuevo_contacto").empty();
+							
 							$("#contact-modal").modal("hide");
 							cargar_seccion_contactos();	
 							show_response_ok_enid(".place_contactos" , "Contacto registrado con éxito.! ");				
@@ -52,12 +53,13 @@ function delete_data_contacto(){
 	   data : data_send , 
 	   beforeSend : function(){	   		
 	   		show_load_enid(".place_delete_contacto"  , "Eliminando .. " , 1); 			
+	   		$(".place_delete_contacto").empty();
 	   }
 	}).done(function(data){
 	   	/**/
 		cargar_seccion_contactos();	   			
 		show_response_ok_enid(".place_contactos" , "Contacto eliminado con éxito.! ");				
-		$(".place_delete_contacto").empty();
+		
 	}).fail(function(){	   	
 		show_error_enid(".place_delete_contacto" , "Se presentaron problemas al eliminar el contacto, reporte al administrador");					
 	});
@@ -91,11 +93,12 @@ function update_data_contacto(e){
 					data : data_send , 
 					beforeSend: function(){
 						show_load_enid(".place_actualizar"  ,  "Actualizando .. " , 1 );
+						$(".place_actualizar").empty();
+						$(".place_tel_valin").empty();
+						$(".place_actualizar_nombre").empty();
+					
 					}
 				}).done(function(data){
-					$(".place_actualizar").empty();
-					$(".place_tel_valin").empty();
-					$(".place_actualizar_nombre").empty();
 					$("#contact-modal-edit").modal("hide");		
 					cargar_seccion_contactos();	
 					show_response_ok_enid(".place_contactos" , "Contacto modificado con éxito.!");			
@@ -129,6 +132,8 @@ function cargar_seccion_contactos(e){
 
 	    /*Para cargar las imagnes */
 	    $(".img_contacto").click(carga_formulario_imagenes);
+	    $(".locacion").click(carga_maps);
+
 	    /*
 	    	$(document).on('click' , '.img_contacto' , function(e){
 				contacto = e.target.id;
@@ -153,11 +158,12 @@ function get_data_contacto_in_modal(contacto){
 		data :  {contacto : contacto} , 
 		beforeSend : function(){			
 			show_load_enid(".place_actualizar"  ,  "Cargando información  del contacto" , 1 );
+			$(".place_actualizar").empty();
+			$(".estado_edicion_contacto").empty();
 		}
 	}).done(function(data){
 
-		$(".place_actualizar").empty();
-		$(".estado_edicion_contacto").empty();
+		
 		valorHTML("#nextension" , data[0].extension);
 		valorHTML("#nnombre" , data[0].nombre);
 		valorHTML("#norganizacion" , data[0].organizacion);
@@ -171,6 +177,10 @@ function get_data_contacto_in_modal(contacto){
 		valorHTML("#ncorreoalterno" , data[0].correo_alterno); 
 		$('#ntipo > option[value="'+ data[0].tipo +'"]').attr('selected', 'selected');				
 		$(".form-contactos-edit").submit(update_data_contacto);
+
+
+		
+
 	}).fail(function(){
 		show_error_enid(".place_actualizar" , "Error al  cargar datos del contacto, reporte al administrador");		
 	});	
@@ -188,9 +198,10 @@ function load_nota_contacto(e){
 		data : {contacto : contacto} , 
 		beforeSend : function(){
 			show_load_enid(".place_nota" , "Cargando datos actuales" , 1 );
+			$(".place_nota").empty();
 		}
 	}).done(function(data){
-		$(".place_nota").empty();
+		
 		$("#nota-text-modal").val(data[0].nota);		
 		$("#form-nota-contacto").submit(set_nota_contacto);
 
@@ -208,10 +219,11 @@ function set_nota_contacto(e){
 		data :  data_send , 
 		beforeSend : function(){
 			show_load_enid(".place_nota" , "Registrando cambios " , 1 );	
+			$(".place_nota").empty();
 		}
 	}).done(function(data){
 		$("#contact-nota").modal("hide");
-		$(".place_nota").empty();
+		
 		llenaelementoHTML( ".contactos" , "Nota del contacto actualizada con éxito" );
 		cargar_seccion_contactos();
 		show_response_ok_enid(".place_contactos" , "Nota actualizada con  éxito.!");	
@@ -233,7 +245,11 @@ function evalua_modal(){
 
 		break; 
 	}
-
-
-
+}
+/**/
+function carga_maps(e){
+	contacto  = e.target.id;
+	url =  now + "index.php/maps/map/"+contacto+"/1/99999999/";
+	iframe =  "<iframe   height='500px;' width='100%'   id='iframe_maps_conf' src='"+url+"'> </iframe>";
+	llenaelementoHTML(".contenedor_iframe_maps" , iframe );
 }

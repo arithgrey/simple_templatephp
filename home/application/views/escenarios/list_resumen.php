@@ -1,6 +1,5 @@
 <?php
     
-    
     $limit_text= 270;        
     $show_delete = 0;    
 
@@ -63,9 +62,6 @@
 ?>
 
 
-<span class='escenarios_evento_list'>
-    Escenarios del evento 
-</span>
 <?=$elements?>
 
 <style type="text/css">

@@ -12,21 +12,17 @@ class Puntosventa extends CI_Controller{
     function administrar($q='' ,  $qmodal = ''){        
         
         if (valida_session_enid($this->sessionclass->is_logged_in())) {    
-            $limit=10;
-            $data= $this->val_session("Puntos de venta frecuentemente utilizados por el empresa");    
-            $id_empresa =  $this->sessionclass->getidempresa();         
-            $puntos_venta = $this->puntoventamodel->get_puntos_venta_empresa_usuario($id_empresa , $this->input->get() , $limit  );                
-            $puntos_venta_data  = $this->puntoventamodel->get_estados_punto_venta();
+            
+            $data= $this->val_session();    
+            $id_empresa =  $this->sessionclass->getidempresa();                                 
             $data["q"] =  $q;
-            $data["qmodal"] =   $qmodal; 
-            $data["puntos_venta_nombres"] =  lista_nombres_punto_venta($puntos_venta);
-            $data["estados_puntos_venta"] =  list_estados_puntos_venta($puntos_venta_data);        
+            $data["qmodal"] =   $qmodal;                        
             $data["zonas_punto_venta"] =  lista_zonas_punto_venta();
             $this->show_data_page($data , "puntosventa/principal");    
         }    
     }
     /**/
-    function val_session($titulo_dinamico_page){
+    function val_session($titulo_dinamico_page =  ""){
 
         if ( $this->sessionclass->is_logged_in() == 1) {                                                            
                 $menu = $this->sessionclass->generadinamymenu();

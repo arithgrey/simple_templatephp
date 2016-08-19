@@ -627,7 +627,25 @@ function delete_genero($param){
 	}
 	return $r1;   		
 }
+/**/
+function update_locacion_maps($param){
 
+	$place_id =  $param["place_id"];
+	$formatted_address =  $param["formatted_address"];
+	$id_evento =  $param["identificador"];
+	$lat = $param["lat"]; 
+	$lng = $param["lng"]; 
+	
+	$query_update = "UPDATE evento 
+					SET  					
+					place_id = '".$place_id ."'  ,  
+					formatted_address = '". $formatted_address  ."', 					
+					lat =  '".$lat."' , 
+					lng = '".$lng."' 
+					WHERE idevento = '".$id_evento."' limit 1"; 
+	return  $this->db->query( $query_update);	
+	
+}
 /*Termina modelo */
 }
 

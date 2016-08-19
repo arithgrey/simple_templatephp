@@ -17,9 +17,12 @@ class Escenario extends REST_Controller{
 
         $id_escenario = $this->get("escenario");
         $param =  $this->get();
-        $img_data = $this->img_model->get_imgs_escenario($id_escenario);                    
-        $this->response(get_slider_img($img_data , $param ));
+        $data["imgs"] =  $this->img_model->get_imgs_escenario($id_escenario);                    
+        $data["param"] =  $param;
+        
 
+        //$this->response(get_slider_img($img_data , $param ));        
+        echo  $this->load->view("escenarios/slider" , $data);
     }
     function resumenpublic_GET(){
         $id_evento =  $this->get("evento");            

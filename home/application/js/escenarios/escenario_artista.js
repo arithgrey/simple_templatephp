@@ -87,9 +87,7 @@ function load_data_escenario_artista(){
 	
 	escenario = $(".id_escenario").val();
 	url = now + "index.php/api/escenario/escenario_artista/format/json";			
-
-	in_session =  $(".in_session").val();
-	
+	in_session =  $(".in_session").val();	
 	$.ajax({
 		url : url , 
 		type: "GET", 

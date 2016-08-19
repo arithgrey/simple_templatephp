@@ -54,9 +54,10 @@ class empresamodel extends CI_Model{
     return   $this->db->query($query_update);  
   }
   /**/  
-  function get_iconos_sociales($id_empresa){
+  function get_iconos_sociales($param){
 
     /**/
+      $id_empresa =  $param["id_empresa"];
       $_num = $this->contruye_experiencia_iconos($id_empresa ,  0 ); 
       /*Aplicamos query*/
       $query_get="select * from   tmp_img_exp_1_$_num 
