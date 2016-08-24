@@ -681,9 +681,11 @@ function get_slider_img_evento($data){
 		return $seccion; 
 	}
 	/**/
+
 	function create_text_descripcion($descripcion ,  $in_session   , $id_evento ){		
 
 		$text =  c_seccion_descripcion($descripcion , $in_session  , $id_evento ); 
+
 		$url =  base_url('index.php/eventos/nuevo/'.$id_evento."/#portlet_tab4");
 		$btn =  editar_btn($in_session , $url );
 		$seccion = "					
@@ -705,10 +707,29 @@ function get_slider_img_evento($data){
 					</span>'; 		
 														}
 		}else{
-			if (strlen($descripcion) < 5){
-					$new_text = 'Próximamente lo que vivirás  al asistir al evento.'; 
-				}
-		}		
+			if (strlen($descripcion) < 5){$new_text = 'Próximamente lo que vivirás  al asistir al evento.'; }
+		}				
+		if (strlen($text) > 300 ){			
+			$primer_part = "<span class='hiddden_descripcion'>  "  .  $text . "</span>";
+			$part_descripcion =  substr($text, 0 ,  270);  
+			$new_text = $primer_part . "<span class='show_descripcion' >". $part_descripcion ."</span>
+
+										<center>
+											<span class='row more-info-f more-info-f-down'>
+												<i class='fa fa-chevron-down' aria-hidden='true'>
+												</i>
+											</span>
+											<span class='row more-info-f more-info-f-up'>
+												<i class='fa fa-chevron-up' aria-hidden='true'>
+												</i>
+											</span>
+
+										</center>"; 			
+		}
+
+
+
+
 		
 		return $new_text;            	
 	}
@@ -737,13 +758,11 @@ function get_slider_img_evento($data){
 	function construye_resumen_artista($data , $in_session){
 
 		$num_agregados =  count($data); 
-		$btn_editar =  editar_btn($in_session  , ""); 
-		$elements = "<h1>
-								 Artistas del evento 
-								 <span class='pull-right'> 
-								   ". $btn_editar ."
-								 </span>
-							   </h1>"; 
+		
+		$elements = "<h1 class='link_next_accesos'>
+						Algunos artistas del evento 
+						
+					</h1>"; 
 		
 		if ($in_session ==  1 ){			
 			if ($num_agregados < 1 ){

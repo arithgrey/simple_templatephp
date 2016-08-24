@@ -24,6 +24,18 @@
 <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
  <style type="text/css">
 
+    .seccion-presentacion{
+          background:  rgb(6, 51, 73);  
+          padding: 5%;
+          display: block;
+    }
+    .nombre-evento-mov{      
+      font-size:3.7em;
+      color: white !important;
+      font-weight: bold;      
+      
+    }
+
     .text-filtro-enid{        
         display: none;
     }
@@ -520,6 +532,12 @@
             /*Todo lo que pertenece a medios*/
             @media only screen and (max-width: 991px) {
 
+                .seccion-presentacion{
+                  background:  rgb(6, 51, 73);  
+                  padding: 10%;
+                  display: block;
+                }
+                
                 .menu_seleccion_enid{
                     display: none;
                 }
@@ -539,6 +557,7 @@
                 .msj_notificacion_config{
                     padding: 1px;                                    
                 }
+
 
             }
         </style>

@@ -1,6 +1,19 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 if(!function_exists('invierte_date_time')){
 
+  function template_evento($nombre_evento){
+    $template =  "
+              <div class='col-lg-12 col-sm-12 col-md-12 seccion-presentacion' >
+                <div class='row'>
+                  <div class='nombre-evento-mov'>
+                    ".$nombre_evento."
+                  </div>
+                </div>
+              </div>
+              ";
+
+      return $template;        
+  }
   /**/
   function btn_comunidad($id_empresa){    
 

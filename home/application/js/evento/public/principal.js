@@ -1,10 +1,12 @@
 $(document).ready(function(){
 	$("footer").ready(carga_portada_event);
 	$("footer").ready(carga_escenarios_evento);
-	$("footer").ready(carga_resumen_extra_evento);
-	//$("footer").ready(carga_mapa_evento);
+	$("footer").ready(carga_resumen_extra_evento);	
 	$(".config_tipo_evento").click(carga_configuracion_tipo_evento);
 	$(".config_estado_evento").click(carga_configuracion_estado_evento);
+	/**/
+	$(".more-info-f").click(carga_contenido);
+
 });
 /**/
 function carga_portada_event(){
@@ -60,10 +62,11 @@ function carga_resumen_extra_evento(){
 		
 	restricciones= $(".h_restricciones").val();
 	politicas= $(".h_politicas").val();
-
+	empresa =  $(".empresa").val();
+	
 	$.ajax({
 		url : url , 
-		data :  {"id_evento" : id_evento , "in_session" :  in_session  , "restricciones" :  restricciones , "politicas" :  politicas} ,
+		data :  {"id_evento" : id_evento , "in_session" :  in_session  , "restricciones" :  restricciones , "politicas" :  politicas , empresa : empresa} ,
 		beforeSend: function(){
 			/*mostramos load*/			
 			show_load_enid(".place_resumen_extra_evento", "Cargando .." , 1); 
@@ -247,3 +250,21 @@ function cancela_event_nota(e){
 	e.preventDefault();
 }
 
+/**/
+function carga_contenido(){
+	seccion =  ".show_descripcion";
+
+	if ($(seccion).is(":visible")) {
+		
+		$(".hiddden_descripcion").show();
+		$(".more-info-f-up").show();
+		$(".more-info-f-down").hide();
+		$(".show_descripcion").hide();
+	}else{
+		
+		$(".hiddden_descripcion").hide();
+		$(".more-info-f-up").hide();
+		$(".more-info-f-down").show();
+		$(".show_descripcion").show();
+	}
+}

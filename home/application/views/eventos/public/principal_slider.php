@@ -1,6 +1,6 @@
 <div class='col-lg-12 col-md-12 col-sm-12'>
     <div class='row'>
-        <div class='seccion_principal'>            
+        <div class='seccion_principal-portada'>            
             <section>    
                 <div class='seccion_slider'>
                 </div>
@@ -8,20 +8,19 @@
                 </div>
             </section>      
             <!---->
-            <section>    
+            <section>                
                 <div class='text_edicion'>                                        
                     <span class='dias_restantes'>
                         <?=$dias_restantes_evento;?>
                     </span>
-
                     <a class='icon-maps' href="#enid-maps">
                         <i class='fa fa-map-marker'>
                         </i>
                     </a>
-                    <div class='separate-enid'>
-                    </div> 
+                    <span class='edicion-event-text row'>
+                        <?=create_text_edicion($evento["edicion"] ,  $in_session , $evento["idevento"] )?>        
+                    </span>    
                 </div>
-
             </section>  
             <!---->
         </div>
@@ -35,19 +34,25 @@
             <span  class='text-historia'>
                 La historia la haces tu
             </span>
-            <div>
-                <span>
-                    <?=create_text_edicion($evento["edicion"] ,  $in_session , $evento["idevento"] )?>        
-                </span>    
+            <div class='row'>
+                <div class='col-lg-12 col-sm-12'>
+                    <div class='seccion-generos'>
+                        <?=get_tags_generos($list_generosdb , $evento['idevento']  , $in_session )?>
+                    </div>                    
+                </div>
             </div>
+            
+
             <div>
-                <span>
+                
+            </div>
+            <div class='descripcion-experiencia'>
+                <span >
                     <?=create_text_descripcion($evento["descripcion_evento"] ,  $in_session  , $evento["idevento"])?>
                 </span>
+                <hr>
             </div>
-            <div class='seccion-generos'>
-                <?=get_tags_generos($list_generosdb , $evento['idevento']  , $in_session )?>
-            </div>
+            
         </section>    
     </div>
 </div>
@@ -58,7 +63,7 @@
         <span class='text_title_escenario'>
             Escenarios del evento         
         </span>
-        <div class='seccion_escenarios_enid'>                            
+        <div class=''>                            
             <div>
                 <div class='seccion_escenarios'>
                 </div>
@@ -68,13 +73,11 @@
         </div>
     </div>
 </div>
-<div class='col-lg-4 col-md-4 col-sm-12 '>
-    <div class='row'>
-        <div class='resumen_extra_evento'>
-        </div>
-        <div class='place_resumen_extra_evento'>
-        </div>
+<div class='col-lg-4 col-md-4 col-sm-12 '>    
+    <div class='resumen_extra_evento'>
     </div>
+    <div class='place_resumen_extra_evento'>
+    </div>    
 </div>    
 <div class='enid-maps' id="enid-maps">
     <?=valida_maps_public($evento['formatted_address'] , $evento['idevento'] )?>
@@ -90,3 +93,4 @@
     </div>
     
 </div>
+

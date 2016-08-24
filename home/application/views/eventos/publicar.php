@@ -31,7 +31,7 @@
     <div class="form-group nombre" >
       <input placeholder="Nombre del evento" class="form-control input-sm"  type="text" value="<?=$data_evento['nombre_evento'];?>"  id="nombre-input" name='nombre-input' >
       </div>  
-      <span class="designation edicion-evento" title='click para editar'>  
+      <span class="designation edicion-evento" title='Edición del evento, click para editar'>  
         <?=show_text_input($data_evento['edicion'] , 2 , "<i class='fa fa-plus'></i>  Edición del evento" )?>           
       </span> 
       <div class="form-group">
@@ -433,6 +433,9 @@
   display: none;
 }.seccion-config-evento-mv{
   display: none;
+}
+.edicion-evento:hover{
+  cursor: pointer;
 }
 </style>
 

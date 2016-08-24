@@ -1,12 +1,4 @@
-<div class='col-lg-12 col-sm-12 col-md-12 seccion-presentacion' >
-  <div class='row'>
-    <div class='nombre-evento-mov'>
-      <?=$evento["nombre_evento"]?>
-    </div>
-  </div>
-</div>
-<?=$this->load->view("eventos/menu_nav")?>
-
+<?=template_evento($evento["nombre_evento"])?>
 <div class='config_tipo animated  ' id='config_tipo'>
   <div class='configuracion_tipo'>
   </div>
@@ -43,6 +35,7 @@
 <input type='hidden' class='nombre_evento_val' id='nombre_evento_val' value="<?=$evento["nombre_evento"]?>">
 <input type='hidden' class='evento_escenario' value="<?=$evento["idevento"]?>">
 <input type='hidden' class='evento'  id='evento'  value="<?=$evento["idevento"]?>">
+<input type="hidden" class='empresa' id='empresa' value="<?=$evento['idempresa']?>">
 <script type="text/javascript" src="<?=base_url('application/js/evento/public/principal.js')?>">
 </script>
 <style type="text/css">
@@ -151,6 +144,20 @@
     .icon-maps{
       color: white;
     }
+    .more-info-f:hover{
+      cursor: pointer;
+      
+    }
+    
+    /*.seccion-presentacion{
+      display: none;
+    }
+    */
+    .edicion-event-text {
+      font-size: .9em;
+      color: #000000;
+      font-weight: bold;
+    }
 
 </style>
 
@@ -186,13 +193,11 @@
     .nombre-evento-mov{      
       font-size:3.7em;
       color: white !important;
-      font-weight: bold;
+      font-weight: bold;      
+      
     }
-    .seccion-presentacion{
-      background:  rgb(6, 51, 73);  
-      padding: 10%;
-      display: block;
-    }
+
+    
     .btn-config-enid-desc,  .seccion-config-enid-desc{
       display: inline-block;
     }
@@ -217,6 +222,15 @@
       margin-top: 20px;
       margin-bottom: 20px;
     }
+    .edicion-event-text{      
+      font-size: .7em;
+      color: #000000;
+      font-weight: bold;
+    }
+
+
+
+
   }
 </style>
 
@@ -226,13 +240,34 @@
 .seccion-dias{
   background:  rgb(0, 4, 4);  
 }
-.seccion_principal{       
+.seccion_principal-portada{       
   background: rgb(4, 97, 136);    
 }
 .text-historia{        
   font-size: 2em;
   font-weight: bold;  
 }
+.hiddden_descripcion{
+  display: none;
+}.more-info-f-up {
+  display: none;
+}
+.btn-config-enid-desc,  .seccion-config-enid-desc{
+      display: inline-block;
+}
+.btn-config-edicion-desc-l , .msj_notificacion_config{
+  display: inline-block;
+}
+.btn-generos-config , .msj_notificacion_config{
+  display: inline-block;    
+}
+.descripcion-experiencia{
+    margin-top: -30px;
+}
+.seccion-historia{
+  margin-top: 2%;
+}
+    
 </style>
 
 
