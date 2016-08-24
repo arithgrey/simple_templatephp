@@ -8,6 +8,63 @@
 <!--TERMINA SECCIÓN 4 ************************************************************ -->
 <div class="col-lg-8 col-md-8 col-sm-12 section-enid-events-r ">    
 
+  <span>
+    <a class='link_ver_evento ver-public-sm' href="<?=base_url('index.php/eventos/visualizar/')?>/<?=$data_evento['idevento']?>" >
+      <i class='fa fa-arrow-circle-o-right'> 
+      </i>
+      Ver como el público 
+    </a>
+  </span>
+  <div class='seccion-config-evento-mv'>
+    <h1 class='nombre-evento-h1' title='click para editar'>
+      <strong style='color:white !important;'>
+        <?=show_text_input($data_evento['nombre_evento'] , 2 , "Evento" )?>      
+      </strong>
+    </h1>
+    <div class='place_nombre_evento'>
+    </div>                  
+    <a class='link_ver_evento ver-public-lg' href="<?=base_url('index.php/eventos/visualizar/')?>/<?=$data_evento['idevento']?>">
+      <i class='fa fa-arrow-circle-o-right'> 
+      </i>
+      Ver como el público 
+    </a>
+    <div class="form-group nombre" >
+      <input placeholder="Nombre del evento" class="form-control input-sm"  type="text" value="<?=$data_evento['nombre_evento'];?>"  id="nombre-input" name='nombre-input' >
+      </div>  
+      <span class="designation edicion-evento" title='click para editar'>  
+        <?=show_text_input($data_evento['edicion'] , 2 , "<i class='fa fa-plus'></i>  Edición del evento" )?>           
+      </span> 
+      <div class="form-group">
+        <input placeholder="Edición del evento" class="form-control input-sm"  type="text" id="edicion-input" name='edicion-input' value="<?=$data_evento['edicion'];?>">
+      </div> 
+      <div class='place_edicion_evento'>
+      </div>   
+      <a href="#mapgooglemap" class='link-map'>
+        <i class="fa fa-map-marker " aria-hidden="true">
+        </i>
+      </a>        
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   <div  id='slogan_seccion' class="form-group alert alert-info slogan_seccion " title='Lema del evento'>                            
     <i class="fa fa-flag">
     </i> Eslogan:                                                                                                   
@@ -31,7 +88,7 @@
                             </a>                                
                           </span>
                         </header>
-                        <div class="panel-body">
+                        <div >
                             <h1>
                               <strong>
                                 Configuración
@@ -103,7 +160,7 @@
                                 </a>
                               </li>          
                               <li>
-                              <a href="<?=base_url('/index.php/eventos/diaevento/')?>/<?=$data_evento['idevento']?>#seccionobjs">
+                              <a  href="<?=base_url('/index.php/eventos/diaevento/')?>/<?=$data_evento['idevento']?>#seccionobjs">
                                   <i class='fa  fa-arrow-circle-o-right'> 
                                   </i>
                                   Ver como el público
@@ -278,29 +335,32 @@
               <div class='col-lg-4  col-md-4 col-sm-12 seccion_derecha_enid' >  
                 <div class='separate-enid'>
                 </div>
-                <h1 class='nombre-evento-h1' title='click para editar'>
-                  <strong style='color:white !important;'>
-                    <?=show_text_input($data_evento['nombre_evento'] , 2 , "Evento" )?>      
-                  </strong>
-                </h1>
-                <div class='place_nombre_evento'>
-                </div>
-                <a  class='link_ver_evento' href="<?=base_url('index.php/eventos/visualizar/')?>/<?=$data_evento['idevento']?>">
-                  <i class='fa fa-arrow-circle-o-right'> 
-                  </i>
-                  Ver como el público 
-                </a>
-                <div class="form-group nombre" >
-                  <input placeholder="Nombre del evento" class="form-control input-sm"  type="text" value="<?=$data_evento['nombre_evento'];?>"  id="nombre-input" name='nombre-input' >
-                </div>  
-                <span class="designation edicion-evento" title='click para editar'>  
-                  <?=show_text_input($data_evento['edicion'] , 2 , "<i class='fa fa-plus'></i>  Edición del evento" )?>           
-                </span>              
-                <div class="form-group">
-                  <input placeholder="Edición del evento" class="form-control input-sm"  type="text" id="edicion-input" name='edicion-input' value="<?=$data_evento['edicion'];?>">
-                </div> 
+                <div class='configs-evento-lg'>
+                  <h1 class='nombre-evento-h1' title='click para editar'>
+                    <strong style='color:white !important;'>
+                      <?=show_text_input($data_evento['nombre_evento'] , 2 , "Evento" )?>      
+                    </strong>
+                  </h1>
+                  <div class='place_nombre_evento'>
+                  </div>                  
+                  <a class='link_ver_evento ver-public-lg' href="<?=base_url('index.php/eventos/visualizar/')?>/<?=$data_evento['idevento']?>">
+                    <i class='fa fa-arrow-circle-o-right'> 
+                    </i>
+                    Ver como el público 
+                  </a>
+                  <div class="form-group nombre" >
+                    <input placeholder="Nombre del evento" class="form-control input-sm"  type="text" value="<?=$data_evento['nombre_evento'];?>"  id="nombre-input" name='nombre-input' >
+                  </div>  
+                  <span class="designation edicion-evento" title='click para editar'>  
+                    <?=show_text_input($data_evento['edicion'] , 2 , "<i class='fa fa-plus'></i>  Edición del evento" )?>           
+                  </span> 
+
+                  <div class="form-group">
+                    <input placeholder="Edición del evento" class="form-control input-sm"  type="text" id="edicion-input" name='edicion-input' value="<?=$data_evento['edicion'];?>">
+                  </div> 
                   <div class='place_edicion_evento'>
                   </div>                    
+                </div>  
                 <div class='section_escenarios_admin'>
                 </div>
                 <div class='row'>
@@ -358,11 +418,6 @@
 <!--Escenarios modal-->
 
 
-<!--
-<script type="text/javascript" src="<?=base_url('application/js/evento/gmap.js')?>"></script>
-<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true&libraries=places"></script>
--->
-
 
 <form id='form-general-ev'>        
     <input type="hidden" value="<?=$evento;?>" id="evento" name='evento'>
@@ -374,4 +429,40 @@
   font-size: 1.5em;
   font-weight: bold;
 }
+.ver-public-sm{
+  display: none;
+}.seccion-config-evento-mv{
+  display: none;
+}
 </style>
+
+<style type="text/css">
+/*Todo lo que pertenece a medios*/
+  @media only screen and (max-width: 991px) {    
+    /*Termina  media query*/
+    .ver-public-lg{
+      display: none;
+    }
+    .ver-public-sm{
+      display: block;
+      background: rgb(22, 103, 129);
+      padding: 10px;
+      margin-bottom: 10px;
+    }.configs-evento-lg{
+      display: none;
+    }
+    .seccion-config-evento-mv{
+      display: block;
+      background: rgb(4, 97, 136);
+      padding: 10px;
+      color: white;
+    }
+    .link-map{
+      color: white;
+    }
+
+  }
+</style>
+
+
+

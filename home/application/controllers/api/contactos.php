@@ -2,8 +2,7 @@
 require APPPATH.'/libraries/REST_Controller.php';
 class Contactos extends REST_Controller{
   function __construct(){
-        parent::__construct();
-       
+        parent::__construct();       
         $this->load->helper("contacto");    
         $this->load->model("contactmodel");
         $this->load->library('sessionclass');                
@@ -56,7 +55,6 @@ class Contactos extends REST_Controller{
       echo $this->load->view("puntosventa/por_filtro" ,  $data);
 
   }
-
   /**/
   function contacto_q_GET(){
       $this->validate_user_sesssion();
@@ -83,7 +81,6 @@ class Contactos extends REST_Controller{
       $this->response($this->contactmodel->update_contacto_empresa($id_empresa , $contacto_data , $id_usuario ));
       /**/
   }
-
   /**/
   function contacto_post(){
   
@@ -130,7 +127,6 @@ class Contactos extends REST_Controller{
   }
   /**/
   function contacto_put(){
-
       $this->validate_user_sesssion();
       $id_contacto= $this->put("idcontacto");
       $nombre  =  $this->put("nnombre");
@@ -155,7 +151,7 @@ class Contactos extends REST_Controller{
 
   }
   /*Terminal la función*/
-    /**/
+  /**/
   function validate_user_sesssion(){
       if($this->sessionclass->is_logged_in() == 1) {                        
 

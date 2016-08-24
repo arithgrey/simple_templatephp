@@ -7,9 +7,11 @@ $(document).on("ready", function(){
 	$("#form-filtro").submit(cargar_seccion_contactos);	
 	$("#nuevo-contacto-button").click(function(){		
 		$(".status-registro").hide();		
+		$(".more-fields").hide();
+		$(".mas-campos").text("+ Más campos ");
 	});
 	$("footer").ready(evalua_modal);
-	
+	$(".mas-campos").click(evalua_campos);
 });
 /****/
 function record_contacto(e){
@@ -78,6 +80,8 @@ function delete_contacto(e){
 function try_update_contacto(e){
 	contacto =  e.target.id;
 	get_data_contacto_in_modal(contacto);
+	$(".more-fields").hide();
+	$(".mas-campos").text("+ Más campos");
 }
 /**/
 function update_data_contacto(e){
@@ -252,4 +256,17 @@ function carga_maps(e){
 	url =  now + "index.php/maps/map/"+contacto+"/1/99999999/";
 	iframe =  "<iframe   height='500px;' width='100%'   id='iframe_maps_conf' src='"+url+"'> </iframe>";
 	llenaelementoHTML(".contenedor_iframe_maps" , iframe );
+}
+/**/
+function evalua_campos(){
+
+	seccion =  ".more-fields";
+	if ($(seccion).is(":visible")) {		
+		$(seccion).hide();		
+		$(".mas-campos").text("+ Más campos");
+	}else{
+		$(seccion).show();
+		$(".mas-campos").text("- Menos campos");
+		
+	}	
 }

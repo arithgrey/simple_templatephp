@@ -42,10 +42,9 @@ function carga_form_errores( tipo , place ){
             show_load_enid( place  , "Cargando .... " , 1 );
         } 
     }).done(function(data){
-        alert(data);
-        /*
-            llenaelementoHTML( place , data[0].num_eventos );    
-        */
+        
+        llenaelementoHTML( place , data );    
+        
         $(".form-error").submit(registra_incidencia);
 
     }).fail(function(){

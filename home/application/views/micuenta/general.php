@@ -132,9 +132,12 @@
                                             </div>
                                         </li>
                                         <li>
-                                            <div class="title">Edad</div>
+                                            <div class="title">
+                                            Edad
+                                            </div>
                                             <div class="desk edad_user_text"  title='click para modificar tu edad '>
-                                              <?=$data_user["edad"];?>                                              
+                                              <?=show_text_input($data_user["edad"] , 2 , "Tu edad" )?>
+                                              
                                             </div>                                             
                                             <span class='place_edad' id='place_edad'></span> 
                                             <div class='edad_e  hidden_enid'>

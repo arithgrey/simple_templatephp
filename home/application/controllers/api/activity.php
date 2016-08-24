@@ -1,12 +1,11 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
 require APPPATH.'/libraries/REST_Controller.php';
 class Activity extends REST_Controller{
-    function __construct(){
-            
-            parent::__construct();            
-            $this->load->helper("activity");
-            $this->load->model("activitymodel");
-            $this->load->library('sessionclass');        
+    function __construct(){            
+        parent::__construct();            
+        $this->load->helper("activity");
+        $this->load->model("activitymodel");
+        $this->load->library('sessionclass');        
     }     
     /**************************/    
     function eventos_administracion_GET(){        
@@ -29,6 +28,5 @@ class Activity extends REST_Controller{
                 $this->sessionclass->logout();
         }   
     }/*termina validar session */
-
 }
 ?>

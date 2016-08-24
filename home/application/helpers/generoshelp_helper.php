@@ -9,12 +9,17 @@ if(!function_exists('invierte_date_time')){
         $btn =  editar_btn($in_session , $url );   
         $text =  ""; 
         if (count($arreglo_generos) == 0 ) {
+
+
             if ($in_session ==  1 ) {
-                $text =  "<span class='msj_notificacion_config'> No has cargado algún genero musical  </span>";    
+                $text =  "<span class='btn-generos-config'> " . $btn . "</span>" ."
+                          <span class='msj_notificacion_config'> 
+                            No has cargado algún genero musical  
+                          </span>";    
             }        
         }
 
-        $tags_generos = "<div class='pull-right'>" . $text . $btn. '<ul class="revenue-nav">';
+        $tags_generos = "<div class='pull-right'>" . $text. '<ul class="revenue-nav">';
         foreach ($arreglo_generos as $row) {      
 
         

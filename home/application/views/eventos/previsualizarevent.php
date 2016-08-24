@@ -1,27 +1,12 @@
-<div class='menu_seleccion_enid'>
-  <ul class="nav nav-pills" role="tablist">
-    <li class="active">
-      <a aria-expanded="true" href="#pill-1" role="tab" data-toggle="tab" title="Latest Arrivals">
-        <i class='fa fa-star'>
-        </i>     
-        <?=$evento["nombre_evento"]?>
-      </a>
-    <li>
-      <a aria-expanded="true" href="<?=base_url('index.php/eventos/accesosalevento'). "/" . $evento["idevento"]?>  ">           
-        Precios y promociones
-      </a>
-    </li>
-    <li>
-      <a aria-expanded="true" href="<?=base_url('index.php/eventos/diaevento/'). "/" . $evento["idevento"]?>  " >          
-        Servicios 
-      </a>
-    </li>  
-    <?=btn_comunidad(1);?>
-    <?=editar_btn($in_session , base_url('index.php/eventos/nuevo')."/" . $evento["idevento"] ); ?>                                            
-    <?=construye_tipo_evento($evento["tipo"] ,  $in_session , $evento["idevento"])?>
-    <?=estado_evento($evento["status"] ,  $in_session , $evento["idevento"] , $evento["programado"])?>    
-  </ul>
+<div class='col-lg-12 col-sm-12 col-md-12 seccion-presentacion' >
+  <div class='row'>
+    <div class='nombre-evento-mov'>
+      <?=$evento["nombre_evento"]?>
+    </div>
+  </div>
 </div>
+<?=$this->load->view("eventos/menu_nav")?>
+
 <div class='config_tipo animated  ' id='config_tipo'>
   <div class='configuracion_tipo'>
   </div>
@@ -75,7 +60,179 @@
     margin-top: 41px;
     clear: right; 
   }
-  
-  
+
 </style>
+
+
+
+
+
+
+
+<style type="text/css">
+    .seccion_slider_evento{
+        margin-bottom: 20px;
+    }
+    .panel_info_evento{
+        background: rgb(60, 94, 121);
+        color: white;
+    }
+    
+    .tags_generos_a{
+        background: #364654 !important;       
+    }
+    .tags_generos_a:hover{    
+        background:#00bcd4 !important;    
+        padding: 8px;       
+    }
+    .tags_generos_a:hover{
+        cursor: pointer;
+    }
+    .slogan{    
+        color: white;        
+    }
+    .seccion_escenairos_evento{
+        background:  #046188; 
+        height: 100%;    
+    }#mapgooglemap{
+      background: #046188;
+    }
+    .titulo_maps{
+        color: white;
+    }.aviso_social{
+        font-size: .8em;
+    }
+    .config_tipo_evento{        
+        cursor: pointer;
+    }
+    .info_tipo_evento{
+        color: white;
+    }
+    span.titulo_evento_slider{
+
+        color: #FFFFFF;
+        margin-left: 1%;
+        font-weight: bold;
+    }
+    .text_edicion{
+        color: rgb(62, 178, 192);        
+        font-size: 1.2em;
+        margin-left: 2%;    
+    }
+    /**/
+    .text_title_escenario{
+        font-size: 2em;
+        font-weight: bold;    
+    }
+    .dias_restantes{
+        color: white !important;
+        font-weight: bold;        
+    }    
+    .seccion_escenarios_enid{
+        background: whitesmoke;
+        padding: 2%;
+    }
+    .maps_enid{
+        background: #046188;
+        padding: 10px;
+    }.text_map{
+        color: white;
+    }
+    .text-map-prox{
+        color: white;
+    }
+  
+
+    .msj-edicion-sm{
+        display: none;
+    }.msj-edicion-lg{
+        display: block;
+    }
+    .icon-maps{
+      color: white;
+    }
+
+</style>
+
+
+
+
+<style type="text/css">
+
+
+/*Todo lo que pertenece a medios*/
+  @media only screen and (max-width: 991px) {    
+    /*Termina  media query*/
+    .ver-public-lg{
+      display: none;
+    }
+    .ver-public-sm{
+      display: block;
+      background: rgb(22, 103, 129);
+      padding: 10px;
+      margin-bottom: 10px;
+    }.configs-evento-lg{
+      display: none;
+    }
+    .seccion-config-evento-mv{
+      display: block;
+      background: rgb(4, 97, 136);
+      padding: 10px;
+      color: white;
+    }
+    .link-map{
+      color: white;
+    }
+    .nombre-evento-mov{      
+      font-size:3.7em;
+      color: white !important;
+      font-weight: bold;
+    }
+    .seccion-presentacion{
+      background:  rgb(6, 51, 73);  
+      padding: 10%;
+      display: block;
+    }
+    .btn-config-enid-desc,  .seccion-config-enid-desc{
+      display: inline-block;
+    }
+    .btn-config-edicion-desc-l , .msj_notificacion_config{
+      display: inline-block;
+    }
+    .btn-generos-config , .msj_notificacion_config{
+       display: inline-block;    
+    }
+    .sepador_superio{
+      display: none;
+    }
+    .msj-edicion-sm{
+      display: block;
+    }.msj-edicion-lg{
+      display: none;
+    }
+    .seccion-generos{
+      float: left;
+    }
+    .seccion-center-evento-mov{
+      margin-top: 20px;
+      margin-bottom: 20px;
+    }
+  }
+</style>
+
+
+
+<style type="text/css">
+.seccion-dias{
+  background:  rgb(0, 4, 4);  
+}
+.seccion_principal{       
+  background: rgb(4, 97, 136);    
+}
+.text-historia{        
+  font-size: 2em;
+  font-weight: bold;  
+}
+</style>
+
 

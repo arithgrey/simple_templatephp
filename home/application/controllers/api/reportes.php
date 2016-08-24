@@ -24,9 +24,6 @@ class Reportes extends REST_Controller{
     
     
   }
-  function globa_cominidad_empresa_GET(){ 
-      $this->response("ok");
-  }
   /**/
   function global_empresa_GET(){
     /**/    
@@ -35,8 +32,7 @@ class Reportes extends REST_Controller{
     $param =  $this->get();
     $db_response =  $this->repomodel->global_empresa($id_empresa ,  $param);
     $repo =  resumen_e($db_response);
-    $this->response($repo);     
-    
+    $this->response($repo);      
 
   }
   /**/
@@ -59,4 +55,3 @@ class Reportes extends REST_Controller{
   
 }
 ?>
-

@@ -9,7 +9,8 @@ $("footer").ready(function(){
 
 	$(".load_resumen_escenarios_event").click(carga_resumen_escenarios);
 	$("footer").ready(dinamic_t);
-
+	key_enid =  "AIzaSyAVF0GA9R64Jnbd3ZX53TnLI-61vOqcq-4";
+	$(".text-filtro-enid").click(show_fields_mov);
 
 });
 function show_load_enid(place , texto , flag ){
@@ -506,6 +507,18 @@ function dinamic_t(){
          }
       }
     }  
+}
+
+/**/
+function show_fields_mov(){	
+	seccion =  ".hidden-field-mov";
+	if ($(seccion).is(":visible")) {		
+		$(seccion).hide();		
+		$(".text-filtro-enid").text(" + Filtros");
+	}else{
+		$(seccion).show();
+		$(".text-filtro-enid").text(" - Filtros");
+	}	
 }
 /**/
 

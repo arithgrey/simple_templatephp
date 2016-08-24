@@ -60,8 +60,4 @@ class Directorio  extends CI_Controller {
         }                      
     }
     /**/
-
-
-
-    
 }/*Termina el controlador */

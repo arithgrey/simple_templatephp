@@ -52,7 +52,4 @@ class Reportecontrolador extends CI_Controller {
         }                      
     }
     /**/
-
-
-
 }

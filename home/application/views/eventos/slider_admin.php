@@ -3,7 +3,7 @@
 		<div class='row'>
 			<div class='response_img_portada' id='response_img_portada'>
 			</div>
-			<div class='col-lg-12  col-md-12  col-sm-12'>
+			<div >
 			  <div class='section-ev portada_evento_section'>               
 			  </div>  
 			  <div class='place_slider_portada'>

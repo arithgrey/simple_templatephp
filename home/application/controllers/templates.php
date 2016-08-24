@@ -58,4 +58,3 @@ class Templates extends CI_Controller {
 
 	
 }/*Termina el controlador */
- 

@@ -11,15 +11,14 @@ var longitud;
 var place_map; 
 
 $(document).ready(function(){
+
     inicia_google_maps();  
 
-    if ($(".public").val() ==  "99999999") {        
+    if ($(".public").val() == "99999999"){                
         $(".btn_new_pv").click(registra_direccion);        
     }else{
         $(".place_maps_enid").empty();
-    }
-    
-
+    }    
 }); 
 
 url_img="";  size_1 = 20; size_2  =  32; origin_1 = 0; origin_2  = 0; anchor_1  = 0; anchor_2 =  32;
@@ -36,9 +35,8 @@ function map(new_latitud, new_longitud ,  new_place , flag ){
 /**/
 function set_base(new_latitud, new_longitud ,  new_place){
 
-    lat =  $(".new_lat").val();    
-    lng =  $(".new_lng").val();
-
+    lat = $(".new_lat").val();    
+    lng = $(".new_lng").val();
     var latlng = new google.maps.LatLng(lat, lng);
     set_centro_latlng(latlng);
 }
@@ -93,14 +91,10 @@ function set_market_map(title){
         position: get_centro(),
         draggable: true,              
         title: title
-    });           
-    
-    
-    
+    });               
 }
 /**/
-function set_icon_mark( url_img  , size_1, size_2 , origin_1 , origin_2 , anchor_1 , anchor_2){
-        
+function set_icon_mark( url_img  , size_1, size_2 , origin_1 , origin_2 , anchor_1 , anchor_2){        
     image = {              
             size: new google.maps.Size(size_1, size_2),          
             origin: new google.maps.Point(origin_1, origin_2),          
@@ -116,8 +110,7 @@ function get_place(){
     return place_map;
 }
 function get_map(){
-    map = new google.maps.Map(document.getElementById(get_place()), get_map_options() );     
-    //console.log(map);               
+    map = new google.maps.Map(document.getElementById(get_place()), get_map_options() );         
     return map; 
 }
 /**/
@@ -128,29 +121,23 @@ function get_map_options(){
 function get_icon_mark(){
     return image;
 }
-/**/
-  
-    
-function  expandViewportToFitPlace(place){            
-
+/**/    
+function expandViewportToFitPlace(place){            
         
-    var  new_location =  place.geometry.location; 
-    var  lat =  new_location.lat(); 
-    var  lng =  new_location.lng(); 
+    var new_location =  place.geometry.location; 
+    var lat =  new_location.lat(); 
+    var lng =  new_location.lng(); 
         
     $(".new_place_id").val(place.place_id);
     $(".new_formatted_address").val(place.formatted_address);           
     $(".new_lat").val(lat);
     $(".new_lng").val(lng);
-        
-  
+
     if(place.geometry.viewport){              
             map.fitBounds(place.geometry.viewport);                                 
-
             var marker = new google.maps.Marker({
                 map: map 
-            });  
-            
+            });              
             marker.setPlace({
                 placeId: place.place_id,
                 location: place.geometry.location
@@ -164,13 +151,8 @@ function  expandViewportToFitPlace(place){
                 
     }           
 }
-  
-
-   
-
-
 /**/
-function inicia_google_maps(){
+function inicia_google_maps(){    
     location_actual  =  navigator.geolocation.getCurrentPosition(initialise);    
 }
 /**/
@@ -186,8 +168,7 @@ function registra_direccion(){
             beforeSend: function(){
                 show_load_enid(".place_nueva_locacion" , "Registrando locación del punto de venta" , 1);    
             }
-        }).done(function(data){   
-            
+        }).done(function(data){               
             show_response_ok_enid( ".place_nueva_locacion", "Locación del punto de venta registra éxito.! "); 
         }).fail(function(){     
             show_error_enid(".place_nueva_locacion" , "Falla al registrar, reporte al administrador" );
@@ -199,12 +180,11 @@ function initialise(location){
     
     var origin_place_id = null;
     var destination_place_id = null;
-    var travel_mode = google.maps.TravelMode.WALKING;
-    
+    var travel_mode = google.maps.TravelMode.WALKING;    
     latitude_actual  =  location.coords.latitude;
     longitude_actual  =  location.coords.longitude;    
 
-    if ($(".destination").val()  ==  99999999 ){
+    if ($(".destination").val() == 99999999 ){
         destination_map(latitude_actual , longitude_actual );
     }else{       
         flag_exist =0;
@@ -216,31 +196,6 @@ function initialise(location){
 function destination_map(latitude_actual , longitude_actual){
    route_map(latitude_actual , longitude_actual );
 }
-
-/**/
-function route(origin_place_latlng , destination_place_id , travel_mode, directionsService, directionsDisplay) {
-    /**/
-    if(!origin_place_latlng || !destination_place_id){
-      return;
-    }
-     var start = '37.7683909618184, -122.51089453697205';
-
-      /**/
-      directionsService.route({
-        origin: start,
-        destination: {'placeId': destination_place_id},
-        travelMode: travel_mode
-      }, function(response, status) {
-        if (status === google.maps.DirectionsStatus.OK) {
-          directionsDisplay.setDirections(response);
-        } else {
-          window.alert('Directions request failed due to ' + status);
-        }
-      });
-
-
-}
-
 /**/
 function route_map(latitude_actual , longitude_actual){    
 
@@ -253,11 +208,8 @@ function route_map(latitude_actual , longitude_actual){
 
     $(".place_maps_enid").empty();    
     place_id_destination = $(".new_place_id").val();
-
-
-    route(origin_place_latlng, destination_place_id, travel_mode, directionsService, directionsDisplay)
-
     
+
 }
 /**/
 function maps_default(latitude_actual ,  longitude_actual , flag_exist ){
@@ -265,25 +217,18 @@ function maps_default(latitude_actual ,  longitude_actual , flag_exist ){
 
         map(latitude_actual , longitude_actual  , "map" ,  flag_exist );
         var mapTypeId  =  google.maps.MapTypeId.ROADMAP;  
-        set_map_options( 18 , mapTypeId );                 
-        
+        set_map_options( 18 , mapTypeId );                         
         var  map_enid_service = get_map();
-        set_market_map("Tu ubicación actual");
-       
+        set_market_map("Tu ubicación actual");       
         var directionsService = new google.maps.DirectionsService;
         var directionsDisplay = new google.maps.DirectionsRenderer;      
 
         var origin_input = document.getElementById('origin-input');
         var origin_autocomplete = new google.maps.places.Autocomplete(origin_input);
         origin_autocomplete.bindTo('bounds', map_enid_service);
-
-        
-        origin_autocomplete.addListener('place_changed', function() {        
-        var place = origin_autocomplete.getPlace(); 
-        
-        if(!place.geometry){window.alert("No se ha encontrado la dirección indicada, verifique que los datos sean correctos.!");
-            return;
-          }          
+        origin_autocomplete.addListener('place_changed', function(){        
+        var place = origin_autocomplete.getPlace();         
+        if(!place.geometry){window.alert("No se ha encontrado la dirección indicada, verifique que los datos sean correctos.!");return;}          
            expandViewportToFitPlace(place);
         });
 

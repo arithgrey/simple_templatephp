@@ -10,7 +10,6 @@ class Img_controller extends REST_Controller{
         $this->load->library('sessionclass');
             
   }     
-
   function upload_img_evento_POST(){
 
       $this->validate_user_sesssion();                
@@ -122,7 +121,5 @@ class Img_controller extends REST_Controller{
           $this->sessionclass->logout();
         }   
     }/*termina validar session */
-
-   /**/
-    
+   /**/   
 }

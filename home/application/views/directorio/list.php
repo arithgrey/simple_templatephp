@@ -1,10 +1,10 @@
 <?php
         $complete  ="";		
         $contacto = "";			
-		$height =""; 
+		$height ="style='overflow-x:auto;'"; 
 		if (count($contactos) >= 20 ){
 			
-			$height ="style='overflow-y:scroll;  height: 400px;' " ; 
+			$height ="style='overflow-y:scroll; style='overflow-x:auto;' height: 500px;' " ; 
 		}
 
 		$b =1;						  
@@ -74,15 +74,6 @@
 
 
 
-<div class='pull-right mas-info' style='font-size: .7em;padding: 5px; margin-left:1px;' >
-	<i class='fa fa-chevron-down'>
-	</i>  + info
-</div>                                        
-<div class='pull-right menos-info' style='font-size: .7em;padding: 5px; margin-left:1px; display:none;' >
-	<i class='fa fa-chevron-up'>
-	</i>  - info
-</div>
-
 
 
 <span class='num_registros_encontrados'>
@@ -91,24 +82,24 @@
 <div  <?=$height?> >
 	<table class='table_enid_service' border=1>
 		<tr class="table_enid_service_header">		
-			<td>Configurar</td>
-			<td>IMG</td>
-			<td>Contacto</td>
-			<td>Organización</td>
-			<td>Teléfono</td>
-			<td>Movil</td>
-			<td>Extensión</td>
-			<td>Correo</td>
-			<td>Correo alterno</td>
-			<td>Página web </td>
-			<td>Facebook</td>
-			<td>Twitter</td>
-			<td>Dirección</td>
-			<td>Nota</td>
-			<td>Tipo</td>
-			<td>Estado</td>
-			<td>Registrado</td>
-			<td>Eliminar</td>
+			<?=get_td("Configurar")?>
+			<?=get_td("IMG")?>
+			<?=get_td("Contacto")?>
+			<?=get_td("Organización")?>
+			<?=get_td("Teléfono")?>
+			<?=get_td("Movil")?>
+			<?=get_td("Extensión")?>
+			<?=get_td("Correo")?>
+			<?=get_td("Correo alterno")?>
+			<?=get_td("Página web ")?>
+			<?=get_td("Facebook")?>
+			<?=get_td("Twitter")?>
+			<?=get_td("Dirección")?>
+			<?=get_td("Nota")?>
+			<?=get_td("Tipo")?>
+			<?=get_td("Estado")?>
+			<?=get_td("Registrado")?>
+			<?=get_td("Eliminar")?>
 		</tr>		
 		<?=$contacto;?>
 	</table>
@@ -122,5 +113,4 @@
 	background: #3C5E79;	
 	color: white;
 }
-
 </style>

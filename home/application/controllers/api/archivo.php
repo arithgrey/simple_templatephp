@@ -3,14 +3,10 @@ require APPPATH.'/libraries/REST_Controller.php';
 class Archivo extends REST_Controller{      
     function __construct(){
         parent::__construct();                       
-
         $this->load->model("img_model");
         $this->load->library('sessionclass');                    
     }
     function imgs_POST(){
-
-
-
         $prm = $this->post(); 
 
         if($_FILES['imagen']['error'] === 4) {
@@ -30,35 +26,6 @@ class Archivo extends REST_Controller{
             $img_response  = $this->gestiona_imagenes($prm);         
             $this->response($img_response);            
         }
-
-
-
-
-    
-    /*        
-
-        $prm = $this->post(); 
-
-        if($_FILES['imagen']['error'] === 4) {
-            die( 'Es necesario establecer una imagen' );        
-        }else if($_FILES['imagen']['error'] === 0 ){
-
-            $imagenBinaria = addslashes(file_get_contents($_FILES['imagen']['tmp_name']));
-            $nombreArchivo = $_FILES['imagen']['name'];
-            $extensiones = array('jpg', 'jpeg', 'gif', 'png', 'bmp' , "image/jpg", "image/jpeg", "image/gif", "image/png" );
-            //$extensiones =  array("image/jpg", "image/jpeg", "image/gif", "image/png");
-            $extension = strtolower(end(explode('.', $nombreArchivo)));
-            if(!in_array($extension, $extensiones)) {
-                die( 'Sólo se permiten archivos con las siguientes extensiones: '.implode(', ', $extensiones) );
-            };
-
-            $prm["imagenBinaria"] = $imagenBinaria;
-            $prm["nombreArchivo"] =  $nombreArchivo;
-            $prm["extension"] =  $extension; 
-            $img_response  = $this->gestiona_imagenes($prm);         
-            $this->response($img_response);            
-        }
-    */    
         
     }
     /**/
@@ -97,20 +64,14 @@ class Archivo extends REST_Controller{
                 break;    
 
 
-            case 'portada_escenario':
-                                
+            case 'portada_escenario':                                
                 $db_response = $this->img_model->insert_principal_escenario($prm , $id_usuario , $id_empresa );
-                return $this->response_status_img($db_response);    
-                
-                
+                return $this->response_status_img($db_response);                                    
                 break;    
             
             case 'artista':                            
                 $db_response = $this->img_model->insert_principal_escenario_artista($prm , $id_usuario , $id_empresa );
-                return $this->response_status_img($db_response);    
-                
-                
-                
+                return $this->response_status_img($db_response);                    
                 break;    
             
 
@@ -147,8 +108,4 @@ class Archivo extends REST_Controller{
             $this->sessionclass->logout();
         }   
     }   
-    /**/
 }?>
-
-
-

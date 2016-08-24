@@ -9,7 +9,6 @@ class Busqueda extends REST_Controller{
         $this->load->library('sessionclass');    
     }   
     function val_session($titulo_dinamico_page){
-
         if ( $this->sessionclass->is_logged_in() == 1) {                                                            
                 $menu = $this->sessionclass->generadinamymenu();
                 $nombre = $this->sessionclass->getnombre();                                         
@@ -24,51 +23,7 @@ class Busqueda extends REST_Controller{
             $data["in_session"] = 0;
             return $data;
         }   
-    }
-    /*
-    function eventos_pasados_GET(){
-
-
-        $id_empresa =  $this->sessionclass->getidempresa();        
-        $extra =" where   date(e.fecha_registro) between DATE_ADD(CURRENT_DATE() , INTERVAL -14 DAY ) and  CURRENT_DATE()   and  e.idempresa = ". $id_empresa ." ";         
-        $extra2 = "  and  2=2  ";
-        $db_response =  $this->busquedamodel->get_eventos_dinamic($extra  ,  $extra2 );
-        if (count($db_response) > 0 )  {
-            $eventos =  get_last_events_empresa($db_response , 270 ,  1 , 1 , 1);                     
-            $this->response($eventos);            
-        }else{
-            $this->response("No se han registrado eventos en los ultimos 14 días ");
-        }        
-    
-    }
-    */
-    /*listamos los eventos del día */     
-    /*
-    function eventos_dia_GET(){
-
-
-        $extra =" where   e.fecha_inicio between CURRENT_DATE() and  DATE_ADD(CURRENT_DATE() , INTERVAL 7 DAY ) "; 
-        $extra2 = "  and  2=2  ";
-        $db_response =  $this->busquedamodel->get_eventos_dinamic($extra  ,  $extra2 );
-        $eventos =  get_last_events_empresa($db_response , 270 ,  0 , 0 , 0);         
-        $this->response($eventos);
-    }
-    */    
-    /*búsqueda dinámica*/    
-
-    /*
-    function evento_GET(){
-        $param =  $this->get(); 
-        $db_response = $this->busquedamodel->load_eventos_busqueda_enid($param);
-
-        if ($db_response["elemento"] > 0) {
-            $eventos =  get_last_events_empresa($db_response["eventos"] , 270 ,  0 , 0 , 0);         
-            $this->response($eventos);    
-        }else{
-            $this->response("No existen eventos relacionados a la búsqueda, intente con otra palabra clave");    
-        }
-    }
-    */
+    }    
     /**/
     function validate_user_sesssion(){
         if( $this->sessionclass->is_logged_in() == 1) {                        
@@ -84,12 +39,9 @@ class Busqueda extends REST_Controller{
         $this->response(get_last_events_empresa($db_response , 270 ,  1 , 1 , 1));
     }
     /**/
-    function eventos_enid_GET(){
-        
+    function eventos_enid_GET(){        
         $param =  $this->get();       
         $db_response =  $this->busquedamodel->eventos_enid($param);
-        $this->response(get_last_events_empresa($db_response , 270 ,  0 , 0 , 0));    
-        //$this->response($db_response);    
+        $this->response(get_last_events_empresa($db_response , 270 ,  0 , 0 , 0));            
     }
-
 }/*Termina rest*/

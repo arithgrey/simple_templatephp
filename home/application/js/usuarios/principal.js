@@ -12,6 +12,7 @@ $(document).ready(function(){
 
     $(".nuevo_user").click(carga_form_user);
     $(".nueva_busqueda").click(carga_form_busqueda);
+    load_users_cuenta();
 
 });
 /*Invitación al nuevo usuario*/
@@ -89,27 +90,34 @@ function load_data_nota_user(e){
 function load_users_cuenta(){
 
     url =  $(".form-busqueda-user").attr("action");
-    var clientresponse = ["Error al cargar los colaboradores, reporte al administrador"];    
-
+    var clientresponse = ["Error al cargar los colaboradores, reporte al administrador"];        
     $.ajax({
         url :  url , 
         data :   $(".form-busqueda-user").serialize() , 
         type: "GET" , 
         beforeSend : function(){
-            llenaelementoHTML("#integrantes-table-info" , "Cargando .. ");
+            /**/
+            show_load_enid("#integrantes-table-info" , "Cargando  .. " , 1);                         
         }
     }).done(function(data){
 
         llenaelementoHTML("#integrantes-table-info" , data);                
-        load_resumen_usuarios();    
+        //load_resumen_usuarios();    
+         $(".edit-nota-user").click(load_data_nota_user);
+        $(".editar_permisos_miembro").click(set_user_id);    
+        $(".config_estatus_user").click(template_config_estatus);
+        $(".mas-info").click(dinamic_section);
+        $(".menos-info").click(dinamic_section_info);
+        $(".img_user").click(carga_imagen_user);
+  
               
     }).fail(function(){
-        alert("Falla al cargar, reporte al administrador");
-        llenaelementoHTML( "#listausuariosempresa", clientresponse[0]);
+        show_error_enid("#integrantes-table-info"  , "Error al registrar, reporte al administrador "); 
     });    
     return false;
 }
-/**/
+/*
+
 function load_resumen_usuarios(){    
     url = now + "index.php/api/cuentageneralrest/integranteescuentaresumen/format/json";    
     $.get(url).done(function(data){    
@@ -121,7 +129,7 @@ function load_resumen_usuarios(){
         $(".mas-info").click(dinamic_section);
         $(".menos-info").click(dinamic_section_info);
         $(".img_user").click(carga_imagen_user);
-        /*Modificar el estado del usuario */
+  
 
 
 
@@ -130,6 +138,7 @@ function load_resumen_usuarios(){
     });
 
 }
+*/
 /**/
 function load_data_user(id_usuario){
 

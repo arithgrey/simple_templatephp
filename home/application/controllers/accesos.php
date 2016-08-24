@@ -64,4 +64,3 @@ class Accesos extends CI_Controller {
     /**/
 
 }/*Termina el controlador */
- 

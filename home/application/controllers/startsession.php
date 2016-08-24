@@ -6,14 +6,9 @@ class Startsession extends CI_Controller {
     }         
     function index(){        
         if ( $this->sessionclass->is_logged_in() == 1) {                        
-            redirect(base_url('index.php/startsession/presentacion/'));
-            
+            redirect(base_url('index.php/startsession/presentacion/'));            
         }else{    
-
-
-            $this->load->view("user/signin");
-            //$data = $this->val_session("Sign In");
-            //$this->show_data_page($data, 'user/signin');
+            $this->load->view("user/signin");            
         }        
     }    
     /**/
@@ -63,8 +58,4 @@ class Startsession extends CI_Controller {
       
     }
     /**/
-
-
-
-
 }

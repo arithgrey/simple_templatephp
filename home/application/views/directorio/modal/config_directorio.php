@@ -1,47 +1,23 @@
-
-            
-<!--MODAL  Eliminar contacto  termina -->
 <!--************************************************** NOTA DEL CONTACTO-->
 <?=construye_header_modal('contact-nota', " Nota del contacto " );?>                           
 <form id='form-nota-contacto' class='form-nota-contacto' method='post' action="<?=base_url('index.php/api/contactos/nota/format/json/')?>">
-  <div class="form-group">
-      <label for="comment">
+    <div class="form-group">
+        <label for="comment">
         Nota del contacto
-      </label>
-      <textarea class="form-control nota-text-modal " rows="3" id="nota-text-modal"  name='nota-contacto-text'>
-      </textarea>
-  </div>
-  <button class='btn btn btn_nnuevo'>
-      Registrar cambios     
-  </button>                
-  <div class='place_nota'>
-  </div>
+        </label>
+        <textarea class="form-control nota-text-modal " rows="3" id="nota-text-modal"  name='nota-contacto-text'>
+        </textarea>
+    </div>
+    <button class='btn btn btn_nnuevo'>
+          Registrar cambios     
+    </button>                
+    <div class='place_nota'>
+    </div>
 </form>                    
 <div class='edit-contact-mod'>
 </div>                
 <?=construye_footer_modal()?>  
 <!--************************************************** TERMINA NOTA DEL CONTACTO-->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -51,9 +27,14 @@
 
             <div class='place_nuevo_contacto'>
             </div>
+            <div class='mas-campos-contenedor'>
+                <label class='mas-campos'>
+                        + Más Campos
+                </label>
+            </div>
             <form class='form-contactos' id="form-contactos" method="post" action="<?=base_url('index.php/api/contactos/contacto/format/json/')?>">                
-                <div class='col-lg-12 col-sm-12  col-md-12  '>
-                    <div class='col-lg-6 col-md-6 col-sm-6  col-sm-6 col-md-6 '>
+                <div >
+                    <div >
                       <div class="form-group">            
                          <div class="input-group m-bot15">
                             <span class="input-group-addon">
@@ -65,7 +46,7 @@
                       <span class='place_nombre_contacto'>
                       </span>
                     </div>
-                    <div class='col-lg-6 col-md-6 col-sm-6 col-md-6 col-sm-6 '>
+                    <div >
                      <div class="form-group">            
                          <div class="input-group m-bot15">
                             <span class="input-group-addon">
@@ -76,8 +57,8 @@
                      </div>
                      </div>
                 </div> 
-                <div class='col-lg-12 col-md-12 col-sm-12 '>
-                    <div class='col-lg-6 col-md-6 col-sm-6'>
+                <div >
+                    <div >
                         <div class="form-group">            
                             <div class="input-group m-bot15">
                                 <span class="input-group-addon">
@@ -90,7 +71,7 @@
                         </span>
                     </div>     
 
-                    <div class='col-lg-6 col-md-6 col-sm-6'>
+                    <div>
                         <div class="form-group">            
                             <div class="input-group m-bot15">
                                 <span class="input-group-addon">
@@ -101,7 +82,7 @@
                         </div>
                     </div>     
 
-                    <div class='col-lg-5 col-md-5 col-sm-5'>
+                    <div>
                      <div class="form-group">            
                          <div class="input-group m-bot15">
                             <span class="input-group-addon">
@@ -112,7 +93,7 @@
 
                      </div>
                     </div>
-                    <div class='col-lg-7 col-md-7 col-sm-7 '>
+                    <div class="more-fields">
                         <div class="form-group">            
                             <div class="input-group m-bot15">
                                 <span class="input-group-addon">
@@ -123,8 +104,8 @@
                         </div>
                     </div> 
                 </div>            
-                <div class='col-lg-12 col-md-12 col-sm-12 '>
-                    <div class='col-lg-12 col-md-12 col-sm-12'>
+                <div>
+                    <div class="more-fields">
                      <div class="form-group">            
                          <div class="input-group m-bot15">
                             <span class="input-group-addon">
@@ -134,7 +115,7 @@
                          </div>
                      </div>
                     </div>
-                    <div class='col-lg-12 col-md-12 col-sm-12 '> 
+                    <div class="more-fields"> 
                          <div class="form-group">            
                              <div class="input-group m-bot15">
                                 <span class="input-group-addon">
@@ -144,63 +125,57 @@
                              </div>
                         </div>
                      </div>
-                </div>                 
-                <div class='col-lg-12 col-md-12 col-sm-12 '> 
-                    <div class='col-lg-12'> 
-                     <div class="form-group">            
-                         <div class="input-group m-bot15">
+                </div>                                 
+                <div class="more-fields"> 
+                    <div class="form-group">            
+                        <div class="input-group m-bot15">
+                        <span class="input-group-addon">
+                                    Dirección
+                        </span>
+                        <input list='pdirecciones' class="form-control input-sm direccion " name="direccion uppercase_enid"   placeholder="Av. sur 89 col...  " type="text" onkeyup="javascript:this.value=this.value.toUpperCase();">
+                        <div class='place-direcciones'>
+                        </div>
+                        </div>
+                    </div>
+                </div>                
+                <div class="more-fields">
+                        <div class="form-group">            
+                            <div class="input-group m-bot15">
                             <span class="input-group-addon">
-                                Dirección
-                            </span>
-                            <input list='pdirecciones' class="form-control input-sm direccion " name="direccion uppercase_enid"   placeholder="Av. sur 89 col...  " type="text" onkeyup="javascript:this.value=this.value.toUpperCase();">
-                            <div class='place-direcciones'>
-                            </div>
-                         </div>
-                     </div>
-                     </div>
-                    
-                 </div>
-                <div class='col-lg-12'>
-                    <div class='col-lg-6 col-md-6 col-sm-12'>
-                         <div class="form-group">            
-                             <div class="input-group m-bot15">
-                                <span class="input-group-addon">
                                     Correo @
-                                </span>
-                                <input class="form-control input-sm" name="correo"   placeholder="arithgrey@gmail.com" type="text">
-                             </div>
+                            </span>
+                            <input class="form-control input-sm" name="correo"   placeholder="arithgrey@gmail.com" type="text">
+                            </div>
 
-                         </div>
-                    </div>
+                        </div>
+                </div>
+                <div class="more-fields">
+                    <div class="form-group">            
+                        <div class="input-group m-bot15">
+                        <span class="input-group-addon">
+                            Correo alterno @
+                        </span>
+                        <input class="form-control input-sm" name="correo_alterno"   placeholder="arithgrey@gmail.com" type="text">
+                        </div>
 
-                    <div class='col-lg-6 col-md-6 col-sm-12'>
-                         <div class="form-group">            
-                             <div class="input-group m-bot15">
-                                <span class="input-group-addon">
-                                    Correo alterno @
-                                </span>
-                                <input class="form-control input-sm" name="correo_alterno"   placeholder="arithgrey@gmail.com" type="text">
-                             </div>
-
-                         </div>
                     </div>
-                    <div class='col-lg-6 col-md-6 col-sm-12'>
-                        <div class="form-group" >                                     
-                            <?=get_tipos_contactos("tipo" , " form-control input-sm " , "tipo" )?>                                      
-                        </div>    
-                    </div>
-                </div>   
-                <div class="col-lg-12  col-md-12  col-sm-12  ">              
-                    <div class="col-lg-12  col-md-12  col-sm-12  ">
+                </div>
+                <div>
+                    <div class="form-group" >                                     
+                        <?=get_tipos_contactos("tipo" , " form-control input-sm " , "tipo" )?>                                      
+                    </div>    
+                </div>            
+                <div class="more-fields">              
+                    <div>
                         <label class="control-label">Nota
                         </label>                    
                         <textarea rows="3" name="nota" class="form-control">
                         </textarea>                    
                     </div>                 
                 </div>                 
-                <div class="col-lg-12  col-md-12  col-sm-12  ">          
-                    <br>
-                    <div class="col-lg-12  col-md-12  col-sm-12  ">          
+                
+                <div>                              
+                    <div>          
                         <button type="submit" id="button-registrar" class="btn btn-default btn_save ">
                             Registrar
                         </button>
@@ -301,9 +276,14 @@
 <!--Nuevo contacto form -->
 <span class='estado_edicion_contacto'>
 </span>
+<div class='mas-campos-contenedor'>
+    <label class='mas-campos'>
+        + Más Campos
+    </label>
+</div>
 <form class='form-contactos-edit    ' id="form-contactos-edit" action="<?=base_url('index.php/api/contactos/contacto/format/json/')?>">            
-    <div class='col-lg-12'>
-        <div class='col-lg-6 col-md-6 col-sm-6 '>
+    <div>
+        <div>
           <div class="form-group">            
                 <div class="input-group">
                     <span class="input-group-addon">
@@ -315,7 +295,7 @@
             <div class='place_actualizar_nombre'>
             </div>
          </div>
-         <div class='col-lg-6 col-md-6 col-sm-6 '>
+         <div>
             <div class="form-group">            
                  <div class="input-group">
                     <span class="input-group-addon">
@@ -327,8 +307,8 @@
              </div>
          </div>
     </div>
-    <div class='col-lg-12 col-sm-12  col-md-12 '>
-        <div class='col-lg-6 col-md-6 col-sm-12 '>
+    <div>
+        <div>
              <div class="form-group">            
                  <div class="input-group m-bot15">
                     <span class="input-group-addon">
@@ -340,7 +320,7 @@
                  </span>
              </div>
          </div>
-         <div class='col-lg-6 col-md-6 col-sm-12 '>
+         <div>
              <div class="form-group">            
                  <div class="input-group m-bot15">
                     <span class="input-group-addon">
@@ -351,7 +331,7 @@
              </div>
          </div>
 
-         <div class='col-lg-6 col-md-6 col-sm-6 '>
+         <div>
              <div class="form-group">            
                  <div class="input-group m-bot15">
                     <span class="input-group-addon">
@@ -362,7 +342,7 @@
 
              </div>
          </div>
-         <div class='col-lg-6 col-md-6  col-sm-6'>
+         <div class="more-fields">
             <div class="form-group">            
                  <div class="input-group m-bot15">
                     <span class="input-group-addon">
@@ -379,11 +359,11 @@
 
 
 
-    <div class='col-lg-12 col-sm-12  col-md-12 '>
+    <div>
          
-         <div class='row'>
-         <div class='col-lg-12'>
-            <div class='col-lg-12 col-md-12 col-sm-12 '>
+         
+         
+            <div class="more-fields" >
                  <div class="form-group">            
                      <div class="input-group m-bot15">
                         <span class="input-group-addon">
@@ -393,7 +373,7 @@
                      </div>
                  </div>
             </div>     
-            <div class='col-lg-12 col-md-12 col-sm-12 '>
+            <div class="more-fields"  >
                 <div class="form-group">            
                  <div class="input-group m-bot15">
                     <span class="input-group-addon">
@@ -403,26 +383,22 @@
                  </div>
              </div>
             </div>    
-         </div>
-         </div>
-
-
-
-         <div class='col-lg-12 col-sm-12  col-md-12   '>
-             <div class="form-group">            
-             <div class="input-group m-bot15">
-                <span class="input-group-addon">
+         
+            <div class="more-fields">
+                <div class="form-group">            
+                <div class="input-group m-bot15">
+                    <span class="input-group-addon">
                     Nueva dirección
-                </span>
-                <input list='lista-ndireccion' class="form-control input-sm" name="ndireccion" id="ndireccion"   placeholder="Av. sur 89 col...  " type="text">
-                <div class='list-ndireccion'>
+                    </span>
+                    <input list='lista-ndireccion' class="form-control input-sm" name="ndireccion" id="ndireccion"   placeholder="Av. sur 89 col...  " type="text">
+                    <div class='list-ndireccion'>
+                    </div> 
+                </div>
                 </div> 
-             </div>
-            </div> 
-         </div>
+            </div>
     </div>     
-    <div class='col-lg-12 col-sm-12 col-md-12 '>
-        <div class='col-lg-6 col-md-6  col-sm-6'>
+    
+        <div>
              <div class="form-group">            
                  <div class="input-group m-bot15">
                     <span class="input-group-addon">
@@ -432,7 +408,7 @@
                  </div>
              </div>
         </div>     
-         <div class='col-lg-6 col-sm-6 col-md-6'>
+         <div class="more-fields" >
              <div class="form-group">            
                  <div class="input-group">
                     <span class="input-group-addon">
@@ -442,28 +418,28 @@
                  </div>
              </div>
         </div>   
-        <div class='col-lg-6 col-md-6 col-sm-12'>
+        <div>
             <div class="form-group" >                    
                 <?=get_tipos_contactos("ntipo" , " form-control input-sm  " , "ntipo" )?>
             </div>    
         </div> 
-    </div>
-    <div class="col-sm-12 col-lg-12 col-md-12">
-        <div class="col-sm-12 col-lg-12 col-md-12">
-            <label class="control-label">
+    
+    
+    <div class="more-fields">
+        <label class="control-label">
                 Nueva nota
-            </label>        
-            <textarea rows="3" name="nnota" id="nnota" class="col-sm-12 form-control">
-            </textarea>        
-        </div>
-    </div>    
-    <div class="col-sm-12 col-lg-12 col-md-12">
-        <br>
-        <div class="col-sm-12 col-lg-12 col-md-12">            
-            <button id="button-update" class="btn btn-default btn_save">
+        </label>        
+        <textarea rows="3" name="nnota" id="nnota" class="col-sm-12 form-control">
+        </textarea>        
+    </div>
+    
+    <div>
+        
+    <div>            
+        <button id="button-update" class="btn btn-default btn_save">
                 Actualizar
-            </button>   
-        </div>
+        </button>   
+    </div>
     </div>
 </form>
 

@@ -1,6 +1,37 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-if(!function_exists('invierte_date_time')){
+if(!function_exists('invierte_date_time')){    
 
+/**/
+function create_select_estatus($name ,  $class , $id){
+
+    $estados = array("TODOS","Usuario Activo","Inactivo","Baja");
+    $select = "<select name = '".$name."' class='".$class ."' id='".$id."'> ";        
+    for ($a=0; $a <count($estados); $a++) { 
+            
+        $select .= "<option value='".$estados[$a]."'>". $estados[$a] ."</option>";    
+     
+    }
+    $select .= "<select> ";    
+    return $select;
+
+    
+
+}
+/**/
+function create_select_turnos($name ,  $class , $id ){
+
+    $turnos = array("TODOS" , "Matutino", "Vespertino", "Nocturno", "Mixto" );
+    $select = "<select name = '".$name."' class='".$class ."' id='".$id."'> ";        
+    for ($a=0; $a <count($turnos); $a++) { 
+            
+        $select .= "<option value='".$turnos[$a]."'>". $turnos[$a] ."</option>";    
+     
+    }
+    $select .= "<select> ";    
+    return $select;
+
+
+}
 /**/
 function validate_social($url , $class , $class_icon ,  $flag  = 0  ){
 

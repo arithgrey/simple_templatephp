@@ -53,12 +53,11 @@ class Emp  extends CI_Controller{
             $data["years"]= get_count_select(1 ,  50 , "Años"  , $data_empresa["years"] );
             $data["empresa_contactos_num"] =  $this->empresamodel->get_contactos_empresanum($id_empresa);    
             $data["evento_publicados"] = $this->empresamodel->get_eventos_publicados($id_empresa);
-            $data["generos_musicales_emp"] = $this->empresamodel->get_generos_musicales_empresa($id_empresa);            
-            //$data["contacto"] =   $this->contactmodel->get_contacto_empresa($id_empresa);        
+            $data["generos_musicales_emp"] = $this->empresamodel->get_generos_musicales_empresa($id_empresa);                    
             $g = $this->generosmusicalesmodel->get_geros_empresa($id_empresa);        
-            //$data["tags_generos"]= get_tags_generos($g);        
+            
             $data["tags_generos"]= get_tags_generos($g , 1 ,0 );        
-        $this->show_data_page( 'empresa/historia' , $data );   
+        $this->show_data_page('empresa/historia' , $data );   
             
     }/**************************La historia de la empresa  **************++*/
 

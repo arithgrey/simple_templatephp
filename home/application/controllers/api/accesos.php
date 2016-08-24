@@ -1,16 +1,15 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
 require APPPATH.'/libraries/REST_Controller.php';
 class Accesos extends REST_Controller{
-    function __construct(){
+    function __construct(){            
+        parent::__construct();
+        $this->load->helper("accesos");
+        $this->load->helper("puntoventa");
+        $this->load->model("accesosmodel");
+        $this->load->model("puntoventamodel");
+        $this->load->library('sessionclass');
             
-            parent::__construct();
-            $this->load->helper("accesos");
-            $this->load->helper("puntoventa");
-            $this->load->model("accesosmodel");
-            $this->load->model("puntoventamodel");
-            $this->load->library('sessionclass');
-            
-        }     
+    }     
     function resumen_accesos_punto_venta_evento_GET(){
         $this->validate_user_sesssion();
         $id_evento = $this->get("evento");

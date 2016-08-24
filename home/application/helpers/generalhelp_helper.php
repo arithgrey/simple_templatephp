@@ -276,7 +276,7 @@ if(!function_exists('invierte_date_time')){
   }
   /**/
   function get_td($val , $extra = '' ){
-    return "<td ". $extra ." >". $val ."</td>";
+    return "<td ". $extra ." NOWRAP >". $val ."</td>";
   }
 
   function get_td_val($val , $extra){

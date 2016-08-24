@@ -36,12 +36,9 @@ class Imgevento extends REST_Controller{
             $this->_create_thumbnail($file_info['file_name']);
             $data = array('upload_data' => $this->upload->data());
             $titulo = $this->input->post('titulo');
-            $imagen = $file_info['file_name'];
-            
+            $imagen = $file_info['file_name'];        
             $this->response("ok");
-        }
-        
+        }    
     }
-
 }
 ?>

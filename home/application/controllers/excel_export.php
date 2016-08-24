@@ -10,4 +10,3 @@ class Excel_export extends CI_Controller {
 		echo $this->input->get('datos_a_enviar');	
 	}		
 }/*Termina el controlador */
- 

@@ -24,9 +24,7 @@ class Recursocontroller extends CI_Controller {
 				
 			$perfil = $this->sessionclass->getperfiles();
 			$data= $this->val_session("Miembros de la cuenta");										
-			$id_empresa =  $this->sessionclass->getidempresa();
-			$integrantes = $this->cuentageneralmodel->miembros_empresa_f($id_empresa);		
-			$data["integrantes_filtro"] = list_filtro_integrantes($integrantes);				   		
+			$id_empresa =  $this->sessionclass->getidempresa();			
 			$id_empresa =  $this->sessionclass->getidempresa();                                            	   
 			$data["id_empresa"] =  $id_empresa; 
 			$this->show_data_page($data ,  "usuarioscuenta/paraadministradorcuenta" );						
@@ -48,8 +46,7 @@ class Recursocontroller extends CI_Controller {
 		$this->show_data_page( $data , 'modulo/moduloconfig_g');			
 	}
 	/**/
-	function informacioncuenta(){
-				
+	function informacioncuenta(){				
 		$data = $this->val_session("Configuración de la cuenta");					
 		$id_usuario  = $this->sessionclass->getidusuario();			
 		$data["data_user"] =  $this->cuentageneralmodel->get_data_user_by_id($id_usuario)[0];
@@ -99,4 +96,3 @@ class Recursocontroller extends CI_Controller {
 
 		
 }
-

@@ -24,8 +24,9 @@
 <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
  <style type="text/css">
 
-
-
+    .text-filtro-enid{        
+        display: none;
+    }
     body{
         font:  16px/28px 'Hind','Helvetica Neue',Helvetica,sans-serif !important;
     }
@@ -267,12 +268,11 @@
             cursor: pointer;
             padding: 5px;
         }        
-        .table_enid_service{
-            
+        .table_enid_service{            
             font-size:.75em; 
             text-align:center; 
             padding:10px; 
-            width:100%;
+            
         }
         .locacion{
             cursor: pointer;
@@ -460,6 +460,7 @@
             background-color: #28393C;
             color: white;
             padding: 10px;
+            font-size: .6em;
         }
         .separate-enid{
             padding: 10px;
@@ -487,6 +488,34 @@
         </style>
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         <style type="text/css">
             /*Todo lo que pertenece a medios*/
             @media only screen and (max-width: 991px) {
@@ -494,19 +523,25 @@
                 .menu_seleccion_enid{
                     display: none;
                 }
+                .text-filtro-enid{ 
+                    display: block;      
+                    background: #055D80;
+                    color: white;                    
+                    margin-bottom: 3px;    
+                    width: 50%;
+                }                   
+                .text-filtro-enid:hover{ 
+                    cursor: pointer;
+                }   
+                .hidden-field-mov{
+                  display: none;
+                }
+                .msj_notificacion_config{
+                    padding: 1px;                                    
+                }
 
             }
         </style>
-
-
-
-       
-
-    <!--<link href="<?=base_url('application/tema/plugins/rs-plugin/css/settings.css')?>" rel="stylesheet">-->
-    <!--<link href="<?=base_url('application/tema/plugins/owl-carousel/owl.transitions.css')?>" rel="stylesheet">-->
-    <!--<link href="<?=base_url('application/tema/css/style.css')?>" rel="stylesheet" >-->
-
-
 
 <!--Modal que indica la versión del código -->
 <?=construye_header_modal('modal-version-sistema', " Versión del sistema " );?>        
@@ -528,20 +563,3 @@
 <?=ini_set('display_errors', '');?>
 
 
-<style type="text/css">
-.sticky-header .main-content{
-    
-    //background: #223c48 !important;
-    //background: #e8f0f3 !important;
-    
-}
-.sticky-header .header-section{
-    //background: #223c48;
-}
-/*
-.sticky-header .main-content{
-    background: #00b3fe !important;
-}
-*/
-
-</style>

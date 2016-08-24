@@ -49,9 +49,7 @@ class Cuentageneralrest extends REST_Controller{
         $this->validate_user_sesssion();                
         $id_empresa =  $this->sessionclass->getidempresa(); 
         $param =  $this->get();                                                
-        $integrantes_data  = 
-        //$table = lista_usuarios_cuenta($integrantes_data);
-        //$this->response($table);    
+        $integrantes_data  =        
         $data["integrantes"] =  $this->cuentageneralmodel->getintegrantesinforme($id_empresa ,  $param );
         echo $this->load->view("usuarioscuenta/list" , $data );
         

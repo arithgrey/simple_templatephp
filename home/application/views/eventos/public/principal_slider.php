@@ -1,45 +1,58 @@
-<div class='separate-enid sepador_superio' >
+<div class='col-lg-12 col-md-12 col-sm-12'>
+    <div class='row'>
+        <div class='seccion_principal'>            
+            <section>    
+                <div class='seccion_slider'>
+                </div>
+                <div class='place_slider'>
+                </div>
+            </section>      
+            <!---->
+            <section>    
+                <div class='text_edicion'>                                        
+                    <span class='dias_restantes'>
+                        <?=$dias_restantes_evento;?>
+                    </span>
+
+                    <a class='icon-maps' href="#enid-maps">
+                        <i class='fa fa-map-marker'>
+                        </i>
+                    </a>
+                    <div class='separate-enid'>
+                    </div> 
+                </div>
+
+            </section>  
+            <!---->
+        </div>
+    </div>
 </div>
-<div class='seccion_principal'>            
-    <div>
-        <div class='seccion_slider'>
-        </div>
-        <div class='place_slider'>
-        </div>
-    </div>    
-    <div class='row'>     
-        <div class='text_edicion'>                                        
-            <span class='dias_restantes'>
-                <?=$dias_restantes_evento;?>
+
+
+<div class='col-lg-12 col-md-12 col-sm-12 seccion-center-evento-mov'>    
+    <div class='row'>
+        <section class='seccion-historia'>    
+            <span  class='text-historia'>
+                La historia la haces tu
             </span>
-            <div class='separate-enid'>
-            </div> 
-
-        </div>       
+            <div>
+                <span>
+                    <?=create_text_edicion($evento["edicion"] ,  $in_session , $evento["idevento"] )?>        
+                </span>    
+            </div>
+            <div>
+                <span>
+                    <?=create_text_descripcion($evento["descripcion_evento"] ,  $in_session  , $evento["idevento"])?>
+                </span>
+            </div>
+            <div class='seccion-generos'>
+                <?=get_tags_generos($list_generosdb , $evento['idevento']  , $in_session )?>
+            </div>
+        </section>    
     </div>
 </div>
-<section>
-    <div class="container">             
-        <h1>
-            La historia la haces tu
-        </h1>
-        <p>
-        <?=create_text_descripcion($evento["descripcion_evento"] ,  $in_session  , $evento["idevento"])?>
-        </p>
-        <div class='pull-right'>
-            <span class='edicion_event'>
-                Edición del evento<?=create_text_edicion($evento["edicion"] ,  $in_session)?>
-            </span>            
-        </div>
-    </div>
-</section>
 
 
-
-
-<div class='separate-enid'>
-</div>
-<?=get_tags_generos($list_generosdb , $evento['idevento']  , $in_session )?>
 <div class='col-lg-8 col-md-8 col-sm-12 '>    
     <div class='row'>
         <span class='text_title_escenario'>
@@ -63,108 +76,17 @@
         </div>
     </div>
 </div>    
-
-<?=valida_maps_public($evento['formatted_address'] , $evento['idevento'] )?>
-<!---->
-<div class='col-lg-12 col-md-12 col-sm-12'>
-    <ul class="p-social-link pull-right">
-        <?=evalua_social($evento["url_social"] , "fb" , $in_session )?>
-        <?=evalua_social($evento["url_social"] , "yt" , $in_session )?>                
-    </ul>  
+<div class='enid-maps' id="enid-maps">
+    <?=valida_maps_public($evento['formatted_address'] , $evento['idevento'] )?>
 </div>
 
-<style type="text/css">
-    .seccion_slider_evento{
-        margin-bottom: 20px;
-    }
-    .panel_info_evento{
-        background: rgb(60, 94, 121);
-        color: white;
-    }
-    .seccion_principal{
-        //background: rgb(22, 103, 129);    
-        background: rgb(54, 70, 84);
-        padding: 10px;    
-        font-size: .9em;
-    }
-    .tags_generos_a{
-        background: #364654 !important;       
-    }
-    .tags_generos_a:hover{    
-        background:#00bcd4 !important;    
-        padding: 8px;       
-    }
-    .tags_generos_a:hover{
-        cursor: pointer;
-    }
-    .slogan{    
-        color: white;        
-    }
-    .seccion_escenairos_evento{
-        background:  #046188; 
-        height: 100%;    
-    }#mapgooglemap{
-      background: #046188;
-    }
-    .titulo_maps{
-        color: white;
-    }.aviso_social{
-        font-size: .8em;
-    }
-    .config_tipo_evento{        
-        cursor: pointer;
-    }
-    .info_tipo_evento{
-        color: white;
-    }
-    span.titulo_evento_slider{
-
-        color: #FFFFFF;
-        margin-left: 1%;
-        font-weight: bold;
-    }
-    .text_edicion{
-        color: rgb(62, 178, 192);        
-        font-size: 1.2em;
-        margin-left: 2%;    
-    }
-    /**/
-    .text_title_escenario{
-        font-size: 2em;
-        font-weight: bold;    
-    }
-    .dias_restantes{
-        color: white !important;
-        font-weight: bold;        
-    }
-    .edicion_event{
-        font-weight: bold;          
-    }
-    .seccion_escenarios_enid{
-        background: whitesmoke;
-        padding: 2%;
-    }
-    .maps_enid{
-        background: #046188;
-        padding: 10px;
-    }.text_map{
-        color: white;
-    }
-    .text-map-prox{
-        color: white;
-    }
-
-
-</style>
-
-
-
-
-<style type="text/css">
-    @media only screen and (max-width: 991px) {
-
-        .sepador_superio{
-            display: none;
-        }
-    }
-</style>
+<!---->
+<div class='col-lg-12 col-md-12 col-sm-12'>
+    <div class='row'>
+        <ul class="p-social-link pull-right">        
+            <?=evalua_social($evento["url_social"] , "fb" , $in_session )?>
+            <?=evalua_social($evento["url_social"] , "yt" , $in_session )?>                
+        </ul>  
+    </div>
+    
+</div>

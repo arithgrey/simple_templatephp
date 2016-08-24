@@ -24,11 +24,9 @@ class CambioPasswordControlador extends REST_Controller{
     }
     /**/
     function validate_user_sesssion(){
-                if( $this->sessionclass->is_logged_in() == 1) {                        
-
-                    }else{
-                    /*Terminamos la session*/
-                    $this->sessionclass->logout();
-                }   
+        if( $this->sessionclass->is_logged_in() == 1) {}else{
+            /*Terminamos la session*/
+            $this->sessionclass->logout();
+        }   
     }/*termina validar session */
 }/*Termina rest*/

@@ -45,7 +45,6 @@ class Generosmusicales extends REST_Controller{
             $this->sessionclass->logout();        
         } 
     }
-/* end generosmusicales end  generosmusicales end  generosmusicales end  generosmusicales generosmusicales generosmusicales*/    
     
 }
 ?>

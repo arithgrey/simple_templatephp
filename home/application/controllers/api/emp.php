@@ -239,9 +239,7 @@ class Emp extends REST_Controller{
          
         $param  =  $this->get();    
         $iconos_experiencia =  $this->empresamodel->get_iconos_sociales($param);        
-        $data["iconos_experiencia_cliente"] =  contruye_iconos_experiencia_cliente($iconos_experiencia); 
-        //$this->response($param["id_empresa"] . "----------------- " );
-
+        $data["iconos_experiencia_cliente"] =  contruye_iconos_experiencia_cliente($iconos_experiencia);         
         $this->load->view("empresa/iconos_generales" , $data);
     }
 }?>

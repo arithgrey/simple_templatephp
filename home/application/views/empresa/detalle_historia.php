@@ -1,4 +1,4 @@
-<div class='row'>
+<div>
   <?=$tags_generos?>
 </div>
 <div class='row'>

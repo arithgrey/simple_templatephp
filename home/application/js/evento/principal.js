@@ -287,14 +287,15 @@ function update_db_restricciones(){
 /*Nueva dirección */
 function update_ubicacion_evento(){
 
+	
 	$(".locacion").keyup(function(){
 		locacion_evento =  $(".locacion").val();
-		key =  "AIzaSyAGAc9HmfSltzzAyFhcvqQ9U0yk427NMTw";
+		key =  "AIzaSyAVF0GA9R64Jnbd3ZX53TnLI-61vOqcq-4";
 		url =  "https://maps.googleapis.com/maps/api/geocode/json"; 
 		$.ajax({
 				url :  url , 
 				type: "GET", 			
-				data: {address: locacion_evento , key :  key } 
+				data: {"address" : locacion_evento , "key" :  key } 
 			}).done(function(data){
 				z = 0; 					
 				locaciones =  "<datalist class='locaciones' id='locaciones'>"; 

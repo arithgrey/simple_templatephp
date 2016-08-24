@@ -1,6 +1,7 @@
 $("#form-integrante-edicion").submit(update_data_user);
 $("#form_estatus").submit(actualiza_estado_usuario);
 $("#btn_cancelar").click(cancelar_modificacion);
+$(".nueva_busqueda").click(carga_form_busqueda);
 function update_data_user(e){    
     /**/   
     id_usuario =  $("#id_usuario").val();

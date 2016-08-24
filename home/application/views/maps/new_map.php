@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <script src="<?=base_url('application/js/js/jquery-1.10.2.min.js')?>"></script>
     <script src="<?=base_url('application/js/js/jquery-ui-1.9.2.custom.min.js')?>"></script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAVF0GA9R64Jnbd3ZX53TnLI-61vOqcq-4&signed_in=true&libraries=places" async defer>
+    <script src="https://maps.googleapis.com/maps/api/js?key=<?=$key_enid?>&signed_in=true&libraries=places" async defer>
     </script>  
     <script type="text/javascript" src="<?=base_url('application/js/maps/principal.js')?>">
     </script>
@@ -14,7 +14,7 @@
   </head>
   <body>    
 
-    <div  class='row  place_maps_enid' >  
+    <div class='row place_maps_enid'>  
       <div>                
           <input id="origin-input" value="<?=$info_locacion['formatted_address']?>" class="form-control input-sm input-nuevo " type="text" placeholder="La dirección del evento">             
           <button type="submit" class="btn btn-default btn_new_pv btn-nuevo " id='btn-registrar'>
@@ -27,12 +27,10 @@
     <div id="map">
     </div>    
     <br>   
-
-
     <form class='form-registro-direccion' id='form-registro-direccion' 
     action="<?=base_url('index.php/api/'.$modulo.'/locacion/format/json/')?>">
       <input type='hidden' class='identificador' id='identificador' name='identificador' value="<?=$identificador?>"> 
-       <input type='hidden' class='new_place_id' name='place_id' value="<?=$info_locacion['place_id']?>">
+      <input type='hidden' class='new_place_id' name='place_id' value="<?=$info_locacion['place_id']?>">
       <input type='hidden' class='new_formatted_address' id='new_formatted_address' name='formatted_address'  value="<?=$info_locacion['formatted_address']?>"  >      
       <input type='hidden' class='flag_default_map' id='flag_default_map' value="<?=$info_locacion['num']?>">
       <input type='hidden' class='new_lat' id='new_lat' value='<?=$info_locacion['lat']?>' name='lat'>

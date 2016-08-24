@@ -1,6 +1,5 @@
 <?php if (!defined('BASEPATH')) exit('No permitir el acceso directo al script');
 class Sessionclass extends CI_Controller{
-
 	function __construct(){
 		parent::__construct();
 		$this->load->model("perfilrecursomodel");
@@ -33,7 +32,6 @@ class Sessionclass extends CI_Controller{
 	function getperfiles(){
 		return $this->session->userdata('perfiles');	
 	}
-
 	function getidempresa(){
 		
 		return $this->session->userdata('idempresa');	
@@ -139,12 +137,10 @@ class Sessionclass extends CI_Controller{
 
 /**/
 	function verificapermiso($nombrerecurso ,  $permiso ){
-
 		
 		$perfiles = $this->getperfiles();		
 		$data_recursos = $this->perfilrecursomodel->displayrecursobyperfiles($perfiles);
         $banderaso=0;          
-
 
         foreach ( $data_recursos as $row){                                     
 	        /*Validamos que el perfil tenga acceso al recurso*/    
@@ -153,13 +149,8 @@ class Sessionclass extends CI_Controller{
 
                     $banderaso=1;
                 }
-
         }
         return $banderaso;
-
-
 	}	
 }
-
 /* End of file Someclass.php */ 
-

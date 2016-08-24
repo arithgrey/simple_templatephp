@@ -1,7 +1,6 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
 require APPPATH.'/libraries/REST_Controller.php';
 class Escenario extends REST_Controller{      
-
     function __construct(){
             parent::__construct();
     
@@ -18,10 +17,7 @@ class Escenario extends REST_Controller{
         $id_escenario = $this->get("escenario");
         $param =  $this->get();
         $data["imgs"] =  $this->img_model->get_imgs_escenario($id_escenario);                    
-        $data["param"] =  $param;
-        
-
-        //$this->response(get_slider_img($img_data , $param ));        
+        $data["param"] =  $param;    
         echo  $this->load->view("escenarios/slider" , $data);
     }
     function resumenpublic_GET(){
@@ -31,8 +27,7 @@ class Escenario extends REST_Controller{
         $in_session =0; 
         if( $this->sessionclass->is_logged_in() == 1){ $in_session =  1; }
         $data["configurar"] =  $in_session; 
-        echo $this->load->view('escenarios/list_resumen' , $data );       
-       
+        echo $this->load->view('escenarios/list_resumen' , $data );              
     }    
     /**/    
     function artista_GET(){
@@ -104,10 +99,7 @@ class Escenario extends REST_Controller{
         $campo = $this->get("campo");
         $id_escenario = $this->get("escenario");
         $db_response = $this->escenariomodel->get_campo_escenario($campo , $id_escenario);
-
         $this->response($db_response[0][$campo]);
-
-
     }
     /**/
     function escenario_evento_POST(){
@@ -123,17 +115,12 @@ class Escenario extends REST_Controller{
         $param =  $this->post();
         $db_response =  $this->escenariomodel->nuevo( validate_text($nombre), $id_evento , $id_empresa , $id_usuario , $nombre_usuario  , $param );
         $this->response($db_response);
-
-
-
     }
     /**/
     function load_GET(){
-        
+            
         $id_evento =  $this->get("evento_escenario");        
-        $response_db = $this->escenariomodel->load_by_event( $id_evento );        
-        //$escenarios =  list_escenarios_on_loadevent($response_db);  
-
+        $response_db = $this->escenariomodel->load_by_event( $id_evento );                
         $data["escenarios"]  =  $response_db;   
         $data["evento"] = $id_evento;
 
@@ -381,14 +368,9 @@ class Escenario extends REST_Controller{
     }
     /**/
     function disponibles_GET(){
-
-
-
         $param =  $this->get();
         $data["escenarios"] =  $this->escenariomodel->get_escenarios_evento($param["id_evento"]);
-        //$data["otros_escenarios"] =  escenarios_in_evento($escenarios_data , $id_escenario);    
         echo $this->load->view("escenarios/resumen_disponibles" , $data  );
-
     }
 }
 ?>

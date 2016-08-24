@@ -2,14 +2,13 @@
 require APPPATH.'/libraries/REST_Controller.php';
 class Event extends REST_Controller{
     function __construct(){
-            parent::__construct();
-            $this->load->model("eventos_model_cliente");                             
-            $this->load->model("eventmodel");                
-            $this->load->helper("eventosh");               
-            $this->load->helper("generoshelp");
-            $this->load->library('sessionclass');                    
+        parent::__construct();
+        $this->load->model("eventos_model_cliente");                             
+        $this->load->model("eventmodel");                
+        $this->load->helper("eventosh");               
+        $this->load->helper("generoshelp");
+        $this->load->library('sessionclass');                    
     }   
-
     function imagenes_GET(){            
 
         $id_evento = $this->get("id_evento");     
@@ -256,7 +255,7 @@ class Event extends REST_Controller{
     }
     /**/        
     function nuevo_evento_POST(){                        
-        /*Capturamos datos*/
+        /*Capturamos datos*/        
         $this->validate_user_sesssion();            
         $generic_response = ["Nombre muy corto para el evento" , "Registre fecha"];                        
         $nombre  = $this->post("nuevo_evento");
@@ -400,9 +399,5 @@ class Event extends REST_Controller{
         $this->response($db_response);
    
     }
-
-
-
 }/*Termina el controlador rest */
 ?>
-

@@ -14,7 +14,8 @@ function trysession(){
 		}else{
 			pwpost = ""+CryptoJS.SHA1(pw);
 			$("#secret").val(pwpost);			
-			url = $(".now").val()+"index.php/api/sessionrestcontroller/start/format/json";
+			
+			url = $("#in").attr("action");
 			$.ajax({
 					url : url , 
 					type : "POST" , 

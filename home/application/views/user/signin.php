@@ -11,91 +11,54 @@
     <?=link_tag('application/css/css/style.css');?> 
 </head>
 <body class='content-enid'>
-    <section>
-        <div>        
-            <div>            
-                <script src="<?=base_url('application/js/js/jquery-1.10.2.min.js')?>"></script>
-                <script src="<?=base_url('application/js/js/jquery-ui-1.9.2.custom.min.js')?>"></script>
-                <script src="<?=base_url('application/js/js/jquery-migrate-1.2.1.min.js')?>"></script>
-                <script src="<?=base_url('application/js/js/bootstrap.min.js')?>"></script>
-                <script src="<?=base_url('application/js/js/modernizr.min.js')?>"></script>
-                <script src="<?=base_url('application/js/js/jquery.nicescroll.js')?>"></script>
-                <script type="text/javascript" src="<?=base_url('application/js/main.js')?>"></script>                      
-            </div>   
-        </div>                         
+    <section>                        
+        <script src="<?=base_url('application/js/js/jquery-1.10.2.min.js')?>"></script>
+        <script src="<?=base_url('application/js/js/jquery-ui-1.9.2.custom.min.js')?>"></script>
+        <script src="<?=base_url('application/js/js/jquery-migrate-1.2.1.min.js')?>"></script>
+        <script src="<?=base_url('application/js/js/bootstrap.min.js')?>"></script>
+        <script src="<?=base_url('application/js/js/modernizr.min.js')?>"></script>
+        <script src="<?=base_url('application/js/js/jquery.nicescroll.js')?>"></script>
+        <script type="text/javascript" src="<?=base_url('application/js/main.js')?>"></script>
     </section>
-    
-<div class='contenedor-form'>
- 
-  <div class='seccion-form-login'>
-    <div>
-        <div>
-            <div>
-                <h1 class='enid-service'>
-                      Enid service
-                </h1>                
-            </div>
-        </div>
-    </div>              
-    <form id="in" method="post" action="">                    
-        <div class="input-group">
-          <span class="input-group-addon" id="basic-addon1">
+
+
+
+
+<div class='contenedor-form col-lg-4 col-lg-offset-4 col-md-4 col-md-offset-4  col-sm-10 col-sm-offset-1'>
+      <div class='seccion-form-login'>    
+            <h1 class='enid-service'>
+                Enid <br>service
+            </h1>                            
+        <form id="in" method="post" action="<?=base_url('index.php/api/sessionrestcontroller/start/format/json')?>">                        
+            <div class="input-group">
+              <span class="input-group-addon" id="basic-addon1">
                 usuario (@email)
-          </span>
-          <input type="mail" name='mail' id="mail"  class="form-control input-sm" placeholder="" aria-describedby="basic-addon1">                                    
-        </div>
-        <div class="input-group">
-          <span class="input-group-addon" >
+              </span>
+              <input type="mail" name='mail' id="mail"  class="form-control input-sm" >                                   
+            </div>
+            <div class="input-group">
+              <span class="input-group-addon" >
                 Contraseña
-          </span>
-          <input type="password" class="form-control input-sm"  name='pw' id="pw" aria-describedby="basic-addon1" >
-          <input type='hidden' name='secret' id="secret">
-        </div>                                
-        <div class="control-group">                                                          
-          <label  id="reportesession" class='reportesession'>
-          </label>                                                          
-        </div>                
-        <button id="inbutton" class='btn btn-default btn_save recupera'>
-              Iniciar
-        </button>                          
+              </span>
+              <input type="password" class="form-control input-sm"  name='pw' id="pw">
+              <input type='hidden' name='secret' id="secret">
+            </div>                                
+            <div class="control-group">                                                          
+              <label  id="reportesession" class='reportesession'>
+              </label>                                                          
+            </div>                
+            <button id="inbutton" class='btn btn-default btn_save recupera'>
+                Iniciar
+            </button>                          
+        </form>
+      </div> 
+</div>
 
-    </form>
-  </div> 
-
-
-
-
-
-</div>     
 <a data-toggle="modal" class='pull-right recupara-pass'>                                                 
   Recuperar contraseña                         
 </a>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 </body>
+
     <style type="text/css">
 
         .recupara-pass{          
@@ -132,9 +95,7 @@
             padding: 5px 0;
             width: 230px;
             height: 30px;
-            position: relative;
-            
-            //float: left;
+            position: relative;            
             line-height: 22px;
         }.enid-service{
             margin-top: 15%;          
@@ -146,11 +107,13 @@
             height: 100%;
             width: 100%;
         }
+        /*
         .contenedor-form{
           width: 35%;
           margin: 0 auto;
           margin-top: 5%;
         }
+        */
     </style>
             
 <script type="text/javascript" src="<?=base_url('application/js/home/landing_page.js')?>"></script>

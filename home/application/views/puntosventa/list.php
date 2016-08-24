@@ -1,9 +1,9 @@
 <?php 
 		$complete ="";
 		$list=  "";
-		$height ="";	
+		$height ="style='overflow-x:auto;'";	
 		if (count($puntos_venta) >= 20 ){
-			$height ="style='overflow-y:scroll;  height: 400px;' " ; 
+			$height ="style='overflow-y:scroll; overflow-x:auto;  height: 500px;' " ; 
 		}		
         $num_puntos_venta =0;
         $b =1;
@@ -67,23 +67,23 @@
 <div <?=$height?> >
 	<table class='table_enid_service' border=1  >
 		<tr class='table_enid_service_header'>		        	
-			<td>Configurar</td>
-			<td>IMG</td>	
-			<td>Punto  venta</td>	
-			<td>L</td>
-			<td>M</td>
-			<td>MI</td>
-			<td>J</td>
-			<td>V</td>
-			<td>S</td>
-			<td>D</td>	
-			<td>Horario de atención</td>
-			<td>Zona</td>
-			<td>Dirección</td>			
-			<td>Sitio web </td>
-			<td>Fecha registro</td>
-			<td>Contactos Asociados</td>			
-			<td>Eliminar</td>
+			<?=get_td("Configurar")?>
+			<?=get_td("IMG")?>
+			<?=get_td("Punto  venta")?>
+			<?=get_td("L")?>
+			<?=get_td("M")?>
+			<?=get_td("MI")?>
+			<?=get_td("J")?>
+			<?=get_td("V")?>
+			<?=get_td("S")?>
+			<?=get_td("D	")?>
+			<?=get_td("Horario de atención")?>
+			<?=get_td("Zona")?>
+			<?=get_td("Dirección")?>
+			<?=get_td("Sitio web ")?>
+			<?=get_td("Fecha registro")?>
+			<?=get_td("Contactos Asociados")?>
+			<?=get_td("Eliminar")?>
 		</tr>
 		<?=$list?>
 	</table>
@@ -114,6 +114,3 @@
 }
 </style>
 
-
-
-<br>

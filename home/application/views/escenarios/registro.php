@@ -73,7 +73,7 @@
             <form id="form-escenario" method="POST">
                 <h4> 
                 	<small class='text-escenario-lb'>                		  
-                	   Cargar Escenario al evento
+                	   + Nuevo escenario
                 	</small>
                 </h4>  
                 <div class="form-group todo-entry">

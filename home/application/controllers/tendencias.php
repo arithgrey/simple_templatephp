@@ -84,12 +84,5 @@ class Tendencias extends CI_Controller {
             $this->load->view('TemplateEnid/footer_template', $data);
         }                      
     }
-    /**/
-
-
-
-
-
-
-        
+       
 }

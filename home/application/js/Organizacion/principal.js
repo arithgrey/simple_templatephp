@@ -42,6 +42,25 @@ $(document).on("ready", function(){
 	$(".text-edit-mensaje-comunidad").click(edita_mensaje_comunidad);
 	$(".img-tmp-empresa").click(edita_logo_empresa);
 	$("footer").ready(carga_iconos_comunidad);
+
+
+
+	$('nav, .nav-controller').on('click', function(event) {
+        $('nav').toggleClass('focus');
+    });
+    $('nav, .nav-controller').on('mouseover', function(event) {
+        $('nav').addClass('focus');
+        $('.controller-open').hide();
+        $('.controller-close').show();
+
+
+    }).on('mouseout', function(event) {
+        $('nav').removeClass('focus');
+        $('.controller-open').show();
+        $('.controller-close').hide();
+    })
+    
+
 });
 function try_update_mas_info(){	
 	valor = $("#mas-info-empresa-input").val();

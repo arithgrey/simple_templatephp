@@ -12,6 +12,7 @@ class Maps extends CI_Controller{
         $data["public"] = $public; 
         $data["modulo"] = $modulos_enid[$modulo]; 
         $data["destination"] =  $destination;  
+        $data["key_enid"]= "AIzaSyAVF0GA9R64Jnbd3ZX53TnLI-61vOqcq-4";
         $this->load->view("maps/new_map", $data);        
     }
     /**/

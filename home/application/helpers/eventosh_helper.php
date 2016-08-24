@@ -638,7 +638,8 @@ function get_slider_img_evento($data){
 			$flags .= '<li data-target="#myCarousel" data-slide-to="'.$flag.'" class="">
 		                <a href="#">
 		                    About
-		                    <small>Lorem ipsum dolor sit
+		                    <small>
+		                    Lorem ipsum dolor sit
 		                    </small>
 		                </a>
 		            </li>
@@ -685,44 +686,52 @@ function get_slider_img_evento($data){
 		$text =  c_seccion_descripcion($descripcion , $in_session  , $id_evento ); 
 		$url =  base_url('index.php/eventos/nuevo/'.$id_evento."/#portlet_tab4");
 		$btn =  editar_btn($in_session , $url );
-		$seccion = "<div class='descripcion_seccion'>
-						". $text  ."			            
-					</div>
-					".$btn;   
+		$seccion = "					
+						<div class='btn-config-enid-desc'>" . $btn . "</div>
+						<div class='descripcion_seccion seccion-config-enid-desc'>
+							". $text  ."			            
+						</div>					
+					";   
 		return $seccion;
 	}
 	/**/
-	function c_seccion_descripcion($descripcion , $in_session , $id_evento  ){		
-		
-		$url =  base_url('index.php/eventos/nuevo/'.$id_evento."/#portlet_tab4");
-		$btn =  editar_btn($in_session , $url );
-
+	function c_seccion_descripcion($descripcion , $in_session , $id_evento){		
 		$text =  trim($descripcion); 
 		$new_text =  $descripcion; 
 		if ($in_session == 1 ){
-			if (strlen($descripcion) < 5 ){ $new_text =  $btn .'<span class="msj_notificacion_config" > No has cargado la descripción del lo que vivirá el publico al asistir al evento. </span>'; 		}
+			if (strlen($descripcion) < 5 ){ $new_text =  '
+					<span class="msj_notificacion_config" > 
+						Registra una descripción del evento 
+					</span>'; 		
+														}
 		}else{
-			if (strlen($descripcion) < 5){$new_text = 'Próximamente lo que vivirás  al asistir al evento.'; }
+			if (strlen($descripcion) < 5){
+					$new_text = 'Próximamente lo que vivirás  al asistir al evento.'; 
+				}
 		}		
 		
 		return $new_text;            	
 	}
 	/**/
-	function create_text_edicion($edicion ,  $in_session){
+	function create_text_edicion($edicion ,  $in_session , $id_evento){
 
 		$text =  ""; $new_text =  "";
+		$url =  base_url('index.php/eventos/nuevo/'.$id_evento."/");
+		$btn =  editar_btn($in_session , $url );
+
 		if ($in_session == 1 ) {
 			$new_text =  $edicion; 
-			if (strlen($edicion) == 0 ) {
-				$new_text =  "No has cargado la edición del evento ";				
+			if(strlen($edicion) == 0 ){
+				$new_text =  "<span class='msj_notificacion_config'> 
+								Registra la edición del evento 
+							  </span>";				
 			}
 		}else{
-
 			if (strlen($edicion) > 0 ) {
 				$new_text =  $edicion;
 			}
 		}
-		return $new_text; 
+		return  "<div class='btn-config-edicion-desc-l'>" . $btn ."</div>".$new_text; 
 	}
 	/**/
 	function construye_resumen_artista($data , $in_session){
