@@ -23,7 +23,16 @@
 
 <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
  <style type="text/css">
-
+    .ver-public-sm{
+      display: none;
+    }
+     .nombre_empresa_enid{
+        float: right;
+        font-size: 1.7em;
+        color: #d9534f;
+        font-weight: bold;
+        
+     }
     .seccion-presentacion{
           background:  rgb(6, 51, 73);  
           padding: 5%;
@@ -504,7 +513,42 @@
 
 
 
+        <style type="text/css">
+        /*Los templates */
+            .link-event-enid{
+                text-decoration: none;
+            }
+            .link-event-enid:hover{
+                text-decoration: none;
+            }
+            .text-title-enid{
+                font-size: 2em;
+                font-weight: bold;
+            }
+            .hiddden_descripcion{
+                display: none;
+            }
+            .more-info-f-up{
+                display: none;
+            }
+            .more-info-f-up:hover , .more-info-f-down:hover{
+                cursor: pointer;
+            }
+            .hiddden_descripcion , .show_descripcion{
+                font-size: .9em;
+            }
+            .text-imagen-enid-b{                
+                font-weight: bold;
+            }
+            .text-imagen-enid{
+                color: white;
+                font-weight: bold;
+            }
+            .text-imagen-enid:hover , .text-imagen-enid-b:hover{
+                cursor: pointer;
+            }
 
+        </style>
 
 
 
@@ -531,7 +575,17 @@
         <style type="text/css">
             /*Todo lo que pertenece a medios*/
             @media only screen and (max-width: 991px) {
-
+                .ver-public-sm{
+                    display: block;
+                    background: rgb(8, 65, 84);
+                    padding: 10px;
+                    margin-bottom: 10px;
+                    color: white;
+                }
+                .ver-public-sm:hover{
+                    text-decoration: none;
+                    color: white;
+                }
                 .seccion-presentacion{
                   background:  rgb(6, 51, 73);  
                   padding: 10%;

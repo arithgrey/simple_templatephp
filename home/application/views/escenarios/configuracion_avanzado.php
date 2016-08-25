@@ -1,51 +1,43 @@
-<?=$this->load->view('escenarios/otros_escenarios')?>
-<div class='menu_seleccion_enid'>          
-  <ul class="nav nav-pills" role="tablist">
-    <li class='tab_nombre'>
-      <a aria-expanded="true" href="<?=base_url('index.php/eventos/nuevo')?>/<?=$data_escenario["idevento"]?>">
-        <i class='fa fa-star'>
-        </i>     
-        <?=$evento["nombre_evento"]?>        
-      </a>
-    </li>    
-    <li class='artistas-btn active tab_escenario'>
-      <a   aria-expanded="false" href="#pill-1" role="tab" data-toggle="tab" title="Top Sellers">
+<?=template_view_like_public(base_url('index.php/escenario/inevento')."/".$data_escenario['idescenario'] . "/".$data_escenario["idevento"] )?>
+<div>          
+  <ul class="nav nav-pills">    
+    <li class='artistas-btn active tab_escenario tab_enid pull-left'>
+      <span class='' href="#pill-1" role="tab" data-toggle="tab" >
         <i class=" icon-up-1">
         </i> 
-        Escenario - <?=$data_escenario["nombre"]?>
-      </a>
+        <strong>
+            Escenario
+        </strong> - <?=$data_escenario["nombre"]?>
+      </span>
     </li>
-    <li class='artistas-btn tab_artistas'>
-      <a   aria-expanded="false" href="#pill-3" role="tab" data-toggle="tab" title="Top Sellers">
+    <li class='artistas-btn tab_artistas tab_enid pull-right'>
+      <span  href="#pill-3" role="tab" data-toggle="tab" >
         <i class=" icon-up-1">
         </i> 
         Artistas 
-      </a>
-    </li>    
-    <li >    
-      <a href="<?=base_url('index.php/escenario/inevento')?>/<?=$data_escenario['idescenario'];?>/<?=$data_escenario["idevento"]?>" >
-        <i class="fa  fa-arrow-circle-o-right"> 
-        </i>     
-        Ver como el público    
-      </a>
-    </li>
+      </span>
+    </li>        
   </ul>
 </div>
+<?=template_evento_admin($evento["nombre_evento"] , $evento["idevento"])?>
 
-<div class='contenidos_escenario'>
-    <div class="tab-content">
-        <div class="tab-pane tab_escenario active" id="pill-1">
-            <?=$this->load->view("escenarios/config_escenario");?>
-        </div>
-        <div class="tab-pane tab_artistas" id="pill-3">
-            <?=$this->load->view("escenarios/config_artistas");?>
-        </div>    
-    </div>            
-</div>
-
-
-
-
+<div class="tab-content">
+    <div class="tab-pane tab_escenario active" id="pill-1">
+        <?=$this->load->view("escenarios/config_escenario");?>
+    </div>
+    <div class="tab-pane tab_artistas" id="pill-3">       
+        <section>        
+            <div class='response_img_artista' id='response_img_artista'>
+            </div>                                      
+            <div class='place_config_artistas'>
+            </div>
+            <div class='place_artistas'>
+            </div>
+            <div class='artistas-escenario-section' id='artistas-escenario-section'>   
+            </div>        
+        </section>
+    </div>    
+</div>            
 <!--Cargamos los modal de configuración ***********-->
 <?=$this->load->view("escenarios/modal/escenario_avanzado")?>
 <!--Terminamos de cargar los modal de configuración ***********-->
@@ -61,33 +53,37 @@
 <script type="text/javascript" src="<?=base_url('application/js/escenarios/escenario_artista.js')?>"></script>
 <script type="text/javascript" src="<?=base_url('application/js/escenarios/config.js')?>"></script>
 <script type="text/javascript" src="<?=base_url('application/js/escenarios/img.js')?>"></script>
-
-
-
 <input type='hidden' value="<?=$evento['nombre_evento']?>" class='enid_evento' id='enid_evento'>
 <input type='hidden' value="<?=$data_escenario["nombre"];?>" class='enid_escenario' id='enid_escenario'> 
 <style type="text/css">
-.nombre-escenario-text:hover, .descripcion-escenario-text:hover {
-    cursor: pointer;    
-}.section-descripcion-escenario-in, .section-nombre-evento-in {
-    display: none;
-}.section-fecha-type{
-    background: #062735;
-}.section-input{
-    display: none;
-}.title_main{
-    display: none;
-}.artistas-inputs:hover{
-    cursor: pointer;
-}.img-artista-evento{
-    width: 150px; 
-    height:150px;
-}.img-artista-evento:hover{
-    cursor: pointer;
-}
+    .nombre-escenario-text:hover, .descripcion-escenario-text:hover {
+        cursor: pointer;    
+    }.section-descripcion-escenario-in, .section-nombre-evento-in {
+        display: none;
+    }.section-fecha-type{
+        background: #062735;
+    }.section-input{
+        display: none;
+    }.title_main{
+        display: none;
+    }.artistas-inputs:hover{
+        cursor: pointer;
+    }.img-artista-evento:hover{
+        cursor: pointer;
+    }
 </style>
 <!--Todo lo que es nuevo -->
 <style type="text/css">
+    .tipos-escenarios , .fechas-escenario-presentacion{
+        display: inline-block;
+    }.f_escenario{
+        color: white;
+        text-decoration: none;
+    }
+    .f_escenario:hover{
+        color: white;
+        text-decoration: none;
+    }
     .contenedor_slider_imgs{
     background:  rgb(54, 70, 84);   
     }.f_escenario:hover{
@@ -109,3 +105,57 @@
         background: red;
     }
 </style>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+    .seccion-portada-escenario{
+        background: rgb(4, 97, 136);
+    }    
+    .hidden_desc{
+        display: none;
+    }   
+    .tab_enid:hover{
+        cursor: pointer;
+    } 
+    .tab_enid{
+        font-size: .8em;
+        text-decoration: underline;
+    }    
+    /*Todo lo que pertenece a medios*/
+  @media only screen and (max-width: 991px) {    
+    .config-general-escenario{
+        margin-top: 10px;
+    }
+    
+    
+  }
+</style>
+
+
+

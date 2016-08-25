@@ -151,7 +151,7 @@ function t_update_horario_artista(e){
 		url : url , 
 		data:  {idartista: artista ,  idescenario :  $("#id_escenario").val() ,  "enid_evento": enid_evento ,  "enid_escenario":  enid_escenario   }, 
 		beforeSend: function(){
-			show_load_enid(".place_horario_artista" , "Cargando horario actial del artista" , 1); 	
+			show_load_enid(".place_horario_artista" , "Cargando horario actual del artista" , 1); 	
 		}
 	}).done(function(data){
 			

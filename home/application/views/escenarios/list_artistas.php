@@ -48,91 +48,92 @@
 				$seccion_youtube = valuda_icon_yt($m_youtube , $id_artista , $url_social_youtube ); 
 				$seccion_sound = valida_icon_sound_cloud($m_sound , $id_artista , $url_sound_cloud   ); 				
 				/*Poder editar la nota*/		
-				$seccion_nota = evalua_nota_artista($m_nota , $id_artista ,  $nota  ); 
-				/*
-				$seccion_nota = '<a "'. $m_nota .'"  class="artista_nota" id="'.$id_artista.'">
-									<i class="artista_nota fa fa-file-text-o icon_config" id="'.$id_artista.'" >
-									</i>
-								</a> 
-								'; 
-								*/
+				$seccion_nota = evalua_nota_artista($m_nota , $id_artista ,  $nota ); 
+				
 		}	
 
 		$list_artistas .=  '
-
-		<div class="panel" >
+			<div class="panel" >
 				'. $m_delete.'
-                <div class="panel-body" >
-                    <div class="row">
-                        	<div class="col-lg-3  col-md-3 ">
-	                            <div class="blog-img-sm">
-	                                '.$img.'
-	                            </div>
-                            </div>
-                            <div class="col-lg-9 col-md-9" >                           
-		                        <div>
-			                        <h1  "'. $m_nombre_artista .'"  >
-								   		<div class="artistas-inputs" id="'. $id_artista .'"  >
-			                    		'.$nombre_artista .'
-			                    		</div>
-			                    	</h1>			         					
-				                	<div>
-					                    <a "'. $m_status .'" >
-								          '. $status_confirmacion.'
-								       	</a>
-										|   						
-								        '.valida_icon_conf_horario($m_horario , $id_artista , ' horario_artista icon_config  ' , 'fa fa-clock-o' , "Horario de presentación " ,   $horario ).'
-								        '. $seccion_youtube .'
-										'. $seccion_sound .'						        
-										|
-										
-
-										'. tag_tipo_artista($public , $id_artista ,  $tipo_artista  ) .'
-
-										
-										
-										'.$seccion_nota.'                                        	                                            	                                                                              		                                            	                                        								      
-										
-									</div>						
-			                 	</div>
-                        	</div>
-                    </div>
+                <div class="panel-body" >              
+                   	<div class="col-lg-3  col-md-3 col-sm-12">
+	                   	<div class="blog-img-sm">
+	                        '.$img.'
+	                   	</div>
+                   	</div>
+                    <div class="col-lg-9 col-md-9 col-sm-12" >                           		                
+			            <h1  "'. $m_nombre_artista .'"  >
+							<div class="artistas-inputs" id="'. $id_artista .'"  >
+				            '.$nombre_artista .'
+				            </div>
+			            </h1>			         					
+					    <div>						    					   
+							'. valida_icon_conf_horario($m_horario , $id_artista , ' horario_artista icon_config  ' , 'fa fa-clock-o' , "Horario de presentación " ,   $horario ).'
+							'. $seccion_youtube .'
+							'. $seccion_sound .'						        										
+							'. tag_tipo_artista($public , $id_artista ,  $tipo_artista  ) .'								
+							'. $seccion_nota .' 
+							<div class="row">
+								<div class="col-lg-12 col-md-12 col-sm-12">
+									<a class="estado_confirm_text  estado_confirm_text_mov " "'. $m_status .'" >
+										'. $status_confirmacion.'
+									</a>
+								</div>
+							</div>
+						</div>									                 
+                    </div>                    
                 </div>
             </div>
-            <hr>
-
-		
-		';
+            <hr>';
 		
 
 	} 
 
+
+
+
+	if ($in_session ==  1 ){
+
+			if (count($artistas) == 0 ) {
+				if ($public == 1 ) {
+					echo "<center>
+							<span class='msj_alerta_artistas  msj_notificacion_config'>
+								No has cargado artistas al escenario aún 
+							</span>
+						  </center>" . 
+						  editar_btn($in_session , base_url('index.php/escenario/configuracionavanzada/'.$id_escenario.'/artista') ); 
+						} 
+					}
+				}else{/**/
+					if (count($artistas) == 0 ) {
+						echo "<center>
+								<span class='msj_alerta_artistas msj_notificacion_config'>
+									Próximamente.!
+								</span>
+							</center>";
+						}
+				}
+		
+
 ?>
-
-
-
-<div class='col-lg-6 col-md-6'>		
-	<?php
-	if ($public== 1){
-		echo editar_btn($in_session , base_url('index.php/escenario/configuracionavanzada/'.$id_escenario.'/artista') );
-	}		
-	?>	
-</div>
-<div class='separate-enid'>
+<div>		
+	<?php if ($public== 1){echo editar_btn($in_session , base_url('index.php/escenario/configuracionavanzada/'.$id_escenario.'/artista') );}		?>	
 </div>
 
-<?php
-		echo form_artista($public , $id_escenario );
-		echo "<div class='separate-enid'></div>";
-		echo "
-		  <div class='artistas'>
-		  	". $list_artistas . "
-		  </div>";	
 
-	if ($in_session ==  1 ){if (count($artistas) == 0 ) {if ($public == 1 ) {echo "<center><span class='msj_alerta_artistas  msj_notificacion_config'>No has cargado artistas al escenario aún </span></center>" . editar_btn($in_session , base_url('index.php/escenario/configuracionavanzada/'.$id_escenario.'/artista') ); } }}else{/**/if (count($artistas) == 0 ) {echo "<center><span class='msj_alerta_artistas msj_notificacion_config '>Próximamente.!</span></center>";}}
-		  
-?>
-
+<div class="seccion-artistas-evento">
+	<div class='row'>
+		<div class='col-lg-12 col-md-12 col-sm-12'>
+			<?=form_artista($public , $id_escenario )?>
+		</div>
+	</div>
+	<div class='row'>
+		<div  class='col-lg-12 col-md-12 col-sm-12'>
+			<?=$list_artistas?>
+		</div>
+	</div>
+	
+</div>
 
 
 <!--FORMULARIO PARA NUEVO-->
@@ -189,14 +190,41 @@
 .config-icon{
 	display: inline-table;
 }
+.seccion-artistas-evento{
+	margin-top: 15px;
+}
 
+.estado_confirm_text{
+	font-size: .9em;
+}
+.estado_confirm_text:hover{
+	cursor: pointer;		
+}
+.estado_confirm_text{
+	cursor: pointer;
+	text-decoration: none;
+}
+.estado_confirm_text:hover{
+	text-decoration: none;
+	color: white;
+}	
+</style>		        
+<!--Para moviles-->
+<style type="text/css">
+  @media only screen and (max-width: 991px) {    
+    .estado_confirm_text_mov{
+    	float: none;
+    	width: 100%;
+    }
+    .text_horario_presentacion{
+    	font-size: .9em;
+    }
+    .estado_confirm_text{
+	    font-size: .9em;
+	    background: #223c48;
+	    color: white;
+	    padding: 2px  10px;
+	}    
 
+  }
 </style>
-
-
-
-
-
-
-
-		        

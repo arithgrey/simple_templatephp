@@ -11,6 +11,7 @@ $("footer").ready(function(){
 	$("footer").ready(dinamic_t);
 	key_enid =  "AIzaSyAVF0GA9R64Jnbd3ZX53TnLI-61vOqcq-4";
 	$(".text-filtro-enid").click(show_fields_mov);
+	$(".more-info-f").click(carga_contenido);
 
 });
 function show_load_enid(place , texto , flag ){
@@ -520,6 +521,30 @@ function show_fields_mov(){
 		$(".text-filtro-enid").text(" - Filtros");
 	}	
 }
+
+
+
+/**/
+function carga_contenido(){
+	seccion =  ".show_descripcion";
+
+	if ($(seccion).is(":visible")) {		
+		$(".hiddden_descripcion").show();
+		$(".more-info-f-up").show();
+		$(".more-info-f-down").hide();
+		$(".show_descripcion").hide();
+	}else{
+		
+		$(".hiddden_descripcion").hide();
+		$(".more-info-f-up").hide();
+		$(".more-info-f-down").show();
+		$(".show_descripcion").show();
+	}
+}
+
+
+
+
 /**/
 
 

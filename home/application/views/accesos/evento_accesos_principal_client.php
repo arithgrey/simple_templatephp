@@ -1,3 +1,5 @@
+<?=template_evento($data_evento["nombre_evento"])?>
+
 <!--Menú-->
 <div class='menu_seleccion_enid'>
     <ul class="nav nav-pills" role="tablist">

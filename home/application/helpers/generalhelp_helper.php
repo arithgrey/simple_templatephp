@@ -1,6 +1,80 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 if(!function_exists('invierte_date_time')){
 
+  /**/
+  function template_text_img($id  ,  $class  , $modal , $black  = 0 ,  $title ='' ){
+
+    $template =  " 
+                <span title='".$title ."' id='".$id."' data-toggle='modal' data-target= '".$modal."' class='text-imagen-enid ".$class."'>
+                    + Imagen
+                </span> ";
+    if ($black == 1  ) {
+      $template =  " 
+                <span title='".$title ."' id='".$id."' data-toggle='modal' data-target= '".$modal."' class='text-imagen-enid-b ".$class."'>
+                    + Imagen
+                </span> ";
+    }
+    
+    return $template;
+  }
+  /**/
+  function template_show_down_content(){
+      $template =  "
+                  <center>
+                    <span class='row more-info-f more-info-f-down'>
+                        <i class='fa fa-chevron-down' aria-hidden='true'>
+                        </i>
+                    </span>
+                    <span class='row more-info-f more-info-f-up'>
+                        <i class='fa fa-chevron-up' aria-hidden='true'>
+                        </i>
+                    </span>
+                  </center>  
+                ";
+      return $template;          
+  }
+  /**/
+  function template_btn_plantilla($id , $extra_class , $modal ,  $center_text =  'Usar plantilla'){
+    $template =  "
+                <button class='btn  btn-template ".$extra_class." ' id='".$id."' data-toggle='modal' data-target='".$modal."' >
+                    <i class='fa fa-file-text-o'>
+                    </i>
+                    ". $center_text."
+                </button> "; 
+    return $template;            
+  }
+  /**/
+  function template_view_like_public($url){
+
+    $template ="
+                <span>
+                    <a class='ver-public-sm' href='".$url."' >
+                      <i class='fa fa-arrow-circle-o-right'> 
+                      </i>
+                      Ver como el público 
+                    </a>
+                </span>";
+    return $template;
+  }  
+  /**/
+  function template_evento_admin($nombre_evento , $id_evento){
+    $url =  base_url("index.php/eventos/nuevo")."/".$id_evento;
+    $template =  "
+              <div class='col-lg-12 col-sm-12 col-md-12 seccion-presentacion' >
+                <div class='row'>
+                  <a class='link-event-enid'  href='".$url."'>
+                    <div class='nombre-evento-mov'>
+                      ".$nombre_evento."
+                    </div>                  
+                  </a>  
+                </div>
+              </div>
+              ";
+
+      return $template;        
+  }
+
+  /**/
   function template_evento($nombre_evento){
     $template =  "
               <div class='col-lg-12 col-sm-12 col-md-12 seccion-presentacion' >
@@ -8,6 +82,9 @@ if(!function_exists('invierte_date_time')){
                   <div class='nombre-evento-mov'>
                     ".$nombre_evento."
                   </div>
+                  <span class='nombre_empresa_enid'>
+                    Enid service
+                  </span>
                 </div>
               </div>
               ";
@@ -157,16 +234,16 @@ if(!function_exists('invierte_date_time')){
     $img =  "";
     if (isset($row["nombre_imagen"] )) {
         if (strlen($row["nombre_imagen"]) > 2  ){        
-          $img =  '<img '. $extra .' class="'. $class .'" id="'.$id.'"  style="display:block;margin:0 auto 0 auto; width: 90%;" src="data:image/jpeg;base64, '. base64_encode($row["img"])  .'  " />';
+          $img =  '<img '. $extra .' class="'. $class .'" id="'.$id.'"  style="display:block;margin:0 auto 0 auto; width: 100%;" src="data:image/jpeg;base64, '. base64_encode($row["img"])  .'  " />';
           
         }else{
           /*Generamos color al de fondo */           
           //return  "<div ". $extra."  style = '". $color_random."' style='margin: 0 auto;' class='img-icon-enid text-center ". $class ." ' id='".$id  ."'  >". $letra ."</div>";          
-          $img =  '<img '. $extra .' class="'. $class .'" id="'.$id.'"  style="display:block;margin:0 auto 0 auto; width: 90%;" src="'.$base_img.'  " />';
+          $img =  '<img '. $extra .' class="'. $class .'" id="'.$id.'"  style="display:block;margin:0 auto 0 auto; width: 100%;" src="'.$base_img.'  " />';
         }      
     }else{
           //return  "<div ". $extra."  style = '". $color_random."' style='margin: 0 auto;' class='img-icon-enid text-center ". $class ." ' id='".$id  ."'  >". $letra ."</div>";
-      $img =  '<img '. $extra .' class="'. $class .'" id="'.$id.'"  style="display:block;margin:0 auto 0 auto; width: 90%;" src="'.$base_img.'  " />';
+      $img =  '<img '. $extra .' class="'. $class .'" id="'.$id.'"  style="display:block;margin:0 auto 0 auto; width: 100%;" src="'.$base_img.'  " />';
     }
     return $img;      
     

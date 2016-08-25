@@ -9,10 +9,9 @@
 			  <div class='place_slider_portada'>
 			  </div>
 			</div>
-			<span title='Cargar imagenes del evento' id='img-button-more-imgs' data-toggle="modal" data-target="#modal-img-evento-section">
-			  + Imagen 
+			<?=template_text_img("img-button-more-imgs" ,  ' imagen-portada '  , "#modal-img-evento-section" , 1 ,  'Cargar imagenes del evento' )?>
+			
 			<input type='hidden' name='action' value="carga-imgenes-escenario">       
-			</span>  
 		</div>
 	</div>
 </div>

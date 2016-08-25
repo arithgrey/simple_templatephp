@@ -1,39 +1,26 @@
-<?=construye_header_modal('modal_tipo_artista', " Tipo de partición " );?>        
+<?=construye_header_modal('modal_tipo_artista', " Partición " );?>        
 <form action='<?=base_url('index.php/api/escenario/artista_tipo/format/json/')?>' id='tipo-artista-form' class='tipo-artista-form'>                        
-        <div class="input-group">                                    
-            <div  class='col-lg-8 col-md-8 col-sm-8 '>                                        
-                <div class="form-group">            
-                    <div class="input-group m-bot15">
-                        <span class="input-group-addon">
-                        Tipo de participación
-                        </span>                                                                                             
-                            <select name='tipo_artista'  class='tipo_escenario form-control' id='tipo_escenario'> 
-                            <option value=''>Ninguno
-                            </option>
-                            <option value='Estelar'>Estelar
-                            </option>
-                            <option value='Especial'>Especial
-                            </option>
-                            <option value='Apertura'>Apertura
-                            </option>
-                            <option value='General'>General
-                            </option>                                
-                        </select>                                        
-                    </div>
-                    </div>  
+    <div class='row'>
+        <div class='col-lg-12 col-md-12 col-sm-12'>                                                
+            <div class='col-lg-9 col-md-9 col-sm-12  select-tipos'>
+                <div class="input-group">
+                    <span class="input-group-addon">
+                            Tipo
+                    </span>                                                                                             
+                    <?=get_tipos_paticipacion()?>
+                </div>
             </div>
-            <div  class='col-lg-4 col-md-4 col-sm-4 '>
+            <div class='col-lg-3  col-md-3 col-sm-12 btn-registro-tipo'>
                 <button title='Establecer el tipo de artista' type="submit" class="btn btn-default btn_save" >                
-                Registrar cambios
-                </button> 
+                        Registrar
+                </button>             
             </div>            
         </div>
-        <div class='row'>
-            
-                <div class='place_tipo_artista'>                 
-                </div>                                        
-            <!--Alertas  terminan -->
+        <div class='col-lg-12 col-md-12 col-sm-12' >            
+            <div class='place_tipo_artista'>                 
+            </div>                                                
         </div>                                
+    </div>
 </form>                    
 <?=construye_footer_modal()?>  
 
@@ -244,7 +231,7 @@
         <div class='place_horario_artista'>            
         </div>       
         <button type="button" class="btn btn-default btn_save guardar_horario" >
-            Fijar horario de presentación
+            Registrar
         </button>
     </div>
                 

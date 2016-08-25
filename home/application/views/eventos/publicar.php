@@ -429,9 +429,7 @@
   font-size: 1.5em;
   font-weight: bold;
 }
-.ver-public-sm{
-  display: none;
-}.seccion-config-evento-mv{
+.seccion-config-evento-mv{
   display: none;
 }
 .edicion-evento:hover{
@@ -446,12 +444,7 @@
     .ver-public-lg{
       display: none;
     }
-    .ver-public-sm{
-      display: block;
-      background: rgb(22, 103, 129);
-      padding: 10px;
-      margin-bottom: 10px;
-    }.configs-evento-lg{
+    .configs-evento-lg{
       display: none;
     }
     .seccion-config-evento-mv{

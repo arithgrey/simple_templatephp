@@ -16,16 +16,16 @@ class Escenario  extends CI_Controller {
     /**************************Configuracion del escenario avanzado **************++*/
     function configuracionavanzada($id_escenario ,  $q ='' ){
 
-        if (valida_session_enid($this->sessionclass->is_logged_in())) {
+        if (valida_session_enid($this->sessionclass->is_logged_in()) ){
             
-                $evento=  $this->eventmodel->get_by_escenario($id_escenario)[0];                
-                $url_evento = base_url("index.php/eventos/nuevo") . "/". $evento["idevento"];
-                $data = $this->val_session("");                                                         
-                $data["evento"]=  $evento;
-                $data["data_escenario"]=$this->escenariomodel->get_escenariobyId($id_escenario)[0]; 
-                $data["q"] =  $q;
-                $artitastas_data = $this->escenarioartistamodel->get_artistas_inevent($id_escenario);        
-                $this->show_data_page( 'escenarios/configuracion_avanzado' , $data);            
+            $evento=  $this->eventmodel->get_by_escenario($id_escenario)[0];                
+            $url_evento = base_url("index.php/eventos/nuevo") . "/". $evento["idevento"];
+            $data = $this->val_session("");                                                         
+            $data["evento"]=  $evento;
+            $data["data_escenario"]=$this->escenariomodel->get_escenariobyId($id_escenario)[0]; 
+            $data["q"] =  $q;
+            $artitastas_data = $this->escenarioartistamodel->get_artistas_inevent($id_escenario);        
+            $this->show_data_page( 'escenarios/configuracion_avanzado' , $data);            
         }
            
     }    

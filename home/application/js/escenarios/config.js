@@ -1,6 +1,5 @@
 $(document).ready(function(){    
-	
-	
+
 	enid_evento =  $(".enid_evento").val(); 
 	enid_escenario  =  $(".enid_escenario").val(); 	
 	flag_carga_otros = 0; 
@@ -15,8 +14,7 @@ $(document).ready(function(){
 		redirect(now + "index.php/escenario/inevento"+ "/" + escenario  + "/" + evento);		
 	});
 	/**/
-	$("#button-template").click(function(){
-		
+	$("#button-template").click(function(){		
 		muestra_plantilla_escenario(5 , ".tmp_escenario" , ".place_tmp_escenario");
 	});
 	/**/
@@ -47,6 +45,8 @@ $(document).ready(function(){
 	/*Para las imagenes*/
 	$(".img-button-more-imgs").click(carga_form_imagenes_escenario);
 	$("footer").ready(valida_q);
+	/**/
+	
 });
 /**/
 function update_type(e){
@@ -211,8 +211,7 @@ function muestra_plantilla_escenario(type , contenido , dinamic_place){
 			show_load_enid( dinamic_place , "Cargando plantillas disponibles  ... " , 1); 
 		} 
 	}).done(function(data){
-		
-
+	
 		$(dinamic_place).empty();
 		llenaelementoHTML(contenido , data );		
 		$(".escenarios").click(carga_plantilla);	
@@ -246,6 +245,8 @@ function muestra_plantilla_escenario(type , contenido , dinamic_place){
 /**/
 function carga_plantilla(e){
 	id_contenido  = e.target.id; 	
+	
+
 	evento =  $("#evento").val();
 	escenario =  $("#id_escenario").val();
 	data_send = {"contenido" : id_contenido , "escenario" : escenario  , "evento" : evento ,  "enid_evento": enid_evento ,  "enid_escenario":  enid_escenario};
@@ -265,7 +266,7 @@ function carga_plantilla(e){
 			$("#modal-platilla-escenarios").modal("hide"); 		
 	   		
 	}).fail(function(){	   	
-	   	
+	   	console.log("error ------- en plantilla  ");
 	   	show_error_enid("#list-plantilla-escenario"  , "Error al actualizar"); 
 	});
 }
@@ -365,3 +366,4 @@ function carga_data_otros(){
 	}
 	flag_carga_otros ++; 
 }
+/**/

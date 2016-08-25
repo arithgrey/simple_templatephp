@@ -1,5 +1,49 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 if(!function_exists('invierte_date_time')){
+/**/
+function get_tipos_paticipacion(){
+
+    $tipos_participacion = array("-", "Estelar", "Especial", "Apertura", "General" , "Otro");    
+    $select =  "<select name='tipo_artista'  class='tipo_escenario form-control input-sm' id='tipo_escenario' >"; 
+    for($a=0; $a <count($tipos_participacion); $a++ ){         
+        $select .=  "<option value='".$tipos_participacion[$a]."'>".$tipos_participacion[$a]."</option>";         
+    }
+    $select .=  "<select>"; 
+    return $select;
+}
+/**/
+function format_descripcion($desc){
+
+    $text_desc =  ""; 
+
+    if (trim(strlen($desc)) > 300 ){
+        $part = substr($desc, 0 , 270);
+
+        $text_desc = "<span class='hiddden_descripcion'>".$desc."</span>";
+        $text_desc .= "<span class='show_descripcion'>".$part."</span>";
+      
+
+    }else{
+        $text_desc = show_text_input($desc , 5 , "+ La experiencia que se vivirá" ); 
+    }
+    return $text_desc;        
+}
+/**/
+function template_btn_tipos(){
+
+
+    $tipos = array("General"  , "Principal" ,  "Especial");
+    $btn =  "<ul class='dropdown-menu' aria-labelledby='btnGroupVerticalDrop1'>";
+    for ($a=0; $a <count($tipos); $a++) { 
+        $btn .=  "<li class='tipo-escenario' id='".$tipos[$a]."'>
+                    <a id='".$tipos[$a]."'>
+                     ". $tipos[$a]."   
+                    </a>
+                </li>"; 
+    }
+    $btn .=  "</ul>";
+    return $btn;
+}
 
 /**/
 function slider_item_escenario($imgs , $param){
@@ -623,24 +667,26 @@ function form_artista($public , $id_escenario  ){
     
     $form =  ""; 
     if ($public == 0) {
-        $form .='  
-                <div class="row">
-                    <div class="form_artista col-lg-6 col-md-6 col-sm-12 pull-right">
-                        <div class="formulario_artista">                                               
-                            <div class="place_artista">
-                            </div>
-                            <form role="form" class="form-inline" id="form-escenario-artista" >
-                                <div class="form-group todo-entry">                     
-                                    <input list="dinamic-artistas" placeholder="Nombre del artista" class="form-control input-sm input_new_artista" id="artista" name="nuevoartista" style="width: 100%" type="text">                                                      
-                                    <input type="hidden" name="idescenario" value="'. $id_escenario .'">
-                                </div>
-                                <button class="btn btn-primary pull-right nuevo_artista_btn" type="submit">
-                                        +
-                                </button>
-                            </form>                        
-                        </div>
+        $form .='                                                                  
+                <div class="place_artista">
+                </div>
+                <form role="form" class="form-inline" id="form-escenario-artista" >
+                    <div class="form-group todo-entry">                     
+                        <input list="dinamic-artistas" 
+                                     placeholder="Nombre del artista" 
+                                     class="form-control input-sm input_new_artista"
+                                     id="artista" 
+                                     name="nuevoartista" 
+                                     type="text">                                                      
+                        <input type="hidden" name="idescenario" value="'. $id_escenario .'">
                     </div>
-                </div>    
+                    <button class="btn btn-primary pull-right nuevo_artista_btn" type="submit">
+                     +
+                    </button>
+                </form>                        
+                        
+                    
+                 
                     
         ';
     }
@@ -662,7 +708,6 @@ function tag_tipo_artista($public , $id_artista ,  $tipo  ){
                 <i class="fa fa-star tipo_artista icon_config '.$d_class.' " id="'.$id_artista.'">
                 </i>
             </a> 
-            |
         ';        
     }
     return $tipo; 

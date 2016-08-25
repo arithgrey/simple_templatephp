@@ -5,8 +5,6 @@ $(document).ready(function(){
 	$(".config_tipo_evento").click(carga_configuracion_tipo_evento);
 	$(".config_estado_evento").click(carga_configuracion_estado_evento);
 	/**/
-	$(".more-info-f").click(carga_contenido);
-
 });
 /**/
 function carga_portada_event(){
@@ -250,21 +248,3 @@ function cancela_event_nota(e){
 	e.preventDefault();
 }
 
-/**/
-function carga_contenido(){
-	seccion =  ".show_descripcion";
-
-	if ($(seccion).is(":visible")) {
-		
-		$(".hiddden_descripcion").show();
-		$(".more-info-f-up").show();
-		$(".more-info-f-down").hide();
-		$(".show_descripcion").hide();
-	}else{
-		
-		$(".hiddden_descripcion").hide();
-		$(".more-info-f-up").hide();
-		$(".more-info-f-down").show();
-		$(".show_descripcion").show();
-	}
-}

@@ -24,7 +24,8 @@ if(!function_exists('invierte_date_time')){
 			$d_class = 'sin_registro'; 
 		}
 
-		$seccion_sound = ' <i  class="artista_sound fa fa-play-circle '.$d_class .' " id="'.$id_artista.'"   "'. $part_sound .'"     ></i>'; 
+		$seccion_sound = ' <i  class="artista_sound fa fa-play-circle '.$d_class .' " id="'.$id_artista.'"   "'. $part_sound .'" >
+							</i>'; 
 		return $seccion_sound;
 	}		
 	/**/
@@ -38,18 +39,20 @@ if(!function_exists('invierte_date_time')){
 		return $seccion_youtube; 
 	}	
 	/**/
-	function valida_icon_conf_horario($part_extra , $id_artista , $class , $icon , $textr_extra , $horario   ){	
-		
+	function valida_icon_conf_horario( $part_extra , $id_artista , $class , $icon , $textr_extra , $horario){			
 		$d_class = 'registrado'; 
-		if ($horario ==  "por definir") {
+		$text_presentacion = "";
+		if ($horario == "por definir"){
 			$d_class = 'sin_registro'; 
+			$text_presentacion =  " Presentación -"; 
 		}
-		$icon =  '
-		<a  class="   '.$class .'   '.$d_class .' " id="'.$id_artista.'"   "'. $part_extra.'"  >
-			<i class="'.$icon .'" >
-			</i>			
-			Horario de presentación  '. $horario .'
-		</a>';
+		$icon = '
+			<a class="text_horario_presentacion   '.$class .'   '.$d_class .' " id="'.$id_artista.'"   "'. $part_extra.'"  >
+				<i class="'. $icon .'" >
+				</i>			
+				'. $text_presentacion .'
+				'. $horario .'
+			</a>';
 		return $icon;
 	}
 	/**/
@@ -302,19 +305,15 @@ if(!function_exists('invierte_date_time')){
 	*/
 	/**/
 	function get_artistas_default_template($artistas_array){
-
 		$artistas ='';
 		$flag =1;
-		foreach ($artistas_array as $row) {
-			
+		foreach ($artistas_array as $row){		
 			$hora_inicio  =  $row["hora_inicio"];
 			$hora_termino  = $row["hora_termino"];
-
 			if(!isset($hora_inicio)) {
 				$hora_inicio ="Próximamente";	
 				$hora_termino ="Próximamente";	
 			}
-
 			$artistas .='<tr>';
 			$artistas .= get_td( $flag , "");
 			$artistas .= get_td( $row["nombre_artista"], "");
