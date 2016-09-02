@@ -131,7 +131,7 @@
                                 <a href="#portlet_tab5" data-toggle="tab" >
                                   <i class='fa fa-play'>
                                   </i>
-                                          Géneros
+                                  Géneros
                                 </a>                                      
                               </li>
                               <li class="restricciones_section_content tab_restricciones">

@@ -97,22 +97,6 @@
 .delete_genero_evento:hover{
   cursor: pointer;
 }
-
-.links_modal .link_modal{
-  text-decoration: none;
-  color: white;
-  font-size: .9em;
-  padding: 7px  20px ;
-  background: #3C5E79;  
-  width: 25%;
-}
-.links_modal .link_modal:hover{
-  text-decoration: none;
-  color: white;
-  font-size: .9em;
-  padding: 13px  10px;
-  background: rgb(62, 178, 192);  
-}
 .text-fecha-evento{
   font-size: .9em;
   margin-bottom: 10px;  

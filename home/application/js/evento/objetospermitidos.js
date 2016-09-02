@@ -48,6 +48,6 @@ function update_all_objects(e){
 	});		
 
 	
-	//load_objetospermitidos_evento();
+	
 }
 

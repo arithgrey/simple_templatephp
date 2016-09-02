@@ -1,18 +1,64 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 if(!function_exists('invierte_date_time')){
 	/**/
+	function show_more_text($nota){
+
+		$dinamic_class =  "";
+		if (strlen(trim($nota)) > 1 ){
+			$dinamic_class= "seccion_nota_acceso"; 	
+		}
+		$new_text = $nota; 
+		if(strlen(trim($nota)) > 250){			
+			
+
+			$primer_part = "<span class='hiddden_descripcion'>  
+							". $nota ."
+							</span>";
+			$part_descripcion =  substr($nota, 0 , 250);  
+
+			$new_text = $primer_part."  <span class='show_descripcion'>
+										". $part_descripcion ."
+										</span>
+										<center>
+											<div class='row'>
+												<span class='more-info-f more-info-f-down'>
+													<i class='more-info-f more-info-f-down  fa fa-chevron-down' aria-hidden='true'>
+													</i>
+												</span>
+												<span class='more-info-f more-info-f-up'>
+													<i class='fa fa-chevron-up more-info-f more-info-f-up ' aria-hidden='true'>
+													</i>
+												</span>
+											</div>
+										</center>"; 			
+
+		}
+		return $new_text;
+				
+	}
+	/**/
 	function valida_registro_promociones($num, $in_session, $id_evento ){		
 		$url  =  base_url('index.php/accesos/configuracionavanzada/1'). "/".$id_evento ."/acceso/"; 
 		$btn =  agregar_btn($in_session , $url ); 
 		$msj =  ""; 
-		if ($num <=1 ) {
+		if ($num < 1 ) {
 			if ($in_session ==  1) {
-				$msj = $btn . "<center> <span class='msj_notificacion_config'>No has cargado accesos al evento aún. </span> </center>";
+				$msj = $btn . "<center> 
+									<span class='msj_notificacion_config'>
+										No has cargado accesos al evento aún. 
+									</span> 
+								</center>";
 			}else{
-				$msj = $btn . "<center> <span class='msj_faltante'>Próximamente podrás consultar los precios para acceder al evento .! </span></center>  ";
+				$msj = $btn . "<center> 
+								<span class='msj_faltante'>
+									Próximamente podrás consultar los precios para acceder al evento .! 
+								</span>
+							   </center>  ";
 			}
 		}else{
-			$msj = "<span title='retistra nuevo acceso'>" .$btn . "</span>";
+			$msj = "<span title='registra nuevo acceso'>
+						" .$btn . "
+					</span>";
 		}
 		return $msj; 
 	}
@@ -323,51 +369,51 @@ $complete .= '
 			$stado_oferta  =  $row["stado_oferta"];
 			$img =  create_icon_img($row , " " , " " ); 
 
-
 			$url =  base_url('index.php/accesos/configuracionavanzada/1')."/". $id_evento."/config/" .$idacceso ;
 			$btn = editar_btn($in_session , $url );  
+
 			$nombre =  $row["nombre"];			
 					$accesos .=  '
-								<div class="separate-enid">
+					<div class="row">
+						<div class="col-lg-12 col-md-12 col-sm-12 contenedor-config">
+							<span >
+								'.$btn.'
+							</span>
+						</div>
+						<div class="col-lg-4 col-md-8 col-sm-12">										
+							'. $img .'												
+						</div>
+						<div class="col-lg-4 col-md-8 col-sm-12">
+											                        
+							<span class="titulo-enid-sm">				                             
+								'. $nombre  ." , 
+								" . $tipo .'				                              
+							</span>	
+							<strong>		
+								, $'. $precio .'.00
+							</strong>				                            
+							<div class="post-info">                                                					                                            					                                            				                            	
+								<span>
+									<i class="icon-calendar">
+									</i> Vigencia '. $inicio_acceso  .' al '. $termino_acceso . ' 
+								<span>   						                                					                            					                                                   
+							</div>
+							
+							<span class="label label-default" class="estado_oferta_lb" >
+								'. $stado_oferta  .' 
+							</span>	
+
+							<div class="row">
+								<div class="col-lg-12 col-md-12 col-sm-12">
+									<span>				        				
+										'.$descripcion.'
+									</span>                                        				                        		                                       				        			
 								</div>
-								<div class="row acceso_listado">									
-									<div class="col-lg-4 col-md-8 col-sm-12">										
-										'. $img .'												
-				                    </div>
-				                    <div class="col-lg-4 col-md-8 col-sm-12">
-				                    		<span class="pull-right">
-				                    		'.$btn.'
-				                    		</span>				                        
-				                            <span class="titulo-enid-sm">				                             
-				                              '. $nombre  ." , 
-				                              " . $tipo .'				                              
-				                            </span>
-				                            <strong>
-					                            <span>
-					                            , $'. $precio .'.00
-					                            </span>
-					                        </strong>				                            
-				                            <div class="post-info">                                                					                                            					                                            				                            	
-					                            <span style="font-size:.9em;">
-						                            <i class="icon-calendar">
-						                            </i> Vigencia
-						                            '. $inicio_acceso  .' 						                                						                                
-						                	       	al '. $termino_acceso . ' 
-					                            <span>   						                                					                            					                                                   
-				                            </div>
-				                            <h4>
-					                            <span class="label label-default" class="estado_oferta_lb" >
-						                            '. $stado_oferta  .' 
-						                        </span>
-					                        </h4>					                                            
-				                            <span>				        				
-							        			'.substr($descripcion , 0 ,  200 ) .'<a> ..seguir leyendo</a>
-							        		</span>                                        				                        		                                       				        			
-									</div>
-								</div>
-								<div class="separate-enid">
-								</div>	
-								<hr>'; 		
+							</div>
+						</div>
+					</div>
+					<hr>
+					'; 		
 		}		
 
 
@@ -376,17 +422,6 @@ $complete .= '
 		$data["num_accesos"]  =  count($data);
 		return $data;				
 	}
-
-
-
-
-
-
-
-
-
-
-
 
 
 }/*Termina el helper*/

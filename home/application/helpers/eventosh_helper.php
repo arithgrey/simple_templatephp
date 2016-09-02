@@ -179,16 +179,36 @@ function tmp_objs_permitidos( $in_session ,  $id_evento){
 	
 }
 /**/
-function validacion_objs_permitidos($descripcion ,  $in_session ,  $id_evento , $tramo_url = ''  ){    
+function validacion_objs_permitidos($descripcion ,  $in_session ,  $id_evento , $t1 , $t2  , $tramo_url = ''  ){    
    
 
     $url_config  =  base_url('index.php/eventos/nuevo') . "/" . $id_evento ."/".$tramo_url;
     if(strlen(trim($descripcion)) > 10 ){ 
-      return  $descripcion . " ". editar_btn($in_session , $url_config ); 
+      return  "<div class='row' >  
+      			  <div class='col-lg-12 col-md-12  col-sm-12'>
+	      			   <span class='btn-text-msj-user ".$t1." '>
+		      			". editar_btn($in_session , $url_config ) ."
+		      		   </span> 
+		      		   <span class='text-msj-user ".$t2."   '>
+		      		   	" .$descripcion . "
+		      		   </span> 
+	      		   </div>
+      		   </div>
+      		   "; 
     }else{      
-        if($in_session){
-            $btn =  editar_btn($in_session , $url_config );
-            return "<span class='msj_user_text_servicios msj_notificacion_config'> Has una especificación para el público ". $btn . "</span>";    
+        if($in_session){            
+            return "
+            		<div class='row'> 
+            			<div class='col-lg-12 col-md-12  col-sm-12'>
+		            		<span class='btn-text-msj-user ".$t1."   '>
+			      				". editar_btn($in_session , $url_config ) ."
+			      		   	</span> 	      		   
+		            		<span class='text-msj-user  msj_user_text_servicios msj_notificacion_config ".$t2."   '> 
+		            			Has una especificación para el público
+		            		</span>
+	            		</div>
+            		</div>
+            		";    
         }else{
           return " "; 
         }       

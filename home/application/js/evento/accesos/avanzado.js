@@ -65,7 +65,7 @@ function record_acceso(e){
 
 
 			evento =  $(".evento").val();
-			data_send =  $("#form-new-acceso").serialize() + "&"  + $.param({"evento" :  evento ,  "enid_evento" : enid_evento  });
+			data_send =  $("#form-new-acceso").serialize() + "&"  + $.param({"evento" :  evento ,  "enid_evento" : enid_evento  });			
 			$.ajax({
 					url :  url , 
 					type :  "POST", 
@@ -76,8 +76,6 @@ function record_acceso(e){
 						$(".place_msj_precio").empty();			
 					}
 			}).done(function(data){		
-
-					
 				var  fields_reset =  ["#acceso_nombre" ,  "#precio-acceso-record" , "#descripcion"];
 				reset_fields(fields_reset);															
 				load_data_accesos();		
@@ -261,26 +259,25 @@ function carga_puntos_venta_agregados(){
 }
 /**/
 function asocia_punto_venta_evento(e){
-
 	evento =  $(".evento").val();
-	puntosventa =  e.target.id; 
-	data_send =  {"puntoventa" : puntosventa , "evento" :  evento ,  "enid_evento" : enid_evento }; 
-	url =  now + "index.php/api/puntosventa/asocia_evento/format/json/"; 
-	$.ajax({
-		   url: url,
-		   type: 'PUT',
-		   data : data_send  , 
-		   beforeSend :  function(){		   		
-		   		show_load_enid( "#list-posibles-puntos" , "Registrando" , 1 ); 					
-		   }
-		}).done(function(data){
-	   		
-	   		show_response_ok_enid("#list-posibles-puntos" ,  "Punto de venta asociado al evento con éxito.! ");	   		
-	   		carga_puntos_venta_agregados();		   		
-
-	}).fail(function(){	   	
-	   	show_error_enid("#list-posibles-puntos" , "Error al  asociar el punto de venta al evento, reporte al administrador "); 
-	});
+	puntosventa =  e.target.id; 	
+	if (puntosventa > 0){		
+		data_send =  {"puntoventa" : puntosventa , "evento" :  evento ,  "enid_evento" : enid_evento }; 
+		url =  now + "index.php/api/puntosventa/asocia_evento/format/json/"; 
+		$.ajax({
+			   url: url,
+			   type: 'PUT',
+			   data : data_send  , 
+			   beforeSend : function(){		   		
+			   		show_load_enid( "#list-posibles-puntos" , "Registrando" , 1 ); 					
+			   }
+			}).done(function(data){	   	
+		   		show_response_ok_enid("#list-posibles-puntos" ,  "Punto de venta asociado al evento con éxito.! ");	   		
+		   		carga_puntos_venta_agregados();		   		
+		}).fail(function(){	   	
+		   	show_error_enid("#list-posibles-puntos" , "Error al  asociar el punto de venta al evento, reporte al administrador "); 
+		});
+	}
 }
 /**/
 function busqueda_punto_venta(){
@@ -376,7 +373,7 @@ function ocultar_infor_punto_venta(){
 	llenaelementoHTML(".info_pv" ,  "");	
 }
 /**/
-function valida_modal(){	
+function valida_modal(){
 	qparam = $(".qparam").val();
 	switch(qparam){
 		case "acceso": 
@@ -389,12 +386,18 @@ function valida_modal(){
 
 			editar_acceso(event); 
 			break;
-		case "puntoventa":					
+		case "puntoventa":
+
+	    	$(".part-accesos-def").removeClass("active");		    		    	
+	    	$(".part-pvs-def").addClass("active");
 			$(".search-punto-venta").val(" ");			
 			busqueda_punto_venta(); 						
 			break;
-		default: 
 
+		
+
+
+		default: 
 		break; 
 	}
 }

@@ -1,4 +1,4 @@
-<?=template_evento($evento["nombre_evento"])?>
+<?=template_evento($evento["nombre_evento"] ,  $evento["idevento"])?>
 <div class='config_tipo animated  ' id='config_tipo'>
   <div class='configuracion_tipo'>
   </div>

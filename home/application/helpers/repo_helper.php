@@ -1,11 +1,15 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 if(!function_exists('invierte_date_time')){
+	
+	function evalua_estatus_eventos($estatus){
+
+		$estatus_disponibles = [ "En edición/publicado" , "En edición/publicado" , "Publicado" , "Cancelado"];
+		return $estatus_disponibles[$estatus];
+	}
 	/**/
 	function resumen_e($data){
-
 		$tbl = "<span>No se han registrado eventos desde más de hace 30 días </span>"; 
 		if ($data["num_eventos"] > 0 ){		
-
 			$tbl =  create_header_resumem_e(); 			
 			$tbl .= create_resumen_data($data["repo_evento"]);  
 			$tbl .= "</table>";
@@ -14,13 +18,23 @@ if(!function_exists('invierte_date_time')){
 		return $tbl;
 	}	
 	/**/
+	function validador_exist($num){
+
+		if ($num > 0 ) {
+			return $num;
+		}else{
+			return 0;
+		}
+		
+	}
+	/**/
 	function create_resumen_data($data){
 		
 		$tramo = ""; 
 		$f = 1; 		
 		foreach ($data as $row) {
 
-			$idevento =  $row["idevento"]; 
+			$id_evento =  $row["idevento"]; 
 			$nombre_event =  $row["nombre_evento"]; 
 			$fecha_registro =  $row["fecha_registro"]; 
 			$fecha_inicio =  $row["fecha_inicio"]; 
@@ -30,17 +44,33 @@ if(!function_exists('invierte_date_time')){
 			$artistas =  $row["artistas"];
 			$puntos_venta =  $row["evento_punto_venta"];
 
-			
+			/**/
+			$formatted_address =  $row["formatted_address"];
+			$locacion =  evalua_direccion_enid($formatted_address  , $id_evento);
 
-			$tramo .=   "<tr>";
-				$tramo .= get_td($f);
-				//$tramo .= get_td($img);				
-				$tramo .= get_td($nombre_event);	
-				$tramo .= get_td($fecha_registro);				
+			$status =  evalua_estatus_eventos($row["status"]);
+			$url_social =  evalua_url_social($row["url_social"]);
+			$url_social_youtube=  evalua_url_youtube($row["url_social_youtube"]);
+				
+			  				
+			$modal_def =  ' data-toggle="modal" data-target="#more-info-modal"  id="'. $id_evento.'"  ';
+			$modal_accesos  = $modal_def . " class='accesos' "; 		 		
+			$modal_pv  = $modal_def . " class='puntos_venta' "; 		 		
+			$modal_artistas  = $modal_def . " class='artistas' "; 		 		
+
+			$tramo .=   "<tr>";				
+				$tramo .= get_td($f);				
+				$tramo .= get_td(url_to_event($id_evento , $nombre_event));					
 				$tramo .= get_td(fechas_enid_format($fecha_inicio , $fecha_termino));
-				$tramo .= get_td($num_accesos);
-				$tramo .= get_td($puntos_venta);
-				$tramo .= get_td($artistas);			
+				$tramo .= get_td($status);
+				$tramo .= get_td($url_social);
+				$tramo .= get_td($url_social_youtube);											
+				$tramo .= get_td(validador_exist($num_accesos) , $modal_accesos);
+				$tramo .= get_td(validador_exist($puntos_venta), $modal_pv);
+				$tramo .= get_td(validador_exist($artistas) ,  $modal_artistas);	
+				$tramo .= get_td($locacion);
+				$tramo .= get_td($edicion);	
+				$tramo .= get_td($fecha_registro);				
 			$tramo .=   "</tr>";
 
 			$f ++; 
@@ -48,18 +78,27 @@ if(!function_exists('invierte_date_time')){
 		}
 		return $tramo; 
 	}
+	/**/
+	function url_to_event($id_evento , $nombre){
+		$url =  base_url("index.php/eventos/visualizar")."/".$id_evento;
+		return "<a href='". $url."'>".$nombre."</a>";
+	}
+	/**/
+	function frame_user_data($id_usuario){
 
-
-
+		$url =  base_url("index.php/api/user/nombre_usuario/id_usuario")."/".$id_usuario."/format/html/";
+		return  "<iframe  src='".$url."' height='400px;' width='100%'>
+                </iframe>'";
+	}
 	/**/
 	function create_header_resumem_e(){
-		$cabeceras =  array("#" , "Evento" ,  "Fecha registro" , "Fecha del evento",   "Accesos promocionados", "Puntos de venta" ,  "Artistas" ); 
+		$cabeceras =  array("#" , "Evento" , "Fecha del evento",  "Estatus" , "Social"  , "Video" ,  "Accesos promocionados", "Puntos de venta" ,  "Artistas" , "Locación" , "Edición" , "Fecha registro" ); 
 		$header = "<table class='table_enid_service' border=1>"; 
-			$header .= "<tr>"; 
+			$header .= "<tr class='table_enid_service_header'>"; 
 			for ($x=0; $x < count($cabeceras); $x++) { 					
 				$header .= get_td($cabeceras[$x]);
 			}
-		$header .= "</tr>"; 
+			$header .= "</tr>"; 
 		return $header; 
 	}
 	/**/

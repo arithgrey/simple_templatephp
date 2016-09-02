@@ -12,8 +12,7 @@ $(document).on("ready" , function(){
 		$(".section-descripcion-evento-complete").hide(300);		
 	});
 	$("footer").ready(dinamic_edit);
-	//$(".load_resumen_escenarios_event").click(muestra_menu);
-
+	
 });
 /**/
 function load_data_escenarios(e){	
@@ -112,7 +111,8 @@ function dinamic_edit(){
 	}	
 }
 function carga_pv_disponibles(){	
-	
+
+
 	url =  now  + "index.php/api/puntosventa/puntos_venta_evento/format/json/";
 	id_evento =  $(".evento").val();	
 	in_session =  $(".in_session").val();
@@ -127,6 +127,8 @@ function carga_pv_disponibles(){
 	}).done(function(data){		
 		$(".place_puntos_venta").empty();
 		llenaelementoHTML(".puntos_venta" , data);
+		
+
 	}).fail(function(){		
 		show_error_enid(".place_puntos_venta" , "Error al cargar el escenario reportar al administrador"); 
 	});

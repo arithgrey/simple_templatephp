@@ -28,16 +28,12 @@
 	}
 	$list .=  "";
 ?>
-<div>
-	<div class='row'>
-		<div class="sc-ranking">
-			<br>
-			<label class='pull-right lb-solicitudes'>
-				Artistas que más nos han solicitado.
-			</label>
-			<br>
-		</div>
-	</div>		
+
+
+<h2 class='title-enid-resum'>
+	Artistas que más nos han solicitado
+</h2>
+<div>	
 	<div <?=$d_class?>>
 		<div class="bs-example bs-example-type" data-example-id="simple-headings"> 
 			<table class="table"> 					

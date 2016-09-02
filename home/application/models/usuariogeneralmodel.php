@@ -6,6 +6,14 @@ class usuariogeneralmodel extends CI_Model {
         $this->load->database();
     }
 
+    /**/
+    function get_nombre_user($param){
+      
+      $query_get =  "SELECT CONCAT(nombre,  apellido_paterno , apellido_materno)nombre_usuario  FROM usuario WHERE idusuario = '". $param["id_usuario"]."' "; 
+      $result =  $this->db->query($query_get);
+      return $result->result_array();
+    }
+    /**/
     function get_usuario($id_usuario ,  $id_empresa ){
         $query_get =  "SELECT * FROM usuario WHERE  idusuario = '". $id_usuario ."' AND idempresa = '". $id_empresa ."' LIMIT 1  "; 
         $result = $this->db->query($query_get);

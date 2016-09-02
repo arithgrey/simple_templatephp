@@ -85,6 +85,27 @@ function get_artistas_resumen($id_escenario , $data_escenario, $nombre_evento){
 	return $result_artistas ->result_array();
 }
 /**/
+function get_evento_artista($param ){
+
+
+	$id_evento =  $param["id_evento"];
+	$query_get =  "SELECT a.* , i.* , esca.* , esca.idescenario as id_escenario FROM artista a 
+					INNER JOIN evento_artista ea 
+					ON a.idartista = ea.id_artista 
+					AND ea.id_evento = '".$id_evento."' 
+					LEFT OUTER JOIN imagen_artista ia 
+					ON ia.id_artista = ea.id_artista 
+					LEFT OUTER JOIN imagen i 
+					ON ia.id_imagen = i.idimagen 
+					LEFT OUTER JOIN escenario_artista esca 
+					ON ea.id_artista = esca.idescenario
+				   ";
+	$result = $this->db->query($query_get);				    
+	return $result->result_array();
+	
+	   
+}
+/**/
 function get_list_artistas_evento($id_evento){
 
 	$query_get =  "select a.* , ea.idescenario id_escenario from artista a  

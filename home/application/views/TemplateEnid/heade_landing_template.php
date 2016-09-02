@@ -40,36 +40,8 @@
                         </span>
                     </div>
                 </div>
-                <h5 class="left-nav-title">
-                    General
-                </h5>
-                <ul class="nav nav-pills nav-stacked custom-nav">                    
-                    <li>
-                        <a href="<?=base_url('index.php/recursocontroller/informacioncuenta')?>">
-                            <i class="fa fa-cog">
-                            </i> 
-                            <span>Configuración</span>
-                        </a>
-                    </li>
-                    <li>                        
-                        <a data-toggle="modal"  data-target="#basicModal" >
-                            <i class="fa fa-code">
-                            </i> 
-                            <span>
-                                Versión del sistema                        
-                            </span>    
-                        </a>    
-                    </li>
-                    <li>
-                        <a href="<?=base_url('index.php/startsession/logout')?>">
-                            <i class="fa fa-sign-out">
-                            </i> 
-                            <span>
-                                Salir
-                            </span>
-                        </a>
-                    </li>
-                </ul>
+                
+                
             </div>            
              <!--Desplegamos el menú-->
             <ul class="nav nav-pills nav-stacked custom-nav">               

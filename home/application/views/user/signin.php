@@ -23,7 +23,11 @@
 
 
 
-
+<a href="<?=base_url('index.php/home/registro')?>">
+    <button  class='btn btn-default btn_save inicia'>    
+        Registra cuenta    
+    </button>        
+</a>
 <div class='contenedor-form col-lg-4 col-lg-offset-4 col-md-4 col-md-offset-4  col-sm-10 col-sm-offset-1'>
       <div class='seccion-form-login'>    
             <h1 class='enid-service'>
@@ -66,7 +70,10 @@
             bottom: 5px;          
             left: 5px;
         }
-        .recupera , .recupara-pass{        
+        .inicia{
+            float: right;
+        }
+        .recupera , .recupara-pass , .inicia{        
             border-radius: 0;
             border-style: solid;
             border-width: 0;
@@ -86,7 +93,7 @@
             cursor: pointer;    
             padding: 1rem 1.77778rem 0.94444rem 1.77778rem;
             font-size: 0.98889rem;
-            background-color: #223c48;
+            //background-color: #223c48;
             border-color: #007095;
             color: #FFFFFF;
             margin-right: 2%;
@@ -103,7 +110,7 @@
             font-weight: bold;
             color: #223c48;
         }.content-enid{        
-            background: #e8f0f3 !important;
+            //background: #e8f0f3 !important;
             height: 100%;
             width: 100%;
         }

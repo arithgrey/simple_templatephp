@@ -1,108 +1,59 @@
-<div class='menu_seleccion_enid'>          
-  <ul class="nav nav-pills" role="tablist">
-    <li>
-      <a aria-expanded="true" href="<?=base_url('index.php/eventos/nuevo')?>/<?=$data_evento['idevento']?>">
-        <i class='fa fa-star'>
-        </i>     
-        <?=$data_evento["nombre_evento"]?>        
-      </a>
+<?=template_view_like_public(base_url('index.php/eventos/accesosalevento')."/". $data_evento['idevento'])?>
+<ul class="nav nav-pills"> 
+    <li class='active pull-left'>
+      <span aria-expanded="true" href="#tab_accesos" role="tab" data-toggle="tab" class='tab_enid'>                     
+        <strong>
+            Accesos
+        </strong> 
+      </span>
     </li>        
-    <!---->
-    <li class="active">
-      <a aria-expanded="true" >
-        <i class='fa fa-star'>
-        </i>     
-        Accesos y puntos de venta
-      </a>
-    </li>        
-    <!---->
-    <li>    
-      <a href="<?=base_url('index.php/eventos/accesosalevento')?>/<?=$data_evento['idevento']?>" >
-        <i class="fa  fa-arrow-circle-o-right"> 
-        </i>     
-        Ver como el público    
-      </a>
-    </li>
-  </ul>        
-</div>
-<div class='separate-enid'>
-</div>
-<!--Sección izquierda -->
-    <div class='col-lg-8 col-md-8 col-sm-12 '>   
-        <br>
-        <div class='row'>
-            <button id="nuevo-acceso-button" title="Registrar contacto" type="button" class="btn btn btn_nnuevo" data-toggle="modal" data-target="#nuevo-acceso-modal">                
-                + Cargar acceso
-            </button>                    
-        </div>
-        <div>                                                     
-            <div class='place_list_accesos'>
-            </div>
-            <div class='list-accesos' id='list-accesos'>                    
-            </div>                           
-        </div>
-    </div>   
-    <!--Sección derecha inicia puntos de venta  -->
-    <div class='col-lg-4 col-md-4  col-sm-12'>
-        <div>
-            <div>
-                <div  class='seccion_pv'>
-                    <h1 class='titulo_pv'>
-                        <strong class='titulo_pv'>
-                            Puntos de venta asociados al evento
-                        </strong>
-                    </h1>                
-                    <hr>                    
-                    <div class='panel'>
-                        <div class='panel-content'>
-                            <div class='panel-body'>                                                                                        
-                                <div class='info_pv'>
-                                </div>  
-                                <div class ='list-puntos-venta-icon' id='list-puntos-venta-icon' >
-                                </div>                        
-                                <br>
-                                <br>                        
-                                <div class='busqueda_input ' >     
-                                    <span>
-                                   + Nuevo punto de venta
-                                    </span>                   
-                                    <div class="input-group">                                      
-                                        <div class="input-group-addon"> 
-                                        <i class='fa fa-search'>
-                                        </i>                                        
-                                        </div>
-                                        <input placeholder="Punto de venta"  class="form-control search-punto-venta input-sm"  name='punto_venta' id='search-punto-venta' placeholder='Nombre del punto de venta' title='Con ésta opción puedes indicar al público dónde adquirir sus accesos'>                            
-                                    </div>
-                                </div>
-                            </div>                                        
-                        </div>                                        
-                    </div>
-
-                   
-                   
-                    <!-- ultimas actividades -->
-                    <div class="panel-body " >                                        
-                        <div class='place_delete_pv'>
+    <li class='tab_puntos_venta pull-right'>
+      <span class='tab_enid' aria-expanded="true" href="#tab_puntos_venta" role="tab" data-toggle="tab" >                              
+        Puntos de venta     
+      </span>
+    </li>    
+</ul>
+<?=template_evento_admin($data_evento["nombre_evento"] , $data_evento["idevento"])?>
+<div class='seccion-principal-admin'>
+  <div class="tab-content clear-style">
+    <div class="tab-pane active" id="tab_accesos">        
+        <div class='contenido-accesos'>
+            <div class='col-lg-8 col-md-8 col-sm-12 '>  
+                <div class='row'>
+                    <button id="nuevo-acceso-button" title="Registrar contacto" type="button" class="btn btn btn_nnuevo" data-toggle="modal" data-target="#nuevo-acceso-modal">                
+                        + Nuevo acceso
+                    </button>                        
+                    <div>                                                     
+                        <div class='place_list_accesos'>
                         </div>
-                        <div id='response-dinamic-punto-venta'>
-                        </div> 
-                        <div class='place_puntos_venta_agregados'>
-                        </div>
-                        <div class ='list-puntos-venta-icon' id='list-puntos-venta-icon' >
-                        </div>        
+                        <div class='list-accesos' id='list-accesos'>                    
+                        </div>                           
                     </div>
-                    <!--Ultimas Actividades -->
-                </div> 
-
-                <div class='resultados_busqueda'>
-                    <div class='list-posibles-puntos' id="list-posibles-puntos">
-                    </div> 
-                </div>
-                   
-
+                </div>     
+            </div>   
+            <!--Sección derecha inicia puntos de venta  -->
+            <div class='col-lg-4 col-md-4  col-sm-12'>    
+                                   
             </div>
-        </div>
+        </div>    
     </div>
+    <div class="tab-pane" id="tab_puntos_venta">
+        <?=$this->load->view("puntosventa/admin");?>
+    </div>    
+  </div> 
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 <!--Sección derecha puntos de venta  termina -->
@@ -154,8 +105,6 @@
     }
     .info-punto-venta:hover{
         cursor: pointer;
-    }.imgagen_acceso{
-      width: 30%;
     }
     .text-descripcion-acceso{
         font-size: .8em;        
@@ -171,31 +120,73 @@
     }
     .menu_accesos{
         background: #046188;
-        /*#3C5E79*/
-        /*#046188*/
-        /*#166781 !important*/
         padding: 15px;
     }
     .seccion_accesos_registrado{
         background: #166781;
     }    
     .seccion_pv{                
-        background: #166781 !important;
+        background: rgb(8, 65, 84) !important;
         padding: 10px;
     }
     .titulo_pv{
         color: white !important;
         font-size: 1.8em;
     }
-
+    .contenido-accesos{
+        margin-top: 10px;
+    }
+    #nuevo-acceso-button{
+        margin-bottom: 10px;   
+    }
+    .delete-punto-venta-icon{
+        cursor: pointer;
+    }
+    .seccion-date-input{
+        width: 95%;
+    }    
+    .seccion-presentacion{
+        margin-bottom: 15px;
+    }
+    
+    .nota_acceso{
+        font-size: .9em;        
+    }
+    .a1 , .a2 , .a3 , .a4{          
+        font-size: .8em;        
+    }
+    .a1{
+        color: black;
+        font-weight: bold;
+        font-weight: 1em !important;
+    }
+    .contenedor-resumen-accesos{
+        background: #428bca;
+        color: white;       
+        padding: 10px; 
+    }
+    .nombre-acceso{
+        font-weight: bold;
+        font-size: 1.2;
+    }
+    .contenedor-descrip{
+        background: white;
+        color: black;
+    }
+    .contenedor-izq{
+        height: 100%;
+    }
+    /**/
+    @media only screen and (max-width: 991px) {    
+        .titulo_pv{
+            color: white !important;
+            font-size: 1.5em;
+        }
+        .text-punto-venta{
+            font-size: .9em;
+        }
+        .seccion-date-input{
+            width: 50%;
+        }
+    }
 </style>
-
-
-
-
-
-
-
-
-
-

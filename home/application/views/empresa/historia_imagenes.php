@@ -32,26 +32,14 @@
 
 
 
-        <aside class="col-md-4 ">
-                            <div class="sidebar">
-                                
-                                <div class="block clearfix">
-                                    <h3 class="title">Latest tweets</h3>
-                                    <div class="separator-2"></div>
-                                    <ul class="tweets">
-                                        <li>
-                                            <i class="fa fa-twitter"></i>
-                                            <p><a href="#">@lorem</a> ipsum dolor sit amet, consectetur adipisicing elit. Mollitia, aliquid, et molestias nesciunt <a href="#">http://t.co/dzLEYGeEH9</a>.</p><span>16 hours ago</span>
-                                        </li>
-                                        <li>
-                                            <i class="fa fa-twitter"></i>
-                                            <p><a href="#">@lorem</a> ipsum dolor sit amet, consectetur adipisicing elit. Mollitia, aliquid, et molestias nesciunt <a href="#">http://t.co/dzLEYGeEH9</a>.</p><span>16 hours ago</span>
-                                        </li>
-                                    </ul>
-                                </div>                              
-                              
-                            </div>
-                        </aside>
+        <aside class="col-md-4 ">            
+            <a class="twitter-timeline" href="https://twitter.com/enidservice">
+                Enid Service 
+            </a>
+            <script async src="//platform.twitter.com/widgets.js" charset="utf-8">                
+            </script>
+                            
+        </aside>
 
 
     </div>

@@ -1,26 +1,17 @@
 <!DOCTYPE html>
 <head>
-  
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
   <meta name="description" content="">
   <meta name="arithgrey" content="">
   <link rel="shortcut icon" href="<?=base_url('application/img/Enid2.png')?>" type="image/png">
-  <title>General</title>
+  <title>
+    Enid Service
+  </title>
 
-
-
-
-<!--    <?=link_tag('application/js/js/gritter/css/jquery.gritter.css');?>   -->
     <?=link_tag('application/css/css/style.css');?>
-<!--<?=link_tag('application/js/js/advanced-datatable/css/demo_page.css')?>-->
-<!--<?=link_tag('application/js/js/advanced-datatable/css/demo_table.css')?>-->
-    <?=link_tag('application/js/js/data-tables/DT_bootstrap.css')?>-->
-
     <?=link_tag('application/css/css/table-responsive.css');?>
     <?=link_tag('application/css/css/style-responsive.css');?>
- 
-    <!--<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">-->
     <link rel="stylesheet" type="text/css" href="<?=base_url('application/js/js/font-awesome.min.css')?>">
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -28,13 +19,6 @@
     <script src="js/html5shiv.js"></script>
     <script src="js/respond.min.js"></script>
     <![endif]-->
-
-
-
-
-
-
-
 </head>
 <body class="sticky-header left-side-collapsed">
 <section>
@@ -62,16 +46,8 @@
                     </div>
                 </div>
 
-                <h5 class="left-nav-title">General</h5>
-                <ul class="nav nav-pills nav-stacked custom-nav">                    
-                    <li><a href="<?=base_url('index.php/recursocontroller/informacioncuenta')?>"><i class="fa fa-cog"></i> <span>Configuración</span></a></li>
-
-
-                    <li><a href="" data-toggle="modal"  data-target="#basicModal">
-                     <i class="fa fa-code"></i> Versión del sistema</a></li>
-
-                    <li><a href="<?=base_url('index.php/startsession/logout')?>"><i class="fa fa-sign-out"></i> <span>Salir</span></a></li>
-                </ul>
+                
+                
             </div>            
             <ul class="nav nav-pills nav-stacked custom-nav">
                 <!--Desplegamos el menú-->
@@ -115,30 +91,6 @@
 
 
         </div>
-                <!-- header section end-->
-        <div class="modal fade" id="basicModal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                        <h4 class="modal-title" id="myModalLabel">Versión</h4>
-                    </div>
-                    <div class="modal-body">
-                        <h3>
-                            Enid Service version 1.2
-                        </h3>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">
-                            Cerrar
-                        </button>
-                        <div id="masInfo" align="right">
-                            <a href="<?=base_url('index.php/reportecontrolador')?>">¿Tienes alguna sugerencia o comentario?</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>    
-        <!---->
+        <!-- header section end-->        
         <div class="wrapper">           
 

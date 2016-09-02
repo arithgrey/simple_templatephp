@@ -3,13 +3,14 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
     <meta name="description" content="">
-    <meta name="arithgrey" content="">
+    <meta name="arithgrey@gmail.com" content="">
     <link rel="shortcut icon" href="<?=base_url('application/img/Enid2.png')?>" type="image/png">
     <title>
         <?=$titulo?>
     </title>
     <?=link_tag('application/css/css/style.css');?> 
 </head>
+<?=ini_set('display_errors', '');?>
 <body class="sticky-header left-side-collapsed">
 <section>
     <!-- left side start-->
@@ -40,36 +41,8 @@
                         </span>
                     </div>
                 </div>
-                <h5 class="left-nav-title">
-                    General
-                </h5>
-                <ul class="nav nav-pills nav-stacked custom-nav">                    
-                    <li>
-                        <a href="<?=base_url('index.php/recursocontroller/informacioncuenta')?>">
-                            <i class="fa fa-cog">
-                            </i> 
-                            <span>Configuración</span>
-                        </a>
-                    </li>
-                    <li>                        
-                        <a data-toggle="modal"  data-target="#basicModal" >
-                            <i class="fa fa-code">
-                            </i> 
-                            <span>
-                                Versión del sistema                        
-                            </span>    
-                        </a>    
-                    </li>
-                    <li>
-                        <a href="<?=base_url('index.php/startsession/logout')?>">
-                            <i class="fa fa-sign-out">
-                            </i> 
-                            <span>
-                                Salir
-                            </span>
-                        </a>
-                    </li>
-                </ul>
+                
+                
             </div>            
              <!--Desplegamos el menú-->
             <ul class="nav nav-pills nav-stacked custom-nav">                               

@@ -9,12 +9,13 @@ class Puntosventa extends REST_Controller{
         $this->load->library('sessionclass');      
   }  
   /**/
-  function evento_icon_GET(){
-  
+  function evento_icon_GET(){    
     $this->validate_user_sesssion();  
     $prm_evento =  $this->get("evento"); 
-    $data["puntos_venta"] =  $this->puntoventamodel->load_puntos_venta_evento_icon($prm_evento);
-    echo $this->load->view("puntosventa/registrados_en_evento" ,  $data );
+    $db_response =  $this->puntoventamodel->load_puntos_venta_evento_icon($prm_evento);    
+    $pvs=  create_template_resumen_punto_venta($db_response);     
+    $this->response($pvs);
+    //echo $this->load->view("puntosventa/registrados_en_evento" ,  $data );
   }
   /**/
   function asocia_evento_PUT(){
@@ -243,9 +244,14 @@ class Puntosventa extends REST_Controller{
   /**/
   function puntos_venta_evento_GET(){    
     $id_evento =  $this->get("id_evento");
-    $data["puntos_venta"] =  $this->puntoventamodel->get_puntos_venta_cliente($id_evento);
-    $data["param"] =  $this->get();
-    echo $this->load->view("puntosventa/public/list" , $data);
+    $db_response=  $this->puntoventamodel->get_punto_venta_evento($id_evento);
+    $this->response(info_punto_venta_frame($db_response)); 
+  }
+  /**/
+  function img_GET(){    
+    $param =  $this->get();
+    $db_response =  $this->puntoventamodel->get_img($param);
+    $this->response(create_icon_img($db_response, " ", " " ));
   }
   /**/
   function form_imgs_GET(){

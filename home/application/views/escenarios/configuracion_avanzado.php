@@ -1,3 +1,4 @@
+<?=$this->load->view('escenarios/otros_escenarios')?>
 <?=template_view_like_public(base_url('index.php/escenario/inevento')."/".$data_escenario['idescenario'] . "/".$data_escenario["idevento"] )?>
 <div>          
   <ul class="nav nav-pills">    
@@ -10,6 +11,7 @@
         </strong> - <?=$data_escenario["nombre"]?>
       </span>
     </li>
+
     <li class='artistas-btn tab_artistas tab_enid pull-right'>
       <span  href="#pill-3" role="tab" data-toggle="tab" >
         <i class=" icon-up-1">
@@ -17,6 +19,9 @@
         Artistas 
       </span>
     </li>        
+
+
+
   </ul>
 </div>
 <?=template_evento_admin($evento["nombre_evento"] , $evento["idevento"])?>
@@ -37,7 +42,27 @@
             </div>        
         </section>
     </div>    
-</div>            
+</div>  
+
+<div class='seccion-links-extra'>          
+  <ul class="nav nav-pills">    
+    <li class='tab_accesos tab_enid pull-right'>
+      <span>             
+        <a class='text_link_accesos_enid' href="<?=base_url('index.php/eventos/accesosalevento'). "/" . $evento["idevento"]?> " >
+          |Accesos 
+        </a>                
+      </span>
+    </li> 
+    <li class='tab_accesos tab_enid pull-right'>
+      <span>             
+        <a class='text_link_accesos_enid' href="<?=base_url('index.php/eventos/diaevento/'). "/" . $evento["idevento"]?>" >
+          Servicios 
+        </a>                
+      </span>
+    </li>
+  </ul>  
+</div>  
+
 <!--Cargamos los modal de configuración ***********-->
 <?=$this->load->view("escenarios/modal/escenario_avanzado")?>
 <!--Terminamos de cargar los modal de configuración ***********-->
@@ -140,20 +165,35 @@
     .hidden_desc{
         display: none;
     }   
-    .tab_enid:hover{
-        cursor: pointer;
-    } 
-    .tab_enid{
-        font-size: .8em;
-        text-decoration: underline;
-    }    
-    /*Todo lo que pertenece a medios*/
-  @media only screen and (max-width: 991px) {    
-    .config-general-escenario{
+    
+    .text_estado_artista{
+        background: #2a323f;
+        padding: 1px 10px;
+        color: white;
+    }
+    .seccion-btn-registro{
         margin-top: 10px;
     }
-    
-    
+    .seccion-links-extra{
+        display: none;
+    }
+    /*Todo lo que pertenece a medios*/
+      @media only screen and (max-width: 991px) {    
+        .config-general-escenario{
+            margin-top: 10px;
+        }
+        .btn-registro-tipo{
+            margin-top: 10px;   
+        }
+        .btn-nota-registro{
+            margin-top: 10px;
+        }
+        .seccion-btn-confim{
+            margin-top: 10px;   
+        }
+        .seccion-links-extra{
+            display: block;
+        }
   }
 </style>
 

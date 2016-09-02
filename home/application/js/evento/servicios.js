@@ -46,49 +46,6 @@ function serviciocheck(e){
 	});	
 }	
 /**/
-/*
-function update_all_services(){
-
-	id_evento = $("#evento").val();
-	url = now + "index.php/api/serviciosevento/update_all_in_event/format/json/"; 
-	data_send =  {"evento" : id_evento};  
-	
-	$.ajax({
-	   url: url,
-	   type: 'PUT',
-	   data : data_send  }).done(function(data){	  		  	
-	  	$("#alert-servicios-ok").show();
-	  	muestra_alert_segundos("#alert-servicios-ok");
-
-	}).fail(function(){
-	   		alert("falla al intentar actualizar, REPORTE AL ADMINISTRADOR");
-	   		$("#alert-servicios-fail").show();
-	});
-	load_data_servicios();
-}
-*/
-/**/
-/*
-function load_nota_servicio(e){
-	
-
-	id_servicio = e.target.id; 
-	section_nota = "#nota_area_" + id_servicio;
-	$(section_nota).show();
-
-
-	text_area_nota_servicio =  "#text_area_nota_servicio" + id_servicio;
-	$(text_area_nota_servicio).blur(function(){
-		text_accesorio =  $(text_area_nota_servicio).val();
-
-		url =  now + "index.php/api/serviciosevento/descripcion/format/json/"; 			
-		actualiza_data(url , {"servicio" : id_servicio , "evento" : evento  , "nota" : text_accesorio } );
-		load_data_servicios();
-
-	});
-
-}
-*/
 function  busqueda_servicios(e) {	
 
 

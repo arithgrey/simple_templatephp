@@ -230,15 +230,11 @@ class Templ extends REST_Controller{
 
         $this->validate_user_sesssion();  
         $id_user  = $this->sessionclass->getidusuario();            
-        $tipo =  $this->get("tipo");        
-        
-
+        $tipo =  $this->get("tipo");            
         
             $data["contenidos"] =  $this->templmodel->get_templ_contenido($id_user, $tipo );    
             $data["param"] =  $this->get();
-            echo $this->load->view("plantillas/contenidos", $data );
-        
-
+            echo $this->load->view("plantillas/contenidos", $data );        
     }   
     /**/
 }

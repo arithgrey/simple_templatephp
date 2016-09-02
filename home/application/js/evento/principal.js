@@ -346,35 +346,6 @@ function update_ubicacion_evento(){
 	});
 	
 }
-/**/
-function registra_locacion_evento(){
-
-}
-
-/*******************************************/
-/*
-function tryrecordgeneros(e){
-	
-	if (e.keyCode == 13){
-
- 		 generos = $("#tags_enid_input").val();	
-
-		 	url =  now + "index.php/api/event/genero/format/json/";    
-
-			$.post(url , { "generos" : generos  , "evento" : $("#evento").val() } )
-			.done(function(data){
-					
-				
-				
-
-			}).fail(function(){
-
-				alert(genericresponse[0]);
-			});
-
- 	}
-}
-*/
 /**********************************************************/
 function update_eslogan_evento(e){
 	showonehideone( "#eslogan-evento" , ".eslogan-p");

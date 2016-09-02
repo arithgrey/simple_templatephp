@@ -14,7 +14,7 @@ function carga_servicios(e){
 		$(".servicio_nota").click(carga_nota_servicio);
 	
 	}).fail(function(){
-		alert("Error al cargar ");
+		console.log("Error al cargar ");
 	});
 }
 /**/
@@ -27,16 +27,13 @@ function carga_nota_servicio(e){
 		
 		$("#nota").val("");		
 		$("#nota").val(data[0].nota);		
-
-		
-
 	}).fail(function(){
-		alert("Error al cargar  nota para el público, reportar al administrador");
+		console.log("Error al cargar  nota para el público, reportar al administrador");
 	});
 }
 /**/
 function actualiza_nota_servicio(id_servicio , id_evento , nota ){
 	/**/
-	alert(id_servicio  + " ----- " + id_evento + "-----" + nota );
+	console.log(id_servicio  + " ----- " + id_evento + "-----" + nota );
 }
 

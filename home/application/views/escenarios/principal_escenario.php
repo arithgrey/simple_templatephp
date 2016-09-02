@@ -1,41 +1,30 @@
-<?=template_evento($evento["nombre_evento"])?>
-
-<div class='menu_seleccion_enid'>          
-  <ul class="nav nav-pills" role="tablist">
-    <li>
-      <a aria-expanded="true" href="<?=base_url('index.php/eventos/visualizar')?>/<?=$evento["idevento"];?>" >
-        <i class='fa fa-star'>
-        </i>     
-       	<?=$evento["nombre_evento"];?>
-      </a>
-    </li>         
-    
-    <li class='active'>
-      <a aria-expanded="true"  >        
-        Escenario - <?=$escenario["nombre"]?>
-      </a>
-    </li>         
-
-    <li>
-      <a aria-expanded="true" href="<?=base_url('index.php/eventos/accesosalevento'). "/" . $evento["idevento"]?>  " >        
-        Precios y promociones
-      </a>
-    </li>   
-     <li>
-      <a aria-expanded="true" href="<?=base_url('index.php/eventos/diaevento/'). "/" . $evento["idevento"]?>  " >        
-        Servicios 
-      </a>
+<?=template_evento($evento["nombre_evento"]  , $evento["idevento"])?>
+<div>          
+  <ul class="nav nav-pills"> 
+    <li class='tab_escenario tab_enid pull-left'>
+      <span>     
+        <strong>
+            Escenario
+        </strong> - <?=$escenario["nombre"]?>
+      </span>
+    </li>
+    <li class='tab_accesos tab_enid pull-right'>
+      <span>             
+        <a class='text_link_accesos_enid' href="<?=base_url('index.php/eventos/accesosalevento'). "/" . $evento["idevento"]?> " >
+          |Accesos 
+        </a>                
+      </span>
+    </li> 
+    <li class='tab_accesos tab_enid pull-right'>
+      <span>             
+        <a class='text_link_accesos_enid' href="<?=base_url('index.php/eventos/diaevento/'). "/" . $evento["idevento"]?>" >
+          |Servicios 
+        </a>                
+      </span>
     </li>
     <?=btn_comunidad($evento["idempresa"])?>
-   	<?=editar_btn($in_session , base_url('index.php/escenario/configuracionavanzada/')."/" . $escenario["idescenario"] ); ?>
-  </ul>            
+  </ul>
 </div>
-
-
-
-
-
-
 
 
 <div>
@@ -151,12 +140,6 @@
     font-size: .8em;
     color: #0E7DBA;
   }
-  /*
-  .seccion_extra{
-    background: #353f48;
-    padding: 10px;
-  }
-  */
   .link_cliente{
     background: #032935;
       padding: 1px;
@@ -173,25 +156,38 @@
     font-size: .9em;
     color: #364654;
   }
+  
 </style>
 
 
 <style type="text/css">
+  /**/
   .seccion_slider_escenario_enid{
     background:  rgb(54, 70, 84);   
   }
-  .dias_restantes{
-    margin-bottom: 1%;
-    //margin-right: 1%;
-    color: white;
-    background: #E31F56;
-    padding: 10px 10px;
-    border-radius: 1px;
-  }
-  .resumen-escenario{
-    
+  /**/
+  .resumen-escenario{    
     font-weight: bold;
+  }    
+  .resumen-a , .resumen-b , .resumen-c{
+      
+      display: inline-table;
+      font-size: .9em;
+      color: white;
+      font-weight: bold;
   }
+  .part_desc_{
+    text-align: right;
+  }
+  /*Medios*/
+  @media only screen and (max-width: 991px){    
+    /**/
+    .part_desc_{
+      text-align: right;
+    }
+
+  }
+
 </style>
 <input type='hidden' id='id_escenario' class='id_escenario' value='<?=$escenario["idescenario"]?>'>
 <input type='hidden' id='nombre_escenario' class='nombre_escenario' value='<?=$escenario["nombre"]?>'>

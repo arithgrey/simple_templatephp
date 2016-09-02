@@ -83,7 +83,7 @@ function get_accesos_tipo_evento($id_evento){
 /**/
 function get_data_acceso_public($id_evento){
 
-	$_num  =  $this->carga_base_img(5 ,  0 ); 	
+	$_num  =  $this->carga_base_img(5 , 0); 	
 	$query_get ="select 
 				a.idacceso, 
 				a.inicio_acceso , 
@@ -103,10 +103,13 @@ function get_data_acceso_public($id_evento){
 				left  outer join  tmp_img_$_num  i on   ia.id_imagen  = i.idimagen  
 				where a.idevento = '". $id_evento ."' ";
 	
+
+	
 	$result =  $this->db->query($query_get);			
 	$data_complete =   $result->result_array();
 	$_num  =  $this->carga_base_img(5 ,  1, $_num ); 	
 	return $data_complete;
+	
 }
 /**/
 

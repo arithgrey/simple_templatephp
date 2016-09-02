@@ -1,58 +1,29 @@
-<?=template_evento($data_evento["nombre_evento"])?>
+<?=template_evento($data_evento["nombre_evento"] ,  $data_evento["idevento"])?>
 
-<!--Menú-->
-<div class='menu_seleccion_enid'>
-    <ul class="nav nav-pills" role="tablist">
-        <li class="principal_li">
-          <a aria-expanded="true" href="<?=base_url('index.php/eventos/visualizar/'). '/' . $data_evento["idevento"] ?>" >
-            <i class='fa fa-star'>
-            </i>     
-            <?=$data_evento["nombre_evento"]?>
-          </a>
-        </li>
-        <li class='dinamic_menu_accesos active'>
-          <a aria-expanded="true" href="#pill-1" role="tab" data-toggle="tab" >               
-            Lo accesos 
-          </a>
-        </li>
-        <li class='dinamic_menu_pv'>
-          <a aria-expanded="true" href="#pill-11" role="tab" data-toggle="tab" >            
-            Puntos de venta
-          </a>
-        </li>
-        <li class='load_resumen_escenarios_event'>
-          <a aria-expanded="true" href="#section_dinamic_escenarios" role="tab" data-toggle="tab" title="Latest Arrivals">               
-            Artistas y escenarios 
-          </a>
-        </li>
-        <li>
-          <a aria-expanded="true" href="<?=base_url('index.php/eventos/diaevento/'). "/" . $data_evento["idevento"]?>  " >               
-            Servicios 
-          </a>
-        </li>
-        <?=btn_comunidad($data_evento["idempresa"])?>
-        <?=editar_btn($in_session , base_url('index.php/accesos/configuracionavanzada/1/' . $data_evento['idevento']) ); ?>
-    </ul>
-</div>
+<ul class="nav nav-pills"> 
+    <li class='pull-left  active tab_enid '>
+      <span  href="#tab_accesos" role="tab" data-toggle="tab" >                     
+        <strong>
+            Accesos
+        </strong>         
+      </span>
+    </li>        
+    <li class='tab_puntos_venta tab_enid pull-right dinamic_menu_pv'>
+      <span  href="#tab_puntos_venta" role="tab" data-toggle="tab" >                              
+        Puntos de venta     
+      </span>
+    </li>    
+</ul>
+
 <!--Contenido -->
 <div>
   <div class="tab-content clear-style">
-    <div class="tab-pane active" id="pill-1">
+    <div class=" tab-pane active " id="tab_accesos">
         <section id='section-slider' class='section-slider'>
         <?=$this->load->view('accesos/principal_public');?>
         </section>
-    </div>    
-    <div class="tab-pane" id="section_dinamic_escenarios">  
-        <div class='col-lg-8 col-md-8 col-sm-12'>
-            <div class='load_resumen_escenario_enid' id='load_resumen_escenario_enid'> 
-            </div>
-            <div class='resumen_escenarios' id='resumen_escenarios'>
-            </div>        
-        </div>
-        <div class='col-lg-4 col-md-4 col-sm-12'>                        
-        </div>    
-    </div> 
-    <div class="tab-pane" id="pill-11">
+    </div>        
+    <div class="tab-pane " id="tab_puntos_venta">
         <?=$this->load->view("accesos/info_user_puntos_venta")?>                                                                                                   
     </div>
   </div> 
@@ -64,12 +35,31 @@
 <style type="text/css">
 .contenedor_puntos_venta{
     background: rgb(22, 103, 129);    
-}
-#puntos-venta{
+}#puntos-venta{
     color: white !important;
-}
-.contenedor_pv{
+}.dias_restantes,.la_experiencia{
+    font-size: 2em;
+    font-weight: bold;
+}.accesos_seccion{
+    background:#fafbf6;
+}.accesos_seccion_contenedor{
+    width: 90%;
+    margin: 0 auto;
+}.acceso_listado{
     background: white;
-    padding: 10px;
+}.btn_more_accesos{
+    margin-top: 2px;
+    margin-left: 2%;
+}.contenedor-config{
+  text-align: right;
+}.seccion-p-accesos , .seccion-p-puntos-venta{
+    margin-top: 10px;
+}.link-to-info , .link-to-admin{
+    display: inline-block;
+    text-align: right;
+}.nuevo-pv-text , .nuevo-pv-btn{
+    display: inline-table;
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 </style>

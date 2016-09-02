@@ -40,14 +40,16 @@
   }  
 ?>
 
-<div class='ultimos-comentarios'>
-	<div class='seccion-contenidos'>
-		<?=valida_title_experiencia($param["seccion"]);?>			
-		<div class='panel'>
-			<div class='panel-body'>
-				<div class='panel-content'>
-					<div <?=$d_class;?> >
-						<?=$bloque?>
+<div class='row'>
+	<div class='ultimos-comentarios'>
+		<div class='seccion-contenidos'>
+			<?=valida_title_experiencia($param["seccion"]);?>			
+			<div class='panel'>
+				<div class='panel-body'>
+					<div class='panel-content'>
+						<div <?=$d_class;?> >
+							<?=$bloque?>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -107,5 +109,4 @@
 	.select_update_status, .btn-estado-exp{
 		display: inline-table;
 	}
-
 </style>

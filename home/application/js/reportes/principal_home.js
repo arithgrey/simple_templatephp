@@ -29,6 +29,12 @@ function carga_informe_global(){
 					
 				$(".place_reporte_evento").empty();
 				llenaelementoHTML(".reporte_evento" ,  data );
+				/*eventos*/
+				$(".accesos").click(carga_info_accesos);
+				$(".puntos_venta").click(carga_info_puntos_venta);
+				$(".artistas").click(carga_info_artistas);
+
+
 
 		}).fail(function(){			
 			show_error_enid(".place_reporte_evento", "Error al cargar informe, reporte al administrador" ); 
@@ -93,3 +99,75 @@ function carga_ultimos_movimientos(){
 		show_error_enid(".place_ultimos_movimientos" , "Problemas al cargar, reporte al administrador.");				
 	});
 }
+/**/
+function carga_info_accesos(e){
+
+	evento =  e.target.id;  
+	$(".place_more_info").empty();	
+	if (evento > 0 ){
+		/**/
+			
+		$(".title-modal-contacto").text("Accesos del evento");
+		url  =  now +  "index.php/api/accesos/accesos_evento/format/json/"; 
+		$.ajax({
+			url : url , 
+			type : "GET" ,
+			data : {"evento" : evento },
+			beforeSend: function(){
+				show_load_enid(".place_more_info", "Cargando accesos del evento " , 1); 
+			}
+		}).done(function(data){			
+			llenaelementoHTML(".place_more_info", data["accesos"]);
+		}).fail(function(){			
+			show_error_enid(".place_more_info" , "Falla al actualizar  los accesos del evento, reporte al administrador " ); 
+			console.log("Error al cargar ");
+		});
+	}	
+}
+/**/
+function carga_info_puntos_venta(e){
+
+	evento =  e.target.id;  
+	$(".place_more_info").empty();	
+	if (evento > 0 ){
+		/**/
+		$(".title-modal-contacto").text("Puntos de venta");					
+		url =  now  + "index.php/api/puntosventa/puntos_venta_evento/format/json/";		
+		$.ajax({
+			url : url , 
+			type :  "GET",
+			data:  {"id_evento" :  evento ,  "in_session" : 0 }	,		
+			beforeSend : function(){			
+				show_load_enid(".place_more_info", "Cargando los puntos de venta del evento" , 1); 			
+			}
+		}).done(function(data){					
+			llenaelementoHTML(".place_more_info" , data);		
+		}).fail(function(){		
+			show_error_enid(".place_more_info" , "Error al cargar los puntos de venta del evento, reporte al administrador"); 
+		});
+
+	}	
+}
+/**/
+function carga_info_artistas(e){
+
+	evento =  e.target.id;  
+	$(".place_more_info").empty();	
+	if(evento > 0){
+		$(".title-modal-contacto").text("Artistas del evento");					
+		url =  now  + "index.php/api/escenario/artistas_evento/format/json/";		
+		$.ajax({
+			url : url , 
+			type :  "GET",
+			data:  {"id_evento" :  evento },		
+			beforeSend : function(){			
+				show_load_enid(".place_more_info", "Cargando los artistas del evento" , 1); 			
+			}
+		}).done(function(data){					
+			llenaelementoHTML(".place_more_info" , data);		
+		}).fail(function(){		
+			show_error_enid(".place_more_info" , "Error al cargar los artistas del evento, reporte al administrador.!"); 
+		});
+	}
+}
+/**/

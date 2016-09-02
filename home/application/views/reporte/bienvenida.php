@@ -1,59 +1,81 @@
-<br>
-<div class='row'>
-	<h1 class="title pull-right">
-		Bienvenido
+<div class='col-lg-12 col-md-12 col-sm-12'>
+	<div class='row'>
+		<a class='text-title-enid-home' href="<?=base_url('index.php/emp/lahistoria/')?>/<?=$id_empresa?>">
+		Configuración de la cuenta
+		</a>
 
-	</h1>		
-</div>
+		<div class='row'>
+			<div class='col-lg-12 col-md-12 col-sm-12'>
+				<span class='text-desc-enid'>
+					Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor (N. del T. persona que se dedica a la imprenta) desconocido usó una galería de textos y los mezcló de tal manera que logró hacer un libro de textos especimen. No sólo sobrevivió 500 años, sino que tambien ingresó como texto de relleno en documentos electrónicos, quedando esencialmente igual al original. Fue popularizado en los 60s con la creación de las hojas "Letraset", las cuales contenian pasajes de Lorem Ipsum, y más recientemente con software de autoedición, como por ejemplo Aldus PageMaker, el cual incluye versiones de Lorem Ipsum.
+				</span>
+			</div>	
+	    </div>
 
-<div class='row'>
-	<h3 class='pull-right'>
-		<small>
-		<?=$nombre_user;?>
-		</small>
-	</h3>
-</div>
-<div class='row'>
-	<div class='pull-right'>
-		    <ul class="nav navbar-nav">
-	        <li class="dropdown">
-	          <a href="#" class="dropdown-toggle" data-toggle="dropdown">Primeros pasos
-	          	
-	          </a>
-	          <ul class="dropdown-menu">
-	            <li>
-	            	<a href="<?=base_url('index.php/emp/lahistoria/')?>/<?=$id_empresa?>">
-	            		Configuración de la cuenta
-	            		<span class="badge pull-right"> 1 </span>
-	            	</a>
-	            </li>
-	            <li>
-	            	<a href="<?=base_url('index.php/recursocontroller/usuarios')?>">
-	            		Registrar usuarios
-	            		<span class="badge pull-right"> 2
-	            		</span>
-	            	</a>
-	            </li>
-	            <li>
-	            	<a href="<?=base_url('index.php/inicio/eventos')?>"> 
-	            		Cargar eventos
-	            		<span class="badge pull-right"> 
-	            			3
-	            		</span>
-	            	</a>
-	            </li>
-	            <li>
-	            	<a href="#">Dar seguimiento
-	            		<span class="badge pull-right"> 4 
-	            		</span>
-	            	</a>
-	            </li>
-	            
-	          </ul>
-	        </li>
-	      </ul>
+
 	</div>
+
+	<hr>
+	<div class='row'>
+		<a class='text-title-enid-home' href="<?=base_url('index.php/recursocontroller/usuarios')?>">
+			Registrar usuarios a la organización
+		</a>
+		<div class='row'>
+			<div class='col-lg-12 col-md-12 col-sm-12'>
+				<span class='text-desc-enid'>
+					Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor (N. del T. persona que se dedica a la imprenta) desconocido usó una galería de textos y los mezcló de tal manera que logró hacer un libro de textos especimen. No sólo sobrevivió 500 años, sino que tambien ingresó como texto de relleno en documentos electrónicos, quedando esencialmente igual al original. Fue popularizado en los 60s con la creación de las hojas "Letraset", las cuales contenian pasajes de Lorem Ipsum, y más recientemente con software de autoedición, como por ejemplo Aldus PageMaker, el cual incluye versiones de Lorem Ipsum.
+				</span>
+			</div>	
+	    </div>
+
+	</div>
+	<hr>
+	<div class='row'>
+		<a class='text-title-enid-home' href="<?=base_url('index.php/inicio/eventos')?>"> 
+			Publicitar eventos
+		</a>	
+		<div class='row'>
+			<div class='col-lg-12 col-md-12 col-sm-12'>
+				<span class='text-desc-enid'>
+					Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor (N. del T. persona que se dedica a la imprenta) desconocido usó una galería de textos y los mezcló de tal manera que logró hacer un libro de textos especimen. No sólo sobrevivió 500 años, sino que tambien ingresó como texto de relleno en documentos electrónicos, quedando esencialmente igual al original. Fue popularizado en los 60s con la creación de las hojas "Letraset", las cuales contenian pasajes de Lorem Ipsum, y más recientemente con software de autoedición, como por ejemplo Aldus PageMaker, el cual incluye versiones de Lorem Ipsum.
+				</span>
+			</div>	
+	    </div>
+
+	</div>
+	<hr>
+	<div class='row'>
+		<a class='text-title-enid-home'> 
+			Dar seguimiento 			
+		</a>			
+	</div>	
+	<hr>
+	<div class='row'>
+		<a class='text-title-enid-home'> 
+			Conocer lo que la gente desea			
+		</a>
+		<div class='row'>
+			<div class='col-lg-12 col-md-12 col-sm-12'>
+				<span class='text-desc-enid'>
+					Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor (N. del T. persona que se dedica a la imprenta) desconocido usó una galería de textos y los mezcló de tal manera que logró hacer un libro de textos especimen. No sólo sobrevivió 500 años, sino que tambien ingresó como texto de relleno en documentos electrónicos, quedando esencialmente igual al original. Fue popularizado en los 60s con la creación de las hojas "Letraset", las cuales contenian pasajes de Lorem Ipsum, y más recientemente con software de autoedición, como por ejemplo Aldus PageMaker, el cual incluye versiones de Lorem Ipsum.
+				</span>
+			</div>	
+	    </div>
+					
+	</div>			
+	<hr>
+	<div class='row'>			
+		<a class='text-title-enid-home'> 
+			Explorar los artistas más solicitados			
+		</a>
+
+		<div class='row'>
+			<div class='col-lg-12 col-md-12 col-sm-12'>
+				<span class='text-desc-enid'>
+					Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor (N. del T. persona que se dedica a la imprenta) desconocido usó una galería de textos y los mezcló de tal manera que logró hacer un libro de textos especimen. No sólo sobrevivió 500 años, sino que tambien ingresó como texto de relleno en documentos electrónicos, quedando esencialmente igual al original. Fue popularizado en los 60s con la creación de las hojas "Letraset", las cuales contenian pasajes de Lorem Ipsum, y más recientemente con software de autoedición, como por ejemplo Aldus PageMaker, el cual incluye versiones de Lorem Ipsum.
+				</span>
+			</div>	
+	    </div>
+
+	</div>								
 </div>
-
-
-

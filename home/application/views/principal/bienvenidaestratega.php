@@ -49,6 +49,23 @@
             </div>
         </div>
     </div>
+
+    
+<a class="twitter-timeline" href="https://twitter.com/enidservice">
+    Enid service
+</a>
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+
+
+
+
+
+
+
+
+
+
 </div>                                       
 <!--Termina la sección-->            
 
@@ -132,4 +149,4 @@
         color: #242829 !important;
     }
 </style>
-<input type='hidden' value='<?=$id_empresa?>' class='empresa'>
+<input type='hidden' value='<?=$id_empresa?>' class='empresa'>  

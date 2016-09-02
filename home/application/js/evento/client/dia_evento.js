@@ -120,12 +120,12 @@ function carga_otros_eventos(){
 		type :  "GET",
 		data:  {"id_evento" :  id_evento  , "id_empresa" :  empresa }	,
 		beforeSend : function(){			
-			show_load_enid( ".place_otros_eventos" , "Cargando los puntos de venta del evento" , 1 ); 				
+			show_load_enid( ".place_extra_event" , "Cargando los puntos de venta del evento" , 1 ); 				
 		}
 	}).done(function(data){					
-		$(".place_otros_eventos").empty();
-		llenaelementoHTML(".otros_eventos" , data);
+		$(".place_extra_event").empty();
+		llenaelementoHTML(".extra_event" , data);
 	}).fail(function(){		
-		show_error_enid(".place_otros_eventos" , "Error al cargar el escenario reportar al administrador"); 
+		show_error_enid(".place_extra_event" , "Error al cargar el escenario reportar al administrador"); 
 	});
 }

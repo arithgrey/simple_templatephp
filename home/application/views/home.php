@@ -33,6 +33,16 @@
                     </button>
                 </a>
             </div>
+            <!---->
+            <div>
+                <a href="<?=base_url('index.php/home/registro')?>">
+                    <button class='btn btn-default login-btn pull-right '>                    
+                        Registrar cuenta 
+                    </button>
+                </a>
+            </div>
+            <!---->
+
         </div>
         <div>                        
             <h1 class='enid-service'>                    
@@ -105,13 +115,12 @@
             margin-left: 6%;
         }.buscador-eventos{
             margin-left: 5%;
-        }.content-enid{        
-            background: #e8f0f3 !important;
+        }.content-enid{                    
             height: 100%;
         }.seccion-2{
             margin-top: 5%;
             height: 500px;
-            background: #223c48;
+            
         }
     </style>
             

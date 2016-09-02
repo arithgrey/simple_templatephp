@@ -61,7 +61,7 @@ function politicas_contenido($data){
                 </div>
                 <div class="activity-desk">
                     <h5>
-                        <a href="#">
+                        <a>
                         '. $nombre_contenido .'
                         </a>                                                 
                     </h5>

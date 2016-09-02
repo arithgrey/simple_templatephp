@@ -7,9 +7,9 @@ class Accesos extends REST_Controller{
         $this->load->helper("puntoventa");
         $this->load->model("accesosmodel");
         $this->load->model("puntoventamodel");
-        $this->load->library('sessionclass');
-            
+        $this->load->library('sessionclass');        
     }     
+    /**/
     function resumen_accesos_punto_venta_evento_GET(){
         $this->validate_user_sesssion();
         $id_evento = $this->get("evento");
@@ -56,19 +56,17 @@ class Accesos extends REST_Controller{
 
         $this->validate_user_sesssion();
         $id_evento = $this->input->get("evento");
-        $data["accesos"] = $this->accesosmodel->get_acceso_by_event($id_evento);                                                                                                                                      
-        $data["param"] =  $this->get();
-        //$accesos_in_event = display_complete_info($data_accesos);
-        //$this->response($accesos_in_event);
+        $data["accesos"] = $this->accesosmodel->get_acceso_by_event($id_evento);
+        $data["param"] =  $this->get();        
         echo  $this->load->view("accesos/list" ,  $data); 
     }    
     function accesos_evento_GET(){
-
-        $this->validate_user_sesssion();
-        $id_empresa =  $this->sessionclass->getidempresa();                
+       
         $id_evento = $this->get("evento");                        
-        $responsedb = $this->accesosmodel->getDataByidEvent($id_empresa, $id_evento);
-        $this->response(accesos_complete($responsedb)); 
+        $db_response =  $this->accesosmodel->get_data_acceso_public($id_evento);                
+        $resum =  lista_accesos_publicos($db_response,  0 , $id_evento );
+        $this->response($resum);
+        
     }/*Termina*/
     /***/        
     function load_post(){

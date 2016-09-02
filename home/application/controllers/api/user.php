@@ -6,6 +6,12 @@ class User extends REST_Controller{
         $this->load->model("cuentageneralmodel");
         $this->load->model("usuariogeneralmodel");        
         $this->load->library('sessionclass');        
+    }
+    /**/
+    function nombre_usuario_GET(){
+        $param =  $this->get();
+        $db_response =  $this->usuariogeneralmodel->get_nombre_user($param);
+        $this->response($db_response);
     }   
     /**/
     function estado_PUT(){
@@ -73,10 +79,7 @@ class User extends REST_Controller{
         $db_response =  $this->usuariogeneralmodel->update_datos_miembro_descripcion($data);
         $this->response($db_response);
     }
-    /**/
-    function descripcion_escenario_GET(){
-        $this->response("ok");
-    }  
+     
     /**/
     function q_PUT(){
 

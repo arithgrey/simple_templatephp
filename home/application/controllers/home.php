@@ -3,17 +3,30 @@ class Home extends CI_Controller {
 	function __construct(){        
         parent::__construct();            
         $this->load->library('sessionclass');
-    }     
+    }    
+    /**/
+    function usos_privacidad_enid_service(){
+        $this->load->view("empresa/uso_privacidad");
+    } 
+    /**/
+    function registro(){
+        /**/
+        if( $this->sessionclass->is_logged_in() == true) {
+            redirect(base_url('index.php/startsession/presentacion/'));         
+        }else{  
+            /**/
+            $data = $this->val_session("");                                                
+            $this->show_data_page($data ,  'organizacion/registro_cuenta' );   
+        }
+    }
+    /**/
 	function index(){
-
-
 		if ( $this->sessionclass->is_logged_in() == true) {
 			redirect(base_url('index.php/startsession/presentacion/'));			
 		}else{					                    
             $this->load->view("home");
 			$this->session->sess_destroy();		
 		}
-
 	}
     /*Termina index*/
 	function signup(){

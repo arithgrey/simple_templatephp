@@ -47,37 +47,70 @@
 ?>
 
 
+<div class='row'>
 
-<div class="panel <?=$class_enid;?> ">
-    <div class="panel-body">
-        <ul class="to-do-list ui-sortable" id="sortable-todo">
-        <?=$total_resumen?>
-        </ul>
-    </div> 
-</div>
+    <div class='col-lg-12 col-md-12 col-sm-12'>
+        <div class='url_template_mov'>
+            <div class='panel'>
+                <?=msj_url_template($identificador);?>
+            </div>
+        </div>
+        <div class="<?=$class_enid;?> ">
+            <div class="panel-body">
+                <ul class="to-do-list ui-sortable" id="sortable-todo">
+                <?=$total_resumen?>
+                </ul>
+            </div> 
+        </div>
 
-<div class='panel'>
-    <?=msj_url_template($identificador);?>
+        <div class='url_template'  >
+            <div class='panel'>
+                <?=msj_url_template($identificador);?>
+            </div>
+        </div>
+    </div>
 </div>
 <style type="text/css">
     .delete_contenido_templ{
         background: rgb(62, 178, 192) !important;
         color: white !important;
     }
-    .url_templates{
-        background: rgb(61, 74, 80) none repeat scroll 0% 0%; 
-        padding:  10px  10px;
-        width: 100%;
-        text-decoration: none !important;
-        color: white;
-        width: 100%;
-    }
-    .url_templates:hover{
-        background: #3C5E79;
-        color: white;
-        width: 100%;
-    }   
     .clearfix:hover{
         cursor: pointer;
     } 
+    .url_template_mov{
+        display:  none;
+    }
+    /**/
+    .url_templates{
+        font-size: .8em;
+        background: #3C5E79;
+        width: 100%;
+        text-decoration: none !important;
+        color: white;    
+        padding: 10px;
+    }
+    .url_templates:hover{    
+        font-size: .8em;
+        background: #3C5E79;
+        width: 100%;
+        text-decoration: none !important;
+        color: white;           
+        padding: 10px;
+    }   
+
+
+</style>
+<style type="text/css">
+  
+   /*Todo lo que pertenece a medios*/
+  @media only screen and (max-width: 991px) {    
+    .url_template_mov{
+        display:  block;
+    }
+    .url_template{
+        display: none;
+    }
+  }
+
 </style>

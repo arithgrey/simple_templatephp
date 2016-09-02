@@ -207,8 +207,8 @@ class repomodel extends CI_Model {
 							e.* ,
 							a.num_accesos,
 							ar.artistas ,
-							p.evento_punto_venta
-							
+							p.evento_punto_venta							
+								
 							FROM tmp_evento_e_m_$_num e  
 							LEFT OUTER JOIN  tmp_evento_e_m_promo_$_num a 
 							ON  e.idevento =  a.idevento
@@ -228,7 +228,7 @@ class repomodel extends CI_Model {
 	/**/
 	function create_tmps($flag, $_num ,  $id_empresa){
 		
-		$num_evento =  $this->create_tmp_evento_mes($flag , $_num );
+		$num_evento =  $this->create_tmp_evento_mes($flag , $_num  , $id_empresa);
 		if ($num_evento > 0 ){
 			$this->create_tmps_e($flag ,  $_num ,  $id_empresa ); 						
 		}
@@ -246,7 +246,7 @@ class repomodel extends CI_Model {
 	}
 
 	/**/
-	function create_tmp_evento_mes($flag , $_num ){
+	function create_tmp_evento_mes($flag , $_num  , $id_empresa ){
 	
 		$query_drop = 'DROP TABLE IF exists tmp_evento_e_m_$_num'; 
 		$db_response =    $this->db->query($query_drop);
@@ -259,9 +259,15 @@ class repomodel extends CI_Model {
 								fecha_registro, 
 								fecha_inicio , 
 								fecha_termino ,
-								edicion
+								edicion, 
+								status , 
+								url_social , 
+								url_social_youtube, 
+								formatted_address
+								
 								FROM evento 
 								WHERE 
+								idempresa = '$id_empresa' AND
 								MONTH(fecha_registro) =  MONTH(CURRENT_DATE())
 								AND 
 								YEAR(fecha_registro) =  YEAR(CURRENT_DATE()) "; 

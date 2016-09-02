@@ -126,7 +126,7 @@ function update_escenario_modal(e){
 
 			}).fail(function(){
 				
-				alert(genericresponse[0]);
+				console.log(genericresponse[0]);
 
 			});
 
@@ -148,7 +148,7 @@ function nuevo_artista_escenario(){
 			  		
 			  })
 			  .fail(function(){			    
-			    alert(genericresponse[0]);
+			    console.log(genericresponse[0]);
 			});
 	}
 	return false;
@@ -180,10 +180,8 @@ function load_data_escenario(idescenario){
 				$('.day_escenario_button').click(update_days_escenario);
 				$('.horario_artista').click(update_horario_artista);				
 
-			}).fail(function(){
-				
-				alert(genericresponse[0]);
-
+			}).fail(function(){				
+				console.log(genericresponse[0]);
 			});
 
 }

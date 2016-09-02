@@ -220,27 +220,6 @@ function muestra_plantilla_escenario(type , contenido , dinamic_place){
 	});
 
 
-	/*
-
-	tipo_contenido =  type;
-	url = now + "index.php/api/templ/templates_content/format/json/";		
-	$.ajax({
-		url : url , 
-		type :  "GET",		
-		data: {"type" : type } ,
-		beforeSend : function(){
-			show_load_enid( dinamic_place , "Guardando  cambios ... " , 1); 
-		}
-	}).done(function(data){
-		$(dinamic_place).empty();
-		llenaelementoHTML(contenido , data );		
-		$(".identificador").click(carga_plantilla);
-	}).fail(function(){
-		show_error_enid(dinamic_place , "Falla al cargar, reporte al administrador");
-	});	
-*/
-
-
 }
 /**/
 function carga_plantilla(e){

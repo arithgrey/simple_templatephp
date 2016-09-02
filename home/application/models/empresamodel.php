@@ -4,6 +4,51 @@ class empresamodel extends CI_Model{
       parent::__construct();        
       $this->load->database();
   }  
+  /**/
+  function create_account($param){
+
+      $query_insert = "INSERT INTO empresa(nombreempresa , acepta_uso_privacidad , text_uso_privacidad ) VALUES ('".$param["org"]."' , '".$param["privacidad_condiciones"]."' , 'He leído y  acepto las condiciones de uso y privacidad para hacer uso del sistema Enid Service.' )";    
+      $this->db->query($query_insert);
+      $id_empresa  = $this->db->insert_id();              
+      /**/
+      $query_insert  = "INSERT INTO enidserv_eniddbbbb3.usuario(            
+                            email,                    
+                            idempresa,                                                                       
+                            ultima_modificacion , 
+                            password ) 
+                        VALUES                         
+                            ('". $param["mail"]."' ,                
+                            '".$id_empresa  . "' ,                                                                 
+                            CURRENT_TIMESTAMP()  , 
+                            '". $param["pw"] ."'
+                            )";
+      $this->db->query($query_insert);
+      $id_user  = $this->db->insert_id();   
+      /**/           
+      return $this->create_config_inicial($id_empresa , $id_user );
+  }
+  /**/
+  function create_config_inicial($id_empresa , $id_user ){
+
+    $query_inser ="INSERT INTO  usuario_perfil(idusuario, idperfil ) VALUES('". $id_user  ."' , '4' )";    
+    $result = $this->db->query($query_inser);     
+    return $result;
+  }
+  /**/
+  function get_num_users($param){
+
+    $query_get =  "SELECT COUNT(0)num  FROM usuario WHERE email = '".$param["mail"]."' LIMIT  1  ";  
+    $result =  $this->db->query($query_get); 
+    return $result->result_array()[0]["num"];
+  }
+  /**/
+  function get_num_empresa_name($param){
+
+    $query_get =  "SELECT COUNT(0)num FROM empresa WHERE  nombreempresa = '".$param["org"]."'  LIMIT  1 ";
+    $result =  $this->db->query($query_get); 
+    return $result->result_array()[0]["num"];
+  }
+  /**/
   function get_solicitud_ciudad_cliente($param){    
     
     $where =  "";
@@ -81,9 +126,6 @@ class empresamodel extends CI_Model{
       $this->db->query($query_procedure);
       return $_num;
   }
-
-
-
   /**/
   function get_generos_musicales_empresa($id_empresa){
 

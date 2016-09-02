@@ -77,7 +77,7 @@ function actualiza_evento_servicio(e){
 
 	}).fail(function(){
 		
-	   	alert("falla al intentar actualizar, reportar al administrador ");
+	   	console.log("falla al intentar actualizar, reportar al administrador ");
 	});		
 }
 /**/
@@ -98,8 +98,8 @@ function update_all_services(){
 
 
 	}).fail(function(){
-	   	alert("falla al intentar actualizar, REPORTE AL ADMINISTRADOR");
-	   	$("#alert-fail-servicios").show();
+	   	console.log("falla al intentar actualizar, REPORTE AL ADMINISTRADOR");
+	   	//$("#alert-fail-servicios").show();
 	});
 
 	

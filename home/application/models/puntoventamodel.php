@@ -1,10 +1,29 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
 class puntoventamodel extends CI_Model {
+
+function get_img($param){
+	$id_punto_venta = $param["punto_venta"];	
+	$query_get = "SELECT i.*  FROM imagen_punto_venta ip 
+					INNER JOIN imagen i ON  
+					ip.idpunto_venta =  $id_punto_venta
+					AND ip.id_imagen  =  i.idimagen
+					WHERE ip.idpunto_venta =  $id_punto_venta LIMIT 1";
+	
+	$result =  $this->db->query($query_get);		
+	return $result->result_array();					
+}
+/**/
 function __construct(){
 	parent::__construct();        
 	$this->load->database();
 }
-	/**/
+/**/
+function get_punto_venta_evento($id_evento){
+	$query_get =  "SELECT idpunto_venta FROM evento_punto_venta WHERE idevento = '".$id_evento."'";
+	$result =  $this->db->query($query_get);
+	return $result->result_array();
+}
+/**/
 function delete_punto_venta_contacto( $punto_venta , $id_contacto){
 	$query_delete = "DELETE FROM punto_venta_contacto WHERE idpunto_venta = '". $punto_venta ."' AND  idcontacto = '".$id_contacto."'  "; 
 	return $this->db->query($query_delete);
@@ -275,26 +294,33 @@ function cargamos_base_img_puntos_venta($tipo , $f  , $_num = 0 ){
 
 	}
 	/**/
-	function load_puntos_venta_evento_icon($id_punto_venta){	
-		/**/
-		$_num = $this->cargamos_base_img_puntos_venta(4 , 0);
-		$query_get ="SELECT 
-					p.idpunto_venta ,
-					p.razon_social, 					
-					i.*					
-					FROM punto_venta p 
-					INNER JOIN  evento_punto_venta ep 
-					ON p.idpunto_venta  =  ep.idpunto_venta
-					LEFT OUTER JOIN imagen_punto_venta ip 
-					ON p.idpunto_venta =  ip.idpunto_venta 
-					LEFT OUTER JOIN tmp_img_$_num i 
-					ON ip.id_imagen  = i.idimagen 
-					WHERE  ep.idevento =" . $id_punto_venta;
+	function load_puntos_venta_evento_icon($id_evento){	
 
-		$result = $this->db->query($query_get);					
-		$data_complete =   $result ->result_array();		
-		$_num = $this->cargamos_base_img_puntos_venta(4 , 1 , $_num);
-		return $data_complete; 
+		$query_get =  "SELECT p.idpunto_venta FROM  punto_venta p INNER JOIN  evento_punto_venta ep   
+						ON p.idpunto_venta =  ep.idpunto_venta 
+						WHERE  ep.idevento =" . $id_evento;		
+		$result =  $this->db->query($query_get);					
+		return $result->result_array();
+		/*
+			$_num = $this->cargamos_base_img_puntos_venta(4 , 0);
+			$query_get ="SELECT 
+						p.idpunto_venta ,
+						p.razon_social, 					
+						i.*					
+						FROM punto_venta p 
+						INNER JOIN  evento_punto_venta ep 
+						ON p.idpunto_venta  =  ep.idpunto_venta
+						LEFT OUTER JOIN imagen_punto_venta ip 
+						ON p.idpunto_venta =  ip.idpunto_venta 
+						LEFT OUTER JOIN tmp_img_$_num i 
+						ON ip.id_imagen  = i.idimagen 
+						WHERE  ep.idevento =" . $id_punto_venta;
+
+			$result = $this->db->query($query_get);					
+			$data_complete =   $result ->result_array();		
+			$_num = $this->cargamos_base_img_puntos_venta(4 , 1 , $_num);
+			return $data_complete; 
+		*/
 	}
 	/**/
 	function load_puntos_venta_evento($id_evento ){

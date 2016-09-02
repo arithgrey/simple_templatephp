@@ -1,6 +1,17 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 if(!function_exists('invierte_date_time')){
 /**/
+function get_status_confirm($class ,  $name , $id ){
+
+    $estados = array( "Seleccione", "Pendiente por confirmar", "Artista confirmado", "Cancela su asistencia", "Promesa de asistencia");
+    $select =  "<select class='form-control input-sm ".$class ." ' name='".$name."' id='".$id."'>"; 
+    for ($a=0; $a < count($estados); $a++){ 
+        $select .=  "<option value='".$estados[$a]."'>".$estados[$a]."</option>"; 
+    }
+    $select .=  "</select>"; 
+    return $select;
+}
+/**/
 function get_tipos_paticipacion(){
 
     $tipos_participacion = array("-", "Estelar", "Especial", "Apertura", "General" , "Otro");    
@@ -95,7 +106,7 @@ function evalua_fechas_enid_format($format){
 
     $n_format =  ""; 
     if (trim($format) > 4) {
-        $n_format =  "| " .$format ." |";
+        $n_format =  $format ." |";
     }
     return $n_format;
 }
@@ -107,10 +118,36 @@ function evalua_desc($descripcion , $in_session , $id_escenario  ){
         $text =  trim($descripcion); 
         $new_text =  $descripcion; 
         if ($in_session == 1 ){
-            if (strlen($descripcion) < 5 ){ $new_text =  $btn .'<span class="msj_notificacion_config" > No has cargado la descripción del lo que vivirá el publico al asistir al evento. </span>';      }
+            if (strlen($descripcion) < 5 ){ 
+                $new_text =  $btn .'<span class="msj_notificacion_config" > Cargar experiencia. </span>';      
+            }
         }else{
-            if (strlen($descripcion) < 5){$new_text = 'Próximamente lo que vivirás  al asistir al evento.'; }
-        }               
+            if (strlen($descripcion) < 5){
+                $new_text = 'Próximamente lo que vivirás  al asistir al evento.'; 
+            }
+        }    
+
+        /*ahora validamos que no pase de los 300*/
+        if ( strlen($new_text)>300){        
+            $primer_part = "<span class='hiddden_descripcion'>  
+                            ".$new_text ."
+                            </span>";
+            $part_descripcion =  substr($new_text, 0 ,  270);  
+            $new_text = $primer_part . "<span class='show_descripcion' >
+                                            ". $part_descripcion ."
+                                        </span>
+                                        <center>
+                                            <span class='row more-info-f more-info-f-down'>
+                                                <i class='fa fa-chevron-down' aria-hidden='true'>
+                                                </i>
+                                            </span>
+                                            <span class='row more-info-f more-info-f-up'>
+                                                <i class='fa fa-chevron-up' aria-hidden='true'>
+                                                </i>
+                                            </span>
+
+                                        </center>";                 
+        }
         return $new_text;               
     }
 /**/

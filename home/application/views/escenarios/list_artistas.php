@@ -4,8 +4,8 @@
 
 		$id_artista = $row["idartista"];	
 		$status = $row["status"];
-		$idescenario = $row["idescenario"];
-			$fecha_registro = $row["fecha_registro"];
+		
+		$fecha_registro = $row["fecha_registro"];
 		$hora_inicio = $row["hora_inicio"];
 		$hora_termino = $row["hora_termino"];
 		$nombre_artista= $row["nombre_artista"];
@@ -39,7 +39,7 @@
 
 				$m_delete = ' <i data-toggle="modal" data-target="#modal_delete_artista"  id="'.$id_artista.'" class="remove-artista fa fa-times pull-right" title="Quitar del escenario"    ></i>'; 	
 				$m_nombre_artista =  ' data-toggle="modal"  data-target="#edit-nombre-artista"   title="artista" '; 
-				$m_status =  ' data-toggle="modal" data-target="#edit-status-confirmacion"   class="status-confirmacion registrado " id="'. $id_artista.'" ';
+				$m_status =  ' data-toggle="modal" data-target="#edit-status-confirmacion"   class="status-confirmacion registrado estado_confirm_text  estado_confirm_text_mov    " id="'. $id_artista.'"     ';
 				$m_horario = ' title="Horario que se presentará  el artista"  data-toggle="modal" data-target="#modal_record_horario"  ';
 				$m_youtube = ' title="Enlace algún  video del artista en youtube" data-toggle="modal" data-target="#modal_link_youtube"   '; 
 				$m_sound = ' data-toggle="modal"  title="Enlace"  data-target="#modal_link_sound"  ';			
@@ -73,10 +73,11 @@
 							'. $seccion_sound .'						        										
 							'. tag_tipo_artista($public , $id_artista ,  $tipo_artista  ) .'								
 							'. $seccion_nota .' 
+
 							<div class="row">
 								<div class="col-lg-12 col-md-12 col-sm-12">
-									<a class="estado_confirm_text  estado_confirm_text_mov " "'. $m_status .'" >
-										'. $status_confirmacion.'
+									<a '.$m_status .'" >
+										'.$status_confirmacion.'
 									</a>
 								</div>
 							</div>
@@ -124,7 +125,13 @@
 <div class="seccion-artistas-evento">
 	<div class='row'>
 		<div class='col-lg-12 col-md-12 col-sm-12'>
-			<?=form_artista($public , $id_escenario )?>
+			<?php
+				if ($public != 3){
+					echo form_artista($public , $id_escenario );	
+				}
+
+				
+			?>
 		</div>
 	</div>
 	<div class='row'>

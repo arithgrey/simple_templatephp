@@ -8,7 +8,7 @@ function load_accesos_evento(){
 			redirect(now +'index.php/accesos/configuracionavanzada/'+id_acceso+"/" + evento +"/"  );
 		});
 	}).fail(function(){
-		alert(genericresponse[0]);
+		console.log(genericresponse[0]);
 	});
 }
 /**/
@@ -18,12 +18,11 @@ function registra_acceso(){
 	$.post(url , $("#form-accesos-modal").serialize()  ).done(function(data){
 		load_accesos_evento();	
 		clean_accesos();
-		$("#alert-ok-accesos").show();
-		muestra_alert_segundos("#alert-ok-accesos");
+		
+		
 
 	}).fail(function(){
-		$("#alert-fail-accesos").show();
-
+		
 	});	
 	return false;
 }
@@ -37,7 +36,9 @@ function remove_acceso(e){
 		$.post(url , { evento : evento , acceso :  acceso } ).done(function(data){
 			load_accesos_evento();
 		}).fail(function(){
-			alert(genericresponse[0]);
+			
+			console.log(genericresponse[0]);
+
 		});
 	});
 }

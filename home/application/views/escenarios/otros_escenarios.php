@@ -33,7 +33,7 @@
 
 <style type="text/css">
   /**/
-  nav > ul > li > a:hover {
+  nav > ul > li > a:hover{
       font-size: 1.1em;
       font-weight: 700;
       color: rgb(51, 51, 51);
@@ -61,13 +61,17 @@
       cursor: pointer;
       z-index: 300;
   }
+  /**/
   .contenedor_escenarios_evento{
     margin-top: 1%;
-  }.otros_escenarios_lb{
+  }
+  /**/
+  .otros_escenarios_lb{
       font-size: 2em;
       font-weight: bold;
       color: white;
   }
+  /**/
    nav {
     position: fixed;
     top: 6%;
@@ -79,26 +83,30 @@
     z-index: 100;    
     overflow: auto;
   }
-   .seccion_escenarios{       
+  /**/
+  .seccion_escenarios{       
       background: #f9f9f9;
   }
-  .contenedor_otros{
-    
+  /**/
+  .contenedor_otros{    
     padding: 1px;
   }
+  /**/
   nav.focus {
       right: 0px;
   }
+  /**/
   .contenido_escenario{
     background: #f5f5f5;
     width: 98%;
     margin: 0 auto;
  
   }
+  /**/
   .panel_escenarios{
     background: white;
-
   }
+  /**/
   .span_otros{
 
     text-align: left;
@@ -106,7 +114,7 @@
     font-size: 2.4em;   
     font-weight: bold;
   }
-  
+  /**/
   .nuevo_escenario_text{
     color: white;
     font-size: .95em;
@@ -114,7 +122,6 @@
     background: #E31F56;
     padding: 10px;
   }
- 
 </style>
 
 

@@ -7,12 +7,16 @@
         $dinamic_class="otros_escenarios3";
     }
 
-    //$list =  "<div class='$dinamic_class'>";      
-    $list =  "<div>
-    			    <h6 class='description description_seccion'>
-			         Otros escenarios
-			        </h6>
-			  ";      
+    
+    $list = "
+    		<div class='row'>	
+	    		<div class='col-lg-12  col-md-12 col-sm-12'>
+	    			<h6 class='description description_seccion'>
+				      +  Escenarios del evento
+				    </h6>
+				<div>
+			<div>
+			";      
     foreach ($escenarios as $row){    	
         
 
@@ -28,73 +32,32 @@
 
 
         	$list .=  '
-			<section class="team"> 
-			    <div>			      
-			        <div>
-			          <div class="row pt-md">
-			            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 profile">
-			              <a href="'.$url .'">
-				              <div class="img-box">			                
-				                '.$img.'
-				              </div>
-			              </a>
-
-			              <div class="info-otros">
-				              <h1 class="profile">
-				              	'.$nombre.'
-				              </h1>
-				              <h3>
-				              	'.$tipoescenario.'/'.$fecha_escenario.'
-				              </h3>
-				              <p>
-				              	'.$descripcion .'
-				              </p>
-				          </div>    
-
-			            </div>            
-			          </div>
-			        </div>			      
-			    </div>  
+			<section class="team"> 			  
+			    <div class="row pt-md">
+			      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 profile">
+			        <a href="'.$url .'">
+				        <div class="img-box">			                
+				        '.$img.'
+				        </div>
+			        </a>
+			        <div class="info-otros">
+				        <h1 class="profile">
+				          	'.$nombre.'
+				        </h1>
+				        <h3>
+				      	'.$tipoescenario.'/'.$fecha_escenario.'
+				        </h3>
+				        <p>
+				          '.$descripcion .'
+				        </p>
+				    </div>    
+			      </div>            
+			    </div>			          
 			</section>
 			';
 
 		           
-           	/* 
-            $list .= '						                       
-						<div>
-						    <div class="contenido_escenario">       
-						      <a href="'.$url.'" >
-						          <div class="col-lg-6 col-md-6 col-sm-12" >                               
-						          '. $img .'                               
-						          </div>
-						          <div >
-						              <span class="col-lg-6 col-md-6 col-sm-12 text-center  otros_contenido ">                                                                        
-						              '. $nombre .'                                    
-						                  <br>
-						              '.$footer_escenarios.'
-						              </span>
-						          </div>    
-						      </a>    
-						      <div class="row">
-						          <div class="seccion_descripcion">
-						          	<div class="col-lg-12 col-md-12 col-sm-12">
-						              <p class="p-escenario-enid">
-						                  <span class="experiencia_esc">
-						                  La experiencia
-						                  </span>
-						                    <br>
-						                  <span class="seccion_descripcion_otros">
-						                  	'.$descripcion.
-						                  '</span>
-						              </p>
-						            </div>
-						          </div>
-						      </div>
-						    </div>  
-						</div>
-						<hr>                            
-			';
-			*/
+           
                 
       }    
 
@@ -115,15 +78,23 @@ $list .=  "</div>";
 	margin: 0 auto;
 	padding: 10px;	
 }
-.description_seccion{
+.description_seccion{	
 	background: #0c9ec7;
-    padding: 10px;
-    width: 90%;
-    margin: 0 auto;
+    padding: 10px;        
     color: white;
     font-size: 2em;
     font-weight: bold;
-}.info-otros{
+    text-decoration: none;
+}
+.description_seccion:hover{
+	background: #0c9ec7;
+    padding: 10px;        
+    color: white;
+    font-size: 2em;
+    font-weight: bold;
+    text-decoration: none;	
+}
+.info-otros{
 	width: 90% !important;
 	margin: 0 auto;
 }

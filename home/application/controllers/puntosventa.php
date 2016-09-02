@@ -8,10 +8,24 @@ class Puntosventa extends CI_Controller{
         $this->load->model("puntoventamodel");
         $this->load->library('sessionclass');      
     }
+    /**/
+    function info_complete($id ,  $links = 0){        
+        $param["punto_venta"] =  $id;         
+        $data["links"] =  $links;
+        $data["info"] =  $this->puntoventamodel->get_punto_venta($param);
+
+        $this->load->view("puntosventa/info" , $data);
+    }
+    /**/
+    function mini_resumen($id){
+        $param["punto_venta"] =  $id;         
+        $data["info"] =  $this->puntoventamodel->get_punto_venta($param);
+        $this->load->view("puntosventa/info_resum" , $data);
+    }
     /*vista administrar puntos de venta*/        
     function administrar($q='' ,  $qmodal = ''){        
         
-        if (valida_session_enid($this->sessionclass->is_logged_in())) {    
+        if (valida_session_enid($this->sessionclass->is_logged_in())){    
             
             $data= $this->val_session();    
             $id_empresa =  $this->sessionclass->getidempresa();                                 

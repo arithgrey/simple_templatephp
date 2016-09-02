@@ -302,15 +302,19 @@ class Escenario extends REST_Controller{
         $id_evento =  $this->get("evento");            
         $data["artistas"]=  $this->escenarioartistamodel->get_list_artistas_evento($id_evento);        
         $data["id_evento"] =  $id_evento;
+        $data["in_session"] =0;
         echo $this->load->view("escenarios/filtro_artistas" ,  $data );
         
     }
-    /**/
-    function artistas_evento_GET(){
-
-        $id_evento =  $this->get("evento");    
-        $db_response =  $this->escenarioartistamodel->get_list_artistas_evento($id_evento);        
-        $this->response(load_complete_artista($db_response));
+    /**/    
+    function artistas_evento_GET(){            
+        $param =  $this->get();        
+        $data["artistas"] =  $this->escenarioartistamodel->get_evento_artista($param);        
+        $data["public"] =3;
+         $data["in_session"] =0;
+        echo  $this->load->view("escenarios/list_artistas", $data);    
+        
+        
     }
     /**/
     function validate_user_sesssion(){

@@ -1,6 +1,107 @@
 <?php if( ! defined('BASEPATH')) exit('No direct script access allowed');
 if(!function_exists('invierte_date_time')){
+	/**/
+	function valida_nuevo_pv_evento($id_acceso , $id_evento , $in_session , $text_desc ){
+		$text = ""; 
 
+		if ($in_session == 1 ){
+			
+			$href = base_url("index.php/accesos/configuracionavanzada")."/".$id_acceso ."/".$id_evento;
+			$btn =  agregar_btn($in_session , $href ); 
+			$text ="<span class='nuevo-pv-text'> 
+						".$text_desc."
+					</span>
+					<span class='nuevo-pv-btn'>  
+					  	". $btn ."
+					</span>"; 
+		}
+		return $text;	
+	}
+	/**/
+	function valida_nuevo_pv($in_session, $text_desc){
+		$text = ""; 
+		if ($in_session == 1 ){			
+			$href =  base_url("index.php/accesos/configuracionavanzada/")."/a/nuevo";
+			$btn =  agregar_btn($in_session , $href ); 
+			$text =  "
+					  <span class='nuevo-pv-text'> 
+						".$text_desc."
+					  </span>
+					  <span class='nuevo-pv-btn'>  
+					  	". $btn ."
+					  </span>"; 
+		}
+		return $text;	
+	}
+	/**/
+	function info_punto_venta_frame($data){
+		
+		$url_next_completee =  ""; 
+		$pvs ="";
+
+
+		foreach ($data as $row) {
+			$idpunto_venta = $row["idpunto_venta"]; 		
+			$url_next = base_url('index.php/puntosventa/info_complete') ."/".$idpunto_venta."/";						
+			$url_next_config = base_url('index.php/puntosventa/info_complete') ."/".$idpunto_venta."/1/";						
+			$url_admin =  base_url('index.php/puntosventa/administrar');
+
+			$pvs .= "	<div class='row'>
+							<div class='col-lg-12 col-md-12 col-sm-12'>		
+							<div class='link-to-info'>
+								<a href='".$url_next_config."'>
+									+ info
+								</a>
+							</div>
+							<div class='link-to-admin'>
+								<a href='".$url_admin."'>
+									<i class='fa fa-cog'>
+									</i>
+								</a>
+							</div>
+							<iframe src='".$url_next."' width='100%' >
+						 	</iframe>				
+						 	</div>
+						</div>					
+					  ";					
+		}
+		return  $pvs;
+	}
+	/**/
+	function create_template_resumen_punto_venta($puntos_venta){
+	
+		$puntos_venta_resum = ""; 
+		foreach ($puntos_venta as $row){			
+
+			$idpunto_venta  = $row["idpunto_venta"];		
+			$url_admin =  base_url('index.php/puntosventa/administrar');
+
+			$url_next =  base_url("index.php/puntosventa")."/mini_resumen/".$idpunto_venta;
+			$puntos_venta_resum .= "<div class='row'>		
+
+										<span title='Quitar del evento éste punnto de venta' data-toggle='modal' data-target='#delete-punto-venta-modal'>
+											<i class='fa fa-times delete-punto-venta-icon' id='". $idpunto_venta  ."'>
+											</i>
+										</span>
+										<span>
+											<a href='".$url_admin ."'>
+												<i class='fa fa-cog'>
+												</i>
+											</a>										
+										</span>
+
+										
+
+										<div class='col-lg-12 col-md-12 col-sm-12'>
+											<iframe src='".$url_next."' width='100%' ></iframe> 	 
+										</div>
+									</div>
+									"; 
+			
+		}			
+		return $puntos_venta_resum;
+	}
+	/**/
 	function create_url_sitio_web($sitio_web){
 
 		$nsitio_web = "<span class='sitio_web_registrado'> wwww </span>"; 
@@ -101,19 +202,14 @@ if(!function_exists('invierte_date_time')){
 
 	/**/
 	function puntos_disponibles($data , $in_session , $id_evento ){	
-	$puntos_disponibles = "";
-	
-
-	if ($in_session ==  1 ){
-
-		editar_btn($in_session , base_url("index.php/accesos/configuracionavanzada/1/".$id_evento."/puntosventa") );
+		$puntos_disponibles = "";
+		if ($in_session ==  1 ){
+			editar_btn($in_session , base_url("index.php/accesos/configuracionavanzada/1/".$id_evento."/puntosventa") );
+			if (count($data)== 0 ) { $puntos_disponibles = "<span class='proximamente_alert msj_notificacion_config  '> No has cargado puntos de venta en el evento  </span>";}		
+		}else{
+			if (count($data)== 0 ) { $puntos_disponibles = "<span class='proximamente'> Próximamente .! </span>";}		
+		}
 		
-
-		if (count($data)== 0 ) { $puntos_disponibles = "<span class='proximamente_alert msj_notificacion_config  '> No has cargado puntos de venta en el evento  </span>";}		
-	}else{
-		if (count($data)== 0 ) { $puntos_disponibles = "<span class='proximamente'> Próximamente .! </span>";}		
-	}
-	
 
 	foreach ($data as $row) {
 		
@@ -126,51 +222,40 @@ if(!function_exists('invierte_date_time')){
 		$dias_disponibles =  tmp_dias_disponibles($row); 
 		$sitio_web  =  $row["sitio_web"];
 
-		$url_config =base_url("index.php/puntosventa/administrar") ."/".$razon_social ;
+		$url_config =base_url("index.php/puntosventa/administrar") ."/".$razon_social;
 		$in_session_btn = editar_btn($in_session  , $url_config ); 
 
 	$puntos_disponibles .= '
-							<div class="row" >
-						        <div class="">
-						            <div class="panel panel_e coupon">
-						              <div class="panel-heading" id="head">
-						                <div class="panel-title" id="title">	
-						                	<span class="pull-left" >'.$in_session_btn .'</span>					                   
-						                    <span class="hidden-xs n_razon_social">'.$razon_social.'</span>
-						                    <span class="visible-xs n_razon_social">'.$razon_social.'</span>
-						                </div>
-						              </div>
-						              <div class="panel-body panel_body_pv" id="'.$zona .'">
-						              	<div class="row">						              	    
-						                	'.$img .'						               						                	
-						                </div>
-						                <br>
-						                <div class="row">
-							                <div class="col-lg-12 col-md-12 col-sm-12">
-							                    '.create_text_direccion($descripcion).'
-							                </div>
-							            </div>
-						                <span class="pull-left"> 
-						              		zona '. $zona .'
-						              	</span>
-						              	<a href="'.$sitio_web.'" class="sitio_web_punto_venta pull-right">
-						                    www
-						                </a>					               
-						              </div>
-
-
-
-
-
-
-						              <div class="panel-footer panel_footer_pv">						              							              							              	
-						                '. $dias_disponibles .'
-
-						              </div>
-						            </div>
-						        </div>
-						    </div>  
-						    <hr>
+							<div>
+								<div>
+									<div>	
+										<span>
+											'.$in_session_btn .'
+										</span>					                   
+										<span class="n_razon_social">
+											'.$razon_social.'
+										</span>						                    
+									</div>						             
+									<div>
+										<div>						              	    
+											'.$img .'						               						                	
+										</div>						  
+										<div>
+											'.create_text_direccion($descripcion).'
+										</div>
+													
+										<span> 
+											Zona de la ciudad '. $zona .'
+										</span>
+										<a href="'.$sitio_web.'" class="sitio_web_punto_venta pull-right">
+											www
+										</a>					               
+									</div>
+									<div class="panel-footer panel_footer_pv">						              							              							              	
+										'. $dias_disponibles .'
+									</div>
+								</div>
+							</div>					  
     					';
     	}
     	return 	$puntos_disponibles;				

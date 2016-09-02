@@ -1,9 +1,8 @@
-<?php
-	
+<?php	
 	$promo_total =0;
 	$complete ="";				
 	$flag =1;	
-	$elements ="<div class='col-12 col-md-12 col-sm-12'>";				
+	$elements ="";				
 
 			foreach ($accesos as $row){
 					
@@ -22,78 +21,84 @@
 				$img_acceso = create_icon_img($row , " img_acceso  pull-left  ", $idacceso , ' data-toggle="modal" data-target="#acceso-imagen-modal"  '  ); 
 				$fecha_registro =  $row["fecha_registro"];
 				$img = '<div data-toggle="modal" data-target="#acceso-imagen-modal"    class="imgagen_acceso"  >'. $img_acceso .'</div>';
+
+                $nota =  show_more_text($nota);
+
 				$config =""; 			
+
 				if($param["in_session"] == 1){									
 
 						$config = '
-							<a title = "Configura datos del acceso "  class="more  pull-right">
-		                        <i data-toggle="modal" data-target="#editar-acceso"    class="fa fa-cog editar-acceso" id="'.$idacceso.'"></i> 
-		                    </a>
-		                    <a title = "Eliminar acceso del evento "  class="more  pull-right">
-		                        <i data-toggle="modal" data-target="#confirma-delete-acceso" class="fa  fa-times delete-acceso" id="'.$idacceso.'" ></i> 
-		                    </a>
-
-
-	                    '; 
+                                <div class="row">
+                                    <div class="col-lg-12 col-md-12 col-sm-12">             
+                                        <a title = "Configura datos del acceso "  class="more  pull-right">
+            		                        <i data-toggle="modal" data-target="#editar-acceso" class="fa fa-cog editar-acceso" 
+                                            id="'.$idacceso.'">
+                                            </i> 
+            		                    </a>
+            		                    <a title = "Eliminar acceso del evento "  class="more  pull-right">
+            		                        <i data-toggle="modal" data-target="#confirma-delete-acceso" 
+                                            class="fa fa-times delete-acceso" id="'.$idacceso.'" >
+                                            </i> 
+            		                    </a>
+                                    </div>
+                                </div>'; 
 				}
 			
-			$elements .= '			        
-        <div class="panel"> 
-        					
-        		'.$config.'
-        		
-                <div class="panel-body">
-                    <div class="row">
-                        <div class="col-md-5">
-                            <div class="blog-img-sm">
-                            	
-                                '. $img .'
-                                
-                            </div>
-                        </div>
-                        <div class="col-md-7">
-                            <h1 class="">
-                            	<a href="">
-                            	'. $nombre  .'
-                            	</a>
-                            </h1>
 
-                            <p>
-                            <p class=" auth-row">
-                                <a href="#">
-                                </a> 
-                                	$'.$precio  .'  
-                                	|  
-                                	'.$vigencia.'   
-                                	| 
-                                <a class="tipo_promo" href="#">
-	                                <strong>
-	                                '.$tipo .'	
-	                                </strong>
-                                </a>
-                            </p>
-                            <span class="f_registro">
-                            Registrado el '.$fecha_registro.'
-                            </span>                            
-                            '. $nota .'
-                            </p>                          
-                        </div>
+			$elements .= '	
+	<div>                             
+        '.$config.'             
+        <div>
+            <div class="col-lg-8 col-md-8 col-sm-12">
+                <div class="row">
+                    <div>
+                        '. $img .'                                                       
                     </div>
                 </div>
             </div>
+            <div class="col-lg-4 col-md-4 col-sm-12 ">
+                <div class="row  contenedor-resumen-accesos">
+                    <span class="nombre-acceso">
+                        '.$nombre.'                                
+                    </span>
+                </div>
 
-            	
-            <hr>
+                <div class="row contenedor-resumen-accesos">
+                    <div>
+                        <span class="a1">
+                            '.$tipo .'        
+                        </span>    
+                        <span class="a2">
+                            $'.$precio  .'
+                        </span>    
+                        <span class="a3">
+                            '.$vigencia.'     
+                        </span>    
+                        <span class="a4">
+                            Fecha registro'.$fecha_registro.'                                                
+                        </span>
+                    </div>        
+                </div>
+                <div class="row">
+                    <div >
+                        '. $nota .'                                
+                    </div>                
+                </div>            
+            </div>
+        </div>
+    </div>                    
+<hr>
         ';                            
  		
         }      
-        $elements .=  "</div>";                      
+                         
 	
 ?>
 <?=$elements?>
 <style type="text/css">
 .f_registro{
-	font-size: .9em;
+    font-size: .9em;
 }
 .tipo_promo{
 	color: #166781 !important;

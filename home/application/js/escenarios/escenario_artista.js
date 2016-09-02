@@ -362,10 +362,10 @@ function upload_data_sound(e){
 }
 /**/
 function t_up_estatus(e){
-	
 	url =  now +"index.php/api/escenario/escenario_artista_status/format/json/";
 	artista = e.target.id;
-	$("#status-artista-evento").change(function(){
+	$(".btn-participacion").click(function(){
+		
 		nuevo_status = $("#status-artista-evento").val();
 		data_send =  { artista :  artista , escenario :  escenario , nuevo_status :  nuevo_status ,  "enid_evento": enid_evento ,  "enid_escenario":  enid_escenario  }
 		$.ajax({				

@@ -1,6 +1,41 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 if(!function_exists('invierte_date_time')){
 
+
+  function evalua_url_youtube($url){
+    /**/
+    $icon = "<a style='color: #93a2a9 !important;'>Youtube</a>"; 
+    if(strlen(trim($url)) > 5 ){
+      $icon = "<a href='".$url."'>Youtube</a>"; 
+    }
+    return $icon;
+  }
+  /**/
+  function evalua_url_social($url){
+    /**/
+    $icon = "<a style='color: #93a2a9 !important;'>Facebook</a>"; 
+    if(strlen(trim($url)) > 5 ){
+      $icon = "<a href='".$url."'>Facebook</a>"; 
+    }
+    return $icon;
+  }
+  /**/
+  function evalua_direccion_enid($direccion ,  $id_evento ){
+
+    $locacion = ""; 
+    if (strlen(trim($direccion))>4){    
+      $locacion =  "<i class='locacion fa fa-map-marker ' id='".$id_evento."' 
+                        data-toggle='modal' data-target='#locacion-modal'  title='". $direccion."'>
+                      </i>";  
+    }else{
+      $locacion =  "<i class='locacion fa fa-map-marker direccion_registrada' 
+                        id='".$id_evento."' 
+                        data-toggle='modal' data-target='#locacion-modal'  title='". $direccion."'>
+                      </i>";  
+    }   
+    return $locacion; 
+
+  }  
   /**/
   function template_text_img($id  ,  $class  , $modal , $black  = 0 ,  $title ='' ){
 
@@ -75,12 +110,16 @@ if(!function_exists('invierte_date_time')){
   }
 
   /**/
-  function template_evento($nombre_evento){
+  function template_evento($nombre_evento ,  $id_evento ){
+                                
+    $url =  base_url("index.php/eventos/visualizar")."/".$id_evento;
     $template =  "
               <div class='col-lg-12 col-sm-12 col-md-12 seccion-presentacion' >
                 <div class='row'>
                   <div class='nombre-evento-mov'>
-                    ".$nombre_evento."
+                    <a class='link-event-enid'  href='".$url."'>
+                      ".$nombre_evento."
+                    </a>
                   </div>
                   <span class='nombre_empresa_enid'>
                     Enid service
@@ -93,14 +132,16 @@ if(!function_exists('invierte_date_time')){
   }
   /**/
   function btn_comunidad($id_empresa){    
-
       $url =  base_url('index.php/emp/lahistoria')."/".$id_empresa;
-      $btn =  "<li>
-                <a aria-expanded='true' href='$url' >          
-                  Nuestra historia
-                </a>
-              </li>  
-              ";
+      $btn =  "
+                <li class='tab_accesos tab_enid pull-right'>
+                  <span>             
+                    <a class='text_link_accesos_enid' href='".$url."' >
+                      Comunidad
+                    </a>                
+                  </span>
+                </li>  
+                ";
       return $btn;
   }
   /**/

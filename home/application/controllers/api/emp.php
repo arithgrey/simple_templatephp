@@ -12,6 +12,45 @@ class Emp extends REST_Controller{
         $this->load->library('sessionclass');                    
     }
     /**/
+    function nueva_POST(){
+        
+        $response =  "";
+        $user_exist = 1; 
+        $empresa_exist =1;
+
+        $param = $this->post();    
+        $empresa_exist =  $this->empresamodel->get_num_empresa_name($param); 
+        $response_emp  =  $this->create_msj_registro($empresa_exist, "org" , "La organización que intenta registrar ya se encuentra registrada."); 
+
+        if($empresa_exist == 0){
+            /*Validamos ahora pero en user*/
+            $user_exist =  $this->empresamodel->get_num_users($param);
+            $response_emp  =  $this->create_msj_registro($user_exist, "user" ,  "El usuario que intenta registrar ya se encuentra registrado."); 
+        }       
+        /**/
+        if($user_exist >  0 || $empresa_exist > 0 ){                    
+            $this->response($response_emp);    
+        }else{            
+            $data["estatus"]  =  $this->empresamodel->create_account($param);
+            $this->response($data);
+        }
+        
+    }
+    /**/
+    function create_msj_registro($valor , $campo ,  $msj ){
+
+        $data["estatus"] =  0;
+        $data["campo"] = $campo;  
+        $data["msj"] =  $msj; 
+        if($valor == 0 ){
+            $data["estatus"] =  1;
+            $data["campo"] = "";  
+
+        }
+        return $data;
+
+    }
+    /**/
     function historias_publico_admin_GET(){
         $this->validate_user_sesssion();  
         $param["empresa"] =  $this->sessionclass->getidempresa();        

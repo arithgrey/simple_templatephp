@@ -14,6 +14,26 @@ $("footer").ready(function(){
 	$(".more-info-f").click(carga_contenido);
 
 });
+/**/
+function validate_format_num_pass( input , place , num  ){
+
+	valor_registrado =   $(input).val(); 
+	text_registro =  $.trim(valor_registrado);  
+	flag =0;
+	if ( text_registro.length > num ) {
+		flag =1;
+	}
+
+	mensaje_user =  ""; 
+	if (flag == 0) {
+		$(input).css("border" , "1px solid rgb(13, 62, 86)");
+		flag  = 0; 
+		mensaje_user =  "Password demasiado corto"; 
+	}
+	llenaelementoHTML( place ,  "<span class='alerta_enid'>" + mensaje_user + "</span>");
+	return flag; 
+}
+/**/
 function show_load_enid(place , texto , flag ){
 
 	/* 1 para imagenes cortas */			
@@ -526,6 +546,7 @@ function show_fields_mov(){
 
 /**/
 function carga_contenido(){
+	
 	seccion =  ".show_descripcion";
 
 	if ($(seccion).is(":visible")) {		

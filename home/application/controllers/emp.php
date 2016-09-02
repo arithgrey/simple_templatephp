@@ -11,6 +11,7 @@ class Emp  extends CI_Controller{
      	$this->load->library('sessionclass');    
 	}
     /**/
+    /**/
     function nuestroseventos(){        
         $data = $this->val_session("Nuestra historia" );                                        
         $this->show_data_page('eventos/busqueda'  , $data );   

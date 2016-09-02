@@ -1,13 +1,10 @@
-<?php
-    
-        $extra_class= '' ;   
-        if (count($proximos_eventos)>3) {
-            $extra_class= ' class= " scroll-enid-public scroll-vertical-enid " ';                  
-        }    
-    
+<?php    
+    $extra_class= '' ;   
+    if (count($proximos_eventos)>3) {
+        $extra_class= ' class= " scroll-enid-public scroll-vertical-enid " ';                  
+    }        
 	$seccion ="";
 	foreach ($proximos_eventos as $row){
-
 		$idevento =  $row["idevento"];
         $nombre_evento  =  $row["nombre_evento"];
         $edicion =  $row["edicion"];
@@ -21,7 +18,7 @@
         $map =  "<i class='fa fa-map-marker' title='".$ubicacion."'></i>"; 
         $next_url =  base_url('index.php/eventos/visualizar') . "/". $idevento;        
         $img =  create_icon_img($row , "img-responsive"  , " " ); 
-
+        $url_maps =  base_url('index.php/eventos/visualizar')."/" .$idevento."#enid-maps";
 			$seccion .='
         			<div class="brdr bgc-fff  box-shad  property-listing">
                         <div class="media">
@@ -47,7 +44,9 @@
                                     	|
                                     </li>
                                     <li>
-                                    '.$map.'
+                                        <a href="'.$url_maps .'">
+                                            '.$map.'
+                                        </a>    
                                     </li>
                                     <li style="list-style: none">
                                         |
@@ -73,34 +72,37 @@
 
 ?>
 
-    <div  style="background-color:#032935">
-        <div class=" container-pad" id="property-listings">                   
-            <div class="row">
-              <div class="col-md-12">
-                <h1 class='h1_otros'>
-                	Los mejores eventos a tu alcance 
-                </h1>
-                <p class='text_otros'>
-                	Otros eventos que pueden interesarte 
-                </p>
-              </div>
-            </div>
-            <div <?=$extra_class?> >
-                <?=$seccion?>
-            </div>            	
-        </div><!-- End container -->
+<div id="property-listings">                   
+    <div>
+        <div>
+            <h1>
+                    Las mejores experiencias a tu alcance 
+            </h1>
+            <span class='text-more-events'>
+                    Otros eventos que pueden interesarte 
+            </span>
+        </div>
     </div>
-<style type="text/css">
+    <div <?=$extra_class?> >
+        <?=$seccion?>
+    </div>            	
+</div>    
 
-/**** LAYOUT ****/
+
+
+
+
+
+
+
+<!---->
+<style type="text/css">
 .list-inline>li {
     padding: 0 10px 0 0;
 }
 .container-pad {
     padding: 30px 15px;
 }
-
-
 /**** MODULE ****/
 .bgc-fff {
     background-color: #fff!important;
@@ -120,7 +122,6 @@
 .fnt-lighter {
     color: #bbb;
 }
-
 /* Padding - Margins */
 .pad-10 {
     padding: 10px!important;
@@ -139,10 +140,10 @@
 .clr-535353 {
     color: #535353;
 }
-
-
-
-
+.text-more-events{
+    font-size: .9em;
+    font-weight: bold;
+}
 /**** MEDIA QUERIES ****/
 @media only screen and (max-width: 991px) {
     #property-listings .property-listing {
@@ -155,15 +156,13 @@
         padding: 10px;
     }
 }
-
 @media only screen and (min-width: 992px) {
     #property-listings .property-listing img {
         max-width: 180px;
     }
 }
-
 .divider_block{
-	padding: 6px;
+    padding: 6px;
 }
 .text_otros{
     color: #FFEF6F;
@@ -173,4 +172,3 @@
     font-weight: bold;
 }
 </style>
-<br>
