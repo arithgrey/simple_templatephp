@@ -5,8 +5,7 @@ $(document).ready(function(){
     $("#form-integrante-edicion").submit(nuevo_user);
 
     $(".form-busqueda-user").submit(load_users_cuenta);
-    $(".nueva_busqueda").click(carga_form_busqueda);    
-    $("#form_estatus").submit(actualiza_estado_usuario);
+    $(".nueva_busqueda").click(carga_form_busqueda);        
     $("#btn_cancelar").click(cancelar_modificacion);
     
 });
@@ -139,18 +138,22 @@ function template_config_estatus(e){
     usuario =  e.target.id; 
     url = now + "index.php/api/user/template_estado/format/json/"; 
     $(".seccion-busqueda").hide();
-    
+
     $.ajax({        
         url :  url , 
         data :  {"usuario" : usuario} , 
         type : "GET" ,
         beforeSend : function(){
-            llenaelementoHTML("#integrantes-table-info" , "Error al tratar de configurar el estado del usuario ");   
+            
+            show_load_enid("#integrantes-table-info" , "Cargando ... " , 1 );
         }
     }).done(function(data){
           llenaelementoHTML("#integrantes-table-info" ,  data );   
+          $("#form_estatus").submit(actualiza_estado_usuario);
+          
     }).fail(function(){
-          llenaelementoHTML("#integrantes-table-info" , "Error al tratar de configurar el estado del usuario ");   
+        
+        show_error_enid("#integrantes-table-info" , "Error al tratar cargar la configuración del evento "); 
     });
 }
 /**/

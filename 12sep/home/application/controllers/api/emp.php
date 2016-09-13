@@ -11,6 +11,18 @@ class Emp extends REST_Controller{
         $this->load->model("organizacionmodel");
         $this->load->library('sessionclass');                    
     }
+    
+    /**/
+    function status_empresa_GET(){
+
+        $this->validate_user_sesssion();          
+        $param["empresa"] =  $this->sessionclass->getidempresa();        
+        $db_response=  $this->empresamodel->get_status_empresa($param); 
+        /**/
+
+        $this->response($db_response);
+        
+    }
     /**/
     function prospectos_enid_post(){
 

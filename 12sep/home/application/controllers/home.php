@@ -5,6 +5,14 @@ class Home extends CI_Controller {
         $this->load->library('sessionclass');
     }    
     /**/
+    function evaluacion(){
+        $this->load->view("empresa/evaluacion_enid");
+    }
+    /**/
+    function planes(){
+        $this->load->view("empresa/planes_enid");
+    }
+    /**/
     function usos_privacidad_enid_service(){
         $this->load->view("empresa/uso_privacidad");
     } 

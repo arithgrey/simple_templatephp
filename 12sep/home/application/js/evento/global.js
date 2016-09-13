@@ -16,6 +16,7 @@ $(document).ready(function(){
     $( "#fecha_inicio" ).datepicker();
     $( "#fecha_termino" ).datepicker();
 
+    $(".btn_nuevo_evento").click(evalua_disponibilidad);
 
     carga_ultima_actividad_eventos();
 });
@@ -121,3 +122,43 @@ function update_fecha_evento_evento(e){
 		return false;
 	});
 }
+
+/**/
+function evalua_disponibilidad(){
+
+	url =  now + "index.php/api/emp/status_empresa/format/json/";  
+	$(".seccion-form-eventos").hide();
+	$.ajax({
+		url : url , 
+		type : "GET",
+		beforeSend : function(){
+			show_load_enid(".place_enid_eventos"  , "Cargando ..." , 1); 
+		}
+	}).done(function(data){
+		$(".place_enid_eventos").empty();
+		
+
+		console.log(data.estatus_empresa);
+		console.log(data);
+		if (data.estatus_empresa == 1){
+			$(".seccion-form-eventos").show();
+		}else{
+
+			$(".seccion-form-eventos").empty();
+			llenaelementoHTML(".place_enid_eventos",  data.estatus_text);
+
+			if (data.propuesta_venta ==  "1") {
+
+				url_next_evaluacion=  now + "index.php/home/evaluacion";
+				url_next = now + "index.php/home/planes";
+				llenaelementoHTML(".place_enid_eventos_venta" ,  "<br><center> <a href='"+url_next_evaluacion+"'><button class='btn_nnuevo'> Evalúa tu experiencia  y publica 2 eventos más gratis</button></a></center> <br><center> <a href='"+url_next+"'><button class='btn_nnuevo'> Conoce que planes hay para ti.! </button></a></center>");
+			}
+
+			
+		}
+
+	}).fail(function(){
+		show_error_enid(".place_enid_eventos" , "Error al cargar formulario de registro, reporte al administrador"); 
+	});
+}
+/**/

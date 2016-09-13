@@ -84,7 +84,7 @@ function load_data_evento( text_visible , val , text_evento , place , null_msj ,
 			type : "GET", 
 			data : data_send, 
 			beforeSend :  function(){
-				show_load_enid( place , "Cargando .. " , 1); 		
+				show_load_enid( place , "Cargando ... " , 1); 		
 			}
 		}).done(function(data){
 			$(place).empty();
@@ -388,7 +388,7 @@ function update_descripcion_evento_by_template(e){
 		type : "PUT", 
 		data : data_send, 	
 		beforeSend: function(){							
-			show_load_enid(".place_experiencia_evento" , "Cargando contenido" , 1); 
+			show_load_enid(".place_experiencia_evento" , "Cargando contenido ... " , 1); 
 		}
 	}).done(function(data){	
 

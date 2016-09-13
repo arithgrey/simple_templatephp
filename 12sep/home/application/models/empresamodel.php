@@ -5,6 +5,80 @@ class empresamodel extends CI_Model{
       $this->load->database();
   } 
   /**/
+  function get_status_empresa($param){
+
+    $query_get = "SELECT status FROM empresa WHERE idempresa =  '".$param["empresa"]."' ";
+    $result=  $this->db->query($query_get); 
+    $estatus_empresa =  $result->result_array()[0]["status"];
+
+
+    $data["estatus_text"] =  "";
+    $data["estatus_empresa"] =  0;
+
+    switch ($estatus_empresa) {
+      case 1:
+          /*Contamos cuantos eventos tenemos registrados*/  
+
+          $num_eventos = $this->empresa_eventos($param["empresa"]);
+          if ($num_eventos < 3){
+              $data["estatus_text"] = "Eventos registrados " . $num_eventos;
+              $data["estatus_empresa"] = 1;            
+          }else{
+
+              $data["estatus_text"] = "Has alcanzado el máximo de de eventos a publicitar en la versión de prueba";
+              $data["estatus_empresa"] = 0;          
+              $data["propuesta_venta"] = 1;          
+
+          }
+
+          break;
+      case 2:          
+          
+          /*2.-Cuando ya han pagado */  
+          $data["estatus_text"] = "Usuario que ha reagistrado pago";
+          $data["estatus_empresa"] =  1;
+
+          break;    
+        
+      case 3:
+
+          /*Cuando ya ha terminado su límite de pago*/
+          $data["estatus_text"] = "Usuario que ha reagistrado pago pero la fecha ha terminado";
+          $data["estatus_empresa"] =  1;
+
+        break;
+
+      case 4:
+
+        $data["estatus_text"] = "Por siempre";
+        $data["estatus_empresa"] =  1;
+        
+        break;
+
+      case 5:
+        $data["estatus_text"] = "Usuario bloqueado";
+        $data["estatus_empresa"] =  0;
+        
+        return 0;
+        break;
+
+      default:        
+        $data["estatus_text"] = "";
+        $data["estatus_empresa"] =  0;
+        break;
+    }
+
+    return $data;
+
+  }
+  /**/
+  function empresa_eventos($id_empresa){
+
+    $query_get =  "SELECT COUNT(0)num_eventos FROM evento WHERE idempresa = $id_empresa LIMIT  5";
+    $result = $this->db->query($query_get);
+    return $result->result_array()[0]["num_eventos"];
+  }
+  /**/
   function insert_prospecto_enid($param){
     $query_insert =  "INSERT IGNORE INTO prospecto(correo) VALUES('". $param["mail"] ."')"; 
     return  $this->db->query($query_insert);  

@@ -169,6 +169,9 @@
 .title-enid-resum{
     font-weight: bold;
 }
+.seccion-desc{
+    margin-top: 30px;
+}
 @media only screen and (max-width: 991px){
     .link_resum{
         background: #dae8ef;        
