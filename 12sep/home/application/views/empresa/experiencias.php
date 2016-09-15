@@ -16,17 +16,15 @@
       $idexperiencia =  $row["idexperiencia"];
       $seccion_config =  valida_seccion_config_expericia($param["seccion"] ,  $status ,  $idexperiencia);
       $bloque .= '
-                <section>
-                  <div>
-                  	<div class="panel-header-commentarios">
+                <section>                 
+                  	<div>
 	                    <div class="title-autor">
 	                      '.$nombre.' 
 	                    </div>
 	                    <div class="calificaciones-info">                    
 	                      '. $fecha_registro .' | '. create_start($calificacion).'                                          
 	                    </div>
-                    </div>
-                  </div>                  
+                    </div>                                
                   <div class="seccion-descripcion">                    
                     '.$descripcion .'                    
                   </div>                
@@ -41,28 +39,22 @@
 ?>
 
 <div class='row'>
-	<div class='ultimos-comentarios'>
-		<div class='seccion-contenidos'>
-			<?=valida_title_experiencia($param["seccion"]);?>			
-			<div class='panel'>
-				<div class='panel-body'>
-					<div class='panel-content'>
-						<div <?=$d_class;?> >
-							<?=$bloque?>
-						</div>
-					</div>
-				</div>
+	<div class='col-lg-12 col-md-12 col-sm-12'>
+		<div class='ultimos-comentarios'>
+			<div class='seccion-contenidos'>
+				<?=valida_title_experiencia($param["seccion"]);?>										
+				<div <?=$d_class;?> >
+					<?=$bloque?>
+				</div>					
 			</div>
 		</div>
-	</div>
+	</div>	
 </div>
 
 
 
 <style type="text/css">
-	.ultimos-comentarios{	
-		height: 500px;
-	}.title-exp{
+	.title-exp{
 		font-size: 4em;
 		font-weight: bold;
 		margin-left: 1%;
@@ -78,8 +70,7 @@
 	}.seccion-descripcion{
 
 		font-size: .9em;
-	}.seccion-contenidos{
-		width: 95%;
+	}.seccion-contenidos{		
 		margin: 0 auto;
 	}.commentarios{
 		height: 400px;

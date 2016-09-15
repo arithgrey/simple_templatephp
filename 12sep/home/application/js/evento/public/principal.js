@@ -1,9 +1,11 @@
 $(document).ready(function(){
 	$("footer").ready(carga_portada_event);
+	$("footer").ready(carga_num_asistentes);
 	$("footer").ready(carga_escenarios_evento);
 	$("footer").ready(carga_resumen_extra_evento);	
 	$(".config_tipo_evento").click(carga_configuracion_tipo_evento);
 	$(".config_estado_evento").click(carga_configuracion_estado_evento);
+	$(".btn_asistencia").click(carga_asistencia_user);
 	/**/
 });
 /**/
@@ -54,6 +56,7 @@ function carga_escenarios_evento(){
 /**/
 function carga_resumen_extra_evento(){
 
+
 	url = now + "index.php/api/event/resumen_extra/format/json/";
 	id_evento =  $("#evento").val();
 	in_session =  $(".in_session").val();  
@@ -66,7 +69,7 @@ function carga_resumen_extra_evento(){
 		url : url , 
 		data :  {"id_evento" : id_evento , "in_session" :  in_session  , "restricciones" :  restricciones , "politicas" :  politicas , empresa : empresa} ,
 		beforeSend: function(){
-			/*mostramos load*/			
+					
 			show_load_enid(".place_resumen_extra_evento", "Cargando .." , 1); 
 		}
 	}).done(function(data){
@@ -75,6 +78,7 @@ function carga_resumen_extra_evento(){
 	}).fail(function(){
 		show_error_enid(".place_resumen_extra_evento" , "Falla al cargar la sección, reporte al administrador ");   
 	}); 
+
 }
 /**/
 /**/
@@ -247,4 +251,43 @@ function cancela_event_nota(e){
 	});	
 	e.preventDefault();
 }
+/**/
+function carga_num_asistentes(){
 
+	id_evento =  $("#evento").val();
+	url =  now + "index.php/api/event/asistentes/format/json/";
+
+	$.ajax({
+		url :  url ,
+		data : {evento :  id_evento},
+		beforeSend: function(){
+			show_load_enid(".place_estado_evento", "" , 1); 
+		}
+	}).done(function(data){
+		llenaelementoHTML( ".place_asistentes" , data);
+	}).fail(function(){
+		show_error_enid(".place_estado_evento" , "Error al cargar el número de asistentes del evento, reporte al administrador ");   			
+	});
+
+}
+/***/
+function carga_asistencia_user(){
+
+	id_evento =  $("#evento").val();
+	url =  now + "index.php/api/event/asistente_user/format/json/";
+
+	$.ajax({
+		url :  url ,
+		type:  "GET",
+		data : {evento :  id_evento},
+		beforeSend: function(){
+			show_load_enid(".place_asistencia_user", "Verificando tu asistencia " , 1); 
+		}
+	}).done(function(data){
+		llenaelementoHTML( ".place_asistencia_user" , data);
+
+	}).fail(function(){
+		show_error_enid(".place_asistencia_user" , "Error cancelar el evento, reporte al administrador ");   			
+	});
+	carga_num_asistentes();
+}

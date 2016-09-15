@@ -8,6 +8,7 @@ if(!function_exists('invierte_date_time')){
 	}
 	/**/
 	function resumen_e($data){
+
 		$tbl = "<span>No se han registrado eventos desde más de hace 30 días </span>"; 
 		if ($data["num_eventos"] > 0 ){		
 			$tbl =  create_header_resumem_e(); 			

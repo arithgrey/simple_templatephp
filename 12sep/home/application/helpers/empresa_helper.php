@@ -95,13 +95,13 @@ function edita_section_mensaje_comunidad($val, $session , $class=""){
       $class =  ""; 
     }
 
-    if(strlen($val) > 300 ){      
+    if(strlen($val) > 700 ){      
 
           $primer_part = "<span class='hiddden_descripcion'>
                             ".$val."
                           </span>";
 
-              $part_descripcion =  substr($val, 0 ,  270);  
+              $part_descripcion =  substr($val, 0 ,  690);  
               $new_text = $primer_part ."<span class='show_descripcion ".$class." '>
                               ". $part_descripcion ."
                             </span>
@@ -275,7 +275,6 @@ function evalua_msj_solicitudes($public ){
 
 /**/
 function valida_seccion_config_expericia($seccion ,  $status , $idexperiencia){
-  
 
   $extra =  "";
   if ($seccion == 3){    
@@ -304,8 +303,9 @@ function get_select_tipo_comentario($tipo, $idexperiencia){
     }
   $select .=  "</select>";  
   $select .=  "
-               <button id='$idexperiencia' class='btn-estado-exp btn btn-default btn_save btn-registrar-cambios'>
-                Actualizar
+              <br>                                                
+              <button id='$idexperiencia' class='btn-estado-exp btn btn-default btn_save btn-registrar-cambios'>
+                Registrar cambios
               </button>";  
   return $select; 
 }

@@ -17,7 +17,7 @@ public function sendMailGmail()
 				'protocol' => 'sendmail',								
 				'smtp_port' => 587,
 				'smtp_user' => 'arithgrey@enidservice.com',
-				'smtp_pass' => 'ubuntuJavaJava.1',
+				'smtp_pass' => 'ubuntuJavaJava.9',
 				'mailtype' => 'html',
 				'charset' => 'utf-8',
 				'wordwrap' => TRUE, 

@@ -26,6 +26,11 @@
 </div>
 
 
+
+
+
+
+
 <input type='hidden' class='h_slogan' value='<?=$evento["eslogan"]?>'> 
 <input type='hidden' class='h_programado' value="<?=trim($evento["programado"])?>">   
 <input type='hidden' class='h_status' value="<?=trim($evento["status"])?>">   
@@ -38,6 +43,37 @@
 <input type="hidden" class='empresa' id='empresa' value="<?=$evento['idempresa']?>">
 <script type="text/javascript" src="<?=base_url('application/js/evento/public/principal.js')?>">
 </script>
+
+
+
+
+
+
+<?=construye_header_modal('asistencia_moal', "Tu asistencia en el evento" );?>                           
+<div class='place_asistencia_user'>  
+</div>
+
+
+<center>
+  <div>            
+          <script>(function(d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) return;
+            js = d.createElement(s); js.id = id;
+            js.src = "//connect.facebook.net/es_ES/sdk.js#xfbml=1&version=v2.7";
+            fjs.parentNode.insertBefore(js, fjs);
+          }(document, 'script', 'facebook-jssdk'));</script>
+
+          <div class="fb-share-button" data-href="<?=base_url('index.php/eventos/visualizar')?>/<?=$evento["idevento"]?>" data-layout="button" data-size="small" data-mobile-iframe="true"><a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fenidservice.com%2Fhome%2F&amp;src=sdkpreparse">Compartir</a></div>
+  </div>
+</center>
+
+
+<?=construye_footer_modal()?>  
+
+
+
+
 <style type="text/css">
   .config_tipo{
     display: none;
@@ -267,7 +303,63 @@
 .seccion-historia{
   margin-top: 2%;
 }
+.link-to-enid:hover{
+  cursor: pointer;
+  text-decoration: none;
+  color: white;
+}
+.btn_call_to{    
+    background: #d9534f;
     
+    color: white;
+    border-radius: 0;
+    border-style: solid;
+    border-width: 0;
+    cursor: pointer;
+    padding: 1rem 1.77778rem 0.94444rem 1.77778rem;    
+    border-color: #007095;
+    color: #FFFFFF;
+    margin-right: 1px;
+}
+.btn_call_to:hover{    
+    background: rgb(3, 41, 53);
+    color: white;
+    border-radius: 0;
+    border-style: solid;
+    border-width: 0;
+    cursor: pointer;
+    padding: 1rem 1.77778rem 0.94444rem 1.77778rem;    
+    border-color: #007095;
+    color: #FFFFFF;
+    margin-right: 1px;
+}
+.btn_call_to_emp{
+  
+    background: rgb(3, 41, 53);
+    color: white;
+    border-radius: 0;
+    border-style: solid;
+    border-width: 0;
+    cursor: pointer;
+    padding: 1rem 1.77778rem 0.94444rem 1.77778rem;    
+    border-color: #007095;
+    color: #FFFFFF;
+    margin-right: 1px;  
+}
+
+.btn_call_to_emp:hover{    
+    background: #090e1b;
+    color: white;
+    border-radius: 0;
+    border-style: solid;
+    border-width: 0;
+    cursor: pointer;
+    padding: 1rem 1.77778rem 0.94444rem 1.77778rem;    
+    border-color: #007095;
+    color: #FFFFFF;
+    margin-right: 1px;
+}
+
 </style>
 
 

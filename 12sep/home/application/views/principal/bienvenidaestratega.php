@@ -1,3 +1,7 @@
+
+
+
+
 <div class='row'>    
     <!--Sección izquierda inicia -->       
     <div class="col-lg-9 col-lg-9 col-sm-12" id='section_main_left'>                        

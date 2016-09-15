@@ -1,18 +1,27 @@
-<h2 class='title-enid-resum'>
-	Tus últimos eventos
-</h2>
+
 <div class='row'>	
-	<div class='menu-reportes'>	
-		<span class='tab_enid pull-right'>		
-		    Tendencias próximamente
-		</span>
-	    <span class='tab_enid pull-right'>
-			Las opiniones próximamente
-		</span>
-	   	<span class='tab_enid pull-right'>		
-		    Eventos por usuario próximamente
-		</span>  
+	<div class='col-lg-12 col-md-12 col-sm-12'>
+	<h2 class='title-enid-resum'>
+	Eventos 
+</h2>
 	</div>
+</div>	
+
+<div class='row'>	
+	<div class='col-lg-12 col-md-12 col-sm-12'>
+		<div class='menu-reportes'>	
+			<span class='tab_enid pull-right'>		
+			    Tendencias próximamente
+			</span>
+		    <span class='tab_enid pull-right'>
+				Las opiniones próximamente
+			</span>
+		   	<span class='tab_enid pull-right'>		
+			    Eventos por usuario próximamente
+			</span>  
+		</div>
+		
+	</div>	
 </div>
 <!---->
 <div>		

@@ -1,65 +1,32 @@
- <br>
 <div class='row'>
     <div class='col-lg-12 col-md-12 col-sm-12'>
-        <div class='seccion-presentacion_bienvenida'>    
-            <span class='enid_bienvenida'>
-                Enid Service
-            </span>                              
-        </div>
+        <div class='ver-public-lg-emp'>              
+            <a href="#faq-cat-2"  data-toggle="tab"  class='links_enid carga_resumen_eventos tab_enid_w active'>Eventos                     
+            </a>|        
+            <a href="#faq-cat-3"  data-toggle="tab" class='carga_resumen_cominidad tab_enid_w'>
+                Lo que la comunidad quiere                        
+            </a>|
+            <a href="#solicitudes-artistas"  data-toggle="tab"   class='carga_resumen_solicitudes tab_enid_w'> 
+                Artistas solicitados                    
+            </a>|
+            <a href="#faq-cat-4"  data-toggle="tab" class='carga_resumen_movimientos tab_enid_w '>
+                Movimientos                           
+            </a>
+        </div>       
     </div>
 </div>
-<div class='row'>
-    <div class='col-lg-12 col-md-12 col-sm-12'>
-        <div class='seccion-bienvenida'> 
-            <span class='title_name_user'>
-                Bienvenido                
-                <?=$nombre_user;?>            
-            </span>
-        </div>
-    </div>    
-</div>
 
-                  
-<ul class="nav navbar-nav col-lg-12 col-md-12 col-sm-12">
-    <li class="dropdown">                
-        <a href="#" class="dropdown-toggle primeros-pasos" data-toggle="dropdown">
-            Resumen de la organización
-        </a>            
-        <ul class="dropdown-menu">
-            <li class='carga_resumen_eventos tab_enid'>
-                <a href="#faq-cat-2"  data-toggle="tab">                                
-                    Eventos                     
-                </a>
-            </li>
-            <li class='carga_resumen_cominidad tab_enid'>
-                <a href="#faq-cat-3"  data-toggle="tab">
-                    Comunidad                        
-                </a>
-            </li>
-            <li class='carga_resumen_solicitudes tab_enid'>
-                <a href="#solicitudes-artistas"  data-toggle="tab" > 
-                    Artistas solicitados                    
-                </a>
-            </li>
-            <li class='carga_resumen_movimientos tab_enid '>
-                <a href="#faq-cat-4"  data-toggle="tab">
-                    Movimientos                           
-                </a>
-            </li>               
-        </ul>
-    </li>
-</ul>   
+
+
+
       
 <hr>
 
 <div class='row'>
     <div class='col-lg-12 col-md-12 col-sm-12'>                     
         <div class="tab-content">
-            <div class="tab-pane active" id="faq-cat-1">  
-            	<?=$this->load->view("reporte/bienvenida");?>
-            </div>
-            <div class="tab-pane" id="faq-cat-2">
-
+            
+            <div class="tab-pane active" id="faq-cat-2">
                 <?=$this->load->view("reporte/admin_eventos")?>
             </div>
             <div class="tab-pane" id="faq-cat-3">
@@ -73,6 +40,10 @@
                 </div>
             </div>
             <div class="tab-pane" id="faq-cat-4">
+                
+                <h2 class="title-enid-resum">
+                    Últimos movimientos
+                </h2>
                 <div class='place_ultimos_movimientos'>
                 </div>                
             </div>
@@ -106,8 +77,9 @@
     .f_busqueda:hover{
         cursor: pointer;
     }
-    .tab_enid {
+    .tab_enid_w {
         margin-right: 1%;
+        color: white;
     }
 
 

@@ -2,18 +2,16 @@
     
     <div class='comunidad-experiencia-imgs' id='comunidad-experiencia-imgs'>
     </div>                            
-    <div>
-        
-
-     
+    <div>        
         <div class='iconos-comunidad'>
         </div>
-
         <div class="panel-body">                                
 
-
-
-            <?=edita_section_mensaje_comunidad($data_empresa["mensaje_comunidad"] , $in_session , "text-edit-mensaje-comunidad")?>
+                <?=edita_section_mensaje_comunidad(
+                    $data_empresa["mensaje_comunidad"] , 
+                    $in_session , 
+                    "text-edit-mensaje-comunidad")
+                ?>
 
             <div class='place-msj-comunidad' id='place-msj-comunidad'>
             </div>            

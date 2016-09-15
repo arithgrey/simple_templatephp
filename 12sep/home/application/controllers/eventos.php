@@ -116,8 +116,11 @@ function accesosalevento($id_evento){
                 //$data["generos_musicales_tags"] = get_tags_generos($list_generosdb);                   
                 $dias_restantes = $this->eventos_model_cliente->get_dias_faltantes($dataevent[0]["idevento"]);
                 $data["dias_restantes_evento"] = get_dias_restantes_evento( $dias_restantes);
+                $this->show_data_page($data, 'eventos/previsualizarevent');   
+                
 
-                $this->show_data_page($data, 'eventos/previsualizarevent'  );   
+
+
                
             }else{
                 header('Location:' . base_url('index.php/inicio/eventos'));

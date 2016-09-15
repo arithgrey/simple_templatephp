@@ -23,9 +23,9 @@
 
 
 
-<a href="<?=base_url('index.php/home/registro')?>">
+<a href="<?=base_url('index.php/home/prospectos')?>">
     <button  class='btn btn-default btn_save inicia'>    
-        Registra cuenta    
+        Prueba gratis
     </button>        
 </a>
 <div class='contenedor-form col-lg-4 col-lg-offset-4 col-md-4 col-md-offset-4  col-sm-10 col-sm-offset-1'>
@@ -58,9 +58,11 @@
       </div> 
 </div>
 
+<!--
 <a data-toggle="modal" class='pull-right recupara-pass'>                                                 
   Recuperar contraseña                         
 </a>
+-->
 </body>
 
     <style type="text/css">

@@ -29,26 +29,27 @@
 		$url_img_icon = base_url("application/img")."/".$imgs[$tipo_evento];
 
 		$list .=  '
-			<div class="row  panel-body '. $class[$tipo_evento]  .' ">
-                <div class="media blog-cmnt">                    
-                    <img  src="'.$url_img_icon.'" class="img-log">                    
-                    <div class="parte-resumen">
-	                    <div class="media-body">
-	                        <h4 class="media-heading">	                            
-	                            '.$nombre . " | " .$email  .'| '. $puesto.'|'.$cargo.'	                            
-	                        </h4>                        
-	                        <p class="mp-less resumen-log">
-	                          '.resumen_descripcion_enid($descripcion).'
-	                        </p>
-	                        <span class="fecha-registro">
-	                        '.$fecha_registro.'
-	                        </span>
-	                        <span class="info-modulo btn btn-default input-sm pull-right">
-	                        '.$nota_log[$modulo].'
-	                        </span>
+			<div class=" '. $class[$tipo_evento]  .' ">
+				<div>
+	                <div class="media blog-cmnt">                    
+	                    <img  src="'.$url_img_icon.'" class="img-log">                    
+	                    <div class="parte-resumen">
+		                    <div class="media-body">
+		                        <h4 class="media-heading">	                            
+		                            '.$nombre . " | " .$email  .'| '. $puesto.'|'.$cargo.'	                            
+		                        </h4>                        
+		                        <p class="mp-less resumen-log">
+		                          '.resumen_descripcion_enid($descripcion).'
+		                        </p>
+		                        <span class="fecha-registro">
+		                        '.$fecha_registro.'
+		                        </span>
+		                        <span class="info-modulo btn btn-default input-sm pull-right">
+		                        '.$nota_log[$modulo].'
+		                        </span>
+		                    </div>
 	                    </div>
-                    </div>
-
+	                </div>
                 </div>
             </div>        
 		';

@@ -3,6 +3,8 @@ $(document).ready(function(){
 	fecha = "";	
 	/**/
 	$(".dinamic_busqueda").click(busqueda_tmp_dinamic);
+
+	$("footert").ready(carga_informe_global);
 	$(".carga_resumen_eventos").click(carga_informe_global);
 	$("#mostrar-abreviaturas").click(dinamic_description_global);
 	$("#ocultar-abreviaturas").click(dinamic_description_global);
@@ -14,6 +16,7 @@ $(document).ready(function(){
 });
 /**/
 function carga_informe_global(){
+	
 
 	/**/
 	url =now + "index.php/api/reportes/global_empresa/format/json/"; 	
@@ -26,7 +29,10 @@ function carga_informe_global(){
 					show_load_enid(".place_reporte_evento" , "Cargando ... " , 1 );
 				}
 			}).done(function(data){		
-					
+				
+
+
+				//console.log(data);	
 				$(".place_reporte_evento").empty();
 				llenaelementoHTML(".reporte_evento" ,  data );
 				/*eventos*/
@@ -74,7 +80,7 @@ function carga_solicitados_artistas(){
 		type :  "GET",
 		data :  {"empresa" :  empresa,  "nombre_empresa" :  nombre_empresa, "public" :  0 },
 		beforeSend: function(){			
-			show_load_enid(".place_solicitudes_artistas" , "Cargando solicitudes  " , 1 );				
+			show_load_enid(".place_solicitudes_artistas" , "Cargando solicitudes ... " , 1 );				
 		}
 	}).done(function(data){
 		llenaelementoHTML(".place_solicitudes_artistas" , data ); 								
@@ -91,7 +97,7 @@ function carga_ultimos_movimientos(){
 		data : { "tipo_actividad" : "eventos" },
 		type :  "GET",
 		beforeSend: function(){
-			show_load_enid(".place_ultimos_movimientos" , "Cargando ultimos movimientos" , 1 );				
+			show_load_enid(".place_ultimos_movimientos" , "Cargando últimos movimientos ...  " , 1 );				
 		}
 	}).done(function(data){
 		llenaelementoHTML(".place_ultimos_movimientos" , data);
@@ -114,7 +120,7 @@ function carga_info_accesos(e){
 			type : "GET" ,
 			data : {"evento" : evento },
 			beforeSend: function(){
-				show_load_enid(".place_more_info", "Cargando accesos del evento " , 1); 
+				show_load_enid(".place_more_info", "Cargando accesos del evento ... " , 1); 
 			}
 		}).done(function(data){			
 			llenaelementoHTML(".place_more_info", data["accesos"]);
@@ -138,7 +144,7 @@ function carga_info_puntos_venta(e){
 			type :  "GET",
 			data:  {"id_evento" :  evento ,  "in_session" : 0 }	,		
 			beforeSend : function(){			
-				show_load_enid(".place_more_info", "Cargando los puntos de venta del evento" , 1); 			
+				show_load_enid(".place_more_info", "Cargando los puntos de venta del evento ... " , 1); 			
 			}
 		}).done(function(data){					
 			llenaelementoHTML(".place_more_info" , data);		
@@ -161,7 +167,7 @@ function carga_info_artistas(e){
 			type :  "GET",
 			data:  {"id_evento" :  evento },		
 			beforeSend : function(){			
-				show_load_enid(".place_more_info", "Cargando los artistas del evento" , 1); 			
+				show_load_enid(".place_more_info", "Cargando los artistas del evento ... " , 1); 			
 			}
 		}).done(function(data){					
 			llenaelementoHTML(".place_more_info" , data);		

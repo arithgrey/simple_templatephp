@@ -1,5 +1,15 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 if(!function_exists('invierte_date_time')){
+	/**/
+	function show_status_asistencia($num_asistencia){
+
+		if ($num_asistencia > 0 ){
+			return  "<center><i class='fa fa-times'></i> <span clas='title-asistencia'> Has mencionado que ya no asistirás al evento</span></center>";	
+		}else{			
+			return  "<center> <i class='fa fa-check'> </i> <span clas='title-asistencia' >Asístirás al evento</span></center>";		
+		}
+	}
+	/**/
 	function valida_resum_edicion($edicion){
 		$new_edicion =  ""; 
 		if ( trim(strlen($edicion)) > 0) {
@@ -442,12 +452,20 @@ function get_last_events_empresa($ultimos_eventos, $limit_text= 270 ,  $show_edi
 			$resumen_section  = resumen_evento($show_edit , $escenarios , $id_evento , $artistas , $evento_punto_venta , $accesos ); 
 
 			$btn_config ='';  
+
+			$btn_social_fb =  '<div class="fb-share-button" data-href="'.$url_next.'" data-layout="button" data-size="small" data-mobile-iframe="true"><a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fenidservice.com%2Fhome%2F&amp;src=sdkpreparse">Compartir</a></div>'; 
+
 			if($show_edit == 1){									
 					$btn_config = '
 					<a title = "Configura el evento " href="'.$url_edith.'" class="more resum_evento pull-right">
                         <i class="fa fa-cog"></i> 
                     </a>'; 
+                    $btn_social_fb  = '';
+
+
 			}
+
+
 			
 			$elements .= '		
 			    	        <div class="row">
@@ -490,6 +508,10 @@ function get_last_events_empresa($ultimos_eventos, $limit_text= 270 ,  $show_edi
 
 	                   		'. $resumen_section   .'
 	                   	</div>
+	                   	<div>
+	                   	'.$btn_social_fb.'		
+	                   	</div>
+
 	                    <div class="col-lg-12 col-md-12 col-sm-12">
 	                    	<span class="text_resum">
 		                    	'. $descripcion_evento .'
@@ -812,8 +834,7 @@ function get_slider_img_evento($data){
 		$num_agregados =  count($data); 
 		
 		$elements = "<h1 class='link_next_accesos'>
-						Algunos artistas del evento 
-						
+						Algunos artistas del evento 						
 					</h1>"; 
 		
 		if ($in_session ==  1 ){			

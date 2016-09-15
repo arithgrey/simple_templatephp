@@ -4,6 +4,52 @@ function __construct(){
 	parent::__construct();        
     $this->load->database();
 }
+/**/
+function get_asistencia_user($param){
+
+
+	$query_get =  "SELECT 
+	count(0)asistentes 
+	FROM  evento_asistente 
+	WHERE id_evento='".$param["evento"]."' 
+	AND ip= '". $param["ip_user"]."' LIMIT 1";
+
+
+	$result =  $this->db->query($query_get);
+	$num =   $result->result_array()[0]["asistentes"];
+
+	if ($num > 0){
+
+		$query_delete =  "DELETE  FROM  evento_asistente WHERE  id_evento='".$param["evento"]."' 
+		AND ip= '". $param["ip_user"]."' LIMIT 1"; 
+		$this->db->query($query_delete);
+
+	}else{
+		/**/
+		$query_insert =  "INSERT IGNORE  INTO asistente(ip) VALUES('". $param["ip_user"]."');"; 
+		$this->db->query($query_insert);
+
+		$query_get =  "SELECT  id_asistente FROM  asistente WHERE ip = '". $param["ip_user"]."' LIMIT 1 ";
+		$result =  $this->db->query($query_get);
+		$id_asistente =  $result->result_array()[0]["id_asistente"];
+	
+		$query_insert =  "INSERT INTO  
+						 evento_asistente(id_evento ,  id_asistente ,  ip ) 
+						 VALUES( '". $param["evento"]."'  , '".  $id_asistente  ."'  ,  '". $param["ip_user"]."' )";  
+	
+		$this->db->query($query_insert);	
+	}
+	return $num;
+	
+}
+/**/
+function get_asistentes($param){
+	/**/
+	$query_get =  "select count(0)asistentes from evento_asistente where id_evento='".$param["evento"]."' ";
+	$result =  $this->db->query($query_get);
+	return $result->result_array()[0]["asistentes"];
+}
+/**/
 function get_resum_by_id_event($id_evento){
 
 	$_num =  $this->contruye_tmp_evento_edit($id_evento , 0  ); 	

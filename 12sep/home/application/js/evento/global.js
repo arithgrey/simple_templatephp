@@ -151,7 +151,7 @@ function evalua_disponibilidad(){
 
 				url_next_evaluacion=  now + "index.php/home/evaluacion";
 				url_next = now + "index.php/home/planes";
-				llenaelementoHTML(".place_enid_eventos_venta" ,  "<br><center> <a href='"+url_next_evaluacion+"'><button class='btn_nnuevo'> Evalúa tu experiencia  y publica 2 eventos más gratis</button></a></center> <br><center> <a href='"+url_next+"'><button class='btn_nnuevo'> Conoce que planes hay para ti.! </button></a></center>");
+				llenaelementoHTML(".place_enid_eventos_venta" ,  "<br><center> <a href='"+url_next_evaluacion+"'><button class='btn_nnuevo'> Evalúa tu experiencia  y publica 2 eventos más gratis</button></a></center>");
 			}
 
 			

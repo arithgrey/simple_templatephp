@@ -16,8 +16,9 @@ class Startsession extends CI_Controller {
 		$this->usuarioregistrado();		
 	}
     
-	function usuarioregistrado(){					
-		redirect( base_url('index.php/inicio') );		
+	function usuarioregistrado(){
+        //redirect( base_url('index.php/inicio/home') );       
+		redirect( base_url('index.php/inicio/eventos') );		
 	}
     
 	function logout(){						

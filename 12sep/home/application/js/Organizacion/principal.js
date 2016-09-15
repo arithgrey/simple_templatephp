@@ -26,7 +26,7 @@ $(document).on("ready", function(){
 	$("#btn-historia").click(next_page_history);
 	$("#btn-artista").click(next_page_artista);
 	$("#section-us").click(load_artistas_solicitados);	
-	$("#section-comunidad").click(load_section_comunidad);
+	$("footer").ready(load_section_comunidad);
 	$(".text-edit-mensaje-comunidad").click(edita_mensaje_comunidad);
 	$(".img-tmp-empresa").click(edita_logo_empresa);
 	$("footer").ready(carga_iconos_comunidad);

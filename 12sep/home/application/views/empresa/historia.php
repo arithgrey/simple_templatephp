@@ -55,14 +55,14 @@
 
 <div class='row'> 
   <div class="tab-content">
-    <div class="tab-pane active" id="pill-1">
+    <div class="tab-pane" id="pill-1">
       <?=$this->load->view("empresa/empresa_general");?>
     </div>
-    <div class="tab-pane" id="pill-2">
+    <div class="tab-pane " id="pill-2">
         <?=$this->load->view("empresa/detalle_historia");?>
     </div>
 
-    <div class="tab-pane" id="pill-3">
+    <div class="tab-pane active" id="pill-3">
         <?=$this->load->view("empresa/historia_imagenes")?>
     </div>
   </div>            

@@ -4,7 +4,8 @@ class Sessionrestcontroller extends REST_Controller{
     function __construct(){
             parent::__construct();
             $this->load->model("usuariogeneralmodel");                      
-    }         
+    } 
+    /**/        
     /**/
     function start_post(){
         $secret = $this->post("secret");        

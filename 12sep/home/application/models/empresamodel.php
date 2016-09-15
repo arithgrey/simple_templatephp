@@ -5,6 +5,20 @@ class empresamodel extends CI_Model{
       $this->load->database();
   } 
   /**/
+  function get_num_empresas(){
+    $query_get =  "SELECT COUNT(0) num_empresas FROM empresa";  
+    $result = $this->db->query($query_get);
+    return $result ->result_array()[0]["num_empresas"];
+  }
+  /**/
+  function consulta_user_prospecto($param){
+    
+    $query_get =  "SELECT COUNT(0)num_user FROM usuario WHERE email='".$param["mail"]."' LIMIT 1 ";
+    $result = $this->db->query($query_get);
+    $num_user =  $result->result_array()[0]["num_user"];
+    return $num_user;
+  }
+  /**/
   function get_status_empresa($param){
 
     $query_get = "SELECT status FROM empresa WHERE idempresa =  '".$param["empresa"]."' ";
@@ -79,6 +93,8 @@ class empresamodel extends CI_Model{
     return $result->result_array()[0]["num_eventos"];
   }
   /**/
+
+  /**/
   function insert_prospecto_enid($param){
     $query_insert =  "INSERT IGNORE INTO prospecto(correo) VALUES('". $param["mail"] ."')"; 
     return  $this->db->query($query_insert);  
@@ -105,10 +121,12 @@ class empresamodel extends CI_Model{
       return $result->result_array();
 
   }
+
   /**/
   function create_account($param){
 
-      $query_insert = "INSERT INTO empresa(nombreempresa , acepta_uso_privacidad , text_uso_privacidad ) VALUES ('".$param["org"]."' , '".$param["privacidad_condiciones"]."' , 'He leído y  acepto las condiciones de uso y privacidad para hacer uso del sistema Enid Service.' )";    
+      $query_insert = "INSERT INTO empresa(nombreempresa , acepta_uso_privacidad , text_uso_privacidad ) 
+      VALUES ('".$param["org"]."' , '".$param["privacidad_condiciones"]."' , 'He leído y  acepto las condiciones de uso y privacidad para hacer uso del sistema Enid Service.' )";    
       $this->db->query($query_insert);
       $id_empresa  = $this->db->insert_id();              
       /**/

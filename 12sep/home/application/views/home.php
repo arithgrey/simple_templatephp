@@ -9,8 +9,14 @@
         Enid Service
     </title>
     <?=link_tag('application/css/css/style.css');?> 
+
+    <div id="fb-root"></div>
+
 </head>
 <body class='content-enid'>
+
+
+
     <section>
         <div>        
             <div>            
@@ -24,6 +30,12 @@
             </div>   
         </div>                         
     </section>
+
+
+
+
+
+
     <div class='contenedor-principal'>
         <div class='row'>
             <div class=''>
@@ -35,9 +47,9 @@
             </div>
             <!---->
             <div>
-                <a href="<?=base_url('index.php/home/registro')?>">
+                <a href="<?=base_url('index.php/home/prospectos')?>">
                     <button class='btn btn-default login-btn pull-right '>                    
-                        Registrar cuenta 
+                        Prueba gratis
                     </button>
                 </a>
             </div>
@@ -152,7 +164,20 @@
             </a>
 
         </div>            
-        
+
+    </div>
+
+
+    <div class='row'>            
+        <script>(function(d, s, id) {
+          var js, fjs = d.getElementsByTagName(s)[0];
+          if (d.getElementById(id)) return;
+          js = d.createElement(s); js.id = id;
+          js.src = "//connect.facebook.net/es_ES/sdk.js#xfbml=1&version=v2.7";
+          fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));</script>
+
+        <div class="fb-share-button" data-href="http://enidservice.com/home/index.php/home/prospectos" data-layout="button" data-size="small" data-mobile-iframe="true"><a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fenidservice.com%2Fhome%2F&amp;src=sdkpreparse">Compartir</a></div>
     </div>
 
 
