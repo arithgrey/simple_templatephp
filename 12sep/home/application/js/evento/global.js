@@ -16,9 +16,11 @@ $(document).ready(function(){
     $( "#fecha_inicio" ).datepicker();
     $( "#fecha_termino" ).datepicker();
 
-    $(".btn_nuevo_evento").click(evalua_disponibilidad);
+    $(".reservaciones_event").click(evalua_disponibilidad);
 
     carga_ultima_actividad_eventos();
+    evalua_q();
+    
 });
 /**/
 function q_eventos(){
@@ -39,6 +41,8 @@ function q_eventos(){
 		$(".puntos_venta_principal").click(carga_puntos_venta_evento);	
 		$(".escenarios_artistas_principal").click(list_informe_artistas);
 		$(".acceso_evento").click(reporte_accesos);		
+		$(".reservaciones_event").click(carga_reservaciones);
+
 	}).fail(function(){
 		show_error_enid(".place_artista" , "Error al acargar los ultimos eventos de la empresa, reporte al administrador"); 
 	});
@@ -162,3 +166,94 @@ function evalua_disponibilidad(){
 	});
 }
 /**/
+
+function carga_reservaciones(e){
+
+	id_evento  =e.target.id;
+	$(".dinamic_event").val(id_evento);
+
+	url =  $(".form-servaciones").attr("action");
+	$.ajax({
+		url :  url , 
+		data :  {"tipo":  "evento" , "id_evento" :  id_evento } ,
+		type :  "GET" ,
+		beforeSend: function(){
+			show_load_enid(".place_reservaciones" ,  "Cargando ... " ,  1 );
+		}
+	}).done(function(data){		
+		
+		console.log(data);
+		$("#reservacion_tel").val(data[0].reservacion_tel);
+		$("#reservacion_mail").val(data[0].reservacion_mail);
+		$(".place_reservaciones").empty();
+		$(".form-servaciones").submit(actualiza_reservaciones);
+
+	}).fail(function(){
+		show_error_enid(".place_reservaciones" , "Error al cargar las reservaciones, reporte al administrador");
+	});	
+}
+
+/**/
+function actualiza_reservaciones(e){
+
+	data_send =  $(".form-servaciones").serialize() +  "&" + $.param({"tipo":  "evento"});	
+	
+	url =  $(".form-servaciones").attr("action");
+	flag  =  valida_email_form("#reservacion_mail" , ".place_mail" );
+
+	if ( flag == 1) {
+		flag2 =  valida_tel_form("#reservacion_tel" ,  ".place_tel" ); 		
+		if (flag2 ==  1 ) {
+			$(".place_mail").empty();
+			$(".place_tel").empty();
+			$.ajax({
+					url :  url , 
+					data : data_send ,
+					type :  "PUT" ,
+					beforeSend: function(){
+						show_load_enid(".place_reservaciones" ,  "Actualizado  ... " ,  1 );
+					}
+			}).done(function(data){			
+
+				show_response_ok_enid( ".place_reservaciones", "Datos del las reservaciones actualizadas con éxito!"); 
+				$("#reservaciones-modal").modal("hide");
+				q_eventos();
+				
+			}).fail(function(){
+				show_error_enid(".place_reservaciones" , "Error al actualizar las reservaciones, reporte al administrador");
+			});
+
+		}
+
+	}
+	
+	e.preventDefault();
+}
+/**/
+function evalua_q(){
+
+	var  q = $(".q").val();	
+	if(q.length == 11 ){
+		//$("#prueba-enid").modal("show");
+		url =  now + "index.php/api/mailrest/prospecto/format/json/"; 
+		$.ajax({
+			url :  url ,
+			data : {"q" : q } ,
+			beforeSend: function(){
+
+			}
+		}).done(function(data){
+			
+			console.log(data);
+			if (data.mail_prospecto ==  0){
+				url_next  = now + "index.php/mailclass/prospecto_user"; 						
+				llenaelementoHTML(".place_notificacion" , "<iframe width='100%'  height='600px' src='"+url_next+"' ></iframe>");
+				$("#prueba-enid").modal("show");	
+			}
+		}).fail(function(){
+			console.log("Error ");
+		});
+
+	}
+	
+}

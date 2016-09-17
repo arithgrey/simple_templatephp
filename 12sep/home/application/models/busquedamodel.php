@@ -58,7 +58,9 @@ function eventos_e($param){
 					e.descripcion_evento,
 					e.eslogan,
 					e.edicion, 
-					e.tipo, 
+					e.tipo,
+					e.reservacion_tel  ,
+					e.reservacion_mail ,
 					ea.artistas , 
 					epv.evento_punto_venta, 	
 					ra.accesos 
@@ -123,7 +125,10 @@ function create_tmp_registrados_e($random , $flag ,  $id_empresa ){
 								e.url_social,	
 								e.url_social_youtube,	
 								e.eslogan,
-								e.tipo
+								e.tipo ,
+								e.reservacion_tel ,
+								e.reservacion_mail
+
 						  FROM evento e
 						  WHERE idempresa = '$id_empresa'  AND DATE(fecha_registro)  
 						  BETWEEN DATE_ADD(CURRENT_DATE(), INTERVAL - 1 MONTH ) AND  CURRENT_DATE() LIMIT 100; 						  
@@ -168,6 +173,8 @@ function create_tmp_escenarios($_num ,  $flag ){
 						e.url_social_youtube,	
 						e.eslogan,
 						e.tipo,
+						e.reservacion_tel ,   
+						e.reservacion_mail ,  
 						sum(case when es.idescenario is not null then 1 else 0 end) escenarios from
 						tmp_evento_r_e_$_num  e
 						left outer join
@@ -262,7 +269,9 @@ function eventos_enid($param){
 					e.descripcion_evento,
 					e.eslogan,
 					e.edicion, 
-					e.tipo, 
+					e.tipo,
+					e.reservacion_tel  ,
+					e.reservacion_mail ,
 					ea.artistas , 
 					epv.evento_punto_venta, 	
 					ra.accesos 
@@ -325,7 +334,10 @@ function busqueda_global($random){
 									e.url_social,	
 									e.url_social_youtube,	
 									e.eslogan,
-									e.tipo
+									e.tipo,
+									e.reservacion_tel  ,
+									e.reservacion_mail 
+
 						  		FROM evento e
 							  	WHERE fecha_inicio 
 							  	BETWEEN DATE(CURRENT_DATE) AND  DATE_ADD(CURRENT_DATE(), INTERVAL  1 MONTH )";		
@@ -368,7 +380,12 @@ function busqueda_global_filtro($_num ,  $param){
 									e.url_social,	
 									e.url_social_youtube,	
 									e.eslogan,
-									e.tipo
+									e.tipo, 
+									e.reservacion_tel  ,
+									e.reservacion_mail 
+	
+
+
 						  		FROM 
 							  	";		
 
@@ -506,6 +523,9 @@ function create_tmp_escenarios_g($_num ,  $flag ){
 						e.url_social_youtube,	
 						e.eslogan,
 						e.tipo,
+						e.reservacion_tel , 
+						e.reservacion_mail ,
+
 						sum(case when es.idescenario is not null then 1 else 0 end) escenarios from
 						tmp_evento_f_g_$_num  e
 						left outer join

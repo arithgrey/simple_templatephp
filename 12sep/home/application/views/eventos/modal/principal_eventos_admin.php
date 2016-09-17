@@ -1,3 +1,36 @@
+<!--************************************************** NOTA DEL CONTACTO-->
+<?=construye_header_modal('reservaciones-modal', "Reservaciones" );?>                           
+   <form class='form-servaciones' id='form-servaciones'
+    action="<?=base_url('index.php/api/emp/reservacion/format/json/')?>">          
+        </label>
+        <div class="input-group m-bot15">
+            <span class="input-group-addon">
+                Tel.
+            </span>
+            <input class="form-control input-sm" name="reservacion_tel" id="reservacion_tel" placeholder="Teléfono" maxlength="10" required="" type="tel">                                                                
+        </div>
+        <span class='place_tel'>            
+        </span>      
+        <div class="input-group m-bot15">
+            <span class="input-group-addon">
+               Correo @
+            </span>
+            <input id='reservacion_mail' class="form-control input-sm" name="reservacion_mail" placeholder="arithgrey@gmail.com" type="text">
+        </div>
+        <br>
+        <button  id="button-registrar" class="btn btn-default btn_save ">
+            Registrar 
+        </button>
+        <input type="hidden" name="dinamic_event"  class='dinamic_event' id='dinamic_event' >
+   </form>           
+   <span class='place_reservaciones'>       
+   </span>
+<?=construye_footer_modal()?>  
+
+
+
+
+
 <?=construye_header_modal('modal_tematica_evento', " Temática del evento " );?> 
 <a id="tematica-button" class="btn section-left  tematica-button" style="font-size:.9em; text-align:center;"   >              
   <i class="fa fa-tree">

@@ -5,6 +5,29 @@ class enidmodel extends CI_Model {
         $this->load->database();
     }
     /**/
+    function verifica_estatus_prospecto($param){
+
+      $query_get =  "SELECT password_prospecto FROM usuario WHERE email =  '".$param["mail_user"]."' LIMIT 1 ";
+      $result =  $this->db->query($query_get);
+      $num_mail =  $result->result_array()[0]["password_prospecto"];
+
+      $data["mail_prospecto"] =1; 
+
+      if ($num_mail == 0 ){
+          $data["mail_prospecto"] =0;
+          $new_pass =  RandomString();
+          $data["new_pass"] =  $new_pass;
+
+          $query_update =  "UPDATE usuario SET password_prospecto = 1 ,  password = '".$new_pass."'  WHERE email =  '".$param["mail_user"]."' LIMIT 1   ";
+          $data["estatus_pass"]=  $this->db->query($query_update);
+
+      }
+      return $data;
+
+
+
+    }
+    /**/
     function repo_prospectos($param){
 
       $_num =  get_random();

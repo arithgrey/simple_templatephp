@@ -1,6 +1,124 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 if(!function_exists('invierte_date_time')){
 
+function RandomString($length=10,$uc=TRUE,$n=TRUE,$sc=FALSE){
+    
+      $source = 'abcdefghijklmnopqrstuvwxyz';
+      if($uc==1) $source .= 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+      if($n==1) $source .= '1234567890';
+      if($sc==1) $source .= '|@#~$%()=^*+[]{}-_';
+      if($length>0){
+          $rstr = "";
+          $source = str_split($source,1);
+          for($i=1; $i<=$length; $i++){
+              mt_srand((double)microtime() * 1000000);
+              $num = mt_rand(1,count($source));
+              $rstr .= $source[$num-1];
+          }
+   
+      }
+      return $rstr;
+}
+/**/
+function valida_reservaciones_public($in_session , $tel , $mail , $href){
+
+  $text_user_complete =  "";  
+  $text_user = "";  
+  $num_tel =  strlen(trim($tel));
+  $num_mail =  strlen(trim($mail));
+
+
+    $flag =0; 
+    if ($num_tel > 0 ){
+      $text_user .=  "Tel.  ".$tel ;
+      $flag ++; 
+    }if ($num_mail > 0 ) {
+      $text_user .=  "  ".$mail; 
+      $flag ++; 
+    }
+
+
+    if ($in_session ==  1 ){      
+        $text_user_complete =  "Reservaciones ";     
+    }else{      
+      if ($flag == 0  ) {
+        $text_user_complete =  "Reservaciones pŕoximanente"; 
+      }else{
+        $text_user_complete =  "Reservaciones  ";
+      }
+    }
+
+    /**/
+
+  return  "<div class='seccion-reservaciones'> 
+              ".editar_btn($in_session , $href ) . "
+              <span class='text-reservaciones'> 
+              " . $text_user_complete. $text_user ."
+              </span>
+          </div>"; 
+
+
+}
+/**/
+function valida_reservaciones( $public , $tel , $mail ,  $modal ,  $id ='' ){
+
+  $text_user_complete =  "";  
+  $text_user = "";  
+  $num_tel =  strlen(trim($tel));
+  $num_mail =  strlen(trim($mail));
+
+
+    $flag =0; 
+    if ($num_tel > 0 ){
+      $text_user .=  "Tel.  ".$tel ;
+      $flag ++; 
+    }if ($num_mail > 0 ) {
+      $text_user .=  "  ".$mail; 
+      $flag ++; 
+    }
+
+
+    if ($public ==  1 ){
+      
+        $text_user_complete =  "Reservaciones "; 
+      
+
+    }else{
+      
+      if ($flag == 0  ) {
+        $text_user_complete =  "Reservaciones pŕoximanente"; 
+      }else{
+        $text_user_complete =  "Reservaciones  ";
+      }
+
+    }
+
+  return  btn_modal_config($public ,  $modal  ,  $id ). "          
+          <span class='text-reservaciones'> 
+            " . $text_user_complete. $text_user ."
+          </span>"; 
+}
+function btn_modal_config($public , $modal , $id ){
+
+    if ($public ==  1 ){        
+          return '  
+                    <li data-toggle="modal" data-target="#'.$modal .'"  class="btn_configurar_enid_w " 
+                    id="'.$id.'"> 
+                      
+                        <i class="fa fa fa-cog reservaciones_event" id="'.$id .'">
+                        </i>                      
+                      
+                    </li>               
+          ';
+      }else{
+        return ""; 
+      }
+
+}
+
+/**/
+
+
   /**/
   function get_def_cargo($name, $class , $id ){
 

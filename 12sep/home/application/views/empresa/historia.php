@@ -244,5 +244,12 @@ nav > ul > li > a:hover {
   }
   .title-cominidad{
     color: white !important; 
+  }.text-reservaciones{
+    color: white !important;
+  }
+
+  .text-reservaciones , 
+  .btn_configurar_enid_w{
+    display: inline-block;
   }
 </style>

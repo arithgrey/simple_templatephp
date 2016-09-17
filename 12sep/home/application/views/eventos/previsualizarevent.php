@@ -359,6 +359,13 @@
     color: #FFFFFF;
     margin-right: 1px;
 }
+.btn_configurar_enid , .text-reservaciones{
+  display: inline-block;
+}
+
+.seccion-reservaciones{
+  font-size: .9em;      
+}
 
 </style>
 

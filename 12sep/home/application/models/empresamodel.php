@@ -5,6 +5,95 @@ class empresamodel extends CI_Model{
       $this->load->database();
   } 
   /**/
+  function update_reservaciones_evento($param){
+
+    /**/
+    $query_update = "UPDATE evento 
+                      SET 
+                      reservacion_tel  = '".$param["reservacion_tel"]."' , 
+                      reservacion_mail   = '".$param["reservacion_mail"]."'   
+                      WHERE idevento = '".$param["dinamic_event"]."' LIMIT 1 ";  
+    return $this->db->query($query_update);
+    /**/
+  }
+  /**/
+  function get_reservaciones_evento($param){
+
+    $query_get =  "SELECT 
+                    reservacion_tel , 
+                    reservacion_mail 
+                    FROM evento 
+                    WHERE idevento = '".$param["id_evento"] ."' LIMIT 1 "; 
+
+
+   $result = $this->db->query($query_get);                 
+
+   $data = $result->result_array();
+   $reservacion_tel =  $data[0]["reservacion_tel"];
+   $reservacion_mail =  $data[0]["reservacion_mail"];
+    
+
+   $tel_lenght = strlen(trim($reservacion_tel));
+   $mail_lenght = strlen(trim($reservacion_mail));
+
+   $flag =0;
+   if ($tel_lenght ==  0 ){
+      
+      $query_update =  "update evento e , empresa  set e.reservacion_tel = ( select reservacion_tel from  empresa 
+                        where       
+                        idempresa = '".$param["id_empresa"]."'  ) 
+                        where e.idevento = '".$param["id_evento"]."' ";     
+
+      $this->db->query($query_update);                  
+      $flag ++;
+   }
+
+   if ($mail_lenght ==  0 ){
+      
+      $query_update =  "update evento e , empresa  set e.reservacion_mail = ( select reservacion_mail from  empresa 
+                        where       
+                        idempresa = '".$param["id_empresa"]."'  ) 
+                        where e.idevento = '".$param["id_evento"]."' ";     
+
+      $this->db->query($query_update);                  
+      $flag ++;
+   }
+
+
+   if ($flag > 0 ){
+
+      $query_get =  "SELECT  reservacion_tel ,  reservacion_mail  FROM evento  
+                     WHERE 
+                     idevento = '".$param["id_evento"] ."' LIMIT 1 "; 
+     $result = $this->db->query($query_get);                 
+     $data = $result->result_array(); 
+   }
+  return $data;
+  }
+  /**/
+  function update_reservaciones($param){
+
+    $query_update =  "UPDATE empresa SET  
+                      reservacion_tel  = '".$param["reservacion_tel"] ."' ,
+                      reservacion_mail =  '".$param["reservacion_mail"] ."'
+                      WHERE idempresa = '".$param["id_empresa"]."' LIMIT 1";
+
+    return $this->db->query($query_update);                  
+  }
+  /**/
+  function get_reservaciones($id_empresa){
+
+    $query_get =  "SELECT  
+                  reservacion_tel ,    
+                  reservacion_mail  
+                  FROM empresa WHERE idempresa = '".$id_empresa."' LIMIT  1";  
+
+    $result = $this->db->query($query_get);
+    return $result->result_array();
+
+    
+  }
+  /**/
   function get_num_empresas(){
     $query_get =  "SELECT COUNT(0) num_empresas FROM empresa";  
     $result = $this->db->query($query_get);

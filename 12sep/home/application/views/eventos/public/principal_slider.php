@@ -1,5 +1,3 @@
-
-
 <div class='col-lg-12 col-md-12 col-sm-12'>
     <div class='row'>
         <div class='seccion_principal-portada'>            
@@ -49,8 +47,17 @@
                 </div>
             </section>  
             
-        </div>
-    </div>
+        </div>        
+
+        <?=valida_reservaciones_public(
+            $in_session ,
+            $evento["reservacion_tel"] ,
+            $evento["reservacion_mail"] , 
+            base_url('index.php/eventos/nuevo')."/".$evento['idevento']."/reservaciones/"
+        )?>
+        
+
+    </div>    
 </div>
 
 

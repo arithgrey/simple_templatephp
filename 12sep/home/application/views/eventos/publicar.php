@@ -33,16 +33,47 @@
         Ver como el público 
       </a>
       <div class="form-group nombre" >
-        <input placeholder="Nombre del evento" class="form-control input-sm"  type="text" value="<?=$data_evento['nombre_evento'];?>"  id="nombre-input" name='nombre-input' >
+        <input placeholder="Nombre del evento" 
+          class="form-control nombre-input input-sm"  
+          type="text" 
+          value="<?=$data_evento['nombre_evento'];?>"  
+          id="nombre-input" name='nombre-input'>
       </div>  
+
+
+      <label>
+        Edición del evento
+      </label>
+      <br>
       <span class="designation edicion-evento" title='Edición del evento, click para editar'>  
         <?=show_text_input($data_evento['edicion'] , 2 , "<i class='fa fa-plus'></i>  Edición del evento" )?>           
       </span> 
+
       <div class="form-group">
-          <input placeholder="Edición del evento" class="form-control input-sm"  type="text" id="edicion-input" name='edicion-input' value="<?=$data_evento['edicion'];?>">
+          <input 
+          placeholder="Edición del evento" 
+          class="form-control edicion-input input-sm"  
+          type="text" 
+          id="edicion-input" 
+          name='edicion-input' 
+          value="<?=$data_evento['edicion'];?>">
       </div> 
       <div class='place_edicion_evento'>
       </div>   
+
+
+      <label class='reservaciones-btn' data-toggle="modal" data-target="#reservaciones-modal"  >
+                    <?=valida_reservaciones(  0 , 
+                    $data_evento["reservacion_tel"] , 
+                    $data_evento["reservacion_mail"] , 
+                    "reservaciones-modal")?>  
+      </label>
+      <br>
+      <span class='place_reservaciones_2'>      
+      </span>                
+
+
+
       <a href="#mapgooglemap" class='link-map'>
         <i class="fa fa-map-marker " aria-hidden="true">
         </i>
@@ -79,7 +110,7 @@
             </h1>
             <div class='place_configuracion'>
             </div>
-            <div class='text-fecha-evento'data-toggle="modal" data-target="#edith_fecha_modal" id="config_data_evento" > 
+            <div class='text-fecha-evento' data-toggle="modal" data-target="#edith_fecha_modal" id="config_data_evento" > 
               Fecha del evento  
               <?= get_date_event_format($data_evento["fecha_inicio"] , $data_evento["fecha_termino"]); ?> 
             </div> 
@@ -321,30 +352,58 @@
                 <div class='separate-enid'>
                 </div>
                 <div class='configs-evento-lg'>
+
                   <h1 class='nombre-evento-h1' title='click para editar'>
                     <strong style='color:white !important;'>
                       <?=show_text_input($data_evento['nombre_evento'] , 2 , "Evento" )?>      
                     </strong>
-                  </h1>
+                  </h1>                  
+                  <input 
+                  placeholder="Nombre del evento" 
+                  type="text" 
+                  value="<?=$data_evento['nombre_evento'];?>"  
+                  class="nombre-input form-control input-sm"
+                  id='nombre-input'
+                  name='nombre-input' >
+                  
                   <div class='place_nombre_evento'>
                   </div>                  
+
                   <a class='link_ver_evento ver-public-lg' href="<?=base_url('index.php/eventos/visualizar/')?>/<?=$data_evento['idevento']?>">
                     <i class='fa fa-arrow-circle-o-right'> 
                     </i>
                     Ver como el público 
                   </a>
-                  <div class="form-group nombre" >
-                    <input placeholder="Nombre del evento" class="form-control input-sm"  type="text" value="<?=$data_evento['nombre_evento'];?>"  id="nombre-input" name='nombre-input' >
-                  </div>  
+                  
+                  <label>
+                    Edición del evento
+                  </label>
+                  <br>
                   <span class="designation edicion-evento" title='click para editar'>  
                     <?=show_text_input($data_evento['edicion'] , 2 , "<i class='fa fa-plus'></i>  Edición del evento" )?>           
                   </span> 
 
                   <div class="form-group">
-                    <input placeholder="Edición del evento" class="form-control input-sm"  type="text" id="edicion-input" name='edicion-input' value="<?=$data_evento['edicion'];?>">
+                    <input 
+                      placeholder="Edición del evento" 
+                      class="form-control edicion-input input-sm"  
+                      type="text"
+                      id="edicion-input" 
+                      name='edicion-input' value="<?=$data_evento['edicion'];?>">
                   </div> 
                   <div class='place_edicion_evento'>
                   </div>                    
+
+                  <label class='reservaciones-btn' data-toggle="modal" data-target="#reservaciones-modal"  >
+                    <?=valida_reservaciones(  0 , 
+                    $data_evento["reservacion_tel"] , 
+                    $data_evento["reservacion_mail"] , 
+                    "reservaciones-modal")?>  
+                  </label>                
+                  <br>
+                  <span class='place_reservaciones_2'>                    
+                  </span>
+
                 </div>  
                 <div class='section_escenarios_admin'>
                 </div>
@@ -434,6 +493,9 @@
 .calendar-1,
 .calendar-2{
  display: inline-block; 
+}
+.reservaciones-btn:hover{
+  cursor: pointer;
 }
 </style>
 

@@ -67,6 +67,9 @@ $(document).ready(function(){
       }
     });
 
+  	/**/
+  	$(".reservaciones-btn").click(carga_reservaciones);
+  	/**/
    	$("footer").ready(load_data_slider);
 	$("#update_inicio").datepicker();
 	$("#update_termino").datepicker();
@@ -97,11 +100,12 @@ function load_data_evento( text_visible , val , text_evento , place , null_msj ,
 }
 /**/	
 function update_name_evento(e){
-	showonehideone( "#nombre-input" , ".nombre-evento-h1" );	
-	$("#nombre-input").blur(update_db_name_evento);
+	showonehideone( ".nombre-input" , ".nombre-evento-h1" );		
+	$(".nombre-input").blur(update_db_name_evento);
 }
 /**/
 function update_db_name_evento(){
+	
 	flag = valida_text_form("#nombre-input" , ".place_nombre_evento" , 5 , "Nombre del evento " ); 
 	if (flag == 1) {
 			url =  now + "index.php/api/event/nombre/format/json/";    
@@ -117,7 +121,7 @@ function update_db_name_evento(){
 				  }).done(function(data){
 				  		$(".place_nombre_evento").empty();
 				  		show_response_ok_enid( ".place_nombre_evento", "Nombre del evento ha sido actualizada con éxito"); 			  		
-				  		replace_val_text("#nombre-input" , ".nombre-evento-h1" , nuevotexto , nuevotexto);
+				  		replace_val_text(".nombre-input" , ".nombre-evento-h1" , nuevotexto , nuevotexto);
 
 				  }).fail(function(){
 				  		show_error_enid(".place_nombre_evento"  , "Error al actualizar la edición del evento reporte al administrador");
@@ -129,8 +133,8 @@ function update_db_name_evento(){
 /*Update descripción*/
 function update_edicion_evento(e){
 
-	showonehideone( "#edicion-input" , ".edicion-evento" );
-	$("#edicion-input").blur(function(){			
+	showonehideone( ".edicion-input" , ".edicion-evento" );
+	$(".edicion-input").blur(function(){			
 		update_db_edicion_evento();
 	});
 }
@@ -138,11 +142,11 @@ function update_edicion_evento(e){
 function update_db_edicion_evento(){
 
 
-	flag = valida_text_form("#edicion-input" , ".place_edicion_evento" , 5 , "Edición del evento " ); 
+	flag = valida_text_form(".edicion-input" , ".place_edicion_evento" , 5 , "Edición del evento " ); 
 	if (flag == 1){
 
 			url =  now + "index.php/api/event/edicion/format/json/";    
-			nuevotexto = $("#edicion-input").val(); 			
+			nuevotexto = $(".edicion-input").val(); 			
 			data_send= { "edicion" : nuevotexto , "evento" : $("#evento").val() ,  "enid_evento" : enid_evento }			
 			$.ajax({
 					url :  url , 
@@ -154,7 +158,7 @@ function update_db_edicion_evento(){
 				  }).done(function(data){
 				  		$(".place_edicion_evento").empty();
 				  		show_response_ok_enid( ".place_edicion_evento", "La edición del evento ha sido actualizada con éxito"); 			  		
-				  		replace_val_text("#edicion-input" , ".edicion-evento" , nuevotexto , nuevotexto );
+				  		replace_val_text(".edicion-input" , ".edicion-evento" , nuevotexto , nuevotexto );
 
 				  }).fail(function(){
 				  		show_error_enid(".place_edicion_evento"  , "Error al actualizar la edición del evento reporte al administrador");
@@ -771,10 +775,86 @@ function evalua_modal(){
 	    	$(".tab_generos").addClass("active");
 	    	carga_generos_registrados();
 	    	break;
+
+
+
+	    	
+	    case "reservaciones":
+	    	carga_reservaciones();
+			$("#reservaciones-modal").modal("show");
+	    	break;
+
 	    default:
 	        
 	        break;
 	}
 }
-/**/
 
+
+/**/
+function carga_reservaciones(){
+
+	id_evento  = evento = $("#evento").val();	
+	$(".dinamic_event").val(id_evento);
+
+	url =  $(".form-servaciones").attr("action");
+	$.ajax({
+		url :  url , 
+		data :  {"tipo":  "evento" , "id_evento" :  id_evento } ,
+		type :  "GET" ,
+		beforeSend: function(){
+			show_load_enid(".place_reservaciones" ,  "Cargando ... " ,  1 );
+		}
+	}).done(function(data){		
+		
+		console.log(data);
+		$("#reservacion_tel").val(data[0].reservacion_tel);
+		$("#reservacion_mail").val(data[0].reservacion_mail);
+		$(".place_reservaciones").empty();
+		$(".form-servaciones").submit(actualiza_reservaciones);
+
+	}).fail(function(){
+		show_error_enid(".place_reservaciones" , "Error al cargar las reservaciones, reporte al administrador");
+	});	
+}
+/**/
+function actualiza_reservaciones(e){
+
+	data_send =  $(".form-servaciones").serialize() +  "&" + $.param({"tipo":  "evento"});	
+	
+	url =  $(".form-servaciones").attr("action");
+	flag  =  valida_email_form("#reservacion_mail" , ".place_mail" );
+
+	if ( flag == 1) {
+		flag2 =  valida_tel_form("#reservacion_tel" ,  ".place_tel" ); 		
+		if (flag2 ==  1 ) {
+			$(".place_mail").empty();
+			$(".place_tel").empty();
+			$.ajax({
+					url :  url , 
+					data : data_send ,
+					type :  "PUT" ,
+					beforeSend: function(){
+						show_load_enid(".place_reservaciones" ,  "Actualizado  ... " ,  1 );
+					}
+			}).done(function(data){			
+
+				show_response_ok_enid( ".place_reservaciones", "Datos del las reservaciones actualizadas con éxito!"); 
+				$("#reservaciones-modal").modal("hide");				
+				/**/			
+				msj =  "Reservaciones Tel." + $("#reservacion_tel").val() + " " + $("#reservacion_mail").val();
+				llenaelementoHTML(".reservaciones-btn" , msj);
+
+				show_response_ok_enid( ".place_reservaciones_2", "Datos del las reservaciones actualizadas con éxito!<br>"); 
+
+				
+			}).fail(function(){
+				show_error_enid(".place_reservaciones" , "Error al actualizar las reservaciones, reporte al administrador");
+			});
+
+		}
+
+	}
+	
+	e.preventDefault();
+}

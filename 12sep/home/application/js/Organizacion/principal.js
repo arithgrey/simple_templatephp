@@ -34,6 +34,7 @@ $(document).on("ready", function(){
 	$(".lb-pais").click(carga_pais_empresa);
 	$(".form-paises").submit(update_pais_empresa);
 
+	$(".btn_configurar_enid_w").click(carga_reservaciones);
 	$('nav, .nav-controller').on('click', function(event) {
         $('nav').toggleClass('focus');
     });
@@ -473,6 +474,71 @@ function set_pais(x){
 }
 
 
+
+/**/
+function carga_reservaciones(){
+	url =  $(".form-servaciones").attr("action");
+	$.ajax({
+		url :  url , 
+		data :  {"tipo":  "empresa"} ,
+		type :  "GET" ,
+		beforeSend: function(){
+			show_load_enid(".place_reservaciones" ,  "Cargando ... " ,  1 );
+		}
+	}).done(function(data){		
+		
+		console.log(data);
+		$("#reservacion_tel").val(data[0].reservacion_tel);
+		$("#reservacion_mail").val(data[0].reservacion_mail);
+		$(".place_reservaciones").empty();
+
+		$(".form-servaciones").submit(actualiza_reservaciones);
+	}).fail(function(){
+		show_error_enid(".place_reservaciones" , "Error al cargar las reservaciones, reporte al administrador");
+	});	
+
+}
+/**/
+function actualiza_reservaciones(e){
+
+
+	data_send =  $(".form-servaciones").serialize() +  "&" + $.param({"tipo":  "empresa"});
+	console.log(data_send);
+	url =  $(".form-servaciones").attr("action");
+	flag  =  valida_email_form("#reservacion_mail" , ".place_mail" )
+
+	
+	if ( flag == 1) {
+		flag2 =  valida_tel_form("#reservacion_tel" ,  ".place_tel" ); 		
+		if (flag2 ==  1 ) {
+			$(".place_mail").empty();
+			$(".place_tel").empty();
+			$.ajax({
+					url :  url , 
+					data : data_send ,
+					type :  "PUT" ,
+					beforeSend: function(){
+						show_load_enid(".place_reservaciones" ,  "Actualizado  ... " ,  1 );
+					}
+			}).done(function(data){			
+
+				show_response_ok_enid( ".place_reservaciones", "Datos del las reservaciones actualizadas con éxito!"); 
+				$("#reservaciones-modal").modal("hide");
+
+				reservaciones =  "RESERVACIONES <BR>  TEL. " + $("#reservacion_tel").val() + " <br> " + $("#reservacion_mail").val();
+				$(".text-reservaciones").html(reservaciones);
+				//console.log(data);		
+			}).fail(function(){
+				show_error_enid(".place_reservaciones" , "Error al actualizar las reservaciones, reporte al administrador");
+			});
+
+		}
+
+	}
+	
+	e.preventDefault();
+}
+/**/
 
 /*************************POSIBLES FUNCIONES QUE NO SE OCUPEN YA *************************/
 /*

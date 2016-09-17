@@ -2,6 +2,8 @@
 if(!function_exists('invierte_date_time')){
 
 /**/
+
+/**/
 function validate_info_emp($val, $in_session  ,  $class ){
 
 

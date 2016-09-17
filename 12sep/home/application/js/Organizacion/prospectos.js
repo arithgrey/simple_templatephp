@@ -32,8 +32,8 @@ function registra_prospecto(e){
 
 			if (data.estatus_empresa ==  true) {
 				show_response_ok_enid(".place_mail"  , "Tu correo ha sido registrado con éxito.!" );	
-				nex_url =  now;
-				setTimeout(redirect(nex_url), 20000);
+				nex_url =  now +"index.php/inicio/eventos/az4299Cv28R/";
+				setTimeout(redirect(nex_url), 10000);
 			}
 			
 		}).fail(function(){

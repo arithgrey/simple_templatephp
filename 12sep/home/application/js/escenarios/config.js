@@ -39,6 +39,11 @@ $(document).ready(function(){
         $('.controller-close').hide();
     })
 	
+	/**/
+	$(".link_to_view").click(view_like_public);
+	/**/
+
+
 	$("#registra-nuevo-escenario-form").submit(t_nuevo_escenario);    
 	/*Cargamos slider del escenario */
 	$("footer").ready(carga_slider_admin);
@@ -355,5 +360,16 @@ function carga_data_otros(){
 		});
 	}
 	flag_carga_otros ++; 
+}
+/**/
+function view_like_public(){
+	id_evento = $(".evento").val();
+	
+	id_escenario =  $("#id_escenario").val();
+	url =  now + "index.php/escenario/inevento/" +id_escenario+"/" + id_evento;
+	redirect(url);
+
+
+
 }
 /**/

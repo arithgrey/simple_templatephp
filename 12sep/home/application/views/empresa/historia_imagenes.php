@@ -1,3 +1,4 @@
+
 <div class='col-lg-8 col-md-8 col-sm-12'>    
     
     <div class='comunidad-experiencia-imgs' id='comunidad-experiencia-imgs'>
@@ -25,8 +26,25 @@
 </div>
 
 <aside class="col-lg-4 col-md-4 col-lg-12 ">            
+
+
+    <div>
+        <div class="panel-heading panel-nuestra-comunidad">
+            <h3 class="panel-title title-cominidad">            
+                <span>
+                    <?=valida_reservaciones( 
+                            $in_session , 
+                            $data_empresa["reservacion_tel"] , 
+                            $data_empresa["reservacion_mail"] ,  
+                            "reservaciones-modal" )?>    
+                </span>                
+            </h3>            
+        </div>
+    </div>    
+
+
     <a class="twitter-timeline" href="https://twitter.com/enidservice">
-            Enid Service 
+        Enid Service 
     </a>
     <script async src="//platform.twitter.com/widgets.js" charset="utf-8">                
     </script>                        

@@ -12,6 +12,18 @@
       </span>
     </li>
 
+    
+        <li class='tab_enid pull-right link_to_view'>
+            |<span class='link_to_view_seccion'>        
+            Ver como el público 
+            <i class='fa fa-arrow-circle-o-right'> 
+            </i>
+            </span>
+        </li>              
+    
+    
+
+
     <li class='artistas-btn tab_artistas tab_enid pull-right'>
       <span  href="#pill-3" role="tab" data-toggle="tab" >
         <i class=" icon-up-1">
@@ -19,6 +31,10 @@
         Artistas 
       </span>
     </li>        
+
+    
+      
+
 
 
 
@@ -220,6 +236,9 @@
         }
         .seccion-links-extra{
             display: block;
+        }
+        .link_to_view_seccion{
+            display: none;
         }
   }
 </style>

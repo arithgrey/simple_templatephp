@@ -289,6 +289,9 @@
         }.indicador_slider:hover{
             cursor: pointer;           
         }
+        .btn_configurar_enid_w{
+            list-style: none;
+        }
         .btn_configurar_enid , .btn_agregar_enid{
             list-style:none;
         }

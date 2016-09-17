@@ -16,6 +16,40 @@ class Emp extends REST_Controller{
 
     }
     /**/
+    function reservacion_PUT(){
+        $this->validate_user_sesssion();    
+        $param =  $this->put();
+        if ($param["tipo"] ==  "empresa"){                    
+            
+            $param["id_empresa"] = $this->sessionclass->getidempresa();       
+            $db_response =  $this->empresamodel->update_reservaciones($param);
+            $this->response($db_response);            
+
+        }else{
+
+            $db_response =  $this->empresamodel->update_reservaciones_evento($param);
+            $this->response($db_response);            
+        }
+
+    }
+    /**/
+    function reservacion_GET(){
+
+        $this->validate_user_sesssion();    
+        $param =  $this->get();
+        if ($param["tipo"] ==  "empresa"){        
+            /**/       
+            $id_empresa = $this->sessionclass->getidempresa();       
+            $db_response = $this->empresamodel->get_reservaciones($id_empresa);
+            $this->response($db_response);
+        }else{
+
+            $param["id_empresa"] = $this->sessionclass->getidempresa();       
+
+            $db_response =  $this->empresamodel->get_reservaciones_evento($param);     
+            $this->response($db_response);
+        }
+    }
     
     /*Verifica en la base de datos que exista el usuario por nombre*/
     function isuserexistrecord($mail, $secret){
@@ -62,6 +96,7 @@ class Emp extends REST_Controller{
 
     /**/
     function status_empresa_GET(){
+
 
         $this->validate_user_sesssion();          
         $param["empresa"] =  $this->sessionclass->getidempresa();        

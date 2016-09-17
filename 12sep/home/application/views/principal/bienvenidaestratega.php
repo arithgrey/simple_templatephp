@@ -1,7 +1,5 @@
 
 
-
-
 <div class='row'>    
     <!--Sección izquierda inicia -->       
     <div class="col-lg-9 col-lg-9 col-sm-12" id='section_main_left'>                        
@@ -256,7 +254,10 @@
     }
     
     
-    
+    .text-reservaciones , 
+  .btn_configurar_enid_w{
+    display: inline-block;
+  }
 
     /**/
     @media only screen and (max-width: 991px) {
@@ -270,3 +271,4 @@
 
 </style>
 <input type='hidden' value='<?=$id_empresa?>' class='empresa'>  
+<input type="hidden" name="q" class='q' id='q' value="<?=$q?>">
