@@ -1,0 +1,21 @@
+.nombres_user:hover , .apellido_user_materno:hover , .apellido_user_paterno:hover, .user_grupo_text:hover{
+	cursor: pointer;
+}
+.hidden_enid{
+	display: none;
+}
+.data_actualizada{
+	font-size: .7em;
+}
+.pfb:hover , .user_descripcion_text:hover ,  .tel_contacto_text:hover{
+	cursor: pointer;
+}
+.edad_user_text:hover{
+	cursor: pointer;
+}
+.num_empleado{
+	font-size: .9em;
+}
+.user_rfc_text:hover , .sexo_user_text:hover{
+	cursor: pointer;
+}

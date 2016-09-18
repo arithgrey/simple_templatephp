@@ -1,0 +1,119 @@
+.text-fecha-evento:hover, .nota-
+:hover{  
+  cursor: pointer;
+}
+.newdescripesenario , #newdescripesenario{
+  display: none;
+}
+
+#form-accesos-s{
+  background: #166781  !important;
+  padding: 10px;
+}
+.title_main{
+  display: none;
+}
+.nota-form-servicio{
+  display: none;
+}
+.alert-ok , .alert-fail , .alert-ok-sm , .alert-fail-sm {
+  display: none;
+}
+.accesos-button:hover{
+  cursor: pointer;
+}
+.section-header-title{
+  display: none;
+}
+.genero_registrado{
+  background: #E31F56;
+  color: white;
+  padding: 5px;        
+}
+#img-button-more-imgs:hover{
+  cursor: pointer;
+}
+.avanzado-accesos:hover{
+  cursor: pointer;
+}
+.ubicacion-panel:hover , .accesos-panel:hover{
+  padding: 10px;    
+  cursor: pointer;
+}
+.descripcion_escenario_update:hover, .nombre-escenario-modal:hover{
+  cursor: pointer;
+}
+#guardar-generos{
+  display: none;
+}
+#file_input{
+  display: none;
+}
+.descripcion-p:hover{
+ cursor: pointer;
+}
+.restricciones-p:hover , .politicas-p:hover , .permitido-p:hover{
+  cursor: pointer; 
+}
+#tematica_section , .tematica_section, #section-articulos-permitidos{
+  display: none;
+}
+.eslogan-input{
+  display: none;
+}
+#nombre-input, #edicion-input , #evento , #descripcion-evento, #ubicacion-input, .descripcion-in-modal-escenario, .nombre-escenario-input-modal, .day_escenario_inputs ,.social-media-event, #restricciones-evento ,  #politicas-evento, #permitido-evento {
+    display: none;
+}
+.newdescripesenario{
+  display: none;
+}
+.title-page-enid{
+    display: none;
+}
+#eslogan-evento{
+  display: none;
+}
+.descripcion-modal-text:hover , .eslogan-p:hover{
+  cursor: pointer;
+}
+.nombre-evento-h1:hover{    
+  cursor: pointer;
+
+}
+.nombre-evento-h1{  
+  font-size:3.7em;
+  color: white !important;
+}
+.edicion-evento:hover{ 
+ cursor: pointer;
+}
+.titulo_generos{
+  color: white;
+  text-align: center;
+  margin: 0 auto;
+}.delete_genero_evento{
+  color: white;  
+}
+.delete_genero_evento:hover{
+  cursor: pointer;
+}
+.text-fecha-evento{
+  font-size: .9em;
+  margin-bottom: 10px;  
+}
+#mapgooglemap{
+  background: #046188;
+}
+.titulo_maps{
+ color: white;
+}
+.seccion_derecha_enid{
+  background: #166781 !important;
+  color: white;
+}
+.link_ver_evento{
+  color: white;
+}
+.link_ver_evento:hover{
+  color: white; 
+}
