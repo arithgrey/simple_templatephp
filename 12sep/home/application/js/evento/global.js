@@ -16,7 +16,7 @@ $(document).ready(function(){
     $( "#fecha_inicio" ).datepicker();
     $( "#fecha_termino" ).datepicker();
 
-    $(".reservaciones_event").click(evalua_disponibilidad);
+    $(".btn_nuevo_evento").click(evalua_disponibilidad);
 
     carga_ultima_actividad_eventos();
     evalua_q();
@@ -129,6 +129,7 @@ function update_fecha_evento_evento(e){
 
 /**/
 function evalua_disponibilidad(){
+	alert();
 
 	url =  now + "index.php/api/emp/status_empresa/format/json/";  
 	$(".seccion-form-eventos").hide();
