@@ -33,7 +33,7 @@
              <center>
              	<div class='place_registro_incidencia'>
              	</div>
-	            <button class='btn btn btn_nnuevo'>
+	            <button class='btn_nnuevo'>
 	             	+ registrar
 	            </button>	             
              </center>

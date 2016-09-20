@@ -1,6 +1,7 @@
-<?=template_evento($evento["nombre_evento"]  , $evento["idevento"])?>
+<?=template_evento($evento["nombre_evento"]  , $evento["idevento"] ,  $evento["idempresa"])?>    
 <div>          
   <ul class="nav nav-pills"> 
+
     <li class='tab_escenario tab_enid pull-left'>
       <span>     
         <strong>
@@ -192,6 +193,7 @@
 <input type='hidden' id='id_escenario' class='id_escenario' value='<?=$escenario["idescenario"]?>'>
 <input type='hidden' id='nombre_escenario' class='nombre_escenario' value='<?=$escenario["nombre"]?>'>
 <input type='hidden' class='evento' value="<?=$evento["idevento"];?>">
-
-
+<input type='hidden' class='id_evento' value="<?=$evento["idevento"];?>">
+<input type='hidden' class='id_empresa' value="<?=$evento["idempresa"]?>">
+<?=$this->load->view("escenarios/modal/public")?>
 

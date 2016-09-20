@@ -3,13 +3,19 @@ function load_artistas_solicitados(){
 	/**/
 	url =  now + "index.php/api/emp/solicitud_artista_top/format/json"; 	
 	empresa  =  $("#id_empresa").val();
-	$.get(url, {"empresa" : empresa }).done(function(data){
-		/**/	
-		llenaelementoHTML(".section-artistas-solicitudes", data );
-		
+	
+	$.ajax({
+		url : url ,
+		data : {"empresa" : empresa } , 
+		beforeSend: function(){			
+			show_load_enid(".section-artistas-solicitudes" , "Cargando ..." , 1 ); 
+		}		
+	}).done(function(data){
+		llenaelementoHTML(".section-artistas-solicitudes" , data );
 	}).fail(function(){
-		alert("Error al cargar ");
+		show_error_enid(".section-artistas-solicitudes" , "Problemas al cargar reporte al administrador ");
 	});
+	
 }
 /**/
 function load_section_comunidad(){
@@ -31,6 +37,7 @@ function load_comentatios_publicos(){
 			show_load_enid(".comentarios-usuarios" , "Cargando ..." , 1 ); 
 		}
 	}).done(function(data){				
+		//alert(data);
 		llenaelementoHTML(".comentarios-usuarios" , data );
 	}).fail(function(){
 		show_error_enid(".comentarios-usuarios" , "Problemas al cargar reporte al administrador ");

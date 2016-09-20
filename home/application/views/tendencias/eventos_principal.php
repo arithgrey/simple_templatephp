@@ -23,7 +23,7 @@
 				                            </div>                              
 						</div>              
 						<div class='col-lg-4 col-md-4 col-sm-4'>
-							<button class='col-lg-12 btn btn btn_nnuevo'>Buscar</button>
+							<button class='col-lg-12 btn_nnuevo'>Buscar</button>
 						</div>                				                      
 				                  
 					</form>				

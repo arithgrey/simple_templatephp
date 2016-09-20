@@ -1,15 +1,162 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
 require APPPATH.'/libraries/REST_Controller.php';
+require 'Request.php';
 class Emp extends REST_Controller{      
     function __construct(){
-        parent::__construct();			
+        parent::__construct();          
         $this->load->helper("artistas");       
         $this->load->helper("empresa");       
-        $this->load->helper("generoshelp");     	
+        $this->load->helper("generoshelp");         
         $this->load->model("generosmusicalesmodel");     
-        $this->load->model("empresamodel"); 	                 
+        $this->load->model("empresamodel");                      
         $this->load->model("organizacionmodel");
+        $this->load->model("usuariogeneralmodel");
+        $this->load->model("perfilmodel");
         $this->load->library('sessionclass');                    
+
+    }
+    /**/
+    function nombre_empresa_GET(){
+
+        $param  =  $this->get();
+        $db_response =  $this->empresamodel->get_nombre_empresa($param);
+        $this->response($db_response);
+    }
+    /**/
+    function reservacion_PUT(){
+        $this->validate_user_sesssion();    
+        $param =  $this->put();
+        if ($param["tipo"] ==  "empresa"){                    
+            
+            $param["id_empresa"] = $this->sessionclass->getidempresa();       
+            $db_response =  $this->empresamodel->update_reservaciones($param);
+            $this->response($db_response);            
+
+        }else{
+
+            $db_response =  $this->empresamodel->update_reservaciones_evento($param);
+            $this->response($db_response);            
+        }
+
+    }
+    /**/
+    function reservacion_GET(){
+
+        $this->validate_user_sesssion();    
+        $param =  $this->get();
+        if ($param["tipo"] ==  "empresa"){        
+            /**/       
+            $id_empresa = $this->sessionclass->getidempresa();       
+            $db_response = $this->empresamodel->get_reservaciones($id_empresa);
+            $this->response($db_response);
+        }else{
+
+            $param["id_empresa"] = $this->sessionclass->getidempresa();       
+
+            $db_response =  $this->empresamodel->get_reservaciones_evento($param);     
+            $this->response($db_response);
+        }
+    }
+    
+    /*Verifica en la base de datos que exista el usuario por nombre*/
+    function isuserexistrecord($mail, $secret){
+
+        $responsedb = $this->usuariogeneralmodel->validauserrecord($mail , $secret);
+        /*Validamos que exista el usuario en la db*/        
+        if (count($responsedb) == 1){
+            /*Crear session*/ 
+                $responsedb =  $responsedb[0];                                
+                $id_usuario = $responsedb["idusuario"];
+                $nombre = $responsedb["nombre"];
+                $email =  $responsedb["email"];                
+                $fecha_registro = $responsedb["fecha_registro"]; 
+            /*Response url*/        
+            return $this->createsession($id_usuario, $nombre , $email);            
+
+        }else{
+            /*Response data error*/        
+            return "Error en en los datos de acceso"; 
+        }               
+    }     
+    function createsession($id_usuario, $nombre , $email ){
+        /*Obtenermos los datos del perfil por usuario*/
+        $this->load->model("perfilmodel");
+        /*Creamos la session*/        
+        $id_empresa =  $this->perfilmodel->getidempresabyidusuario($id_usuario); 
+        $perfiles =  $this->perfilmodel->getperfiluser($id_usuario); 
+        $perfildata =  $this->perfilmodel->getperfildata($id_usuario); 
+
+        $newdatasession = array(
+            "idusuario" => $id_usuario , 
+            "nombre" => $nombre ,
+            "email" => $email ,            
+            "perfiles" => $perfiles ,  
+            "perfildata" => $perfildata ,
+            "idempresa" => $id_empresa,
+            'logged_in' => TRUE
+        );   
+        $this->session->set_userdata($newdatasession);                                          
+        return 1;
+    }    
+    /*Termina rest*/
+
+
+    /**/
+    function status_empresa_GET(){
+
+
+        $this->validate_user_sesssion();          
+        $param["empresa"] =  $this->sessionclass->getidempresa();        
+        $db_response=  $this->empresamodel->get_status_empresa($param); 
+        /**/
+
+        $this->response($db_response);
+        
+    }
+    /**/
+    function prospectos_enid_post(){
+
+        /**/
+        $param =  $this->post();        
+        $num_user =  $this->empresamodel->consulta_user_prospecto($param);
+        $param["pw"] =  sha1("123456789");
+        $num_empresas =  $this->empresamodel->get_num_empresas();
+        $param["org"] = "Empresa de prueba " .$num_empresas; 
+        $param["privacidad_condiciones"] =  1;
+        $data["estatus_empresa"] = 0;  
+
+
+
+
+        if ($num_user == 0 ){
+            $data["estatus_empresa"] = $db_response = $this->empresamodel->create_account($param);
+           
+        }else{
+             $data["estatus_empresa"] = 0;
+             $data["estatus_empresa_text"] = "Usted ya tiene un usuario activo con ésta cuenta";             
+           
+        }
+        
+
+
+        if($data["estatus_empresa"] ==  true){
+            $this->isuserexistrecord($param["mail"], $param["pw"]);            
+        }
+        $this->response($data);
+    }
+    /**/
+    function pais_GET(){
+        $param =  $this->get();         
+        $db_response =  $this->empresamodel->get_pais_empresa($param);
+        $this->response($db_response);
+        
+    }
+    /**/
+    function pais_PUT(){
+        $param =  $this->put();         
+        $db_response =  $this->empresamodel->update_pais_empresa($param);
+        $this->response($db_response);
+        
     }
     /**/
     function nueva_POST(){
@@ -177,11 +324,11 @@ class Emp extends REST_Controller{
     /**/
     function empresa_contacto_GET(){
 
-    	$this->validate_user_sesssion();
+        $this->validate_user_sesssion();
         $id_empresa = $this->sessionclass->getidempresa();
         $id_user = $this->sessionclass->getidusuario();        
-    	$contactos_empresa_data  = data_contactos_empresa($this->empresamodel->get_contactos_empresa($id_empresa, $id_user));   
-    	$this->response($contactos_empresa_data );        
+        $contactos_empresa_data  = data_contactos_empresa($this->empresamodel->get_contactos_empresa($id_empresa, $id_user));   
+        $this->response($contactos_empresa_data );        
     }  
 
     function empresa_country_PUT(){
@@ -193,13 +340,13 @@ class Emp extends REST_Controller{
         $this->response($response_db);
     }
     /**/
-   	function empresa_contacto_PUT(){
+    function empresa_contacto_PUT(){
 
         $this->validate_user_sesssion();
         $id_empresa= $this->sessionclass->getidempresa();
         $response_db = $this->empresamodel->update_contacto_empresa($id_empresa , $this->put() );
         $this->response($response_db);           
-   		
+        
 
     }
     /**/
@@ -277,8 +424,10 @@ class Emp extends REST_Controller{
     function iconos_comunidad_GET(){
          
         $param  =  $this->get();    
-        $iconos_experiencia =  $this->empresamodel->get_iconos_sociales($param);        
-        $data["iconos_experiencia_cliente"] =  contruye_iconos_experiencia_cliente($iconos_experiencia);         
+        $db_response =  $this->empresamodel->get_iconos_sociales($param);                
+        $data["iconos_experiencia_cliente"] =  contruye_iconos_experiencia_cliente($db_response);         
         $this->load->view("empresa/iconos_generales" , $data);
+        
+        
     }
 }?>

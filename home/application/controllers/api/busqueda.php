@@ -42,6 +42,6 @@ class Busqueda extends REST_Controller{
     function eventos_enid_GET(){        
         $param =  $this->get();       
         $db_response =  $this->busquedamodel->eventos_enid($param);
-        $this->response(get_last_events_empresa($db_response , 270 ,  0 , 0 , 0));            
+        $this->response(get_last_events_empresa($db_response , 270 ,  0 , 0 , 0 , 1));            
     }
 }/*Termina rest*/

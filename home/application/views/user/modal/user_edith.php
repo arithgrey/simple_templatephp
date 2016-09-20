@@ -1,15 +1,15 @@
 <div class='row'>
-  <button  type="button" class=" nueva_busqueda btn btn btn_nnuevo " 
+  <button  type="button" class=" nueva_busqueda btn_nnuevo " 
     title='Registra un nuevo integrante a la cuenta'>
       <i class="fa fa-search" aria-hidden="true">
       </i> 
       Búsqueda 
   </button> 
-  <div class=" pull-right">
-    <button class="form-control" id="btn_cancelar">
-      Cancelar
-    </button>
-  </div>
+   <div class='seccion-miembro-text'>
+      <span class='datos-user-text'>
+        Datos del nuevo miembro
+      </span>      
+    </div>
 
   <div class='response_insert_user' id="response_insert_user">
   </div>
@@ -226,8 +226,7 @@
 </div>
               
 
-<script type="text/javascript" src="<?=base_url('application/js/usuarios/config_user.js')?>"></script>
-
+<!---<script type="text/javascript" src="<?=base_url('application/js/usuarios/config_user.js')?>"></script>-->
 <link rel="stylesheet" type="text/css" href="<?=base_url('application/js/js/bootstrap-timepicker/css/timepicker.css')?>" />
 <script type="text/javascript" src="<?=base_url('application/js/js/bootstrap-datepicker/js/bootstrap-datepicker.js')?>"></script>
 <script type="text/javascript" src="<?=base_url('application/js/js/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js')?>"></script>
@@ -236,6 +235,12 @@
 <script type="text/javascript" src="<?=base_url('application/js/js/bootstrap-colorpicker/js/bootstrap-colorpicker.js')?>"></script>
 <script type="text/javascript" src="<?=base_url('application/js/js/bootstrap-timepicker/js/bootstrap-timepicker.js')?>"></script>
 <script src="<?=base_url('application/js/js/pickers-init.js')?>"></script>
+<style type="text/css">
+.datos-user-text{
+  font-weight: bold;  
+  color: #154469;
+}
+</style>
 
 
 

@@ -36,7 +36,7 @@ function serviciocheck(e){
 	 	type :  "POST",
 	 	data :  { evento : evento , idservicio : idservicio ,  "enid_evento" : enid_evento } , 
 	 	beforeSend: function(){
-	 		show_load_enid(".place_servicios_incluidos" , "Actualizando " , 1); 				
+	 		show_load_enid(".place_servicios_incluidos" , "Actualizando ... " , 1); 				
 	 	}
 	}).done(function(data){
 		show_response_ok_enid( ".place_servicios_incluidos", "Lista de artículos actualizada"); 
@@ -55,7 +55,7 @@ function  busqueda_servicios(e) {
 		data :  $("#form_servicios_b").serialize(), 
 		type :  "GET" , 
 		beforeSend:function(){						
-			show_load_enid(".servicios_encontrados" , "Cargando .. " , 1); 				
+			show_load_enid(".servicios_encontrados" , "Cargando ... " , 1); 				
 		}
 	}).done(function(data){		
 
@@ -85,7 +85,7 @@ function eliminar_servicio_evento(e){
 	 	type :  "POST",
 	 	data :  { evento : evento , idservicio : idservicio ,  "enid_evento" : enid_evento } , 
 	 	beforeSend: function(){
-	 		show_load_enid(".place_servicios_incluidos" , "Actualizando " , 1); 				
+	 		show_load_enid(".place_servicios_incluidos" , "Actualizando ... " , 1); 				
 	 	}
 	}).done(function(data){
 		show_response_ok_enid( ".place_servicios_incluidos", "Lista de artículos actualizada"); 

@@ -39,6 +39,11 @@ $(document).ready(function(){
         $('.controller-close').hide();
     })
 	
+	/**/
+	$(".link_to_view").click(view_like_public);
+	/**/
+
+
 	$("#registra-nuevo-escenario-form").submit(t_nuevo_escenario);    
 	/*Cargamos slider del escenario */
 	$("footer").ready(carga_slider_admin);
@@ -46,6 +51,10 @@ $(document).ready(function(){
 	$(".img-button-more-imgs").click(carga_form_imagenes_escenario);
 	$("footer").ready(valida_q);
 	/**/
+	
+
+	$("#termino").datepicker();
+	$("#inicio").datepicker();
 	
 });
 /**/
@@ -66,7 +75,7 @@ function update_type(e){
 		data :  {"idescenario": escenario , "tipoescenario" : type_escenario  , "evento" : evento ,  "enid_evento": enid_evento ,  "enid_escenario":  enid_escenario } , 
 		beforeSend: function(){
 			
-			show_load_enid(".place_tipo", "Registrando cambios" , 1); 
+			show_load_enid(".place_tipo", "Registrando cambios ... " , 1); 
 
 		}
 	}).done(function(data){		
@@ -97,7 +106,7 @@ function  update_nombre_escenario(){
 				type :  "PUT",
 				data :  { "campo": "nombre" ,    "escenario" : escenario , "nuevonombre" : nuevo_nombre ,  "enid_evento": enid_evento ,  "enid_escenario":  enid_escenario }  , 
 				beforeSend: function(){					
-					show_load_enid(".place_nombre_escenario", "Registrando cambios" , 1); 
+					show_load_enid(".place_nombre_escenario", "Registrando cambios ..." , 1); 
 				}
 			}).done(function(data){
 				show_response_ok_enid(".place_nombre_escenario"  , "Nombre del escenario actualizado con éxito" ); 
@@ -171,13 +180,17 @@ function update_fecha_escenario(e){
 	url =now + "index.php/api/escenario/inicio_termino/format/json"; 	
 	inicio = $("#inicio").val();
 	termino =  $("#termino").val();
-	$.ajax({
+
+
+	flag =  valida_format_date("#inicio" , "#termino" , ".place_fechas_evento" ,  "La fecha no puede ser menor a la fecha actual");
+	if (flag ==  0 ) {
+		$.ajax({
 			url : url ,
 			type:  "PUT" ,
 			data :  {"escenario" : escenario , "nuevoinicio" :  inicio , "nuevotermino" : termino ,  "enid_evento": enid_evento ,  "enid_escenario":  enid_escenario} , 
 			beforeSend: function(){
 				/*place_fechas_evento*/				
-				show_load_enid(".place_fechas_evento", "Registrando cambios " , 1); 
+				show_load_enid(".place_fechas_evento", "Registrando cambios ... " , 1); 
 			}			
 		}).done(function(data){
 			$("#modal-date-escenario").modal("hide");
@@ -195,7 +208,10 @@ function update_fecha_escenario(e){
 			/**/
 			show_error_enid(".place_fechas_evento"  , "Error al actualizar reporte al administrador" ); 
 		});	
-		e.preventDefault();
+		
+	}
+	
+	e.preventDefault();
 }
 /**/
 function muestra_plantilla_escenario(type , contenido , dinamic_place){
@@ -235,7 +251,7 @@ function carga_plantilla(e){
 		   type: 'PUT',
 		   data : data_send  , 
 		   beforeSend :  function(){
-		   		show_load_enid("#list-plantilla-escenario" ,  "Registrando cambios" , 1 ); 
+		   		show_load_enid("#list-plantilla-escenario" ,  "Registrando cambios ... " , 1 ); 
 		   }
 		}).done(function(data){
 
@@ -260,7 +276,7 @@ function carga_slider_admin(){
 		type: "GET" ,
 		data : {"escenario" : escenario , "nombre_escenario" : nombre , "in_session" : in_session , "public" : 0 } ,
 		beforeSend: function(){			
-			show_load_enid( ".slider-principal-escenario" , "Cargando portada del escenario" , 1 ); 				
+			show_load_enid( ".slider-principal-escenario" , "Cargando portada del escenario ... " , 1 ); 				
 		}
 	}).done(function(data){
 		llenaelementoHTML(".slider-principal-escenario", data );
@@ -335,7 +351,7 @@ function carga_data_otros(){
 			type: "GET", 
 			data : {"in_session" : in_session , "id_evento" : id_evento }  , 
 			beforeSend: function(){
-				show_load_enid(".place_escenarios_disponibles" , "Cargando .... " , 1 );
+				show_load_enid(".place_escenarios_disponibles" , "Cargando ... " , 1 );
 			}
 		}).done(function(data){			
 			llenaelementoHTML(".place_escenarios_disponibles" , data );
@@ -344,5 +360,16 @@ function carga_data_otros(){
 		});
 	}
 	flag_carga_otros ++; 
+}
+/**/
+function view_like_public(){
+	id_evento = $(".evento").val();
+	
+	id_escenario =  $("#id_escenario").val();
+	url =  now + "index.php/escenario/inevento/" +id_escenario+"/" + id_evento;
+	redirect(url);
+
+
+
 }
 /**/

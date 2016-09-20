@@ -27,8 +27,8 @@ function format_descripcion($desc){
 
     $text_desc =  ""; 
 
-    if (trim(strlen($desc)) > 300 ){
-        $part = substr($desc, 0 , 270);
+    if (trim(strlen($desc)) > 700 ){
+        $part = substr($desc, 0 , 700);
 
         $text_desc = "<span class='hiddden_descripcion'>".$desc."</span>";
         $text_desc .= "<span class='show_descripcion'>".$part."</span>";
@@ -128,11 +128,11 @@ function evalua_desc($descripcion , $in_session , $id_escenario  ){
         }    
 
         /*ahora validamos que no pase de los 300*/
-        if ( strlen($new_text)>300){        
+        if ( strlen($new_text)>700){        
             $primer_part = "<span class='hiddden_descripcion'>  
                             ".$new_text ."
                             </span>";
-            $part_descripcion =  substr($new_text, 0 ,  270);  
+            $part_descripcion =  substr($new_text, 0 ,  700);  
             $new_text = $primer_part . "<span class='show_descripcion' >
                                             ". $part_descripcion ."
                                         </span>

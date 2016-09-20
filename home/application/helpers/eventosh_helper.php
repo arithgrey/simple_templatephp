@@ -1,6 +1,24 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 if(!function_exists('invierte_date_time')){
 	/**/
+	function show_status_asistencia($num_asistencia){
+
+		if ($num_asistencia > 0 ){
+			return  "<center><i class='fa fa-times'></i> <span clas='title-asistencia'> Has mencionado que ya no asistirás al evento</span></center>";	
+		}else{			
+			return  "<center> <i class='fa fa-check'> </i> <span clas='title-asistencia' >Asístirás al evento</span></center>";		
+		}
+	}
+	/**/
+	function valida_resum_edicion($edicion){
+		$new_edicion =  ""; 
+		if ( trim(strlen($edicion)) > 0) {
+			$new_edicion = $edicion .'|';	
+		}
+		return $new_edicion;
+		
+	}
+	/**/
 	function valida_maps_public($formatted_address ,  $id_evento  ){
 		$maps =  "<span class='text-map-prox'>
 					Próximamen la se publicará el lugar del evento
@@ -394,13 +412,18 @@ function get_date_event_format($inicio , $termino){
 	return $date;
 }
 /*Últimos eventos */
-function get_last_events_empresa($ultimos_eventos, $limit_text= 270 ,  $show_edit=0 , $show_delete = 0 , $show_view_like_public = 0){	
+function get_last_events_empresa($ultimos_eventos, $limit_text= 270 ,  $show_edit=0 , $show_delete = 0 ,
+ $show_view_like_public = 0 , $show_emp = 0){	
 
 		$elements ="<div class='col-12 col-md-12 col-sm-12'>";		
 		if ($ultimos_eventos["num_eventos"] == 0  ) {
 
 			if ($show_edit ==  1) {
-				$elements.= "<center><span class='msj_notificacion_config'>No has publicado eventos durante los últimos 30 días</span></center>";	
+				$elements.= "<center>
+								<span class='msj_notificacion_config'>
+									No has publicado eventos durante los últimos 30 días
+								</span>
+							</center>";	
 			}	
 			
 		}else{
@@ -427,52 +450,106 @@ function get_last_events_empresa($ultimos_eventos, $limit_text= 270 ,  $show_edi
 			$dinamic_section = "dinamic_section".$id_evento;
 			$config =""; 
 			$url_maps=  base_url('index.php/maps/map') ."/". $id_evento."/0/";
-			$resumen_section  = resumen_evento($show_edit , $escenarios , $id_evento , $artistas , $evento_punto_venta , $accesos ); 
+
+
+
+			$reservacion_tel =  $row["reservacion_tel"];
+			$reservacion_mail =  $row["reservacion_mail"]; 
+
+			$resumen_section  = resumen_evento($show_edit , $escenarios , $id_evento , $artistas , $evento_punto_venta , $accesos  ,  $reservacion_tel ,  $reservacion_mail  ); 
+
+			$btn_config ='';  
+
+
+			$text_public =  ""; 
+			if ($show_emp ==  1){
+
+				$id_empresa =  $row["idempresa"];
+				$url_empresa =  base_url('index.php/emp/lahistoria/'). "/".$id_empresa;				
+				$nombreempresa =  $row["nombreempresa"];	
+				$text_public =  "<a href='". $url_empresa ."' class='btn-empresa-link'> By " .$nombreempresa ."</a>";
+			}
+			
+
+			$btn_social_fb =  '
+				<div class="col-lg-12 col-md-12 col-sm-12">
+								<div class="fb-share-button" data-href="'.$url_next.'" data-layout="button" data-size="small" data-mobile-iframe="true"><a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fenidservice.com%2Fhome%2F&amp;src=sdkpreparse">Compartir</a></div>
+				</div>				
+								'; 
 
 			if($show_edit == 1){									
-					$config = '
+					$btn_config = '
 					<a title = "Configura el evento " href="'.$url_edith.'" class="more resum_evento pull-right">
                         <i class="fa fa-cog"></i> 
                     </a>'; 
-			}
-			
-			$elements .= '			        
-        <div class="panel"> 
-        					
-        		'.$config.'
-        		
-                <div class="panel-body">
-                    <div class="row">
-                        <div class="col-md-5">
-                            <div class="blog-img-sm">
-                            	<a href="'.$url_next.'" >
-                                '. $img .'
-                                <a>
-                            </div>
-                        </div>
-                        <div class="col-md-7">
-                            <h1 class="">
-                            	<a href="'.$url_next.'">
-                            	'. $nombre_evento  .'
-                            	</a>
-                            </h1>
+                    $btn_social_fb  = '';
 
-                            <p>
-                            <p class=" auth-row">
-                                <a href="#"></a> '.$edicion .'  |  '.$fecha_evento.'   | <a href="#">5 Comments</a>|
-                                <a href="'.$url_maps.'"><i class="fa fa-map-marker locacion" id="'.$id_evento.'" ></i></a>
-                            </p>
-                            
-                            '. $descripcion_evento .'
-                            </p>
-                            '. $resumen_section   .'
-                        </div>
+
+			}
+
+
+			
+			$elements .= '		
+			    	        <div class="row">
+					<div class="col-lg-12 col-md-12 col-sm-12">	
+					'.$btn_config.'
+					</div>
+			</div>	        
+            <div class="row">         					        		      		                               
+                <div class="col-lg-5  col-md-5 col-sm-12">
+                    <div class="blog-img-sm">
+                        <a href="'.$url_next.'" >
+                            '. $img .'
+                        <a>
                     </div>
                 </div>
+                <div class="col-lg-7 col-md-7 col-sm-12">
+                	<div class="row">
+                		<div class="col-lg-12 col-md-12 col-sm-12">
+		                    <h1 class="nombre_evento_text">
+		                        <a class="nombre_evento_a" href="'.$url_next.'">
+		                            	'. $nombre_evento  .'
+		                        </a>
+		                    </h1>
+		                    '.$text_public .'
+	                    </div>
+	                    
+	                    <div  class="col-lg-12 col-md-12 col-sm-12 contenedor-resum-event">
+			                <span class="a_resum_event">
+			                	'.valida_resum_edicion($edicion) .''.			                    
+			                    $fecha_evento.'|
+			                    <a>
+			                        5 Comments
+								</a>|
+			                    <a href="'.$url_maps.'">
+			                        <i class="fa fa-map-marker locacion" id="'.$id_evento.'" >
+			                        </i>
+			                    </a>
+			                </span>                            
+						</div>
+						<div class="col-lg-12 col-md-12 col-sm-12">
+
+	                   		'. $resumen_section   .'
+	                   	</div>
+	                   	<div>
+	                   	'.$btn_social_fb.'		
+	                   	</div>
+
+	                    <div class="col-lg-12 col-md-12 col-sm-12">
+	                    	<span class="text_resum">
+		                    	'. $descripcion_evento .'
+		                    </span>
+		                </div>
+
+                    </div>
+                    
+
+                </div>
+                                
             </div>
 
-            	<div class="'.$dinamic_section.'" >
-            	</div>
+            <div class="'.$dinamic_section.'" >
+            </div>
             <hr>
         ';                            
 
@@ -493,7 +570,7 @@ function get_last_events_empresa($ultimos_eventos, $limit_text= 270 ,  $show_edi
 		return $elements;                                    	
 	}
 
-function resumen_evento($public , $escenarios ,$id_evento  , $artistas , $evento_punto_venta , $accesos ){
+function resumen_evento($public , $escenarios ,$id_evento  , $artistas , $evento_punto_venta , $accesos ,  $reservacion_tel  ,  $reservacion_mail ){
 
 
 	$href_evento  =""; 
@@ -516,11 +593,20 @@ function resumen_evento($public , $escenarios ,$id_evento  , $artistas , $evento
         </a>
         <a '.$href_pv .' class="resum_evento acceso_evento  " id="'. $id_evento .'"  ># '.$accesos .'Promociones
         </a>
+        <div class="row">
+        	<div class="col-lg-12 col-md-12 col-sm-12">
+		        <a '.$href_pv .' class="resum_evento reservaciones_evento  "   id="'. $id_evento .'"  >
+			        '. valida_reservaciones($public  , $reservacion_tel , $reservacion_mail , "reservaciones-modal" ,
+			         $id_evento   ).'
+
+		        </a>
+	        </div>
+        </div>
+
 	';
 	
 	return $resumen_section; 
 }
-
 /*****************************************************************************************/
 /*RETORNA LA PLANTILLA EN CASO DE QUE EL CLIENTE AÚN NO HAYA REGISTRADO EVENTOS */
 	function default_template_eventos(){
@@ -729,9 +815,9 @@ function get_slider_img_evento($data){
 		}else{
 			if (strlen($descripcion) < 5){$new_text = 'Próximamente lo que vivirás  al asistir al evento.'; }
 		}				
-		if (strlen($text) > 300 ){			
+		if (strlen($text) > 800 ){			
 			$primer_part = "<span class='hiddden_descripcion'>  "  .  $text . "</span>";
-			$part_descripcion =  substr($text, 0 ,  270);  
+			$part_descripcion =  substr($text, 0 ,  799);  
 			$new_text = $primer_part . "<span class='show_descripcion' >". $part_descripcion ."</span>
 
 										<center>
@@ -780,8 +866,7 @@ function get_slider_img_evento($data){
 		$num_agregados =  count($data); 
 		
 		$elements = "<h1 class='link_next_accesos'>
-						Algunos artistas del evento 
-						
+						Algunos artistas del evento 						
 					</h1>"; 
 		
 		if ($in_session ==  1 ){			

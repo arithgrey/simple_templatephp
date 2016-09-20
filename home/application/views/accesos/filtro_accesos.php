@@ -12,8 +12,7 @@
 	if ($a > 0 ) {
 		$mensaje_evento = "Puntos de venta registrados en el evento. "; 		
 	}
-	$mensaje_evento .="	<div class='separate-enid'>
-		</div>		<div class='row'>
+	$mensaje_evento .="<div class='row'>
 							<div class='col-lg-12'>
 								<a class='nuevo-elemento pull-left' href='".$url."'> 
 									+ Registrar nuevo
@@ -27,16 +26,25 @@
 
 <div class='panel panel-resumen-evento' >	
 	<div class="item-content-block tags">
-		<i class=" menos_info_puntos_venta  fa fa-caret-up" aria-hidden="true" id='<?=$id_evento?>'  >
-		</i>			
-		<span class='msj-resumen'>
-			<?=$mensaje_evento;?>
-		</span>	
-		<div class='separate-enid'>
-		</div>
-		<div>
-			<?=$accesos_registrados;?>
-		</div>
+		<i class=" menos_info_puntos_venta  fa fa-caret-up pull-right" aria-hidden="true" id='<?=$id_evento?>'  >
+		</i>
+		<span class='text-title-resum'> 
+			Accesos cargados al evento
+		</span>						
+		<div class='row'>
+			<div class='col-lg-12 col-md-12 col-sm-12'>
+			<span class='msj-resumen'>
+				<?=$mensaje_evento;?>
+			</span>	
+			<div class='separate-enid'>
+			</div>
+			<div>
+				<?=$accesos_registrados;?>
+			</div>
+
+			</div>
+		</div>						
+		
 	</div>
 </div>
 

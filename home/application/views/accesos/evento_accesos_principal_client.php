@@ -1,4 +1,4 @@
-<?=template_evento($data_evento["nombre_evento"] ,  $data_evento["idevento"])?>
+<?=template_evento($data_evento["nombre_evento"] ,  $data_evento["idevento"]   ,  $data_evento["idempresa"])?>
 
 <ul class="nav nav-pills"> 
     <li class='pull-left  active tab_enid '>
@@ -13,6 +13,14 @@
         Puntos de venta     
       </span>
     </li>    
+    <a href="<?=base_url('index.php/eventos/diaevento')?>/<?=$data_evento["idevento"]?>">
+        <li class='tab_enid pull-right '>
+          <span >                              
+            Servicios
+          </span>
+        </li>    
+    </a>
+
 </ul>
 
 <!--Contenido -->
@@ -29,9 +37,18 @@
   </div> 
 </div>
 <input type='hidden' class='empresa' value='<?=$data_evento["idempresa"]?>'>
+<input type='hidden' class='id_empresa' value='<?=$data_evento["idempresa"]?>'>
+
+
+
 <input type='hidden' class='evento' value='<?=$data_evento["idevento"]?>'>
+<input type='hidden' class='id_evento' value='<?=$data_evento["idevento"]?>'>
+
 <input type='hidden' class='evento_escenario' value='<?=$data_evento["idevento"]?>'>
 <script type="text/javascript" src="<?=base_url('application/js/accesos/principal_cliente.js')?>"></script>
+
+
+<?=$this->load->view("reglas/modal/asistencia");?>
 <style type="text/css">
 .contenedor_puntos_venta{
     background: rgb(22, 103, 129);    

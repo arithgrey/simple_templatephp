@@ -8,7 +8,23 @@ class Event extends REST_Controller{
         $this->load->helper("eventosh");               
         $this->load->helper("generoshelp");
         $this->load->library('sessionclass');                    
+    }
+    /**/
+    function asistente_user_GET(){
+
+        $param =  $this->get();        
+        $param["ip_user"]= $this->input->ip_address();
+        $db_response =  $this->eventmodel->get_asistencia_user($param);
+        $this->response(show_status_asistencia($db_response));
+        
     }   
+    /**/
+    function asistentes_GET(){
+        $param =  $this->get();
+        $num_asistentes=  $this->eventmodel->get_asistentes($param);
+        $this->response("#".$num_asistentes);
+    }
+    /**/    
     function imagenes_GET(){            
 
         $id_evento = $this->get("id_evento");     
@@ -336,8 +352,7 @@ class Event extends REST_Controller{
 
         $param =  $this->get();
         $data["param"] = $param;
-        $data["resumen_artistas"] =  $this->eventmodel->get_resumen_artistas($param);
-     
+            
         echo $this->load->view("eventos/public/extra" , $data);
     }  
     function config_tipo_GET(){

@@ -1,3 +1,9 @@
+<div class="panel-heading panel-nuestra-comunidad">
+    <h3 class="panel-title title-cominidad">
+        Imagenes de nuestra comunidad
+    </h3>
+</div>
+
 <section class="panel">                        
     <div class="panel-body">
             <ul id="filters" class="media-filter" >

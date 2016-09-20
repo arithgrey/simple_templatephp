@@ -12,8 +12,185 @@ $("footer").ready(function(){
 	key_enid =  "AIzaSyAVF0GA9R64Jnbd3ZX53TnLI-61vOqcq-4";
 	$(".text-filtro-enid").click(show_fields_mov);
 	$(".more-info-f").click(carga_contenido);
+	$(".form-busqueda-general").submit(new_busqueda_general);
 
 });
+/**/
+function new_busqueda_general(e){
+
+	q =  $("#qeventoenid").val();
+	next =  now + "index.php/eventos/busqueda/"+q;
+	redirect(next);
+	e.preventDefault();
+}
+
+function carga_num_asistentes(){
+
+
+	id_evento =  $(".id_evento").val();
+	url =  now + "index.php/api/event/asistentes/format/json/";
+	//alert(id_evento);
+	$.ajax({
+		url :  url ,
+		data : {evento :  id_evento},
+		beforeSend: function(){
+			show_load_enid(".place_estado_evento", "" , 1); 
+		}
+	}).done(function(data){
+		llenaelementoHTML( ".place_asistentes" , data);
+	}).fail(function(){
+		show_error_enid(".place_estado_evento" , "Error al cargar el número de asistentes del evento, reporte al administrador ");   			
+	});
+
+}
+/***/
+
+/**/
+function carga_asistencia_user(){
+
+	id_evento =  $(".id_evento").val();
+	url =  now + "index.php/api/event/asistente_user/format/json/";
+	console.log("id evento" +  id_evento );
+	$.ajax({
+		url :  url ,
+		type:  "GET",
+		data : {evento :  id_evento},
+		beforeSend: function(){
+			show_load_enid(".place_asistencia_user", "Verificando tu asistencia ... " , 1); 
+		}
+	}).done(function(data){
+		llenaelementoHTML( ".place_asistencia_user" , data);
+
+	}).fail(function(){
+		show_error_enid(".place_asistencia_user" , "Error al cargar tu asistencia, reportar al administrador ");   			
+	});
+	carga_num_asistentes();
+}
+/**/
+
+/**/
+function carga_data_empresa(){	
+	url  =  now + "index.php/api/emp/nombre_empresa/format/json/";		
+	id_empresa =  $(".id_empresa").val();
+	$.ajax({
+
+		url : url, 
+		data : {"id_empresa" :  id_empresa },		
+		beforeSend : function(){
+			show_load_enid(".place_nombre_empresa", " ... " , 1); 
+		}
+	}).done(function(data){
+
+		console.log(data);
+		$(".place_nombre_empresa").empty();
+		nombre_empresa= data[0].nombreempresa;
+		llenaelementoHTML(".nombre_empresa" , nombre_empresa );
+
+	}).fail(function(){
+		show_error_enid(".place_nombre_empresa" , "Error al cargar, reporte al administrado.");   			
+	});
+}
+/**/
+function existeFecha2(fecha){
+        var fechaf = fecha.split("-");
+        var y = fechaf[0];
+        console.log("----" + y); 
+        var m = fechaf[1];
+        console.log("----" + m); 
+
+        var d = fechaf[2];
+        console.log("----" + d); 
+
+        return m > 0 && m < 13 && y > 0 && y < 32768 && d > 0 && d <= (new Date(y, m, 0)).getDate();
+}
+
+/**/
+function valida_format_date(fecha_inicio , fecha_termino , place ,  mensaje ){
+
+	fecha_inicio =  $(fecha_inicio).val();
+	fecha_termino =  $(fecha_termino).val();
+	var fecha_actual =  new Date();
+
+
+	/**/
+	año_inicio =  fecha_inicio.substring(0 ,4);
+	año_inicio = parseInt(año_inicio);
+
+	año_termino =  fecha_termino.substring(0 ,4);
+	año_termino = parseInt(año_termino);
+
+	mes_inicio  =  fecha_inicio.substring(5 ,7);
+	mes_inicio = parseInt(mes_inicio);
+
+	mes_termino  =  fecha_termino.substring(5 ,7);
+	mes_termino = parseInt(mes_termino);
+
+
+	dia_inicio =  fecha_inicio.substring(8, 10);
+	dia_inicio = parseInt(dia_inicio);
+
+	dia_termino =  fecha_termino.substring(8, 10);
+	dia_termino = parseInt(dia_termino);
+
+
+	dia  =  fecha_actual.getDate();	
+	dia =  parseInt(dia);
+	mes =  fecha_actual.getMonth() +1;
+	mes =  parseInt(mes);
+	año =  fecha_actual.getFullYear();
+	año =  parseInt(año);
+
+	/**/
+	mensaje_cliente =  ""; 
+	flag_fecha = 0; 
+	flag2 = 0;
+
+	/*Validamos año*/
+	if (año_inicio >=  año &&  año_termino >= año){
+		/*Validamos mes */
+		if (mes_inicio >=  mes && mes_termino >= mes  ||   año_inicio < año_termino  ){
+			/*Validamos día*/			
+		}else{			
+			flag_fecha  ++;  				
+		}
+	}else{
+		flag_fecha  ++;  
+		
+	}
+	/**/
+	if (flag_fecha > 0 ){		
+		llenaelementoHTML(place , "<span class='alerta_enid'>"+mensaje+"</span>");							
+	}
+
+	/**/
+	if(existeFecha2(fecha_inicio) ==  true){		
+	}else{
+		flag_fecha ++;
+		llenaelementoHTML(place , "<span class='alerta_enid'>Indique sólo fechas reales</span>");							
+	}
+
+	if(existeFecha2(fecha_termino) ==  true){		
+	}else{
+		flag_fecha ++;
+		llenaelementoHTML(place , "<span class='alerta_enid'>Indique sólo fechas reales</span>");							
+	}
+	fecha_ini =  new Date(año_inicio , mes_inicio , dia_inicio);
+	fecha_ter =  new Date(año_termino , mes_termino , dia_termino);
+	if (fecha_ini> fecha_ter) {
+		flag_fecha ++;
+		llenaelementoHTML(place , "<span class='alerta_enid'>La fecha inicio no puede ser mayor a la de termino </span>");								
+	}
+
+
+
+
+	if (flag_fecha == 0 ) {
+		$(place).empty();
+	}
+	return flag_fecha;
+
+	
+}
 /**/
 function validate_format_num_pass( input , place , num  ){
 
@@ -73,8 +250,14 @@ function valida_text_form(input , place_msj , len , nom ){
 	if (flag == 0) {
 		$(input).css("border" , "1px solid rgb(13, 62, 86)");
 		flag  = 0; 
+
 	}
+
 	llenaelementoHTML( place_msj ,  "<span class='alerta_enid'>" + mensaje_user + "</span>");
+	if (flag ==1 ) {
+		$(place_msj).empty();
+	}
+
 	return flag; 
 }
 /**/

@@ -15,6 +15,18 @@ $(document).on("ready", function(){
 	$(".section-puntos-venta").ready(load_data_accesos);
 	$("#nuevo-acceso-button").click(reset_form_acceso);
 	$("footer").ready(valida_modal);
+
+	/**/
+	$("#fecha_termino").datepicker();
+	$("#fecha_inicio").datepicker();
+	
+	$("#nuevo_inicio_acceso").datepicker();
+	$("#nuevo_termino_acceso").datepicker();
+
+
+
+
+
 });
 function update_status_punto_venta_evento(e){
 
@@ -64,28 +76,36 @@ function record_acceso(e){
 		if (flag_numerico == 1 ){
 
 
-			evento =  $(".evento").val();
-			data_send =  $("#form-new-acceso").serialize() + "&"  + $.param({"evento" :  evento ,  "enid_evento" : enid_evento  });			
-			$.ajax({
-					url :  url , 
-					type :  "POST", 
-					data :   data_send , 
-					beforeSend:function(){								
-						show_load_enid( ".place_registro_acceso" , "Registrando" , 1 ); 				
-						$(".place_nombre_promo_vali").empty();
-						$(".place_msj_precio").empty();			
-					}
-			}).done(function(data){		
-				var  fields_reset =  ["#acceso_nombre" ,  "#precio-acceso-record" , "#descripcion"];
-				reset_fields(fields_reset);															
-				load_data_accesos();		
-				$("#nuevo-acceso-modal").modal("hide");
-				show_load_enid( ".place_list_accesos" , "Acceso cargado al evento con éxito.!" , 1 ); 	
-				$(".place_registro_acceso").empty();
 
-			}).fail(function(){			
-				show_error_enid(".place_registro_acceso" , "Error al cargar el escenario reportar al administrador"); 
-			});
+			flag_date =  valida_format_date("#fecha_inicio" , "#fecha_termino" , ".place_val_date" , "La fecha no puede ser menor a la fecha actual" );
+
+			if (flag_date == 0) {
+
+				evento =  $(".evento").val();
+				data_send =  $("#form-new-acceso").serialize() + "&"  + $.param({"evento" :  evento ,  "enid_evento" : enid_evento  });			
+				$.ajax({
+						url :  url , 
+						type :  "POST", 
+						data :   data_send , 
+						beforeSend:function(){								
+							show_load_enid( ".place_registro_acceso" , "Registrando ..." , 1 ); 				
+							$(".place_nombre_promo_vali").empty();
+							$(".place_msj_precio").empty();			
+						}
+				}).done(function(data){		
+					var  fields_reset =  ["#acceso_nombre" ,  "#precio-acceso-record" , "#descripcion"];
+					reset_fields(fields_reset);															
+					load_data_accesos();		
+					$("#nuevo-acceso-modal").modal("hide");
+					show_load_enid( ".place_list_accesos" , "Acceso cargado al evento con éxito.!" , 1 ); 	
+					$(".place_registro_acceso").empty();
+
+				}).fail(function(){			
+					show_error_enid(".place_registro_acceso" , "Error al cargar el escenario reportar al administrador"); 
+				});
+
+			}
+
 		}				
 	}		
 	e.preventDefault();
@@ -104,7 +124,7 @@ function load_data_accesos(){
 		type :  "GET", 
 		data : { evento : evento , in_session :  in_session}, 
 		beforeSend: function(){			
-			show_load_enid( ".place_list_accesos" , "Cargando accesos registrados al avento" , 1 ); 	
+			show_load_enid( ".place_list_accesos" , "Cargando accesos registrados al avento ... " , 1 ); 	
 		}
 	}).done(function(data){
 
@@ -132,7 +152,7 @@ function remove_acceso(e){
 			data : { evento : evento , acceso :  acceso,  "enid_evento" : enid_evento } , 
 			beforeSend : function(){
 				
-				show_load_enid( ".place_remov_acceso" , "Eliminando acceso del evento " , 1 );
+				show_load_enid( ".place_remov_acceso" , "Eliminando acceso del evento ..." , 1 );
 			}
 		}).done(function(data){
 			$("#confirma-delete-acceso").modal("hide");
@@ -165,7 +185,7 @@ function editar_acceso(e){
 		type: "GET", 
 		data :  {"evento": evento   , "acceso" : acceso ,  "enid_evento" : enid_evento} , 
 		beforeSend: function(){
-			show_load_enid( ".place_editar_acceso" , "Cargando datos del acceso " , 1 );			
+			show_load_enid( ".place_editar_acceso" , "Cargando datos del acceso ..." , 1 );			
 		}
 
 	}).done(function(data){
@@ -198,29 +218,36 @@ function editar_acceso(e){
 }
 
 function actualiza_data_accesos(){
+	
 	/*evento*/
 	url  = $("#dinamic-form-accesos").attr("action");	
 	data_send =  $("#dinamic-form-accesos").serialize() +  "&"+ $.param({"enid_evento" : enid_evento}); 		
 	
-	$.ajax({
-	   url: url,
-	   type: 'PUT',
-	   data : data_send  ,
-	   beforeSend : function(){
-	   		
-	   	show_load_enid(".place_editar_acceso" , "Actualizando datos información del acceso");
-	   }
-	}).done(function(data){
-		
-		$("#editar-acceso").modal("hide");
-		load_data_accesos();
-		show_response_ok_enid( ".place_list_accesos" ,"Datos del acceso configurados con éxito.!" , 1 ); 	
+	flag_date =  valida_format_date("#nuevo_inicio_acceso" , "#nuevo_termino_acceso" , ".place_val_date_2" , "La fecha no puede ser menor a la fecha actual" );
 
-	}).fail(function(){
-		show_error_enid(".place_editar_acceso" , "Error al editar los datos de acceso, reporte al administrador"); 
+	if (flag_date == 0) {
+		$.ajax({
+		   url: url,
+		   type: 'PUT',
+		   data : data_send  ,
+		   beforeSend : function(){
+		   		
+		   	show_load_enid(".place_editar_acceso" , "Actualizando datos información del acceso ... ");
+		   }
+		}).done(function(data){
+			
+			$("#editar-acceso").modal("hide");
+			load_data_accesos();
+			show_response_ok_enid( ".place_list_accesos" ,"Datos del acceso configurados con éxito.!" , 1 ); 	
 
-	});
+		}).fail(function(){
+			show_error_enid(".place_editar_acceso" , "Error al editar los datos de acceso, reporte al administrador"); 
 
+		});
+
+
+	}
+	
 	
 	return false;
 }
@@ -247,7 +274,7 @@ function carga_puntos_venta_agregados(){
 			type : "GET" ,
 			data : {"evento" : evento} , 
 			beforeSend : function(){				
-				show_load_enid( ".place_puntos_venta_agregados" , "Cargando los puntos de venta asociados al evento" , 1 ); 
+				show_load_enid( ".place_puntos_venta_agregados" , "Cargando los puntos de venta asociados al evento ..." , 1 ); 
 			}
 		}).done(function(data){
 			$( ".place_puntos_venta_agregados" ).empty();
@@ -269,7 +296,7 @@ function asocia_punto_venta_evento(e){
 			   type: 'PUT',
 			   data : data_send  , 
 			   beforeSend : function(){		   		
-			   		show_load_enid( "#list-posibles-puntos" , "Registrando" , 1 ); 					
+			   		show_load_enid( "#list-posibles-puntos" , "Registrando ..." , 1 ); 					
 			   }
 			}).done(function(data){	   	
 		   		show_response_ok_enid("#list-posibles-puntos" ,  "Punto de venta asociado al evento con éxito.! ");	   		
@@ -291,7 +318,7 @@ function busqueda_punto_venta(){
 			data : {"punto_venta" : text_input , "empresa" :  empresa } , 
 			beforeSend: function(){
 
-				show_load_enid( "#list-posibles-puntos" , "Buscando .. " , 1 ); 				
+				show_load_enid( "#list-posibles-puntos" , "Buscando ... " , 1 ); 				
 			}
 		}).done(function(data){			
 			llenaelementoHTML("#list-posibles-puntos" ,  data);
@@ -358,7 +385,7 @@ function show_complete_info(e){
 		type :  "GET",
 		data : data_send , 
 		beforeSend : function(){
-			show_load_enid(".info_pv" , "Cargando información del punto de venta" );
+			show_load_enid(".info_pv" , "Cargando información del punto de venta ..." );
 		}
 	}).done(function(data){		
 		llenaelementoHTML(".info_pv" ,  data);

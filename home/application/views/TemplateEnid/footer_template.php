@@ -14,6 +14,21 @@
 <input type="hidden" name="now" class="now" value="<?=base_url();?>">
 <input type='hidden' name="in_session" id='in_session' class='in_session' value="<?=$in_session;?>" >
 <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-84341967-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+
+
+
 </body>
 </html>
 
@@ -284,6 +299,9 @@
         }.indicador_slider:hover{
             cursor: pointer;           
         }
+        .btn_configurar_enid_w{
+            list-style: none;
+        }
         .btn_configurar_enid , .btn_agregar_enid{
             list-style:none;
         }
@@ -379,6 +397,32 @@
         <style type="text/css">
            
             /*Los templates */
+            .btn_configurar_enid , .text-reservaciones{
+              display: inline-block;
+            }
+            .btn_call_to_emp{
+              
+                background: #24A2F2 none repeat scroll 0% 0%;
+                color: white;
+                border-radius: 0;
+                border-style: solid;
+                border-width: 0;
+                cursor: pointer;    
+                border-color: #007095;
+                color: #FFFFFF;    
+            }
+
+            .btn_call_to_emp:hover{    
+                background: #24A2F2 none repeat scroll 0% 0%;
+                color: white;
+                border-radius: 0;
+                border-style: solid;
+                border-width: 0;
+                cursor: pointer;    
+                border-color: #007095;
+                color: #FFFFFF;
+                
+            }
             body{
                 font:  16px/28px 'Hind','Helvetica Neue',Helvetica,sans-serif !important;
             }ul{ 
@@ -398,8 +442,10 @@
             }.nombre_empresa_enid{
                 float: right;
                 font-size: 1.7em;
-                color: #d9534f;
+                color: white;
                 font-weight: bold;    
+                background: #24A2F2;
+                padding: 5px;
             }iframe{
                 border: 0px !important;
             }.enid-lg-hidden{
@@ -451,6 +497,20 @@
             }.btn_nnuevo{            
                 background: #166781;
                 color: white;
+
+                border-radius: 0;
+                border-style: solid;
+                border-width: 0;
+                cursor: pointer;
+                padding: 1rem 1.77778rem 0.94444rem 1.77778rem;
+                font-size: 0.98889rem;
+                //background-color: #008CBA;
+                border-color: #007095;
+                color: #FFFFFF;
+                
+                
+
+
             }.btn_nnuevo:hover{            
                 background: #00BCD4;
                 color: white;
@@ -458,13 +518,46 @@
                 color: #09AFDF;
                 transition: all 0.2s ease-in-out 0s;
             }.btn_busqueda{
-                background: #058EA5;
+                background: #19344a;
                 color: white;
-            }.title-page-enid{
+                border-radius: 0;
+                border-style: solid;
+                border-width: 0;
+                cursor: pointer;
+                padding: 1rem 1.77778rem 0.94444rem 1.77778rem;
+                font-size: 0.98889rem;
+                //background-color: #008CBA;
+                border-color: #007095;
+                color: #FFFFFF;                
+            }.btn-default{
+                background: #19344a;
+                color: white;
+                border-radius: 0;
+                border-style: solid;
+                border-width: 0;
+                cursor: pointer;
+                padding: 1rem 1.77778rem 0.94444rem 1.77778rem;
+                font-size: 0.98889rem;
+                //background-color: #008CBA;
+                border-color: #007095;
+                color: #FFFFFF; 
+            }
+
+            .title-page-enid{
                 margin-top: -1px;
             }.btn-template{
                 background: #1A6174 !important;
                 color: white !important;
+                border-radius: 0;
+                border-style: solid;
+                border-width: 0;
+                cursor: pointer;
+                padding: 1rem 1.77778rem 0.94444rem 1.77778rem;
+                font-size: 0.98889rem;
+                //background-color: #008CBA;
+                border-color: #007095;
+                color: #FFFFFF;
+
             }.blue-col-enid-more{
                  background: #FCF566 none repeat scroll 0% 0% !important;
                 color: black !important;
@@ -567,12 +660,46 @@
             }
             .text-desc-enid{
                 font-size: .9em;
+            }.text_completo{
+                display: none;
+            }
+            .parte_descripcion,
+            .text_completo{
+                font-size: .8em !important;
             }
             /**/
-
-
+            .tex_hidden_title{
+                display: none;
+            }
+            .ver-public-lg-emp{
+                display: block;
+                background: rgb(8, 65, 84);
+                padding: 10px;
+                margin-bottom: 10px;
+                color: white;
+            }
+            .ver-public-lg{
+                display: block;
+                background: rgb(8, 65, 84);
+                padding: 10px;
+                margin-bottom: 10px;
+                color: white;
+            }
+            .btn-empresa-link{
+                font-weight: bold;
+                color: #083641;
+            }
+            .btn-empresa-link:hover{
+                font-weight: bold;
+                color: #083641;
+                text-decoration: none;
+            }
             /*Todo lo que pertenece a medios*/
             @media only screen and (max-width: 991px) {
+                
+                .ver-public-lg{
+                    display: none;
+                }    
                 .ver-public-sm{
                     display: block;
                     background: rgb(8, 65, 84);
@@ -611,9 +738,12 @@
                 }
                 .enid-lg-hidden{
                     display: block;
+                }.tex_hidden_title{
+                    display: block;
                 }
 
             }
             /**/
 
         </style>
+<?=ini_set('display_errors', '');?>

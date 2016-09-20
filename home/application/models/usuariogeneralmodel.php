@@ -5,7 +5,14 @@ class usuariogeneralmodel extends CI_Model {
         parent::__construct();        
         $this->load->database();
     }
-
+    /**/
+    function get_num_users($param){
+        
+        $query_get =  "SELECT COUNT(0)num  FROM usuario WHERE email = '".$param["mail"]."' LIMIT  1  ";  
+        $result =  $this->db->query($query_get); 
+        return $result->result_array()[0]["num"];
+    }
+  
     /**/
     function get_nombre_user($param){
       
@@ -81,8 +88,7 @@ class usuariogeneralmodel extends CI_Model {
     }
     /**/    
     function get_data_miembro($param){
-
-        //$query_get = "SELECT * FROM usuario WHERE idusuario = '". $param["id_usuario"]  ."' limit 1";          
+            
         $query_get = "SELECT * FROM usuario u inner join usuario_perfil up  on  u.idusuario =  up.idusuario  WHERE u.idusuario =  '". $param["id_usuario"]  ."'   ";
         $result = $this->db->query($query_get);
         return $result->result_array();
@@ -90,13 +96,18 @@ class usuariogeneralmodel extends CI_Model {
     /**/
     function update_datos_miembro($param){  
 
-
-
       $dinamic_query =""; 
       $flag = 0;
-      if ($param["id_usuario"]  ==  0  ) {
+      $db_response["status_user"] =  "FALSE"; 
+      $db_response["msj_user"] =  "El usuario ya tiene una cuenta Enid Service, intente con otro usuario."; 
+
+
+
+      if($param["action"]  ==  "registro"  ){
             
-            $dinamic_query  = "INSERT INTO enidserv_eniddbbbb3.usuario(
+
+
+            $dinamic_query  = "INSERT INTO usuario(
             nombre,
             email,                    
             idempresa,                                    
@@ -135,39 +146,61 @@ class usuariogeneralmodel extends CI_Model {
               '". sha1("9876543210")."'
               )";
 
+            $user_exist =  $this->get_num_users($param);             
+
+            
+
+            if ($user_exist  ==  0 ) {
+              
+              $this->db->query($dinamic_query);
+              $id_usuario = $this->db->insert_id();                      
+              $id_perfil_user =  $param["perfil_user"];
+              
+              $db_response["status_user"] = $this->insert_perfil_user($id_usuario , $id_perfil_user); 
+              $db_response["msj_user"] =  ""; 
+
+            }
+
+
           /*inserta user */
-          $this->db->query($dinamic_query);
-          $id_usuario = $this->db->insert_id();                      
-          $id_perfil_user =  $param["perfil_user"];
-          return $this->insert_perfil_user($id_usuario , $id_perfil_user); 
+          
 
 
 
       }else{
-         $dinamic_query = "UPDATE usuario SET nombre  = '". $param["nombres"]."' ,                                              
-                                              grupo = '". $param["grupo"] ."' , 
-                                              cargo = '". $param["cargo"] ."'  ,  
-                                              inicio_labor = '".$param["inicio_labor"] ."' , 
-                                              fin_labor = '". $param["fin_labor"] ."'  ,
-                                              email_alterno  = '". $param["email_alterno"] ."', 
-                                              apellido_paterno = '". $param["apellido_paterno"] ."' , 
-                                              apellido_materno = '". $param["apellido_materno"] ."' , 
-                                              edad = '". $param["edad_user"] ."' , 
-                                              tel_contacto = '". $param["tel_contacto"]."' ,
-                                              tel_contacto_alterno = '". $param["tel_contacto_alterno"] ."' , 
-                                              status = '". $param["nuevo_estado"] ."'    , 
-                                              rfc = '". $param["rfc"] ."'  , 
-                                              turno = '". $param["turno"] ."' 
-                                              WHERE idusuario = '". $param["id_usuario"] ."' 
-                                              LIMIT 1 
-                                              ";     
-          $this->db->query($dinamic_query);   
+
+
+         $query_update = "UPDATE usuario 
+         SET nombre  = '". $param["nombres"]."' ,                                              
+             grupo = '". $param["grupo"] ."' , 
+             cargo = '". $param["cargo"] ."'  ,  
+             inicio_labor = '".$param["inicio_labor"] ."' , 
+             fin_labor = '". $param["fin_labor"] ."'  ,
+             email_alterno  = '". $param["email_alterno"] ."', 
+             apellido_paterno = '". $param["apellido_paterno"] ."' , 
+             apellido_materno = '". $param["apellido_materno"] ."' , 
+             edad = '". $param["edad_user"] ."' , 
+             tel_contacto = '". $param["tel_contacto"]."' ,
+             tel_contacto_alterno = '". $param["tel_contacto_alterno"] ."' ,              
+             rfc = '". $param["rfc"] ."'  , 
+             turno = '". $param["turno"] ."' 
+             WHERE idusuario = '". $param["id_usuario"] ."' 
+             LIMIT 1 ";     
+         
+          $this->db->query($query_update);   
+        
+
+          
           $perfil_user =  $param["perfil_user"];                                           
           $dinamic_query_perfil ="UPDATE  usuario_perfil SET idperfil = '". $perfil_user ."' WHERE idusuario = '". $param["id_usuario"] ."'  LIMIT 1";                                  
           $result = $this->db->query($dinamic_query_perfil);     
-          return $result;
+          
+
+          $db_response["status_user"] = "true"; 
+          $db_response["msj_user"] =  "";           
           
       }
+      return $db_response;
       
     }
     /**/

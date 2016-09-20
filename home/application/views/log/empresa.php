@@ -29,27 +29,27 @@
 		$url_img_icon = base_url("application/img")."/".$imgs[$tipo_evento];
 
 		$list .=  '
-			<div class="panel-body '. $class[$tipo_evento]  .' ">
-                <div class="media blog-cmnt">
-                    <a href="javascript:;" class="pull-left">
-                        <img alt="" src="'.$url_img_icon.'" class="media-object">
-                    </a>
-                    <div class="media-body">
-                        <h4 class="media-heading">
-                            <a href="#">
-                            '.$nombre . " | " .$email  .'| '. $puesto.'|'.$cargo.'
-                            </a>
-                        </h4>                        
-                        <p class="mp-less">
-                          '.$descripcion.'
-                        </p>
-                        <span class="fecha-registro">
-                        '.$fecha_registro.'
-                        </span>
-                        <span class="info-modulo btn btn-default input-sm pull-right">
-                        '.$nota_log[$modulo].'
-                        </span>
-                    </div>
+			<div class=" '. $class[$tipo_evento]  .' ">
+				<div>
+	                <div class="media blog-cmnt">                    
+	                    <img  src="'.$url_img_icon.'" class="img-log">                    
+	                    <div class="parte-resumen">
+		                    <div class="media-body">
+		                        <h4 class="media-heading">	                            
+		                            '.$nombre . " | " .$email  .'| '. $puesto.'|'.$cargo.'	                            
+		                        </h4>                        
+		                        <p class="mp-less resumen-log">
+		                          '.resumen_descripcion_enid($descripcion).'
+		                        </p>
+		                        <span class="fecha-registro">
+		                        '.$fecha_registro.'
+		                        </span>
+		                        <span class="info-modulo btn btn-default input-sm pull-right">
+		                        '.$nota_log[$modulo].'
+		                        </span>
+		                    </div>
+	                    </div>
+	                </div>
                 </div>
             </div>        
 		';
@@ -83,5 +83,31 @@
 		font-size: .8em;
 		background: #223c48;
 		color: white !important;
+	}.img-log{
+		float: left;
+	}
+	.resumen-log{
+		font-size: .8em;
+	}
+	
+	/**/
+	@media only screen and (max-width: 991px) {
+		.parte-resumen{
+			width: 100%;		
+			float: left;
+		}.img-log{
+			width: 100%;
+		}.text_completo_log{
+			height: 80px;
+			width: 100%;
+			overflow-y:scroll;
+			overflow-x:hidden;
+		}
+		.text_completo_log_def{
+			font-size: .8em !important;
+		}
+
+
+
 	}
 </style>

@@ -1,7 +1,169 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 if(!function_exists('invierte_date_time')){
 
+/**/
+function btn_asistencia(){
+  $btn =  "<button class='btn_call_to_emp  btn_asistencia' type='button' data-toggle='modal' data-target='#asistencia_moal' >
+            <span class='place_asistentes'>                                
+            </span> Asistiré
+          </button>";
 
+  return $btn;
+}
+/**/
+function RandomString($length=10,$uc=TRUE,$n=TRUE,$sc=FALSE){
+    
+      $source = 'abcdefghijklmnopqrstuvwxyz';
+      if($uc==1) $source .= 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+      if($n==1) $source .= '1234567890';
+      if($sc==1) $source .= '|@#~$%()=^*+[]{}-_';
+      if($length>0){
+          $rstr = "";
+          $source = str_split($source,1);
+          for($i=1; $i<=$length; $i++){
+              mt_srand((double)microtime() * 1000000);
+              $num = mt_rand(1,count($source));
+              $rstr .= $source[$num-1];
+          }
+   
+      }
+      return $rstr;
+}
+/**/
+function valida_reservaciones_public($in_session , $tel , $mail , $href){
+
+  $text_user_complete =  "";  
+  $text_user = "";  
+  $num_tel =  strlen(trim($tel));
+  $num_mail =  strlen(trim($mail));
+
+
+    $flag =0; 
+    if ($num_tel > 0 ){
+      $text_user .=  "Tel.  ".$tel ;
+      $flag ++; 
+    }if ($num_mail > 0 ) {
+      $text_user .=  "  ".$mail; 
+      $flag ++; 
+    }
+
+
+    if ($in_session ==  1 ){      
+        $text_user_complete =  "Reservaciones ";     
+    }else{      
+      if ($flag == 0  ) {
+        $text_user_complete =  "Reservaciones pŕoximanente"; 
+      }else{
+        $text_user_complete =  "Reservaciones  ";
+      }
+    }
+
+    /**/
+
+  return  "<div class='seccion-reservaciones'> 
+              ".editar_btn($in_session , $href ) . "
+              <span class='text-reservaciones'> 
+              " . $text_user_complete. $text_user ."
+              </span>
+          </div>"; 
+
+
+}
+/**/
+function valida_reservaciones( $public , $tel , $mail ,  $modal ,  $id ='' ){
+
+  $text_user_complete =  "";  
+  $text_user = "";  
+  $num_tel =  strlen(trim($tel));
+  $num_mail =  strlen(trim($mail));
+
+
+    $flag =0; 
+    if ($num_tel > 0 ){
+      $text_user .=  "Tel.  ".$tel ;
+      $flag ++; 
+    }if ($num_mail > 0 ) {
+      $text_user .=  "  ".$mail; 
+      $flag ++; 
+    }
+
+
+    if ($public ==  1 ){
+      
+        $text_user_complete =  "Reservaciones "; 
+      
+
+    }else{
+      
+      if ($flag == 0  ) {
+        $text_user_complete =  "Reservaciones pŕoximanente"; 
+      }else{
+        $text_user_complete =  "Reservaciones  ";
+      }
+
+    }
+
+  return  btn_modal_config($public ,  $modal  ,  $id ). "          
+          <span class='text-reservaciones'> 
+            " . $text_user_complete. $text_user ."
+          </span>"; 
+}
+function btn_modal_config($public , $modal , $id ){
+
+    if ($public ==  1 ){        
+          return '  
+                    <li data-toggle="modal" data-target="#'.$modal .'"  class="btn_configurar_enid_w " 
+                    id="'.$id.'"> 
+                      
+                        <i class="fa fa fa-cog reservaciones_event" id="'.$id .'">
+                        </i>                      
+                      
+                    </li>               
+          ';
+      }else{
+        return ""; 
+      }
+
+}
+
+/**/
+
+
+  /**/
+  function get_def_cargo($name, $class , $id ){
+
+    $cargo = ["Director","Director comercial","Director de comunicación","Director de tecnología","Coordinador","Gerente","Subdirector","Supervisor","Jefe de operaciones","Staff","Staff","Otro"];
+    $select =  "<select name= '".$name."' class='".$class ."' id='".$id."'>"; 
+    for ($a=0; $a < count($cargo); $a++){ 
+        $select .=  "<option value='".$cargo[$a]."'>". $cargo[$a]."</option>"; 
+    }
+    $select .=  "</select>"; 
+    return $select;      
+  }
+  /**/
+  function get_def_grupo($name, $class , $id  ){
+    /**/
+    $grupo =  ["Marketing" , "Audio y video" , "Iluminación" , "Calidad" , "Venta", "Escenografía" , "Comunicación" , "Información" , "Seguridad" , "Otro"];
+
+    $select =  "<select name= '".$name."' class='".$class ."' id='".$id."'>"; 
+    for ($a=0; $a < count($grupo); $a++){ 
+        $select .=  "<option value='".$grupo[$a]."'>". $grupo[$a]."</option>"; 
+    }
+    $select .=  "</select>"; 
+    return $select;      
+  }
+  /**/
+  function get_turnos_def($name, $class , $id  ){
+
+    $turno =  ["Matutino" , "Vespertino" , "Nocturno" , "Mixto"];
+    $select =  "<select name= '".$name."' class='".$class ."' id='".$id."'>"; 
+    for ($a=0; $a < count($turno); $a++) { 
+        $select .=  "<option value='".$turno[$a]."'>". $turno[$a]."</option>"; 
+    }
+    $select .=  "</select>"; 
+    return $select;  
+  }
+  /**/
   function evalua_url_youtube($url){
     /**/
     $icon = "<a style='color: #93a2a9 !important;'>Youtube</a>"; 
@@ -110,9 +272,11 @@ if(!function_exists('invierte_date_time')){
   }
 
   /**/
-  function template_evento($nombre_evento ,  $id_evento ){
+  function template_evento($nombre_evento ,  $id_evento , $id_empresa ){
                                 
     $url =  base_url("index.php/eventos/visualizar")."/".$id_evento;
+    $url_empresa = base_url('index.php/emp/lahistoria'). "/".$id_empresa;
+    $url_enid =  base_url();
     $template =  "
               <div class='col-lg-12 col-sm-12 col-md-12 seccion-presentacion' >
                 <div class='row'>
@@ -121,10 +285,29 @@ if(!function_exists('invierte_date_time')){
                       ".$nombre_evento."
                     </a>
                   </div>
-                  <span class='nombre_empresa_enid'>
-                    Enid service
-                  </span>
+                  <a href='".$url_enid."'>
+                    <span class='nombre_empresa_enid'>
+                      Enid service
+                    </span>
+                  </a>
                 </div>
+                <div >
+                  <a href='".$url_empresa."' class='pull-left'>                        
+                    <button class='btn_call_to_emp'>
+                        By 
+                        <span class='place_nombre_empresa'>
+                        </span>
+                        <span class='nombre_empresa'>
+                        </span>
+
+                    </button>    
+                  </a>                            
+                </div>
+
+                <div>
+                ".btn_asistencia() ."
+                </div>
+
               </div>
               ";
 
@@ -833,6 +1016,19 @@ function get_statusevent($status){
     }else{
       return $val; 
     }    
+  }
+  /**/
+  function resumen_descripcion_enid($text){
+
+      /**/
+      $text_complete = ""; 
+      if(strlen(trim($text)) > 100){        
+        $text_complete .=  "<div class='text_completo_log_def   text_completo_log'>". $text ." </div>";
+      }else{
+        $text_complete =  "<div class='text_completo_log_def '>" .$text ."</span>";
+      }
+      return  $text_complete;
+
   }
   /**/
   function part_descripcion($descripcion ,  $min_lenght , $max_lenght ){

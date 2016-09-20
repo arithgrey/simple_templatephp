@@ -1,3 +1,4 @@
+	
 <!--inicia la sección principal-->
 <div class='row'>
 	<div class='col-lg-12  col-ms-12 col-sm-12'>		
@@ -10,6 +11,9 @@
 		    </div>			
 		</div>
 		<div class='part_desc_'>
+
+
+
 			<span class='resumen-a'>
 				<?=editar_btn($in_session , base_url('index.php/escenario/configuracionavanzada/'. $escenario["idescenario"].'/tipo/#btnGroupVerticalDrop1') )?>
 			</span>
@@ -20,7 +24,16 @@
 				<?=trim($escenario["tipoescenario"]);?>
 			</span>			
 		</div>
+
+		
 		<div class='dias_restantes'>
+			<?=valida_reservaciones_public(
+	            $in_session ,
+	            $evento["reservacion_tel"] ,
+	            $evento["reservacion_mail"] , 
+	            base_url('index.php/eventos/nuevo')."/".$evento['idevento']."/reservaciones/"
+	        )?>
+        
 			<span class=''>
 				<?=$dias_restantes_evento;?>
 			</span>

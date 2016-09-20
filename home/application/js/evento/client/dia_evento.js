@@ -1,7 +1,17 @@
 $(document).on("ready" , function(){
 	evento =  $("#idevento").val();		
+
+
+	/**/
+	$("footer").ready(carga_data_empresa);
+	$("footer").ready(carga_num_asistentes);
+	$(".btn_asistencia").click(carga_asistencia_user);
+	/**/
 	$("footer").ready(carga_servicios);	
 	$("footer").ready(carga_otros_eventos);
+
+
+
 });
 /**/
 function carga_section_politicas_evento(){

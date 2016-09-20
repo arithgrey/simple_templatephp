@@ -3,6 +3,12 @@ $(document).on("ready", function(){
 	$(".botonExcel").click(exporta_excel);
 	edith_section();
 
+	$("footer").ready(carga_data_empresa);		
+	
+
+	$("footer").ready(carga_num_asistentes);
+	$(".btn_asistencia").click(carga_asistencia_user);
+
 	$("footer").ready(carga_portada_escenario);
 	$("footer").ready(carga_seccion_artistas);
 	$("footer").ready(cargar_otros);
@@ -74,7 +80,7 @@ function carga_portada_escenario(){
 		}
 	}).done(function(data){
 		llenaelementoHTML(".slider-principal-escenario", data );
-		$(".nombre-escenario-text").click(update_nombre_escenario);
+		
 	}).fail(function(){		
 		show_error_enid(".slider-principal-escenario", "Error al cargar la portada del escenario, reporte al administrador" ); 
 	});

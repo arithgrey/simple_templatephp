@@ -60,12 +60,42 @@
             <span class="input-group-addon">
                 $
             </span>
-            <input class="form-control" type="text" name='nuevo_precio' id='nuevo-precio'>
+            <input maxlength="10"  class="form-control" type="text" name='nuevo_precio' id='nuevo-precio'>
             <span class="input-group-addon ">
                 .00
             </span>
         </div>
         <?=get_select_divisas("nueva_moneda" , "nueva_moneda form-control" , "nueva_moneda")?>              
+        
+
+
+
+                <div class='row'>
+                    <div class='col-lg-12 col-md-12 col-sm-12'>
+                        <div class='calendar-1'>        
+                            <label class='text-inicio'>
+                                Día Inicio    
+                            </label>                    
+                            <input type="" data-date-format="yyyy-mm-dd" value="<?=now_enid();?>"  id="nuevo_inicio_acceso" 
+                            class='form-control input-sm'  name="nuevo_inicio_acceso"  size="10" required >                        
+                        </div>        
+                        <div class='calendar-2'>    
+                            <label class='text-termino'>
+                                Día  Termino                 
+                            </label>        
+                            
+                            <input  type="" name="nuevo_termino_acceso"  data-date-format="yyyy-mm-dd" value="<?=now_enid();?>"  
+                                id="nuevo_termino_acceso"  class='form-control input-sm' size="10" required>                
+                        </div>
+                    </div>            
+                    <div class='col-lg-12 col-md-12 col-sm-12'>
+                        <span class='place_val_date_2'>                            
+                        </span>
+                    </div>
+                </div> 
+
+
+        <!--
         <div class='seccion-date-input'>                    
             <div data-date-viewmode="years" data-date-format="yyyy-mm-dd" data-date="<?=now_enid()?>" 
             class="input-append date dpYears"  >
@@ -89,6 +119,12 @@
                 </span>
             </div>                    
         </div>
+        -->
+
+
+
+
+
         <label>
             Nota adicional
         </label>
@@ -150,7 +186,7 @@
                     <span class="input-group-addon">
                         $
                     </span>
-                    <input class="form-control input-sm" type="number" name='precio' id='precio-acceso-record' maxlength='3' required>
+                    <input maxlength="10" class="form-control input-sm" type="number" name='precio' id='precio-acceso-record'  required>
                     <span class="input-group-addon ">
                         .00
                     </span>                    
@@ -159,34 +195,35 @@
                 </div>                        
                 <?=get_select_divisas("moneda" , "moneda form-control" , "moneda" )?>        
 
-                
-                <div class='seccion-date-input'>
-                    <div data-date-viewmode="years" data-date-format="yyyy-mm-dd" data-date="<?=now_enid()?>" class="input-append date dpYears"  >
-                    <input readonly="" value="<?=now_enid()?>" size="16" class="form-control input-sm" name="inicio" id="inicio-acceso-record" type="text" >
-                        <span class="input-group-btn add-on">
-                            <button class="btn btn-primary" type="button">
-                                <i class="fa fa-calendar">
-                                </i>
-                            </button>
+                <div class='row'>
+                    <div class='col-lg-12 col-md-12 col-sm-12'>
+                        <div class='calendar-1'>        
+                            <label class='text-inicio'>
+                                Día Inicio    
+                            </label>                    
+                            <input type="" data-date-format="yyyy-mm-dd" value="<?=now_enid();?>"  id="fecha_inicio" 
+                            class='form-control input-sm'  name="inicio"  size="10" required >                        
+                        </div>        
+                        <div class='calendar-2'>    
+                            <label class='text-termino'>
+                                Día  Termino                 
+                            </label>        
+                            
+                            <input  type="" name="termino"   data-date-format="yyyy-mm-dd" value="<?=now_enid();?>"  
+                                id="fecha_termino"  class='form-control input-sm' size="10" required>                
+                        </div>
+                    </div>            
+                    <div class='col-lg-12 col-md-12 col-sm-12'>
+                        <span class='place_val_date'>                            
                         </span>
-                    </div>    
+                    </div>
                 </div> 
-                <div class='seccion-date-input'>
-                    <div data-date-viewmode="years" data-date-format="yyyy-mm-dd" data-date="<?=now_enid()?>" class="input-append date dpYears"  >
-                        <input readonly="" value="<?=now_enid()?>" size="16" class="form-control input-sm" name="termino" id="termino-acceso-record"  type="text"  >
-                        <span class="input-group-btn add-on">
-                            <button class="btn btn-primary" type="button">
-                                <i class="fa fa-calendar">
-                                </i>
-                            </button>
-                        </span>
-                    </div>        
-                </div>
                 <label>
                     Nota adicional
                 </label>        
                 <textarea name='descripcion' id='descripcion' rows="6" class="form-control input-sm">
-                </textarea>                                           
+                </textarea> 
+            <br>                                          
                 <button class="btn btn-default btn_save  acceso-registro-button">
                     Registrar acceso 
                 </button>           

@@ -3,15 +3,224 @@ class empresamodel extends CI_Model{
   function __construct(){
       parent::__construct();        
       $this->load->database();
-  }  
+  } 
+  /**/
+  function update_reservaciones_evento($param){
+
+    /**/
+    $query_update = "UPDATE evento 
+                      SET 
+                      reservacion_tel  = '".$param["reservacion_tel"]."' , 
+                      reservacion_mail   = '".$param["reservacion_mail"]."'   
+                      WHERE idevento = '".$param["dinamic_event"]."' LIMIT 1 ";  
+    return $this->db->query($query_update);
+    /**/
+  }
+  /**/
+  function get_reservaciones_evento($param){
+
+    $query_get =  "SELECT 
+                    reservacion_tel , 
+                    reservacion_mail 
+                    FROM evento 
+                    WHERE idevento = '".$param["id_evento"] ."' LIMIT 1 "; 
+
+
+   $result = $this->db->query($query_get);                 
+
+   $data = $result->result_array();
+   $reservacion_tel =  $data[0]["reservacion_tel"];
+   $reservacion_mail =  $data[0]["reservacion_mail"];
+    
+
+   $tel_lenght = strlen(trim($reservacion_tel));
+   $mail_lenght = strlen(trim($reservacion_mail));
+
+   $flag =0;
+   if ($tel_lenght ==  0 ){
+      
+      $query_update =  "update evento e , empresa  set e.reservacion_tel = ( select reservacion_tel from  empresa 
+                        where       
+                        idempresa = '".$param["id_empresa"]."'  ) 
+                        where e.idevento = '".$param["id_evento"]."' ";     
+
+      $this->db->query($query_update);                  
+      $flag ++;
+   }
+
+   if ($mail_lenght ==  0 ){
+      
+      $query_update =  "update evento e , empresa  set e.reservacion_mail = ( select reservacion_mail from  empresa 
+                        where       
+                        idempresa = '".$param["id_empresa"]."'  ) 
+                        where e.idevento = '".$param["id_evento"]."' ";     
+
+      $this->db->query($query_update);                  
+      $flag ++;
+   }
+
+
+   if ($flag > 0 ){
+
+      $query_get =  "SELECT  reservacion_tel ,  reservacion_mail  FROM evento  
+                     WHERE 
+                     idevento = '".$param["id_evento"] ."' LIMIT 1 "; 
+     $result = $this->db->query($query_get);                 
+     $data = $result->result_array(); 
+   }
+  return $data;
+  }
+  /**/
+  function update_reservaciones($param){
+
+    $query_update =  "UPDATE empresa SET  
+                      reservacion_tel  = '".$param["reservacion_tel"] ."' ,
+                      reservacion_mail =  '".$param["reservacion_mail"] ."'
+                      WHERE idempresa = '".$param["id_empresa"]."' LIMIT 1";
+
+    return $this->db->query($query_update);                  
+  }
+  /**/
+  function get_reservaciones($id_empresa){
+
+    $query_get =  "SELECT  
+                  reservacion_tel ,    
+                  reservacion_mail  
+                  FROM empresa WHERE idempresa = '".$id_empresa."' LIMIT  1";  
+
+    $result = $this->db->query($query_get);
+    return $result->result_array();
+
+    
+  }
+  /**/
+  function get_num_empresas(){
+    $query_get =  "SELECT COUNT(0) num_empresas FROM empresa";  
+    $result = $this->db->query($query_get);
+    return $result ->result_array()[0]["num_empresas"];
+  }
+  /**/
+  function consulta_user_prospecto($param){
+    
+    $query_get =  "SELECT COUNT(0)num_user FROM usuario WHERE email='".$param["mail"]."' LIMIT 1 ";
+    $result = $this->db->query($query_get);
+    $num_user =  $result->result_array()[0]["num_user"];
+    return $num_user;
+  }
+  /**/
+  function get_status_empresa($param){
+
+    $query_get = "SELECT status FROM empresa WHERE idempresa =  '".$param["empresa"]."' ";
+    $result=  $this->db->query($query_get); 
+    $estatus_empresa =  $result->result_array()[0]["status"];
+
+
+    $data["estatus_text"] =  "";
+    $data["estatus_empresa"] =  0;
+
+    switch ($estatus_empresa) {
+      case 1:
+          /*Contamos cuantos eventos tenemos registrados*/  
+
+          $num_eventos = $this->empresa_eventos($param["empresa"]);
+          if ($num_eventos < 3){
+              $data["estatus_text"] = "Eventos registrados " . $num_eventos;
+              $data["estatus_empresa"] = 1;            
+          }else{
+
+              $data["estatus_text"] = "Has alcanzado el máximo de de eventos a publicitar en la versión de prueba";
+              $data["estatus_empresa"] = 0;          
+              $data["propuesta_venta"] = 1;          
+
+          }
+
+          break;
+      case 2:          
+          
+          /*2.-Cuando ya han pagado */  
+          $data["estatus_text"] = "Usuario que ha reagistrado pago";
+          $data["estatus_empresa"] =  1;
+
+          break;    
+        
+      case 3:
+
+          /*Cuando ya ha terminado su límite de pago*/
+          $data["estatus_text"] = "Usuario que ha reagistrado pago pero la fecha ha terminado";
+          $data["estatus_empresa"] =  1;
+
+        break;
+
+      case 4:
+
+        $data["estatus_text"] = "Por siempre";
+        $data["estatus_empresa"] =  1;
+        
+        break;
+
+      case 5:
+        $data["estatus_text"] = "Usuario bloqueado";
+        $data["estatus_empresa"] =  0;
+        
+        return 0;
+        break;
+
+      default:        
+        $data["estatus_text"] = "";
+        $data["estatus_empresa"] =  0;
+        break;
+    }
+
+    return $data;
+
+  }
+  /**/
+  function empresa_eventos($id_empresa){
+
+    $query_get =  "SELECT COUNT(0)num_eventos FROM evento WHERE idempresa = $id_empresa LIMIT  5";
+    $result = $this->db->query($query_get);
+    return $result->result_array()[0]["num_eventos"];
+  }
+  /**/
+
+  /**/
+  function insert_prospecto_enid($param){
+    $query_insert =  "INSERT IGNORE INTO prospecto(correo) VALUES('". $param["mail"] ."')"; 
+    return  $this->db->query($query_insert);  
+  }
+  /**/      
+  function update_pais_empresa($param){
+    $query_get =  "UPDATE empresa SET idCountry = '".$param["pais_empresa"]."' 
+    WHERE idempresa  = '". $param["empresa"]."' limit 1 ";
+    return  $this->db->query($query_get);
+
+  }
+  /**/
+  function get_pais_empresa($param){
+
+    $query_get =  "SELECT idCountry FROM empresa WHERE idempresa = '". $param["empresa"]."'  LIMIT 1";
+    $result = $this->db->query($query_get);
+    return $result->result_array();
+  } 
+  /**/
+  function get_paises(){
+
+      $query_get =  "select * from countries";
+      $result =  $this->db->query($query_get);
+      return $result->result_array();
+
+  }
+
   /**/
   function create_account($param){
 
-      $query_insert = "INSERT INTO empresa(nombreempresa , acepta_uso_privacidad , text_uso_privacidad ) VALUES ('".$param["org"]."' , '".$param["privacidad_condiciones"]."' , 'He leído y  acepto las condiciones de uso y privacidad para hacer uso del sistema Enid Service.' )";    
+
+      $query_insert = "INSERT INTO empresa(nombreempresa , acepta_uso_privacidad , text_uso_privacidad ) 
+      VALUES ('".$param["org"]."' , '".$param["privacidad_condiciones"]."' , 'He leído y  acepto las condiciones de uso y privacidad para hacer uso del sistema Enid Service.' )";    
       $this->db->query($query_insert);
       $id_empresa  = $this->db->insert_id();              
       /**/
-      $query_insert  = "INSERT INTO enidserv_eniddbbbb3.usuario(            
+      $query_insert  = "INSERT INTO usuario(            
                             email,                    
                             idempresa,                                                                       
                             ultima_modificacion , 
@@ -100,21 +309,52 @@ class empresamodel extends CI_Model{
   }
   /**/  
   function get_iconos_sociales($param){
+    
 
-    /**/
       $id_empresa =  $param["id_empresa"];
-      $_num = $this->contruye_experiencia_iconos($id_empresa ,  0 ); 
-      /*Aplicamos query*/
-      $query_get="select * from   tmp_img_exp_1_$_num 
-      UNION ALL 
-      select * from   tmp_img_exp_2_$_num 
-      UNION ALL 
-      select * from   tmp_img_exp_7_$_num";
+      $this->create_imgs_iconos(0 , $id_empresa);
+      
+      $query_get="SELECT * FROM   tmp_img_exp_1_$id_empresa 
+                  UNION ALL 
+                  select * from   tmp_img_exp_2_$id_empresa 
+                  UNION ALL 
+                  select * from   tmp_img_exp_7_$id_empresa";
+
       $result = $this->db->query($query_get);
-      $data_complete = $result->result_array();
-      /*Borramos las tablas*/
-    $this->contruye_experiencia_iconos($id_empresa ,  1, $_num ); 
-    return $data_complete; 
+      $data_complete = $result->result_array();  
+      $this->create_imgs_iconos(1 , $id_empresa);
+      return $data_complete; 
+      
+  }
+  /**/
+  function create_imgs_iconos($flag , $id_empresa){
+
+
+    $posibles_tables = array( 1 , 2 , 7);
+    $msj_client =  ""; 
+    for ($x=0; $x <count($posibles_tables); $x++) {       
+      $query_procedure =  "DROP table IF exists tmp_img_exp_".$posibles_tables[$x]."_".$id_empresa; 
+      $msj_client .= $this->db->query($query_procedure);
+  
+    }
+
+    if ($flag == 0 ){
+    
+      
+      
+      for ($x=0; $x <count($posibles_tables); $x++) {       
+        $query_create =  "CREATE TABLE  tmp_img_exp_".$posibles_tables[$x]."_".$id_empresa." AS  
+            SELECT * FROM imagen WHERE id_empresa =  '".$id_empresa ."'
+            AND DATE(fecha_registro) BETWEEN DATE_ADD(CURRENT_DATE(), INTERVAL - 1 MONTH) AND CURRENT_DATE() AND 
+            type = '".$posibles_tables[$x]."'
+            ORDER BY fecha_registro DESC LIMIT 4";
+
+          $msj_client .= $this->db->query($query_create);
+      }
+    }
+    return $msj_client;
+
+
   }
   /**/
   function contruye_experiencia_iconos($id_empresa , $f = 0 , $_num = 0 ){
@@ -126,6 +366,8 @@ class empresamodel extends CI_Model{
       $this->db->query($query_procedure);
       return $_num;
   }
+  /**/
+
   /**/
   function get_generos_musicales_empresa($id_empresa){
 
@@ -344,11 +586,18 @@ function exist_company_byname( $nombreempresa ){
       }     
     return $flag;
 
-}/*Termina la función */
+}
+/*Termina la función */
+function get_nombre_empresa($param){
 
-
-
-
+    $query_get =  "SELECT  nombreempresa FROM empresa WHERE idempresa  ='".$param["id_empresa"]."' LIMIT 1"; 
+    
+    $result =  $this->db->query($query_get);
+    return $result->result_array();
+    
+    
+}
+/**/
 function recordempresawhitname( $nombreempresa ){
 
 
@@ -555,8 +804,7 @@ function create_tmp_user_e($_num,  $flag , $param){
                       puesto,
                       cargo
                       FROM  usuario 
-                      WHERE idempresa = $id_empresa 
-                      and tipo =1 "; 
+                      WHERE idempresa = $id_empresa"; 
       $db_response = $this->db->query($query_create);                
 
     }
@@ -637,26 +885,3 @@ function create_tmp_logs( $_num , $flag  ,  $param ){
 /**/
 /*Termina modelo */
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

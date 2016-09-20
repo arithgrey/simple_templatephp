@@ -7,6 +7,19 @@
         </strong> 
       </span>
     </li>        
+
+    <div class='ver-public-lap'>
+        <a href="<?=base_url('index.php/eventos/accesosalevento/')?>/<?=$data_evento['idevento']?>">    
+             <li class='tab_enid pull-right'>
+                |<span>        
+                    Ver como el público 
+                <i class='fa fa-arrow-circle-o-right'> 
+                </i>
+                </span>
+            </li>              
+        </a>
+    </div>
+    
     <li class='tab_puntos_venta pull-right'>
       <span class='tab_enid' aria-expanded="true" href="#tab_puntos_venta" role="tab" data-toggle="tab" >                              
         Puntos de venta     
@@ -20,7 +33,7 @@
         <div class='contenido-accesos'>
             <div class='col-lg-8 col-md-8 col-sm-12 '>  
                 <div class='row'>
-                    <button id="nuevo-acceso-button" title="Registrar contacto" type="button" class="btn btn btn_nnuevo" data-toggle="modal" data-target="#nuevo-acceso-modal">                
+                    <button id="nuevo-acceso-button" title="Registrar contacto" type="button" class="btn_nnuevo" data-toggle="modal" data-target="#nuevo-acceso-modal">                
                         + Nuevo acceso
                     </button>                        
                     <div>                                                     
@@ -176,6 +189,11 @@
     .contenedor-izq{
         height: 100%;
     }
+    .calendar-1, .text-inicio , 
+    .calendar-2 , .text-termino{
+        display: inline-block;
+    }
+
     /**/
     @media only screen and (max-width: 991px) {    
         .titulo_pv{
@@ -187,6 +205,9 @@
         }
         .seccion-date-input{
             width: 50%;
+        }
+        .ver-public-lap{
+            display: none;
         }
     }
 </style>

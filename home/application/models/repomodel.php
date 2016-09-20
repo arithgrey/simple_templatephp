@@ -177,31 +177,7 @@ class repomodel extends CI_Model {
 		$data["num_eventos"] = $this->create_tmps(0 ,  $_num ,  $id_empresa );
 		
 		if ($data["num_eventos"] > 0){
-			/*
-			$query_get = "SELECT 
-							e.* ,
-							a.num_accesos,
-							ar.artistas ,
-							p.evento_punto_venta,							
-							i.*
-							FROM tmp_evento_e_m_$_num e  
-							LEFT OUTER JOIN  tmp_evento_e_m_promo_$_num a 
-							ON  e.idevento =  a.idevento
-							LEFT OUTER JOIN  tmp_evento_e_artistas_$_num ar
-							ON e.idevento =  ar.id_evento
-							LEFT OUTER JOIN tmp_evento_e_puntos_venta_$_num p 
-							ON e.idevento =  p.idevento
-
-							
-							LEFT OUTER JOIN tmp_img_evento_e_$_num ti 
-							ON  e.idevento =  ti.id_evento
-							LEFT OUTER JOIN tmp_img_e_$_num i 
-							ON  ti.id_imagen=  i.idimagen   
-							
-							"; 
-							*/
-
-
+		
 
 							$query_get = "SELECT 
 							e.* ,
@@ -223,7 +199,17 @@ class repomodel extends CI_Model {
 			$this->create_tmps( 1 ,  $_num , $id_empresa  );			
 			$data["query"] =  $query_get ;
 		}
+
+
+		$this->last_delete($_num , $param);
 		return $data;
+	}
+	/**/
+	function last_delete( $_num , $param){
+
+		$query_drop =  "DROP TABLE IF exists tmp_evento_e_m_$_num"; 
+		$this->db->query($query_drop);
+
 	}
 	/**/
 	function create_tmps($flag, $_num ,  $id_empresa){

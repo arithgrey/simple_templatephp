@@ -2,213 +2,185 @@
 require APPPATH.'/libraries/REST_Controller.php';
 class Mailrest extends REST_Controller{
 	function __construct(){
-	    parent::__construct();
-	    $this->load->library("email");
-	    $this->load->model("recuperapasswordmodel");
-	    $this->load->model("usuariogeneralmodel");   
-	    $this->load->library('sessionclass');  
+	    parent::__construct();	  
+	    $this->load->model("enidmodel");  
+	    $this->load->library('sessionclass');        
+	}    
+  
 
-	}         
-	/**************************************************************************************/
-	function recuperarPassword_get(){
-	    
-	    $email = $this->get('email');
-	    /*Conslta que exista */
-		$respuestaDB = $this->recuperapasswordmodel->recuperarPassword($email);
-	    if($respuestaDB > 0){
-	    		$this->response($this->reenvioContrasena($email));
-	    }else{
-	    
-	    	$this->response("El correo no existe...");
-	    }
-	}
 	/**/
-	function reenvioContrasena($email){
+	function prospecto_get(){
 
-			$cadena = $this->RandomString();
-	    	$Cifrada = sha1($cadena);
-	    	$exito = $this->recuperapasswordmodel->actualizaPassword($email, $Cifrada);
+ 		$this->validate_user_sesssion();          
+ 		$param =  $this->get();		
+ 		if ($param["q"] ==  "az4299Cv28R"){
 
-	    	if($exito == true){
-
-	    		/*Se envia email */
-				$mensaje ="<h1>Enid service </h1>
-				<label> 
-				
-				Mensajes enviado por el desarrollador de la plataforma, dudas y aclaraciones
-				 comunicarse con  arithgrey@gmail.com</label><br>
-				<h2>Tu usuario es tu correo: ".trim($email )." </h2>
-				<h3>Tu contraseña es: ". trim( $cadena) ."</h3><br>
-				Para iniciar sessión al sistema dirigete a: ". base_url('index.php/sessioncontroller/iniciosessionuser')."
-				";
-
-				$subject ="Recuperación de contraseña";
-		    		$this->response($this->sendMailGmailnuevainvitacioncuenta($email , $cadena, $mensaje, $subject));
-		    	}else{
-		    		$this->response("Intente de nuevo...");
-		    	}
-
-			$cadena = $this->RandomString();
-			return $cadena;		
-	}
-/**************************************************************************************/
-
-
-	function send_mail_gmail_invitaticon_post(){
-
-		$this->validate_user_sesssion();
-
-		$clientresponse ="";	
-		$id_perfil = $this->post("idperfil");
-		$mailnewcontact =  $this->post("mailnewcontact");
-		$nombre = $this->post("nombre");
-
-		$idempresa = $this->sessionclass->getidempresa();
-		$contraseñaaleatoria = $this->RandomString();
-		$pw = sha1($contraseñaaleatoria);
-
-		$usuarioexiste = $this->isuserexist($nombre ,  $mailnewcontact); 
-				
-		if ($usuarioexiste ==  true) {				
-			$clientresponse = "Intente con otro usuario, el que ingresó ya existe en el sistema";
-		}else{
-			$registro  = $this->recordusergeneral($nombre , $mailnewcontact, $pw , $idempresa , $id_perfil );
-				
-				if ($registro == 1) {
-					$mensaje ="<h1>Enid service</h1>
-						<label>Hola que tal, el administrador de la cuenta de Enid Service ha 
-						registrado tu usuario en el sistema, la contraseña es provisional así 
-						que una vez que inicies sesión en el sistema tendrás que cambiarla por 
-						motivos de seguridad. 
-
-						Mensaje generado desde la plataforma, dudas y aclaraciones
-						comunicarse con arithgrey@enidservice.com ó arithgrey@gmail.com</label><br>
-						<h2>Tu usuario es tu correo: ".trim($mailnewcontact)." </h2>
-						<h3>Tu contraseña es: ".trim( $contraseñaaleatoria )."</h3><br>
-						Para iniciar sessión al sistema dirigete a: ". base_url('index.php/sessioncontroller/iniciosessionuser')."
-						";
-
-					$subject ='Invitación a formar parte del sistema Enid Service';
-						
-					$clientresponse = $this->sendMailGmailnuevainvitacioncuenta( trim($mailnewcontact) ,$contraseñaaleatoria, $mensaje, $subject);
-
-				}else{
-					$clientresponse ="Intente nuevamente, si persiste el error reporte al desarrollador";			
-				}		
-
-		}
-
-		$this->response($clientresponse);
-	}
+ 			$param["mail_user"] = $this->sessionclass->getemailuser();            
+ 			$user_prospecto =  $this->update_pass_prospecto($param);
+ 			$this->response($user_prospecto);
+ 		} 	
+	}   
 	/**/
+	function update_pass_prospecto($param){
 
-	function sendMailGmailnuevainvitacioncuenta($mail , $pw, $mensaje,  $subject){
-			
-			$configGmail = array(
-					'protocol' => 'sendmail',								
-					'smtp_port' => 587,
-					'smtp_user' => 'arithgrey@enidservice.com',
-					'smtp_pass' => 'ubuntuJavaJava.1',
-					'mailtype' => 'html',
-					'charset' => 'utf-8',
-					'wordwrap' => TRUE, 
-					'validate' => true
+		$mail =  $param["mail_user"];
+		$mail_response["mail_prospecto"] = 1;
+		$mail_response["mail_user"] =  $mail;
+		$db_response  =  $this->enidmodel->verifica_estatus_prospecto($param);
+		$mail_response["info_verificacion"] =  $db_response;
 
-			);    
-
-		    $this->email->initialize($configGmail);
-		    $this->email->set_newline("\r\n");				 
-			$this->email->from('arithgrey@enidservice.com');
-			$this->email->to($mail);
-			$this->email->subject($subject);	
-			$this->email->message($mensaje);
-
-			if ($this->email->send()) {
-				return $this->email->send();	
-			}else{
-				return $this->email->print_debugger();
-			}
-	}/*Termina la función*/
-
-
-/*******************************************************************************/
-	function sendMailGmail_get(){
-			  
-
-		$configGmail = array(
-				'protocol' => 'sendmail',								
-				'smtp_port' => 587,
-				'smtp_user' => 'arithgrey@enidservice.com',
-				'smtp_pass' => 'ubuntuJavaJava.1',
-				'mailtype' => 'html',
-				'charset' => 'utf-8',
-				'wordwrap' => TRUE, 
-				'validate' => true
-
-		);    
-
-		$this->email->initialize($configGmail);
-		$this->email->set_newline("\r\n");				
-	
-		$this->email->from('arithgrey@enidservice.com');
-		$this->email->to("arithgrey@gmail.com");
-		$this->email->subject('Invitación a formar parte del sistema Enid Service');
-		$this->email->message('<h2>by desde el rest @arithgrey</h2>');
-		$this->email->send();
-			
-		$this->response($this->email->print_debugger());
-	}
-	/**/
-	function isuserexist($user ,  $mail){
-
-	    $responsedb = $this->usuariogeneralmodel->validaexistuser($user , $mail );                
-	    if ($responsedb >0) {
-	        return true;  
-	    }else{
-	        return false; 	
-	    }	                	                                      
-	}
-  	/**/
-	function recordusergeneral($usuario , $mail , $pw , $idempresaregistrada , $perfil ){
-
-		$responsedb = $this->usuariogeneralmodel->recordusergeneralconperfil($usuario , $mail , $pw , $idempresaregistrada, $perfil);                
-	    if ($responsedb != true){
-	        return 0;
-	    }else{
-	       	return 1;
-	    }                                          
-	}/*termina */
-	/**/
-	function RandomString($length=10,$uc=TRUE,$n=TRUE,$sc=FALSE){
 		
-	    $source = 'abcdefghijklmnopqrstuvwxyz';
-	    if($uc==1) $source .= 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-	    if($n==1) $source .= '1234567890';
-	    if($sc==1) $source .= '|@#~$%()=^*+[]{}-_';
-	    if($length>0){
-	        $rstr = "";
-	        $source = str_split($source,1);
-	        for($i=1; $i<=$length; $i++){
-	            mt_srand((double)microtime() * 1000000);
-	            $num = mt_rand(1,count($source));
-	            $rstr .= $source[$num-1];
-	        }
-	 
-	    }
-	    return $rstr;
+		if($db_response["mail_prospecto"] ==  0 ){
+			$pass =$db_response["new_pass"];
+			$mail_response["mail_prospecto"]=0;
+			$mail_response["extra_info"]= $this->mail_prospecto($mail  , $pass );
+			
+		}
+		return $mail_response;
+
 	}
 	/**/
+
+	function mail_prospecto($mail , $pass ){
+
+		$datos["mail_send"] =   $mail;
+		$datos["pass_send"] =  $pass;
+
+		$destinatario = "arithgrey@enidservice.com"; 
+		$asunto = "Accesos a tu cuenta Enid Service"; 
+		$cuerpo = "<html>
+					<a href='". base_url('index.php/startsession') ."'>						
+						<img src=". base_url('application/img/mail/presentacion.png') .">
+						<center>
+							<strong>
+				                <span style='color:black;'>
+				                    Buen día le agradecemos que se tome el tiempo para conocer nuestra plataforma, con Enid service usted podrá publicitar  sus eventos musicales y hacer que cada uno de sus espectadores viva la experiencia antes y después de los mismos, aumentar su marketing  y mostrar al mundo una imagen empresarial dentro del sector del entretenimiento. 
+				                </span>      
+			                </strong>
+			            </center>
+		            </a>
+
+		            <br>
+		            <center>
+			            <a href='". base_url('index.php/startsession') ."'>
+		                    <button class='btn btn-default login-btn ' style='border-radius: 0;
+					            border-style: solid;
+					            border-width: 0;
+					            cursor: pointer;    
+					            padding: 1rem 1.77778rem 0.94444rem 1.77778rem;
+					            font-size: 0.98889rem;
+					            background-color: #008CBA;
+					            border-color: #007095;
+					            color: #FFFFFF;'>                    
+		                        Inicia ahora.!
+		                    </button>
+		                </a>
+		            </center>
+
+		            <center>
+			            <label>
+			            	Usuario :  ". $mail ."
+			            </label>
+			            <label>
+			            	Password: ".trim($pass)."
+			            </label>
+			            <br>
+			            <label>
+			            	Te recomendamos hacer el cambio  de tu contraseña al ingresar al sistema.
+			            </label>
+		            </center>
+
+		       
+				   </html>"; 
+
+		//para el envío en formato HTML 
+		$headers = "MIME-Version: 1.0\r\n"; 
+		$headers .= "Content-type: text/html; charset=iso-8859-1\r\n"; 
+
+		//dirección del remitente 
+		$headers .= "From: Enid Service <arithgrey@enidservice.com>\r\n"; 		
+
+		//ruta del mensaje desde origen a destino 
+		$headers .= "Return-path: arithgrey@gmail.com\r\n"; 
+
+		//direcciones que recibián copia 
+		$headers .= "Cc: $mail,arithgrey@enidservice.com\r\n"; 
+
+		//direcciones que recibirán copia oculta 
+		//$headers .= "Bcc: pepe@pepe.com,juan@juan.com\r\n"; 
+
+		mail($destinatario,$asunto,$cuerpo,$headers);
+		return $datos;		   
+
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	/**/
+	function mail_test_get(){
+
+		$mail = "arithgrey@gmail.com";
+		$pass =  "asd";
+		$destinatario = "arithgrey@enidservice.com"; 
+		$asunto = "Este mensaje es de prueba"; 
+		$cuerpo = " 
+		<html> 
+		<head> 
+		   <title>Prueba de correo</title> 
+		</head> 
+		<body> 
+		<h1>Test </h1> 
+		<p> 
+		<b>
+			ok prueba 
+		</p> 
+		</body> 
+		</html> 
+		"; 
+
+		//para el envío en formato HTML 
+		$headers = "MIME-Version: 1.0\r\n"; 
+		$headers .= "Content-type: text/html; charset=iso-8859-1\r\n"; 
+
+		//dirección del remitente 
+		$headers .= "From: Jonathan Govinda <arithgrey@enidservice.com>\r\n"; 		
+
+		//ruta del mensaje desde origen a destino 
+		$headers .= "Return-path: arithgrey@gmail.com\r\n"; 
+
+		//direcciones que recibián copia 
+		$headers .= "Cc: arithgrey@gmail.com,enidservice@gmail.com\r\n"; 
+
+		//direcciones que recibirán copia oculta 
+		//$headers .= "Bcc: pepe@pepe.com,juan@juan.com\r\n"; 
+
+		mail($destinatario,$asunto,$cuerpo,$headers);
+
+	}
+
+
+	/**/
+		/*Validar session para modificar datos*/
     function validate_user_sesssion(){
-                if( $this->sessionclass->is_logged_in() == 1) {                        
+        if( $this->sessionclass->is_logged_in() == 1) {                        
 
-                    }else{
-                    /*Terminamos la session*/
-                    $this->sessionclass->logout();
-                }   
-    }/*termina validar session */
-
-
-
+            }else{
+                        /*Terminamos la session*/
+                $this->sessionclass->logout();
+        }   
+    }
+   /**/ 
 
 	
 }/*Termina rest*/

@@ -6,167 +6,186 @@
 <script type="text/javascript" src="<?=base_url('application/js/evento/objetospermitidos.js')?>"></script>
 <script type="text/javascript" src="<?=base_url('application/js/evento/img.js')?>"></script>
 <!--TERMINA SECCIÓN 4 ************************************************************ -->
-<div class="col-lg-8 col-md-8 col-sm-12 section-enid-events-r ">    
 
-  <span>
-    <a class='link_ver_evento ver-public-sm' href="<?=base_url('index.php/eventos/visualizar/')?>/<?=$data_evento['idevento']?>" >
-      <i class='fa fa-arrow-circle-o-right'> 
-      </i>
-      Ver como el público 
-    </a>
-  </span>
-  <div class='seccion-config-evento-mv'>
-    <h1 class='nombre-evento-h1' title='click para editar'>
-      <strong style='color:white !important;'>
-        <?=show_text_input($data_evento['nombre_evento'] , 2 , "Evento" )?>      
-      </strong>
-    </h1>
-    <div class='place_nombre_evento'>
-    </div>                  
-    <a class='link_ver_evento ver-public-lg' href="<?=base_url('index.php/eventos/visualizar/')?>/<?=$data_evento['idevento']?>">
-      <i class='fa fa-arrow-circle-o-right'> 
-      </i>
-      Ver como el público 
-    </a>
-    <div class="form-group nombre" >
-      <input placeholder="Nombre del evento" class="form-control input-sm"  type="text" value="<?=$data_evento['nombre_evento'];?>"  id="nombre-input" name='nombre-input' >
+
+<div>
+<div class="col-lg-8 col-md-8 col-sm-12 section-enid-events-r ">    
+  <div class='row'>
+    <span>
+      <a class='link_ver_evento ver-public-sm' href="<?=base_url('index.php/eventos/visualizar/')?>/<?=$data_evento['idevento']?>" >
+        <i class='fa fa-arrow-circle-o-right'> 
+        </i>
+        Ver como el público 
+      </a>
+    </span>
+
+    <div class='seccion-config-evento-mv'>
+      <h1 class='nombre-evento-h1' title='click para editar'>
+        <strong style='color:white !important;'>
+          <?=show_text_input($data_evento['nombre_evento'] , 2 , "Evento" )?>      
+        </strong>
+      </h1>
+      <div class='place_nombre_evento'>
+      </div>                  
+      <a class='link_ver_evento ver-public-lg' href="<?=base_url('index.php/eventos/visualizar/')?>/<?=$data_evento['idevento']?>">
+        <i class='fa fa-arrow-circle-o-right'> 
+        </i>
+        Ver como el público 
+      </a>
+      <div class="form-group nombre" >
+        <input placeholder="Nombre del evento" 
+          class="form-control nombre-input input-sm"  
+          type="text" 
+          value="<?=$data_evento['nombre_evento'];?>"  
+          id="nombre-input" name='nombre-input'>
       </div>  
+
+
+      <label>
+        Edición del evento
+      </label>
+      <br>
       <span class="designation edicion-evento" title='Edición del evento, click para editar'>  
         <?=show_text_input($data_evento['edicion'] , 2 , "<i class='fa fa-plus'></i>  Edición del evento" )?>           
       </span> 
+
       <div class="form-group">
-        <input placeholder="Edición del evento" class="form-control input-sm"  type="text" id="edicion-input" name='edicion-input' value="<?=$data_evento['edicion'];?>">
+          <input 
+          placeholder="Edición del evento" 
+          class="form-control edicion-input input-sm"  
+          type="text" 
+          id="edicion-input" 
+          name='edicion-input' 
+          value="<?=$data_evento['edicion'];?>">
       </div> 
       <div class='place_edicion_evento'>
       </div>   
+
+
+      <label class='reservaciones-btn' data-toggle="modal" data-target="#reservaciones-modal"  >
+                    <?=valida_reservaciones(  0 , 
+                    $data_evento["reservacion_tel"] , 
+                    $data_evento["reservacion_mail"] , 
+                    "reservaciones-modal")?>  
+      </label>
+      <br>
+      <span class='place_reservaciones_2'>      
+      </span>                
+
+
+
       <a href="#mapgooglemap" class='link-map'>
         <i class="fa fa-map-marker " aria-hidden="true">
         </i>
       </a>        
     </div>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  <div  id='slogan_seccion' class="form-group alert alert-info slogan_seccion " title='Lema del evento'>                            
-    <i class="fa fa-flag">
-    </i> Eslogan:                                                                                                   
-    <span class='eslogan-p'>
-      <?=show_text_input($data_evento["eslogan"] , 5 , "+ Eslogan del evento " )?>
-    </span>
-    <input value="<?=$data_evento['eslogan']?>"class="form-control eslogan-evento" id="eslogan-evento" name='eslogan-evento'  placeholder="Si es en méxico, estará lleno de colores" required>
+    <div>
+      <div  id='slogan_seccion' class="form-group alert alert-info slogan_seccion " title='Lema del evento'>  
+        <i class="fa fa-flag">
+        </i> Eslogan:                                                                                                   
+        <span class='eslogan-p'>
+          <?=show_text_input($data_evento["eslogan"] , 5 , "+ Eslogan del evento " )?>
+        </span>
+        <input value="<?=$data_evento['eslogan']?>" class="form-control eslogan-evento input-sm" id="eslogan-evento" name='eslogan-evento'  placeholder="Si es en méxico, estará lleno de colores" required>
+      </div>
+      <div class='place_eslogan_evento'>
+      </div> 
+    </div>
   </div>
-  <div class='place_eslogan_evento'>
-  </div> 
-
+  <div class='row'>
   <?=$this->load->view('eventos/slider_admin')?>
-    <!--Inicia panel body ******************************-->
-          
-          <div class='row'>
-            <div class="panel-body">
-                      <div class="panel">                  
-                        <header class="panel-heading ">                            
-                          <span class="tools pull-right ">
-                            <a  class="fa fa-caret-down ">
-                            </a>                                
-                          </span>
-                        </header>
-                        <div >
-                            <h1>
-                              <strong>
-                                Configuración
-                              </strong>
-                            </h1>
-                            <div class='place_configuracion'>
-                            </div>
+  </div>
 
-                            <div class='text-fecha-evento'data-toggle="modal" data-target="#edith_fecha_modal" id="config_data_evento" >
-                               Fecha del evento  <?= get_date_event_format($data_evento["fecha_inicio"] , $data_evento["fecha_termino"]); ?> 
-                            </div> 
-                            <section class='links_modal'>
-                              <a id='tipificacion-evento' data-toggle="modal" data-target="#tipo-evento"  class='link_modal'>
-                                <?=$data_evento['tipo']?>
-                              </a>
-                              <a href ="<?=base_url('index.php/accesos/configuracionavanzada/1/')?>/<?=$data_evento["idevento"]?>"  class='link_modal' >              
-                                <i class="fa fa-credit-card">
-                                </i> 
-                                Accesos al evento y puntos de venta         
-                              </a>
-                              <a id="servicios-button" data-toggle="modal" data-target="#serviciosmodal" class="accesos-button link_modal ">           
-                                  <i class="fa fa-cutlery">
-                                  </i>                                  
-                                  Servicios incluidos 
-                              </a>
-                              <a title='Las redes sociales del evento'   class="section-left link_modal"  data-toggle="modal" data-target="#modal_social_evento" >                
-                                  <i class="fa fa-flag">
-                                  </i> 
-                                  Social                 
-                              </a>                                                                                                  
-                              <a id="tematica-button" class="section-left  link_modal "  data-toggle="modal" data-target="#modal_tematica_evento"   >              
-                                  <i class="fa fa-tree">
-                                  </i> 
-                                  Temática              
-                              </a>
-                            </section>
-                            <br>                  
-                            <ul class="nav nav-tabs menu_contenidos_enid">                                  
-                              <li class='generos_musicales_contente tab_generos' id='generos_musicales_contente'>
-                                <a href="#portlet_tab5" data-toggle="tab" >
-                                  <i class='fa fa-play'>
-                                  </i>
-                                  Géneros
-                                </a>                                      
-                              </li>
-                              <li class="restricciones_section_content tab_restricciones">
-                                <a href="#portlet_tab3" data-toggle="tab">
-                                  <i class="fa fa-exclamation-triangle">
-                                  </i> Restricciones
-                                </a>
-                              </li>
-                              <li class='permitidonow tab_permitido' title='Lo que el cliente podrá acceder al evento'>
-                                <a href="#portlet_tab2" data-toggle="tab">
-                                  <i class="fa fa-check permitidonow" >
-                                  </i>
-                                  Lo permitido 
-                                </a>
-                              </li>
-                              <li class="politicas_section_content tab_politicas ">
-                                <a href="#portlet_tab1" data-toggle="tab">
-                                  <i class="fa fa-circle">
-                                  </i>
-                                  Políticas 
-                                </a>
-                              </li>                    
-                              <li class="active tab_evento">
-                                <a href="#portlet_tab4" data-toggle="tab" >
-                                  Evento 
-                                </a>
-                              </li>          
-                              <li>
-                              <a  href="<?=base_url('/index.php/eventos/diaevento/')?>/<?=$data_evento['idevento']?>#seccionobjs">
-                                  <i class='fa  fa-arrow-circle-o-right'> 
-                                  </i>
-                                  Ver como el público
-                                </a>
-                              </li>          
-                            </ul>
+  
+    <!--Inicia panel body ******************************-->          
+  <div class='row'>
+    <div>
+      <div>                                          
+        <div>
+            <h1>
+              <strong>
+                Configuración
+              </strong>
+            </h1>
+            <div class='place_configuracion'>
+            </div>
+            <div class='text-fecha-evento' data-toggle="modal" data-target="#edith_fecha_modal" id="config_data_evento" > 
+              Fecha del evento  
+              <?= get_date_event_format($data_evento["fecha_inicio"] , $data_evento["fecha_termino"]); ?> 
+            </div> 
+            <section class='links_modal'>
+              <a id='tipificacion-evento' data-toggle="modal" data-target="#tipo-evento"  class='link_modal'>
+                <?=$data_evento['tipo']?>
+              </a>
+              <a href="<?=base_url('index.php/accesos/configuracionavanzada/1/')?>/<?=$data_evento["idevento"]?>" class='link_modal' >  <i class="fa fa-credit-card">
+                </i> 
+                Accesos y puntos de venta         
+              </a>
+              <a id="servicios-button" data-toggle="modal" data-target="#serviciosmodal" class="accesos-button link_modal">           
+                  <i class="fa fa-cutlery">
+                  </i>                                  
+                  Servicios incluidos 
+              </a>
+              <a title='Redes sociales' class="section-left link_modal" data-toggle="modal" data-target="#modal_social_evento" >
+                  <i class="fa fa-flag">
+                  </i> 
+                  Social                 
+              </a>                                                                                                  
+              <a id="tematica-button" class="section-left  link_modal "  data-toggle="modal" data-target="#modal_tematica_evento">    
+                <i class="fa fa-tree">
+                </i> 
+                Temática              
+              </a>
+            </section>                                        
+            <div>              
+              <div>
+                <ul class="nav nav-tabs menu_contenidos_enid">                                  
+                  <li class='generos_musicales_contente tab_generos' id='generos_musicales_contente'>
+                    <a href="#portlet_tab5" data-toggle="tab" class='enid-sub-menu'>
+                      <i class='fa fa-play'>
+                      </i>
+                      Géneros musicales
+                    </a>                                      
+                  </li>
+                  <li class="restricciones_section_content tab_restricciones">
+                    <a href="#portlet_tab3" data-toggle="tab" class='enid-sub-menu'>
+                      <i class="fa fa-exclamation-triangle">
+                      </i> 
+                      Restricciones
+                    </a>
+                  </li>
+                  <li class='permitidonow tab_permitido' title='Lo que el cliente podrá acceder al evento'>
+                    <a href="#portlet_tab2" data-toggle="tab" class='enid-sub-menu'>
+                      <i class="fa fa-check permitidonow" >
+                      </i>
+                      Lo permitido 
+                    </a>
+                  </li>
+                  <li class="politicas_section_content tab_politicas ">
+                    <a href="#portlet_tab1" data-toggle="tab" class='enid-sub-menu'>
+                      <i class="fa fa-circle">
+                      </i>
+                      Políticas 
+                    </a>
+                  </li>                    
+                  <li class="active tab_evento">
+                    <a href="#portlet_tab4" data-toggle="tab" class='enid-sub-menu' >
+                      La experiencia
+                    </a>
+                  </li>          
+                  <li>
+                  <a class='enid-sub-menu' href="<?=base_url('/index.php/eventos/diaevento/')?>/<?=$data_evento['idevento']?>#seccionobjs">
+                    <i class='fa  fa-arrow-circle-o-right'> 
+                    </i>
+                    Ver como el público
+                  </a>
+                </li>          
+              </ul>
+            </div>
+          </div>  
+
+
                             <!---Inicia  Descripciones dle evento  *************************************-->
                             <div class="tab-content">
                               <div class="tab-pane tab_generos" id="portlet_tab5">                                                                                                               
@@ -186,6 +205,7 @@
                                 </div>                               
                                 <div class='place_generos_musicales_busqueda'>
                                 </div>     
+                                <br>
                               </div>
                               <!--Politicas tab-->
                               <div class="tab-pane tab_politicas" id="portlet_tab1">            
@@ -219,8 +239,15 @@
                                 <div class='row'>
                                   <div class='col-lg-12 col-md-12 col-sm-12'>
                                     <span class='permitido-p' id='permitido-p'>
-                                      <?=show_text_input($data_evento["permitido"] , 250 , " + Lo que se permite en el evento" )?>                         
+                                      <?=show_text_input($data_evento["permitido"] , 250 , " + Lo que se permite en el evento" )?>
                                     </span>                                
+                                    <div class="form-group">
+                                      <textarea id='permitido-evento' placeholder ='' rows="6" class="form-control">
+                                        <?=$data_evento["permitido"];?>
+                                      </textarea>
+                                    </div>                                                           
+                                    <div class='place_permitido'>
+                                    </div>
                                   </div>
                                 </div>
                                 
@@ -235,9 +262,7 @@
                                   <i class="fa fa-chevron-down">
                                   </i> Articulos permitidos
                                 </button>                              
-                                <button title='Lista de objetos permitidos' class='btn  btn-template articulos-permitidos-button' id='articulos-permitidos-button-u' style='display:none;'>
-                                  <i class="fa fa-chevron-up">
-                                  </i>
+                                <button title='Lista de objetos permitidos' class='btn  btn-template articulos-permitidos-button' id='articulos-permitidos-button-u' style='display:none;'>                                  
                                   Articulos permitidos
                                 </button>                      
                                 <div class='separate-enid'>
@@ -251,15 +276,7 @@
                                   </div>
                                 </div>
 
-                               <!--Termina la lista de objetos permitidos -->    
-                                
-                                <div class="form-group">
-                                  <textarea id='permitido-evento' placeholder ='' rows="6" class="form-control">
-                                    <?=$data_evento["permitido"];?>
-                                  </textarea>
-                                </div>                                                           
-                                <div class='place_permitido'>
-                                </div>
+                               <!--Termina la lista de objetos permitidos -->                                    
                               </div>
                               <!--Termina lo permitido  Tab-->                        
                               <!--Inicia las restricciones -->
@@ -297,7 +314,7 @@
                                                            
                                 <h4>
                                   <i class="fa fa-file-text">
-                                  </i>  Descripción del evento
+                                  </i>  Lo que vivirá el público del evento
                                 </h4>                              
                                 <!--Terminan los alert -->
                                 <span class='descripcion-p'>
@@ -316,50 +333,77 @@
                                 </button>
                                 <div class='place_experiencia_evento'>
                                 </div>                            
+                                <br>
                               </div>
                               <!-- Termina  la experiencia --> 
                             </div>
                             <!---Inicia  Descripciones dle evento  *************************************-->            
                         </div><!--- Termina panel body  -->
                       </div><!--- Termina panel   -->
-            </div><!--- Termina panel body  -->
+            </div>
           </div>
-
-
-
-          <!--Termina la seccion general del eveto -->
-        </div><!--Termina el panel -->                      
+        </div>
+  </div>        
+        <!--Termina el panel -->                      
   
               <!--Configuración escenarios -->      
-
+            <div>
               <div class='col-lg-4  col-md-4 col-sm-12 seccion_derecha_enid' >  
                 <div class='separate-enid'>
                 </div>
                 <div class='configs-evento-lg'>
+
                   <h1 class='nombre-evento-h1' title='click para editar'>
                     <strong style='color:white !important;'>
                       <?=show_text_input($data_evento['nombre_evento'] , 2 , "Evento" )?>      
                     </strong>
-                  </h1>
+                  </h1>                  
+                  <input 
+                  placeholder="Nombre del evento" 
+                  type="text" 
+                  value="<?=$data_evento['nombre_evento'];?>"  
+                  class="nombre-input form-control input-sm"
+                  id='nombre-input'
+                  name='nombre-input' >
+                  
                   <div class='place_nombre_evento'>
                   </div>                  
+
                   <a class='link_ver_evento ver-public-lg' href="<?=base_url('index.php/eventos/visualizar/')?>/<?=$data_evento['idevento']?>">
                     <i class='fa fa-arrow-circle-o-right'> 
                     </i>
                     Ver como el público 
                   </a>
-                  <div class="form-group nombre" >
-                    <input placeholder="Nombre del evento" class="form-control input-sm"  type="text" value="<?=$data_evento['nombre_evento'];?>"  id="nombre-input" name='nombre-input' >
-                  </div>  
+                  
+                  <label>
+                    Edición del evento
+                  </label>
+                  <br>
                   <span class="designation edicion-evento" title='click para editar'>  
                     <?=show_text_input($data_evento['edicion'] , 2 , "<i class='fa fa-plus'></i>  Edición del evento" )?>           
                   </span> 
 
                   <div class="form-group">
-                    <input placeholder="Edición del evento" class="form-control input-sm"  type="text" id="edicion-input" name='edicion-input' value="<?=$data_evento['edicion'];?>">
+                    <input 
+                      placeholder="Edición del evento" 
+                      class="form-control edicion-input input-sm"  
+                      type="text"
+                      id="edicion-input" 
+                      name='edicion-input' value="<?=$data_evento['edicion'];?>">
                   </div> 
                   <div class='place_edicion_evento'>
                   </div>                    
+
+                  <label class='reservaciones-btn' data-toggle="modal" data-target="#reservaciones-modal"  >
+                    <?=valida_reservaciones(  0 , 
+                    $data_evento["reservacion_tel"] , 
+                    $data_evento["reservacion_mail"] , 
+                    "reservaciones-modal")?>  
+                  </label>                
+                  <br>
+                  <span class='place_reservaciones_2'>                    
+                  </span>
+
                 </div>  
                 <div class='section_escenarios_admin'>
                 </div>
@@ -368,6 +412,7 @@
                   </div>
                 </div>
               </div>
+            </div>      
               <!--Termina configuración escenarios -->      
               <!--Inicia la seccion del google maps para el evento-->              
               
@@ -434,8 +479,28 @@
 }
 .edicion-evento:hover{
   cursor: pointer;
+}.enid-sub-menu{
+  font-size: .9em;
+    font-weight: bold;
+    color: #3c5e79
+}
+.descripcion-p, .politicas-p , .permitido-p , .restricciones-p{
+  font-size: .8em;
+}
+#update_inicio , #update_termino{
+  display: inline-block;
+}
+.calendar-1,
+.calendar-2{
+ display: inline-block; 
+}
+.reservaciones-btn:hover{
+  cursor: pointer;
 }
 </style>
+
+
+
 
 <style type="text/css">
 /*Todo lo que pertenece a medios*/
@@ -456,6 +521,7 @@
     .link-map{
       color: white;
     }
+
 
   }
 </style>

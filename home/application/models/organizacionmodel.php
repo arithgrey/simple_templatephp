@@ -80,7 +80,7 @@ function construye_top_artistas_cliente($_num = 0  , $flag  , $id_empresa){
     }                                                   
     
     
-    $query_procedure ="CALL enidserv_eniddbbbb3.top_artistas_emp($_num , $flag  , $id_empresa);"; 
+    $query_procedure ="CALL top_artistas_emp($_num , $flag  , $id_empresa);"; 
 
     $this->db->query($query_procedure);   
     return $_num;

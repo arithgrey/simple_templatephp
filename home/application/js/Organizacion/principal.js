@@ -2,28 +2,16 @@ $(document).on("ready", function(){
 	$("#nombre-empresa-text").click(try_update_nombre);
 	$("#slogan-text").click(try_update_slogan);
 	$("#artistas-empresa-text").click(try_update_artistas);
-	$("#description-empresa-text").click(try_update_descripcion);
-	$("#mision-empresa-text").click(try_update_mision);
-	$("#vision-empresa-text").click(try_update_vision);
+	$(".description-empresa-text").click(try_update_descripcion);
+	$(".mision-empresa-text").click(try_update_mision);
+	$(".vision-empresa-text").click(try_update_vision);
 	$(".años-empresa-text").click(try_update_years);
-	$("#mas-info-empresa-text").click(try_update_mas_info);
-	//$(".contactos_asociados").click(try_update_medios_contacto);
-	//$("#imgs-empresa").change(upload_main_imgs);
-	//$("#modal-img-logo-empresa").click(clean_img);
-	//$("#pais-select").change(update_country_org);	
+	$(".mas-info-empresa-text").click(try_update_mas_info);
+	
 	$("#text-nombre-empresa").click(function(){
 		$(".pais_empresa_input").show();
 	});
-	//$("#form-genero-empresa").submit(insert_genero_musical_empresa);
-	//$(".delete_genero_empresa").click(delete_genero_empresa);
-	//$(".form-historia").submit(record_experiencia_cliente);
-	//$(".form-artista").submit(record_solicitus_artista);
-	//$(".cuentanos-tu-histori-sec").click(dinamic_contenido);
-	//$("#artista-solicitud").keyup(load_posibles_artistas);
-
-	//$("#solicitud-ciudad-form").submit(registra_solicitud_ciudad);
-
-	//$(".contactos-sec").click(load_contactos_empresa_data);
+	
 	$(".social-fb").click(try_update_social_fb);
 	$(".social-tw").click(try_update_social_tw);
 	$(".social-gp").click(try_update_social_gp);
@@ -38,16 +26,21 @@ $(document).on("ready", function(){
 	$("#btn-historia").click(next_page_history);
 	$("#btn-artista").click(next_page_artista);
 	$("#section-us").click(load_artistas_solicitados);	
-	$("#section-comunidad").click(load_section_comunidad);
+	$("footer").ready(load_section_comunidad);
 	$(".text-edit-mensaje-comunidad").click(edita_mensaje_comunidad);
 	$(".img-tmp-empresa").click(edita_logo_empresa);
 	$("footer").ready(carga_iconos_comunidad);
 
+	$(".lb-pais").click(carga_pais_empresa);
+	$(".form-paises").submit(update_pais_empresa);
 
-
+	$(".btn_configurar_enid_w").click(carga_reservaciones);
 	$('nav, .nav-controller').on('click', function(event) {
         $('nav').toggleClass('focus');
     });
+
+
+    $(".links_enid").click(new_menu);
     $('nav, .nav-controller').on('mouseover', function(event) {
         $('nav').addClass('focus');
         $('.controller-open').hide();
@@ -58,10 +51,75 @@ $(document).on("ready", function(){
         $('nav').removeClass('focus');
         $('.controller-open').show();
         $('.controller-close').hide();
-    })
+    });
     
 
 });
+/**/
+function carga_pais_empresa(){
+	/**/
+	url = $("#form-paises").attr("action");
+	empresa = $(".id_empresa").val();
+
+	$.ajax({
+		url :  url , 
+		type:  "GET",
+		data:  { "empresa" :  empresa },
+		beforeSend: function(){
+			show_load_enid(".place_pais" , "Cargando país de la empresa ... " , 1);			
+		}
+
+	}).done(function(data){
+
+		$(".place_pais").empty();
+		console.log(data);
+		$('#pais_empresa > option[value="'+ data[0].idCountry +'"]').attr('selected', 'selected');				
+
+	}).fail(function(){
+		show_error_enid(".place_pais" , "Falla al cargar paises disponibles, reporte al administrador");
+	});
+}
+/**/
+function new_menu(e){
+
+	menu = e.target.id;		
+
+	console.log("---" + menu);
+
+	switch(menu){
+		case "menu_1": 
+			$("#menu_1").css("color" , "#c9e6f5");			
+			$("#section-comunidad").css("color" , "white");
+			$("#section-us").css("color" , "white");
+
+			break;
+
+		case "section-comunidad":
+			$("#menu_1").css("color" , "white");
+			$("#section-comunidad").css("color" , "#c9e6f5");						
+			$("#section-us").css("color" , "white");
+
+			break;
+
+		case "section-us":
+
+			$("#menu_1").css("color" , "white");
+			$("#section-comunidad").css("color" , "white");
+			$("#section-us").css("color" , "#c9e6f5");			
+		
+
+			break;
+
+		default:
+			//alert("Default");
+			break;
+
+	}			
+
+
+
+}
+/**/
 function try_update_mas_info(){	
 	valor = $("#mas-info-empresa-input").val();
 	if (in_session == 1){
@@ -71,7 +129,7 @@ function try_update_mas_info(){
 			if (flag ==  1) {
 				cadena =  $(this).val();  
 				update_data_emp("mas_info", cadena, ".response-update-mas-info"  , "#section-mas-info" , "#mas-info-empresa-text_place");		
-				new_text(valor, cadena , "#mas-info-empresa-text"); 
+				new_text(valor, cadena , ".mas-info-empresa-text"); 
 			}				
 		});	
 	}	
@@ -99,7 +157,7 @@ function try_update_vision(){
 			if (flag ==  1 ) {
 				cadena =  $(this).val(); 	
 				update_data_emp("vision", cadena , ".response-update-vision" ,  "#section-vision-empresa" , "#vision-empresa-text_place");		
-				new_text(valor, cadena , "#vision-empresa-text");		
+				new_text(valor, cadena , ".vision-empresa-text");		
 			}				
 		});
 	}		
@@ -114,7 +172,7 @@ function try_update_mision(){
 			if (flag ==  1 ) {
 				cadena =  $(this).val();  	
 				update_data_emp("mision", cadena , ".response-update-mision" , "#section-mision-empresa" , "#mision-empresa-text_place"  );		
-				new_text(valor, cadena , "#mision-empresa-text");		
+				new_text(valor, cadena , ".mision-empresa-text");		
 			}			
 		});
 	}
@@ -130,7 +188,7 @@ function try_update_descripcion(){
 			flag =  valida_text_form(".descripcion-empresa-input" , ".place_descripcion" , 100 , "Descripción de la empresa " ); 			
 			if (flag ==  1){
 				update_data_emp("quienes_somos", cadena ,  ".response-update-quienes-somos" ,  "#section-description-empresa" , "#description-empresa-text_place" );						
-				new_text(valor, cadena , "#description-empresa-text");
+				new_text(valor, cadena , ".description-empresa-text");
 			}				
 		});
 	}
@@ -290,12 +348,15 @@ function try_update_nombre(){
 	if (in_session == 1){
 		showonehideone("#nombre-empresa-section" , "#nombre-empresa-text" );
 		$("#nombre-empresa-input").blur(function(){			
+
+			/**/
 			cadena =  $(this).val();  
 			flag =  valida_text_form("#nombre-empresa-input" , ".place_nombre_empresa" , 3 , "Nombre para la empresa" ); 					
 			if (flag == 1){					
 				f =  update_data_emp("nombreempresa", cadena , ".place_nombre_empresa" , "#nombre-empresa-section" , "#nombre-empresa-text" );															
 				new_text(primer_text, cadena ,  "#nombre-empresa-text" ); 
 			}		
+
 		});
 	}
 }
@@ -336,6 +397,8 @@ function update_data_emp(q ,val, place , a ,b){
 }
 /**/
 function carga_iconos_comunidad(){
+	
+
 	url =  now + "index.php/api/emp/iconos_comunidad/format/json/";
 	id_empresa =  $(".id_empresa").val();
 	$.ajax({
@@ -346,15 +409,141 @@ function carga_iconos_comunidad(){
 			show_load_enid(".iconos-comunidad" ,  "Cargando ... " ,  1 );
 		}
 	}).done(function(data){
+//		console.log(data);
 		llenaelementoHTML(".iconos-comunidad" , data);
 	}).fail(function(){
 		show_error_enid(".iconos-comunidad" , "Falla al cargar modulo, comunidad, reporte al administrador");
 	})
 }
+/**/
+function update_pais_empresa(e){
+
+
+	url = $("#form-paises").attr("action");
+	data_send =  $("#form-paises").serialize() +"&"+$.param({"empresa" : $(".id_empresa").val()  });	
+
+
+	$.ajax({
+		url:  url , 
+		type : "PUT",
+		data:  data_send , 
+		beforeSend: function(){
+			show_load_enid(".place_pais" ,  "Actualizando ... " ,  1 );
+		}
+	}).done(function(data){
+
+
+		set_pais($(".pais_empresa").val());
+		$("#modal-locacion").modal("hide");
+		$(".place_pais").empty();
+		show_response_ok_enid(".place_empresa_locacion", "País actualizado con éxito.! ");
+
+	}).fail(function(){
+		show_error_enid(".place_pais" , "Falla al registrar cambios, reporte al administrador.");
+	});
+	e.preventDefault();
+}
+/**/
+function set_pais(x){
+
+	var paises =  [ "Argentina",
+	"Aún sin definir ",
+	"Bolivia",
+	"Brasil",
+	"Canada",
+	"Chile",
+	"Colombia",
+	"Costa Rica",
+	"Cuba",
+	"Ecuador",
+	"El Salvador",
+	"España",
+	"Estados Unidos",
+	"Guatemala",
+	"Honduras",
+	"México",
+	"Nicaragua",
+	"Panama",
+	"Paraguay",
+	"Peru",
+	"Puerto Rico",
+	"Uruguay"];
+
+	console.log(paises[x]);
+	$(".lb-pais").text(paises[x]);
+}
+
+
+
+/**/
+function carga_reservaciones(){
+	url =  $(".form-servaciones").attr("action");
+	$.ajax({
+		url :  url , 
+		data :  {"tipo":  "empresa"} ,
+		type :  "GET" ,
+		beforeSend: function(){
+			show_load_enid(".place_reservaciones" ,  "Cargando ... " ,  1 );
+		}
+	}).done(function(data){		
+		
+		console.log(data);
+		$("#reservacion_tel").val(data[0].reservacion_tel);
+		$("#reservacion_mail").val(data[0].reservacion_mail);
+		$(".place_reservaciones").empty();
+
+		$(".form-servaciones").submit(actualiza_reservaciones);
+	}).fail(function(){
+		show_error_enid(".place_reservaciones" , "Error al cargar las reservaciones, reporte al administrador");
+	});	
+
+}
+/**/
+function actualiza_reservaciones(e){
+
+
+	data_send =  $(".form-servaciones").serialize() +  "&" + $.param({"tipo":  "empresa"});
+	console.log(data_send);
+	url =  $(".form-servaciones").attr("action");
+	flag  =  valida_email_form("#reservacion_mail" , ".place_mail" )
+
+	
+	if ( flag == 1) {
+		flag2 =  valida_tel_form("#reservacion_tel" ,  ".place_tel" ); 		
+		if (flag2 ==  1 ) {
+			$(".place_mail").empty();
+			$(".place_tel").empty();
+			$.ajax({
+					url :  url , 
+					data : data_send ,
+					type :  "PUT" ,
+					beforeSend: function(){
+						show_load_enid(".place_reservaciones" ,  "Actualizado  ... " ,  1 );
+					}
+			}).done(function(data){			
+
+				show_response_ok_enid( ".place_reservaciones", "Datos del las reservaciones actualizadas con éxito!"); 
+				$("#reservaciones-modal").modal("hide");
+
+				reservaciones =  "RESERVACIONES <BR>  TEL. " + $("#reservacion_tel").val() + " <br> " + $("#reservacion_mail").val();
+				$(".text-reservaciones").html(reservaciones);
+				//console.log(data);		
+			}).fail(function(){
+				show_error_enid(".place_reservaciones" , "Error al actualizar las reservaciones, reporte al administrador");
+			});
+
+		}
+
+	}
+	
+	e.preventDefault();
+}
+/**/
+
 /*************************POSIBLES FUNCIONES QUE NO SE OCUPEN YA *************************/
 /*
 function load_contactos_empresa_data(){
-	url = now  + "index.php/api/contactos/empresa/format/json/";
+	"url = now  + "index.php/api/contactos/empresa/format/json/";",
 	$.ajax({
 			url :  url ,
 			type :  "GET",

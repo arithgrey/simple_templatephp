@@ -1,3 +1,76 @@
+<!---->
+<!--************************************************** NOTA DEL CONTACTO-->
+<?=construye_header_modal('reservaciones-modal', "Reservaciones" );?>                           
+   <form class='form-servaciones' id='form-servaciones'
+    action="<?=base_url('index.php/api/emp/reservacion/format/json/')?>">  
+        <label>
+            Teléfono para reservaciones
+        </label>
+          
+
+
+
+        <div class="input-group m-bot15">
+            <span class="input-group-addon">
+				Tel.
+            </span>
+            <input class="form-control input-sm" name="reservacion_tel" id="reservacion_tel" placeholder="Teléfono" maxlength="10" required="" type="tel">                                                                
+        </div>
+
+        <span class='place_tel'>            
+        </span>
+        
+
+
+        <div class="input-group m-bot15">
+	        <span class="input-group-addon">
+	           Correo @
+	        </span>
+	        <input id='reservacion_mail' class="form-control input-sm" name="reservacion_mail" placeholder="arithgrey@gmail.com" type="text">
+        </div>
+
+        <br>
+        <button  id="button-registrar" class="btn btn-default btn_save ">
+            Registrar 
+        </button>
+   </form>           
+   <span class='place_reservaciones'>   	
+   </span>
+<?=construye_footer_modal()?>  
+
+
+
+
+
+
+
+<!---->
+
+
+
+
+<?=construye_header_modal('modal-locacion', " Logo de la empresa  " );?>
+	<form class='form-paises' id='form-paises' action="<?=base_url('index.php/api/emp/pais/format/json/')?>">
+		<?=get_select_paises($paises, "pais_empresa" , "pais_empresa", "pais_empresa" )?>	
+		<br>
+		<button class="btn  btn-default btn_save">
+			Registrar cambios
+		</button>	
+		<div class='row'>
+			<div class='col-lg-12 col-md-12 col-sm-12'>
+				<span class='place_pais'>			
+				</span>		
+			</div>
+			
+		</div>
+		
+	</form>
+	
+	
+<?=construye_footer_modal()?>  
+
+
+
 <!--*********************************LOGO DE LA EMPRESA  *******************************-->
 <?=construye_header_modal('modal-logo-empresa', " Logo de la empresa  " );?>
 <?=$this->load->view("imgs/logo_empresa")?>

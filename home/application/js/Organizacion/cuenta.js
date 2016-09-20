@@ -56,7 +56,7 @@ function validate_form(e){
 
 					place_part =  data.campo;
 					mensaje_user = data.msj; 
-					console.log(place_part );
+					console.log(place_part);
 					place  =  ".place_" + place_part;	
 					llenaelementoHTML( place ,  "<span class='alerta_enid'>" + mensaje_user + "</span>");	
 				}	

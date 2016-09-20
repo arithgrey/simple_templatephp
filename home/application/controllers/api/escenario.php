@@ -104,7 +104,6 @@ class Escenario extends REST_Controller{
     /**/
     function escenario_evento_POST(){
 
-
         $this->validate_user_sesssion();
         $id_evento =  $this->post("evento_escenario");
         $nombre= $this->post("nuevoescenario");    
@@ -113,7 +112,8 @@ class Escenario extends REST_Controller{
         $id_usuario =  $this->sessionclass->getidusuario();
         $nombre_usuario   = $this->sessionclass->getnombre();  
         $param =  $this->post();
-        $db_response =  $this->escenariomodel->nuevo( validate_text($nombre), $id_evento , $id_empresa , $id_usuario , $nombre_usuario  , $param );
+        $db_response =  $this->escenariomodel->nuevo(validate_text($nombre), $id_evento , $id_empresa , $id_usuario , $nombre_usuario  , $param );
+        
         $this->response($db_response);
     }
     /**/
@@ -280,12 +280,11 @@ class Escenario extends REST_Controller{
     function escenario_evento_get(){
 
         $this->validate_user_sesssion();
-        $id_evento = $this->get("evento");
-            
+        $id_evento = $this->get("evento");        
         $data["escenarios_evento"] = $this->escenariomodel->get_escenarios_evento($id_evento);    
         $data["id_evento"] =  $id_evento;
         echo $this->load->view("escenarios/filtro" ,  $data );
-        //$this->response($db_response);
+        
     }
     /**/
     function escenarios_evento_jfunnel_GET(){

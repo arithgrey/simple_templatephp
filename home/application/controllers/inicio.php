@@ -9,12 +9,28 @@ class Inicio extends CI_Controller {
 	    $this->load->model("empresamodel");    
 	    $this->load->model("repomodel");
 	    $this->load->library('sessionclass');	     
-    }     
-	function eventos(){
+    }    
+    /**/
+    function empresas(){
+		
+		$data = $this->val_session("Bienvenido");
+		$id_empresa =  $this->sessionclass->getidempresa();		
+
+		if ($id_empresa ==  1 ){
+			$this->show_data_page( $data , 'empresa/empresas_enid.php');			
+		}else{
+			redirect(base_url());
+		}		
+
+		
+    }
+    /**/ 
+	function eventos($q=''){
 
 		if (valida_session_enid($this->sessionclass->is_logged_in())) {
 			$data = $this->val_session("Eventos");		
 			$data["id_empresa"] =  $this->sessionclass->getidempresa();
+			$data["q"] = $q;
 			$this->show_data_page( $data , 'principal/bienvenidaestratega' , $data );	
 		}				
 

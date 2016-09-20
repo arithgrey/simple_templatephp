@@ -132,28 +132,31 @@
     <div class='row'>
         <div class='col-lg-12 col-md-12 col-sm-12 '>
             <form id="form-nueva-fecha">            
-                    <div>
-                        <div data-date-viewmode="years" data-date-format="yyyy-mm-dd" data-date="<?=now_enid()?>" 
-                        class="input-append date dpYears"  >
-                            <input readonly="" value="<?=now_enid()?>"  class="form-control"   id='inicio' name="from" type="text"  >
-                            <span class="input-group-btn add-on">
-                                <button class="btn btn-primary" type="button">
-                                    <i class="fa fa-calendar">
-                                    </i>
-                                </button>
-                            </span>
-                        </div>
-                    </div>
-                    
-                    <div data-date-viewmode="years" data-date-format="yyyy-mm-dd" data-date="<?=now_enid()?>"  class="input-append date dpYears">
-                        <input readonly="" value="<?=now_enid()?>" class="form-control" id='termino' name="to" type="text" >
-                        <span class="input-group-btn add-on">
-                            <button class="btn btn-primary" type="button">
-                                <i class="fa fa-calendar">
-                                </i>
-                            </button>
-                        </span>
-                    </div>                    
+
+
+
+            <div class='row'>
+                <div class='col-lg-12 col-md-12 col-sm-12'>
+                  <div class='calendar-1'>        
+                      <label class='text-inicio'>
+                        Día Inicio    
+                      </label>                    
+                      <input data-date-format="yyyy-mm-dd" value="<?=now_enid();?>" id="inicio" 
+                        class='form-control input-sm'  name="inicio"  size="10" required >                        
+                  </div>        
+                  <div class='calendar-2'>    
+                      <label class='text-termino'>
+                        Día  Termino                 
+                      </label>                                    
+                      <input name="termino" data-date-format="yyyy-mm-dd" value="<?=now_enid();?>"  
+                        id="termino" class='form-control input-sm' size="10" required>                
+                  </div>
+                </div>                 
+            </div>
+                
+
+                
+
                     <span class="help-block">
                         Fecha para este escenario
                     </span>

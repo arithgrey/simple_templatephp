@@ -179,7 +179,7 @@ class Templ extends REST_Controller{
         $id_empresa =  $this->sessionclass->getidempresa();
         $data["articulos"] = $this->templmodel->get_templ_obj_permitidos($id_empresa);
         echo  $this->load->view("plantillas/list_articulos" , $data);
-        //$this->response(list_objetos_permitidos_empresa($plantilla_obj_permitidos));        
+        
 
     }   
     /**/

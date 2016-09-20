@@ -36,7 +36,7 @@ function load_data_escenarios(){
 		type :  "GET", 
 		beforeSend :  function(){
 			//llenaelementoHTML(".section_escenarios_admin" , "Cargando ...");
-			show_load_enid(".place_nuevo_escenario" , "Cargando escenarios .. " , 1); 	
+			show_load_enid(".place_nuevo_escenario" , "Cargando escenarios ... " , 1); 	
 
 		}		
 	}).done(function(data){

@@ -4,6 +4,52 @@ function __construct(){
 	parent::__construct();        
     $this->load->database();
 }
+/**/
+function get_asistencia_user($param){
+
+
+	$query_get =  "SELECT 
+	count(0)asistentes 
+	FROM  evento_asistente 
+	WHERE id_evento='".$param["evento"]."' 
+	AND ip= '". $param["ip_user"]."' LIMIT 1";
+
+
+	$result =  $this->db->query($query_get);
+	$num =   $result->result_array()[0]["asistentes"];
+
+	if ($num > 0){
+
+		$query_delete =  "DELETE  FROM  evento_asistente WHERE  id_evento='".$param["evento"]."' 
+		AND ip= '". $param["ip_user"]."' LIMIT 1"; 
+		$this->db->query($query_delete);
+
+	}else{
+		/**/
+		$query_insert =  "INSERT IGNORE  INTO asistente(ip) VALUES('". $param["ip_user"]."');"; 
+		$this->db->query($query_insert);
+
+		$query_get =  "SELECT  id_asistente FROM  asistente WHERE ip = '". $param["ip_user"]."' LIMIT 1 ";
+		$result =  $this->db->query($query_get);
+		$id_asistente =  $result->result_array()[0]["id_asistente"];
+	
+		$query_insert =  "INSERT INTO  
+						 evento_asistente(id_evento ,  id_asistente ,  ip ) 
+						 VALUES( '". $param["evento"]."'  , '".  $id_asistente  ."'  ,  '". $param["ip_user"]."' )";  
+	
+		$this->db->query($query_insert);	
+	}
+	return $num;
+	
+}
+/**/
+function get_asistentes($param){
+	/**/
+	$query_get =  "select count(0)asistentes from evento_asistente where id_evento='".$param["evento"]."' ";
+	$result =  $this->db->query($query_get);
+	return $result->result_array()[0]["asistentes"];
+}
+/**/
 function get_resum_by_id_event($id_evento){
 
 	$_num =  $this->contruye_tmp_evento_edit($id_evento , 0  ); 	
@@ -188,7 +234,7 @@ function get_servicios_evento_by_id($id_evento){
 /*********************        **************************               *****************/
 function delete_byid($id_evento , $id_usuario , $id_empresa ){
 
-	$query_procedure="call enidserv_eniddbbbb3.delete_evento_all_data('". $id_evento ."'  , '". $id_usuario ."' );";
+	$query_procedure="call delete_evento_all_data('". $id_evento ."'  , '". $id_usuario ."' );";
 	return $this->db->query($query_procedure);
 }
 /**/
@@ -216,7 +262,7 @@ function get_obj_permitidos($id_evento){
 /**/
 function update_all_in_event_obj_inter($id_evento , $id_empresa ){
 
-	$query_procedure ="call enidserv_eniddbbbb3.update_all_obj_in_event( $id_evento , $id_empresa );";		
+	$query_procedure ="call update_all_obj_in_event( $id_evento , $id_empresa );";		
 	$result = $this->db->query($query_procedure);			
 	return $result->result_array();
 }
@@ -279,7 +325,7 @@ function get_days_to_event($fecha_inicio){
     if($_num == 0 ) {
        $_num = mt_rand();       
     }      												  
-    $query_temporal_tables =  "call enidserv_eniddbbbb3.repo_eventos_admin($_num , $flag  , $id_empresa);"; 
+    $query_temporal_tables =  "call repo_eventos_admin($_num , $flag  , $id_empresa);"; 
 	$this->db->query($query_temporal_tables);	
 	return $_num;
 
@@ -345,7 +391,7 @@ function contruye_tmp_evento_edit($id_evento , $f , $_num='0' ){
 	if($_num == 0 ) {
        $_num = mt_rand();       
 	}      												    	
-	$query_procedure = "call enidserv_eniddbbbb3.data_event_public($id_evento , $f , $_num );";	
+	$query_procedure = "call data_event_public($id_evento , $f , $_num );";	
 	$this->db->query($query_procedure);
 	return $_num; 
 }

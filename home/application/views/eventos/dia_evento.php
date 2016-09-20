@@ -1,4 +1,13 @@
-<?=template_evento($evento["nombre_evento"] ,  $evento["idevento"])?>
+<?=template_evento($evento["nombre_evento"] ,  $evento["idevento"] ,  $evento["idempresa"])?>
+
+
+<?=valida_reservaciones_public(
+            $in_session ,
+            $evento["reservacion_tel"] ,
+            $evento["reservacion_mail"] , 
+            base_url('index.php/eventos/nuevo')."/".$evento['idevento']."/reservaciones/"
+        )?>
+        
 <div>          
   <ul class="nav nav-pills"> 
     <li class='tab_escenario pull-left' href="#seccion-principal-info"  role="tab" data-toggle="tab">
@@ -40,6 +49,7 @@
   </div>    
 </div> 
 <input type='hidden' class='empresa' id='empresa' value="<?=$evento['idempresa']?>">
+<input type='hidden' class='id_empresa' value="<?=$evento['idempresa']?>">
 <input type='hidden' class='evento_escenario' value="<?=$evento['idevento']?>">
 <input type='hidden' id='idevento' class='id_evento' value="<?=$evento["idevento"];?>">
 <input type='hidden' id='descripcion_permitido' class ='descripcion_permitido' value='<?=$evento["permitido"]?>' >
@@ -100,3 +110,4 @@
   }
 
   </style>
+<?=$this->load->view("reglas/modal/asistencia")?>

@@ -1,19 +1,13 @@
-$(document).ready(function(){
-
-    $(".sednewsolicitud").click(sed_mail_request);        
-    $(".botonExcel").click(exporta_excel);
-    $("#btn-nuevo-integrante").click(set_config_user_record);
-    $(".edit-nota-user").click(load_data_nota_user);
-    dinamic_user = 0;
-    $("#descripcion-miembro").submit(update_descripcion_user);    
-    $(".mas-info").click(dinamic_section);
-    $(".menos-info").click(dinamic_section_info);
-    $(".form-busqueda-user").submit(load_users_cuenta);
-
-    $(".nuevo_user").click(carga_form_user);
-    $(".nueva_busqueda").click(carga_form_busqueda);
+$(document).ready(function(){    
     load_users_cuenta();
+    $(".nuevo_user").click(carga_form_user);
+    $(".more-inputs").click(show_more_fields);
+    $("#form-integrante-edicion").submit(nuevo_user);
 
+    $(".form-busqueda-user").submit(load_users_cuenta);
+    $(".nueva_busqueda").click(carga_form_busqueda);        
+    $("#btn_cancelar").click(cancelar_modificacion);
+    
 });
 /*Invitación al nuevo usuario*/
 function sed_mail_request(){
@@ -41,141 +35,82 @@ function exporta_excel(){
     $("#datos_a_enviar").val( $("<div>").append( $("#print-section").eq(0).clone()).html());
     $("#FormularioExportacion").submit();
 }
-/**/
-function set_user_id(e){
 
-    $(".seccion-busqueda").hide();
-    //$("#modal-title-user").text("Configuración del usuario ");
-    id_usuario = e.target.id;
-    $("#id_usuario").val(id_usuario);
-    $("#email-section").hide();
-    reset_form_user();
-    /*Mandamos a llamar los datos del usuario */
-    load_data_user(id_usuario);
-}
-
-
-function set_config_user_record(){
-
-    $("#modal-title-user").text(" + Registra un nuevo integrante a la cuenta ");
-    $("#id_usuario").val(0);   
-    valor = $("#email").val()
-    $("#email-section").show();    
-    reset_form_user();
-}
 /**/
 function reset_form_user(){
     $("#response-update-insert").text("");
     var  inputs_reset = ["#apellido_paterno" , "#apellido_materno"  , "#nombres" , "#email" , "#email_alterno" , "#tel_contacto"  , "#tel_contacto_alterno" , "#inicio_labor" , "#fin_labor" , "#rfc"];
     reset_fields(inputs_reset);     
 }
-/******************LOADS LOADS LOADS LOADS LOADS LOADS LOADS LOADS LOADS LOADS LOADS LOADS LOADS LOADS */
-/**/
-function load_data_nota_user(e){
 
-    var  alerts =  [".alert-ok" , ".alert-fail"];
-    ocualta_elementos_array(alerts);
-    url = now + "index.php/api/user/miembro/format/json/";
-    user = e.target.id;    
-    dinamic_user = user;
-    $.get( url , {"id_usuario" : user } ).done(function(data){
-        /**/
-        descripcion = data[0].descripcion; 
-        $(".nota-user-text").val(descripcion);
-    }).fail(function(){
-        alert("Errror");
-    });
-}
-/*Carga los usuarios de la cuenta*/
-function load_users_cuenta(){
-
-    url =  $(".form-busqueda-user").attr("action");
-    var clientresponse = ["Error al cargar los colaboradores, reporte al administrador"];        
-    $.ajax({
-        url :  url , 
-        data :   $(".form-busqueda-user").serialize() , 
-        type: "GET" , 
-        beforeSend : function(){
-            /**/
-            show_load_enid("#integrantes-table-info" , "Cargando  .. " , 1);                         
-        }
-    }).done(function(data){
-
-        llenaelementoHTML("#integrantes-table-info" , data);                
-        //load_resumen_usuarios();    
-         $(".edit-nota-user").click(load_data_nota_user);
-        $(".editar_permisos_miembro").click(set_user_id);    
-        $(".config_estatus_user").click(template_config_estatus);
-        $(".mas-info").click(dinamic_section);
-        $(".menos-info").click(dinamic_section_info);
-        $(".img_user").click(carga_imagen_user);
-  
-              
-    }).fail(function(){
-        show_error_enid("#integrantes-table-info"  , "Error al registrar, reporte al administrador "); 
-    });    
-    return false;
-}
-/*
-
-function load_resumen_usuarios(){    
-    url = now + "index.php/api/cuentageneralrest/integranteescuentaresumen/format/json";    
-    $.get(url).done(function(data){    
-        
-        llenaelementoHTML("#resumen-section" , data);
-        $(".edit-nota-user").click(load_data_nota_user);
-        $(".editar_permisos_miembro").click(set_user_id);    
-        $(".config_estatus_user").click(template_config_estatus);
-        $(".mas-info").click(dinamic_section);
-        $(".menos-info").click(dinamic_section_info);
-        $(".img_user").click(carga_imagen_user);
-  
-
-
-
-    }).fail(function(){    
-        alert("Error");
-    });
-
-}
-*/
 /**/
 function load_data_user(id_usuario){
 
+  $("#id_usuario").val(id_usuario);
   url = now + "index.php/api/user/miembro/format/json/";   
    $.ajax({
         url: url, 
         data: {"id_usuario" : id_usuario }, 
         type: "GET", 
         beforeSend: function(){
-            llenaelementoHTML("#integrantes-table-info" , "Cargando ..");             
+            show_load_enid(".integrantes-table-info" , "Cargando información del usuario" , 1 ); 
         }
-
    }).done(function(data){
-        llenaelementoHTML("#integrantes-table-info" , data);           
+        $(".integrantes-table-info").empty();        
+            /**/
+            idusuario =  data[0].idusuario;            
+            nombre =  data[0].nombre;
+            email             =  data[0].email            ;
+            fecha_registro =  data[0].fecha_registro;
+            idempresa =  data[0].idempresa;
+            descripcion =  data[0].descripcion;
+            puesto =  data[0].puesto;            
+            apellido_paterno =  data[0].apellido_paterno;
+            apellido_materno =  data[0].apellido_materno;
+            email_alterno =  data[0].email_alterno;
+            tel_contacto =  data[0].tel_contacto;
+            tel_contacto_alterno =  data[0].tel_contacto_alterno;
+            edad =  data[0].edad;
+            numero_empleado =  data[0].numero_empleado;
+            inicio_labor =  data[0].inicio_labor;
+            fin_labor =  data[0].fin_labor;
+            grupo =  data[0].grupo;
+            cargo =  data[0].cargo;
+            rfc =  data[0].rfc;
+            turno =  data[0].turno;
+            ultima_modificacion =  data[0].ultima_modificacion;
+            descripcion_usuario =  data[0].descripcion_usuario;
+            url_fb =  data[0].url_fb;
+            url_tw =  data[0].url_tw;
+            url_www =  data[0].url_www;
+            sexo =  data[0].sexo;
+            tipo =  data[0].tipo;
+            idperfil =  data[0].idperfil;
+            
+            llenaelementoHTML(".user_edit_text" , email);
+
+            valorHTML( "#apellido_paterno" , apellido_paterno);  
+            valorHTML( "#apellido_materno" , apellido_materno);              
+            valorHTML( "#nombres" , nombre);  
+            valorHTML( "#email" , email);  
+            valorHTML( "#email_alterno" , email_alterno);              
+            valorHTML( "#tel_contacto" , tel_contacto);              
+            valorHTML( "#tel_contacto_alterno" , tel_contacto_alterno);              
+            valorHTML( "#inicio_labor" , inicio_labor);  
+            valorHTML( "#fin_labor" , fin_labor);  
+            valorHTML( "#rfc" , rfc);  
+
+            /**/
+            $('#turno_user > option[value="'+ turno +'"]').attr('selected', 'selected');              
+            $('#grupo_user > option[value="'+ grupo +'"]').attr('selected', 'selected');              
+            $('#cargo_user > option[value="'+ cargo +'"]').attr('selected', 'selected');              
+            $('#perfil_user > option[value="'+ idperfil +'"]').attr('selected', 'selected');              
+            $('#edad_user > option[value="'+edad +'"]').attr('selected', 'selected');              
+            
+            $("#form-integrante-edicion").submit(nuevo_user);                        
    }).fail(function(){
-        alert("Error ");
+        show_error_enid(".integrantes-table-info" , "Error al cargar los datos del usuario, reporte al administrador" ); 
    });
-}
-/**/
-function carga_form_user(){
-
-    url = now + "index.php/api/user/miembro/format/json/";       
-    showonehideone( ".nueva_busqueda" , ".seccion-busqueda");
-
-
-    $.ajax({
-        url: url, 
-        data: {"id_usuario" : 0 }, 
-        type: "GET", 
-        beforeSend: function(){
-                llenaelementoHTML("#integrantes-table-info" , "Cargando ..");             
-        }
-   }).done(function(data){
-        llenaelementoHTML("#integrantes-table-info" , data);           
-   }).fail(function(){
-        alert("Error ");
-   });   
 }
 /**/
 function carga_form_busqueda(){
@@ -198,34 +133,165 @@ function try_update_perfil_usuario(e){
     ); 
 }
 /**/
-function update_descripcion_user(){    
-    url = now + "index.php/api/user/miembro_descripcion/format/json/";
-    data_send =  $("#descripcion-miembro").serialize() + "&" + $.param({"usuario" : dinamic_user });        
-    actualiza_data(url , data_send);
-    /**/
-
-    llenaelementoHTML( "#response-insert-user" , "<div class='alert-ok' id='alert-ok-nota'><em> Datos actualizados correctamente.!</em></div>");
-    
-    complete_alert_ok_modal("#alert-ok-nota",  "#edit-nota-user-modal");
-    return false;
-}
-/**/
 function template_config_estatus(e){
 
     usuario =  e.target.id; 
     url = now + "index.php/api/user/template_estado/format/json/"; 
     $(".seccion-busqueda").hide();
-    
+
     $.ajax({        
         url :  url , 
         data :  {"usuario" : usuario} , 
         type : "GET" ,
         beforeSend : function(){
-            llenaelementoHTML("#integrantes-table-info" , "Error al tratar de configurar el estado del usuario ");   
+            
+            show_load_enid("#integrantes-table-info" , "Cargando ... " , 1 );
         }
     }).done(function(data){
           llenaelementoHTML("#integrantes-table-info" ,  data );   
+          $("#form_estatus").submit(actualiza_estado_usuario);
+          
     }).fail(function(){
-          llenaelementoHTML("#integrantes-table-info" , "Error al tratar de configurar el estado del usuario ");   
+        
+        show_error_enid("#integrantes-table-info" , "Error al tratar cargar la configuración del evento "); 
     });
+}
+/**/
+function carga_form_user(){
+
+    $("#integrantes-table-info").empty();  
+    $(".hidden_inputs_enid").hide();  
+    $("#id_usuario").val(0);
+    $(".action").val("registro");
+    $("#email-section").show();
+    document.getElementById("form-integrante-edicion").reset();    
+    showonehideone(".seccion-form-user" , ".seccion-busqueda");    
+    $(".user_edit_text").empty();
+}
+/**/
+function modifica_user(e){
+
+    id_usuario = e.target.id;
+    document.getElementById("form-integrante-edicion").reset();    
+    llenaelementoHTML(".more-inputs" , '<i class="fa fa-chevron-up" aria-hidden="true"> </i>Menos info ');
+
+    $(".action").val("actualizacion");
+    $(".seccion-form-user").show();
+    $(".seccion-busqueda").hide();
+    $(".integrantes-table-info").empty();    
+    $(".hidden_inputs_enid").show();  
+    $("#email-section").hide();
+    load_data_user(id_usuario);    
+}
+/**/
+function show_more_fields(){     
+    seccion =  ".hidden_inputs_enid";
+    if ($(seccion).is(":visible")) {        
+        $(seccion).hide();      
+        $(".more-inputs").html("<i class='fa fa-chevron-down' aria-hidden='true'> </i>Más info ");
+    }else{
+        $(seccion).show();
+        $(".more-inputs").html("<i class='fa fa-chevron-up' aria-hidden='true'> </i>Menos info ");
+    }   
+}
+/**/
+/*Carga los usuarios de la cuenta*/
+function load_users_cuenta(){
+
+    $("#integrantes-table-info").empty();
+    $("#integrantes-table-info").show();
+    url =  $(".form-busqueda-user").attr("action");
+    var clientresponse = ["Error al cargar los colaboradores, reporte al administrador"];        
+    $.ajax({
+        url :  url , 
+        data :   $(".form-busqueda-user").serialize() , 
+        type: "GET" , 
+        beforeSend : function(){
+            /**/
+            show_load_enid("#integrantes-table-info" , "Cargando  .. " , 1);                         
+        }
+    }).done(function(data){
+        llenaelementoHTML("#integrantes-table-info" , data);                                 
+        $(".editar_permisos_miembro").click(modifica_user);    
+        $(".config_estatus_user").click(template_config_estatus);        
+              
+    }).fail(function(){
+        show_error_enid("#integrantes-table-info"  , "Error al registrar, reporte al administrador "); 
+    });    
+    return false;
+}
+
+function nuevo_user(e){    
+
+    /**/   
+    id_usuario =  $("#id_usuario").val();
+    flag = 0; 
+    flag2 = 0; 
+    msj_user =  "<br> Información del usuario actualizada.!";
+    if (id_usuario  ==  0 ) {msj_user = "<br> Usuario registrado con éxito.!";}    
+    flag  =  valida_email_form("#email" ,  ".place_mail_vali");      
+    if (flag == 1  ) { flag2 =  valida_text_form("#nombres" , ".place_nombre_vali"  , 4 , " Nombre del integrante " ); }
+    if (flag2 == 1){
+
+        /**/        
+        url =  $("#form-integrante-edicion").attr("action");                  
+        console.log($("#form-integrante-edicion").serialize());
+        $.ajax({
+            url :  url, 
+            data:  $("#form-integrante-edicion").serialize() , 
+            type :  "PUT", 
+            beforeSend: function(){                    
+                show_load_enid(".integrantes-table-info" , "Cargando ... " , 1 );
+                $(".place_mail_vali").empty();
+                $(".place_nombre_vali").empty(); 
+            }
+        }).done(function(data){
+            
+            
+            console.log(data);
+            $(".integrantes-table-info").empty();
+            if (data.status_user !=  "FALSE"){
+                show_response_ok_enid( ".integrantes-table-info", "Información registrada con éxito.!");             
+                $(".seccion-form-user").hide();
+                $(".seccion-busqueda").show();
+            }else{                
+                llenaelementoHTML(".place_mail_vali" ,  "<span class='alerta_enid'>" + data.msj_user + "</span>");
+            }
+            
+
+        }).fail(function(){  
+            $(".place_mail_vali").empty();
+            $(".place_nombre_vali").empty();          
+            show_error_enid(".integrantes-table-info" , "Error al cargar los datos del usuario, reporte al administrador");
+        });
+
+    }
+    e.preventDefault();
+}
+/**/
+function actualiza_estado_usuario(e){
+
+    url =  $("#form_estatus").attr("action" ); 
+    $.ajax({
+        url :  url , 
+        type : "PUT", 
+        data :  $("#form_estatus").serialize() , 
+        beforeSend :  function(){
+            llenaelementoHTML( ".integrantes-table-info" , "Registrando cambios ..");     
+        }
+    }).done(function(data){                
+        llenaelementoHTML( ".integrantes-table-info" , "<br>"  + data);     
+    }).fail(function(){
+        llenaelementoHTML( ".integrantes-table-info" ,  " Error al modificar el estatus del usuario, reporte al administrador ");     
+    });
+    $(".seccion-busqueda").show();
+    e.preventDefault();
+}
+/**/
+function cancelar_modificacion(){
+    
+    $(".seccion-busqueda").show();
+    $(".seccion-form-user").hide();
+
+    llenaelementoHTML( ".integrantes-table-info" , "");    
 }

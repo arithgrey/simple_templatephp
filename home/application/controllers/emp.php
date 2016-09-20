@@ -1,22 +1,22 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 class Emp  extends CI_Controller{
-	function __construct(){
-		parent::__construct();
+    function __construct(){
+        parent::__construct();
         $this->load->helper("empresa");
         $this->load->helper("img_eventsh");
         $this->load->helper("generoshelp");
         $this->load->model("generosmusicalesmodel");
         $this->load->model("contactmodel");
         $this->load->model("empresamodel");
-     	$this->load->library('sessionclass');    
-	}
+        $this->load->library('sessionclass');    
+    }
     /**/
     /**/
     function nuestroseventos(){        
         $data = $this->val_session("Nuestra historia" );                                        
         $this->show_data_page('eventos/busqueda'  , $data );   
     }
-	/**/    
+    /**/    
     function incidencias(){
 
         $data = $this->val_session("Incidencias");                
@@ -54,7 +54,9 @@ class Emp  extends CI_Controller{
             $data["years"]= get_count_select(1 ,  50 , "Años"  , $data_empresa["years"] );
             $data["empresa_contactos_num"] =  $this->empresamodel->get_contactos_empresanum($id_empresa);    
             $data["evento_publicados"] = $this->empresamodel->get_eventos_publicados($id_empresa);
+            $data["paises"] =  $this->empresamodel->get_paises();
             $data["generos_musicales_emp"] = $this->empresamodel->get_generos_musicales_empresa($id_empresa);                    
+
             $g = $this->generosmusicalesmodel->get_geros_empresa($id_empresa);        
             
             $data["tags_generos"]= get_tags_generos($g , 1 ,0 );        
@@ -100,5 +102,4 @@ class Emp  extends CI_Controller{
         }                
       
     }
-    
 }/*Termina el controlador */

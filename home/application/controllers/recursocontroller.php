@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 class Recursocontroller extends CI_Controller {
-	function __construct(){
+	function __construct(){		
 		parent::__construct();
 		$this->load->helper("recursos");
 		$this->load->model("cuentageneralmodel");
@@ -13,21 +13,19 @@ class Recursocontroller extends CI_Controller {
 	}	
 	/**/
 	function usuarios_imgs(){
-
-		$data= $this->val_session("Miembros de la cuenta");										
+		$data= $this->val_session("");										
 		$this->show_data_page($data ,  "imgs/user" );						
 	}
 	/**/
 	function usuarios(){
 
-		if (valida_session_enid($this->sessionclass->is_logged_in())){
-				
+		if (valida_session_enid($this->sessionclass->is_logged_in())){				
 			$perfil = $this->sessionclass->getperfiles();
-			$data= $this->val_session("Miembros de la cuenta");										
+			$data= $this->val_session("");										
 			$id_empresa =  $this->sessionclass->getidempresa();			
-			$id_empresa =  $this->sessionclass->getidempresa();                                            	   
-			$data["id_empresa"] =  $id_empresa; 
-			$this->show_data_page($data ,  "usuarioscuenta/paraadministradorcuenta" );						
+			                                            	   
+			$data["id_empresa"] =  $id_empresa; 			
+			$this->show_data_page($data , "usuarioscuenta/paraadministradorcuenta" );				
 		}
 	}	
 	/*****Para el administrador de la cuenta *****************/
@@ -40,14 +38,13 @@ class Recursocontroller extends CI_Controller {
 	}	
 	/**/
 	function perfilconfigad($recurso){
-
-		$data = $this->val_session("Configuración avanzada, accesos a los poerfiles por módulo");						
+		$data = $this->val_session("");						
 		$data["modulo"] = $recurso;			
 		$this->show_data_page( $data , 'modulo/moduloconfig_g');			
 	}
 	/**/
 	function informacioncuenta(){				
-		$data = $this->val_session("Configuración de la cuenta");					
+		$data = $this->val_session("");					
 		$id_usuario  = $this->sessionclass->getidusuario();			
 		$data["data_user"] =  $this->cuentageneralmodel->get_data_user_by_id($id_usuario)[0];
 		$this->show_data_page($data , 'micuenta/principal' );				
@@ -55,7 +52,7 @@ class Recursocontroller extends CI_Controller {
 	/*Inicia perfil avanzado*/
 	function perfilesavanzado(){
 		
-			$data = $this->val_session("Configuración perfiles");	
+			$data = $this->val_session("");	
 			$recurso = $this->input->get("moduloconfig");					
 			$data["modulo"] = $recurso;			
 			$this->show_data_page( $data , 'modulo/moduloconfig.php' );				
@@ -82,17 +79,15 @@ class Recursocontroller extends CI_Controller {
     function show_data_page($data, $center_page){
         
         if ($data["in_session"] == 1){        
-
             $this->load->view('TemplateEnid/header_template', $data);
             $this->load->view($center_page , $data);            
             $this->load->view('TemplateEnid/footer_template', $data);
         }else{          
+        	
             $this->load->view('TemplateEnid/header_template_all_user', $data);
             $this->load->view($center_page , $data);            
             $this->load->view('TemplateEnid/footer_template', $data);
+            
         }                      
-    }
-    /**/
-
-		
+    }/**/		
 }

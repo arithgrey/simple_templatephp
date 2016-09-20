@@ -31,10 +31,12 @@ $(document).on("ready", function(){
 });
 /**/
 function delete_articulo_empresa(e){
+
 	url = now + "index.php/api/templ/plantillaarticulos/format/json/";
 	id_objeto_permitido = e.target.id;
 	eliminar_data( url , { "objeto_permitido" : id_objeto_permitido } );	
 	carga_articulos_empresa();
+
 }
 /*Registramos la restriccion*/
 function registra_contenido( formulario , type_conten ,  place  , place_val ,  input_val  ){
@@ -99,7 +101,7 @@ function load_contenidos_templ_data(type , contenido , dinamic_place ){
 		type :  "GET",		
 		data: {"type" : type } ,
 		beforeSend : function(){
-			show_load_enid( dinamic_place , "Guardando  cambios ... " , 1); 
+			show_load_enid( dinamic_place , "Cargando ... " , 1); 
 		}
 	}).done(function(data){
 		$(dinamic_place).empty();
@@ -165,7 +167,7 @@ function record_articulo_permitido(e){
 			type : "POST",
 			data :   $("#form-articulo-permitido").serialize(),
 			beforeSend : function(){
-				show_load_enid(".place_n_articulo" , "Registrando .. " ,  1 );
+				show_load_enid(".place_n_articulo" , "Registrando ... " ,  1 );
 			}
 		}).done(function(data){
 
@@ -184,8 +186,8 @@ function record_articulo_permitido(e){
 }
 /**/
 function carga_articulos_empresa(){	
-
-	url = now + "index.php/api/templ/articulos/format/json/";
+	
+	url = now + "index.php/api/templ/articulos/format/json/";	
 	$.ajax({
 		url: url , 
 		type:  "GET",
@@ -212,7 +214,7 @@ function carga_data_obj(e){
 		type : "GET",
 		data : {"id_obj" : obj } , 
 		beforeSend : function(){
-			show_load_enid(".place_config_obj",  "Cargando datos del artículo permitido" , 1 );
+			show_load_enid(".place_config_obj",  "Cargando datos ... " , 1 );
 		}
 	}).done(function(data){
 
@@ -241,7 +243,7 @@ function actualiza_obj(e){
 		type : "PUT",
 		data :  $("#form_conf_articulo").serialize(), 
 		beforeSend : function(){
-			show_load_enid(".place_config_obj",  "Registrando cambios" , 1 );
+			show_load_enid(".place_config_obj",  "Registrando ... " , 1 );
 		}
 
 	}).done(function(data){
@@ -253,13 +255,14 @@ function actualiza_obj(e){
 
 
 	}).fail(function(){
-		show_load_enid(".place_config_obj",  "Error al actualizar, reporte al administrador" , 1 );
+		
 	});
 	e.preventDefault();
 }
 /**/
 function eliminar_obj(e){
 	obj  =  e.target.id;
+
 	url = now + "index.php/api/templ/articulo/format/json/";			
 	$(".aceptar_obj_eliminar").click(function(){		
 	
@@ -268,7 +271,7 @@ function eliminar_obj(e){
 			type : "DELETE", 
 			data:  {id_obj : obj },
 			beforeSend: function(){
-				show_load_enid(".place_eliminar_obj" , "Elimanando artículo .. " , 1 );
+				show_load_enid(".place_eliminar_obj" , "Elimanando artículo ... " , 1 );
 			}
 		}).done(function(data){
 			

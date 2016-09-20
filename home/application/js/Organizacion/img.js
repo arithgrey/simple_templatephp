@@ -45,4 +45,3 @@ function registra_img_logo(e){
     });
     $.removeData(formData);
 }
-

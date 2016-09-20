@@ -1,5 +1,8 @@
         <div class="menu-right">            
             <ul class="notification-menu">
+                
+
+            <!--
                 <li title='Tareas pendientes'>
                     <a href="#" class="btn btn-default dropdown-toggle info-number" data-toggle="dropdown">
                         <i class="fa fa-tasks">
@@ -31,8 +34,9 @@
                         </ul>
                     </div>
                 </li>            
-                <li >
-                    <a title='Más opciones' href="#" class="btn btn-default dropdown-toggle" data-toggle="dropdown">                        
+                -->
+                <li>
+                    <a style="background:#166781;" title='Más opciones' href="#" class="btn btn-default dropdown-toggle" data-toggle="dropdown">                        
                         <?=$nombre;?>
                         <i class="fa fa-sort-desc">
                         </i>
@@ -51,6 +55,11 @@
                                 <i class="fa fa-code">
                                 </i>
                                 Versión del sistema 
+                            </a>
+                        </li>
+                        <li>
+                            <a href="<?=base_url('index.php/home/usos_privacidad_enid_service')?>" >                                
+                                Condiciones de uso y privacidad 
                             </a>
                         </li>
                         <li title='Terminar sessión del sistema'>

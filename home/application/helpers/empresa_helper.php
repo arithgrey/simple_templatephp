@@ -1,25 +1,160 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 if(!function_exists('invierte_date_time')){
 
+/**/
 
-function edita_section_mensaje_comunidad($val ,  $session , $class='' ){  
-    /*mensaje más  editar */    
-    $mensaje =  "<p>
-                    ". 
-                    $val 
-                    ."
-                 </p>"; 
-    if ($session == 1){
-        $mensaje .=  "<p $class >
-                      ". $val ."
-                     </p>"; 
-        $mensaje .="<textarea rows='5' style='display:none;' cols='20' class='form-control' id='comunidad-mensaje-input' name='mensaje-comunidad' placeholder='Cómo la comunidad de tu organización'>
-                    ".$val."
+/**/
+function validate_info_emp($val, $in_session  ,  $class ){
+
+
+  $msj =  ""; 
+  $msj_text =  "";
+  $mensaje ="";    
+  
+
+  if($in_session == 1){
+
+    $class =  $class; 
+  }else{
+    $class =  ""; 
+  }
+
+
+  if (trim( strlen($val)) > 300 ){
+
+
+      $primer_part = "<span class='hiddden_descripcion'>
+                            ".$val."
+                          </span>";
+
+        $part_descripcion =  substr($val, 0 ,  300);  
+        $new_text = $primer_part ."<span class='show_descripcion ".$class." '>
+                              ". $part_descripcion ."
+                            </span>
+                            <center>
+                              <span class='row more-info-f more-info-f-down'>
+                                <i class='fa fa-chevron-down' aria-hidden='true'>
+                                </i>
+                              </span>
+                              <span class='row more-info-f more-info-f-up'>
+                                <i class='fa fa-chevron-up' aria-hidden='true'>
+                                </i>
+                              </span>
+                            </center>";  
+    
+  }else{
+
+      if(trim( strlen($val)) == 0 ){
+        $new_text =  "<span class='".$class ."'> La historia de la empresa. </span>";
+      }else{
+        $new_text =  "<span class='".$class ."'>" . $val ."</span>";
+      }
+
+  }
+
+
+  return $new_text;
+  
+}
+/**/
+function get_select_paises($paises, $class , $id, $name ){
+
+    
+  $select =  "<select class='form-control ".$class." ' id='". $id ."' name='".$name ."'>";
+  foreach ($paises as $row) {
+    
+    $select .=  "<option value='".$row["idCountry"]."' >".$row["countryName"] ."</option>";  
+  }
+  $select .= "</select>";
+  return $select;
+
+}
+/**/
+function modal_localizacion($in_session,  $localizacion){
+
+
+  $text =  ""; 
+  if ($in_session ==  1 ) {
+      $text = "<label class='lb-pais' data-toggle='modal' data-target='#modal-locacion' >  
+                ". $localizacion ."
+                </label>";
+  }else{
+    $text = "<label class='lb-pais'>  
+                ". $localizacion ."
+              </label>";
+  }
+  return $text;
+    
+
+}
+/**/
+function edita_section_mensaje_comunidad($val, $session , $class=""){      
+    $mensaje ="";    
+    $new_text = "";
+    if($session ==  1 ){
+        $class =  $class; 
+    }else{
+      $class =  ""; 
+    }
+
+    if(strlen($val) > 700 ){      
+
+          $primer_part = "<span class='hiddden_descripcion'>
+                            ".$val."
+                          </span>";
+
+              $part_descripcion =  substr($val, 0 ,  690);  
+              $new_text = $primer_part ."<span class='show_descripcion ".$class." '>
+                              ". $part_descripcion ."
+                            </span>
+                            <center>
+                              <span class='row more-info-f more-info-f-down'>
+                                <i class='fa fa-chevron-down' aria-hidden='true'>
+                                </i>
+                              </span>
+                              <span class='row more-info-f more-info-f-up'>
+                                <i class='fa fa-chevron-up' aria-hidden='true'>
+                                </i>
+                              </span>
+                            </center>";       
+
+
+
+
+      }else{
+
+          if (trim( strlen($val) ) == 0 ){
+              $new_text = "<span class='".$class."'> 
+                            Mensaje para tu comunidad 
+                         </span>";
+          }else{
+              $new_text = "<span class='".$class."'> 
+                            ".$val."
+                            </span>";
+
+          }        
+      }
+
+
+    if ($session == 1){     
+
+        $mensaje .= $new_text;           
+        $mensaje .="<textarea rows='5' 
+                    style='display:none;'                     
+                    class='form-control' 
+                    id='comunidad-mensaje-input'     
+                    name='mensaje-comunidad' 
+                    placeholder='Mensaje para tu comunidad'>
+                      ".$val."
                     </textarea>'";                           
+    }else{
+      $mensaje = $new_text; 
     }
     return $mensaje; 
     /**/
-  }
+}
+
+
 
 
 function contruye_iconos_experiencia_cliente($data){
@@ -31,14 +166,24 @@ function contruye_iconos_experiencia_cliente($data){
         $clases = ''; 
         $nombre =''; 
         $imgs =  ''; 
-        $links = '
+
+
+                
+        
+        $links = '';
+        if (count($data)> 0){
+          $links = '
                 <li>
                     <a  class="tag-enid-galery" href="#" data-filter="*"> 
                         + 
                     </a>
                 </li>
-                ';   
+                ';     
+        }
         
+        
+        
+
         foreach ($data as $row){
 
             $idimagen =  $row["idimagen"];
@@ -132,7 +277,7 @@ function evalua_msj_solicitudes($public ){
 
 /**/
 function valida_seccion_config_expericia($seccion ,  $status , $idexperiencia){
-  
+
   $extra =  "";
   if ($seccion == 3){    
     $extra .=  "<label class='lb-estado-comentario'>Estado actual del comentario</label><br>";     
@@ -160,8 +305,9 @@ function get_select_tipo_comentario($tipo, $idexperiencia){
     }
   $select .=  "</select>";  
   $select .=  "
-               <button id='$idexperiencia' class='btn-estado-exp btn btn-default btn_save btn-registrar-cambios'>
-                Actualizar
+              <br>                                                
+              <button id='$idexperiencia' class='btn-estado-exp btn btn-default btn_save btn-registrar-cambios'>
+                Registrar cambios
               </button>";  
   return $select; 
 }
@@ -198,11 +344,9 @@ function valida_title_experiencia($seccion){
                   ';
       break;
     case 2:
-
-      $title .=  '
-                  <h2 class="title-exp-comunidad">      
-                    Lo que la comunidad opina.
-                  </h2>
+      $title .=  '<div class="ver-public-lg-emp">
+                      Lo que la comunidad opina.
+                  </div>
                   ';
       break;    
       case 3:

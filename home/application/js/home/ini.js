@@ -3,7 +3,7 @@ $(document).on("ready", function(){
 });
 /**/
 function trysession(){
-	pw = $("#pw").val();
+	pw = $.trim($("#pw").val());
 	if(pw.length >= 8){
 		expr = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
 		mail = $('#mail').val();		

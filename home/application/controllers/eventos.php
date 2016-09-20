@@ -94,6 +94,7 @@ function accesosalevento($id_evento){
             $data_evento =   $this->eventmodel->getEventbyid($id_evento)[0];    
             $data = $this->val_session("");                
             $data["data_evento"] = $data_evento;                    
+            $data["evento"] = $data_evento;                    
             $data["data_accesos"]=  $this->accesosmodel->get_data_acceso_public($id_evento);        
             $dias_restantes = $this->eventos_model_cliente->get_dias_faltantes($id_evento);
             $data["dias_restantes_evento"] = get_dias_restantes_evento( $dias_restantes);
@@ -112,13 +113,11 @@ function accesosalevento($id_evento){
                 $nombre_evento =  $dataevent[0]["nombre_evento"]; 
                 $data =  $this->val_session($nombre_evento);                    
                 $data["evento"] =  $dataevent[0];
-                $data["list_generosdb"] = $this->eventmodel->get_list_generos_musicales_byidev($id_evento);
-                //$data["generos_musicales_tags"] = get_tags_generos($list_generosdb);                   
+                $data["list_generosdb"] = $this->eventmodel->get_list_generos_musicales_byidev($id_evento);                 
                 $dias_restantes = $this->eventos_model_cliente->get_dias_faltantes($dataevent[0]["idevento"]);
                 $data["dias_restantes_evento"] = get_dias_restantes_evento( $dias_restantes);
-
-                $this->show_data_page($data, 'eventos/previsualizarevent'  );   
-               
+                $this->show_data_page($data, 'eventos/previsualizarevent');                   
+                
             }else{
                 header('Location:' . base_url('index.php/inicio/eventos'));
         }            

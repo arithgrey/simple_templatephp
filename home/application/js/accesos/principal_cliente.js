@@ -1,5 +1,12 @@
 $(document).on("ready" , function(){
 
+	
+
+	$("footer").ready(carga_data_empresa);
+	$("footer").ready(carga_num_asistentes);
+	$(".btn_asistencia").click(carga_asistencia_user);
+	
+
 	$(".dinamic_menu_pv").click(carga_pv_disponibles);
 	$("footer").ready(carga_informacion_extra);	
 	var punto_venta_global  = 0; 

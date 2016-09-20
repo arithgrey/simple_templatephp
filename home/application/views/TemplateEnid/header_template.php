@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <head>
     <meta charset="utf-8">
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
     <meta name="description" content="">
     <meta name="arithgrey@gmail.com" content="">
@@ -8,13 +9,12 @@
     <title>
         <?=$titulo?>
     </title>
-    <?=link_tag('application/css/css/style.css');?> 
 </head>
-<?=ini_set('display_errors', '');?>
-<body class="sticky-header left-side-collapsed">
+<?=link_tag('application/css/css/style.css');?> 
+<body class="sticky-header left-side-collapsed ---">
 <section>
     <!-- left side start-->
-    <div class="left-side sticky-left-side ">        
+    <div class="left-side sticky-left-side">        
         <div class="logo">
             <a href="<?=base_url()?>">
                 <img style="width: 20%"  src="<?=base_url('application/img/Enid2.png')?>" alt="Enid Service">
@@ -62,12 +62,10 @@
             <script src="<?=base_url('application/js/js/jquery-1.10.2.min.js')?>"></script>
             <script src="<?=base_url('application/js/js/jquery-ui-1.9.2.custom.min.js')?>"></script>
             <script src="<?=base_url('application/js/js/jquery-migrate-1.2.1.min.js')?>"></script>
-            <script src="<?=base_url('application/js/js/bootstrap.min.js')?>"></script>
-            <script src="<?=base_url('application/js/js/modernizr.min.js')?>"></script>
+            <script src="<?=base_url('application/js/js/bootstrap.min.js')?>"></script>            
             <script src="<?=base_url('application/js/js/jquery.nicescroll.js')?>"></script>
             <script type="text/javascript" src="<?=base_url('application/js/main.js')?>"></script>              
             <?=$this->load->view("TemplateEnid/menu_right");?>   
             <!--notification menu end -->
         </div>        
         <div class="wrapper">           
-

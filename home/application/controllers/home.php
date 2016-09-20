@@ -5,18 +5,30 @@ class Home extends CI_Controller {
         $this->load->library('sessionclass');
     }    
     /**/
+    function evaluacion(){
+        $this->load->view("empresa/evaluacion_enid");
+    }
+    /**/
+    function planes(){
+        $this->load->view("empresa/planes_enid");
+    }
+    /**/
     function usos_privacidad_enid_service(){
         $this->load->view("empresa/uso_privacidad");
     } 
+    /**/
+    function prospectos(){
+        $this->load->view("empresa/prospectos");
+    }
     /**/
     function registro(){
         /**/
         if( $this->sessionclass->is_logged_in() == true) {
             redirect(base_url('index.php/startsession/presentacion/'));         
         }else{  
-            /**/
-            $data = $this->val_session("");                                                
-            $this->show_data_page($data ,  'organizacion/registro_cuenta' );   
+            /**/            
+            $this->load->view('organizacion/registro_cuenta');   
+            $this->session->sess_destroy();     
         }
     }
     /**/

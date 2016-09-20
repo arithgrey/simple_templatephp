@@ -3,7 +3,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
     <meta name="description" content="">
-    <meta name="arithgrey" content="">
+    <meta name="arithgrey@gmail.com" content="">
     <link rel="shortcut icon" href="<?=base_url('application/img/Enid2.png')?>" type="image/png">
     <title>
         <?=$titulo?>
@@ -62,7 +62,7 @@
             <script src="<?=base_url('application/js/js/jquery-ui-1.9.2.custom.min.js')?>"></script>
             <script src="<?=base_url('application/js/js/jquery-migrate-1.2.1.min.js')?>"></script>
             <script src="<?=base_url('application/js/js/bootstrap.min.js')?>"></script>
-            <script src="<?=base_url('application/js/js/modernizr.min.js')?>"></script>
+            
             <script src="<?=base_url('application/js/js/jquery.nicescroll.js')?>"></script>
             <script type="text/javascript" src="<?=base_url('application/js/main.js')?>"></script>              
             

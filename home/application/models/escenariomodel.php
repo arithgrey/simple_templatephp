@@ -224,15 +224,16 @@ function insert_log($tipo_evento , $descripcion , $id_evento , $id_usuario){
 /**/
 function nuevo( $nombre , $evento ,  $id_empresa  , $id_usuario , $nombre_usuario , $param ){
 
-	$query_insert ="INSERT INTO escenario (nombre , idevento  ) values ('$nombre' , '$evento ' )";	
+	$query_insert ="INSERT INTO escenario (nombre , idevento  ) values ('$nombre' , '$evento' )";		
 	$this->db->query($query_insert);
 	$id_escenario = $this->db->insert_id(); 							
-	
+
 	if ($id_escenario > 0 ){
-		$log_evento =  "Cargo un nuevo escenario con nombre $nombre  al evento ". $param["enid_evento"] ." - id ". $id_escenario;
+		$log_evento =  "Cargo un nuevo escenario con nombre $nombre  al evento ". $evento ." - id ". $id_escenario;
 		$this->insert_log(1, $log_evento , $id_escenario , $id_usuario);
 	}
 	return $id_escenario;
+
 }	
 /**/
 function update_descripcion_escenario_template($param , $id_escenario ,  $id_artista  , $id_usuario  , $id_empresa , $param ){	

@@ -52,6 +52,10 @@
             <ul class="nav nav-pills nav-stacked custom-nav">
                 <!--Desplegamos el menú-->
                 
+
+
+
+
                 <!--Termina Desplegamos el menú-->
             </ul>            
         </div>
@@ -68,23 +72,40 @@
         <script src="<?=base_url('application/js/js/jquery-1.10.2.min.js')?>"></script>
         <script src="<?=base_url('application/js/js/jquery-ui-1.9.2.custom.min.js')?>"></script>
         <script src="<?=base_url('application/js/js/jquery-migrate-1.2.1.min.js')?>"></script>
-        <script src="<?=base_url('application/js/js/bootstrap.min.js')?>"></script>
-        <script src="<?=base_url('application/js/js/modernizr.min.js')?>"></script>
+        <script src="<?=base_url('application/js/js/bootstrap.min.js')?>"></script>        
         <script src="<?=base_url('application/js/js/jquery.nicescroll.js')?>"></script>
         <script type="text/javascript" src="<?=base_url('application/js/js/gritter/js/jquery.gritter.js')?>"></script>
         
         <script type="text/javascript" src="<?=base_url('application/js/main.js')?>"></script>      
         
                          <div class="menu-right">            
-                            <ul class="notification-menu">
-                                <li title='Tareas pendientes'>                                    
-                                    <a href="<?=base_url('index.php/eventos/busqueda')?>" class="btn btn-default dropdown-toggle info-number" >
-                                        <i class="fa fa-search busqueda_eventos_icon">
-                                        </i>                                       
-                                    </a>                                    
-                                </li>                                            
-                            </ul>
-                        </div>
+                            <div class='form-busqueda-general-enid'>
+                                <form class='form-busqueda-general' action='<?=base_url('index.php/eventos/busqueda/')?>'>
+                                  <div>
+                                      <div class="input-group">
+                                          <div class="input-group-btn search-panel">
+                                              <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                                                <span id="search_concept" >
+                                                  Evento
+                                                </span>                                                 
+                                              </button>
+                                              
+                                          </div>                                           
+                                          <input type="text" value='' class="form-control q" id="qeventoenid" name="q" placeholder="Artista , Genero musical , tipo ... ">                  
+                                          <span class="input-group-btn">
+                                              <button class="btn btn-default" type="submit">
+                                                <i class='fa fa-search'></i>
+                                              </button>
+                                          </span>                  
+                                      </div>
+                                  </div>
+                                </form>  
+
+                                
+                                
+                                
+                            </div>
+            </div>
 
 
 

@@ -1,29 +1,34 @@
-<div class='container'>
-    <div class='row'>    
-        <div class='col-lg-3  col-md-3 col-sm-3'>          
+<div class='row'>    
+    <div class='col-lg-3 col-md-13 col-sm-12'>
+        <div>          
             <select class='form-control input-sm' id='select-template' name='select_template'>            
                 <option value='Eventos'>
-                    Para eventos
+                        Para eventos
                 </option>
                 <option value='Escenarios'>
-                    Para escenarios
+                        Para escenarios
                 </option>
             </select>
         </div>    
-    </div>       
-    <div class='separate-enid'>
-    </div>
-    <div class='row contenedor_templates' >
-        <!--***********************************Plantilla de escenarios ***********************************-->
-        <div id='section-escenarios' class='section-escenarios'>    
-            <?=$this->load->view("plantillas/escenarios");?>
-        </div>
-        <!--***********************************Termina plantilla de escenarios ***********************************-->
-        <div id='section-eventos'>
-            <?=$this->load->view("plantillas/eventos");?>
-        </div>
-    </div>
+    </div>    
 </div>
+
+
+<div class='row'>
+    <div class='col-lg-12 col-md-12 col-sm-12'>
+        <div class='contenedor_templates' >        
+            <div id='section-escenarios' class='section-escenarios'>    
+                <?=$this->load->view("plantillas/escenarios");?>
+            </div>        
+            <div id='section-eventos'>
+                <?=$this->load->view("plantillas/eventos");?>
+            </div>
+        </div>
+    </div>    
+</div>
+    
+
+
 
 <!--*******************MODAL DE CONFIGURACIÓN ***********************************-->
 <?=$this->load->view("plantillas/modal/config_evento");?>
@@ -131,8 +136,12 @@ span.round-tab:hover {
 }
 .delete_contenido_templ{
     background: rgb(62, 178, 192) !important;
-color: white !important;    
+    color: white !important;    
 }
+.template-f-seccion, .template-a-seccion{
+    margin-bottom: 10px;
+}
+
 </style>
 <?=$q?>
 <input type='hidden' value='<?=$q?>' class='q_modal'>

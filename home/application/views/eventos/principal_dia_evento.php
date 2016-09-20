@@ -35,3 +35,4 @@
 		<?=show_text_input($evento["eslogan"] , 5  ,  editar_btn($in_session , base_url('index.php/eventos/nuevo/'.$evento['idevento'].'/slogan'   )  ))?>
 	</div>		
 </div>
+

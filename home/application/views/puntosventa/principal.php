@@ -1,102 +1,77 @@
-<div class='col-lg-9 col-md-9 col-sm-12'  title='Click para registrar'>            
-    <div class="panel" >
-        <header class="panel-heading">
-            <div  class='seccion-new'>                
-                <button id="nuevo-contacto-button" type="button" class="btn btn btn_nnuevo pull-left btn_new_pv" data-toggle="modal" data-target="#contact-modal">
-                + Nuevo 
-                </button>
-                <span class="pull-right">
-                    Puntos de venta
-                </span>
-            </div>
-        </header>
-        <div class="panel-body">
-            <div class='row'>
-                <form class='form-filtro' id="form-filtro">    
-                    <div class='col-lg-6 col-md-6 col-sm-12' title='Filtro criterio'>                    
-                        <span class="text-filtro-enid">
-                            + Filtros
-                        </span>
-                        <div class="input-group">
-                            <div class="input-group-addon">
-                                Punto de venta 
+
+
+
+<div class='row'>
+    <div class='col-lg-9 col-md-9 col-sm-12'  title='Click para registrar'>            
+        <div class="panel" >
+            <header class="panel-heading">
+                <div  class='seccion-new'>                
+                    <button id="nuevo-contacto-button" type="button" class="btn_nnuevo pull-left btn_new_pv" data-toggle="modal" data-target="#contact-modal">
+                    + Nuevo 
+                    </button>
+                    <span class="pull-right">
+                        Puntos de venta
+                    </span>
+                </div>
+            </header>
+            <div class="panel-body">
+                <div class='row'>
+                    <form class='form-filtro' id="form-filtro">    
+                        <div class='col-lg-6 col-md-6 col-sm-12' title='Filtro criterio'>                    
+                            <span class="text-filtro-enid">
+                                + Filtros
+                            </span>
+                            <div class="input-group">
+                                <div class="input-group-addon">
+                                    Punto de venta 
+                                </div>
+                                <input name='puntos_venta_b' id='puntos-venta-filtro' class='puntos-venta-filtro  input-sm form-control' value='<?=$q?>'>                       
                             </div>
-                            <input name='puntos_venta_b' id='puntos-venta-filtro' class='puntos-venta-filtro  input-sm form-control' value='<?=$q?>'>                       
+                        </div>                
+                        <div class='hidden-field-mov col-lg-6 col-md-6 col-sm-12' title='Filtro criterio'>                                
+                            <div class="input-group">
+                                <div class="input-group-addon">
+                                    Zona
+                                </div>                
+                                <select name='zona_b' class='form-control input-sm' id="busqueda-zona" >
+                                    <?=lista_zonas_punto_venta();?>
+                                </select>
+                            </div>    
+                        </div>                 
+                        <div class='col-lg-6 col-md-6 col-sm-12 pull-right seccion-btn-busqueda' title='Filtro criterio'>                                   
+                            <button class="btn btn_busqueda pull-right" id='busqueda-btn'>
+                                Buscar
+                            </button>
                         </div>
-                    </div>                
-                    <div class='hidden-field-mov col-lg-6 col-md-6 col-sm-12' title='Filtro criterio'>                                
-                        <div class="input-group">
-                            <div class="input-group-addon">
-                                Zona
-                            </div>                
-                            <select name='zona_b' class='form-control input-sm' id="busqueda-zona" >
-                                <?=lista_zonas_punto_venta();?>
-                            </select>
-                        </div>    
-                    </div>                 
-                    <div class='col-lg-6 col-md-6 col-sm-12 pull-right seccion-btn-busqueda' title='Filtro criterio'>                                   
-                        <button class="btn btn_busqueda pull-right" id='busqueda-btn'>
-                            Buscar
-                        </button>
+                    </form>
+                </div>
+                <div class='seccion_data_pv'>
+                    <div class='section-busqueda-enidservice' title='Filtro criterio'>            
                     </div>
-                </form>
-            </div>
-            <div class='seccion_data_pv'>
-                <div class='section-busqueda-enidservice' title='Filtro criterio'>            
+                    <div>
+                    <div class='place_puntos_venta'>
+                    </div>
+                    <div class="puntos_venta">                        
+                    </div>
+                    </div>        
                 </div>
-                <div>
-                <div class='place_puntos_venta'>
-                </div>
-                <div class="puntos_venta">                        
-                </div>
-                </div>        
             </div>
         </div>
     </div>
 </div>
 
-<div class='col-lg-3 col-md-3 col-sm-12 seccion-logs'>
-  <div class="panel deep-purple-box">
-      <div style="background:#D12F40 none repeat scroll 0% 0%"  class="panel-body">
-        <div class="blog-post">
-            <h1 class='text-acontecimientos'>
-              Últimos acontecimientos 
-            </h1>
-            <div class="media">
-                <a href="javascript:;" class="pull-left">
-                    <img alt="" src="images/blog/blog-thumb-1.jpg">
-                </a>
-                <div class="media-body">
-                    <h5 class="media-heading">
-                      <a href="javascript:;">
-                        02 May 2013 
-                      </a>
-                    </h5>
-                    <p>
-                      Donec id elit non mi porta gravida at eget metus amet int
-                    </p>
-                </div>
-            </div>                        
-            <div class="media">
-                <a href="javascript:;" class="pull-left">
-                    <img alt="" src="images/blog/blog-thumb-3.jpg" class=" ">
-                </a>
-                <div class="media-body">
-                    <h5 class="media-heading">
-                      <a href="javascript:;">
-                        02 May 2013 
-                      </a>
-                    </h5>
-                    <p>
-                      Donec id elit non mi porta gravida at eget metus amet int
-                    </p>
-                </div>
-            </div>
-        </div>
-                
-
+<div class='row'>
+    <div class='col-lg-3 col-md-3 col-sm-12 seccion-logs'>
+      <div class="panel deep-purple-box">
+          <div style="background:#D12F40 none repeat scroll 0% 0%"  class="panel-body">
+            <div class="blog-post">
+                <h1 class='text-acontecimientos'>
+                  Últimos acontecimientos 
+                </h1>                
+            </div>                
+          </div>
       </div>
-  </div>
+    </div>
 </div>
 
 

@@ -20,7 +20,7 @@
 
                 <div class="col-sm-12 section_time">
                     <div class='row pull-right new-evento-mod'>
-                        <button class='btn btn btn_nnuevo' title='Registra un nuevo evento para el público' data-toggle="modal" data-target="#modal-nuevo-evento">+  Nuevo Evento <i class='fa fa-headphones'></i></button>
+                        <button class='btn_nnuevo' title='Registra un nuevo evento para el público' data-toggle="modal" data-target="#modal-nuevo-evento">+  Nuevo Evento <i class='fa fa-headphones'></i></button>
                     </div>
 
                     <div class="timeline">

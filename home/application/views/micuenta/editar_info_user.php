@@ -1,5 +1,5 @@
 <div class='form-section-editar'>
-  <button  class='btn btn btn_nnuevo buton_cancelar_edicion' id='buton_cancelar_edicion' style='display:none;'>
+  <button  class='btn_nnuevo buton_cancelar_edicion' id='buton_cancelar_edicion' style='display:none;'>
     Cancelar
   </button>
           <form class="form-horizontal" id='form-user-update' method='POST' action="<?=base_url('index.php/api/misdatoscontrolador/usuario/format/json')?>">
